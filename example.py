@@ -1,5 +1,4 @@
 #!/usr/local/bin/python3
-import microbial_community as mc
 from microbial_community.microbial_model import Model, plot_time_evolution
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,7 +28,7 @@ model = Model()
 
 # we generate random parameters (according to the mode we specified), by default we take an equilibrium of the system
 print('We generate a model with random parameters : ')
-model.generate_random_parameters(NR_, NS_, mode)
+#model.generate_random_parameters(NR_, NS_, mode)
 
 
 # Now that the model is generated, we can do a couple of things with it
@@ -43,11 +42,16 @@ print('We load a model with the parameters : ')
 model2.print_parameters()
 
 
-fig = plt.figure()
-gs = fig.add_gridspec(2,2)
-axis1 = fig.add_subplot(gs[0,:])
-axis2 = fig.add_subplot(gs[1,0])
-axis3 = fig.add_subplot(gs[1,1])
+fig1 = plt.figure(figsize=(10,5))
+gs = fig1.add_gridspec(1,2)
+axis1 = fig1.add_subplot(gs[0,0])
+axis2 = fig1.add_subplot(gs[0,1])
+
+fig2 = plt.figure()
+gs = fig2.add_gridspec(1,2)
+axis3 = fig2.add_subplot(gs[0,0])
+axis4 = fig2.add_subplot(gs[0,1])
+
 
 
 # we can make it time evolve from a set of initial conditions
@@ -57,14 +61,17 @@ sol = model2.time_evolution(R0, S0, np.linspace(0, 100, 1000))
 # and plot it on an axis
 plot_time_evolution(axis1, sol)
 
+# we can also plot the eigenspectrum of the jacobian 
+model2.plot_eigenspectrum(axis2)
+
 # print the jacobian with the current values
-Jeq = model.jacobian()
+Jeq = model2.jacobian()
 print('jacobian at equilibrium = ')
 print(Jeq)
 
 # or even draw the two food networks associated to the system
-model2.draw_food_network(axis2, 'consumption')
-model2.draw_food_network(axis3, 'byproduct release')
+model2.draw_food_network(axis3, 'consumption')
+model2.draw_food_network(axis4, 'byproduct release')
 
 plt.tight_layout()
 plt.show()

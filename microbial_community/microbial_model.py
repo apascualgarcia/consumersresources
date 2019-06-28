@@ -198,21 +198,42 @@ class Model:
         data = np.load(filepath+'.npy', allow_pickle=True)
         self.data = data[()]
         return
+        
+    # plots the spectrum of the jacobian
+    def plot_eigenspectrum(self, axis):
+        
+        eigenvalues = np.linalg.eigvals(self.jacobian())
+        axis.scatter(np.real(eigenvalues), np.imag(eigenvalues), color = 'red')
+        axis.plot([0., 0.], [np.max(np.imag(eigenvalues)), np.min(np.imag(eigenvalues))], color = 'grey')
+        
+        lambda_max = np.max(np.real(eigenvalues))
+        titre = 'Spectrum of the jacobian at equilibrium '
+        if lambda_max > 0:
+            titre += '(unstable)'
+        else:
+            titre += '(stable)'
+            
+        axis.set_title(titre)
+        axis.set_xlabel(r'Re($\lambda$)')
+        axis.set_ylabel(r'Im($\lambda$)')
+        
+        return
+        
+        
+        
 
 # takes the output of model.time_involution and plots the species and resources joint time evolution on the given axis
 def plot_time_evolution(axis, sol):
     (R, S, t) = sol
-    
-    plt.sca(axis)
-    
+        
     for i in range(len(R)):
-        plt.plot(t, R[i], color = 'green')
+        axis.plot(t, R[i], color = 'green')
     for i in range(len(S)):
-        plt.plot(t, S[i], color = 'blue')
+        axis.plot(t, S[i], color = 'blue')
         
     custom_lines = [Line2D([0], [0], color='green', lw=4),\
     Line2D([0], [0], color='blue', lw=4)]
-    
+    axis.axis('on')
     axis.legend(custom_lines, ['Resources', 'Species'])
     axis.set_title('Time evolution of the ecosystem')
     
