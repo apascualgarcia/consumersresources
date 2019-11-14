@@ -3,6 +3,7 @@ project(consumerresources)
 
 set(CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_INSTALL_LIBDIR additional_libs)
 add_compile_options(-Wall -pedantic -O)
 
 file(GLOB CRM_HEADERS include/*.h)
@@ -26,6 +27,17 @@ endif(NOT Eigen3_FOUND)
 
 # if we can’t find gsl, we install it
 find_package(GSL REQUIRED)
+if(NOT GSL_FOUND)
+	message(STATUS "GSL not found, we will install it now.")
+	include(GNUInstallDirs)
+	install(
+		TARGETS
+			GSL
+		LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+		RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+	)
+endif(NOT GSL_FOUND)
 
 add_library(CRModel SHARED ${CRM_SOURCES} ${CRM_HEADERS})
 target_include_directories(CRModel PUBLIC include)
@@ -33,8 +45,6 @@ target_link_libraries(CRModel Eigen3::Eigen GSL::gsl)
 
 foreach(app ${APP_SOURCES})
 	get_filename_component(app_name ${app} NAME_WE)
-	message(STATUS ${app_name})
 	add_executable(${app_name} ${app})
 	target_link_libraries(${app_name} CRModel)
 endforeach(app ${APP_SOURCES})
-

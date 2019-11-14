@@ -63,11 +63,23 @@ struct Metaparameters{
 
 struct Extinction{
   ntype t_eq;
-  unsigned int extinct;
+  ntype extinct;
   nvector new_Req;
   nvector new_Seq;
 };
 
+struct Solver_Parameters{
+  // these dictate the values we will take for compute_average_extinction
+  Metaparameters* metaparameters;
+  unsigned int Nsimul;
+};
+
+struct Delta_critical{
+  ntype delta_crit;
+  ntype delta_low;
+  ntype delta_high;
+  ntype accuracy;
+};
 
 class Dynamical_variables{
 private :
@@ -128,6 +140,7 @@ public:
   nmatrix time_evolution(const Dynamical_variables&, ntype) const ;
   Dynamical_variables perturb_equilibrium() const;
   void perturb_parameters() const;
+  void perturb_parameters(const ntype &) const;
   Extinction evolve_until_equilibrium(ntype) const;
   void save_new_equilibrium(const Extinction&) const;
 };
@@ -161,7 +174,6 @@ void print_rand_number();
 
 int ode_equations_of_evolution(double, const double[], double[], void*);
 
-
 std::ostream& operator<<(std::ostream&, const Metaparameters&);
 std::ostream& operator<<(std::ostream&, const nctype&);
 std::ostream& operator<<(std::ostream&, const ncvector&);
@@ -171,5 +183,14 @@ std::ostream& operator<<(std::ostream&, const ntensor&);
 std::ostream& operator<<(std::ostream&, const Parameter_set&);
 std::ostream& operator<<(std::ostream&, const Model_parameters&);
 std::ostream& operator<<(std::ostream&, const CRModel&);
+
+// for a given set of metaparameters, computes the average extinction of the system
+Extinction compute_average_extinction(Metaparameters*, const ntype &, unsigned int);
+/* computes the critical delta (i.e. the delta of structural stability for which
+   we have an average of 1.0 +/- accuracy number of extinctions
+*/
+Delta_critical compute_critical_Delta(Metaparameters, ntype);
+double function_av_extinct_solver(double, void*);
+double average_number_of_extinctions(double , void*);
 
 #endif

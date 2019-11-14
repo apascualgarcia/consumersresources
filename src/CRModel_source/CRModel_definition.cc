@@ -747,8 +747,7 @@ Dynamical_variables CRModel::perturb_equilibrium() const{
 
 }
 
-void CRModel::perturb_parameters() const{
-  ntype Delta = this->metaparameters->perturb_parameters;
+void CRModel::perturb_parameters(const ntype & Delta) const{
   Parameter_set* p = this->model_param->get_parameters();
   std::uniform_real_distribution<ntype> uniform_distrib(-1., 1.);
 
@@ -756,6 +755,11 @@ void CRModel::perturb_parameters() const{
     p->l[mu] = p->l[mu]*(1+Delta*uniform_distrib(random_engine));
   }
 
+  return;
+}
+
+void CRModel::perturb_parameters() const{
+  this->perturb_parameters(this->metaparameters->perturb_parameters);
   return;
 }
 
@@ -784,6 +788,7 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
 
   return;
 }
+
 
 /*** ALL THE ADDITIONAL USEFUL FUNCTIONS ****/
 foodmatrix load_food_matrix(const Metaparameters& m){
@@ -1049,4 +1054,38 @@ std::ostream& operator<<(std::ostream& os, const nmatrix& M){
     os << M[i] << std::endl;
   }
   return os;
+}
+
+
+Extinction compute_average_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
+  ntype convergence_threshold = 1e-6;
+  Extinction av_extinct;
+  av_extinct.t_eq = 0.;
+  av_extinct.extinct = 0.;
+  av_extinct.new_Req = nvector(metaparams->NR, 0.);
+  av_extinct.new_Seq = nvector(metaparams->NS, 0.);
+
+  foodmatrix food_matrix = load_food_matrix(*metaparams);
+  if(metaparams->verbose){
+    std::cout << "Computing average extinction for the given set of metaparameters." << std::endl;
+  }
+
+  for(size_t i = 0; i < Nsimul; ++i){
+    CRModel model(food_matrix,*metaparams);
+    model.perturb_parameters(Delta);
+    Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold);
+
+    av_extinct.t_eq += (new_equilib.t_eq/Nsimul);
+    av_extinct.extinct += (new_equilib.extinct/Nsimul);
+
+    for(size_t j = 0 ; j < metaparams->NS; ++j){
+      av_extinct.new_Seq[j] += (new_equilib.new_Seq[j]/Nsimul);
+    }
+    for(size_t mu = 0; mu < metaparams->NR; ++mu){
+      av_extinct.new_Req[mu] += (new_equilib.new_Req[mu]/Nsimul);
+    }
+
+  }
+
+  return av_extinct;
 }

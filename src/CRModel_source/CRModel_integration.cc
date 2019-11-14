@@ -292,7 +292,7 @@ Extinction CRModel::evolve_until_equilibrium(ntype threshold) const{
   gsl_odeiv2_control_free(c);
   gsl_odeiv2_step_free(s);
 
-  Extinction to_return = {t,extinct, new_R, new_S};
+  Extinction to_return = {t,ntype(extinct), new_R, new_S};
   return to_return;
 
 }

@@ -1,0 +1,24 @@
+% Enter here the needed metaparameters to run the simulation :
+gamma_0 = 1.
+alpha_0 = 0.1
+sigma_0 = 0.4
+p = 0.5
+R0 = 100.
+S0 = 1.
+epsilon = 0.1
+l_0 = 3698.
+NR = 50
+NS = 25
+tf = 1000.
+gamma_mode = random_val
+tau_mode = taualpha
+alpha_mode = random_structure
+path_to_food_matrix = /Users/Shared/Cloud/Master/Master_Thesis/Code/consumersresources/TEST_FOLDER/Matrices/Nr50_Nc25/RandTrix_Nr50_Nc25_Nest0.3_Conn0.1792.txt
+verbose = true
+budget_constraint = false
+energy_constraint = true
+number_of_attempts = 100 % number of attempts to build a system with such metaparameters, after this the program will build a feasible system with an alpha0 it will have chosen
+path_to_save_file = /Users/Shared/Cloud/Master/Master_Thesis/Code/consumersresources/TEST_FOLDER/DataOutput/test.out
+seed_number=0
+perturbation_equilibrium=1.0
+perturbation_parameters=0.9
