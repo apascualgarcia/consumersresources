@@ -6,7 +6,9 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   initialize_random_engine(metaparams);
-  compute_critical_Delta(metaparams,0.001);
+  double critical_delta = compute_critical_Delta(metaparams,0.001);
+  std::cout << "Critical delta found for this matrix : " << critical_delta << std::endl;
+
 /*
   Extinction av_extinct = compute_average_extinction(&metaparams,metaparams.perturb_parameters,100);
   std::cout << "For a Delta of " << metaparams.perturb_parameters << ", we find an average time to reach a new equilibrium of ";

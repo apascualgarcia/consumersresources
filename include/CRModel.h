@@ -4,6 +4,7 @@
 #include<string>
 #include<complex>
 #include<random>
+#include <gsl/gsl_vector.h>
 
 
 typedef long double ntype;
@@ -19,7 +20,7 @@ enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
 enum alphamode{random_structure, no_release_when_eat};
 
-const unsigned int print_precision=3;
+const unsigned int print_precision=4;
 const ntype EIGENSOLVER_PRECISION = 1e-15;
 
 struct Parameter_set{
@@ -189,8 +190,17 @@ Extinction compute_average_extinction(Metaparameters*, const ntype &, unsigned i
 /* computes the critical delta (i.e. the delta of structural stability for which
    we have an average of 1.0 +/- accuracy number of extinctions
 */
-Delta_critical compute_critical_Delta(Metaparameters, ntype);
+double compute_critical_Delta(Metaparameters, ntype);
 double function_av_extinct_solver(double, void*);
 double average_number_of_extinctions(double , void*);
+double estimate_delta_crit_from_interval(const nvector&, const nvector&);
+int function_to_fit(const gsl_vector* , void* , gsl_vector*);
+
+/* everything for the root solving here */
+double solve_for_delta_with_fit(const gsl_vector* fit_parameters);
+
+/* everything for the curve fitting here */
+#define NUMBER_OF_FITTING_PARAMETERS 4;
+double choice_of_fitting_function(double x, void* params);
 
 #endif

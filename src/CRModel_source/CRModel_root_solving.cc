@@ -6,8 +6,8 @@
 #include <gsl/gsl_roots.h>
 #include <array>
 
-Delta_critical compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
-  Delta_critical delta_crit;
+double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
+  double delta_crit=0.;
 
   // set up the solver
   const gsl_root_fsolver_type *T;
@@ -19,7 +19,7 @@ Delta_critical compute_critical_Delta(Metaparameters metaparams, ntype accuracy)
 
   Solver_Parameters params;
   params.metaparameters = &metaparams;
-  params.Nsimul = 10;
+  params.Nsimul = 50;
 
   gsl_function F;
   F.function = &function_av_extinct_solver;
@@ -27,39 +27,43 @@ Delta_critical compute_critical_Delta(Metaparameters metaparams, ntype accuracy)
 
   T = gsl_root_fsolver_brent;
   s = gsl_root_fsolver_alloc(T);
+
   gsl_root_fsolver_set(s, &F, x_lo, x_hi);
 
-  // The idea is to find a smaller and smaller interval in which we have a higher and higher accuracy
-  // i.e. you narrow down the interval
-  unsigned int Nsimul_max = 1./accuracy;
-  std::array<unsigned int,2> Nsimul_for_intervals={100, Nsimul_max};
-  std::array<ntype,2> accuracy_for_intervals={0.1, accuracy};
+  // the idea is first to find an interval where the solution roughly should be
+  do{
+    iter++;
+    status = gsl_root_fsolver_iterate(s);
+    r = gsl_root_fsolver_root(s);
+    x_lo = gsl_root_fsolver_x_lower(s);
+    x_hi = gsl_root_fsolver_x_upper(s);
+    status = gsl_root_test_interval(x_lo, x_hi, 0, 0.1);
+    if(status==GSL_SUCCESS and metaparams.verbose){
+      std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
+    }
+  }while(status==GSL_CONTINUE);
 
-  for(size_t i = 0; i < Nsimul_for_intervals.size(); ++i){
-    params.Nsimul = Nsimul_for_intervals[i];
-    F.params = &params;
-    gsl_root_fsolver_set(s, &F, x_lo, x_hi);
-    do{
-      iter++;
-      status = gsl_root_fsolver_iterate(s);
-      r = gsl_root_fsolver_root(s);
-      x_lo = gsl_root_fsolver_x_lower(s);
-      x_hi = gsl_root_fsolver_x_upper(s);
-      status = gsl_root_test_interval(x_lo, x_hi, 0, accuracy_for_intervals[i]);
-      if(status==GSL_SUCCESS){
-        std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
-        std::cout << "In this interval we have Dcrit=" << r << " with number of extinctions " << average_number_of_extinctions(r, &params) << std::endl;
-      }
-    }while(status==GSL_CONTINUE);
-    // when we have found an interval good enough for the desired accuracy, we refine it and increase the accuracy
+  /* when we have found an interval we highly suspect of containing the root
+    we compute the average number of extinctions at a better accuracy for ten points
+   in the interval */
+  nvector interval;
+  size_t interval_length = 10;
+  for(size_t i=0; i < interval_length; ++i){
+    interval.push_back(x_lo+i*(x_hi-x_lo)/(interval_length-1));
   }
 
-  gsl_root_fsolver_free(s);
+  params.Nsimul=500;
+  F.params = &params;
+  nvector extinctions;
+  for(size_t i=0; i < interval_length; ++i){
+    double result = function_av_extinct_solver(interval[i], &params);
+    extinctions.push_back(result);
+  }
 
-  delta_crit.delta_crit = r;
-  delta_crit.delta_low = x_lo;
-  delta_crit.delta_high = x_hi;
-  delta_crit.accuracy = accuracy;
+  /* after getting these ten points, we fit them with a curve of a given shape,
+   that allows us to estimate delta critical */
+  delta_crit = estimate_delta_crit_from_interval(interval, extinctions);
+  gsl_root_fsolver_free(s);
 
   return delta_crit;
 }
@@ -78,4 +82,46 @@ double average_number_of_extinctions(double delta, void* params){
 
 double function_av_extinct_solver(double delta, void*params){
   return average_number_of_extinctions(delta, params)-1.;
+}
+
+double solve_for_delta_with_fit(const gsl_vector* fit_parameters){
+  double estimate = 0.;
+
+  unsigned int max_iter = 100;
+  unsigned int N = NUMBER_OF_FITTING_PARAMETERS;
+  double params[N];
+  for(size_t i = 0; i < N; ++i){
+    params[i] = gsl_vector_get(fit_parameters,i);
+  }
+
+  int status;
+  int iter = 0;
+
+  const gsl_root_fsolver_type* T;
+  gsl_root_fsolver* s;
+  double r = 0.;
+  double x_lo = 0., x_hi = 1.;
+  gsl_function F;
+
+  F.function = &choice_of_fitting_function;
+  F.params = &params;
+
+  T = gsl_root_fsolver_brent;
+  s = gsl_root_fsolver_alloc(T);
+  gsl_root_fsolver_set(s, &F, x_lo, x_hi);
+  do{
+    iter++;
+    status = gsl_root_fsolver_iterate(s);
+    r = gsl_root_fsolver_root(s);
+    x_lo = gsl_root_fsolver_x_lower(s);
+    x_hi = gsl_root_fsolver_x_upper(s);
+
+    status = gsl_root_test_interval(x_lo, x_hi, 0, 1e-6);
+  }while(status==GSL_CONTINUE && iter < max_iter);
+  if(iter > max_iter){
+    std::cerr << "The solver wasn't able to estimate delta critical, the best estimate will be returned" << std::endl;
+  }
+  estimate = r;
+  gsl_root_fsolver_free(s);
+  return estimate;
 }
