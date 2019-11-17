@@ -23,6 +23,16 @@ enum alphamode{random_structure, no_release_when_eat};
 const unsigned int print_precision=4;
 const ntype EIGENSOLVER_PRECISION = 1e-15;
 
+struct statistics{
+  ntype mean;
+  ntype std_deviation;
+};
+
+struct nvector_statistics{
+  nvector means;
+  nvector std_deviations;
+};
+
 struct Parameter_set{
   nmatrix alpha;
   nmatrix gamma;
@@ -60,6 +70,13 @@ struct Metaparameters{
   ntype perturb_parameters;
 
   Metaparameters(int argc, char *argv[]);
+};
+
+struct Extinction_statistics{
+  statistics t_eq;
+  statistics extinct;
+  nvector_statistics new_Req;
+  nvector_statistics new_Seq;
 };
 
 struct Extinction{
@@ -186,7 +203,7 @@ std::ostream& operator<<(std::ostream&, const Model_parameters&);
 std::ostream& operator<<(std::ostream&, const CRModel&);
 
 // for a given set of metaparameters, computes the average extinction of the system
-Extinction compute_average_extinction(Metaparameters*, const ntype &, unsigned int);
+Extinction_statistics compute_average_extinction(Metaparameters*, const ntype &, unsigned int);
 /* computes the critical delta (i.e. the delta of structural stability for which
    we have an average of 1.0 +/- accuracy number of extinctions
 */
@@ -195,6 +212,8 @@ double function_av_extinct_solver(double, void*);
 double average_number_of_extinctions(double , void*);
 double estimate_delta_crit_from_interval(const nvector&, const nvector&);
 int function_to_fit(const gsl_vector* , void* , gsl_vector*);
+
+void write_av_number_extinctions_delta_interval(Metaparameters* , const nvector& , unsigned int Nsimul = 500);
 
 /* everything for the root solving here */
 double solve_for_delta_with_fit(const gsl_vector* fit_parameters);

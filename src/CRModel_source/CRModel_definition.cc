@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <ctime>
 #include <stdlib.h>
+#include <gsl/gsl_statistics.h>
 
 
 //std::random_device rdevice;
@@ -1057,35 +1058,78 @@ std::ostream& operator<<(std::ostream& os, const nmatrix& M){
 }
 
 
-Extinction compute_average_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
+Extinction_statistics compute_average_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
   ntype convergence_threshold = 1e-6;
-  Extinction av_extinct;
-  av_extinct.t_eq = 0.;
-  av_extinct.extinct = 0.;
-  av_extinct.new_Req = nvector(metaparams->NR, 0.);
-  av_extinct.new_Seq = nvector(metaparams->NS, 0.);
+  Extinction_statistics av_extinct;
+  av_extinct.t_eq.mean = 0.;
+  av_extinct.t_eq.std_deviation= 0.;
+  av_extinct.extinct.mean = 0.;
+  av_extinct.extinct.std_deviation = 0.;
+  av_extinct.new_Req.means = nvector(metaparams->NR, 0.);
+  av_extinct.new_Seq.means = nvector(metaparams->NS, 0.);
 
   foodmatrix food_matrix = load_food_matrix(*metaparams);
   if(metaparams->verbose){
     std::cout << "Computing average extinction for the given set of metaparameters." << std::endl;
   }
 
+  double teq[Nsimul];
+  double extinctions[Nsimul];
+
   for(size_t i = 0; i < Nsimul; ++i){
     CRModel model(food_matrix,*metaparams);
     model.perturb_parameters(Delta);
     Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold);
 
-    av_extinct.t_eq += (new_equilib.t_eq/Nsimul);
-    av_extinct.extinct += (new_equilib.extinct/Nsimul);
+    teq[i] = new_equilib.t_eq;
+    extinctions[i] = new_equilib.extinct;
 
     for(size_t j = 0 ; j < metaparams->NS; ++j){
-      av_extinct.new_Seq[j] += (new_equilib.new_Seq[j]/Nsimul);
+      av_extinct.new_Seq.means[j] += (new_equilib.new_Seq[j]/Nsimul);
     }
     for(size_t mu = 0; mu < metaparams->NR; ++mu){
-      av_extinct.new_Req[mu] += (new_equilib.new_Req[mu]/Nsimul);
+      av_extinct.new_Req.means[mu] += (new_equilib.new_Req[mu]/Nsimul);
     }
-
   }
 
+  av_extinct.t_eq.mean = gsl_stats_mean(teq, 1, Nsimul);
+  av_extinct.t_eq.std_deviation = gsl_stats_sd_m(teq, 1, Nsimul, av_extinct.t_eq.mean);
+
+  av_extinct.extinct.mean = gsl_stats_mean(extinctions, 1, Nsimul);
+  av_extinct.extinct.std_deviation = gsl_stats_sd_m(extinctions, 1, Nsimul, av_extinct.extinct.mean);
+
+  std::cout << " Average extinction for Delta = " << Delta << " is " << av_extinct.extinct.mean;
+  std::cout << " +/- " << av_extinct.extinct.std_deviation << std::endl;
+
   return av_extinct;
+}
+
+void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector& deltas, unsigned int Nsimul)
+{
+  unsigned int Npoints = deltas.size();
+  nvector av_extinctions = nvector(Npoints, 0.);
+  nvector std_extinctions = nvector(Npoints, 0.);
+
+  std::ofstream myfile;
+  myfile.open(m->save_path,std::ios_base::app);
+  bool save_success(false);
+  if(not(myfile.is_open())){
+    std::cerr << "Could not open "<<m->save_path <<" for saving the simulation "<< std::endl;
+  }else{
+    save_success=true;
+    for(size_t i = 0 ; i < deltas.size(); ++i){
+
+      Extinction_statistics ext_stat = compute_average_extinction(m, deltas[i], Nsimul);
+
+      myfile << "# "  << m->p << " " << m->epsilon << " " << m->foodmatrixpath << " " << m->verbose << " ";
+      myfile << m->energy_constraint << " " << m->budget_constraint << " " << m->nb_attempts<<" " << m->seed_number <<" ";
+      myfile << m->save_path << " ";
+      time_t now=time(0);
+      myfile << ctime(&now) ;
+      myfile << deltas[i] << " " << ext_stat.extinct.mean << " " << ext_stat.extinct.std_deviation << std::endl;
+    }
+  }
+  myfile.close();
+
+  return;
 }

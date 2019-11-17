@@ -74,8 +74,8 @@ double average_number_of_extinctions(double delta, void* params){
   Metaparameters* m = s->metaparameters;
   unsigned int Nsimul = s->Nsimul;
 
-  Extinction ext = compute_average_extinction(m, ntype(delta), Nsimul);
-  double av_number_extinct = double(ext.extinct);
+  Extinction_statistics ext = compute_average_extinction(m, ntype(delta), Nsimul);
+  double av_number_extinct = double(ext.extinct.mean);
 
   return av_number_extinct;
 }
