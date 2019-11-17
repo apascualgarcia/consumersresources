@@ -1098,9 +1098,10 @@ Extinction_statistics compute_average_extinction(Metaparameters* metaparams, con
   av_extinct.extinct.mean = gsl_stats_mean(extinctions, 1, Nsimul);
   av_extinct.extinct.std_deviation = gsl_stats_sd_m(extinctions, 1, Nsimul, av_extinct.extinct.mean);
 
-  std::cout << " Average extinction for Delta = " << Delta << " is " << av_extinct.extinct.mean;
-  std::cout << " +/- " << av_extinct.extinct.std_deviation << std::endl;
-
+  if(metaparams->verbose){
+    std::cout << " Average extinction for Delta = " << Delta << " is " << av_extinct.extinct.mean;
+    std::cout << " +/- " << av_extinct.extinct.std_deviation << std::endl;
+  }
   return av_extinct;
 }
 
