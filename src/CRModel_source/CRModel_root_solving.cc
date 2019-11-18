@@ -97,30 +97,31 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
   int status;
   int iter = 0;
 
-  const gsl_root_fsolver_type* T;
-  gsl_root_fsolver* s;
-  double r = 0.;
-  gsl_function F;
+  const gsl_root_fdfsolver_type* T;
+  gsl_root_fdfsolver* s;
+  double r = 0.5*(x_lo+x_hi);
+  double x0;
+  gsl_function_fdf F;
 
-  F.function = &choice_of_fitting_function;
+  F.f = &choice_of_fitting_function;
+  F.df = NULL;
+  F.fdf = NULL;
   F.params = &params;
 
-  T = gsl_root_fsolver_brent;
-  s = gsl_root_fsolver_alloc(T);
-  gsl_root_fsolver_set(s, &F, x_lo, x_hi);
+  T = gsl_root_fdfsolver_newton;
+  s = gsl_root_fdfsolver_alloc(T);
+  gsl_root_fdfsolver_set(s, &F, r);
   do{
     iter++;
-    status = gsl_root_fsolver_iterate(s);
-    r = gsl_root_fsolver_root(s);
-    x_lo = gsl_root_fsolver_x_lower(s);
-    x_hi = gsl_root_fsolver_x_upper(s);
+    status = gsl_root_fdfsolver_iterate(s);
+    x0 = r;
+    status = gsl_root_test_delta(r, x0, 0, 1e-3);
 
-    status = gsl_root_test_interval(x_lo, x_hi, 0, 1e-6);
   }while(status==GSL_CONTINUE && iter < max_iter);
   if(iter > max_iter){
     std::cerr << "The solver wasn't able to estimate delta critical, the best estimate will be returned" << std::endl;
   }
   estimate = r;
-  gsl_root_fsolver_free(s);
+  gsl_root_fdfsolver_free(s);
   return estimate;
 }
