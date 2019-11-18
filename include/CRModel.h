@@ -216,7 +216,7 @@ int function_to_fit(const gsl_vector* , void* , gsl_vector*);
 void write_av_number_extinctions_delta_interval(Metaparameters* , const nvector& , unsigned int Nsimul = 500);
 
 /* everything for the root solving here */
-double solve_for_delta_with_fit(const gsl_vector* fit_parameters);
+double solve_for_delta_with_fit(const gsl_vector*, double&, double&);
 
 /* everything for the curve fitting here */
 #define NUMBER_OF_FITTING_PARAMETERS 4;

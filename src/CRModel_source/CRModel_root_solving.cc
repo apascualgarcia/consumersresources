@@ -84,7 +84,7 @@ double function_av_extinct_solver(double delta, void*params){
   return average_number_of_extinctions(delta, params)-1.;
 }
 
-double solve_for_delta_with_fit(const gsl_vector* fit_parameters){
+double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi){
   double estimate = 0.;
 
   unsigned int max_iter = 100;
@@ -100,7 +100,6 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters){
   const gsl_root_fsolver_type* T;
   gsl_root_fsolver* s;
   double r = 0.;
-  double x_lo = 0., x_hi = 1.;
   gsl_function F;
 
   F.function = &choice_of_fitting_function;

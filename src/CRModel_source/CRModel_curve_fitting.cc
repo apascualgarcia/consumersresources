@@ -146,6 +146,9 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
 
 double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions){
   double delta_crit=0.;
+  double x_lo = interval[0];
+  double x_hi = interval[interval.size()-1];
+
   /*so we have this interval of x-points with their y-values, we choose to make a
    polynomial fit around it and take delta critical as the root of that polynomial */
 
@@ -160,7 +163,7 @@ double estimate_delta_crit_from_interval(const nvector& interval, const nvector&
 
 
   /* with the fitting parameters estimated, we can actually solve for Delta numerically */
-  delta_crit = solve_for_delta_with_fit(fit_parameters);
+  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi);
   gsl_vector_free(fit_parameters);
   std::cout << "zero estimated at " << delta_crit << std::endl;
 
