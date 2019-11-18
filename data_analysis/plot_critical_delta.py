@@ -65,20 +65,20 @@ print("Data sorted.")
 for i in range(len(sorted_size)):
     [NR, NS] = sorted_size[i]
     data = sorted_mprop[i]
-    # we filter the data to round the nestedness up to 2 decimals
+    # we filter the data to round the connectance up to 2 decimals
     data[:, 1] = np.array([round(data[i, 1], 2) for i in range(len(data))])
     # lists the different connectances available
-    connectance = np.array(sorted(list(set(data[:, 0]))))
+    connectance = np.array(sorted(list(set(data[:, 1]))))
     # lists the different nestednesses available
-    nestedness = np.array(sorted(list(set(data[:, 1]))))
+    nestedness = np.array(sorted(list(set(data[:, 0]))))
 
     fig1 = plt.figure('Nestedness for fixed connectance')
     ax1 = fig1.add_subplot(111)
     for conn in connectance:
-        nest = np.array([data[i, 1]
-                         for i in range(len(data)) if data[i, 0] == conn])
+        nest = np.array([data[i, 0]
+                         for i in range(len(data)) if data[i, 1] == conn])
         dcrit = np.array([data[i, 2]
-                          for i in range(len(data)) if data[i, 0] == conn])
+                          for i in range(len(data)) if data[i, 1] == conn])
         indices = np.argsort(nest)
         sorted_dcrit = np.array([dcrit[i] for i in indices])
         sorted_nest = np.sort(nest)
@@ -92,10 +92,10 @@ for i in range(len(sorted_size)):
     fig2 = plt.figure('Connectance for fixed nestedness')
     ax2 = fig2.add_subplot(111)
     for nest in nestedness:
-        conn = np.array([data[i, 0]
-                         for i in range(len(data)) if data[i, 1] == nest])
+        conn = np.array([data[i, 1]
+                         for i in range(len(data)) if data[i, 0] == nest])
         dcrit = np.array([data[i, 2]
-                          for i in range(len(data)) if data[i, 1] == nest])
+                          for i in range(len(data)) if data[i, 0] == nest])
         indices = np.argsort(conn)
         sorted_dcrit = np.array([dcrit[i] for i in indices])
         sorted_conn = np.sort(conn)
