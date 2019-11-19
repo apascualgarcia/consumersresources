@@ -37,7 +37,7 @@ def C_value(eps, s0, g0, R0, S0, l0, NR, NS):
 
 eps = 0.1
 g0 = 1.
-s0 = 0.5
+s0 = 0.9
 R0 = 300
 S0 = 1.0
 l0 = 11092
