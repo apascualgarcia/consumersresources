@@ -3,3 +3,5 @@ build/*
 data_output/*
 logs/*
 !.placeholder
+text/*
+!text/consumer_resource.pdf
