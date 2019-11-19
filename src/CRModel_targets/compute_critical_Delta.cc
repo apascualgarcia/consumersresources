@@ -25,6 +25,9 @@ int main(int argc, char * argv[]){
   if(not(myfile.is_open())){
     std::cerr << "Could not open " << metaparams.save_path << " to write the new equilibrium of the system" << std::endl;
   }else{
+    if(metaparams.verbose > 0){
+      std::cout << "Successfully opened " << metaparams.save_path <<", attempting now to find the critical delta of every listed matrix " << std::endl;
+    }
     save_success = true;
     for(size_t i = 0; i < matrices_path.size();++i){
         metaparams.foodmatrixpath = matrices_path[i];

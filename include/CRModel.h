@@ -210,13 +210,13 @@ Extinction_statistics compute_average_extinction(Metaparameters*, const ntype &,
 double compute_critical_Delta(Metaparameters, ntype);
 double function_av_extinct_solver(double, void*);
 double average_number_of_extinctions(double , void*);
-double estimate_delta_crit_from_interval(const nvector&, const nvector&);
+double estimate_delta_crit_from_interval(const nvector&, const nvector&, const Metaparameters&);
 int function_to_fit(const gsl_vector* , void* , gsl_vector*);
 
 void write_av_number_extinctions_delta_interval(Metaparameters* , const nvector& , unsigned int Nsimul = 500);
 
 /* everything for the root solving here */
-double solve_for_delta_with_fit(const gsl_vector*, double&, double&);
+double solve_for_delta_with_fit(const gsl_vector*, double&, double&, const Metaparameters& );
 
 /* everything for the curve fitting here */
 #define NUMBER_OF_FITTING_PARAMETERS 4;

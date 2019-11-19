@@ -756,6 +756,10 @@ void CRModel::perturb_parameters(const ntype & Delta) const{
     p->l[mu] = p->l[mu]*(1+Delta*uniform_distrib(random_engine));
   }
 
+  if(this->metaparameters->verbose > 1){
+    std::cout <<" Structurally perturbed the system with parameter delta =" << Delta << std::endl;
+  }
+
   return;
 }
 
@@ -794,8 +798,8 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
 /*** ALL THE ADDITIONAL USEFUL FUNCTIONS ****/
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
-  if(m.verbose > 0){
-    std::cout << "Loading food matrix from " << m.foodmatrixpath << std::endl;
+  if(m.verbose > 1){
+    std::cout << "  Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
   std::ifstream in(m.foodmatrixpath);
   if (!in) {
@@ -1070,7 +1074,7 @@ Extinction_statistics compute_average_extinction(Metaparameters* metaparams, con
 
   foodmatrix food_matrix = load_food_matrix(*metaparams);
   if(metaparams->verbose > 0){
-    std::cout << "Computing average extinction for the given set of metaparameters." << std::endl;
+    std::cout << "Computing average extinction for delta="<<Delta << " with food matrix " << metaparams->foodmatrixpath << std::endl;
   }
 
   double teq[Nsimul];
@@ -1099,8 +1103,8 @@ Extinction_statistics compute_average_extinction(Metaparameters* metaparams, con
   av_extinct.extinct.std_deviation = gsl_stats_sd_m(extinctions, 1, Nsimul, av_extinct.extinct.mean);
 
   if(metaparams->verbose > 0){
-    std::cout << " Average extinction for Delta = " << Delta << " is " << av_extinct.extinct.mean;
-    std::cout << " +/- " << av_extinct.extinct.std_deviation << std::endl;
+    std::cout << "Average extinction for Delta = " << Delta << " is " << av_extinct.extinct.mean;
+    std::cout << " +/- " << av_extinct.extinct.std_deviation << " (" <<Nsimul << " runs)" << std::endl;
   }
   return av_extinct;
 }

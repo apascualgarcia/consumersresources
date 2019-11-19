@@ -4,11 +4,14 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_roots.h>
+#include <gsl/gsl_poly.h>
 #include <array>
 
 double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
   double delta_crit=0.;
-
+  if(metaparams.verbose > 0){
+    std::cout << "Attempting now to find the critical delta for the given set of metaparameters" << std::endl;
+  }
   // set up the solver
   const gsl_root_fsolver_type *T;
   gsl_root_fsolver* s;
@@ -31,6 +34,9 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
   gsl_root_fsolver_set(s, &F, x_lo, x_hi);
 
   // the idea is first to find an interval where the solution roughly should be
+  if(metaparams.verbose > 0){
+    std::cout << "We first find a rough interval where the critical delta should lie (each point computed by the solver is estimated with " << params.Nsimul<<" runs)"<<std::endl;  }
+
   do{
     iter++;
     status = gsl_root_fsolver_iterate(s);
@@ -55,6 +61,11 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
   params.Nsimul=500;
   F.params = &params;
   nvector extinctions;
+
+  if(metaparams.verbose > 0){
+    std::cout << "Now computing the average number of extinctions for ten points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
+  }
+
   for(size_t i=0; i < interval_length; ++i){
     double result = function_av_extinct_solver(interval[i], &params);
     extinctions.push_back(result);
@@ -62,7 +73,7 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate delta critical */
-  delta_crit = estimate_delta_crit_from_interval(interval, extinctions);
+  delta_crit = estimate_delta_crit_from_interval(interval, extinctions, metaparams);
   gsl_root_fsolver_free(s);
 
   return delta_crit;
@@ -84,9 +95,18 @@ double function_av_extinct_solver(double delta, void*params){
   return average_number_of_extinctions(delta, params)-1.;
 }
 
-double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi){
+double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m){
   double estimate = 0.;
 
+  if(m.verbose > 0){
+    std::cout << "Now we find the zero of the fit to determine delta critical (parameters =";
+    for(size_t i = 0; i < fit_parameters->size; ++i){
+      std::cout << " "<<gsl_vector_get(fit_parameters, i);
+    }
+    std::cout << ")" << std::endl;
+  }
+
+  /*
   unsigned int max_iter = 100;
   unsigned int N = NUMBER_OF_FITTING_PARAMETERS;
   double params[N];
@@ -103,14 +123,17 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
   double x0;
   gsl_function_fdf F;
 
+
   F.f = &choice_of_fitting_function;
   F.df = NULL;
   F.fdf = NULL;
+  std::cout << "All good until here" << std::endl;
   F.params = &params;
 
   T = gsl_root_fdfsolver_newton;
   s = gsl_root_fdfsolver_alloc(T);
   gsl_root_fdfsolver_set(s, &F, r);
+
   do{
     iter++;
     status = gsl_root_fdfsolver_iterate(s);
@@ -123,5 +146,53 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
   }
   estimate = r;
   gsl_root_fdfsolver_free(s);
+  */
+
+  if(m.verbose > 0){
+    std::cout << "We interpret the fitting parameters as coefficients of a degree 3 polynomial (which should be true, please check that)" << std::endl;
+  }
+
+  /* initiated these as -10 because we know it can't be a root */
+  double x0 = -10;
+  double x1 = -10;
+  double x2 = -10;
+
+  double a0 = gsl_vector_get(fit_parameters,0), a1= gsl_vector_get(fit_parameters,1), a2 = gsl_vector_get(fit_parameters,2),a3 = gsl_vector_get(fit_parameters,3);
+  double c = a0/a3, b = a1/a3, a = a2/a3;
+
+  int success = gsl_poly_solve_cubic(a,b,c, &x0, &x1, &x2);
+  if(x0 == -10){
+    std::cerr << "Error in the root finding, could not find a single root" << std::endl;
+  }
+  if(x1==-10){
+    estimate = x0;
+  }else{
+    unsigned int Nsimul =100;
+    if(m.verbose > 0){
+      std::cout << "Found three potential roots, compute which one is the best (" << Nsimul <<" runs per point)" << std::endl;
+    }
+    Metaparameters m_copy = m;
+    Extinction_statistics av0 = compute_average_extinction(&m_copy, ntype(x0), Nsimul);
+    Extinction_statistics av1 = compute_average_extinction(&m_copy, ntype(x1), Nsimul);
+    Extinction_statistics av2 = compute_average_extinction(&m_copy, ntype(x2), Nsimul);
+
+    double dist0 = (av0.extinct.mean-1.)*(av0.extinct.mean-1.);
+    double dist1 = (av1.extinct.mean-1.)*(av1.extinct.mean-1.);
+    double dist2 = (av2.extinct.mean-1.)*(av2.extinct.mean-1.);
+
+    if(dist0 < dist1){
+      if(dist0 < dist2){
+        estimate = x0;
+      }else{
+        estimate = x2;
+      }
+    }else{
+      if(dist1 < dist2){
+        estimate = x1;
+      }else{
+        estimate = x2;
+      }
+    }
+  }
   return estimate;
 }

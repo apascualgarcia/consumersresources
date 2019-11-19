@@ -272,6 +272,11 @@ Extinction CRModel::evolve_until_equilibrium(ntype threshold) const{
       }
     }
   }
+
+  if(this->metaparameters->verbose>1){
+    std::cout << "  Time to reach new equilibrium : " << t << std::endl;
+  }
+
   // At the end of the integration, we compute how many species went extinct
   unsigned int extinct(0);
   for(size_t i = p->NR; i < p->NR+p->NS; ++i){

@@ -144,7 +144,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
   return;
 }
 
-double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions){
+double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m){
   double delta_crit=0.;
   double x_lo = interval[0];
   double x_hi = interval[interval.size()-1];
@@ -159,11 +159,14 @@ double estimate_delta_crit_from_interval(const nvector& interval, const nvector&
   /* Then we actually find the parameters that fit our choice of function best */
   unsigned int number_of_fitting_parameters = NUMBER_OF_FITTING_PARAMETERS;
   gsl_vector* fit_parameters = gsl_vector_alloc(number_of_fitting_parameters);
+  if(m.verbose > 0){
+    std::cout << "Now fitting the " << x_points_to_fit.size() << " chosen into the specific function" << std::endl;
+  }
   fit_points_with_function(x_points_to_fit, y_points_to_fit, fit_parameters);
 
 
   /* with the fitting parameters estimated, we can actually solve for Delta numerically */
-  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi);
+  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi, m);
   gsl_vector_free(fit_parameters);
   std::cout << "zero estimated at " << delta_crit << std::endl;
 
