@@ -41,7 +41,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->tau_mode = string_to_tau_mode(configFile.get<std::string>("tau_mode"));
   this->alpha_mode = string_to_alpha_mode(configFile.get<std::string>("alpha_mode"));
   this->foodmatrixpath = configFile.get<std::string>("path_to_food_matrix");
-  this->verbose=configFile.get<bool>("verbose");
+  this->verbose=configFile.get<unsigned int>("verbose-level");
   this->energy_constraint=configFile.get<bool>("energy_constraint");
   this->nb_attempts = configFile.get<unsigned int>("number_of_attempts");
   this->save_path = configFile.get<std::string>("path_to_save_file");
@@ -52,7 +52,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->tf = configFile.get<ntype>("tf");
   this->perturb_eq = configFile.get<ntype>("perturbation_equilibrium");
   this->perturb_parameters = configFile.get<ntype>("perturbation_parameters");
-  if(this->verbose){
+  if(this->verbose > 0){
     std::cout << "Loading metaparameters from " << inputPath << std::endl;
   }
   return;
@@ -143,7 +143,7 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
   }while(not(this->constraints_fulfilled(meta)));
 
   this->metaparameters = &meta;
-  if(meta.verbose){
+  if(meta.verbose > 1){
     std::cout << "Feasible system build in "<<attempts<<" iteration(s). ";
     if(attempts > meta.nb_attempts){
       std::cout << "The metaparameters had to be changed.";
@@ -610,7 +610,7 @@ void CRModel::save_simulation() const{
     }
     myfile << std::endl;
   }
-  if(m->verbose){
+  if(m->verbose > 0){
     if(save_success){
       std::cout << "Successfully saved model to " << m->save_path << std::endl;
     }
@@ -645,7 +645,7 @@ void CRModel::save_jacobian_at_equilibrium(std::string savepath) const{
     myfile << this->jacobian_at_equilibrium() << "#"<< std::endl;
 
   }
-  if(m->verbose){
+  if(m->verbose > 0){
     if(save_success){
       std::cout << "Successfully saved model to " << savepath << std::endl;
     }
@@ -708,7 +708,7 @@ void CRModel::write_time_evolution(const Dynamical_variables & dyn, ntype tf) co
     myfile << evolution[i] << std::endl;
   }
 
-  if(m->verbose){
+  if(m->verbose > 0){
     if(save_success){
       std::cout << "Successfully saved temporal evolution of system to " << m->save_path << std::endl;
     }
@@ -779,7 +779,7 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
   myfile << m->save_path << std::endl;
   myfile << m->NR << " " << m->NS << " " << m->perturb_parameters << " " << ext.t_eq << " " << ext.extinct  << std::endl;
 
-  if(m->verbose){
+  if(m->verbose > 0){
     if(save_success){
       std::cout << "Successfully saved new equilibrium of system in "<< m->save_path << std::endl;
     }
@@ -794,7 +794,7 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
 /*** ALL THE ADDITIONAL USEFUL FUNCTIONS ****/
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
-  if(m.verbose){
+  if(m.verbose > 0){
     std::cout << "Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
   std::ifstream in(m.foodmatrixpath);
@@ -1069,7 +1069,7 @@ Extinction_statistics compute_average_extinction(Metaparameters* metaparams, con
   av_extinct.new_Seq.means = nvector(metaparams->NS, 0.);
 
   foodmatrix food_matrix = load_food_matrix(*metaparams);
-  if(metaparams->verbose){
+  if(metaparams->verbose > 0){
     std::cout << "Computing average extinction for the given set of metaparameters." << std::endl;
   }
 
@@ -1098,7 +1098,7 @@ Extinction_statistics compute_average_extinction(Metaparameters* metaparams, con
   av_extinct.extinct.mean = gsl_stats_mean(extinctions, 1, Nsimul);
   av_extinct.extinct.std_deviation = gsl_stats_sd_m(extinctions, 1, Nsimul, av_extinct.extinct.mean);
 
-  if(metaparams->verbose){
+  if(metaparams->verbose > 0){
     std::cout << " Average extinction for Delta = " << Delta << " is " << av_extinct.extinct.mean;
     std::cout << " +/- " << av_extinct.extinct.std_deviation << std::endl;
   }

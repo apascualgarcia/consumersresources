@@ -59,7 +59,7 @@ struct Metaparameters{
   taumode tau_mode;
   alphamode alpha_mode;
   std::string foodmatrixpath;
-  bool verbose;
+  unsigned int verbose;
   bool energy_constraint;
   bool budget_constraint;
   unsigned int nb_attempts;
