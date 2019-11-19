@@ -22,7 +22,7 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
 
   Solver_Parameters params;
   params.metaparameters = &metaparams;
-  params.Nsimul = 50;
+  params.Nsimul = 100;
 
   gsl_function F;
   F.function = &function_av_extinct_solver;
