@@ -1,2 +1,2 @@
 #!/bin/bash
-nohup time ./build/compute_critical_Delta config/configuration_comparison_NR25_NS25_s05_a0.in  path_to_food_matrix=./config/matrix_list_NR25_NS25_test.in path_to_save_file=./data_output/critical_delta_NR25_NS25_test.out > logs/critical_delta_NR25_NS25_test.log &
+nohup ./build/compute_critical_Delta config/configuration_comparison_NR25_NS25_s05_a0.in  path_to_food_matrix=./config/matrix_list_NR25_NS25_test.in path_to_save_file=./data_output/critical_delta_NR25_NS25_test.out |ts '[%Y-%m-%d %H:%M:%S]' > logs/critical_delta_NR25_NS25_test.log &
