@@ -2,13 +2,14 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
+from mpl_toolkits import mplot3d
 # rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
 # # for Palatino and other serif fonts use:
 # # rc('font',**{'family':'serif','serif':['Palatino']})
 # rc('text', usetex=False)
 
 folder = './data_output'
-filename = 'critical_delta_NR25_NS25'
+filename = 'critical_delta_NR25_NS25_combined'
 save_folder = './plots'
 save_name = filename
 title = r'Nr25_Nc25_Nest0.3_Conn0.1296 (1000 runs per point)'
@@ -106,6 +107,9 @@ for i in range(len(sorted_size)):
     ax2.set_xlabel(r'Connectance', fontsize=fs)
     ax2.set_ylabel(r'$\Delta^*$', fontsize=fs)
     ax2.legend()
+
+    fig3 = plt.figure()
+    ax3 = plt.axes(projection='3d')
 
     plt.show()
     plt.clf()

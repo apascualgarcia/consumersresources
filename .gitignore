@@ -5,3 +5,4 @@ logs/*
 !.placeholder
 text/*
 !text/consumer_resource.pdf
+*.out
