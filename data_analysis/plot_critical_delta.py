@@ -65,6 +65,7 @@ print("Data sorted.")
 
 for i in range(len(sorted_size)):
     [NR, NS] = sorted_size[i]
+    save_string = 'NR' + str(NR) + 'NS' + str(NS)
     data = sorted_mprop[i]
     # we filter the data to round the connectance up to 2 decimals
     data[:, 1] = np.array([round(data[i, 1], 2) for i in range(len(data))])
@@ -89,6 +90,7 @@ for i in range(len(sorted_size)):
     ax1.set_xlabel(r'Nestedness', fontsize=fs)
     ax1.set_ylabel(r'$\Delta^*$', fontsize=fs)
     ax1.legend()
+    fig1.savefig(save_folder + '/' + save_string + 'nest_fixed_conn.pdf')
 
     fig2 = plt.figure('Connectance for fixed nestedness')
     ax2 = fig2.add_subplot(111)
@@ -107,9 +109,17 @@ for i in range(len(sorted_size)):
     ax2.set_xlabel(r'Connectance', fontsize=fs)
     ax2.set_ylabel(r'$\Delta^*$', fontsize=fs)
     ax2.legend()
+    fig2.savefig(save_folder + '/' + save_string + '_conn_fixed_nest.pdf')
 
     fig3 = plt.figure()
-    ax3 = plt.axes(projection='3d')
+    ax3 = fig3.add_subplot(111, projection='3d')
+    ax3.plot_trisurf(data[:, 0], data[:, 1], data[:, 2])
+    ax3.set_xlabel('Nestedness')
+    ax3.set_ylabel('Connectance')
+    ax3.set_zlabel(r'$\Delta^*$')
+    ax3.view_init(azim=79, elev=29)
+    fig3.savefig(save_folder + '/' + save_string +
+                 '_connectance_nestedness_3d.pdf')
 
-    plt.show()
     plt.clf()
+print('Data plotted and saved.')
