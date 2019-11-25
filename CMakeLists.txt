@@ -15,7 +15,7 @@ if(NOT Eigen3_FOUND)
 	message(STATUS “Eigen3 not found, please install it to use the program.”)
 endif(NOT Eigen3_FOUND)
 
-find_package(GSL REQUIRED)
+find_package(GSL 2.4 REQUIRED)
 if(NOT GSL_FOUND)
 	message(STATUS "GSL not found, please install it to use the program.")
 endif(NOT GSL_FOUND)
