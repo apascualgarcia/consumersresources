@@ -1,2 +1,2 @@
 #!/bin/bash
-cd build && rm -r ./* && cmake .. && make && cd ..
+cd build && touch plholder && rm -r ./* && cmake .. && make && cd ..
