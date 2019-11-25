@@ -3,7 +3,7 @@ project(consumerresources)
 
 set(CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_compile_options(-Wall -pedantic -O)
+add_compile_options(-Wall -pedantic -O -fpermissive)
 
 file(GLOB CRM_HEADERS include/*.h)
 file(GLOB CRM_SOURCES src/CRModel_source/*.cc)
