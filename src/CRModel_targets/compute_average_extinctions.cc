@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "CRModel.h"
 
 using namespace std;
@@ -6,14 +7,22 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   initialize_random_engine(metaparams);
-  double int_start = 0., int_end = 1.;
-  unsigned int N = 100;
-  nvector Delta_interval;
-  for(size_t i = 0; i < N; ++i){
-    Delta_interval.push_back(int_start+i*(int_end-int_start)/(N-1));
+  std::ofstream myfile;
+  std::string spath = metaparams.save_path;
+  myfile.open(spath);
+  if(not(myfile.is_open())){
+    std::cerr << "Could not open " << spath << " for writing the extinctions " << std::endl;
+  }else{
+    int Nsimul = 10000;
+    for(size_t i = 0 ; i < Nsimul; ++i){
+      CRModel model(metaparams);
+      model.perturb_parameters(metaparams.perturb_parameters);
+      Extinction ext = model.evolve_until_equilibrium(1e-6);
+      std::cout << ext.extinct << " " ;
+      myfile << ext.extinct << " ";
+    }
+    myfile << std::endl;
   }
-
-  write_av_number_extinctions_delta_interval(&metaparams, Delta_interval, 1000);
-
+  myfile.close();
   return 0;
 }

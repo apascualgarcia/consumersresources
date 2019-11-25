@@ -1,0 +1,5 @@
+#!/bin/bash
+nohup ./build/compute_average_extinctions config/configuration_comparison_NR25_NS25_s025_a0.in path_to_save_file=data_output/histogram_extinctions_nest0.1_conn0.0832.out path_to_food_matrix=./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0832.txt perturbation_parameters=0.026104 &
+nohup ./build/compute_average_extinctions config/configuration_comparison_NR25_NS25_s025_a0.in path_to_save_file=data_output/histogram_extinctions_nest0.55_conn0.4176.out path_to_food_matrix=./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.55_Conn0.4176.txt perturbation_parameters=0.0185974 &
+nohup ./build/compute_average_extinctions config/configuration_comparison_NR25_NS25_s025_a0.in path_to_save_file=data_output/histogram_extinctions_nest0.55_conn0.2784.out path_to_food_matrix=./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.55_Conn0.2784.txt perturbation_parameters=0.00717183 &
+nohup ./build/compute_average_extinctions config/configuration_comparison_NR25_NS25_s025_a0.in path_to_save_file=data_output/histogram_extinctions_nest0.25_conn0.2336.out path_to_food_matrix=./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.25_Conn0.2336.txt perturbation_parameters=0.0214407 &

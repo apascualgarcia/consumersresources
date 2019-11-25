@@ -72,6 +72,12 @@ CRModel::CRModel(Model_parameters* mod_params){
   metaparameters=NULL;
   return;
 }
+
+CRModel::CRModel(Metaparameters& meta){
+  foodmatrix food_matrix = load_food_matrix(meta);
+  *this = CRModel::CRModel(food_matrix, meta);
+}
+
 CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
   unsigned int attempts(0);
   this->model_param = new Model_parameters();

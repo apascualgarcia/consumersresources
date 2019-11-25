@@ -137,6 +137,7 @@ private:
   Model_parameters* model_param;
 
 public:
+  CRModel(Metaparameters&);
   CRModel(const foodmatrix&, Metaparameters&);
   CRModel(Model_parameters*);
   nvector equations_of_evolution(const Dynamical_variables&) const; // returns the value of the RHS of the equations of evolution

@@ -7,7 +7,7 @@ with open('./config/' + config_file + '.in') as f:
 
 for config in mylist:
     for i in range(1, cores + 1):
-        cmd = 'nohup ./build/compute_critical_Delta '
+        cmd = 'nohup ./build/compute_critical_Delta_matrices '
         cmd += 'config/' + config + '.in'
         cmd += " path_to_food_matrix=./config/" + \
             matrix_list + "_" + str(i) + '.in'
