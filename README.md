@@ -1,4 +1,4 @@
-# Consumer resources model
+# Consumers resources model
 We here detail how the software we developed to numerically study consumers-resources models can be installed and used.
 ## Installation
 ### Pre-requisites
@@ -44,7 +44,7 @@ will install pip on your system. You can then type
 ```
 pip3 install [libname]
 ```
-where [libname] is the name of the wanted libraries.
+where [libname] is the name of the wanted library.
 
 * **ts** : this tool is needed in order to print timestamps in the console output when a script is running. It can be found e.g. in the **moreutils** package which can be installed with
 ```
