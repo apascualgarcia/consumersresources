@@ -17,7 +17,7 @@ for i in range(0, cores):
         cmd_core += './build/compute_critical_Delta_matrices '
         cmd_core += 'config/' + config + '.in'
         cmd_core += " path_to_food_matrix=./config/" + \
-            matrix_list[i] + '.in'
+            matrix_list[i]
         cmd_core += " path_to_save_file=./data_output/" + \
             config + "_" + str(i) + ".out"
         cmd_core += " seed_number=" + str(seed_number)
