@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime
 from separate_file import separate_file, remove_files
 
 config_file = sys.argv[1]
@@ -22,13 +23,18 @@ for i in range(0, cores):
         cmd_core += " path_to_save_file=./data_output/" + \
             config + "_" + str(i) + ".out"
         cmd_core += " seed_number=" + str(seed_number)
-        cmd_core += " |ts '[%Y-%m-%d %H:%M:%S]' > ./logs/" + \
+        cmd_core += " | ts '[%Y-%m-%d %H:%M:%S]' > ./logs/" + \
             config + "_" + str(i) + ".log"
         cmd_core += " 2>./logs/err" + config + "_" + \
             str(i) + ".log && "
         seed_number += 1
     cmd_core = cmd_core[:-3]
     cmd_core = cmd_core + '&'
-    os.system(cmd_core)
+    # os.system(cmd_core)
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    cmd_write = '[' + dt_string + '] ' + cmd_core
+    cmd_write = 'echo "' + cmd_write + '" >> logs/commands.log'
+    os.system(cmd_write)
 print("Launched the commands in the background, please check the appropriate logs to see the progress")
 remove_files(conf_files)
