@@ -144,7 +144,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
   return;
 }
 
-double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m){
+double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, eqmode equilibrium){
   double delta_crit=0.;
   double x_lo = interval[0];
   double x_hi = interval[interval.size()-1];
@@ -166,9 +166,9 @@ double estimate_delta_crit_from_interval(const nvector& interval, const nvector&
 
 
   /* with the fitting parameters estimated, we can actually solve for Delta numerically */
-  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi, m);
+  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi, m, equilibrium);
   gsl_vector_free(fit_parameters);
-  std::cout << "zero estimated at " << delta_crit << std::endl;
+  std::cout << " zero estimated at " << delta_crit << std::endl;
 
   /* finally, we return the estimated value */
   return delta_crit;

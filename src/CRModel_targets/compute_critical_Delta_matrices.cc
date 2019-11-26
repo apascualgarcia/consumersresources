@@ -31,7 +31,7 @@ int main(int argc, char * argv[]){
     save_success = true;
     for(size_t i = 0; i < matrices_path.size();++i){
         metaparams.foodmatrixpath = matrices_path[i];
-        double delta = compute_critical_Delta(metaparams, 0.);
+        double delta = compute_critical_Delta(metaparams, 0., eqmode(oneextinct));
         std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
         myfile << matrices_path[i] << " " << delta << std::endl;
     }

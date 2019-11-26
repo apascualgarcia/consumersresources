@@ -205,9 +205,8 @@ void CRModel::write_time_evolution_until_equilibrium(const Dynamical_variables& 
   return;
 }
 
-Extinction CRModel::evolve_until_equilibrium(ntype threshold) const{
+Extinction CRModel::evolve_until_equilibrium(ntype threshold, eqmode eq_mode) const{
   Metaparameters* p = this->metaparameters;
-
   // initialization of the system
   double t0=0.;
   double t = t0;
@@ -233,13 +232,31 @@ Extinction CRModel::evolve_until_equilibrium(ntype threshold) const{
   unsigned int counts = 0;
   double previous_y[10][p->NR+p->NS];
   double eq_coeff = 1.;
+  bool exit_condition = true;
+  bool one_extinct = false;
+
+  exit_condition = (t>=tmax) or (eq_coeff <= threshold);
 
   // system temporal evolution
-  while( (t<tmax) and (eq_coeff > threshold)){
+  while(not(exit_condition)){
     int status = gsl_odeiv2_evolve_apply(e,c,s, &sys, &t, tmax, &h, y);
     if (status != GSL_SUCCESS){
       std::cerr << "Error in the integration of the ODE!" << std::endl;
       break;
+    }
+
+    if(p->verbose > 3){
+      std::cout << "Population of the system at time t = "<< t << " :" << std::endl;
+      std::cout << "  Resources :";
+      for(size_t nu = 0; nu < p->NR; ++nu){
+        std::cout << " " << y[nu] ;
+      }
+      std::cout << std::endl;
+      std::cout << "  Consumers :";
+      for(size_t i = p->NR; i < p->NR+p->NS; ++i){
+        std::cout << " " << y[i];
+      }
+      std::cout << std::endl;
     }
 
     // store the previous ten values to estimate convergence
@@ -265,19 +282,50 @@ Extinction CRModel::evolve_until_equilibrium(ntype threshold) const{
       eq_coeff = pow(eq_coeff, 0.5);
     }
     counts += 1;
-    // if a resource/consumer is too small, we effectively set it to zero
-    for(size_t i=0; i < p->NR+p->NS; ++i){
+
+    /* if a resource/consumer is too small, we effectively set it to zero */
+    for(size_t i=0; i < p->NR+p->NS and not(one_extinct); ++i){
       if(y[i] < threshold){
         y[i]=0.;
-      }
+        if(i >= p->NR){
+          one_extinct=true;
+          if(p->verbose > 2){
+            std::cout << " Consumer " << i-p->NR << " went extinct at time t=" << t << std::endl;
+          }
+        }else{
+          if(p->verbose > 2){
+            std::cout << " Species " << i << " went extinct at time t=" << t << std::endl;
+          }
+        }
+        }
+    }
+
+    exit_condition = (t>=tmax) or (eq_coeff <= threshold);
+    if(eq_mode == oneextinct){
+      exit_condition = exit_condition or one_extinct;
     }
   }
 
   if(this->metaparameters->verbose>1){
-    std::cout << "  Time to reach new equilibrium : " << t << std::endl;
+    if(eq_mode == oneextinct){
+      std::cout << " Time to get to equilibrium : " << t ;
+      std::cout << " (";
+      if(one_extinct){
+        std::cout << "observed at least one extinction";
+      }else if(t >= tmax){
+        std::cout << "reached max time integration";
+      }else if(eq_coeff <= threshold){
+        std::cout << "convergence observed";
+      }
+      std::cout << ")" << std::endl;
+    }else if(eq_mode == convergence){
+      std::cout << " Time to get convergence on all the resources/consumers time lines : " << t << std::endl;
+    }
   }
 
-  // At the end of the integration, we compute how many species went extinct
+  /*  At the end of the integration, we compute how many species went extinct
+      This should be one if eq_mode is oneextinct (except if two species or more
+      are deemed extinct at the same time) */
   unsigned int extinct(0);
   for(size_t i = p->NR; i < p->NR+p->NS; ++i){
     if(y[i] < threshold){
@@ -299,5 +347,4 @@ Extinction CRModel::evolve_until_equilibrium(ntype threshold) const{
 
   Extinction to_return = {t,ntype(extinct), new_R, new_S};
   return to_return;
-
 }

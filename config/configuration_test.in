@@ -20,3 +20,4 @@ energy_constraint = true
 number_of_attempts = 100 % number of attempts to build a system with such metaparameters, after this the program will build a feasible system with an alpha0 it will have chosen
 path_to_save_file = /Users/Shared/Cloud/Master/Master_Thesis/Code/consumersresources/TEST_FOLDER/DataOutput/jacobian.out
 seed_number=20
+equilibrium_mode=one_extinct

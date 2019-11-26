@@ -8,7 +8,13 @@
 #include <array>
 
 double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
+  return compute_critical_Delta(metaparams, accuracy, metaparams.equilibrium);
+}
+
+double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode equilibrium){
   double delta_crit=0.;
+  unsigned int Nsimul_frun = 100;
+  unsigned int Nsimul_srun = 1000;
   if(metaparams.verbose > 0){
     std::cout << "Attempting now to find the critical delta for the given set of metaparameters" << std::endl;
   }
@@ -22,7 +28,8 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
 
   Solver_Parameters params;
   params.metaparameters = &metaparams;
-  params.Nsimul = 100;
+  params.Nsimul = Nsimul_frun;
+  params.equilibrium = equilibrium;
 
   gsl_function F;
   F.function = &function_av_extinct_solver;
@@ -58,12 +65,18 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
     interval.push_back(x_lo+i*(x_hi-x_lo)/(interval_length-1));
   }
 
-  params.Nsimul=500;
+  params.Nsimul=Nsimul_srun;
   F.params = &params;
   nvector extinctions;
 
   if(metaparams.verbose > 0){
-    std::cout << "Now computing the average number of extinctions for ten points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
+    std::cout << "Now computing the ";
+    if(equilibrium == convergence){
+      std::cout << "average number of extinctions";
+    }else if(equilibrium==oneextinct){
+      std::cout << "probability of getting more than one extinction";
+    }
+    std::cout << " for ten points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
   }
 
   for(size_t i=0; i < interval_length; ++i){
@@ -73,17 +86,19 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate delta critical */
-  delta_crit = estimate_delta_crit_from_interval(interval, extinctions, metaparams);
+  delta_crit = estimate_delta_crit_from_interval(interval, extinctions, metaparams, equilibrium);
   gsl_root_fsolver_free(s);
 
   return delta_crit;
 }
 
 
-double average_number_of_extinctions(double delta, void* params){
+double average_number_of_extinctions(double delta, Metaparameters* m, unsigned int Nsimul){
+  /* old version
   Solver_Parameters* s = (Solver_Parameters*) params;
   Metaparameters* m = s->metaparameters;
   unsigned int Nsimul = s->Nsimul;
+  */
 
   Extinction_statistics ext = compute_average_extinction(m, ntype(delta), Nsimul);
   double av_number_extinct = double(ext.extinct.mean);
@@ -92,10 +107,21 @@ double average_number_of_extinctions(double delta, void* params){
 }
 
 double function_av_extinct_solver(double delta, void*params){
-  return average_number_of_extinctions(delta, params)-1.;
+  Solver_Parameters* s = (Solver_Parameters*) params;
+  Metaparameters* m = s->metaparameters;
+  unsigned int Nsimul = s->Nsimul;
+
+  if(s->equilibrium==convergence){
+    return average_number_of_extinctions(delta, m, Nsimul)-1.;
+  }else if(s->equilibrium==oneextinct){
+    return probability_of_extinction_greather_than_one(m, delta, Nsimul)-0.5;
+  }else{
+    std::cerr << "equilibrium type not implemented yet, return 0"<< std::endl;
+    return 0.;
+  }
 }
 
-double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m){
+double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, eqmode equilibrium){
   double estimate = 0.;
 
   if(m.verbose > 0){
@@ -170,7 +196,10 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
     unsigned int Nsimul =100;
     if(m.verbose > 0){
       std::cout << "Found three potential roots, compute which one is the best (" << Nsimul <<" runs per point)" << std::endl;
+      std::cout << "Please implement the different equilibrium modes in case of three roots" << std::endl;
     }
+    estimate = -1.;
+    /*
     Metaparameters m_copy = m;
     Extinction_statistics av0 = compute_average_extinction(&m_copy, ntype(x0), Nsimul);
     Extinction_statistics av1 = compute_average_extinction(&m_copy, ntype(x1), Nsimul);
@@ -193,6 +222,7 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
         estimate = x2;
       }
     }
+    */
   }
   return estimate;
 }

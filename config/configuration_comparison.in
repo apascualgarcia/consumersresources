@@ -21,3 +21,4 @@ number_of_attempts = 100 % number of attempts to build a system with such metapa
 path_to_save_file = /Users/Shared/Cloud/Master/Master_Thesis/Code/consumersresources/TEST_FOLDER/DataOutput/test.out
 seed_number=0
 perturbation=0.1
+equilibrium_mode=one_extinct

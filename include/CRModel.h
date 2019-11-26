@@ -19,6 +19,7 @@ typedef nmatrix foodmatrix;
 enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
 enum alphamode{random_structure, no_release_when_eat};
+enum eqmode{oneextinct, convergence};
 
 const unsigned int print_precision=4;
 const ntype EIGENSOLVER_PRECISION = 1e-15;
@@ -68,6 +69,7 @@ struct Metaparameters{
   std::string save_path;
   ntype perturb_eq;
   ntype perturb_parameters;
+  eqmode equilibrium;
 
   Metaparameters(int argc, char *argv[]);
 };
@@ -90,6 +92,7 @@ struct Solver_Parameters{
   // these dictate the values we will take for compute_average_extinction
   Metaparameters* metaparameters;
   unsigned int Nsimul;
+  eqmode equilibrium;
 };
 
 struct Delta_critical{
@@ -160,7 +163,7 @@ public:
   Dynamical_variables perturb_equilibrium() const;
   void perturb_parameters() const;
   void perturb_parameters(const ntype &) const;
-  Extinction evolve_until_equilibrium(ntype) const;
+  Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence) const;
   void save_new_equilibrium(const Extinction&) const;
 };
 
@@ -181,6 +184,7 @@ void rescale_mean(nmatrix&, const ntype&);
 gammamode string_to_gamma_mode(std::string);
 taumode string_to_tau_mode(std::string);
 alphamode string_to_alpha_mode(std::string);
+eqmode string_to_eq_mode(std::string);
 
 std::ostream& display_matrix_w_name(std::ostream&, std::string, const nmatrix&);
 std::ostream& display_vector_w_name(std::ostream&, std::string, const nvector&);
@@ -209,15 +213,17 @@ Extinction_statistics compute_average_extinction(Metaparameters*, const ntype &,
    we have an average of 1.0 +/- accuracy number of extinctions
 */
 double compute_critical_Delta(Metaparameters, ntype);
+double compute_critical_Delta(Metaparameters, ntype, eqmode);
 double function_av_extinct_solver(double, void*);
-double average_number_of_extinctions(double , void*);
-double estimate_delta_crit_from_interval(const nvector&, const nvector&, const Metaparameters&);
+double average_number_of_extinctions(double , Metaparameters*, unsigned int);
+double probability_of_extinction_greather_than_one(Metaparameters*, const ntype& , unsigned int);
+double estimate_delta_crit_from_interval(const nvector&, const nvector&, const Metaparameters&,eqmode);
 int function_to_fit(const gsl_vector* , void* , gsl_vector*);
 
 void write_av_number_extinctions_delta_interval(Metaparameters* , const nvector& , unsigned int Nsimul = 500);
 
 /* everything for the root solving here */
-double solve_for_delta_with_fit(const gsl_vector*, double&, double&, const Metaparameters& );
+double solve_for_delta_with_fit(const gsl_vector*, double&, double&, const Metaparameters&, eqmode);
 
 /* everything for the curve fitting here */
 #define NUMBER_OF_FITTING_PARAMETERS 4;

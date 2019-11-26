@@ -6,3 +6,4 @@ logs/*
 text/*
 !text/consumer_resource.pdf
 *.out
+process-palette.json

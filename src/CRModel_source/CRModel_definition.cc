@@ -52,6 +52,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->tf = configFile.get<ntype>("tf");
   this->perturb_eq = configFile.get<ntype>("perturbation_equilibrium");
   this->perturb_parameters = configFile.get<ntype>("perturbation_parameters");
+  this->equilibrium = string_to_eq_mode(configFile.get<std::string>("equilibrium_mode"));
   if(this->verbose > 0){
     std::cout << "Loading metaparameters from " << inputPath << std::endl;
   }
@@ -904,10 +905,23 @@ alphamode string_to_alpha_mode(std::string mode){
     return alphamode(no_release_when_eat);
   }else{
     std::cerr << "Error, that value of alphamode has not been implemented yet or does not exist"<<std::endl;
-    std::cerr << "Continuing with alphamode random_structure" << std::endl;
-    return alphamode(random_structure);
+    std::cerr << "Aborting simulation" << std::endl;
+    abort();
   }
 }
+
+eqmode string_to_eq_mode(std::string mode){
+    if(mode=="one_extinct"){
+      return eqmode(oneextinct);
+    }else if(mode=="convergence"){
+      return eqmode(convergence);
+    }else{
+      std::cerr<< "Error, that value of equilibrium_mode has not been implemented yet or does not exist" << std::endl;
+      std::cerr << "Aborting simulation" << std::endl;
+      abort();
+    }
+}
+
 std::ostream& display_matrix_w_name(std::ostream& os, std::string mat_name, const nmatrix & mat){
   os << mat_name << " = " << mat[0] << std::endl;
   for(size_t i = 1; i < mat.size(); ++i){
@@ -1115,6 +1129,29 @@ Extinction_statistics compute_average_extinction(Metaparameters* metaparams, con
   return av_extinct;
 }
 
+double probability_of_extinction_greather_than_one(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
+  ntype convergence_threshold = 1e-6;
+  double probability_ext_gtone = 0.;
+
+  if(metaparams->verbose > 0){
+    std::cout << "Computing probability of getting one or more extinctions for Delta=" << Delta << std::endl;
+  }
+
+  for(size_t i = 0; i < Nsimul; ++i){
+    CRModel model(*metaparams);
+    model.perturb_parameters(Delta);
+    Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
+    if(new_equilib.extinct >=1){
+      probability_ext_gtone+=1./Nsimul;
+    }
+  }
+  if(metaparams->verbose>0){
+    std::cout << "Probability of getting one or more extinctions for Delta=" << Delta;
+    std::cout << " is " << probability_ext_gtone << std::endl;
+  }
+  return probability_ext_gtone;
+}
+
 void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector& deltas, unsigned int Nsimul)
 {
   unsigned int Npoints = deltas.size();
@@ -1141,6 +1178,5 @@ void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector
     }
   }
   myfile.close();
-
   return;
 }

@@ -3,7 +3,7 @@ import numpy as np
 
 config_folder = './config'
 config_file = 'matrix_list_NR25_NS25'
-CORES = 20
+CORES = 6
 
 
 def separate_file(conf_file):
@@ -27,4 +27,3 @@ def remove_files(mylist):
 
 
 config_files = separate_file(config_folder + '/' + config_file + '.in')
-remove_files(config_files)

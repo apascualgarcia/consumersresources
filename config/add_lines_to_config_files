@@ -1,0 +1,5 @@
+#!/bin/bash
+LINE="equilibrium_mode=one_extinct" 
+
+echo $LINE | tee -a configuration*
+
