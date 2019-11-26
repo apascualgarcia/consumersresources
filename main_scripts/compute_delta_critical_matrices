@@ -4,6 +4,6 @@
 ## whose critical delta we want to find. They MUST be in the config folder
 METAPARAMS_LIST="list_of_config_files_comparison_test"
 MATRIX_LIST="matrix_list_NR25_NS25"
-CORES=6
+CORES=$1
 
 python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES
