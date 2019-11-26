@@ -10,7 +10,7 @@ int main(int argc, char * argv[]){
   vector<string> matrices_path;
   std::ifstream in(metaparams.foodmatrixpath);
   if (!in) {
-    std::cerr << "Cannot open file.\n" << " to compute critical deltas" << std::endl;
+    std::cerr << "Cannot open file " << metaparams.foodmatrixpath << " to compute critical deltas" << std::endl;
   }else{
     do{
       std::string a;
