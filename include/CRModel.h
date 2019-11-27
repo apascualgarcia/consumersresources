@@ -221,7 +221,7 @@ double estimate_delta_crit_from_interval(const nvector&, const nvector&, const M
 int function_to_fit(const gsl_vector* , void* , gsl_vector*);
 
 void write_av_number_extinctions_delta_interval(Metaparameters* , const nvector& , unsigned int Nsimul = 500);
-
+void write_prob_greater_than_one_delta_interval(Metaparameters*, const nvector&, unsigned int Nsimul=500);
 /* everything for the root solving here */
 double solve_for_delta_with_fit(const gsl_vector*, double&, double&, const Metaparameters&, eqmode);
 

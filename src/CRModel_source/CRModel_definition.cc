@@ -1152,8 +1152,7 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
   return probability_ext_gtone;
 }
 
-void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector& deltas, unsigned int Nsimul)
-{
+void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector& deltas, unsigned int Nsimul){
   unsigned int Npoints = deltas.size();
   nvector av_extinctions = nvector(Npoints, 0.);
   nvector std_extinctions = nvector(Npoints, 0.);
@@ -1179,4 +1178,31 @@ void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector
   }
   myfile.close();
   return;
+}
+void write_prob_greater_than_one_delta_interval(Metaparameters* m, const nvector& deltas, unsigned int Nsimul){
+  unsigned int Npoints = deltas.size();
+  nvector probability_ext = nvector(Npoints, 0.);
+
+  std::ofstream myfile;
+  myfile.open(m->save_path,std::ios_base::app);
+  bool save_success(false);
+  if(not(myfile.is_open())){
+    std::cerr << "Could not open "<<m->save_path <<" for saving the simulation "<< std::endl;
+  }else{
+    save_success=true;
+    for(size_t i = 0 ; i < deltas.size(); ++i){
+
+      double proba = probability_of_extinction_greather_than_one(m, deltas[i], Nsimul);
+
+      myfile << "# "  << m->p << " " << m->epsilon << " " << m->foodmatrixpath << " " << m->verbose << " ";
+      myfile << m->energy_constraint << " " << m->budget_constraint << " " << m->nb_attempts<<" " << m->seed_number <<" ";
+      myfile << m->save_path << " ";
+      time_t now=time(0);
+      myfile << ctime(&now) ;
+      myfile << deltas[i] << " " << proba << std::endl;
+    }
+  }
+  myfile.close();
+  return;
+
 }
