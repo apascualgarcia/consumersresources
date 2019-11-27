@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   initialize_random_engine(metaparams);
-  eqmode equilibrium = oneextinct;
+  eqmode equilibrium = convergence;
   std::ofstream myfile;
   std::string spath = metaparams.save_path;
   myfile.open(spath, std::ofstream::out | std::ofstream::trunc);
