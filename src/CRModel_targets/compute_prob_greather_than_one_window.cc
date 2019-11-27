@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include "CRModel.h"
 
 using namespace std;
@@ -15,5 +14,6 @@ int main(int argc, char * argv[]){
   }
 
   write_av_number_extinctions_delta_interval(&metaparams, Delta_interval, 1000);
+
   return 0;
 }
