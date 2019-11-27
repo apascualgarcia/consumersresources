@@ -14,7 +14,7 @@ int main(int argc, char * argv[]){
   if(not(myfile.is_open())){
     std::cerr << "Could not open " << spath << " for writing the extinctions " << std::endl;
   }else{
-    int Nsimul = 10000;
+    int Nsimul = 1000;
     for(size_t i = 0 ; i < Nsimul; ++i){
       CRModel model(metaparams);
       model.perturb_parameters(metaparams.perturb_parameters);

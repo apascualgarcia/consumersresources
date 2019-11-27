@@ -56,3 +56,25 @@ Once you made sure that the required tools are installed and you pulled the depo
 ./configure
 ```
 from the main folder to set up everything.
+
+## Tree structure of the package
+
+## How to run scripts
+* compute_critical_Delta_matrices : this one is actually fairly simple. It computes the critical delta of a given set of matrices (given by default but which can be changed if needed) for every configuration of metaparameters specified. This means the total number of critical delta computed will be #matrices x #configuration. If you don't change the default matrix list and the default set of metaparameters, then you can simply run the script with the command
+```
+main_scripts/compute_delta_critical_matrices CORES
+```
+where **CORES** is an integer specifying the number of cores you want to allocate for this task. If you need to change the list of matrices or the set of configurations, you can do it manually in the script with a standard text editor, e.g. **nano** :
+```
+nano main_scripts/compute_delta_critical_matrices
+```
+Then you can specify the name of your set of matrices by changing the value of **MATRIX_LIST**. Be careful not to include the file extension. Note that the file extension must be '.in' and the file must be in the **config** folder, e.g.
+```
+MATRIX_LIST="other_matrix_list"
+```
+for a list of matrices that would be config/other_matrix_list.in.
+Similarly, for an other set of metaparameters configurations
+```
+METAPARAMS_LIST="other_metaparams_list"
+```
+for the file config/other_metaparams_list.in

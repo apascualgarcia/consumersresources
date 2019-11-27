@@ -1,5 +1,6 @@
-filename = 'critical_delta_NR25_NS25'
-file_list = [filename + '_' + str(i) for i in range(1, 7)]
+cores = 4
+filename = 'configuration_comparison_NR25_NS25_s05_a0_matrix_list_NR25_NS25'
+file_list = [filename + '_' + str(i) for i in range(0, cores)]
 
 total_strings = []
 for file in file_list:

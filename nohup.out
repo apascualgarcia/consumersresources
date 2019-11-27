@@ -19,3 +19,7 @@ Average extinction for Delta = 0.0210251 is 0.9 +/- 0.814411
 Found an interval for Delta critical : [0.0210251;0.0220097]
 Now computing the average number of extinctions for ten points inside this interval (500 runs per point)
 Computing average extinction for delta=0.0210251 with food matrix ./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.25_Conn0.2336.txt
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in

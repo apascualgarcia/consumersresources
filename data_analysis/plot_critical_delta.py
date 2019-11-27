@@ -9,7 +9,7 @@ from mpl_toolkits import mplot3d
 # rc('text', usetex=False)
 
 folder = './data_output'
-filename = 'critical_delta_NR25_NS25_combined'
+filename = 'configuration_comparison_NR25_NS25_s05_a0_matrix_list_NR25_NS25_combined'
 save_folder = './plots'
 save_name = filename
 title = r'Nr25_Nc25_Nest0.3_Conn0.1296 (1000 runs per point)'
