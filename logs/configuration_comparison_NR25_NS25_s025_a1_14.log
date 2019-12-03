@@ -1,0 +1,210 @@
+[2019-11-29 22:44:51] Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a1.in
+[2019-11-29 22:44:51] Successfully opened ./data_output/configuration_comparison_NR25_NS25_s025_a1_matrix_list_NR25_NS25_14.out, attempting now to find the critical delta of every listed matrix 
+[2019-11-29 22:44:51] Attempting now to find the critical delta for the given set of metaparameters
+[2019-11-29 22:44:51] Computing probability of getting one or more extinctions for Delta=0
+[2019-11-29 22:44:51] Probability of getting one or more extinctions for Delta=0 is 0
+[2019-11-29 22:44:51] Computing probability of getting one or more extinctions for Delta=1
+[2019-11-29 22:44:52] Probability of getting one or more extinctions for Delta=1 is 1
+[2019-11-29 22:44:52] We first find a rough interval where the critical delta should lie (each point computed by the solver is estimated with 100 runs)
+[2019-11-29 22:44:52] Computing probability of getting one or more extinctions for Delta=0.5
+[2019-11-29 22:44:52] Probability of getting one or more extinctions for Delta=0.5 is 1
+[2019-11-29 22:44:52] Computing probability of getting one or more extinctions for Delta=0.25
+[2019-11-29 22:44:53] Probability of getting one or more extinctions for Delta=0.25 is 1
+[2019-11-29 22:44:53] Computing probability of getting one or more extinctions for Delta=0.125
+[2019-11-29 22:44:54] Probability of getting one or more extinctions for Delta=0.125 is 0.99
+[2019-11-29 22:44:54] Computing probability of getting one or more extinctions for Delta=0.0631313
+[2019-11-29 22:44:57] Probability of getting one or more extinctions for Delta=0.0631313 is 0.97
+[2019-11-29 22:44:57] Computing probability of getting one or more extinctions for Delta=0.0315657
+[2019-11-29 22:45:10] Probability of getting one or more extinctions for Delta=0.0315657 is 0.33
+[2019-11-29 22:45:10] Computing probability of getting one or more extinctions for Delta=0.0399503
+[2019-11-29 22:45:20] Probability of getting one or more extinctions for Delta=0.0399503 is 0.57
+[2019-11-29 22:45:20] Computing probability of getting one or more extinctions for Delta=0.0375048
+[2019-11-29 22:45:29] Probability of getting one or more extinctions for Delta=0.0375048 is 0.6
+[2019-11-29 22:45:29] Computing probability of getting one or more extinctions for Delta=0.0345352
+[2019-11-29 22:45:39] Probability of getting one or more extinctions for Delta=0.0345352 is 0.5
+[2019-11-29 22:45:39] Found an interval for Delta critical : [0.0315657;0.0345352]
+[2019-11-29 22:45:39] Now computing the probability of getting more than one extinction for ten points inside this interval (1000 runs per point)
+[2019-11-29 22:45:39] Computing probability of getting one or more extinctions for Delta=0.0315657
+[2019-11-29 22:47:31] Probability of getting one or more extinctions for Delta=0.0315657 is 0.354
+[2019-11-29 22:47:31] Computing probability of getting one or more extinctions for Delta=0.0318956
+[2019-11-29 22:49:24] Probability of getting one or more extinctions for Delta=0.0318956 is 0.361
+[2019-11-29 22:49:24] Computing probability of getting one or more extinctions for Delta=0.0322256
+[2019-11-29 22:51:09] Probability of getting one or more extinctions for Delta=0.0322256 is 0.408
+[2019-11-29 22:51:09] Computing probability of getting one or more extinctions for Delta=0.0325555
+[2019-11-29 22:52:41] Probability of getting one or more extinctions for Delta=0.0325555 is 0.412
+[2019-11-29 22:52:41] Computing probability of getting one or more extinctions for Delta=0.0328855
+[2019-11-29 22:54:13] Probability of getting one or more extinctions for Delta=0.0328855 is 0.41
+[2019-11-29 22:54:13] Computing probability of getting one or more extinctions for Delta=0.0332154
+[2019-11-29 22:55:59] Probability of getting one or more extinctions for Delta=0.0332154 is 0.423
+[2019-11-29 22:55:59] Computing probability of getting one or more extinctions for Delta=0.0335454
+[2019-11-29 22:57:17] Probability of getting one or more extinctions for Delta=0.0335454 is 0.439
+[2019-11-29 22:57:17] Computing probability of getting one or more extinctions for Delta=0.0338753
+[2019-11-29 22:58:56] Probability of getting one or more extinctions for Delta=0.0338753 is 0.448
+[2019-11-29 22:58:56] Computing probability of getting one or more extinctions for Delta=0.0342053
+[2019-11-29 23:00:38] Probability of getting one or more extinctions for Delta=0.0342053 is 0.462
+[2019-11-29 23:00:38] Computing probability of getting one or more extinctions for Delta=0.0345352
+[2019-11-29 23:02:17] Probability of getting one or more extinctions for Delta=0.0345352 is 0.457
+[2019-11-29 23:02:17] Now fitting the 10 chosen into the specific function
+[2019-11-29 23:02:17] Now we find the zero of the fit to determine delta critical (parameters = -111.168 9758.66 -286362 2.80777e+06)
+[2019-11-29 23:02:17] We interpret the fitting parameters as coefficients of a degree 3 polynomial (which should be true, please check that)
+[2019-11-29 23:02:17]  zero estimated at 0.0356401
+[2019-11-29 23:02:17] Computed critical delta for ./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.1344.txt
+[2019-11-29 23:02:17] Attempting now to find the critical delta for the given set of metaparameters
+[2019-11-29 23:02:17] Computing probability of getting one or more extinctions for Delta=0
+[2019-11-29 23:02:17] Probability of getting one or more extinctions for Delta=0 is 0
+[2019-11-29 23:02:17] Computing probability of getting one or more extinctions for Delta=1
+[2019-11-29 23:02:18] Probability of getting one or more extinctions for Delta=1 is 1
+[2019-11-29 23:02:18] We first find a rough interval where the critical delta should lie (each point computed by the solver is estimated with 100 runs)
+[2019-11-29 23:02:18] Computing probability of getting one or more extinctions for Delta=0.5
+[2019-11-29 23:02:19] Probability of getting one or more extinctions for Delta=0.5 is 1
+[2019-11-29 23:02:19] Computing probability of getting one or more extinctions for Delta=0.25
+[2019-11-29 23:02:20] Probability of getting one or more extinctions for Delta=0.25 is 1
+[2019-11-29 23:02:20] Computing probability of getting one or more extinctions for Delta=0.125
+[2019-11-29 23:02:21] Probability of getting one or more extinctions for Delta=0.125 is 1
+[2019-11-29 23:02:21] Computing probability of getting one or more extinctions for Delta=0.0625
+[2019-11-29 23:02:24] Probability of getting one or more extinctions for Delta=0.0625 is 0.98
+[2019-11-29 23:02:24] Computing probability of getting one or more extinctions for Delta=0.0318878
+[2019-11-29 23:02:36] Probability of getting one or more extinctions for Delta=0.0318878 is 0.65
+[2019-11-29 23:02:36] Computing probability of getting one or more extinctions for Delta=0.0211842
+[2019-11-29 23:02:55] Probability of getting one or more extinctions for Delta=0.0211842 is 0.18
+[2019-11-29 23:02:55] Computing probability of getting one or more extinctions for Delta=0.0284717
+[2019-11-29 23:03:09] Probability of getting one or more extinctions for Delta=0.0284717 is 0.52
+[2019-11-29 23:03:09] Computing probability of getting one or more extinctions for Delta=0.0279771
+[2019-11-29 23:03:28] Probability of getting one or more extinctions for Delta=0.0279771 is 0.52
+[2019-11-29 23:03:28] Computing probability of getting one or more extinctions for Delta=0.0245806
+[2019-11-29 23:03:47] Probability of getting one or more extinctions for Delta=0.0245806 is 0.32
+[2019-11-29 23:03:47] Computing probability of getting one or more extinctions for Delta=0.0276374
+[2019-11-29 23:04:06] Probability of getting one or more extinctions for Delta=0.0276374 is 0.49
+[2019-11-29 23:04:06] Found an interval for Delta critical : [0.0276374;0.0279771]
+[2019-11-29 23:04:06] Now computing the probability of getting more than one extinction for ten points inside this interval (1000 runs per point)
+[2019-11-29 23:04:06] Computing probability of getting one or more extinctions for Delta=0.0276374
+[2019-11-29 23:07:04] Probability of getting one or more extinctions for Delta=0.0276374 is 0.486
+[2019-11-29 23:07:04] Computing probability of getting one or more extinctions for Delta=0.0276752
+[2019-11-29 23:08:53] Probability of getting one or more extinctions for Delta=0.0276752 is 0.477
+[2019-11-29 23:08:53] Computing probability of getting one or more extinctions for Delta=0.0277129
+[2019-11-29 23:10:17] Probability of getting one or more extinctions for Delta=0.0277129 is 0.495
+[2019-11-29 23:10:17] Computing probability of getting one or more extinctions for Delta=0.0277507
+[2019-11-29 23:11:43] Probability of getting one or more extinctions for Delta=0.0277507 is 0.489
+[2019-11-29 23:11:43] Computing probability of getting one or more extinctions for Delta=0.0277884
+[2019-11-29 23:13:18] Probability of getting one or more extinctions for Delta=0.0277884 is 0.484
+[2019-11-29 23:13:18] Computing probability of getting one or more extinctions for Delta=0.0278261
+[2019-11-29 23:14:46] Probability of getting one or more extinctions for Delta=0.0278261 is 0.471
+[2019-11-29 23:14:46] Computing probability of getting one or more extinctions for Delta=0.0278639
+[2019-11-29 23:16:14] Probability of getting one or more extinctions for Delta=0.0278639 is 0.484
+[2019-11-29 23:16:14] Computing probability of getting one or more extinctions for Delta=0.0279016
+[2019-11-29 23:17:42] Probability of getting one or more extinctions for Delta=0.0279016 is 0.513
+[2019-11-29 23:17:42] Computing probability of getting one or more extinctions for Delta=0.0279394
+[2019-11-29 23:19:09] Probability of getting one or more extinctions for Delta=0.0279394 is 0.479
+[2019-11-29 23:19:09] Computing probability of getting one or more extinctions for Delta=0.0279771
+[2019-11-29 23:20:42] Probability of getting one or more extinctions for Delta=0.0279771 is 0.485
+[2019-11-29 23:20:42] Now fitting the 10 chosen into the specific function
+[2019-11-29 23:20:42] Now we find the zero of the fit to determine delta critical (parameters = -8.35474 203.169 17362.3 -499194)
+[2019-11-29 23:20:42] We interpret the fitting parameters as coefficients of a degree 3 polynomial (which should be true, please check that)
+[2019-11-29 23:20:42]  zero estimated at -0.0212844
+[2019-11-29 23:20:42] Computed critical delta for ./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.1712.txt
+[2019-11-29 23:20:42] Attempting now to find the critical delta for the given set of metaparameters
+[2019-11-29 23:20:42] Computing probability of getting one or more extinctions for Delta=0
+[2019-11-29 23:20:42] Probability of getting one or more extinctions for Delta=0 is 0
+[2019-11-29 23:20:42] Computing probability of getting one or more extinctions for Delta=1
+[2019-11-29 23:20:42] Probability of getting one or more extinctions for Delta=1 is 1
+[2019-11-29 23:20:42] We first find a rough interval where the critical delta should lie (each point computed by the solver is estimated with 100 runs)
+[2019-11-29 23:20:42] Computing probability of getting one or more extinctions for Delta=0.5
+[2019-11-29 23:20:43] Probability of getting one or more extinctions for Delta=0.5 is 1
+[2019-11-29 23:20:43] Computing probability of getting one or more extinctions for Delta=0.25
+[2019-11-29 23:20:43] Probability of getting one or more extinctions for Delta=0.25 is 1
+[2019-11-29 23:20:43] Computing probability of getting one or more extinctions for Delta=0.125
+[2019-11-29 23:20:44] Probability of getting one or more extinctions for Delta=0.125 is 1
+[2019-11-29 23:20:44] Computing probability of getting one or more extinctions for Delta=0.0625
+[2019-11-29 23:20:45] Probability of getting one or more extinctions for Delta=0.0625 is 1
+[2019-11-29 23:20:45] Computing probability of getting one or more extinctions for Delta=0.03125
+[2019-11-29 23:20:51] Probability of getting one or more extinctions for Delta=0.03125 is 1
+[2019-11-29 23:20:51] Computing probability of getting one or more extinctions for Delta=0.015625
+[2019-11-29 23:21:39] Probability of getting one or more extinctions for Delta=0.015625 is 0.6
+[2019-11-29 23:21:39] Computing probability of getting one or more extinctions for Delta=0.0130208
+[2019-11-29 23:23:02] Probability of getting one or more extinctions for Delta=0.0130208 is 0.42
+[2019-11-29 23:23:02] Computing probability of getting one or more extinctions for Delta=0.0141782
+[2019-11-29 23:24:54] Probability of getting one or more extinctions for Delta=0.0141782 is 0.47
+[2019-11-29 23:24:54] Computing probability of getting one or more extinctions for Delta=0.0147124
+[2019-11-29 23:26:50] Probability of getting one or more extinctions for Delta=0.0147124 is 0.52
+[2019-11-29 23:26:50] Found an interval for Delta critical : [0.0141782;0.0147124]
+[2019-11-29 23:26:50] Now computing the probability of getting more than one extinction for ten points inside this interval (1000 runs per point)
+[2019-11-29 23:26:50] Computing probability of getting one or more extinctions for Delta=0.0141782
+[2019-11-30 04:11:30] Probability of getting one or more extinctions for Delta=0.0141782 is 0.567
+[2019-11-30 04:11:30] Computing probability of getting one or more extinctions for Delta=0.0142376
+[2019-11-30 08:35:35] Probability of getting one or more extinctions for Delta=0.0142376 is 0.534
+[2019-11-30 08:35:35] Computing probability of getting one or more extinctions for Delta=0.0142969
+[2019-11-30 08:47:13] Probability of getting one or more extinctions for Delta=0.0142969 is 0.537
+[2019-11-30 08:47:13] Computing probability of getting one or more extinctions for Delta=0.0143563
+[2019-11-30 09:00:13] Probability of getting one or more extinctions for Delta=0.0143563 is 0.527
+[2019-11-30 09:00:13] Computing probability of getting one or more extinctions for Delta=0.0144157
+[2019-11-30 09:14:42] Probability of getting one or more extinctions for Delta=0.0144157 is 0.547
+[2019-11-30 09:14:42] Computing probability of getting one or more extinctions for Delta=0.014475
+[2019-11-30 09:26:08] Probability of getting one or more extinctions for Delta=0.014475 is 0.536
+[2019-11-30 09:26:08] Computing probability of getting one or more extinctions for Delta=0.0145344
+[2019-11-30 09:39:41] Probability of getting one or more extinctions for Delta=0.0145344 is 0.536
+[2019-11-30 09:39:41] Computing probability of getting one or more extinctions for Delta=0.0145937
+[2019-11-30 09:52:51] Probability of getting one or more extinctions for Delta=0.0145937 is 0.56
+[2019-11-30 09:52:51] Computing probability of getting one or more extinctions for Delta=0.0146531
+[2019-11-30 10:07:04] Probability of getting one or more extinctions for Delta=0.0146531 is 0.571
+[2019-11-30 10:07:04] Computing probability of getting one or more extinctions for Delta=0.0147124
+[2019-11-30 10:22:59] Probability of getting one or more extinctions for Delta=0.0147124 is 0.565
+[2019-11-30 10:22:59] Now fitting the 10 chosen into the specific function
+[2019-11-30 10:22:59] Now we find the zero of the fit to determine delta critical (parameters = 4411.23 -910374 6.26169e+07 -1.43539e+09)
+[2019-11-30 10:22:59] We interpret the fitting parameters as coefficients of a degree 3 polynomial (which should be true, please check that)
+[2019-11-30 10:22:59]  zero estimated at 0.0149718
+[2019-11-30 10:22:59] Computed critical delta for ./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.2304.txt
+[2019-11-30 10:22:59] Attempting now to find the critical delta for the given set of metaparameters
+[2019-11-30 10:22:59] Computing probability of getting one or more extinctions for Delta=0
+[2019-11-30 10:22:59] Probability of getting one or more extinctions for Delta=0 is 0
+[2019-11-30 10:22:59] Computing probability of getting one or more extinctions for Delta=1
+[2019-11-30 10:22:59] Probability of getting one or more extinctions for Delta=1 is 1
+[2019-11-30 10:22:59] We first find a rough interval where the critical delta should lie (each point computed by the solver is estimated with 100 runs)
+[2019-11-30 10:22:59] Computing probability of getting one or more extinctions for Delta=0.5
+[2019-11-30 10:23:00] Probability of getting one or more extinctions for Delta=0.5 is 1
+[2019-11-30 10:23:00] Computing probability of getting one or more extinctions for Delta=0.25
+[2019-11-30 10:23:00] Probability of getting one or more extinctions for Delta=0.25 is 1
+[2019-11-30 10:23:00] Computing probability of getting one or more extinctions for Delta=0.125
+[2019-11-30 10:23:01] Probability of getting one or more extinctions for Delta=0.125 is 1
+[2019-11-30 10:23:01] Computing probability of getting one or more extinctions for Delta=0.0625
+[2019-11-30 10:23:02] Probability of getting one or more extinctions for Delta=0.0625 is 1
+[2019-11-30 10:23:02] Computing probability of getting one or more extinctions for Delta=0.03125
+[2019-11-30 10:23:09] Probability of getting one or more extinctions for Delta=0.03125 is 1
+[2019-11-30 10:23:09] Computing probability of getting one or more extinctions for Delta=0.015625
+[2019-11-30 10:25:01] Probability of getting one or more extinctions for Delta=0.015625 is 0.7
+[2019-11-30 10:25:01] Computing probability of getting one or more extinctions for Delta=0.0111607
+[2019-11-30 10:26:47] Probability of getting one or more extinctions for Delta=0.0111607 is 0.6
+[2019-11-30 10:26:47] Computing probability of getting one or more extinctions for Delta=0.00744048
+[2019-11-30 10:28:35] Probability of getting one or more extinctions for Delta=0.00744048 is 0.28
+[2019-11-30 10:28:35] Computing probability of getting one or more extinctions for Delta=0.00999814
+[2019-11-30 10:30:08] Probability of getting one or more extinctions for Delta=0.00999814 is 0.53
+[2019-11-30 10:30:08] Computing probability of getting one or more extinctions for Delta=0.00955968
+[2019-11-30 10:33:43] Probability of getting one or more extinctions for Delta=0.00955968 is 0.38
+[2019-11-30 10:33:43] Found an interval for Delta critical : [0.00955968;0.00999814]
+[2019-11-30 10:33:43] Now computing the probability of getting more than one extinction for ten points inside this interval (1000 runs per point)
+[2019-11-30 10:33:43] Computing probability of getting one or more extinctions for Delta=0.00955968
+[2019-11-30 10:57:57] Probability of getting one or more extinctions for Delta=0.00955968 is 0.436
+[2019-11-30 10:57:57] Computing probability of getting one or more extinctions for Delta=0.0096084
+[2019-11-30 11:29:16] Probability of getting one or more extinctions for Delta=0.0096084 is 0.446
+[2019-11-30 11:29:16] Computing probability of getting one or more extinctions for Delta=0.00965712
+[2019-11-30 12:00:44] Probability of getting one or more extinctions for Delta=0.00965712 is 0.42
+[2019-11-30 12:00:44] Computing probability of getting one or more extinctions for Delta=0.00970584
+[2019-11-30 12:29:06] Probability of getting one or more extinctions for Delta=0.00970584 is 0.44
+[2019-11-30 12:29:06] Computing probability of getting one or more extinctions for Delta=0.00975455
+[2019-11-30 12:55:35] Probability of getting one or more extinctions for Delta=0.00975455 is 0.451
+[2019-11-30 12:55:35] Computing probability of getting one or more extinctions for Delta=0.00980327
+[2019-11-30 13:17:32] Probability of getting one or more extinctions for Delta=0.00980327 is 0.443
+[2019-11-30 13:17:32] Computing probability of getting one or more extinctions for Delta=0.00985199
+[2019-11-30 13:45:10] Probability of getting one or more extinctions for Delta=0.00985199 is 0.464
+[2019-11-30 13:45:10] Computing probability of getting one or more extinctions for Delta=0.00990071
+[2019-11-30 14:16:52] Probability of getting one or more extinctions for Delta=0.00990071 is 0.471
+[2019-11-30 14:16:52] Computing probability of getting one or more extinctions for Delta=0.00994942
+[2019-11-30 14:46:13] Probability of getting one or more extinctions for Delta=0.00994942 is 0.464
+[2019-11-30 14:46:13] Computing probability of getting one or more extinctions for Delta=0.00999814
+[2019-11-30 15:12:54] Probability of getting one or more extinctions for Delta=0.00999814 is 0.485
+[2019-11-30 15:12:54] Now fitting the 10 chosen into the specific function
+[2019-11-30 15:12:54] Now we find the zero of the fit to determine delta critical (parameters = 1011.31 -307955 3.12403e+07 -1.0558e+09)
+[2019-11-30 15:12:54] We interpret the fitting parameters as coefficients of a degree 3 polynomial (which should be true, please check that)
+[2019-11-30 15:12:54]  zero estimated at 0.00937584
+[2019-11-30 15:12:54] Computed critical delta for ./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.2768.txt
+[2019-11-30 15:12:54] Attempting now to find the critical delta for the given set of metaparameters
+[2019-11-30 15:12:54] Computing probability of getting one or more extinctions for Delta=0
