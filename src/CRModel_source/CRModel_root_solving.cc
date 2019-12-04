@@ -11,20 +11,52 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
   return compute_critical_Delta(metaparams, accuracy, metaparams.equilibrium);
 }
 
-double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode equilibrium){
-  double delta_crit=0.;
-  unsigned int Nsimul_frun = 100;
-  unsigned int Nsimul_srun = 1000;
-  if(metaparams.verbose > 0){
-    std::cout << "Attempting now to find the critical delta for the given set of metaparameters" << std::endl;
-  }
-  // set up the solver
+nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose){
+  nvector interval;
+
   const gsl_root_fsolver_type *T;
   gsl_root_fsolver* s;
 
   double x_lo = 0., x_hi =1., r=0.1;
   int status;
   int iter = 0;
+
+  gsl_function F = *f;
+
+  T = gsl_root_fsolver_brent;
+  s = gsl_root_fsolver_alloc(T);
+
+  gsl_root_fsolver_set(s, &F, x_lo, x_hi);
+
+  // the idea is first to find an interval where the solution roughly should be
+  do{
+    iter++;
+    status = gsl_root_fsolver_iterate(s);
+    r = gsl_root_fsolver_root(s);
+    x_lo = gsl_root_fsolver_x_lower(s);
+    x_hi = gsl_root_fsolver_x_upper(s);
+    status = gsl_root_test_interval(x_lo, x_hi, 0, 0.1);
+    if(status==GSL_SUCCESS and verbose > 0){
+      std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
+    }
+  }while(status==GSL_CONTINUE);
+
+  gsl_root_fsolver_free(s);
+
+  size_t interval_length = Npoints;
+
+  for(size_t i=0; i < interval_length; ++i){
+    interval.push_back(x_lo+i*(x_hi-x_lo)/(interval_length-1));
+  }
+  return interval;
+
+}
+
+double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode equilibrium){
+  double delta_crit=0.;
+  unsigned int Nsimul_frun = 100;
+  unsigned int Nsimul_srun = 1000;
+  size_t interval_length = 10;
 
   Solver_Parameters params;
   params.metaparameters = &metaparams;
@@ -35,39 +67,12 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode 
   F.function = &function_av_extinct_solver;
   F.params = &params;
 
-  T = gsl_root_fsolver_brent;
-  s = gsl_root_fsolver_alloc(T);
-
-  gsl_root_fsolver_set(s, &F, x_lo, x_hi);
-
-  // the idea is first to find an interval where the solution roughly should be
   if(metaparams.verbose > 0){
-    std::cout << "We first find a rough interval where the critical delta should lie (each point computed by the solver is estimated with " << params.Nsimul<<" runs)"<<std::endl;  }
-
-  do{
-    iter++;
-    status = gsl_root_fsolver_iterate(s);
-    r = gsl_root_fsolver_root(s);
-    x_lo = gsl_root_fsolver_x_lower(s);
-    x_hi = gsl_root_fsolver_x_upper(s);
-    status = gsl_root_test_interval(x_lo, x_hi, 0, 0.1);
-    if(status==GSL_SUCCESS and metaparams.verbose > 0){
-      std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
-    }
-  }while(status==GSL_CONTINUE);
-
-  /* when we have found an interval we highly suspect of containing the root
-    we compute the average number of extinctions at a better accuracy for ten points
-   in the interval */
-  nvector interval;
-  size_t interval_length = 10;
-  for(size_t i=0; i < interval_length; ++i){
-    interval.push_back(x_lo+i*(x_hi-x_lo)/(interval_length-1));
+    std::cout << "Now attempting to find the critical delta for the following set of parameters : " << metaparams << std::endl;
+    std::cout << "We first find a rough interval where we know the critical delta will lie. " << std::endl;
   }
 
-  params.Nsimul=Nsimul_srun;
-  F.params = &params;
-  nvector extinctions;
+  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose);
 
   if(metaparams.verbose > 0){
     std::cout << "Now computing the ";
@@ -79,32 +84,27 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode 
     std::cout << " for ten points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
   }
 
+  /* when we have found an interval we highly suspect of containing the root
+    we compute the average number of extinctions at a better accuracy for the points
+    in the interval */
+  params.Nsimul=Nsimul_srun;
+  F.params = &params;
+  nvector function_y_values;
+
   for(size_t i=0; i < interval_length; ++i){
     double result = function_av_extinct_solver(interval[i], &params);
-    extinctions.push_back(result);
+    function_y_values.push_back(result);
   }
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate delta critical */
-  delta_crit = estimate_delta_crit_from_interval(interval, extinctions, metaparams, equilibrium);
-  gsl_root_fsolver_free(s);
+  delta_crit = estimate_delta_crit_from_interval(interval, function_y_values, metaparams, equilibrium);
 
   return delta_crit;
 }
 
 
-double average_number_of_extinctions(double delta, Metaparameters* m, unsigned int Nsimul){
-  /* old version
-  Solver_Parameters* s = (Solver_Parameters*) params;
-  Metaparameters* m = s->metaparameters;
-  unsigned int Nsimul = s->Nsimul;
-  */
 
-  Extinction_statistics ext = compute_average_extinction(m, ntype(delta), Nsimul);
-  double av_number_extinct = double(ext.extinct.mean);
-
-  return av_number_extinct;
-}
 
 double function_av_extinct_solver(double delta, void*params){
   Solver_Parameters* s = (Solver_Parameters*) params;
