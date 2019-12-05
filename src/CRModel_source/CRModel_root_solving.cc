@@ -8,10 +8,10 @@
 #include <array>
 
 double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
-  return compute_critical_Delta(metaparams, accuracy, metaparams.equilibrium);
+  delta_solver solv_params = {fitmode(sigmoidal), metaparams.equilibrium};
+  return compute_critical_Delta(metaparams, accuracy, solv_params);
 }
-
-nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose){
+nvector find_rough_interval_polynomial_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose){
   nvector interval;
 
   const gsl_root_fsolver_type *T;
@@ -21,12 +21,10 @@ nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int 
   int status;
   int iter = 0;
 
-  gsl_function F = *f;
-
   T = gsl_root_fsolver_brent;
   s = gsl_root_fsolver_alloc(T);
 
-  gsl_root_fsolver_set(s, &F, x_lo, x_hi);
+  gsl_root_fsolver_set(s, f, x_lo, x_hi);
 
   // the idea is first to find an interval where the solution roughly should be
   do{
@@ -49,19 +47,135 @@ nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int 
     interval.push_back(x_lo+i*(x_hi-x_lo)/(interval_length-1));
   }
   return interval;
+}
+nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose){
+  nvector interval;
+  Solver_Parameters* s = (Solver_Parameters*) f->params;
+  double initial_target = s->target;
 
+  /* the idea is to find the first point x0 such that f(x0) > 0. It will be taken as the start of the interval */
+  if(verbose > 0){
+    std::cout << "We look for a low point such that we have a non-zero chance of observing an extinction." << std::endl;
+  }
+  s->target = 0.01;
+  double x_lo = find_zero(f, Npoints, verbose);
+
+  /* we then find a second point such that f(x1) < 1. It will be taken as the end of the interval */
+  if(verbose > 0){
+    std::cout << "We then look for a high point such that we will not always observe at least an extinction" << std::endl;
+  }
+  s->target = 0.8;
+  double x_hi = find_zero(f, Npoints, verbose);
+
+  /* we do not forget to set the target back to its initial value */
+  s->target = initial_target;
+
+  if(verbose > 0){
+    std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
+  }
+
+  for(size_t i = 0; i < Npoints; ++i){
+    interval.push_back(x_lo + i*(x_hi-x_lo)/(Npoints-1.));
+  }
+  return interval;
 }
 
-double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode equilibrium){
+double find_zero(gsl_function* f, unsigned int Npoints, unsigned int verbose){
+  double estimate = 0.;
+
+  const gsl_root_fsolver_type *T;
+  gsl_root_fsolver* s;
+
+  double x_lo = 0., x_hi =1., r=0.05;
+  double tolerance = 0.05;
+  int status;
+  int iter = 0;
+
+  T = gsl_root_fsolver_brent;
+  s = gsl_root_fsolver_alloc(T);
+
+  gsl_root_fsolver_set(s, f, x_lo, x_hi);
+
+  // the idea is first to find an interval where the solution roughly should be
+  do{
+    iter++;
+    status = gsl_root_fsolver_iterate(s);
+    r = gsl_root_fsolver_root(s);
+    x_lo = gsl_root_fsolver_x_lower(s);
+    x_hi = gsl_root_fsolver_x_upper(s);
+    status = gsl_root_test_interval(x_lo, x_hi, 0, tolerance);
+  }while(status==GSL_CONTINUE);
+  estimate = r;
+
+  gsl_root_fsolver_free(s);
+  return estimate;
+}
+
+nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose, fitmode fit_mode){
+  switch(fit_mode){
+    case polynomial:
+      return find_rough_interval_polynomial_fit(f, Npoints, verbose);
+      break;
+
+    case sigmoidal:
+      return find_rough_interval_sigmoidal_fit(f, Npoints, verbose);
+      break;
+
+    default:
+      std::cerr << "Cannot find rought interval to compute delta critical with that fitting mode" << std::endl;
+      std::cerr << "It either does not exist or has not been implemented yet. Aborting the simulation now" << std::endl;
+      abort();
+  }
+}
+double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, delta_solver delta_solv){
+  eqmode equilibrium = delta_solv.eq_mode;
   double delta_crit=0.;
-  unsigned int Nsimul_frun = 100;
-  unsigned int Nsimul_srun = 1000;
-  size_t interval_length = 10;
+  unsigned int Nsimul_frun;
+  unsigned int Nsimul_srun;
+  size_t interval_length;
+  double target;
+
+  /* tells what is the target for the function we want to solve */
+  switch(delta_solv.eq_mode){
+    case oneextinct:
+    /* in the case 'one extinction' we want the probability to be equal to 0.5 */
+      target=0.5;
+      break;
+    case convergence:
+    /* in the case 'convergence' we want the average number of extinctions to be 1 */
+      target=1.;
+      break;
+    default:
+      std::cerr << "This type of equilibrium has not been implemented yet or does not exist " << std::endl;
+      std::cerr << "Abort the program now " << std::endl;
+      abort();
+      break;
+  }
+
+  switch(delta_solv.fit_mode){
+    case polynomial:
+      Nsimul_frun = 50;
+      Nsimul_srun = 100;
+      interval_length = 10;
+      break;
+    case sigmoidal:
+      Nsimul_frun = 50;
+      Nsimul_srun = 50;
+      interval_length= 500;
+      break;
+    default:
+      std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;
+      std::cerr << "Aborting the program now" << std::endl;
+      abort();
+      break;
+  }
+
 
   Solver_Parameters params;
   params.metaparameters = &metaparams;
   params.Nsimul = Nsimul_frun;
   params.equilibrium = equilibrium;
+  params.target = target;
 
   gsl_function F;
   F.function = &function_av_extinct_solver;
@@ -69,11 +183,17 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode 
 
   if(metaparams.verbose > 0){
     std::cout << "Now attempting to find the critical delta for the following set of parameters : " << metaparams << std::endl;
-    std::cout << "We first find a rough interval where we know the critical delta will lie. " << std::endl;
+    std::cout << "We first find a rough interval where we know the critical delta will lie ("<<params.Nsimul << " runs per point). " << std::endl;
   }
 
-  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose);
+  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose, delta_solv.fit_mode);
 
+  /* when we have found an interval we highly suspect of containing the root
+    we compute the average number of extinctions at a better accuracy for the points
+    in the interval */
+  params.Nsimul=Nsimul_srun;
+
+  nvector function_y_values;
   if(metaparams.verbose > 0){
     std::cout << "Now computing the ";
     if(equilibrium == convergence){
@@ -81,15 +201,8 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode 
     }else if(equilibrium==oneextinct){
       std::cout << "probability of getting more than one extinction";
     }
-    std::cout << " for ten points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
+    std::cout << " for "<< interval_length << " points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
   }
-
-  /* when we have found an interval we highly suspect of containing the root
-    we compute the average number of extinctions at a better accuracy for the points
-    in the interval */
-  params.Nsimul=Nsimul_srun;
-  F.params = &params;
-  nvector function_y_values;
 
   for(size_t i=0; i < interval_length; ++i){
     double result = function_av_extinct_solver(interval[i], &params);
@@ -98,32 +211,34 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, eqmode 
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate delta critical */
-  delta_crit = estimate_delta_crit_from_interval(interval, function_y_values, metaparams, equilibrium);
+  delta_crit = estimate_delta_crit_from_interval(interval, function_y_values, metaparams, delta_solv);
 
   return delta_crit;
 }
-
-
-
-
 double function_av_extinct_solver(double delta, void*params){
   Solver_Parameters* s = (Solver_Parameters*) params;
   Metaparameters* m = s->metaparameters;
   unsigned int Nsimul = s->Nsimul;
+  double target = s->target;
 
-  if(s->equilibrium==convergence){
-    return average_number_of_extinctions(delta, m, Nsimul)-1.;
-  }else if(s->equilibrium==oneextinct){
-    return probability_of_extinction_greather_than_one(m, delta, Nsimul)-0.5;
-  }else{
-    std::cerr << "equilibrium type not implemented yet, return 0"<< std::endl;
-    return 0.;
+  switch(s->equilibrium){
+    case convergence:
+      return average_number_of_extinctions(delta, m, Nsimul)-target;
+      break;
+    case oneextinct:
+      return probability_of_extinction_greather_than_one(m, delta, Nsimul)-target;
+      break;
+    default:
+      std::cerr << "equilibrium type not implemented yet"<< std::endl;
+      std::cerr << "Aborting simulation now" << std::endl;
+      abort();
+      break;
   }
+
 }
+double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, delta_solver delta_solv){
 
-double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, eqmode equilibrium){
   double estimate = 0.;
-
   if(m.verbose > 0){
     std::cout << "Now we find the zero of the fit to determine delta critical (parameters =";
     for(size_t i = 0; i < fit_parameters->size; ++i){
@@ -132,97 +247,21 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
     std::cout << ")" << std::endl;
   }
 
-  /*
-  unsigned int max_iter = 100;
-  unsigned int N = NUMBER_OF_FITTING_PARAMETERS;
-  double params[N];
-  for(size_t i = 0; i < N; ++i){
-    params[i] = gsl_vector_get(fit_parameters,i);
-  }
+  switch(delta_solv.fit_mode){
+    case sigmoidal:
+      estimate = gsl_vector_get(fit_parameters,0);
+      break;
+    case polynomial:
+      std::cerr << "PLEASE IMPLEMENT THE FUNCTION TO SOLVE FOR DELTA WITH POLYNOMIAL FIT" << std::endl;
+      std::cerr << "Aborting the simulation now";
+      abort();
+      break;
 
-  int status;
-  int iter = 0;
-
-  const gsl_root_fdfsolver_type* T;
-  gsl_root_fdfsolver* s;
-  double r = 0.5*(x_lo+x_hi);
-  double x0;
-  gsl_function_fdf F;
-
-
-  F.f = &choice_of_fitting_function;
-  F.df = NULL;
-  F.fdf = NULL;
-  std::cout << "All good until here" << std::endl;
-  F.params = &params;
-
-  T = gsl_root_fdfsolver_newton;
-  s = gsl_root_fdfsolver_alloc(T);
-  gsl_root_fdfsolver_set(s, &F, r);
-
-  do{
-    iter++;
-    status = gsl_root_fdfsolver_iterate(s);
-    x0 = r;
-    status = gsl_root_test_delta(r, x0, 0, 1e-3);
-
-  }while(status==GSL_CONTINUE && iter < max_iter);
-  if(iter > max_iter){
-    std::cerr << "The solver wasn't able to estimate delta critical, the best estimate will be returned" << std::endl;
-  }
-  estimate = r;
-  gsl_root_fdfsolver_free(s);
-  */
-
-  if(m.verbose > 0){
-    std::cout << "We interpret the fitting parameters as coefficients of a degree 3 polynomial (which should be true, please check that)" << std::endl;
-  }
-
-  /* initiated these as -10 because we know it can't be a root */
-  double x0 = -10;
-  double x1 = -10;
-  double x2 = -10;
-
-  double a0 = gsl_vector_get(fit_parameters,0), a1= gsl_vector_get(fit_parameters,1), a2 = gsl_vector_get(fit_parameters,2),a3 = gsl_vector_get(fit_parameters,3);
-  double c = a0/a3, b = a1/a3, a = a2/a3;
-
-  int success = gsl_poly_solve_cubic(a,b,c, &x0, &x1, &x2);
-  if(x0 == -10){
-    std::cerr << "Error in the root finding, could not find a single root" << std::endl;
-  }
-  if(x1==-10){
-    estimate = x0;
-  }else{
-    unsigned int Nsimul =100;
-    if(m.verbose > 0){
-      std::cout << "Found three potential roots, compute which one is the best (" << Nsimul <<" runs per point)" << std::endl;
-      std::cout << "Please implement the different equilibrium modes in case of three roots" << std::endl;
-    }
-    estimate = -1.;
-    /*
-    Metaparameters m_copy = m;
-    Extinction_statistics av0 = compute_average_extinction(&m_copy, ntype(x0), Nsimul);
-    Extinction_statistics av1 = compute_average_extinction(&m_copy, ntype(x1), Nsimul);
-    Extinction_statistics av2 = compute_average_extinction(&m_copy, ntype(x2), Nsimul);
-
-    double dist0 = (av0.extinct.mean-1.)*(av0.extinct.mean-1.);
-    double dist1 = (av1.extinct.mean-1.)*(av1.extinct.mean-1.);
-    double dist2 = (av2.extinct.mean-1.)*(av2.extinct.mean-1.);
-
-    if(dist0 < dist1){
-      if(dist0 < dist2){
-        estimate = x0;
-      }else{
-        estimate = x2;
-      }
-    }else{
-      if(dist1 < dist2){
-        estimate = x1;
-      }else{
-        estimate = x2;
-      }
-    }
-    */
+    default:
+      std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;
+      std::cerr << "Abort simulation now " << std::endl;
+      abort();
+      break;
   }
   return estimate;
 }

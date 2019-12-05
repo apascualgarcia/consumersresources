@@ -12,7 +12,9 @@ foodmatrix load_food_matrix(const Metaparameters& m){
   }
   std::ifstream in(m.foodmatrixpath);
   if (!in) {
-    std::cerr << "Cannot open file.\n" << "Returning empty food matrix" << std::endl;
+    std::cerr << "Cannot open file for the matrix " << m.foodmatrixpath << std::endl;
+    std::cerr << "Now aborting the simulation" << std::endl;
+    abort();
     return f;
   }
   for (unsigned int x = 0; x < m.NS; x++) {

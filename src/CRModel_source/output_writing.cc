@@ -4,14 +4,14 @@
 #include <iomanip>
 
 std::ostream& operator<<(std::ostream& os, const Metaparameters& m){
-  os << "gamma0 = " << m.gamma0 << std::endl;
-  os << "alpha0 = " << m.alpha0 << std::endl;
-  os << "sigma0 = " << m.sigma0 << std::endl;
-  os << "p = " << m.p << std::endl;
-  os << "R0 = " << m.R0 << std::endl;
-  os << "S0 = " << m.S0 << std::endl;
-  os << "NR = " << m.NR << std::endl;
-  os << "NS = " << m.NS << std::endl;
+  os << "gamma0 = " << m.gamma0 << "; ";
+  os << "alpha0 = " << m.alpha0 << "; ";
+  os << "sigma0 = " << m.sigma0 << "; ";
+  os << "p = " << m.p << "; ";
+  os << "R0 = " << m.R0 << "; ";
+  os << "S0 = " << m.S0 << "; ";
+  os << "NR = " << m.NR << "; ";
+  os << "NS = " << m.NS ;
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nctype& number){

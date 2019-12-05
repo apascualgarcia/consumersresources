@@ -20,6 +20,9 @@ enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
 enum alphamode{random_structure, no_release_when_eat};
 enum eqmode{oneextinct, convergence};
+/*  when using polynomial please specify the degree manually otherwise,
+    there will be a runtime error */
+enum fitmode{sigmoidal, polynomial};
 
 struct statistics{
   ntype mean;

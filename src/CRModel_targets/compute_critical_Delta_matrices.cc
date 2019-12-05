@@ -21,6 +21,12 @@ int main(int argc, char * argv[]){
   in.close();
   std::ofstream myfile;
   myfile.open(metaparams.save_path, std::ios::app);
+  if(metaparams.verbose > 0){
+    std::cout << "The critical deltas for the following matrices will be computed :";
+    for(size_t i = 0 ; i < matrices_path.size(); ++i){
+      std::cout << std::endl << matrices_path[i];
+    }
+  }
   bool save_success(false);
   if(not(myfile.is_open())){
     std::cerr << "Could not open " << metaparams.save_path << " to write the new equilibrium of the system" << std::endl;
@@ -31,7 +37,8 @@ int main(int argc, char * argv[]){
     save_success = true;
     for(size_t i = 0; i < matrices_path.size();++i){
         metaparams.foodmatrixpath = matrices_path[i];
-        double delta = compute_critical_Delta(metaparams, 0., eqmode(oneextinct));
+        delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
+        double delta = compute_critical_Delta(metaparams, 0., solv_params);
         std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
         myfile << matrices_path[i] << " " << delta << std::endl;
     }

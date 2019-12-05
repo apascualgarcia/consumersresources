@@ -276,10 +276,12 @@ Extinction CRModel::evolve_until_equilibrium(ntype threshold, eqmode eq_mode) co
 
       // computes the "equilibrium coefficient" to estimate
       eq_coeff = 0.;
-      for(size_t i = 0 ; i < p->NR+p->NS; ++i){
-        eq_coeff += pow(mean_el[i]-y[i], 2.);
+      for(size_t i = 0; i < p->NR+p->NS; ++i){
+        if(y[i] > 0){
+          eq_coeff += pow(mean_el[i]/y[i]-1., 2.);
+        }
       }
-      eq_coeff = pow(eq_coeff, 0.5);
+      eq_coeff = pow(eq_coeff, 0.5)/(p->NR+p->NS);
     }
     counts += 1;
 

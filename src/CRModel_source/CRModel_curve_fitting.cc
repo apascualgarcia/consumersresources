@@ -4,55 +4,62 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
-#include <gsl/gsl_multifit_nlinear.h>
+#include <gsl/gsl_sf_exp.h>
 #include <iostream>
 #include <array>
+#include <string>
 /*
     code from this file is heavily inspired from the GNU docs example of function fitting
     https://www.gnu.org/software/gsl/doc/html/nls.html#examples
 */
 
-struct data {
-  size_t p;
-  size_t n;
-  double* x;
-  double* y;
-};
+unsigned int NUMBER_OF_FITTING_PARAMETERS;
 
 /*  That's the choice of the function we use for fitting, i.e. assume Yi = f(Xi)
     We choose Yi = a0+a1*Xi+a2*Xi^2+a3*Xi^3 as the function to fit  */
-double choice_of_fitting_function(double x, void* params){
-  double* a = (double*)params;
+
+double polynomial_fit(double x, const gsl_vector* a){
   double result = 0.;
-  unsigned int N = NUMBER_OF_FITTING_PARAMETERS;
-  for(size_t i = 0; i < N; ++i){
-    result+= a[i]*gsl_pow_uint(x,i);
+  for(size_t i = 0; i < NUMBER_OF_FITTING_PARAMETERS; ++i){
+    result+= gsl_vector_get(a,i)*gsl_pow_uint(x,i);
   }
   return result;
 }
 
-double fitting_function(double x, const gsl_vector* a){
-  unsigned int N = NUMBER_OF_FITTING_PARAMETERS;
-  double params[N];
-  for(size_t i=0; i < N; ++i){
-    params[i] = gsl_vector_get(a, i);
-  }
-  return choice_of_fitting_function(x, &params);
+double sigmoidal_fit(double x, const gsl_vector* a){
+  double result = 0.;
+  /* CAREFUL : add -0.5 because that's the target */
+  result = 1./(1.+gsl_sf_exp(-gsl_vector_get(a,1)*(x-gsl_vector_get(a,0))))-0.5;
+  return result;
 }
 
+double fitting_function(double x, const gsl_vector* a, fitmode fit_mode){
+  switch(fit_mode){
+    case sigmoidal:
+      return sigmoidal_fit(x,a);
+    case polynomial:
+      return polynomial_fit(x,a);
+    default:
+      std::cerr << "This type of fitting either does not exist or has not been implemented yet " << std::endl;
+      std::cerr << "Aborting the program now" << std::endl;
+      abort();
+      break;
+  }
+}
 
 int function_to_fit(const gsl_vector*  params, void* data, gsl_vector* f){
   size_t n = ((struct data*)data)->n;
   double* x = ((struct data*)data)->x;
   double* y = ((struct data*)data)->y;
+  fitmode fit_mode =((struct data*)data)->fit_mode;
 
   for(size_t i=0; i < n; ++i){
-    double Yi = fitting_function(x[i], params);
+    double Yi = fitting_function(x[i], params, fit_mode);
     gsl_vector_set(f,i,Yi-y[i]);
   }
-
   return GSL_SUCCESS;
 }
+
 void callback(const size_t iter, void *params, const gsl_multifit_nlinear_workspace *w){
   gsl_vector *f = gsl_multifit_nlinear_residual(w);
   gsl_vector *x = gsl_multifit_nlinear_position(w);
@@ -70,26 +77,49 @@ void callback(const size_t iter, void *params, const gsl_multifit_nlinear_worksp
           gsl_blas_dnrm2(f));
   return;
 }
-void fit_points_with_function(const nvector& interval, const nvector& points, gsl_vector* fit_parameters){
+void fit_points_with_function(const nvector& interval, const nvector& points, gsl_vector* fit_parameters, fitmode fit_mode){
 
   const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
   gsl_multifit_nlinear_workspace *w;
   gsl_multifit_nlinear_fdf fdf;
   gsl_multifit_nlinear_parameters fdf_params = gsl_multifit_nlinear_default_parameters();
 
-  const unsigned int N = interval.size();
-
-  const size_t n = N;
+  const size_t n = interval.size();
   const size_t p = NUMBER_OF_FITTING_PARAMETERS;
 
+  std::cout << "[";
+  for(size_t i = 0; i < interval.size()-1; ++i){
+    std::cout << interval[i] << ",";
+  }
+  std::cout << interval[interval.size()-1] << "]" << std::endl;
+
+  std::cout << "[";
+  for(size_t i = 0; i < points.size()-1; ++i){
+    std::cout << points[i] << ",";
+  }
+  std::cout << points[points.size()-1] << "]" << std::endl;
+
+
   gsl_vector* f;
-  double x[N], y[N], weights[N];
-  struct data d = {p, n, x, y};
+  double x[n], y[n], weights[n];
+  struct data d = {p, n, x, y, fit_mode};
   double a_init[p];
 
-  for(size_t i=0; i < p; ++i){
-    a_init[i]=1.0;
+  switch(fit_mode){
+    case sigmoidal:
+      a_init[0] = 0.03;
+      a_init[1] = 200.;
+      break;
+    case polynomial:
+      for(size_t i=0; i < p; ++i){
+        a_init[i]=0.;
+      }
+      break;
+    default:
+      abort();
+      break;
   }
+
 
   gsl_vector_view a = gsl_vector_view_array(a_init, p);
   gsl_vector_view wts = gsl_vector_view_array(weights, n);
@@ -131,8 +161,8 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
   f = gsl_multifit_nlinear_residual(w);
   gsl_blas_ddot(f,f, &chisq0);
 
-  /* solve the system with a maximum of 100 iterations */
-  status = gsl_multifit_nlinear_driver(100, atol, gtol, ftol, NULL, NULL, &info, w);
+  /* solve the system with a maximum of 1000 iterations */
+  status = gsl_multifit_nlinear_driver(1000000, atol, gtol, ftol, NULL, NULL, &info, w);
 
   for(size_t i=0; i < w->x->size; ++i){
     gsl_vector_set(fit_parameters, i, gsl_vector_get(w->x,i));
@@ -143,11 +173,13 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
 
   return;
 }
-
-double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, eqmode equilibrium){
+double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, delta_solver delta_solver){
   double delta_crit=0.;
+
   double x_lo = interval[0];
   double x_hi = interval[interval.size()-1];
+
+  eqmode equilibrium = delta_solver.eq_mode;
 
   /*so we have this interval of x-points with their y-values, we choose to make a
    polynomial fit around it and take delta critical as the root of that polynomial */
@@ -156,19 +188,39 @@ double estimate_delta_crit_from_interval(const nvector& interval, const nvector&
   nvector x_points_to_fit = interval;
   nvector y_points_to_fit = extinctions;
 
+  std::string fit_type;
+
+  switch(delta_solver.fit_mode){
+    case sigmoidal:
+      NUMBER_OF_FITTING_PARAMETERS = 2;
+      fit_type = "sigmoidal";
+      break;
+    case polynomial:
+      NUMBER_OF_FITTING_PARAMETERS = 4;
+      fit_type = "degree 3 polynomial";
+      break;
+    default:
+      std::cerr << "This type of fitting has not been implemented yet or does not exist." << std::endl;
+      std::cerr << "The program will now abort" << std::endl;
+      abort();
+      break;
+  }
+
   /* Then we actually find the parameters that fit our choice of function best */
   unsigned int number_of_fitting_parameters = NUMBER_OF_FITTING_PARAMETERS;
   gsl_vector* fit_parameters = gsl_vector_alloc(number_of_fitting_parameters);
   if(m.verbose > 0){
-    std::cout << "Now fitting the " << x_points_to_fit.size() << " chosen into the specific function" << std::endl;
+    std::cout << "Now fitting the " << x_points_to_fit.size() << " points chosen into the specific function (";
+    std::cout << fit_type << ")"<< std::endl;
   }
-  fit_points_with_function(x_points_to_fit, y_points_to_fit, fit_parameters);
-
+  fit_points_with_function(x_points_to_fit, y_points_to_fit, fit_parameters, delta_solver.fit_mode);
 
   /* with the fitting parameters estimated, we can actually solve for Delta numerically */
-  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi, m, equilibrium);
+  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi, m, delta_solver);
   gsl_vector_free(fit_parameters);
-  std::cout << " zero estimated at " << delta_crit << std::endl;
+  if(m.verbose > 0){
+    std::cout << " zero estimated at " << delta_crit << std::endl;
+  }
 
   /* finally, we return the estimated value */
   return delta_crit;

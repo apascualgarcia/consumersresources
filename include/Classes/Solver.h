@@ -9,6 +9,7 @@ struct Solver_Parameters{
   Metaparameters* metaparameters;
   unsigned int Nsimul;
   eqmode equilibrium;
+  double target; //basically allows us to say we want to solve f(x)=shift instead of f(x)=0
 };
 
 struct Delta_critical{
@@ -16,6 +17,11 @@ struct Delta_critical{
   ntype delta_low;
   ntype delta_high;
   ntype accuracy;
+};
+
+struct delta_solver{
+  fitmode fit_mode;
+  eqmode eq_mode;
 };
 
 #endif

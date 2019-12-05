@@ -13,7 +13,7 @@ int main(int argc, char * argv[]){
     Delta_interval.push_back(int_start+i*(int_end-int_start)/(N-1));
   }
 
-  write_prob_greater_than_one_delta_interval(&metaparams, Delta_interval, 100);
+  write_prob_greater_than_one_delta_interval(&metaparams, Delta_interval, 1000);
 
   return 0;
 }

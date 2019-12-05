@@ -81,3 +81,35 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
   }
   return probability_ext_gtone;
 }
+double can_find_one_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
+  ntype convergence_threshold = 1e-6;
+  if(metaparams->verbose > 0){
+    std::cout << "We check if within " << Nsimul << " runs, we can find one of them where an extinction occurs ";
+    std::cout << "after a perturbation of Delta=" << Delta << std::endl;
+  }
+  for(size_t i=0; i < Nsimul; ++i){
+    CRModel model(*metaparams);
+    model.perturb_parameters(Delta);
+    Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
+    if(new_equilib.extinct >= 1){
+      return 0.;
+    }
+  }
+  return 1.;
+}
+double can_find_zero_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
+  ntype convergence_threshold = 1e-6;
+  if(metaparams->verbose > 0){
+    std::cout << "We check if within " << Nsimul << " runs, we can find one of them where 0 extinction occurs ";
+    std::cout << "after a perturbation of Delta=" << Delta << std::endl;
+  }
+  for(size_t i = 0; i < Nsimul; ++i){
+    CRModel model(*metaparams);
+    model.perturb_parameters(Delta);
+    Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
+    if(new_equilib.extinct==0){
+      return 0.;
+    }
+  }
+  return 1.;
+}
