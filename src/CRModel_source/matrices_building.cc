@@ -1,5 +1,5 @@
 #include "CRModel.h"
-
+#include <algorithm>
 nmatrix build_sigma(const Metaparameters& m){
   nmatrix sigma(m.NS, nvector(m.NR,0.));
   std::uniform_real_distribution<ntype> sigma_distribution((1.-m.epsilon)*m.sigma0, (1.+m.epsilon)*m.sigma0);
