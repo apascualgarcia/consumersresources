@@ -41,6 +41,10 @@ public:
   void perturb_parameters(const ntype &) const;
   Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence) const;
   void save_new_equilibrium(const Extinction&) const;
+  double get_m0() const;
+  double get_d0() const;
+  nvector get_m() const;
+  nvector get_d() const;
 };
 
 #endif

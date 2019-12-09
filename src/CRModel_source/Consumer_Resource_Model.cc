@@ -480,3 +480,33 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
 
   return;
 }
+
+double CRModel::get_m0() const{
+  Parameter_set* p = this->model_param->get_parameters();
+  double m0 = 0.;
+  unsigned int NR = p->m.size();
+  for(size_t nu = 0; nu < NR; ++nu){
+    m0 += p->m[nu]/NR;
+  }
+  return m0;
+}
+
+double CRModel::get_d0() const{
+  Parameter_set* p = this->model_param->get_parameters();
+  double d0 = 0.;
+  unsigned int NS = p->d.size();
+  for(size_t i = 0; i < NS; ++i){
+    d0 += p->d[i]/NS;
+  }
+  return d0;
+}
+
+nvector CRModel::get_m() const{
+  Parameter_set* p = this->model_param->get_parameters();
+  return p->m;
+}
+
+nvector CRModel::get_d()const{
+  Parameter_set* p = this->model_param->get_parameters();
+  return p->d;
+}
