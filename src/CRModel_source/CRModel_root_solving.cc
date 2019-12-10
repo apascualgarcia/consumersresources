@@ -161,7 +161,7 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, delta_s
     case sigmoidal:
       Nsimul_frun = 50;
       Nsimul_srun = 50;
-      interval_length= 500;
+      interval_length= 50;
       break;
     default:
       std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;
