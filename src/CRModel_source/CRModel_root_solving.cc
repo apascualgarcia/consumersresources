@@ -79,7 +79,6 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
   }
   return interval;
 }
-
 double find_zero(gsl_function* f, unsigned int Npoints, unsigned int verbose){
   double estimate = 0.;
 
@@ -110,7 +109,6 @@ double find_zero(gsl_function* f, unsigned int Npoints, unsigned int verbose){
   gsl_root_fsolver_free(s);
   return estimate;
 }
-
 nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose, fitmode fit_mode){
   switch(fit_mode){
     case polynomial:
@@ -127,7 +125,6 @@ nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int 
       abort();
   }
 }
-
 statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, delta_solver delta_solv){
   eqmode equilibrium = delta_solv.eq_mode;
   unsigned int Nsimul_frun;

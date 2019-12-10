@@ -28,10 +28,59 @@ double polynomial_fit(double x, const gsl_vector* a){
 
 double sigmoidal_fit(double x, const gsl_vector* a){
   double result = 0.;
+  double x0 = gsl_vector_get(a,0);
+  double scale = gsl_vector_get(a,1);
+
   /* CAREFUL : add -0.5 because that's the target */
-  result = 1./(1.+gsl_sf_exp(-gsl_vector_get(a,1)*(x-gsl_vector_get(a,0))))-0.5;
+  result = 1./(1.+gsl_sf_exp(-scale*(x-x0)))-0.5;
   return result;
 }
+
+int function_to_fit_df(const gsl_vector* params, void* data, gsl_matrix* J){
+  set_jacobian_matrix_fit(params, data, J);
+  return GSL_SUCCESS;
+}
+
+void set_jacobian_matrix_fit(const gsl_vector* params, void* data, gsl_matrix* J){
+  fitmode fit_mode =((struct data*)data)->fit_mode;
+
+  switch(fit_mode){
+    case sigmoidal:
+      set_jacobian_matrix_sigmoidal_fit(params, data, J);
+      break;
+    case polynomial:
+      std::cerr << "Please implement the jacobian for the polynomial fit " << std::endl;
+      std::cerr << "Aborting the simulation." << std::endl;
+      abort();
+      break;
+    default:
+      std::cerr << "The jacobian for this type of fitting has not been implemented or does not exist yet" << std::endl;
+      std::cerr << "Aborting the simulation." << std::endl;
+      abort();
+      break;
+  }
+  return;
+}
+
+void set_jacobian_matrix_sigmoidal_fit(const gsl_vector* params, void* data, gsl_matrix* J){
+  double* x = ((struct data*)data)->x;
+  size_t n = ((struct data*)data)->n;
+
+  double x0 = gsl_vector_get(params, 0);
+  double scale = gsl_vector_get(params, 1);
+
+  /* J has shape n x p i.e. here it has two columns for n rows */
+  /* it is filled by df_i/dparams_j */
+  for(size_t i = 0; i < n;++i){
+    double factor = gsl_sf_exp(-scale*(x[i]-x0));
+    factor /= gsl_pow_2(1.+gsl_sf_exp(-scale*(x[i]-x0)));
+    gsl_matrix_set(J,i,0,-scale*factor);
+    gsl_matrix_set(J,i,1,(x[i]-x0)*factor);
+  }
+  return;
+}
+
+
 
 double fitting_function(double x, const gsl_vector* a, fitmode fit_mode){
   switch(fit_mode){
@@ -144,7 +193,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
 
   /* define the function to be minimized*/
   fdf.f = function_to_fit;
-  fdf.df = NULL;
+  fdf.df = function_to_fit_df;
   fdf.fvv = NULL;
   fdf.n = n;
   fdf.p = p;
