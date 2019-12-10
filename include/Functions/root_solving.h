@@ -18,6 +18,6 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
 double find_zero(gsl_function* f, unsigned int Npoints, unsigned int verbose);
 
 double function_av_extinct_solver(double, void*);
-double solve_for_delta_with_fit(const gsl_vector*, double&, double&, const Metaparameters&, delta_solver);
+statistics solve_for_delta_with_fit(fitting_parameters&, double&, double&, const Metaparameters&, delta_solver);
 
 #endif

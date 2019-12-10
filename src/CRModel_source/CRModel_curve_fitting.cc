@@ -77,7 +77,7 @@ void callback(const size_t iter, void *params, const gsl_multifit_nlinear_worksp
           gsl_blas_dnrm2(f));
   return;
 }
-void fit_points_with_function(const nvector& interval, const nvector& points, gsl_vector* fit_parameters, fitmode fit_mode){
+void fit_points_with_function(const nvector& interval, const nvector& points, fitting_parameters& fit_parameters, fitmode fit_mode){
 
   const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
   gsl_multifit_nlinear_workspace *w;
@@ -87,6 +87,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
   const size_t n = interval.size();
   const size_t p = NUMBER_OF_FITTING_PARAMETERS;
 
+  /* cout of the points to fit
   std::cout << "[";
   for(size_t i = 0; i < interval.size()-1; ++i){
     std::cout << interval[i] << ",";
@@ -98,9 +99,14 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
     std::cout << points[i] << ",";
   }
   std::cout << points[points.size()-1] << "]" << std::endl;
+  */
 
-
+  /* define the function to be minimized */
   gsl_vector* f;
+  gsl_matrix* J;
+  /* define the covariance matrix */
+  gsl_matrix* covar = gsl_matrix_alloc(p,p);
+
   double x[n], y[n], weights[n];
   struct data d = {p, n, x, y, fit_mode};
   double a_init[p];
@@ -124,6 +130,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
   gsl_vector_view a = gsl_vector_view_array(a_init, p);
   gsl_vector_view wts = gsl_vector_view_array(weights, n);
   gsl_rng* r;
+  double chisq, chisq0;
   int status, info;
   size_t i;
 
@@ -156,16 +163,26 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
   /* initialize solver with starting points and weights */
   gsl_multifit_nlinear_winit(&a.vector, &wts.vector, &fdf, w);
 
-  /* compute initial cost function */
-  double chisq0;
+  /* compute initial cost function
   f = gsl_multifit_nlinear_residual(w);
   gsl_blas_ddot(f,f, &chisq0);
+  */
 
   /* solve the system with a maximum of 1000 iterations */
-  status = gsl_multifit_nlinear_driver(1000000, atol, gtol, ftol, NULL, NULL, &info, w);
+  status = gsl_multifit_nlinear_driver(1000, atol, gtol, ftol, NULL, NULL, &info, w);
+
+  /* compute covariance of best fit parameters */
+  J = gsl_multifit_nlinear_jac(w);
+  gsl_multifit_nlinear_covar(J, 0.0, covar);
+
+  /* compute final cost
+  double chisq;
+  gsl_blas_ddot(f,f,&chisq);
+  */
 
   for(size_t i=0; i < w->x->size; ++i){
-    gsl_vector_set(fit_parameters, i, gsl_vector_get(w->x,i));
+    gsl_vector_set(fit_parameters.fit_parameters, i, gsl_vector_get(w->x,i));
+    gsl_vector_set(fit_parameters.error, i, sqrt(gsl_matrix_get(covar,i,i)));
   }
 
   gsl_multifit_nlinear_free(w);
@@ -173,9 +190,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, gs
 
   return;
 }
-double estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, delta_solver delta_solver){
-  double delta_crit=0.;
-
+statistics estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, delta_solver delta_solver){
   double x_lo = interval[0];
   double x_hi = interval[interval.size()-1];
 
@@ -208,18 +223,23 @@ double estimate_delta_crit_from_interval(const nvector& interval, const nvector&
 
   /* Then we actually find the parameters that fit our choice of function best */
   unsigned int number_of_fitting_parameters = NUMBER_OF_FITTING_PARAMETERS;
+
+  /* define fitting parameters */
   gsl_vector* fit_parameters = gsl_vector_alloc(number_of_fitting_parameters);
+  gsl_vector* error = gsl_vector_alloc(number_of_fitting_parameters);
+
+  fitting_parameters fitting_parameters = {fit_parameters, error};
   if(m.verbose > 0){
     std::cout << "Now fitting the " << x_points_to_fit.size() << " points chosen into the specific function (";
     std::cout << fit_type << ")"<< std::endl;
   }
-  fit_points_with_function(x_points_to_fit, y_points_to_fit, fit_parameters, delta_solver.fit_mode);
+  fit_points_with_function(x_points_to_fit, y_points_to_fit, fitting_parameters, delta_solver.fit_mode);
 
   /* with the fitting parameters estimated, we can actually solve for Delta numerically */
-  delta_crit = solve_for_delta_with_fit(fit_parameters, x_lo, x_hi, m, delta_solver);
+  statistics delta_crit = solve_for_delta_with_fit(fitting_parameters, x_lo, x_hi, m, delta_solver);
   gsl_vector_free(fit_parameters);
   if(m.verbose > 0){
-    std::cout << " zero estimated at " << delta_crit << std::endl;
+    std::cout << "Zero estimated at " << delta_crit.mean << "+/-" << delta_crit.std_deviation  << std::endl;
   }
 
   /* finally, we return the estimated value */

@@ -35,9 +35,9 @@ int main(int argc, char * argv[]){
     save_success = true;
     for(size_t i = 0; i < alpha_vals.size();++i){
         metaparams.alpha0 = alpha_vals[i];
-        double delta = compute_critical_Delta(metaparams, 0.);
+        statistics delta = compute_critical_Delta(metaparams, 0.);
         std::cout << "Computed critical delta for alpha0=" << alpha_vals[i] << std::endl;
-        myfile << alpha_vals[i] << " " << delta << std::endl;
+        myfile << alpha_vals[i] << " " << delta.mean << " " << delta.std_deviation << std::endl;
     }
   }
   myfile.close();

@@ -38,9 +38,9 @@ int main(int argc, char * argv[]){
     for(size_t i = 0; i < matrices_path.size();++i){
         metaparams.foodmatrixpath = matrices_path[i];
         delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
-        double delta = compute_critical_Delta(metaparams, 0., solv_params);
+        statistics delta = compute_critical_Delta(metaparams, 0., solv_params);
         std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
-        myfile << matrices_path[i] << " " << delta << std::endl;
+        myfile << matrices_path[i] << " " << delta.mean << " " << delta.std_deviation << std::endl;
     }
   }
   myfile.close();

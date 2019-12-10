@@ -7,7 +7,7 @@
 #include <gsl/gsl_poly.h>
 #include <array>
 
-double compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
+statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
   delta_solver solv_params = {fitmode(sigmoidal), metaparams.equilibrium};
   return compute_critical_Delta(metaparams, accuracy, solv_params);
 }
@@ -127,9 +127,9 @@ nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int 
       abort();
   }
 }
-double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, delta_solver delta_solv){
+
+statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, delta_solver delta_solv){
   eqmode equilibrium = delta_solv.eq_mode;
-  double delta_crit=0.;
   unsigned int Nsimul_frun;
   unsigned int Nsimul_srun;
   size_t interval_length;
@@ -211,10 +211,10 @@ double compute_critical_Delta(Metaparameters metaparams, ntype accuracy, delta_s
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate delta critical */
-  delta_crit = estimate_delta_crit_from_interval(interval, function_y_values, metaparams, delta_solv);
-
+  statistics delta_crit = estimate_delta_crit_from_interval(interval, function_y_values, metaparams, delta_solv);
   return delta_crit;
 }
+
 double function_av_extinct_solver(double delta, void*params){
   Solver_Parameters* s = (Solver_Parameters*) params;
   Metaparameters* m = s->metaparameters;
@@ -236,20 +236,21 @@ double function_av_extinct_solver(double delta, void*params){
   }
 
 }
-double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, delta_solver delta_solv){
-
-  double estimate = 0.;
+statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, delta_solver delta_solv){
+  double estimate = 0., error = 0.;
   if(m.verbose > 0){
     std::cout << "Now we find the zero of the fit to determine delta critical (parameters =";
-    for(size_t i = 0; i < fit_parameters->size; ++i){
-      std::cout << " "<<gsl_vector_get(fit_parameters, i);
+    for(size_t i = 0; i < fit_parameters.fit_parameters->size; ++i){
+      std::cout << " "<<gsl_vector_get(fit_parameters.fit_parameters, i) << "+/-";
+      std::cout << gsl_vector_get(fit_parameters.error, i);
     }
     std::cout << ")" << std::endl;
   }
 
   switch(delta_solv.fit_mode){
     case sigmoidal:
-      estimate = gsl_vector_get(fit_parameters,0);
+      estimate = gsl_vector_get(fit_parameters.fit_parameters,0);
+      error = gsl_vector_get(fit_parameters.error, 0);
       break;
     case polynomial:
       std::cerr << "PLEASE IMPLEMENT THE FUNCTION TO SOLVE FOR DELTA WITH POLYNOMIAL FIT" << std::endl;
@@ -263,5 +264,6 @@ double solve_for_delta_with_fit(const gsl_vector* fit_parameters, double & x_lo,
       abort();
       break;
   }
-  return estimate;
+  statistics delta = {estimate, error, NULL};
+  return delta;
 }

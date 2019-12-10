@@ -16,12 +16,16 @@ int main(){
   NUMBER_OF_FITTING_PARAMETERS = 2;
 
   gsl_vector* params = gsl_vector_alloc(NUMBER_OF_FITTING_PARAMETERS);
-  fit_points_with_function(x_data, y_data, params, fitmode(sigmoidal));
+  gsl_vector* error = gsl_vector_alloc(NUMBER_OF_FITTING_PARAMETERS);
+
+  fitting_parameters fit_params = {params, error};
+
+  fit_points_with_function(x_data, y_data, fit_params, fitmode(sigmoidal));
   std::cout << "[";
   for(size_t i = 0; i < NUMBER_OF_FITTING_PARAMETERS-1; ++i){
-    std::cout << gsl_vector_get(params, i) << ",";
+    std::cout << gsl_vector_get(params, i) << "+/-"<< gsl_vector_get(error, i) << ",";
   }
-  std::cout << gsl_vector_get(params, NUMBER_OF_FITTING_PARAMETERS-1) << "]" << std::endl;
+  std::cout <<  gsl_vector_get(params, NUMBER_OF_FITTING_PARAMETERS-1) << "+/-"<< gsl_vector_get(error, NUMBER_OF_FITTING_PARAMETERS-1) << "]" << std::endl;
 
   return 0;
 }
