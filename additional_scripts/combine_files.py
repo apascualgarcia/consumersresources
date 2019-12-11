@@ -1,4 +1,4 @@
-cores = 16
+cores = 4
 filename = 'configuration_comparison_NR25_NS25_s05_a0_matrix_list_NR25_NS25'
 file_list = [filename + '_' + str(i) for i in range(0, cores)]
 

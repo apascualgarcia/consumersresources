@@ -26,10 +26,12 @@ double polynomial_fit(double, const gsl_vector*);
 double sigmoidal_fit(double, const gsl_vector*);
 double fitting_function(double, const gsl_vector*, fitmode);
 
+nvector guess_initial_fit_parameters(const nvector&, const nvector&, fitmode);
+
 int function_to_fit(const gsl_vector* , void* , gsl_vector*);
 int function_to_fit_df(const gsl_vector*, void*, gsl_matrix*);
 void callback(const size_t, void*, const gsl_multifit_nlinear_workspace);
-void fit_points_with_function(const nvector&, const nvector&, fitting_parameters&, fitmode);
+void fit_points_with_function(const nvector&, const nvector&, fitting_parameters&, fitmode, const unsigned int& = 1);
 
 void set_jacobian_matrix_fit(const gsl_vector*, void*, gsl_matrix*);
 void set_jacobian_matrix_sigmoidal_fit(const gsl_vector*, void*, gsl_matrix*);

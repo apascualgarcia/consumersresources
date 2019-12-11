@@ -79,13 +79,15 @@ for i in range(len(sorted_size)):
     for conn in connectance:
         nest = np.array([data[i, 0]
                          for i in range(len(data)) if data[i, 1] == conn])
-        dcrit = np.array([data[i, 2]
+        dcrit = np.array([[data[i, 2], data[i,3]]
                           for i in range(len(data)) if data[i, 1] == conn])
         indices = np.argsort(nest)
-        sorted_dcrit = np.array([dcrit[i] for i in indices])
+        sorted_dcrit = np.array([dcrit[i,0] for i in indices])
+        sorted_dcrit_error = np.array([dcrit[i,1] for i in indices])
         sorted_nest = np.sort(nest)
-        ax1.plot(sorted_nest, sorted_dcrit, '+-', linestyle='dotted',
-                 label=r'Connectance $\approx$' + str(conn), markersize=markersize, markeredgewidth=markeredgewidth)
+        ax1.errorbar(x=sorted_nest, y=sorted_dcrit, yerr=sorted_dcrit_error, fmt='+-', linestyle='dotted',
+                  label=r'Connectance $\approx$' + str(conn), markersize=markersize, markeredgewidth=markeredgewidth,
+                  elinewidth=error_bar_width, capsize=cap_width)
     ax1.set_title(r'$N_R=$' + str(NR) + r', $N_S=$' + str(NS))
     ax1.set_xlabel(r'Nestedness', fontsize=fs)
     ax1.set_ylabel(r'$\Delta^*$', fontsize=fs)
@@ -97,14 +99,15 @@ for i in range(len(sorted_size)):
     for nest in nestedness:
         conn = np.array([data[i, 1]
                          for i in range(len(data)) if data[i, 0] == nest])
-        dcrit = np.array([data[i, 2]
+        dcrit = np.array([[data[i, 2], data[i,3]]
                           for i in range(len(data)) if data[i, 0] == nest])
         indices = np.argsort(conn)
-        sorted_dcrit = np.array([dcrit[i] for i in indices])
+        sorted_dcrit = np.array([dcrit[i,0] for i in indices])
+        sorted_dcrit_error = np.array([dcrit[i,1] for i in indices])
         sorted_conn = np.sort(conn)
-
-        ax2.plot(sorted_conn, sorted_dcrit, '+-', linestyle='dotted',
-                 label=r'Nestedness $\approx$' + str(nest), markersize=markersize, markeredgewidth=markeredgewidth)
+        ax2.errorbar(x=sorted_conn, y=sorted_dcrit, yerr=sorted_dcrit_error, fmt='+-', linestyle='dotted',
+                  label=r'Nestedness $\approx$' + str(nest), markersize=markersize, markeredgewidth=markeredgewidth,
+                  elinewidth=error_bar_width, capsize=cap_width)
     ax2.set_title(r'$N_R=$' + str(NR) + r', $N_S=$' + str(NS))
     ax2.set_xlabel(r'Connectance', fontsize=fs)
     ax2.set_ylabel(r'$\Delta^*$', fontsize=fs)

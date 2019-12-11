@@ -126,7 +126,7 @@ void callback(const size_t iter, void *params, const gsl_multifit_nlinear_worksp
           gsl_blas_dnrm2(f));
   return;
 }
-void fit_points_with_function(const nvector& interval, const nvector& points, fitting_parameters& fit_parameters, fitmode fit_mode){
+void fit_points_with_function(const nvector& interval, const nvector& points, fitting_parameters& fit_parameters, fitmode fit_mode, const unsigned int& verbose){
 
   const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
   gsl_multifit_nlinear_workspace *w;
@@ -156,32 +156,36 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
   /* define the covariance matrix */
   gsl_matrix* covar = gsl_matrix_alloc(p,p);
 
-  double x[n], y[n], weights[n];
-  struct data d = {p, n, x, y, fit_mode};
-  double a_init[p];
+  double x[n], y[n], weights[n], a_init[p];
+  nvector initial_guess = guess_initial_fit_parameters(interval, points, fit_mode);
 
-  switch(fit_mode){
-    case sigmoidal:
-      a_init[0] = 0.03;
-      a_init[1] = 200.;
-      break;
-    case polynomial:
-      for(size_t i=0; i < p; ++i){
-        a_init[i]=0.;
-      }
-      break;
-    default:
-      abort();
-      break;
+  /* this is the data to be fitted */
+  for (size_t i=0; i < n; ++i){
+    x[i] = double(interval[i]);
+    y[i] = double(points[i]);
+    weights[i] = 1.;
   }
 
+  /* set the initial guess for the fitting parameters */
+  for(size_t i = 0; i < p; ++i){
+    a_init[i] = double(initial_guess[i]);
+  }
+
+  if(verbose > 0){
+    std::cout << "Starting the fit with the following estimates on the parameters : ";
+    for(size_t i=0; i < p; ++i){
+      std::cout << a_init[i] << " ";
+    }
+    std::cout << std::endl;
+  }
+
+  struct data d = {p, n, x, y, fit_mode};
 
   gsl_vector_view a = gsl_vector_view_array(a_init, p);
   gsl_vector_view wts = gsl_vector_view_array(weights, n);
   gsl_rng* r;
   double chisq, chisq0;
   int status, info;
-  size_t i;
 
   const double atol = 1e-8;
   const double gtol = 1e-8;
@@ -199,12 +203,6 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
   fdf.p = p;
   fdf.params = &d;
 
-  /* this is the data to be fitted */
-  for (i=0; i < n; ++i){
-    x[i] = double(interval[i]);
-    y[i] = double(points[i]);
-    weights[i] = 1.;
-  }
 
   /* allocate workspace with default parameters */
   w = gsl_multifit_nlinear_alloc(T, &fdf_params, n, p);
@@ -239,6 +237,49 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
 
   return;
 }
+
+nvector guess_initial_fit_parameters(const nvector& x, const nvector& y, fitmode fit_mode){
+  const size_t p = NUMBER_OF_FITTING_PARAMETERS;
+  nvector a_init;
+
+  switch(fit_mode){
+    case sigmoidal: {
+      /* for the estimate on the solution, we simply take the x whose y is closer to 0 */
+      ntype approx_sol = x[0], val_of_approx_sol = y[0];
+      for(size_t i = 1; i < x.size(); ++i){
+        /* if y[i] is closer to zero than the previous value, change the estimate */
+        if(y[i]*y[i] < val_of_approx_sol*val_of_approx_sol){
+          approx_sol = x[i];
+          val_of_approx_sol = y[i];
+        }
+      }
+
+      a_init.push_back(approx_sol);
+
+      /* for the estimate on the scale, we take 4/(interval length), (it's an okay approx)*/
+      ntype min_el = x[0], max_el = x[x.size()-1];
+      for(size_t i=0; i < x.size(); ++i){
+        if(x[i] < min_el){
+          min_el = x[i];
+        }
+        if(x[i] > max_el){
+          max_el = x[i];
+        }
+      }
+      a_init.push_back(4/(max_el-min_el));
+      break;
+    }
+    default:{
+      std::cerr << "This type of fitting has not been implemented yet or does not exist"<<std::endl;
+      std::cerr << "Aborting the simulation now"<<std::endl;
+      abort();
+      break;
+    }
+  }
+
+  return a_init;
+}
+
 statistics estimate_delta_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, delta_solver delta_solver){
   double x_lo = interval[0];
   double x_hi = interval[interval.size()-1];
@@ -282,7 +323,7 @@ statistics estimate_delta_crit_from_interval(const nvector& interval, const nvec
     std::cout << "Now fitting the " << x_points_to_fit.size() << " points chosen into the specific function (";
     std::cout << fit_type << ")"<< std::endl;
   }
-  fit_points_with_function(x_points_to_fit, y_points_to_fit, fitting_parameters, delta_solver.fit_mode);
+  fit_points_with_function(x_points_to_fit, y_points_to_fit, fitting_parameters, delta_solver.fit_mode, m.verbose);
 
   /* with the fitting parameters estimated, we can actually solve for Delta numerically */
   statistics delta_crit = solve_for_delta_with_fit(fitting_parameters, x_lo, x_hi, m, delta_solver);
