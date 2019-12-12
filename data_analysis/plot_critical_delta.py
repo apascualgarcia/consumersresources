@@ -21,23 +21,28 @@ markersize = 6
 errorbar = 'no_errorbar'
 matrices_folder = './matrices/Nr25_Nc25'
 
+not_all_conn = True
+target_conn = [0.08, 0.23, 0.33]
+
+not_all_nest = True
+target_nest = [0.1, 0.3, 0.5]
+
 
 def remove_strings_from_file(filename):
-    if(not os.path.isfile(filename + '_filtered.out')):
-        file = open(filename + '.out', "r")
-        metadata = []
-        for x in file:
-            name = x.replace(matrices_folder + '/RandTrix_Nr', '')
-            name = name.replace('_Nc', ' ')
-            name = name.replace('_Nest', ' ')
-            name = name.replace('_Conn', ' ')
-            name = name.replace('.txt', '')
-            metadata.append(name)
-        file.close()
-        f = open(filename + '_filtered.out', 'w')
-        for a in metadata:  # python will convert \n to os.linesep
-            f.write(a + '\n')
-        f.close()
+    file = open(filename + '.out', "r")
+    metadata = []
+    for x in file:
+        name = x.replace(matrices_folder + '/RandTrix_Nr', '')
+        name = name.replace('_Nc', ' ')
+        name = name.replace('_Nest', ' ')
+        name = name.replace('_Conn', ' ')
+        name = name.replace('.txt', '')
+        metadata.append(name)
+    file.close()
+    f = open(filename + '_filtered.out', 'w')
+    for a in metadata:  # python will convert \n to os.linesep
+        f.write(a + '\n')
+    f.close()
 
 
 filename = folder + '/' + filename
@@ -66,6 +71,8 @@ print("Data sorted.")
 for i in range(len(sorted_size)):
     [NR, NS] = sorted_size[i]
     save_string = 'NR' + str(NR) + 'NS' + str(NS)
+    save_string1 = save_folder + '/' + save_string + 'nest_fixed_conn'
+    save_string2 = save_folder + '/' + save_string + '_conn_fixed_nest'
     data = sorted_mprop[i]
     # we filter the data to round the connectance up to 2 decimals
     data[:, 1] = np.array([round(data[i, 1], 2) for i in range(len(data))])
@@ -74,9 +81,20 @@ for i in range(len(sorted_size)):
     # lists the different nestednesses available
     nestedness = np.array(sorted(list(set(data[:, 0]))))
 
+    target_connectance = connectance
+    if(not_all_conn):
+        target_connectance = target_conn
+    else:
+        save_string1+='_all_points'
+    target_nestedness = nestedness
+    if(not_all_nest):
+        target_nestedness = target_nest
+    else:
+        save_string2+='_all_points'
+
     fig1 = plt.figure('Nestedness for fixed connectance')
     ax1 = fig1.add_subplot(111)
-    for conn in connectance:
+    for conn in target_connectance:
         nest = np.array([data[i, 0]
                          for i in range(len(data)) if data[i, 1] == conn])
         dcrit = np.array([[data[i, 2], data[i,3]]
@@ -92,11 +110,11 @@ for i in range(len(sorted_size)):
     ax1.set_xlabel(r'Nestedness', fontsize=fs)
     ax1.set_ylabel(r'$\Delta^*$', fontsize=fs)
     ax1.legend()
-    fig1.savefig(save_folder + '/' + save_string + 'nest_fixed_conn.pdf')
+    fig1.savefig(save_string1+'.pdf')
 
     fig2 = plt.figure('Connectance for fixed nestedness')
     ax2 = fig2.add_subplot(111)
-    for nest in nestedness:
+    for nest in target_nestedness:
         conn = np.array([data[i, 1]
                          for i in range(len(data)) if data[i, 0] == nest])
         dcrit = np.array([[data[i, 2], data[i,3]]
@@ -112,7 +130,7 @@ for i in range(len(sorted_size)):
     ax2.set_xlabel(r'Connectance', fontsize=fs)
     ax2.set_ylabel(r'$\Delta^*$', fontsize=fs)
     ax2.legend()
-    fig2.savefig(save_folder + '/' + save_string + '_conn_fixed_nest.pdf')
+    fig2.savefig(save_string2+'.pdf')
 
     fig3 = plt.figure()
     ax3 = fig3.add_subplot(111, projection='3d')

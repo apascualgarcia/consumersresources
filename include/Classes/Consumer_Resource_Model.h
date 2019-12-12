@@ -45,6 +45,16 @@ public:
   double get_d0() const;
   nvector get_m() const;
   nvector get_d() const;
+  ntype get_resilience_jacobian() const;
+  ntype get_resilience_dynamical_stability(const ntype& delta=0.);
+
+  nmatrix get_first_equilibrium() const;
+
+  /* returns dynamical variables perturbed away from their equilibrium value*/
+  nmatrix perturb_abundances(const ntype& );
+
+  /* returns the extinction properties with the initial values of abundances */
+  Extinction evolve_until_equilibrium_from_abundances(const nmatrix& , ntype threshold=1e-8, eqmode eq_mode = oneextinct) const;
 };
 
 #endif

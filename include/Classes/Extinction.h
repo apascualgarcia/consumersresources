@@ -7,6 +7,8 @@ struct Extinction{
   ntype extinct;
   nvector new_Req;
   nvector new_Seq;
+  nvector old_Req;
+  nvector old_Seq;
 };
 
 struct Extinction_statistics{
@@ -16,5 +18,6 @@ struct Extinction_statistics{
   nvector_statistics new_Seq;
 };
 
+ntype distance_between_equilibria(const Extinction& );
 
 #endif

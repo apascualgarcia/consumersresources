@@ -22,6 +22,7 @@ struct Delta_critical{
 struct delta_solver{
   fitmode fit_mode;
   eqmode eq_mode;
+  stabilitymode stab_mode;
 };
 
 #endif

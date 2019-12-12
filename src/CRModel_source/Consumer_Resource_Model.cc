@@ -510,3 +510,44 @@ nvector CRModel::get_d()const{
   Parameter_set* p = this->model_param->get_parameters();
   return p->d;
 }
+
+nmatrix CRModel::perturb_abundances(const ntype& delta){
+  nmatrix* current_eq = &(*eq_vals)[0];
+  nmatrix perturb_eq;
+  perturb_eq.push_back(nvector());
+  perturb_eq.push_back(nvector());
+
+  Parameter_set* p = this->model_param->get_parameters();
+
+  std::uniform_real_distribution<ntype> uniform_distrib(-1., 1.);
+  for(size_t i=0; i < p->NR; ++i){
+    perturb_eq[0].push_back((*current_eq)[0][i]*(1+delta*uniform_distrib(random_engine)));
+  }
+  for(size_t i=0; i < p->NS; ++i){
+    perturb_eq[1].push_back((*current_eq)[1][i]*(1+delta*uniform_distrib(random_engine)));
+  }
+  return perturb_eq;
+}
+
+nmatrix CRModel::get_first_equilibrium() const{
+  return (*eq_vals)[0];
+}
+
+ntype CRModel::get_resilience_jacobian() const{
+  /* resilience is defined as 1/l1 where l1 is the largest real part of an eigenvalue of the jacobian at equilibrium */
+  ntype resilience = 0.;
+  ncvector eigenvals = this->eigenvalues_at_equilibrium();
+  ntype largest_real_part = real(eigenvals[0]);
+  for(size_t i = 1; i < eigenvals.size(); ++i){
+    if(real(eigenvals[i]) > largest_real_part){
+      largest_real_part=real(eigenvals[i]);
+    }
+  }
+  resilience = ntype(1./largest_real_part);
+  return resilience;
+}
+ntype CRModel::get_resilience_dynamical_stability(const ntype& delta){
+  /* we perturb all the abundances by delta */
+  double tend = 0.;
+  return ntype(tend);
+}

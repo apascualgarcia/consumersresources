@@ -14,7 +14,7 @@
 #include "Functions/fitting.h"
 #include "Functions/root_solving.h"
 #include "Functions/matrices_building.h"
-#include "Functions/structural_stability.h"
+#include "Functions/study_stability.h"
 #include "Functions/additional_functions.h"
 #include "Functions/input_reading.h"
 #include "Functions/model_characteristics.h"

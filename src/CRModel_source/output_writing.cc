@@ -54,9 +54,10 @@ std::ostream& operator<<(std::ostream& os, const Model_parameters& M){
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const ntensor& T){
-  for(size_t i = 0; i < T.size(); ++i){
+  for(size_t i = 0; i < T.size()-1; ++i){
     os << "Element " << i << " of tensor :" << std::endl << T[i] << std::endl;
   }
+  os << "Element " << T.size()-1 << " of tensor :" << std::endl << T[T.size()-1] << std::endl;
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nvector& v){
@@ -66,9 +67,10 @@ std::ostream& operator<<(std::ostream& os, const nvector& v){
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nmatrix& M){
-  for (size_t i=0; i < M.size(); ++i){
+  for (size_t i=0; i < M.size()-1; ++i){
     os << M[i] << std::endl;
   }
+  os << M[M.size()-1];
   return os;
 }
 

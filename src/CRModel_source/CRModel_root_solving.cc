@@ -7,8 +7,8 @@
 #include <gsl/gsl_poly.h>
 #include <array>
 
-statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy){
-  delta_solver solv_params = {fitmode(sigmoidal), metaparams.equilibrium};
+statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, stabilitymode stab_mode){
+  delta_solver solv_params = {fitmode(sigmoidal), metaparams.equilibrium, stab_mode};
   return compute_critical_Delta(metaparams, accuracy, solv_params);
 }
 nvector find_rough_interval_polynomial_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose){
@@ -158,7 +158,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, del
     case sigmoidal:
       Nsimul_frun = 50;
       Nsimul_srun = 50;
-      interval_length= 50;
+      interval_length= 100;
       break;
     default:
       std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;

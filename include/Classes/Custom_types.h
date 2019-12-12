@@ -23,6 +23,7 @@ enum eqmode{oneextinct, convergence};
 /*  when using polynomial please specify the degree manually otherwise,
     there will be a runtime error */
 enum fitmode{sigmoidal, polynomial};
+enum stabilitymode{dynamical, structural};
 
 struct statistics{
   ntype mean;

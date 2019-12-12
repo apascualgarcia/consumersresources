@@ -3,6 +3,7 @@
 
 #include "../Classes/Metaparameters.h"
 #include "../Classes/Custom_types.h"
+#include "../Classes/Extinction.h"
 #include<random>
 
 foodmatrix load_food_matrix(const Metaparameters&);
@@ -16,5 +17,12 @@ bool non_neg_elements(const nvector&);
 
 void initialize_random_engine(const Metaparameters&);
 void print_rand_number();
+
+ntype mean(const nvector&);
+ntype standard_dev(const nvector&);
+
+nvector operator+(const nvector&, const nvector&);
+nvector operator-(const nvector&);
+nvector operator-(const nvector&, const nvector&);
 
 #endif
