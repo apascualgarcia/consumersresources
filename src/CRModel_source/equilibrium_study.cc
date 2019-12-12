@@ -59,27 +59,70 @@ double average_number_of_extinctions(double delta, Metaparameters* m, unsigned i
 
   return av_number_extinct;
 }
-double probability_of_extinction_greather_than_one(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
-  ntype convergence_threshold = 1e-6;
+double probability_of_extinction_greather_than_one(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul, stabilitymode stab_mode){
+  ntype convergence_threshold = 1e-9;
   double probability_ext_gtone = 0.;
+  std::string stability;
 
   if(metaparams->verbose > 0){
     std::cout << "Computing probability of getting one or more extinctions for Delta=" << Delta << std::endl;
   }
 
-  for(size_t i = 0; i < Nsimul; ++i){
-    CRModel model(*metaparams);
-    model.perturb_parameters(Delta);
-    Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
-    if(new_equilib.extinct >=1){
-      probability_ext_gtone+=1./Nsimul;
+  switch(stab_mode){
+    case structural:{
+      stability = "structural";
+      for(size_t i = 0; i < Nsimul; ++i){
+        CRModel model(*metaparams);
+        model.perturb_parameters(Delta);
+        Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
+        if(new_equilib.extinct >=1){
+          probability_ext_gtone+=1./Nsimul;
+        }
+      }
+      break;
+    };
+    case dynamical:{
+      stability="dynamical";
+      for(size_t i=0; i < Nsimul;++i){
+        CRModel model(*metaparams);
+        Extinction new_equilib = model.evolve_until_equilibrium_from_abundances(model.perturb_abundances(Delta));
+        if(new_equilib.extinct >=1){
+          probability_ext_gtone += 1./Nsimul;
+        }
+      }
+      break;
+    };
+    default:{
+      std::cerr << "Inexistent type of stability in probability_of_extinction_greather_than_one" << std::endl;
+      std::cerr << "Aborting simulation now "<< std::endl;
+      abort();
+      break;
     }
   }
+
   if(metaparams->verbose>0){
     std::cout << "Probability of getting one or more extinctions for Delta=" << Delta;
     std::cout << " is " << probability_ext_gtone << std::endl;
   }
   return probability_ext_gtone;
+}
+ntype average_distance_between_equilibria(Metaparameters* metaparams, const ntype& delta, unsigned int Nsimul, stabilitymode stab_mode){
+    ntype av_dist = 0.;
+    switch(stab_mode){
+      /*
+      case dynamical:{
+        for(size_t i=0; i < Nsimul;++i){
+        }
+      }
+      */
+      default:{
+        std::cerr << "average_distance_between_equilibria not yet implemented for this type of stability mode " << std::endl;
+        std::cerr << "Aborting simulation now" << std::endl;
+        abort();
+        break;
+      }
+    }
+    return av_dist;
 }
 double can_find_one_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
   ntype convergence_threshold = 1e-6;
