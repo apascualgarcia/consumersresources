@@ -9,6 +9,7 @@
 #include <vector>
 #include <array>
 #include <math.h>
+#include <algorithm>
 
 
 nmatrix CRModel::time_evolution(const Dynamical_variables& init_val, ntype tf) const{
