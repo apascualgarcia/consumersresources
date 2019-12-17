@@ -568,9 +568,13 @@ bool CRModel::has_linearly_stable_eq() const{
 
   SelfAdjointEigenSolver<Matrix<ntype, Dynamic, Dynamic>> eigensolver(jacob_sym);
   Matrix<ntype, Dynamic,1> eigvals = eigensolver.eigenvalues();
+  nvector eigenvalues;
+  for(size_t i=0; i < eigvals.rows();++i){
+    eigenvalues.push_back(eigvals(i));
+  }
 
-  ntype min_eigval = std::min(eigvals);
-  ntype max_eigval = std::max(eigvals);
+  ntype min_eigval = *std::min_element(eigenvalues.begin(), eigenvalues.end());
+  ntype max_eigval = *std::max_element(eigenvalues.begin(), eigenvalues.end());
 
   if(min_eigval > 0.){
     return false;
@@ -582,5 +586,5 @@ bool CRModel::has_linearly_stable_eq() const{
 
   std::cout << "Could not determine whether or not the system was stable, returning false to make sure" << std::endl;
   return false;
-  
+
 }

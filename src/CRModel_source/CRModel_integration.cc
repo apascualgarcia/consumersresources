@@ -10,6 +10,7 @@
 #include <array>
 #include <math.h>
 
+
 nmatrix CRModel::time_evolution(const Dynamical_variables& init_val, ntype tf) const{
   // evolution contains the state of the system at all times i.e. evolution[0] contains
   // the initial value of the Dynamical_variables init_val; The goal of the algorithm is
