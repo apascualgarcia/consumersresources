@@ -1,18 +1,56 @@
 #include "../../include/CRModel.h"
 #include <gsl/gsl_statistics.h>
 
-stability_metrics compute_stability_metrics(Metaparameters& m, unsigned int Nsimul){
+stability_metrics compute_stability_metrics(Metaparameters& m, const ntype& delta, unsigned int Nsimul, stabilitymode stab_mode){
   nvector resiliences;
+  nvector angles;
+  nvector distances;
+  nvector extinctions;
+  if(m.verbose > 0){
+    std::cout << "Now computing the different "<< stab_mode << " stability metrics for delta=" << delta << " ("<<Nsimul<<" runs)" <<std::endl;
+  }
+
   for(size_t i = 0; i < Nsimul; ++i){
     CRModel model(m);
-    resiliences.push_back(model.get_resilience_dynamical_stability());
+    Extinction new_equilib;
+    switch(stab_mode){
+      case dynamical:{
+        new_equilib = model.evolve_until_equilibrium_from_abundances(model.perturb_abundances(delta));
+        break;
+      }
+      case structural:{
+        model.perturb_parameters(delta);
+        new_equilib = model.evolve_until_equilibrium(1e-9, convergence);
+        break;
+      }
+    }
+    resiliences.push_back(new_equilib.t_eq);
+    angles.push_back(angle_between_equilibria(new_equilib));
+    distances.push_back(distance_between_equilibria(new_equilib));
+    extinctions.push_back(new_equilib.extinct);
+    if(m.verbose > 1){
+      std::cout << "\t For this run, we found : ";
+      std::cout << "resilience = " << resiliences[i] << "; angle = " << angles[i] << "; distance = " << distances[i];
+      std::cout << "; number of extinctions = " << extinctions[i] << std::endl;
+    }
   }
-  ntype av_resilience = mean(resiliences);
-  ntype std_resilience = standard_dev(resiliences);
-  /* /!\ CAREFUL resiliences is shuffled in the gsl_stats_median part */
-  ntype median_resilience = 0;
 
-  statistics resilience = {av_resilience, std_resilience, median_resilience};
-  stability_metrics stab_metr = {resilience};
+  statistics resilience(resiliences);
+  statistics angle(angles);
+  statistics distance(distances);
+  statistics extinction(extinctions);
+
+  stability_metrics stab_metr;
+  stab_metr.resilience=resilience;
+  stab_metr.angle_between_equilibria=angle;
+  stab_metr.distance_between_equilibria=distance;
+  stab_metr.extinctions=extinction;
+
+
+  if(m.verbose > 0){
+    std::cout << "Overall, we found the following stability metrics : " << stab_metr << std::endl;
+  }
+
+
   return stab_metr;
 }

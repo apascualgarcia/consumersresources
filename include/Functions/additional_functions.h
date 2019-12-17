@@ -20,9 +20,15 @@ void print_rand_number();
 
 ntype mean(const nvector&);
 ntype standard_dev(const nvector&);
+ntype median(const nvector&);
+
+ntype angle(const nvector&, const nvector&);
+ntype distance(const nvector&, const nvector&);
 
 nvector operator+(const nvector&, const nvector&);
 nvector operator-(const nvector&);
 nvector operator-(const nvector&, const nvector&);
+ntype operator*(const nvector&, const nvector&);
+
 
 #endif

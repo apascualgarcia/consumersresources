@@ -40,7 +40,7 @@ int main(int argc, char * argv[]){
         delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
         statistics delta = compute_critical_Delta(metaparams, 0., solv_params);
         std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
-        myfile << matrices_path[i] << " " << delta.mean << " " << delta.std_deviation << std::endl;
+        myfile << matrices_path[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
     }
   }
   myfile.close();

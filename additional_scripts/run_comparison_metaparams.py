@@ -22,7 +22,7 @@ for i in range(0, cores):
             config + "_" + m_list + "_" + str(i) + ".out"
         cmd_core += " seed_number=" + str(seed_number)
         cmd_core += " | ts '[%Y-%m-%d %H:%M:%S]' > ./logs/" + \
-            config + "_" + str(i) + ".log"
+            config + "_" + m_list + "_" + str(i) + ".log"
         cmd_core += " 2>./logs/err" + config + "_" + \
             str(i) + ".log && "
         seed_number += 1

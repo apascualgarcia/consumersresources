@@ -10,7 +10,6 @@ int main(int argc, char * argv[]){
   std::cout << "Equilibrium after perturbation : " << std::endl;
   std::cout << extinct.new_Req << std::endl;
   std::cout << extinct.new_Seq << std::endl;
-  std::cout << "Distance between two equilibria : " << distance_between_equilibria(extinct)<<std::endl;
-
+  std::cout << "Time to get convergence : " << extinct.t_eq << std::endl;
   return 0;
 }

@@ -85,3 +85,33 @@ std::ostream& display_vector_w_name(std::ostream& os, std::string vec_name, cons
   os << vec_name << " = " << vect << std::endl;
   return os;
 }
+std::ostream& operator<<(std::ostream& os, const stability_metrics& m){
+  os << std::endl;
+  os << "Resilience : " << m.resilience<< std::endl;
+  os << "Number of extinctions : " << m.extinctions << std::endl;
+  os << "Angle between equilibria : " << m.angle_between_equilibria<< std::endl;
+  os << "Distance between equilibria : " << m.distance_between_equilibria;
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const statistics& stats){
+  os << stats.mean_ << "+/-" << stats.std_deviation_ << " (median : "<<stats.median_ << ")";
+  return os;
+}
+
+
+std::ostream& operator<<(std::ostream& os, const stabilitymode& stab){
+  switch(stab){
+    case dynamical:{
+      os << "dynamical";
+      break;
+    }
+    case structural:{
+      os << "structural";
+      break;
+    }
+    default:
+      break;
+  }
+  return os;
+}

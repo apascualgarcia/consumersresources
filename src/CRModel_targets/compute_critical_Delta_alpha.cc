@@ -37,7 +37,7 @@ int main(int argc, char * argv[]){
         metaparams.alpha0 = alpha_vals[i];
         statistics delta = compute_critical_Delta(metaparams, 0.);
         std::cout << "Computed critical delta for alpha0=" << alpha_vals[i] << std::endl;
-        myfile << alpha_vals[i] << " " << delta.mean << " " << delta.std_deviation << std::endl;
+        myfile << alpha_vals[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
     }
   }
   myfile.close();

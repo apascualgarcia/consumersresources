@@ -1,5 +1,6 @@
 #include "../../include/CRModel.h"
 #include <cmath>
+
 ntype distance_between_equilibria(const Extinction& extinct){
   ntype distance_spec = 0., distance_res = 0.;
   size_t NR = extinct.old_Req.size(), NS = extinct.old_Seq.size();
@@ -12,4 +13,8 @@ ntype distance_between_equilibria(const Extinction& extinct){
     distance_spec+=(to_add*to_add);
   }
   return sqrt(distance_spec+distance_res);
+}
+
+ntype angle_between_equilibria(const Extinction& extinction){
+  return angle(extinction.new_Req, extinction.old_Seq);
 }

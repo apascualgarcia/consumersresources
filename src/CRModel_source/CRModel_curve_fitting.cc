@@ -329,7 +329,7 @@ statistics estimate_delta_crit_from_interval(const nvector& interval, const nvec
   statistics delta_crit = solve_for_delta_with_fit(fitting_parameters, x_lo, x_hi, m, delta_solver);
   gsl_vector_free(fit_parameters);
   if(m.verbose > 0){
-    std::cout << "Zero estimated at " << delta_crit.mean << "+/-" << delta_crit.std_deviation  << std::endl;
+    std::cout << "Zero estimated at " << delta_crit << std::endl;
   }
 
   /* finally, we return the estimated value */

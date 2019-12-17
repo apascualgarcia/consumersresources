@@ -20,5 +20,8 @@ std::ostream& operator<<(std::ostream&, const ntensor&);
 std::ostream& operator<<(std::ostream&, const Parameter_set&);
 std::ostream& operator<<(std::ostream&, const Model_parameters&);
 std::ostream& operator<<(std::ostream&, const CRModel&);
+std::ostream& operator<<(std::ostream&, const stability_metrics&);
+std::ostream& operator<<(std::ostream&, const stabilitymode&);
+std::ostream& operator<<(std::ostream&, const statistics&);
 
 #endif

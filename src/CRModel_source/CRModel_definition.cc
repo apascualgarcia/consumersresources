@@ -49,7 +49,7 @@ void write_av_number_extinctions_delta_interval(Metaparameters* m, const nvector
       myfile << m->save_path << " ";
       time_t now=time(0);
       myfile << ctime(&now) ;
-      myfile << deltas[i] << " " << ext_stat.extinct.mean << " " << ext_stat.extinct.std_deviation << std::endl;
+      myfile << deltas[i] << " " << ext_stat.extinct.mean_ << " " << ext_stat.extinct.std_deviation_ << std::endl;
     }
   }
   myfile.close();

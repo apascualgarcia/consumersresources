@@ -26,15 +26,41 @@ enum fitmode{sigmoidal, polynomial};
 enum stabilitymode{dynamical, structural};
 
 struct statistics{
-  ntype mean;
-  ntype std_deviation;
-  ntype median;
+  ntype mean_;
+  ntype std_deviation_;
+  ntype median_;
+  statistics(const nvector&);
+  statistics(const statistics&);
+  statistics();
 };
 
 struct nvector_statistics{
   nvector means;
   nvector std_deviations;
   nvector medians;
+};
+
+struct stability_metrics{
+  statistics resilience;
+  statistics angle_between_equilibria;
+  statistics distance_between_equilibria;
+  statistics extinctions;
+};
+
+struct Extinction{
+  ntype t_eq;
+  ntype extinct;
+  nvector new_Req;
+  nvector new_Seq;
+  nvector old_Req;
+  nvector old_Seq;
+};
+
+struct Extinction_statistics{
+  statistics t_eq;
+  statistics extinct;
+  nvector_statistics new_Req;
+  nvector_statistics new_Seq;
 };
 
 

@@ -10,7 +10,8 @@ Extinction_statistics compute_average_extinction(Metaparameters*, const ntype &,
 double average_number_of_extinctions(double , Metaparameters*, unsigned int);
 double probability_of_extinction_greather_than_one(Metaparameters*, const ntype& delta, unsigned int Nsimul, stabilitymode stab_mode=structural);
 /* perturbs a system by delta (structurally or dynamically and computes the av. dist between eq) */
-ntype average_distance_between_equilibria(Metaparameters*, const ntype& delta, unsigned int Nsimul, stabilitymode stab_mode);
+statistics distance_between_equilibria(Metaparameters*, const ntype& delta, unsigned int Nsimul, stabilitymode stab_mode);
+statistics angle_between_equilibria(Metaparameters*, const ntype& delta, unsigned int Nsimul, stabilitymode stab_mode);
 
 /* returns 0. if we find one system that goes extinct within the given number of simulations, returns 1. otherwise */
 double can_find_one_extinction(Metaparameters*, const ntype & delta, unsigned int Nsimul);

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues>
+#include <algorithm>
 
 CRModel::CRModel(Model_parameters* mod_params){
   model_param=mod_params;
@@ -86,9 +87,9 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
 
   this->metaparameters = &meta;
   if(meta.verbose > 1){
-    std::cout << "Feasible system build in "<<attempts<<" iteration(s). ";
+    std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
     if(attempts > meta.nb_attempts){
-      std::cout << "The metaparameters had to be changed.";
+      std::cout << "\t The metaparameters had to be changed.";
     }else{
       std::cout << "It was possible to use the initial metaparameters.";
     }
@@ -446,7 +447,7 @@ void CRModel::perturb_parameters(const ntype & Delta) const{
   }
 
   if(this->metaparameters->verbose > 1){
-    std::cout <<" Structurally perturbed the system with parameter delta =" << Delta << std::endl;
+    std::cout <<"\t Structurally perturbed the system with parameter delta =" << Delta << std::endl;
   }
 
   return;
@@ -550,4 +551,36 @@ ntype CRModel::get_resilience_dynamical_stability(const ntype& delta){
   /* we perturb all the abundances by delta */
   double tend = 0.;
   return ntype(tend);
+}
+
+bool CRModel::has_linearly_stable_eq() const{
+  using namespace Eigen;
+  unsigned int NR = this->metaparameters->NR, NS = this->metaparameters->NS;
+  Matrix<ntype, Dynamic, Dynamic> jacob_sym;
+  jacob_sym.resize(NR+NS, NR+NS);
+
+  nmatrix jac_eq = this->jacobian_at_equilibrium();
+  for(size_t i = 0; i < NR+NS; ++i){
+    for(size_t j=0; j < NR+NS; ++j){
+      jacob_sym(i,j) = 0.5*(jac_eq[i][j]+jac_eq[j][i]);
+    }
+  }
+
+  SelfAdjointEigenSolver<Matrix<ntype, Dynamic, Dynamic>> eigensolver(jacob_sym);
+  Matrix<ntype, Dynamic,1> eigvals = eigensolver.eigenvalues();
+
+  ntype min_eigval = std::min(eigvals);
+  ntype max_eigval = std::max(eigvals);
+
+  if(min_eigval > 0.){
+    return false;
+  }
+
+  if(max_eigval < 0.){
+    return true;
+  }
+
+  std::cout << "Could not determine whether or not the system was stable, returning false to make sure" << std::endl;
+  return false;
+  
 }

@@ -3,13 +3,14 @@
 #include <fstream>
 #include <random>
 #include <cmath>
+#include <algorithm>
 
 std::mt19937 random_engine;
 
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
   if(m.verbose > 1){
-    std::cout << "  Loading food matrix from " << m.foodmatrixpath << std::endl;
+    std::cout << "\t Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
   std::ifstream in(m.foodmatrixpath);
   if (!in) {
@@ -118,6 +119,19 @@ ntype mean(const nvector& x){
   return mean;
 }
 
+ntype median(const nvector& x){
+  ntype median = 0.;
+  nvector sort_x = x;
+  std::sort(sort_x.begin(), sort_x.end());
+  unsigned int N = x.size();
+  if(N%2==0){
+    median = 0.5*(sort_x[N/2-1]+sort_x[N/2]);
+  }else{
+    median = sort_x[(N-1)/2];
+  }
+  return median;
+}
+
 ntype standard_dev(const nvector& x){
   ntype std = 0.;
   ntype variance = 0.;
@@ -128,6 +142,16 @@ ntype standard_dev(const nvector& x){
   }
   std=sqrt(variance);
   return std;
+}
+
+ntype angle(const nvector& v1, const nvector& v2){
+  ntype costheta = 0.;
+  costheta = (v1*v2)/(norm(v1)*norm(v2));
+  return acos(costheta);
+}
+
+ntype distance(const nvector& v1, const nvector& v2){
+  return norm(v1-v2);
 }
 
 nvector operator+(const nvector& v1, const nvector& v2){
@@ -155,6 +179,32 @@ nvector operator-(const nvector& v1){
   return opp;
 }
 
+statistics::statistics(const nvector& v){
+  this->mean_ = mean(v);
+  this->std_deviation_ = standard_dev(v);
+  this->median_ = median(v);
+}
+
+statistics::statistics(const statistics & s){
+  this->mean_ = s.mean_;
+  this->std_deviation_=s.std_deviation_;
+  this->median_ = s.median_;
+}
+
+statistics::statistics(){
+  this->mean_ = NULL;
+  this->std_deviation_ = NULL;
+  this->median_ = NULL;
+}
+
 nvector operator-(const nvector& v1, const nvector& v2){
   return v1+(-v2);
+}
+
+ntype operator*(const nvector& v1, const nvector& v2){
+  ntype dot_prod=0.;
+  for(size_t i=0; i < v1.size(); ++i){
+    dot_prod += v1[i]*v2[i];
+  }
+  return dot_prod;
 }

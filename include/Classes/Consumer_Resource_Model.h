@@ -39,7 +39,6 @@ public:
   Dynamical_variables perturb_equilibrium() const;
   void perturb_parameters() const;
   void perturb_parameters(const ntype &) const;
-  Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence) const;
   void save_new_equilibrium(const Extinction&) const;
   double get_m0() const;
   double get_d0() const;
@@ -48,13 +47,19 @@ public:
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
 
+  bool has_linearly_stable_eq() const;
+
   nmatrix get_first_equilibrium() const;
 
   /* returns dynamical variables perturbed away from their equilibrium value*/
   nmatrix perturb_abundances(const ntype& );
 
   /* returns the extinction properties with the initial values of abundances */
-  Extinction evolve_until_equilibrium_from_abundances(const nmatrix& , ntype threshold=1e-8, eqmode eq_mode = oneextinct) const;
+  Extinction evolve_until_equilibrium_from_abundances(const nmatrix& , ntype threshold=1e-9, eqmode eq_mode = oneextinct) const;
+  /* returns the evolution from equilibrium (assumes we are not at equilibrium with R^* and S^*) -> finds the new eq*/
+  Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence) const;
+  /* returns the general extinction properties for the initial values init_val */
+  Extinction evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode) const;
 };
 
 #endif

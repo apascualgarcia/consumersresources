@@ -1,12 +1,11 @@
 #include "../../include/CRModel.h"
 #include <iostream>
-int main(int argc, char * argv[]){
-  Metaparameters metaparams(argc, argv);
-  initialize_random_engine(metaparams);
+int main(){
 
-  stability_metrics stab_metrics = compute_stability_metrics(metaparams);
-  std::cout << "Stability_metrics : " << std::endl;
-  std::cout << " Resilience : " << stab_metrics.resilience.mean << "+/-" << stab_metrics.resilience.std_deviation << std::endl;
+  nvector v1 = {0., 1.};
+  nvector v2 = {1., 0.};
+
+  std::cout << "Angle between v1 and v2 : " << angle(v1, v2) << std::endl;
 
   return 0;
 }

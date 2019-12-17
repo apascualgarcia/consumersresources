@@ -10,7 +10,6 @@
 #include <array>
 #include <math.h>
 
-
 nmatrix CRModel::time_evolution(const Dynamical_variables& init_val, ntype tf) const{
   // evolution contains the state of the system at all times i.e. evolution[0] contains
   // the initial value of the Dynamical_variables init_val; The goal of the algorithm is
@@ -170,29 +169,32 @@ void CRModel::write_time_evolution_until_equilibrium(const Dynamical_variables& 
     }
 
     // stores the mean value over the last ten runs of every resource and consumer
-    if(counts >= 10){
-      double mean_el[p->NR+p->NS];
-      for(size_t i = 0; i < p->NR+p->NS; ++i){
-        mean_el[i] = 0.;
-        for(size_t j = 0; j < 10; ++j){
-          mean_el[i] += previous_y[j][i]/10.;
-        }
-      }
-
-      // computes the "equilibrium coefficient" to estimate
-      eq_coeff = 0.;
-      for(size_t i = 0 ; i < p->NR+p->NS; ++i){
-        eq_coeff += pow(mean_el[i]-y[i], 2.);
-      }
-      eq_coeff = pow(eq_coeff, 0.5);
+    double mean_el[p->NR+p->NS];
+    unsigned int values_to_compare;
+    if(counts>=10){
+      values_to_compare = 10;
+    }else{
+      values_to_compare=counts;
     }
+    for(size_t i = 0; i < p->NR+p->NS; ++i){
+      mean_el[i] = 0.;
+      for(size_t j = 0; j < values_to_compare; ++j){
+        mean_el[i] += previous_y[j][i]/values_to_compare;
+      }
+    }
+    // computes the "equilibrium coefficient" to estimate
+    eq_coeff = 0.;
+    for(size_t i = 0 ; i < p->NR+p->NS; ++i){
+      eq_coeff += pow(mean_el[i]-y[i], 2.);
+    }
+    eq_coeff = pow(eq_coeff, 0.5);
+    std::cout << "/!\ Correct write_time_evolution_until_equilibrium" << std::endl;
     counts += 1;
     myfile << t <<" ";
     for(size_t i = 0; i < p->NR+p->NS; ++i){
       myfile << y[i] << " ";
     }
     myfile << eq_coeff << std::endl;
-
   }
 
   myfile.close();
@@ -203,225 +205,113 @@ void CRModel::write_time_evolution_until_equilibrium(const Dynamical_variables& 
 
   return;
 }
-
-Extinction CRModel::evolve_until_equilibrium(ntype threshold, eqmode eq_mode) const{
-  Metaparameters* p = this->metaparameters;
-  // initialization of the system
-  double t0=0.;
-  double t = t0;
-  double y[p->NR+p->NS];
-  double h = 1e-6;
-  double tmax = double(p->tf);
-
-  for(size_t nu = 0; nu < p->NR; ++nu){
-    y[nu]= (*eq_vals)[0][0][nu];
-  }
-  for(size_t i = 0; i < p->NS; ++i){
-    y[i+p->NR]=(*eq_vals)[0][1][i];
-  }
-
-  // initialization of the integrator
-  size_t dim = p->NR+p->NS;
-  const gsl_odeiv2_step_type* T = gsl_odeiv2_step_rkf45;
-  gsl_odeiv2_step* s = gsl_odeiv2_step_alloc(T, dim);
-  gsl_odeiv2_control* c = gsl_odeiv2_control_y_new(1e-6, 0.0);
-  gsl_odeiv2_evolve* e = gsl_odeiv2_evolve_alloc(dim);
-  gsl_odeiv2_system sys = {ode_equations_of_evolution, NULL, dim, this->model_param->get_parameters()};
-
-  unsigned int counts = 0;
-  double previous_y[10][p->NR+p->NS];
-  double eq_coeff = 1.;
-  bool exit_condition = true;
-  bool one_extinct = false;
-
-  exit_condition = (t>=tmax) or (eq_coeff <= threshold);
-
-  // system temporal evolution
-  while(not(exit_condition)){
-    int status = gsl_odeiv2_evolve_apply(e,c,s, &sys, &t, tmax, &h, y);
-    if (status != GSL_SUCCESS){
-      std::cerr << "Error in the integration of the ODE!" << std::endl;
-      break;
-    }
-
-    if(p->verbose > 3){
-      std::cout << "Population of the system at time t = "<< t << " :" << std::endl;
-      std::cout << "  Resources :";
-      for(size_t nu = 0; nu < p->NR; ++nu){
-        std::cout << " " << y[nu] ;
-      }
-      std::cout << std::endl;
-      std::cout << "  Consumers :";
-      for(size_t i = p->NR; i < p->NR+p->NS; ++i){
-        std::cout << " " << y[i];
-      }
-      std::cout << std::endl;
-    }
-
-    // store the previous ten values to estimate convergence
-    for(size_t i = 0; i < p->NR+p->NS; ++i){
-      previous_y[counts%10][i] = y[i];
-    }
-
-    // stores the mean value over the last ten runs of every resource and consumer
-    if(counts >= 10){
-      double mean_el[p->NR+p->NS];
-      for(size_t i = 0; i < p->NR+p->NS; ++i){
-        mean_el[i] = 0.;
-        for(size_t j = 0; j < 10; ++j){
-          mean_el[i] += previous_y[j][i]/10.;
-        }
-      }
-
-      // computes the "equilibrium coefficient" to estimate
-      eq_coeff = 0.;
-      for(size_t i = 0; i < p->NR+p->NS; ++i){
-        if(y[i] > 0){
-          eq_coeff += pow(mean_el[i]/y[i]-1., 2.);
-        }
-      }
-      eq_coeff = pow(eq_coeff, 0.5)/(p->NR+p->NS);
-    }
-    counts += 1;
-
-    /* if a resource/consumer is too small, we effectively set it to zero */
-    for(size_t i=0; i < p->NR+p->NS and not(one_extinct); ++i){
-      if(y[i] < threshold){
-        y[i]=0.;
-        if(i >= p->NR){
-          one_extinct=true;
-          if(p->verbose > 2){
-            std::cout << " Consumer " << i-p->NR << " went extinct at time t=" << t << std::endl;
-          }
-        }else{
-          if(p->verbose > 2){
-            std::cout << " Species " << i << " went extinct at time t=" << t << std::endl;
-          }
-        }
-        }
-    }
-
-    exit_condition = (t>=tmax) or (eq_coeff <= threshold);
-    if(eq_mode == oneextinct){
-      exit_condition = exit_condition or one_extinct;
-    }
-  }
-
-  if(this->metaparameters->verbose>1){
-    if(eq_mode == oneextinct){
-      std::cout << " Time to get to equilibrium : " << t ;
-      std::cout << " (";
-      if(one_extinct){
-        std::cout << "observed at least one extinction";
-      }else if(t >= tmax){
-        std::cout << "reached max time integration";
-      }else if(eq_coeff <= threshold){
-        std::cout << "convergence observed";
-      }
-      std::cout << ")" << std::endl;
-    }else if(eq_mode == convergence){
-      std::cout << " Time to get convergence on all the resources/consumers time lines : " << t << std::endl;
-    }
-  }
-
-  /*  At the end of the integration, we compute how many species went extinct
-      This should be one if eq_mode is oneextinct (except if two species or more
-      are deemed extinct at the same time) */
-  unsigned int extinct(0);
-  for(size_t i = p->NR; i < p->NR+p->NS; ++i){
-    if(y[i] < threshold){
-      extinct += 1;
-    }
-  }
-
-  nvector new_R, new_S;
-  for(size_t nu = 0; nu < p->NR; ++nu){
-    new_R.push_back(y[nu]);
-  }
-  for(size_t i = p->NR; i < p->NR+p->NS; ++i){
-    new_S.push_back(y[i]);
-  }
-
-  gsl_odeiv2_evolve_free(e);
-  gsl_odeiv2_control_free(c);
-  gsl_odeiv2_step_free(s);
-
-  Extinction to_return = {t,ntype(extinct), new_R, new_S};
-  return to_return;
-}
-
-Extinction CRModel::evolve_until_equilibrium_from_abundances(const nmatrix& init_val, ntype threshold, eqmode eq_mode) const{
+Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode) const{
   Metaparameters* p = this->metaparameters;
   /* initialization of the system */
   double t0=0.;
   double t = t0;
   double y[p->NR+p->NS];
-  double h = 1e-6;
+  double step_size = 1e-6;
   double tmax = double(p->tf);
 
-  nmatrix old_eq = this->get_first_equilibrium();
+  nvector old_R = init_val[0];
+  nvector old_S = init_val[1];
 
   for(size_t nu = 0; nu < p->NR; ++nu){
-    y[nu]= init_val[0][nu];
+    y[nu]= old_R[nu];
   }
   for(size_t i = 0; i < p->NS; ++i){
-    y[i+p->NR]=init_val[1][i];
+    y[i+p->NR]=old_S[i];
   }
 
   /* initialization of the integrator */
   size_t dim = p->NR+p->NS;
+  /* we choose an adaptative step for a rk order 4 scheme */
   const gsl_odeiv2_step_type* T = gsl_odeiv2_step_rkf45;
   gsl_odeiv2_step* s = gsl_odeiv2_step_alloc(T, dim);
-  gsl_odeiv2_control* c = gsl_odeiv2_control_y_new(1e-6, 0.0);
+  gsl_odeiv2_control* c = gsl_odeiv2_control_y_new(INTEGRATOR_ABS_PRECISION, INTEGRATOR_REL_PRECISION);
   gsl_odeiv2_evolve* e = gsl_odeiv2_evolve_alloc(dim);
   gsl_odeiv2_system sys = {ode_equations_of_evolution, NULL, dim, this->model_param->get_parameters()};
 
   unsigned int counts = 0;
   double previous_y[10][p->NR+p->NS];
+  double diff[10][p->NR+p->NS];
   double eq_coeff = 1.;
-  bool exit_condition = true;
+  bool exit_condition = false;
   bool one_extinct = false;
+  /* if it turns out that the system was ALREADY at equilibrium, we will return 0 as the final time */
+  bool started_at_equilibrium = false;
+  std::vector<unsigned int> extinct_variables;
+  double t_eq = 0.;
 
-  exit_condition = (t>=tmax) or (eq_coeff <= threshold);
+  exit_condition = (t>=tmax) or (eq_coeff <= threshold) or started_at_equilibrium;
 
-  // system temporal evolution
+  /* system temporal evolution */
   while(not(exit_condition)){
-    int status = gsl_odeiv2_evolve_apply(e,c,s, &sys, &t, tmax, &h, y);
+
+    /* store the previous ten values to estimate convergence */
+    for(size_t i = 0; i < p->NR+p->NS; ++i){
+      previous_y[counts%10][i] = y[i];
+    }
+
+    /* evolve the system to the next state */
+    int status = gsl_odeiv2_evolve_apply(e,c,s, &sys, &t, tmax, &step_size, y);
     if (status != GSL_SUCCESS){
       std::cerr << "Error in the integration of the ODE!" << std::endl;
+      abort();
       break;
     }
 
+    /* we then compute the differences between this step and the previous one to check if we started already at equilibrium */
+    if(counts <=10){
+      for(size_t i=0; i < p->NR+p->NS; ++i){
+        diff[counts%10][i] = y[i]-previous_y[counts%10][i];
+      }
+    }
+    /* after ten counts we check whether the system was de facto at equilibrium */
+    if(counts==10){
+      started_at_equilibrium = true;
+      for(size_t j=0; j < 10 and started_at_equilibrium; ++j){
+        for(size_t k=0; (k < p->NR+p->NS) and started_at_equilibrium; ++k){
+          double difference = abs(diff[j][k]);
+          if(difference> INTEGRATOR_ABS_PRECISION){
+            started_at_equilibrium = false;
+          }
+        }
+      }
+      if(started_at_equilibrium and p->verbose > 3){
+        std::cout << "\t \t \t It turns out the system was already at equilibrium!" << std::endl;
+      }
+    }
+
+    /* displays the values if asked */
     if(p->verbose > 3){
-      std::cout << "Population of the system at time t = "<< t << " :" << std::endl;
-      std::cout << "  Resources :";
+      std::cout << "\t \t \t Population of the system at time t = "<< t << " :" << std::endl;
+      std::cout << "\t \t \t Resources :";
       for(size_t nu = 0; nu < p->NR; ++nu){
         std::cout << " " << y[nu] ;
       }
       std::cout << std::endl;
-      std::cout << "  Consumers :";
+      std::cout << "\t \t \t Consumers :";
       for(size_t i = p->NR; i < p->NR+p->NS; ++i){
         std::cout << " " << y[i];
       }
       std::cout << std::endl;
     }
 
-    // store the previous ten values to estimate convergence
-    for(size_t i = 0; i < p->NR+p->NS; ++i){
-      previous_y[counts%10][i] = y[i];
-    }
-
-    // stores the mean value over the last ten runs of every resource and consumer
-    if(counts >= 10){
+    /* if counts >= 10, stores the mean value over the last ten runs of every resource and consumer */
+    /* this is done in order to compute the convergence coefficient */
+    if(counts>=10){
       double mean_el[p->NR+p->NS];
+      unsigned int values_to_compare=10;
       for(size_t i = 0; i < p->NR+p->NS; ++i){
         mean_el[i] = 0.;
-        for(size_t j = 0; j < 10; ++j){
-          mean_el[i] += previous_y[j][i]/10.;
+        for(size_t j = 0; j < values_to_compare; ++j){
+          mean_el[i] += previous_y[j][i]/values_to_compare;
         }
       }
 
-      // computes the "equilibrium coefficient" to estimate
+      /* computes the "convergence coefficient" to estimate */
       eq_coeff = 0.;
       for(size_t i = 0; i < p->NR+p->NS; ++i){
         if(y[i] > 0){
@@ -430,34 +320,67 @@ Extinction CRModel::evolve_until_equilibrium_from_abundances(const nmatrix& init
       }
       eq_coeff = pow(eq_coeff, 0.5)/(p->NR+p->NS);
     }
-    counts += 1;
 
     /* if a resource/consumer is too small, we effectively set it to zero */
-    for(size_t i=0; i < p->NR+p->NS and not(one_extinct); ++i){
+    bool local_exit = false;
+    for(size_t i=0; i < p->NR+p->NS and not(local_exit); ++i){
       if(y[i] < threshold){
         y[i]=0.;
+        bool already_extinct;
+        /* check if species is already extinct */
+        if(std::find(extinct_variables.begin(), extinct_variables.end(), i) != extinct_variables.end()){
+          /* in that case the species is already extinct */
+          already_extinct = true;
+        }else{
+          extinct_variables.push_back(i);
+          already_extinct = false;
+        }
         if(i >= p->NR){
           one_extinct=true;
+          if(eq_mode==oneextinct){
+            local_exit=true;
+          }
           if(p->verbose > 2){
-            std::cout << " Consumer " << i-p->NR << " went extinct at time t=" << t << std::endl;
+            if(not(already_extinct)){
+              std::cout << "\t \t Consumer " << i-p->NR << " went extinct at time t=" << t << std::endl;
+            }
+            if(eq_mode==oneextinct){
+              std::cout << "\t \t Stopped calculating who goes extinct since we found one consumer extinct " <<std::endl;
+            }
           }
         }else{
           if(p->verbose > 2){
-            std::cout << " Species " << i << " went extinct at time t=" << t << std::endl;
+            if(not(already_extinct)){
+              std::cout << "\t \t Species " << i << " went extinct at time t=" << t << std::endl;
+            }
+            if(eq_mode==oneextinct){
+              std::cout << "\t \t Stopped calculating who goes extinct since we found one resource extinct " <<std::endl;
+            }
           }
         }
         }
     }
 
-    exit_condition = (t>=tmax) or (eq_coeff <= threshold);
+    /* let's not forget to add a count since we did a whole step */
+    counts += 1;
+
+    /* we check whether we should continue integrating or not */
+    exit_condition = (t>=tmax) or (eq_coeff <= threshold) or started_at_equilibrium;
     if(eq_mode == oneextinct){
       exit_condition = exit_condition or one_extinct;
     }
   }
 
+  if(not(started_at_equilibrium)){
+    t_eq = t;
+  }else{
+    t_eq = 0.;
+  }
+
+
   if(this->metaparameters->verbose>1){
     if(eq_mode == oneextinct){
-      std::cout << " Time to get to equilibrium : " << t ;
+      std::cout << "\t Time to get to equilibrium : " << t ;
       std::cout << " (";
       if(one_extinct){
         std::cout << "observed at least one extinction";
@@ -468,7 +391,7 @@ Extinction CRModel::evolve_until_equilibrium_from_abundances(const nmatrix& init
       }
       std::cout << ")" << std::endl;
     }else if(eq_mode == convergence){
-      std::cout << " Time to get convergence on all the resources/consumers time lines : " << t << std::endl;
+      std::cout << "\t Time to get convergence on all the resources/consumers time lines : " << t << std::endl;
     }
   }
 
@@ -494,7 +417,13 @@ Extinction CRModel::evolve_until_equilibrium_from_abundances(const nmatrix& init
   gsl_odeiv2_control_free(c);
   gsl_odeiv2_step_free(s);
 
-  Extinction to_return = {t,ntype(extinct), new_R, new_S, old_eq[0], old_eq[1]};
+  Extinction to_return = {t_eq,ntype(extinct), new_R, new_S, old_R, old_S};
   return to_return;
+}
 
+Extinction CRModel::evolve_until_equilibrium(ntype threshold, eqmode eq_mode) const{
+  return evolve_until_equilibrium_general((*eq_vals)[0],threshold, eq_mode);
+}
+Extinction CRModel::evolve_until_equilibrium_from_abundances(const nmatrix& init_val, ntype threshold, eqmode eq_mode) const{
+  return evolve_until_equilibrium_general(init_val, threshold, eq_mode);
 }

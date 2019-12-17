@@ -261,6 +261,9 @@ statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double &
       abort();
       break;
   }
-  statistics delta = {estimate, error, NULL};
+  statistics delta;
+  delta.mean_ = estimate;
+  delta.std_deviation_ = error;
+  delta.median_ = NULL;
   return delta;
 }
