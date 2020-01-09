@@ -16,9 +16,11 @@ private:
   Model_parameters* model_param;
 
 public:
+  CRModel();
   CRModel(Metaparameters&);
   CRModel(const foodmatrix&, Metaparameters&);
   CRModel(Model_parameters*);
+  void attempt_to_build_model();
   nvector equations_of_evolution(const Dynamical_variables&) const; // returns the value of the RHS of the equations of evolution
   nmatrix jacobian_at_equilibrium() const;
   ncvector eigenvalues_at_equilibrium() const;

@@ -5,17 +5,24 @@
 #include <Eigen/Eigenvalues>
 #include <algorithm>
 
-CRModel::CRModel(Model_parameters* mod_params){
+/*  default constructor, every pointer is initialized to NULL */
+CRModel::CRModel(){
+  this->metaparameters = NULL;
+  this->eq_vals = NULL;
+  this->model_param = NULL;
+  return;
+}
+
+
+CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
-  eq_vals=NULL;
-  metaparameters=NULL;
   return;
 }
 CRModel::CRModel(Metaparameters& meta){
   foodmatrix food_matrix = load_food_matrix(meta);
   *this = CRModel::CRModel(food_matrix, meta);
 }
-CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
+CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):CRModel(){
   unsigned int attempts(0);
   this->model_param = new Model_parameters();
   Parameter_set* p = model_param->get_parameters();
@@ -23,6 +30,7 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
   do{
     attempts+=1;
 
+    /* first find the values for the equilibria */
     nvector Req = build_resources(meta);
     nvector Seq = build_consumers(meta);
 
@@ -99,6 +107,11 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
 
   return;
 }
+
+void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta){
+
+}
+
 nvector CRModel::equations_of_evolution(const Dynamical_variables& dyn_var) const{
   nvector v;
   const Parameter_set* p = this->model_param->get_parameters();
