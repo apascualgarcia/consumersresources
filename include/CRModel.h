@@ -21,6 +21,10 @@
 #include "Functions/equilibrium_study.h"
 
 
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_math.h>
+
+
 #include<limits>
 const unsigned int print_precision = 4;
 const ntype EIGENSOLVER_PRECISION = 1e-15;

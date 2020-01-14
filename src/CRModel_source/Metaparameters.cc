@@ -41,5 +41,48 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   if(this->verbose > 0){
     std::cout << "Loading metaparameters from " << inputPath << std::endl;
   }
+  initialize_random_engine(*this);
+
   return;
+}
+
+ntype Metaparameters::physical_maximum_alpha0() const{
+  ntype maxa0=0.;
+
+  maxa0 = (1+this->epsilon)*(1+this->epsilon)/(1-this->epsilon);
+  maxa0 *= (1-(1-this->epsilon)*this->sigma0);
+  maxa0 *= this->NR*this->gamma0*this->R0;
+
+  return maxa0;
+}
+
+ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
+  ntype alpha_max =0.;
+  gsl_function F;
+  Metaparameters meta = *this;
+
+  Solver_Parameters solv;
+  solv.metaparameters = &meta;
+  solv.Nsimul=1000;
+  solv.target=0.95;
+
+  F.function = &function_proba_feasability_solver;
+  F.params = &solv;
+
+  /* we first find the alpha_max for which the feasability probability is roughly 0.98 */
+  alpha_max = find_zero(&F, this->verbose, interval(0, this->physical_maximum_alpha0()));
+  meta.alpha0 = alpha_max;
+
+  /*  we take a tiny step back and wait for the first alpha which is = 1
+      this works because we know the shape of the feasability vs alpha curve */
+  while(find_feasability_probability(meta) < 1.){
+    alpha_max -= alpha_accuracy;
+    meta.alpha0=alpha_max;
+  }
+
+  if(this->verbose > 0){
+    std::cout << "Maximum feasible alpha0 for " << this->foodmatrixpath << " is " << alpha_max << std::endl;
+  }
+
+  return alpha_max;
 }

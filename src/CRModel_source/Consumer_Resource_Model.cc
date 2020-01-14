@@ -13,87 +13,19 @@ CRModel::CRModel(){
   return;
 }
 
-
 CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
 }
-CRModel::CRModel(Metaparameters& meta){
-  foodmatrix food_matrix = load_food_matrix(meta);
-  *this = CRModel::CRModel(food_matrix, meta);
-}
-CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):CRModel(){
-  unsigned int attempts(0);
-  this->model_param = new Model_parameters();
-  Parameter_set* p = model_param->get_parameters();
 
+CRModel::CRModel(Metaparameters& meta){
+  unsigned int attempts(0);
+  this->create_model_parameters(meta);
   do{
     attempts+=1;
-
-    /* first find the values for the equilibria */
-    nvector Req = build_resources(meta);
-    nvector Seq = build_consumers(meta);
-
-    this->eq_vals = new ntensor();
-    nmatrix equilibria;
-    equilibria.push_back(Req);
-    equilibria.push_back(Seq);
-    eq_vals->push_back(equilibria);
-
-    p->NR = meta.NR;
-    p->NS = meta.NS;
-
-    // first sigma, Req, Seq are drawn randomly
-    p->sigma=build_sigma(meta);
-
-    // then we build gamma according to the food matrix
-    p->gamma=build_gamma(F,meta);
-
-    // then we build alpha according to the other parameters
-    p->alpha=build_alpha(p, meta, Req, attempts);
-    p->tau = build_tau(p, meta, attempts);
-
-    // d is then set
-    nvector d;
-    for (size_t i=0; i < meta.NS; ++i){
-      ntype result = 0.;
-      for (size_t mu =0 ; mu < meta.NR; ++mu){
-        result+=(p->sigma)[i][mu]*(p->gamma)[i][mu]*Req[mu]-(p->tau)[mu][i];
-      }
-      d.push_back(result);
-    }
-    p->d = d;
-
-    // still have to set l and m
-    nvector l, m;
-    l = build_l(meta);
-    for(size_t nu=0; nu < p->NR; ++nu){
-      ntype C = 0.;
-      for(size_t j = 0; j < p->NS; ++j){
-        C+=(p->alpha[nu][j]*Seq[j]-p->gamma[j][nu]*Req[nu]*Seq[j]);
-      }
-      m.push_back(ntype(l[nu]+C)/Req[nu]);
-    }
-
-    // std::exponential_distribution<ntype> exp_distrib(1.);
-    // for(size_t nu = 0; nu < p->NR; ++nu){
-    //   ntype  C = 0.;
-    //   for(size_t j = 0; j < p->NS; ++j){
-    //     C+= (p->alpha[nu][j]-p->gamma[j][nu]*Req[nu])*Seq[j];
-    //   }
-    //   if(C > 0.){
-    //     l.push_back(exp_distrib(random_device));
-    //   }else{
-    //     l.push_back(exp_distrib(random_device) - C);
-    //   }
-    //   m.push_back(ntype(l[nu]+C)/Req[nu]);
-    // }
-
-    p->l = l;
-    p->m = m;
+    this->attempt_to_build_model(load_food_matrix(meta), meta, attempts);
   }while(not(this->constraints_fulfilled(meta)));
 
-  this->metaparameters = &meta;
   if(meta.verbose > 1){
     std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
     if(attempts > meta.nb_attempts){
@@ -104,13 +36,99 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):CRModel(){
     std::cout << std::endl;
   }
 
+  return;
+}
+
+CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
+  unsigned int attempts(0);
+  this->create_model_parameters(meta);
+  do{
+    attempts+=1;
+    this->attempt_to_build_model(F, meta, attempts);
+  }while(not(this->constraints_fulfilled(meta)));
+
+  if(meta.verbose > 1){
+    std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
+    if(attempts > meta.nb_attempts){
+      std::cout << "\t The metaparameters had to be changed.";
+    }else{
+      std::cout << "It was possible to use the initial metaparameters.";
+    }
+    std::cout << std::endl;
+  }
+  return;
+}
+
+CRModel::~CRModel(){
+  delete this->model_param;
+  delete this->eq_vals;
+  return;
+}
+
+void CRModel::create_model_parameters(Metaparameters& meta){
+  this->model_param = new Model_parameters();
+  this->eq_vals = new ntensor();
+  this->metaparameters = &meta;
+  return;
+}
+
+void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
+
+  Parameter_set* p = this->model_param->get_parameters();
+
+  /* first find the values for the equilibria */
+  nvector Req = build_resources(meta);
+  nvector Seq = build_consumers(meta);
+
+  nmatrix equilibria;
+  equilibria.push_back(Req);
+  equilibria.push_back(Seq);
+
+  ntensor equilibria_vals;
+  equilibria_vals.push_back(equilibria);
+
+  *(this->eq_vals) = equilibria_vals;
+
+  p->NR = meta.NR;
+  p->NS = meta.NS;
+
+  /* first sigma, Req, Seq are drawn randomly */
+  p->sigma = build_sigma(meta);
+
+  /* then we build gamma according to the food matrix */
+  p->gamma = build_gamma(F,meta);
+
+  /* then we build alpha according to the other parameters */
+  p->alpha = build_alpha(p, meta, Req, attempts);
+  p->tau = build_tau(p, meta, attempts);
+
+  /* d is then set */
+  nvector d;
+  for (size_t i=0; i < meta.NS; ++i){
+    ntype result = 0.;
+    for (size_t mu =0 ; mu < meta.NR; ++mu){
+      result+=(p->sigma)[i][mu]*(p->gamma)[i][mu]*Req[mu]-(p->tau)[mu][i];
+    }
+    d.push_back(result);
+  }
+  p->d = d;
+
+  /* still have to set l and m */
+  nvector l, m;
+  l = build_l(meta);
+  for(size_t nu=0; nu < p->NR; ++nu){
+    ntype C = 0.;
+    for(size_t j = 0; j < p->NS; ++j){
+      C+=(p->alpha[nu][j]*Seq[j]-p->gamma[j][nu]*Req[nu]*Seq[j]);
+    }
+    m.push_back(ntype(l[nu]+C)/Req[nu]);
+  }
+  p->l = l;
+  p->m = m;
 
   return;
 }
 
-void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta){
-
-}
 
 nvector CRModel::equations_of_evolution(const Dynamical_variables& dyn_var) const{
   nvector v;
@@ -243,6 +261,7 @@ bool CRModel::constraints_fulfilled(const Metaparameters& m) const{
   }
   return true;
 }
+
 bool CRModel::energy_constraint() const{
   Parameter_set* p = this->model_param->get_parameters();
   for(size_t j = 0 ; j < this->eq_vals->size();++j){

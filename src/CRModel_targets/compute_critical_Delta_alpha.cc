@@ -9,7 +9,6 @@ using namespace std;
 
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
-  initialize_random_engine(metaparams);
 
   vector<ntype> alpha_vals;
   std::ifstream in(metaparams.foodmatrixpath);

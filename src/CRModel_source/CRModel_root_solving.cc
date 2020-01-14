@@ -11,13 +11,14 @@ statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, sta
   delta_solver solv_params = {fitmode(sigmoidal), metaparams.equilibrium, stab_mode};
   return compute_critical_Delta(metaparams, accuracy, solv_params);
 }
-nvector find_rough_interval_polynomial_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose){
+
+nvector find_rough_interval_polynomial_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose, interval bounds){
   nvector interval;
 
   const gsl_root_fsolver_type *T;
   gsl_root_fsolver* s;
 
-  double x_lo = 0., x_hi =1., r=0.1;
+  double x_lo = bounds.begin, x_hi =bounds.end, r=0.1;
   int status;
   int iter = 0;
 
@@ -48,44 +49,45 @@ nvector find_rough_interval_polynomial_fit(gsl_function* f, unsigned int Npoints
   }
   return interval;
 }
-nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose){
-  nvector interval;
+nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose, interval bounds){
+  nvector rough_interval;
   Solver_Parameters* s = (Solver_Parameters*) f->params;
   double initial_target = s->target;
 
   /* the idea is to find the first point x0 such that f(x0) > 0. It will be taken as the start of the interval */
   if(verbose > 0){
-    std::cout << "We look for a low point such that we have a non-zero chance of observing an extinction." << std::endl;
+    std::cout << "We look for a point slightly above zero." << std::endl;
   }
   s->target = 0.01;
-  double x_lo = find_zero(f, Npoints, verbose);
+  double x_lo = find_zero(f, verbose, bounds);
 
   /* we then find a second point such that f(x1) < 1. It will be taken as the end of the interval */
   if(verbose > 0){
-    std::cout << "We then look for a high point such that we will not always observe at least an extinction" << std::endl;
+    std::cout << "We then look for a high point slightly below one." << std::endl;
   }
   s->target = 0.8;
-  double x_hi = find_zero(f, Npoints, verbose);
+  double x_hi = find_zero(f, verbose, bounds);
 
   /* we do not forget to set the target back to its initial value */
   s->target = initial_target;
-
+  interval r_interval(x_lo, x_hi);
   if(verbose > 0){
-    std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
+    std::cout << "Found an interval for the critical value :" << r_interval<< std::endl;
   }
 
   for(size_t i = 0; i < Npoints; ++i){
-    interval.push_back(x_lo + i*(x_hi-x_lo)/(Npoints-1.));
+    rough_interval.push_back(r_interval.begin + i*(r_interval.end-r_interval.begin)/(Npoints-1.));
   }
-  return interval;
+  return rough_interval;
 }
-double find_zero(gsl_function* f, unsigned int Npoints, unsigned int verbose){
+
+double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
   double estimate = 0.;
 
   const gsl_root_fsolver_type *T;
   gsl_root_fsolver* s;
 
-  double x_lo = 0., x_hi =1., r=0.05;
+  double x_lo = bounds.begin, x_hi = bounds.end, r=0.05;
   double tolerance = 0.05;
   int status;
   int iter = 0;
@@ -109,14 +111,18 @@ double find_zero(gsl_function* f, unsigned int Npoints, unsigned int verbose){
   gsl_root_fsolver_free(s);
   return estimate;
 }
-nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose, fitmode fit_mode){
+nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose, fitmode fit_mode, interval bounds){
   switch(fit_mode){
     case polynomial:
-      return find_rough_interval_polynomial_fit(f, Npoints, verbose);
+      return find_rough_interval_polynomial_fit(f, Npoints, verbose, bounds);
       break;
 
     case sigmoidal:
-      return find_rough_interval_sigmoidal_fit(f, Npoints, verbose);
+      return find_rough_interval_sigmoidal_fit(f, Npoints, verbose, bounds);
+      break;
+
+    case sigmoidal_erf:
+      return find_rough_interval_sigmoidal_fit(f, Npoints, verbose, bounds);
       break;
 
     default:
@@ -131,6 +137,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, del
   unsigned int Nsimul_srun;
   size_t interval_length;
   double target;
+  interval initial_guess(0., 1.);
 
   /* tells what is the target for the function we want to solve */
   switch(delta_solv.eq_mode){
@@ -183,7 +190,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, del
     std::cout << "We first find a rough interval where we know the critical delta will lie ("<<params.Nsimul << " runs per point). " << std::endl;
   }
 
-  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose, delta_solv.fit_mode);
+  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose, delta_solv.fit_mode, initial_guess);
 
   /* when we have found an interval we highly suspect of containing the root
     we compute the average number of extinctions at a better accuracy for the points
@@ -211,6 +218,53 @@ statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, del
   statistics delta_crit = estimate_delta_crit_from_interval(interval, function_y_values, metaparams, delta_solv);
   return delta_crit;
 }
+statistics compute_critical_alpha(Metaparameters& metaparams, ntype accuracy, fitmode fit_mode){
+  statistics critical_alpha;
+  double target=0.;
+  unsigned int Nsimul_frun = 100, Nsimul_srun = 1000;
+  size_t interval_length = 50;
+  interval initial_guess(0., metaparams.physical_maximum_alpha0());
+
+  Solver_Parameters params;
+  params.metaparameters = &metaparams;
+  params.Nsimul = Nsimul_frun;
+  params.target = target;
+
+  gsl_function F;
+  F.function = &function_proba_feasability_solver;
+  F.params = &params;
+
+  if(metaparams.verbose > 0){
+    std::cout << "Now attempting to find the critical alpha for the following set of parameters : " << metaparams << std::endl;
+    std::cout << "We first find a rough interval where we know the critical alpha will lie ("<<params.Nsimul << " runs per point). " << std::endl;
+  }
+  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose, fit_mode, initial_guess);
+  /* when we have found an interval we highly suspect of containing the root
+    we compute the feasability probability at a better accuracy for the points
+    in the interval */
+  params.Nsimul=Nsimul_srun;
+
+  nvector function_y_values;
+  if(metaparams.verbose > 0){
+    std::cout << "Now computing the feasability probability for different alpha, ";
+    std::cout << interval_length << " points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
+  }
+
+  for(size_t i=0; i < interval_length; ++i){
+    double result = function_proba_feasability_solver(interval[i], &params);
+    function_y_values.push_back(result);
+  }
+
+  std::cout << "Interval for alpha0's " << interval << std::endl;
+  std::cout << "Corresponding proba : " << function_y_values << std::endl;
+
+
+  /* after getting these ten points, we fit them with a curve of a given shape,
+   that allows us to estimate the critical alpha */
+  critical_alpha = estimate_alpha_crit_from_interval(interval, function_y_values, metaparams, fit_mode);
+  return critical_alpha;
+}
+
 
 double function_av_extinct_solver(double delta, void*params){
   Solver_Parameters* s = (Solver_Parameters*) params;
@@ -231,8 +285,17 @@ double function_av_extinct_solver(double delta, void*params){
       abort();
       break;
   }
-
 }
+double function_proba_feasability_solver(double alpha, void* params){
+  Solver_Parameters* s = (Solver_Parameters*) params;
+  Metaparameters* m = s->metaparameters;
+  m->alpha0 = alpha;
+  unsigned int Nsimul = s->Nsimul;
+  double target = s->target;
+
+  return find_feasability_probability(*m, Nsimul)-target;
+}
+
 statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, delta_solver delta_solv){
   double estimate = 0., error = 0.;
   if(m.verbose > 0){
@@ -249,6 +312,10 @@ statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double &
       estimate = gsl_vector_get(fit_parameters.fit_parameters,0);
       error = gsl_vector_get(fit_parameters.error, 0);
       break;
+    case sigmoidal_erf:
+      estimate = gsl_vector_get(fit_parameters.fit_parameters,0);
+      error = gsl_vector_get(fit_parameters.error, 0);
+
     case polynomial:
       std::cerr << "PLEASE IMPLEMENT THE FUNCTION TO SOLVE FOR DELTA WITH POLYNOMIAL FIT" << std::endl;
       std::cerr << "Aborting the simulation now";

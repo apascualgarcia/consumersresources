@@ -1,6 +1,24 @@
 #include "../../include/CRModel.h"
 #include <gsl/gsl_statistics.h>
 
+
+ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nruns){
+  foodmatrix F = load_food_matrix(metaparams);
+  ntype proba = 0.;
+  CRModel model;
+  model.create_model_parameters(metaparams);
+  for(size_t j=0; j < Nruns;++j){
+    model.attempt_to_build_model(F, metaparams, 0);
+    if(model.constraints_fulfilled(metaparams)){
+      proba+=1./Nruns;
+    }
+  }
+  if(metaparams.verbose > 1){
+    std::cout << "The probability of feasability for alpha0 = " << metaparams.alpha0 << " is " << proba << std::endl;
+  }
+  return proba;
+}
+
 Extinction_statistics compute_average_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
   ntype convergence_threshold = 1e-6;
   Extinction_statistics av_extinct;

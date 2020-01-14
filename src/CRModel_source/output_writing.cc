@@ -11,7 +11,8 @@ std::ostream& operator<<(std::ostream& os, const Metaparameters& m){
   os << "R0 = " << m.R0 << "; ";
   os << "S0 = " << m.S0 << "; ";
   os << "NR = " << m.NR << "; ";
-  os << "NS = " << m.NS ;
+  os << "NS = " << m.NS  << "; ";
+  os << "matrix path = " << m.foodmatrixpath ;
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nctype& number){
@@ -111,6 +112,29 @@ std::ostream& operator<<(std::ostream& os, const stabilitymode& stab){
       break;
     }
     default:
+      break;
+  }
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const interval & interval_){
+  os <<  "[" << interval_.begin << ";" << interval_.end << "]";
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const fitmode & fit){
+  switch(fit){
+    case sigmoidal:
+      os << "sigmoidal";
+      break;
+    case sigmoidal_erf:
+      os << "sigmoidal erf";
+      break;
+    case polynomial:
+      os << "polynomial";
+      break;
+    default:
+      os << "unknown fit";
       break;
   }
   return os;

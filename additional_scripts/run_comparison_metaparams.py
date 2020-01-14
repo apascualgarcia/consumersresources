@@ -6,6 +6,7 @@ from separate_file import separate_file, remove_files
 config_file = sys.argv[1]
 m_list = sys.argv[2]
 cores = int(sys.argv[3])
+command = sys.argv[4]
 
 with open('./config/' + config_file + '.in') as f:
     mylist = f.read().splitlines()
@@ -14,7 +15,7 @@ seed_number = 0
 for i in range(0, cores):
     cmd_core = 'nohup '
     for config in mylist:
-        cmd_core += './build/compute_critical_Delta_matrices '
+        cmd_core += (command + ' ')
         cmd_core += 'config/' + config + '.in'
         cmd_core += " path_to_food_matrix=" + \
             matrix_list[i]
@@ -33,5 +34,6 @@ for i in range(0, cores):
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
     cmd_write = '[' + dt_string + '] ' + cmd_core
     cmd_write = 'echo "' + cmd_write + '" >> logs/commands.log'
-    os.system(cmd_write)
+    cmd_write += '& echo $! > /tmp/pid'
+    #os.system(cmd_write)
 print("Launched the commands in the background, please check the appropriate logs to see the progress")

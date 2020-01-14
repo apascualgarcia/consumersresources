@@ -103,6 +103,9 @@ bool non_neg_elements(const nvector& v){
 
 void initialize_random_engine(const Metaparameters& m){
   random_engine.seed(m.seed_number);
+  if(m.verbose > 0){
+    std::cout << "Initiated random engine with seed " << m.seed_number << std::endl;
+  }
   return;
 }
 void print_rand_number(){

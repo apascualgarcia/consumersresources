@@ -3,6 +3,7 @@
 
 #include "Classes/Custom_types.h"
 #include "Classes/Metaparameters.h"
+#include <gsl/gsl_math.h>
 
 struct Solver_Parameters{
   // these dictate the values we will take for compute_average_extinction
@@ -24,5 +25,6 @@ struct delta_solver{
   eqmode eq_mode;
   stabilitymode stab_mode;
 };
+
 
 #endif

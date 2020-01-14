@@ -8,8 +8,8 @@ from mpl_toolkits import mplot3d
 # # rc('font',**{'family':'serif','serif':['Palatino']})
 # rc('text', usetex=False)
 
-folder = './data_output/data_output_alberto_13Jan'
-filename = 'configuration_comparison_NR25_NS25_s05_a0_matrix_list_NR25_NS25_combined'
+folder = './data_output'
+filename = 'test'
 save_folder = './plots'
 save_name = filename
 title = r'Nr25_Nc25_Nest0.3_Conn0.1296 (1000 runs per point)'
@@ -22,7 +22,7 @@ errorbar = 'no_errorbar'
 matrices_folder = './matrices/Nr25_Nc25'
 
 not_all_conn = True
-target_conn = [0.08, 0.23, 0.33]
+target_conn = [0.08]
 
 not_all_nest = True
 target_nest = [0.1, 0.3, 0.5]
@@ -96,18 +96,18 @@ for i in range(len(sorted_size)):
     for conn in target_connectance:
         nest = np.array([data[i, 0]
                          for i in range(len(data)) if data[i, 1] == conn])
-        dcrit = np.array([[data[i, 2], data[i,3]]
+        acrit = np.array([[data[i, 2], data[i,3]]
                           for i in range(len(data)) if data[i, 1] == conn])
         indices = np.argsort(nest)
-        sorted_dcrit = np.array([dcrit[i,0] for i in indices])
-        sorted_dcrit_error = np.array([dcrit[i,1] for i in indices])
+        sorted_acrit = np.array([acrit[i,0] for i in indices])
+        sorted_acrit_error = np.array([acrit[i,1] for i in indices])
         sorted_nest = np.sort(nest)
-        ax1.errorbar(x=sorted_nest, y=sorted_dcrit, yerr=sorted_dcrit_error, fmt='+-', linestyle='dotted',
+        ax1.errorbar(x=sorted_nest, y=sorted_acrit, yerr=sorted_acrit_error, fmt='+-', linestyle='dotted',
                   label=r'Connectance $\approx$' + str(conn), markersize=markersize, markeredgewidth=markeredgewidth,
                   elinewidth=error_bar_width, capsize=cap_width)
     ax1.set_title(r'$N_R=$' + str(NR) + r', $N_S=$' + str(NS))
     ax1.set_xlabel(r'Nestedness', fontsize=fs)
-    ax1.set_ylabel(r'$\Delta^*$', fontsize=fs)
+    ax1.set_ylabel(r'$\alpha^*$', fontsize=fs)
     ax1.legend()
     fig1.savefig(save_string1+'.pdf')
 
@@ -116,18 +116,18 @@ for i in range(len(sorted_size)):
     for nest in target_nestedness:
         conn = np.array([data[i, 1]
                          for i in range(len(data)) if data[i, 0] == nest])
-        dcrit = np.array([[data[i, 2], data[i,3]]
+        acrit = np.array([[data[i, 2], data[i,3]]
                           for i in range(len(data)) if data[i, 0] == nest])
         indices = np.argsort(conn)
-        sorted_dcrit = np.array([dcrit[i,0] for i in indices])
-        sorted_dcrit_error = np.array([dcrit[i,1] for i in indices])
+        sorted_acrit = np.array([acrit[i,0] for i in indices])
+        sorted_acrit_error = np.array([acrit[i,1] for i in indices])
         sorted_conn = np.sort(conn)
-        ax2.errorbar(x=sorted_conn, y=sorted_dcrit, yerr=sorted_dcrit_error, fmt='+-', linestyle='dotted',
+        ax2.errorbar(x=sorted_conn, y=sorted_acrit, yerr=sorted_acrit_error, fmt='+-', linestyle='dotted',
                   label=r'Nestedness $\approx$' + str(nest), markersize=markersize, markeredgewidth=markeredgewidth,
                   elinewidth=error_bar_width, capsize=cap_width)
     ax2.set_title(r'$N_R=$' + str(NR) + r', $N_S=$' + str(NS))
     ax2.set_xlabel(r'Connectance', fontsize=fs)
-    ax2.set_ylabel(r'$\Delta^*$', fontsize=fs)
+    ax2.set_ylabel(r'$\alpha^*$', fontsize=fs)
     ax2.legend()
     fig2.savefig(save_string2+'.pdf')
 
@@ -136,7 +136,7 @@ for i in range(len(sorted_size)):
     ax3.plot_trisurf(data[:, 0], data[:, 1], data[:, 2])
     ax3.set_xlabel('Nestedness')
     ax3.set_ylabel('Connectance')
-    ax3.set_zlabel(r'$\Delta^*$')
+    ax3.set_zlabel(r'$\alpha^*$')
     ax3.view_init(azim=79, elev=29)
     fig3.savefig(save_folder + '/' + save_string +
                  '_connectance_nestedness_3d.pdf')

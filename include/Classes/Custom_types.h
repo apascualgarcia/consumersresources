@@ -4,6 +4,8 @@
 #include<iostream>
 #include<complex>
 #include<vector>
+#include <gsl/gsl_vector.h>
+
 
 
 typedef long double ntype;
@@ -22,7 +24,7 @@ enum alphamode{random_structure, no_release_when_eat};
 enum eqmode{oneextinct, convergence};
 /*  when using polynomial please specify the degree manually otherwise,
     there will be a runtime error */
-enum fitmode{sigmoidal, polynomial};
+enum fitmode{sigmoidal, polynomial, sigmoidal_erf};
 enum stabilitymode{dynamical, structural};
 
 struct statistics{
@@ -45,6 +47,22 @@ struct stability_metrics{
   statistics angle_between_equilibria;
   statistics distance_between_equilibria;
   statistics extinctions;
+};
+
+struct interval{
+  ntype begin;
+  ntype end;
+
+  interval(ntype a, ntype b){
+    if(a < b){
+      this->begin = a;
+      this->end = b;
+    }
+    else{
+      this->begin = b;
+      this->end = a;
+    }
+  };
 };
 
 struct Extinction{

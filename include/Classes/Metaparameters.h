@@ -31,6 +31,11 @@ struct Metaparameters{
   eqmode equilibrium;
 
   Metaparameters(int argc, char *argv[]);
+  /* gives back the hard limit over which we know we won't find any feasible system*/
+  ntype physical_maximum_alpha0() const;
+  /*  gives back the softer limit after which prob(draw feasible system) < 1,
+      has an accuracy on alpha of roughly alpha_accuracy */
+  ntype feasible_alpha_max(ntype alpha_accuracy = 0.01) const;
 };
 
 

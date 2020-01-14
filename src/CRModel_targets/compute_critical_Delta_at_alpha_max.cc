@@ -8,6 +8,7 @@ using namespace std;
     to increase syntrophy while still building a reasonable amount of systems for the same time */
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
+  unsigned int Npoints = 3;
   /* loading the different matrices */
   std::vector<std::string> matrices;
   std::ifstream in(metaparams.foodmatrixpath);
@@ -30,18 +31,6 @@ int main(int argc, char * argv[]){
     std::cout << matrices[i] << std::endl;
   }
 
-  /* we attempt to build a Nsystems systems for each point*/
-  unsigned int Nsystems = 100;
-  /* we check for N_alpha values of alpha between alpha_min and alpha_max*/
-  unsigned int N_alpha = 100;
-  ntype alpha_min = 4.;
-  ntype alpha_max = 16.5;
-
-  nvector alpha_range;
-  for(size_t i=0; i < N_alpha; ++i){
-    alpha_range.push_back(alpha_min+(alpha_max-alpha_min)*i/(N_alpha-1));
-  }
-
   std::ofstream myfile;
   myfile.open(metaparams.save_path, std::ofstream::out | std::ofstream::trunc);
   bool save_success(false);
@@ -51,23 +40,13 @@ int main(int argc, char * argv[]){
     if(metaparams.verbose > 0){
       std::cout << "Successfully opened " << metaparams.save_path <<", attempting now to find the critical feasability probability of every listed matrix " << std::endl;
     }
+    const ntype initial_a0 = metaparams.alpha0;
     for(size_t i=0; i < matrices.size();++i){
       metaparams.foodmatrixpath = matrices[i];
-      nvector proba_range;
-      bool completely_feasible = true;
-      for(size_t j=0; j < N_alpha;++j){
-        metaparams.alpha0 = alpha_range[j];
-        ntype proba = find_feasability_probability(metaparams, Nsystems);
-        if(proba*proba < 1.){
-          completely_feasible = false;
-        }
-        proba_range.push_back(proba);
-      }
-      if(not(completely_feasible)){
-        myfile << matrices[i] << " ";
-        myfile << proba_range << std::endl;
-      }else{
-        std::cerr << "Matrix " << matrices[i] << " has a critical alpha outside the range considered " << std::endl;
+      ntype alpha_max = metaparams.feasible_alpha_max();
+      for(size_t j=0; j < Npoints; ++j){
+        metaparams.alpha0 = alpha_max*j/(Npoints-1);
+        std::cout << "Structural stability for alpha0 = " << metaparams.alpha0 << " is " << compute_critical_Delta(metaparams, 1e-4) << std::endl;
       }
     }
   }

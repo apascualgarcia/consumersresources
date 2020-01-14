@@ -31,16 +31,8 @@ int main(int argc, char * argv[]){
   }
 
   /* we attempt to build a Nsystems systems for each point*/
-  unsigned int Nsystems = 100;
-  /* we check for N_alpha values of alpha between alpha_min and alpha_max*/
-  unsigned int N_alpha = 100;
-  ntype alpha_min = 4.;
-  ntype alpha_max = 16.5;
+  unsigned int Nsystems = 1000;
 
-  nvector alpha_range;
-  for(size_t i=0; i < N_alpha; ++i){
-    alpha_range.push_back(alpha_min+(alpha_max-alpha_min)*i/(N_alpha-1));
-  }
 
   std::ofstream myfile;
   myfile.open(metaparams.save_path, std::ofstream::out | std::ofstream::trunc);
@@ -53,22 +45,9 @@ int main(int argc, char * argv[]){
     }
     for(size_t i=0; i < matrices.size();++i){
       metaparams.foodmatrixpath = matrices[i];
-      nvector proba_range;
-      bool completely_feasible = true;
-      for(size_t j=0; j < N_alpha;++j){
-        metaparams.alpha0 = alpha_range[j];
-        ntype proba = find_feasability_probability(metaparams, Nsystems);
-        if(proba*proba < 1.){
-          completely_feasible = false;
-        }
-        proba_range.push_back(proba);
-      }
-      if(not(completely_feasible)){
-        myfile << matrices[i] << " ";
-        myfile << proba_range << std::endl;
-      }else{
-        std::cerr << "Matrix " << matrices[i] << " has a critical alpha outside the range considered " << std::endl;
-      }
+      myfile << matrices[i] << " ";
+      statistics alpha_crit = compute_critical_alpha(metaparams, 1e-4, sigmoidal);
+      myfile << alpha_crit.mean_ << " " << alpha_crit.std_deviation_ << std::endl;
     }
   }
   myfile.close();

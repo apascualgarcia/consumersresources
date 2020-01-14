@@ -5,5 +5,6 @@
 METAPARAMS_LIST="list_of_config_files_comparison_test"
 MATRIX_LIST="matrix_list_NR25_NS25"
 CORES=$1
+COMMMAND="build/compute_critical_Delta_matrices"
 
-python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES
+python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND

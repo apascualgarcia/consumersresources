@@ -24,6 +24,7 @@ struct fitting_parameters{
 
 double polynomial_fit(double, const gsl_vector*);
 double sigmoidal_fit(double, const gsl_vector*);
+double sigmoidal_fit_erf(double, const gsl_vector*);
 double fitting_function(double, const gsl_vector*, fitmode);
 
 nvector guess_initial_fit_parameters(const nvector&, const nvector&, fitmode);

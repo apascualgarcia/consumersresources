@@ -8,7 +8,10 @@
 statistics compute_critical_Delta(Metaparameters, ntype, stabilitymode stab_mode = structural);
 statistics compute_critical_Delta(Metaparameters, ntype, delta_solver);
 
+statistics compute_critical_alpha(Metaparameters&, ntype, fitmode);
+
 statistics estimate_delta_crit_from_interval(const nvector&, const nvector&, const Metaparameters&,delta_solver);
+statistics estimate_alpha_crit_from_interval(const nvector&, const nvector&, const Metaparameters&,fitmode);
 
 /* compute the different metrics for the stability when we perturb the system by delta */
 stability_metrics compute_stability_metrics(Metaparameters&, const ntype& delta, unsigned int Nsimul=100, stabilitymode stab_mode=dynamical);
