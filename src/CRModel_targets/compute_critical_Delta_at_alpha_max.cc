@@ -44,10 +44,12 @@ int main(int argc, char * argv[]){
     for(size_t i=0; i < matrices.size();++i){
       metaparams.foodmatrixpath = matrices[i];
       ntype alpha_max = metaparams.feasible_alpha_max();
+      myfile<< matrices[i] << " ";
       for(size_t j=0; j < Npoints; ++j){
         metaparams.alpha0 = alpha_max*j/(Npoints-1);
-        std::cout << "Structural stability for alpha0 = " << metaparams.alpha0 << " is " << compute_critical_Delta(metaparams, 1e-4) << std::endl;
+        myfile << metaparams.alpha0 << " " << compute_critical_Delta(metaparams, 1e-3) << " ";
       }
+      myfile << std::endl;
     }
   }
   myfile.close();
