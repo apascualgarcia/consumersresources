@@ -3,8 +3,8 @@
 ## METAPARAMS_LIST and MATRIX_LIST are the list of metaparameters and matrices
 ## whose critical delta we want to find. They MUST be in the config folder
 METAPARAMS_LIST="list_of_config_files_comparison_test"
-MATRIX_LIST="critical_matrix_list_NR25_NS25"
+MATRIX_LIST="matrix_list_NR25_NS25_test"
 CORES=$1
-COMMMAND="build/compute_critical_Delta_at_alpha_max"
+COMMAND_NAME="build/compute_critical_Delta_at_alpha_max"
 
-python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND
+python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND_NAME
