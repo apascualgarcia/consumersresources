@@ -24,7 +24,7 @@ for i in range(0, cores):
             matrix_list[i]
         cmd_core += " path_to_save_file=./data_output/" + output_name + ".out"
         cmd_core += " seed_number=" + str(seed_number)
-        cmd_core += "| ts '[%Y-%m-%d %H:%M:%S]'\"> ./logs/" + output_name+ ".log"
+        cmd_core += "| ts \'[%Y-%m-%d %H:%M:%S]\'\"> ./logs/" + output_name+ ".log"
         cmd_core += " 2>./logs/err" + output_name + '.log'
         seed_number += 1
     #cmd_core = cmd_core[:-3]
