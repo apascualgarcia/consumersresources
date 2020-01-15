@@ -6,5 +6,6 @@ METAPARAMS_LIST="list_of_config_files_comparison_test"
 MATRIX_LIST="critical_matrix_list_NR25_NS25"
 CORES=$1
 COMMAND_NAME="build/compute_critical_Delta_at_alpha_max"
+OUTPUT_NAME="cd_alpha_max"
 
-python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND_NAME
+python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND_NAME $OUTPUT_NAME

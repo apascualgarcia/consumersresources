@@ -8,6 +8,7 @@ config_file = sys.argv[1]
 m_list = sys.argv[2]
 cores = int(sys.argv[3])
 command_name = sys.argv[4]
+output_name = sys.argv[5]
 
 with open('./config/' + config_file + '.in') as f:
     mylist = f.read().splitlines()
@@ -16,17 +17,15 @@ seed_number = 0
 for i in range(0, cores):
     cmd_core = 'nohup sh -c "'
     for config in mylist:
+        out_name = output_name + "_" + config + "_" + m_list + "_" + str(i)
         cmd_core += (command_name + ' ')
         cmd_core += 'config/' + config + '.in'
         cmd_core += " path_to_food_matrix=" + \
             matrix_list[i]
-        cmd_core += " path_to_save_file=./data_output/" + \
-            config + "_" + m_list + "_" + str(i) + ".out"
+        cmd_core += " path_to_save_file=./data_output/" + output_name + ".out"
         cmd_core += " seed_number=" + str(seed_number)
-        cmd_core += '| ts [%Y-%m-%d %H:%M:%S]"> ./logs/' + \
-            config + "_" + m_list + "_" + str(i) + ".log"
-        cmd_core += " 2>./logs/err" + config + "_" + m_list + '_'+\
-            str(i) + '.log '
+        cmd_core += "| ts '[%Y-%m-%d %H:%M:%S]'\"> ./logs/" + output_name+ ".log"
+        cmd_core += " 2>./logs/err" + output_name + '.log'
         seed_number += 1
     #cmd_core = cmd_core[:-3]
     cmd_core += '&'
