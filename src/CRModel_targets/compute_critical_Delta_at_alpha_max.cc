@@ -47,7 +47,8 @@ int main(int argc, char * argv[]){
       myfile<< matrices[i] << " ";
       for(size_t j=0; j < Npoints; ++j){
         metaparams.alpha0 = alpha_max*j/(Npoints-1);
-        myfile << metaparams.alpha0 << " " << compute_critical_Delta(metaparams, 1e-3) << " ";
+        statistics critical_delta = compute_critical_Delta(metaparams, 1e-3);
+        myfile << metaparams.alpha0 << " " << critical_delta.mean_ << " " << critical_delta.std_deviation_ << " ";
       }
       myfile << std::endl;
     }
