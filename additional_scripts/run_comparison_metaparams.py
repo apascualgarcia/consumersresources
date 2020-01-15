@@ -22,15 +22,14 @@ for i in range(0, cores):
         cmd_core += 'config/' + config + '.in'
         cmd_core += " path_to_food_matrix=" + \
             matrix_list[i]
-        cmd_core += " path_to_save_file=./data_output/" + output_name + ".out"
+        cmd_core += " path_to_save_file=./data_output/" + out_name + ".out"
         cmd_core += " seed_number=" + str(seed_number)
-        cmd_core += "| ts \'[%Y-%m-%d %H:%M:%S]\'\"> ./logs/" + output_name+ ".log"
+        cmd_core += "| ts \'[%Y-%m-%d %H:%M:%S]\'\"> ./logs/" + out_name+ ".log"
         cmd_core += " 2>./logs/err" + output_name + '.log'
         seed_number += 1
     #cmd_core = cmd_core[:-3]
     cmd_core += '&'
-    #os.system(cmd_core)
-    print(cmd_core)
+    os.system(cmd_core)
     now = datetime.now()
     dt_string = now.strftime('%d/%m/%Y %H:%M:%S')
     cmd_write = '[' + dt_string + '] ' + cmd_core
