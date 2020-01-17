@@ -139,3 +139,25 @@ std::ostream& operator<<(std::ostream& os, const fitmode & fit){
   }
   return os;
 }
+
+std::ostream& operator<<(std::ostream& os, const systemstability& stab){
+  switch(stab){
+    case stable:{
+      os << "stable";
+      break;
+    }
+    case marginal:{
+      os << "marginally stable";
+      break;
+    }
+    case unstable:{
+      os << "unstable";
+      break;
+    }
+  }
+  return os;
+}
+std::ostream& operator<<(std::ostream& os, const stability& stab){
+  os << stab.unstable << " " << stab.marginally_stable << " " << stab.stable;
+  return os;
+}

@@ -1,0 +1,7 @@
+#!/bin/bash
+CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0 configuration_comparison_NR25_NS25_s05_a05 configuration_comparison_NR25_NS25_s09_a0"
+
+for f in $CONFIG_LIST
+do
+  nohup build/prop_dynamical_stability_varying_NR_NS config/$f.in path_to_save_file=data_output/phase_diagram_$f.out > logs/phase_diagram_$f.log 2>logs/errphase_diagram_$f.log&
+done

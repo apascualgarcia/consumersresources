@@ -54,3 +54,26 @@ stability_metrics compute_stability_metrics(Metaparameters& m, const ntype& delt
 
   return stab_metr;
 }
+
+stability compute_proportion_stability(Metaparameters& meta, unsigned int Nsimuls){
+  stability stab_prop = {0., 0., 0.};
+  ntype toadd = 1./Nsimuls;
+  for(size_t i=0; i < Nsimuls;++i){
+    CRModel model(meta);
+    switch(model.is_dynamically_stable()){
+      case stable :{
+        stab_prop.stable += toadd;
+        break;
+      }
+      case marginal:{
+        stab_prop.marginally_stable += toadd;
+        break;
+      }
+      case unstable:{
+        stab_prop.unstable += toadd;
+        break;
+      }
+    }
+  }
+  return stab_prop;
+}

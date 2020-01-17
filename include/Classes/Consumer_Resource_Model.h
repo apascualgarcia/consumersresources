@@ -51,6 +51,9 @@ public:
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
 
+  /* tells you if the system is stable, marginally stable or unstable dynamically */
+  systemstability is_dynamically_stable() const;
+
   bool has_linearly_stable_eq() const;
 
   nmatrix get_first_equilibrium() const;

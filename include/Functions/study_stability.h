@@ -15,6 +15,8 @@ statistics estimate_alpha_crit_from_interval(const nvector&, const nvector&, con
 
 /* compute the different metrics for the stability when we perturb the system by delta */
 stability_metrics compute_stability_metrics(Metaparameters&, const ntype& delta, unsigned int Nsimul=100, stabilitymode stab_mode=dynamical);
+/* computes the proportion of stable, marginally stable and unstable systems */
+stability compute_proportion_stability(Metaparameters&, unsigned int Nsimuls);
 
 void write_av_number_extinctions_delta_interval(Metaparameters* , const nvector& , unsigned int Nsimul = 500);
 void write_prob_greater_than_one_delta_interval(Metaparameters*, const nvector&, unsigned int Nsimul=500);

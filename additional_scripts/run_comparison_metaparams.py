@@ -25,7 +25,7 @@ for i in range(0, cores):
         cmd_core += " path_to_save_file=./data_output/" + out_name + ".out"
         cmd_core += " seed_number=" + str(seed_number)
         cmd_core += "| ts \'[%Y-%m-%d %H:%M:%S]\'\"> ./logs/" + out_name+ ".log"
-        cmd_core += " 2>./logs/err" + output_name + '.log'
+        cmd_core += " 2>./logs/err" + out_name + '.log'
         seed_number += 1
     #cmd_core = cmd_core[:-3]
     cmd_core += '&'

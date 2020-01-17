@@ -618,5 +618,23 @@ bool CRModel::has_linearly_stable_eq() const{
 
   std::cout << "Could not determine whether or not the system was stable, returning false to make sure" << std::endl;
   return false;
+}
 
+systemstability CRModel::is_dynamically_stable() const{
+  ncvector eigvals = this->eigenvalues_at_equilibrium();
+  ntype max_real_eigval = real(eigvals[0]);
+  for(size_t i=1; i < eigvals.size(); ++i){
+    ntype test = real(eigvals[i]);
+    if(test > max_real_eigval){
+      max_real_eigval = test;
+    }
+  }
+
+  if(max_real_eigval > EIGENSOLVER_PRECISION){
+    return systemstability(unstable);
+  }else if(abs(max_real_eigval) <= EIGENSOLVER_PRECISION){
+    return systemstability(marginal);
+  }else{
+    return systemstability(stable);
+  }
 }

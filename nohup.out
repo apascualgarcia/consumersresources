@@ -24,3 +24,18 @@ Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in
 Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in
 Loading metaparameters from config/configuration_comparison_NR25_NS25_s025_a0.in
 Error in the integration of the ODE!
+nohup: build/compute_proportion_stability: No such file or directory
+libc++abi.dylib: terminating with uncaught exception of type std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >
+libc++abi.dylib: terminating with uncaught exception of type std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s05_a0.in
+Initiated random engine with seed 0
+Successfully opened data_output/phase_diagram_configuration_comparison_NR25_NS25_s05_a0.out, attempting now to find the critical feasability probability of every listed matrix 
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s05_a0.in
+Initiated random engine with seed 0
+Successfully opened data_output/phase_diagram_configuration_comparison_NR25_NS25_s05_a0.out, attempting now to find the critical feasability probability of every listed matrix 
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s05_a05.in
+Initiated random engine with seed 0
+Loading metaparameters from config/configuration_comparison_NR25_NS25_s09_a0.in
+Initiated random engine with seed 0
+Successfully opened data_output/phase_diagram_configuration_comparison_NR25_NS25_s05_a05.out, attempting now to find the critical feasability probability of every listed matrix 
+Successfully opened data_output/phase_diagram_configuration_comparison_NR25_NS25_s09_a0.out, attempting now to find the critical feasability probability of every listed matrix 

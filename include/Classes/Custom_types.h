@@ -27,6 +27,8 @@ enum eqmode{oneextinct, convergence};
 enum fitmode{sigmoidal, polynomial, sigmoidal_erf};
 enum stabilitymode{dynamical, structural};
 
+enum systemstability {stable, marginal, unstable};
+
 struct statistics{
   ntype mean_;
   ntype std_deviation_;
@@ -79,6 +81,12 @@ struct Extinction_statistics{
   statistics extinct;
   nvector_statistics new_Req;
   nvector_statistics new_Seq;
+};
+
+struct stability{
+  ntype stable;
+  ntype marginally_stable;
+  ntype unstable;
 };
 
 
