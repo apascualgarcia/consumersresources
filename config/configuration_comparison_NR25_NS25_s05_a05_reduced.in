@@ -2,7 +2,7 @@
 gamma_0 = 1.
 alpha_0 = 0.5
 sigma_0 = 0.5
-R0 = 300.
+R0 = 30.
 S0 = 1.
 l_0 = 11092.
 epsilon = 0.1
