@@ -5,8 +5,8 @@
 #include "../Classes/Metaparameters.h"
 
 
-statistics compute_critical_Delta(Metaparameters, ntype, stabilitymode stab_mode = structural);
-statistics compute_critical_Delta(Metaparameters, ntype, delta_solver);
+statistics compute_critical_Delta(Metaparameters, stabilitymode stab_mode = structural);
+statistics compute_critical_Delta(Metaparameters, delta_solver);
 
 statistics compute_critical_alpha(Metaparameters&, ntype, fitmode);
 

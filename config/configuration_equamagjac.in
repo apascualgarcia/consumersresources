@@ -21,3 +21,4 @@ number_of_attempts = 100 % number of attempts to build a system with such metapa
 path_to_save_file =/Users/Shared/Cloud/Master/Master_Thesis/Code/consumersresources/TEST_FOLDER/DataOutput/jacobian.out
 seed_number=20
 equilibrium_mode=one_extinct
+convergence_threshold=1e-4

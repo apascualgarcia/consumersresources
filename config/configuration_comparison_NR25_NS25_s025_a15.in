@@ -23,3 +23,4 @@ seed_number=0
 perturbation_equilibrium=1.0
 perturbation_parameters=0.1
 equilibrium_mode=one_extinct
+convergence_threshold=1e-4

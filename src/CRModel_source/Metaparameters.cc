@@ -38,6 +38,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->perturb_eq = configFile.get<ntype>("perturbation_equilibrium");
   this->perturb_parameters = configFile.get<ntype>("perturbation_parameters");
   this->equilibrium = string_to_eq_mode(configFile.get<std::string>("equilibrium_mode"));
+  this->convergence_threshold = configFile.get<ntype>("convergence_threshold");
   if(this->verbose > 0){
     std::cout << "Loading metaparameters from " << inputPath << std::endl;
   }

@@ -6,7 +6,6 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   initialize_random_engine(metaparams);
-
   vector<string> matrices_path;
   std::ifstream in(metaparams.foodmatrixpath);
   if (!in) {
@@ -38,7 +37,7 @@ int main(int argc, char * argv[]){
     for(size_t i = 0; i < matrices_path.size();++i){
         metaparams.foodmatrixpath = matrices_path[i];
         delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
-        statistics delta = compute_critical_Delta(metaparams, 0., solv_params);
+        statistics delta = compute_critical_Delta(metaparams, solv_params);
         std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
         myfile << matrices_path[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
     }

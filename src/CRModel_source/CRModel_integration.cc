@@ -271,11 +271,8 @@ bool convergence_criterion(const double threshold, const double t, const double 
         if(abs(dydt[i]/y[i]) > threshold){
           all_smaller_than_threshold=false;
         }
-      }else{
-        std::cout << "Species " << i << " extinct ";
       }
     }
-    std::cout << std::endl;
     converged = all_smaller_than_threshold;
   }
 

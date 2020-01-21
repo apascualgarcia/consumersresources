@@ -29,6 +29,7 @@ struct Metaparameters{
   ntype perturb_eq;
   ntype perturb_parameters;
   eqmode equilibrium;
+  ntype convergence_threshold;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

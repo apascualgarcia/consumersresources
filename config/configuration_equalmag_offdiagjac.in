@@ -22,3 +22,4 @@ path_to_save_file = /Users/Shared/Cloud/Master/Master_Thesis/Code/consumersresou
 seed_number=0
 perturbation=0.1
 equilibrium_mode=one_extinct
+convergence_threshold=1e-4

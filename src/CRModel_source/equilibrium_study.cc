@@ -20,7 +20,7 @@ ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nrun
 }
 
 Extinction_statistics compute_average_extinction(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul){
-  ntype convergence_threshold = 1e-6;
+  ntype convergence_threshold = metaparams->convergence_threshold;
   Extinction_statistics av_extinct;
   av_extinct.t_eq.mean_ = 0.;
   av_extinct.t_eq.std_deviation_= 0.;
@@ -78,7 +78,7 @@ double average_number_of_extinctions(double delta, Metaparameters* m, unsigned i
   return av_number_extinct;
 }
 double probability_of_extinction_greather_than_one(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul, stabilitymode stab_mode){
-  ntype convergence_threshold = 1e-9;
+  ntype convergence_threshold = metaparams->convergence_threshold;
   double probability_ext_gtone = 0.;
   std::string stability;
 

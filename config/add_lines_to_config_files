@@ -1,5 +1,4 @@
 #!/bin/bash
-LINE="equilibrium_mode=one_extinct" 
+LINE="convergence_threshold=1e-4"
 
-echo $LINE | tee -a configuration*
-
+echo $LINE | tee -a config/configuration*
