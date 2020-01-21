@@ -3,6 +3,7 @@
 
 #include "../Classes/Custom_types.h"
 #include "../Classes/Metaparameters.h"
+#include "../Global_Constants.h"
 
 /* finds the probability that the metaparameters yield a feasible system (probability estimated with Nruns runs) */
 ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nruns=1000);
@@ -20,4 +21,7 @@ statistics angle_between_equilibria(Metaparameters*, const ntype& delta, unsigne
 double can_find_one_extinction(Metaparameters*, const ntype & delta, unsigned int Nsimul);
 /*  returns 0. if we once find a system where there is no extinction, returns 1. if we don't find any system that has 0 extinctions */
 double can_find_zero_extinction(Metaparameters*, const ntype & delta, unsigned int Nsimul);
+
+/* tells you whether or not the time evolution is considered "converged"*/
+bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params);
 #endif

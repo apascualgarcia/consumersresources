@@ -35,11 +35,7 @@ public:
   bool dynamically_stable() const;
   void save_simulation() const;
   void save_jacobian_at_equilibrium(std::string) const;
-  void write_time_evolution(const Dynamical_variables&, ntype) const;
-  void write_time_evolution_from_equilibrium() const;
-  void write_time_evolution_until_equilibrium(const Dynamical_variables &, ntype, ntype) const;
   void write_death_rates(std::string) const;
-  nmatrix time_evolution(const Dynamical_variables&, ntype) const ;
   Dynamical_variables perturb_equilibrium() const;
   void perturb_parameters() const;
   void perturb_parameters(const ntype &) const;
@@ -62,11 +58,11 @@ public:
   nmatrix perturb_abundances(const ntype& );
 
   /* returns the extinction properties with the initial values of abundances */
-  Extinction evolve_until_equilibrium_from_abundances(const nmatrix& , ntype threshold=1e-9, eqmode eq_mode = oneextinct) const;
+  Extinction evolve_until_equilibrium_from_abundances(const nmatrix& , ntype threshold=1e-9, eqmode eq_mode = oneextinct, writemode write_mode=writemode()) const;
   /* returns the evolution from equilibrium (assumes we are not at equilibrium with R^* and S^*) -> finds the new eq*/
-  Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence) const;
+  Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence, writemode write_mode=writemode()) const;
   /* returns the general extinction properties for the initial values init_val */
-  Extinction evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode) const;
+  Extinction evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode, writemode write_mode=writemode()) const;
 };
 
 #endif

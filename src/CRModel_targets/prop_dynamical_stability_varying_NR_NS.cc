@@ -3,7 +3,7 @@
 
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
-  unsigned int Nsimuls = 10000;
+  unsigned int Nsimuls = 100;
   unsigned int NRmin=1, NRmax=25;
   unsigned int NSmin=1, NSmax=25;
 
@@ -14,10 +14,10 @@ int main(int argc, char * argv[]){
   myfile.open(metaparams.save_path, std::ofstream::out | std::ofstream::trunc);
   bool save_success(false);
   if(not(myfile.is_open())){
-    std::cerr << "Could not open " << metaparams.save_path << " to write the critical feasability probabilities" << std::endl;
+    std::cerr << "Could not open " << metaparams.save_path << std::endl;
   }else{
     if(metaparams.verbose > 0){
-      std::cout << "Successfully opened " << metaparams.save_path <<", attempting now to find the critical feasability probability of every listed matrix " << std::endl;
+      std::cout << "Successfully opened " << metaparams.save_path <<", now attempting to compute the phase diagram of the given metaparameters" << std::endl;
     }
     for(size_t i=0; i < NRmax-NRmin+1; ++i){
       unsigned int current_NR = NRmin +(NRmax-NRmin)*i/(NRmax-NRmin);

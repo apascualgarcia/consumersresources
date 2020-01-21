@@ -15,19 +15,19 @@ with open('./config/' + config_file + '.in') as f:
 matrix_list = separate_file(m_list, cores)
 seed_number = 0
 for i in range(0, cores):
-    cmd_core = 'nohup sh -c "'
+    cmd_core=''
     for config in mylist:
         out_name = output_name + "_" + config + "_" + m_list + "_" + str(i)
-        cmd_core += (command_name + ' ')
+        cmd_core += (' nohup sh -c "' +command_name + ' ')
         cmd_core += 'config/' + config + '.in'
         cmd_core += " path_to_food_matrix=" + \
             matrix_list[i]
         cmd_core += " path_to_save_file=./data_output/" + out_name + ".out"
         cmd_core += " seed_number=" + str(seed_number)
         cmd_core += "| ts \'[%Y-%m-%d %H:%M:%S]\'\"> ./logs/" + out_name+ ".log"
-        cmd_core += " 2>./logs/err" + out_name + '.log'
+        cmd_core += " 2>./logs/err" + out_name + '.log &&'
         seed_number += 1
-    #cmd_core = cmd_core[:-3]
+    cmd_core = cmd_core[:-3]
     cmd_core += '&'
     os.system(cmd_core)
     now = datetime.now()

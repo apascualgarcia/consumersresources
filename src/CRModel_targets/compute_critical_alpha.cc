@@ -30,8 +30,8 @@ int main(int argc, char * argv[]){
     std::cout << matrices[i] << std::endl;
   }
 
-  /* we attempt to build a Nsystems systems for each point*/
-  unsigned int Nsystems = 1000;
+  /* we attempt to build Nsystems systems for each point*/
+  unsigned int Nsystems = 10000;
 
 
   std::ofstream myfile;

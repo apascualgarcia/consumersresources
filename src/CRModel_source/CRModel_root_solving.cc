@@ -221,7 +221,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, ntype accuracy, del
 statistics compute_critical_alpha(Metaparameters& metaparams, ntype accuracy, fitmode fit_mode){
   statistics critical_alpha;
   double target=0.;
-  unsigned int Nsimul_frun = 100, Nsimul_srun = 1000;
+  unsigned int Nsimul_frun = 100, Nsimul_srun = 10000;
   size_t interval_length = 50;
   interval initial_guess(0., metaparams.physical_maximum_alpha0());
 
@@ -254,10 +254,6 @@ statistics compute_critical_alpha(Metaparameters& metaparams, ntype accuracy, fi
     double result = function_proba_feasability_solver(interval[i], &params);
     function_y_values.push_back(result);
   }
-
-  std::cout << "Interval for alpha0's " << interval << std::endl;
-  std::cout << "Corresponding proba : " << function_y_values << std::endl;
-
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate the critical alpha */

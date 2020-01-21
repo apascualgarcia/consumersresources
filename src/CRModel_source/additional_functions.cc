@@ -200,6 +200,11 @@ statistics::statistics(){
   this->median_ = NULL;
 }
 
+
+writemode::writemode(bool write_, std::ostream& os):write(write_),write_path(os){}
+writemode::writemode():write(false), write_path(std::cout){}
+
+
 nvector operator-(const nvector& v1, const nvector& v2){
   return v1+(-v2);
 }

@@ -24,17 +24,10 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_math.h>
 
-
 #include<limits>
-const unsigned int print_precision = 4;
-const ntype EIGENSOLVER_PRECISION = 1e-15;
-
-/*  At each step the solver changes the step size such that the error level for each component is
-    D_i = INTEGRATOR_ABS_PRECISION + INTEGRATOR_RELATIVE_PRECISION *(a_y |y_i| + adydt h |y'i|) */
-//const double INTEGRATOR_ABS_PRECISION = std::numeric_limits<double>::epsilon();
-const double INTEGRATOR_ABS_PRECISION = 1e-6;
-const double INTEGRATOR_REL_PRECISION = 0;
-
-extern std::mt19937 random_engine;
+#include<fstream>
+#include<iostream>
+#include<iomanip>
+#include "Global_Constants.h"
 
 #endif

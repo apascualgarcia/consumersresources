@@ -7,3 +7,5 @@ text/*
 *.out
 process-palette.json
 *.pyc
+data_analysis/.*
+matplotlibrc

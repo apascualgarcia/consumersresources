@@ -415,38 +415,7 @@ void CRModel::write_death_rates(std::string savepath) const{
 
   return;
 }
-void CRModel::write_time_evolution(const Dynamical_variables & dyn, ntype tf) const{
-  Metaparameters* m = this->metaparameters;
-  std::ofstream myfile;
-  myfile.open(m->save_path, std::ios::app);
-  bool save_success(false);
-  if(not(myfile.is_open())){
-    std::cerr << "Could not open " << m->save_path << " to write the temporal evolution" << std::endl;
-  }else{
-    save_success = true;
-  }
 
-  nmatrix evolution = this->time_evolution(dyn, tf);
-  for(size_t i =0; i < evolution.size() ; ++i){
-    myfile << evolution[i] << std::endl;
-  }
-
-  if(m->verbose > 0){
-    if(save_success){
-      std::cout << "Successfully saved temporal evolution of system to " << m->save_path << std::endl;
-    }
-  }
-  myfile.close();
-  return;
-}
-void CRModel::write_time_evolution_from_equilibrium() const{
-  nvector* eq_resources = &(*eq_vals)[0][0];
-  nvector* eq_consumers = &(*eq_vals)[0][1];
-
-  Dynamical_variables dyn(eq_resources, eq_consumers);
-  write_time_evolution(dyn, this->metaparameters->tf);
-  return ;
-}
 Dynamical_variables CRModel::perturb_equilibrium() const{
   nvector unp_resources = (*eq_vals)[0][0];
   nvector unp_consumers = (*eq_vals)[0][1];
@@ -565,7 +534,6 @@ nmatrix CRModel::perturb_abundances(const ntype& delta){
 nmatrix CRModel::get_first_equilibrium() const{
   return (*eq_vals)[0];
 }
-
 ntype CRModel::get_resilience_jacobian() const{
   /* resilience is defined as 1/l1 where l1 is the largest real part of an eigenvalue of the jacobian at equilibrium */
   ntype resilience = 0.;

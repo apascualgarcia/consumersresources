@@ -5,7 +5,7 @@
 #include<complex>
 #include<vector>
 #include <gsl/gsl_vector.h>
-
+#include <fstream>
 
 
 typedef long double ntype;
@@ -21,6 +21,7 @@ typedef nmatrix foodmatrix;
 enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
 enum alphamode{random_structure, no_release_when_eat};
+/* eqmode tells you when you stop your time evolution algorithm */
 enum eqmode{oneextinct, convergence};
 /*  when using polynomial please specify the degree manually otherwise,
     there will be a runtime error */
@@ -28,6 +29,16 @@ enum fitmode{sigmoidal, polynomial, sigmoidal_erf};
 enum stabilitymode{dynamical, structural};
 
 enum systemstability {stable, marginal, unstable};
+
+/*  writemode is used in the general time evolution of the system. It tells you whether you should, and if so Where
+    write the time evolution of the system */
+struct writemode{
+  bool write;
+  std::ostream& write_path;
+
+  writemode(bool, std::ostream&);
+  writemode();
+};
 
 struct statistics{
   ntype mean_;
