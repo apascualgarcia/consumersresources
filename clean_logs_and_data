@@ -1,0 +1,5 @@
+#!/bin/bash
+now=$(date "+%d_%m_%y")
+
+mkdir -p old_logs/logs_$now; mv logs/* $_
+mkdir -p old_data/data_output_$now; mv data_output/* $_
