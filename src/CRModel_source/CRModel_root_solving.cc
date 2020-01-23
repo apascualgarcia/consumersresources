@@ -164,7 +164,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
       break;
     case sigmoidal:
       Nsimul_frun = 50;
-      Nsimul_srun = 200;
+      Nsimul_srun = 100;
       interval_length= 50;
       break;
     default:

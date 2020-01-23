@@ -12,12 +12,10 @@ CRModel::CRModel(){
   this->model_param = NULL;
   return;
 }
-
 CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
 }
-
 CRModel::CRModel(Metaparameters& meta){
   unsigned int attempts(0);
   this->create_model_parameters(meta);
@@ -38,7 +36,6 @@ CRModel::CRModel(Metaparameters& meta){
 
   return;
 }
-
 CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
   unsigned int attempts(0);
   this->create_model_parameters(meta);
@@ -58,20 +55,17 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
   }
   return;
 }
-
 CRModel::~CRModel(){
   delete this->model_param;
   delete this->eq_vals;
   return;
 }
-
 void CRModel::create_model_parameters(Metaparameters& meta){
   this->model_param = new Model_parameters();
   this->eq_vals = new ntensor();
   this->metaparameters = &meta;
   return;
 }
-
 void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
 
   Parameter_set* p = this->model_param->get_parameters();
@@ -128,8 +122,6 @@ void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, 
 
   return;
 }
-
-
 nvector CRModel::equations_of_evolution(const Dynamical_variables& dyn_var) const{
   nvector v;
   const Parameter_set* p = this->model_param->get_parameters();
@@ -261,7 +253,6 @@ bool CRModel::constraints_fulfilled(const Metaparameters& m) const{
   }
   return true;
 }
-
 bool CRModel::energy_constraint() const{
   Parameter_set* p = this->model_param->get_parameters();
   for(size_t j = 0 ; j < this->eq_vals->size();++j){
@@ -281,16 +272,16 @@ bool CRModel::energy_constraint() const{
 }
 bool CRModel::positive_parameters() const{
   Parameter_set* p = this->model_param->get_parameters();
-  if(not(non_neg_elements(p->d))){
-    std::cerr << "d contains negative elements" << std::endl;
+  if(not(non_neg_elements(p->d)) and this->metaparameters->verbose>2){
+    std::cerr << "\t \t System unfeasible : d contains negative elements : " << p->d << std::endl;
     return false;
   }
-  if(not(non_neg_elements(p->l))){
-    std::cerr << "l contains negative elements" << std::endl;
+  if(not(non_neg_elements(p->l)) and this->metaparameters->verbose>2){
+    std::cerr << "\t \t System unfeasible: l contains negative elements : " << p->l << std::endl;
     return false;
   }
-  if(not(non_neg_elements(p->m))){
-    std::cerr << "m contains negative elements : ";
+  if(not(non_neg_elements(p->m)) and this->metaparameters->verbose>2){
+    std::cerr << "\t \t System unfeasible: m contains negative elements : ";
     std::cerr << p->m << std::endl;
     return false;
   }
@@ -415,7 +406,6 @@ void CRModel::write_death_rates(std::string savepath) const{
 
   return;
 }
-
 Dynamical_variables CRModel::perturb_equilibrium() const{
   nvector unp_resources = (*eq_vals)[0][0];
   nvector unp_consumers = (*eq_vals)[0][1];
@@ -482,7 +472,6 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
 
   return;
 }
-
 double CRModel::get_m0() const{
   Parameter_set* p = this->model_param->get_parameters();
   double m0 = 0.;
@@ -492,7 +481,6 @@ double CRModel::get_m0() const{
   }
   return m0;
 }
-
 double CRModel::get_d0() const{
   Parameter_set* p = this->model_param->get_parameters();
   double d0 = 0.;
@@ -502,17 +490,14 @@ double CRModel::get_d0() const{
   }
   return d0;
 }
-
 nvector CRModel::get_m() const{
   Parameter_set* p = this->model_param->get_parameters();
   return p->m;
 }
-
 nvector CRModel::get_d()const{
   Parameter_set* p = this->model_param->get_parameters();
   return p->d;
 }
-
 nmatrix CRModel::perturb_abundances(const ntype& delta){
   nmatrix* current_eq = &(*eq_vals)[0];
   nmatrix perturb_eq;
@@ -530,7 +515,6 @@ nmatrix CRModel::perturb_abundances(const ntype& delta){
   }
   return perturb_eq;
 }
-
 nmatrix CRModel::get_first_equilibrium() const{
   return (*eq_vals)[0];
 }
@@ -552,7 +536,6 @@ ntype CRModel::get_resilience_dynamical_stability(const ntype& delta){
   double tend = 0.;
   return ntype(tend);
 }
-
 bool CRModel::has_linearly_stable_eq() const{
   using namespace Eigen;
   unsigned int NR = this->metaparameters->NR, NS = this->metaparameters->NS;
@@ -587,7 +570,6 @@ bool CRModel::has_linearly_stable_eq() const{
   std::cout << "Could not determine whether or not the system was stable, returning false to make sure" << std::endl;
   return false;
 }
-
 systemstability CRModel::is_dynamically_stable() const{
   ncvector eigvals = this->eigenvalues_at_equilibrium();
   ntype max_real_eigval = real(eigvals[0]);
@@ -605,4 +587,72 @@ systemstability CRModel::is_dynamically_stable() const{
   }else{
     return systemstability(stable);
   }
+}
+nvector CRModel::get_resources_equilibrium(unsigned int n){
+  return (*eq_vals)[n][0];
+}
+nvector CRModel::get_consumers_equilibrium(unsigned int n){
+  return (*eq_vals)[n][1];
+}
+ntype CRModel::environmental_flux_resource(unsigned int mu){
+  return this->model_param->get_parameters()->l[mu];
+}
+ntype CRModel::environmental_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+  return this->environmental_flux_resource(mu);
+}
+ntype CRModel::diffusion_flux_resource(unsigned int mu, const nvector& R){
+  return -this->model_param->get_parameters()->m[mu]*R[mu];
+}
+ntype CRModel::diffusion_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+  return this->diffusion_flux_resource(mu, get_resources_equilibrium(mu));
+}
+ntype CRModel::syntrophy_flux_resource(unsigned int mu, const nvector& R, const nvector& S){
+  Parameter_set * p = this->model_param->get_parameters();
+  ntype flux=0.;
+  for(size_t j=0; j < S.size(); ++j){
+    flux+=p->alpha[mu][j]*S[j];
+  }
+  return flux;
+}
+ntype CRModel::syntrophy_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+  return this->syntrophy_flux_resource(mu, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
+}
+ntype CRModel::consumption_flux_resource(unsigned int mu, const nvector& R, const nvector& S){
+  Parameter_set * p = this->model_param->get_parameters();
+  ntype flux=0.;
+  for(size_t j=0; j < S.size(); ++j){
+    flux-=p->gamma[j][mu]*R[mu]*S[j];
+  }
+  return flux;
+}
+ntype CRModel::consumption_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+  return this->consumption_flux_resource(mu, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
+}
+ntype CRModel::consumption_intake_flux_consumer(unsigned int i, const nvector&R, const nvector& S){
+  Parameter_set* p=this->model_param->get_parameters();
+  ntype flux=0.;
+  for(size_t mu=0; mu < R.size();++mu){
+    flux+=p->sigma[i][mu]*p->gamma[i][mu]*S[i]*R[mu];
+  }
+  return flux;
+}
+ntype CRModel::consumption_intake_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number){
+  return this->consumption_intake_flux_consumer(i, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
+}
+ntype CRModel::diffusion_flux_consumer(unsigned int i, const nvector& S){
+  return -this->model_param->get_parameters()->d[i]*S[i];
+}
+ntype CRModel::diffusion_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number){
+  return this->diffusion_flux_consumer(i, this->get_consumers_equilibrium(eq_number));
+}
+ntype CRModel::syntrophy_flux_consumer(unsigned int i, const nvector& R, const nvector& S){
+  ntype flux=0.;
+  Parameter_set* p = this->model_param->get_parameters();
+  for(size_t mu=0; mu < R.size(); ++mu){
+    flux-=p->alpha[mu][i]*S[i];
+  }
+  return flux;
+}
+ntype CRModel::syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number){
+  return this->syntrophy_flux_consumer(i,this->get_resources_equilibrium(eq_number),this->get_consumers_equilibrium(eq_number));
 }
