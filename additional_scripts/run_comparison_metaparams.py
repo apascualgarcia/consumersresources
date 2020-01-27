@@ -9,6 +9,7 @@ m_list = sys.argv[2]
 cores = int(sys.argv[3])
 command_name = sys.argv[4]
 output_name = sys.argv[5]
+additional_metaparams = sys.argv[6]
 
 with open('./config/' + config_file + '.in') as f:
     mylist = f.read().splitlines()
@@ -23,6 +24,7 @@ for i in range(0, cores):
         cmd_core += " path_to_food_matrix=" + \
             matrix_list[i]
         cmd_core += " path_to_save_file=./data_output/" + out_name + ".out"
+        cmd_core += (" "+additional_metaparams)
         cmd_core += " seed_number=" + str(seed_number)
         cmd_core += "| ts \'[%Y-%m-%d %H:%M:%S]\'\"> ./logs/" + out_name+ ".log"
         cmd_core += " 2>./logs/err" + out_name + '.log &&'

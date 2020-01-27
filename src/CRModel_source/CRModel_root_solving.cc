@@ -158,14 +158,14 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
 
   switch(delta_solv.fit_mode){
     case polynomial:
-      Nsimul_frun = 50;
-      Nsimul_srun = 100;
-      interval_length = 10;
+      Nsimul_frun = COMPUTE_CRITICAL_DELTA_POLY_FIRST_RUN;
+      Nsimul_srun = COMPUTE_CRITICAL_DELTA_POLY_SECOND_RUN;
+      interval_length = COMPUTE_CRITICAL_DELTA_POLY_INTERVAL_LENGTH;
       break;
     case sigmoidal:
-      Nsimul_frun = 50;
-      Nsimul_srun = 100;
-      interval_length= 50;
+      Nsimul_frun = COMPUTE_CRITICAL_DELTA_SIG_FIRST_RUN;
+      Nsimul_srun = COMPUTE_CRITICAL_DELTA_SIG_SECOND_RUN;
+      interval_length= COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH;
       break;
     default:
       std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;

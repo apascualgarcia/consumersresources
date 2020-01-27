@@ -4,12 +4,14 @@ import numpy as np
 plt.rc('lines', marker=None)
 plt.rc('lines', linestyle='solid')
 
-NR = 4
-NS = 4
+NR = 3
+NS = 3
 folder_path = 'data_output'
+file_ext='.out'
 filename = 'test'
-save_folder='plots/Typical_time_evolution'
-added_text='_low_threshold'
+save_folder='plots'
+added_text='_test'
+INTEGRATOR_PRECISION=1e-6
 
 def compute_log_derivative(t, f):
     deriv = []
@@ -19,7 +21,7 @@ def compute_log_derivative(t, f):
         deriv.append((f[i+1]-f[i])/(f[i]*(t[i+1]-t[i])))
     return np.array(time), np.array(deriv)
 
-data = np.loadtxt(folder_path + "/" + filename +'.out')
+data = np.loadtxt(folder_path + "/" + filename +file_ext)
 
 
 t = data[:, 0]
@@ -44,7 +46,7 @@ index=0
 max_value=10.
 for i in range(NS):
     time_deriv, deriv_cons = compute_log_derivative(t, consumers[:, i])
-    if(max(abs(deriv_cons[:-1]))>max_value):
+    if(max(abs(deriv_cons[:-1]))>max_value and max(abs(deriv_cons[:-1]))<INTEGRATOR_PRECISION):
         index=i
         max_value = max(abs(deriv_cons))
 time_deriv, deriv_cons = compute_log_derivative(t, consumers[:, index])

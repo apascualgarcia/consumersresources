@@ -10,13 +10,14 @@ CRModel::CRModel(){
   this->metaparameters = NULL;
   this->eq_vals = NULL;
   this->model_param = NULL;
+  this->equations_of_evolution = NULL;
   return;
 }
 CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
 }
-CRModel::CRModel(Metaparameters& meta){
+CRModel::CRModel(Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
   unsigned int attempts(0);
   this->create_model_parameters(meta);
   do{
@@ -36,7 +37,7 @@ CRModel::CRModel(Metaparameters& meta){
 
   return;
 }
-CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
+CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
   unsigned int attempts(0);
   this->create_model_parameters(meta);
   do{
@@ -56,8 +57,8 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
   return;
 }
 CRModel::~CRModel(){
-  delete this->model_param;
-  delete this->eq_vals;
+  //delete this->model_param;
+  //delete this->eq_vals;
   return;
 }
 void CRModel::create_model_parameters(Metaparameters& meta){
@@ -121,34 +122,6 @@ void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, 
   p->m = m;
 
   return;
-}
-nvector CRModel::equations_of_evolution(const Dynamical_variables& dyn_var) const{
-  nvector v;
-  const Parameter_set* p = this->model_param->get_parameters();
-  const nvector R = *dyn_var.get_resources();
-  const nvector S = *dyn_var.get_consumers();
-
-  for (size_t nu=0; nu < p->NR; ++nu){
-    ntype result(0.);
-    result+=p->l[nu];
-    result-=p->m[nu]*R[nu];
-    for (size_t j=0; j < p->NS; ++j){
-      result-=p->gamma[j][nu]*R[nu]*S[j];
-      result+=p->alpha[nu][j]*S[j];
-    }
-    v.push_back(result);
-  }
-
-  for (size_t i=0; i<p->NS; ++i){
-    ntype result=0.;
-    for (size_t mu=0; mu < p->NR; ++mu){
-      result+=p->sigma[i][mu]*p->gamma[i][mu]*S[i]*R[mu];
-      result-=p->tau[mu][i]*S[i];
-    }
-    result-=p->d[i]*S[i];
-    v.push_back(result);
-  }
-  return v;
 }
 nmatrix CRModel::jacobian(const Dynamical_variables& dyn_var) const{
   const Parameter_set* p = this->model_param->get_parameters();
@@ -655,4 +628,16 @@ ntype CRModel::syntrophy_flux_consumer(unsigned int i, const nvector& R, const n
 }
 ntype CRModel::syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number){
   return this->syntrophy_flux_consumer(i,this->get_resources_equilibrium(eq_number),this->get_consumers_equilibrium(eq_number));
+}
+Metaparameters* CRModel::get_metaparameters() const{
+  return this->metaparameters;
+}
+Parameter_set* CRModel::get_parameter_set() const{
+  return this->model_param->get_parameters();
+}
+Model_parameters* CRModel::get_model_parameters() const{
+  return this->model_param;
+}
+ntensor* CRModel::get_equilibrium_abundances() const{
+  return this->eq_vals;
 }

@@ -38,7 +38,7 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
   gsl_odeiv2_step* s = gsl_odeiv2_step_alloc(T, dim);
   gsl_odeiv2_control* c = gsl_odeiv2_control_y_new(INTEGRATOR_ABS_PRECISION, INTEGRATOR_REL_PRECISION);
   gsl_odeiv2_evolve* e = gsl_odeiv2_evolve_alloc(dim);
-  gsl_odeiv2_system sys = {ode_equations_of_evolution, NULL, dim, this->model_param->get_parameters()};
+  gsl_odeiv2_system sys = {this->equations_of_evolution, NULL, dim, this->model_param->get_parameters()};
 
   unsigned int counts = 0;
   double previous_y[p->NR+p->NS][INDICES_FOR_AVERAGE];
@@ -119,12 +119,12 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
     }
 
     /* computes the "convergence coefficient" to estimate the convergence (one criterion to stop)*/
-    numerical_convergence = convergence_criterion(threshold, t, previous_y,y,counts, this->model_param->get_parameters());
+    numerical_convergence = convergence_criterion(threshold, t, previous_y,y,counts, this->model_param->get_parameters(), this->equations_of_evolution);
 
     /* if a resource/consumer is too small, we effectively set it to zero */
     bool local_exit = false;
     for(size_t i=0; i < p->NR+p->NS and not(local_exit); ++i){
-      if(y[i] < threshold){
+      if(y[i] < INTEGRATOR_ABS_PRECISION){
         y[i]=0.;
         bool already_extinct;
         /* check if species is already extinct */
@@ -221,14 +221,14 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
   return to_return;
 }
 
-bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params){
+bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params, func_equ_evol equ_evol){
   bool converged = false;
   Parameter_set* p = &(*(Parameter_set*) params);
   const unsigned int sys_size=p->NR+p->NS;
   if(counts>=INDICES_FOR_AVERAGE){
     double dydt[sys_size];
     /* computes dNi/dt in dydt */
-    ode_equations_of_evolution(t, y, dydt, params);
+    equ_evol(t, y, dydt, params);
     bool all_smaller_than_threshold=true;
     for(size_t i=0; i<sys_size and all_smaller_than_threshold;++i){
       if(y[i]>0){

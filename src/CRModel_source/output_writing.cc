@@ -7,6 +7,7 @@ std::ostream& operator<<(std::ostream& os, const Metaparameters& m){
   os << "gamma0 = " << m.gamma0 << "; ";
   os << "alpha0 = " << m.alpha0 << "; ";
   os << "sigma0 = " << m.sigma0 << "; ";
+  os << "l0 = " << m.l0 << ";";
   os << "p = " << m.p << "; ";
   os << "R0 = " << m.R0 << "; ";
   os << "S0 = " << m.S0 << "; ";

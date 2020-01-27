@@ -6,14 +6,16 @@
 #include "Metaparameters.h"
 #include "Dynamical_variables.h"
 #include "Extinction.h"
+#include "../Functions/model_characteristics.h"
 #include <iostream>
 #include <string>
 
 class CRModel{
-private:
+protected:
   Metaparameters* metaparameters;
   ntensor* eq_vals; // we allow the possibility of multiple equilibria (hence vector of vector)
   Model_parameters* model_param;
+  func_equ_evol equations_of_evolution;
 
 public:
   CRModel();
@@ -23,7 +25,6 @@ public:
   ~CRModel();
   void create_model_parameters(Metaparameters&);
   void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
-  nvector equations_of_evolution(const Dynamical_variables&) const; // returns the value of the RHS of the equations of evolution
   nmatrix jacobian_at_equilibrium() const;
   ncvector eigenvalues_at_equilibrium() const;
   nmatrix jacobian(const Dynamical_variables&) const; // returns the jacobian for the given dynamical variables
@@ -40,6 +41,12 @@ public:
   void perturb_parameters() const;
   void perturb_parameters(const ntype &) const;
   void save_new_equilibrium(const Extinction&) const;
+
+  Metaparameters* get_metaparameters() const;
+  Model_parameters* get_model_parameters() const;
+  ntensor* get_equilibrium_abundances() const;
+  Parameter_set* get_parameter_set() const;
+
   double get_m0() const;
   double get_d0() const;
   nvector get_m() const;
@@ -94,7 +101,7 @@ public:
   /* returns the evolution from equilibrium (assumes we are not at equilibrium with R^* and S^*) -> finds the new eq*/
   Extinction evolve_until_equilibrium(ntype, eqmode eq_mode=convergence, writemode write_mode=writemode()) const;
   /* returns the general extinction properties for the initial values init_val */
-  Extinction evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode, writemode write_mode=writemode()) const;
+  Extinction evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode, writemode write_mode=writemode())const;
 };
 
 #endif

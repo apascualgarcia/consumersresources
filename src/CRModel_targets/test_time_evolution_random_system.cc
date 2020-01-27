@@ -5,22 +5,28 @@
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
 
-  std::ofstream myfile;
+  std::ofstream myfile, eff_file;
   myfile.open(metaparams.save_path, std::ofstream::out|std::ofstream::trunc);
-  if(not(myfile.is_open())){
+  eff_file.open(metaparams.save_path + "_eff", std::ofstream::out|std::ofstream::trunc);
+  if(not(myfile.is_open()) or not(eff_file.is_open())){
     std::cerr << "Could not open file " << std::endl;
   }else{
     CRModel model(metaparams);
+    EffectiveCRModel eff_model(model);
+
     eqmode equilibre(convergence);
     writemode ecriture(true, myfile);
+    writemode eff_ecriture(true, eff_file);
 
-    model.perturb_parameters(0.05);
-    model.evolve_until_equilibrium(INTEGRATOR_ABS_PRECISION, equilibre,ecriture);
+    model.perturb_parameters(0.3);
+    model.evolve_until_equilibrium(metaparams.convergence_threshold, equilibre,ecriture);
+    //eff_model.evolve_until_equilibrium(metaparams.convergence_threshold, equilibre,eff_ecriture);
     if(metaparams.verbose > 0){
       std::cout << "Finished writing the time evolution until equilibrium" << std::endl;
     }
   }
   myfile.close();
+  eff_file.close();
 
 
   return 0;

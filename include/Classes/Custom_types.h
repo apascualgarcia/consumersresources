@@ -17,6 +17,8 @@ typedef std::vector<nvector> nmatrix;
 typedef std::vector<nmatrix> ntensor;
 typedef nmatrix foodmatrix;
 
+typedef int(*func_equ_evol)(double, const double[], double[], void *);
+
 // tau0 : tau = 0; taualpha : tau = alpha
 enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
