@@ -67,10 +67,12 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
   if(verbose > 0){
     std::cout << "We then look for a high point slightly below one." << std::endl;
   }
+
   bool high_point_greater_than_one = false;
   /*  we first check if the point where f(x1) = 1-eps is outside of [0,1].
       This happens if f(1) < 1., we check that here */
-  if(GSL_FN_EVAL(&f, 1) < 1.){
+  double x_hi=1.;
+  if(GSL_FN_EVAL(f, 1) < 1.){
     high_point_greater_than_one = true;
     if(verbose>0){
       std::cout << "It turns out that one does not saturate, so we take it as the end of the interval" << std::endl;
@@ -80,7 +82,7 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
 
   if(not(high_point_greater_than_one)){
     s->target = 0.9;
-    double x_hi = find_zero(f, verbose, bounds);
+    x_hi = find_zero(f, verbose, bounds);
   }
 
 
