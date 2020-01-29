@@ -33,8 +33,7 @@ for i in range(0, cores):
         seed_number += 1
     cmd_core = cmd_core[:-3]
     cmd_core += '&'
-    #os.system(cmd_core)
-    print(cmd_core)
+    os.system(cmd_core)
     now = datetime.now()
     dt_string = now.strftime('%d/%m/%Y %H:%M:%S')
     cmd_write = '[' + dt_string + '] ' + cmd_core
