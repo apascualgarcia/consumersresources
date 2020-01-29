@@ -23,5 +23,5 @@ double can_find_one_extinction(Metaparameters*, const ntype & delta, unsigned in
 double can_find_zero_extinction(Metaparameters*, const ntype & delta, unsigned int Nsimul);
 
 /* tells you whether or not the time evolution is considered "converged"*/
-bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params, func_equ_evol equation_evolution);
+bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params, func_equ_evol equation_evolution, writemode wm);
 #endif

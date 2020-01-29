@@ -53,6 +53,13 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
 
   exit_condition = (t>=tmax) or numerical_convergence or started_at_equilibrium;
 
+  /* a rough estimate (higher than the actual value) on the error of the solution*/
+
+
+  if(write_mode.write){
+    write_mode.write_path << std::setprecision(print_precision);
+  }
+
   /* system temporal evolution */
   while(not(exit_condition)){
 
@@ -68,6 +75,13 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
       abort();
       break;
     }
+    ntype ERROR_ON_THE_SOLUTION =0.;
+    for(size_t i=0; i < p->NR+p->NS;++i){
+      ntype local_error=e->yerr[i];
+      if(local_error > ERROR_ON_THE_SOLUTION){
+        ERROR_ON_THE_SOLUTION = local_error;
+      }
+    }
 
     /* we write the system to the desired output if wanted */
     if(write_mode.write){
@@ -75,11 +89,11 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
       for(size_t i =0; i<p->NR+p->NS; ++i){
         write_mode.write_path << y[i] << " ";
       }
-      write_mode.write_path << std::endl;
+      write_mode.write_path << ERROR_ON_THE_SOLUTION << " ";
     }
 
     /* we then compute the differences between this step and the previous one to check if we started already at equilibrium */
-    if(counts <=INDICES_FOR_AVERAGE){
+    if(counts <= INDICES_FOR_AVERAGE){
       for(size_t i=0; i < p->NR+p->NS; ++i){
         diff[i][counts%INDICES_FOR_AVERAGE] = y[i]-previous_y[i][counts%INDICES_FOR_AVERAGE];
       }
@@ -91,7 +105,7 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
       for(size_t j=0; j < INDICES_FOR_AVERAGE and started_at_equilibrium; ++j){
         for(size_t k=0; (k < p->NR+p->NS) and started_at_equilibrium; ++k){
           double difference = abs(diff[k][j]);
-          if(difference> INTEGRATOR_ABS_PRECISION){
+          if(difference> INTEGRATOR_ZERO){
             started_at_equilibrium = false;
           }
         }
@@ -119,13 +133,13 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
     }
 
     /* computes the "convergence coefficient" to estimate the convergence (one criterion to stop)*/
-    numerical_convergence = convergence_criterion(threshold, t, previous_y,y,counts, this->model_param->get_parameters(), this->equations_of_evolution);
+    numerical_convergence = convergence_criterion(threshold, t, previous_y,y,counts, this->model_param->get_parameters(), this->equations_of_evolution, write_mode);
 
     /* if a resource/consumer is too small, we effectively set it to zero */
     bool local_exit = false;
     for(size_t i=0; i < p->NR+p->NS and not(local_exit); ++i){
-      if(y[i] < INTEGRATOR_ABS_PRECISION){
-        y[i]=0.;
+      if(y[i] < SPECIES_EXTINCT){
+        y[i]=INTEGRATOR_ZERO;
         bool already_extinct;
         /* check if species is already extinct */
         if(std::find(extinct_variables.begin(), extinct_variables.end(), i) != extinct_variables.end()){
@@ -163,6 +177,10 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
 
     /* let's not forget to add a count since we did a whole step */
     counts += 1;
+
+    if(write_mode.write){
+      write_mode.write_path << std::endl;
+    }
 
     /* we check whether we should continue integrating or not */
     exit_condition = (t>=tmax) or numerical_convergence or started_at_equilibrium;
@@ -221,23 +239,45 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
   return to_return;
 }
 
-bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params, func_equ_evol equ_evol){
+bool convergence_criterion(const double threshold, const double t, const double previous_y[][INDICES_FOR_AVERAGE], const double y[], unsigned int counts, void* params, func_equ_evol equ_evol, writemode wm){
   bool converged = false;
   Parameter_set* p = &(*(Parameter_set*) params);
   const unsigned int sys_size=p->NR+p->NS;
   if(counts>=INDICES_FOR_AVERAGE){
     double dydt[sys_size];
     /* computes dNi/dt in dydt */
+    /* CHECK WHY THIS DOES NOT GIVE APPROPRIATE RESULTS */
     equ_evol(t, y, dydt, params);
+
+
     bool all_smaller_than_threshold=true;
-    for(size_t i=0; i<sys_size and all_smaller_than_threshold;++i){
-      if(y[i]>0){
-        if(abs(dydt[i]/y[i]) > threshold){
-          all_smaller_than_threshold=false;
-        }
+    bool stay_condition = true;
+
+    for(size_t i=0; stay_condition ;++i){
+      double local_error=0.;
+      /* we check the convergence only of non extinct species */
+      if(y[i] > SPECIES_EXTINCT){
+        local_error = abs(dydt[i]/y[i]);
       }
+      if(local_error > threshold){
+        all_smaller_than_threshold = false;
+      }
+      if(wm.write){
+        wm.write_path << local_error << " ";
+      }
+      stay_condition=wm.write or all_smaller_than_threshold;
+      /*  Add -1 because this is evaluated at the end of the loop so
+          e.g. when sys_size=6, stay_condition should be wrong when i = 5*/
+      stay_condition=stay_condition and i < sys_size-1;
     }
     converged = all_smaller_than_threshold;
+    std::cout << std::endl;
+  }else{
+    if(wm.write){
+      for(size_t i=0; i < sys_size;++i){
+        wm.write_path << "NaN ";
+      }
+    }
   }
 
   return converged;

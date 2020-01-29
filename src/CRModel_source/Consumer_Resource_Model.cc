@@ -561,25 +561,25 @@ systemstability CRModel::is_dynamically_stable() const{
     return systemstability(stable);
   }
 }
-nvector CRModel::get_resources_equilibrium(unsigned int n){
+nvector CRModel::get_resources_equilibrium(unsigned int n) const {
   return (*eq_vals)[n][0];
 }
-nvector CRModel::get_consumers_equilibrium(unsigned int n){
+nvector CRModel::get_consumers_equilibrium(unsigned int n)const {
   return (*eq_vals)[n][1];
 }
-ntype CRModel::environmental_flux_resource(unsigned int mu){
+ntype CRModel::environmental_flux_resource(unsigned int mu) const {
   return this->model_param->get_parameters()->l[mu];
 }
-ntype CRModel::environmental_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+ntype CRModel::environmental_flux_equilibrium_resource (unsigned int mu, unsigned int equilibrium_number) const {
   return this->environmental_flux_resource(mu);
 }
-ntype CRModel::diffusion_flux_resource(unsigned int mu, const nvector& R){
+ntype CRModel::diffusion_flux_resource(unsigned int mu, const nvector& R) const {
   return -this->model_param->get_parameters()->m[mu]*R[mu];
 }
-ntype CRModel::diffusion_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
-  return this->diffusion_flux_resource(mu, get_resources_equilibrium(mu));
+ntype CRModel::diffusion_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number) const {
+  return this->diffusion_flux_resource(mu, get_resources_equilibrium(equilibrium_number));
 }
-ntype CRModel::syntrophy_flux_resource(unsigned int mu, const nvector& R, const nvector& S){
+ntype CRModel::syntrophy_flux_resource(unsigned int mu, const nvector& R, const nvector& S)const {
   Parameter_set * p = this->model_param->get_parameters();
   ntype flux=0.;
   for(size_t j=0; j < S.size(); ++j){
@@ -587,10 +587,10 @@ ntype CRModel::syntrophy_flux_resource(unsigned int mu, const nvector& R, const 
   }
   return flux;
 }
-ntype CRModel::syntrophy_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+ntype CRModel::syntrophy_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number) const {
   return this->syntrophy_flux_resource(mu, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
 }
-ntype CRModel::consumption_flux_resource(unsigned int mu, const nvector& R, const nvector& S){
+ntype CRModel::consumption_flux_resource(unsigned int mu, const nvector& R, const nvector& S) const {
   Parameter_set * p = this->model_param->get_parameters();
   ntype flux=0.;
   for(size_t j=0; j < S.size(); ++j){
@@ -598,10 +598,10 @@ ntype CRModel::consumption_flux_resource(unsigned int mu, const nvector& R, cons
   }
   return flux;
 }
-ntype CRModel::consumption_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number){
+ntype CRModel::consumption_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number) const {
   return this->consumption_flux_resource(mu, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
 }
-ntype CRModel::consumption_intake_flux_consumer(unsigned int i, const nvector&R, const nvector& S){
+ntype CRModel::consumption_intake_flux_consumer(unsigned int i, const nvector&R, const nvector& S) const {
   Parameter_set* p=this->model_param->get_parameters();
   ntype flux=0.;
   for(size_t mu=0; mu < R.size();++mu){
@@ -609,16 +609,16 @@ ntype CRModel::consumption_intake_flux_consumer(unsigned int i, const nvector&R,
   }
   return flux;
 }
-ntype CRModel::consumption_intake_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number){
+ntype CRModel::consumption_intake_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number) const {
   return this->consumption_intake_flux_consumer(i, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
 }
-ntype CRModel::diffusion_flux_consumer(unsigned int i, const nvector& S){
+ntype CRModel::diffusion_flux_consumer(unsigned int i, const nvector& S) const {
   return -this->model_param->get_parameters()->d[i]*S[i];
 }
-ntype CRModel::diffusion_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number){
+ntype CRModel::diffusion_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number) const {
   return this->diffusion_flux_consumer(i, this->get_consumers_equilibrium(eq_number));
 }
-ntype CRModel::syntrophy_flux_consumer(unsigned int i, const nvector& R, const nvector& S){
+ntype CRModel::syntrophy_flux_consumer(unsigned int i, const nvector& R, const nvector& S) const {
   ntype flux=0.;
   Parameter_set* p = this->model_param->get_parameters();
   for(size_t mu=0; mu < R.size(); ++mu){
@@ -626,8 +626,26 @@ ntype CRModel::syntrophy_flux_consumer(unsigned int i, const nvector& R, const n
   }
   return flux;
 }
-ntype CRModel::syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number){
+ntype CRModel::syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number) const {
   return this->syntrophy_flux_consumer(i,this->get_resources_equilibrium(eq_number),this->get_consumers_equilibrium(eq_number));
+}
+ntype CRModel::order_parameter() const{
+  ntype syntrophy_flux_consumers = 0.;
+  ntype consumption_flux_consumers=0.;
+  ntype diffusion_flux_consumers=0.;
+  for(size_t i=0; i < this->metaparameters->NS; ++i){
+    syntrophy_flux_consumers+=this->syntrophy_flux_equilibrium_consumer(i);
+    consumption_flux_consumers+=this->consumption_intake_flux_equilibrium_consumer(i);
+    diffusion_flux_consumers+=this->diffusion_flux_equilibrium_consumer(i);
+  }
+  ntype environmental_flux=0.;
+  ntype diffusion_flux_resources=0.;
+  for(size_t mu=0; mu < this->metaparameters->NR;++mu){
+    environmental_flux+=this->environmental_flux_equilibrium_resource(mu);
+    diffusion_flux_resources+=this->diffusion_flux_equilibrium_resource(mu);
+  }
+
+  return environmental_flux/(diffusion_flux_resources+diffusion_flux_consumers);
 }
 Metaparameters* CRModel::get_metaparameters() const{
   return this->metaparameters;

@@ -53,9 +53,9 @@ public:
   nvector get_d() const;
 
   /* returns the n-th equilibrium value of the resources */
-  nvector get_resources_equilibrium(unsigned int n=0);
+  nvector get_resources_equilibrium(unsigned int n=0) const;
   /* returns the n-th equilibrium value of the species */
-  nvector get_consumers_equilibrium(unsigned int n=0);
+  nvector get_consumers_equilibrium(unsigned int n=0) const;
 
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
@@ -63,28 +63,30 @@ public:
   /* FLUXES PART */
   /* FLUXES FOR RESOURCES */
   /* environmental input biomass flux for resource mu */
-  ntype environmental_flux_resource(unsigned int mu);
-  ntype environmental_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0);
+  ntype environmental_flux_resource(unsigned int mu) const;
+  ntype environmental_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0) const;
   /* diffusion flux for resource mu */
-  ntype diffusion_flux_resource(unsigned int mu, const nvector& R);
-  ntype diffusion_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0);
+  ntype diffusion_flux_resource(unsigned int mu, const nvector& R) const ;
+  ntype diffusion_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0) const;
   /* syntrophy flux for resource mu */
-  ntype syntrophy_flux_resource(unsigned int mu, const nvector& R, const nvector& S);
-  ntype syntrophy_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0);
+  ntype syntrophy_flux_resource(unsigned int mu, const nvector& R, const nvector& S) const;
+  ntype syntrophy_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0) const;
   /* consumption from consumers flux for resource mu */
-  ntype consumption_flux_resource(unsigned int mu, const nvector& R, const nvector& S);
-  ntype consumption_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0);
+  ntype consumption_flux_resource(unsigned int mu, const nvector& R, const nvector& S) const;
+  ntype consumption_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number=0) const;
 
   /* FLUXES FOR CONSUMERS */
   /* consumption intake flux for consumer */
-  ntype consumption_intake_flux_consumer(unsigned int i, const nvector& R, const nvector& S);
-  ntype consumption_intake_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number=0);
+  ntype consumption_intake_flux_consumer(unsigned int i, const nvector& R, const nvector& S) const;
+  ntype consumption_intake_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number=0) const;
   /* diffusion flux for consumer */
-  ntype diffusion_flux_consumer(unsigned int i, const nvector & S);
-  ntype diffusion_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number=0);
+  ntype diffusion_flux_consumer(unsigned int i, const nvector & S) const;
+  ntype diffusion_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number=0) const;
   /* syntrophy flux for consumer */
-  ntype syntrophy_flux_consumer(unsigned int i, const nvector& R, const nvector & S);
-  ntype syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number=0);
+  ntype syntrophy_flux_consumer(unsigned int i, const nvector& R, const nvector & S) const;
+  ntype syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number=0) const;
+  /* gives back the order parameter */
+  ntype order_parameter() const;
 
   /* tells you if the system is stable, marginally stable or unstable dynamically */
   systemstability is_dynamically_stable() const;

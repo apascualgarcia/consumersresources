@@ -119,6 +119,31 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
   std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
   std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
   nmatrix alpha = nmatrix(p->NR, nvector(p->NS, 0.));
+  switch(m.alpha_mode){
+    case random_structure:{
+      for(size_t mu=0; mu < p->NR; ++mu){
+        for(size_t i=0; i < p->NS; ++i){
+          alpha[mu][i] = alpha_distrib(random_engine);
+        }
+      }
+      break;
+    }
+
+    case no_release_when_eat:{
+      for(size_t i=0; i < p->NS; ++i){
+        for(size_t mu=0; mu < p->NR; ++mu){
+          if(p->gamma[i][mu]>0. and ntype(empty_or_not_distrib(random_engine)) < m.p){
+            alpha[mu][i] = alpha_distrib(random_engine);
+          }
+        }
+      }
+      //rescale_mean(alpha, m.alpha0);
+    }
+    default:{
+      std::cerr << " This case of alpha mode has not been implemented yet " << std::endl;
+    }
+  }
+  /* OLD CODE from Jan 27
   if(attempts <= m.nb_attempts){
     switch(m.alpha_mode){
       case random_structure:{
@@ -181,6 +206,7 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
   }
     m.alpha0 = mean(alpha);
   }
+  */
   /* OLD CODE for when the Metaparameters might not be consistent
   nvector alpha_upperbound;
 

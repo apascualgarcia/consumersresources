@@ -16,6 +16,7 @@ int main(int argc, char * argv[]){
     std::cout << model.syntrophy_flux_equilibrium_resource(mu) << " (sy) " << model.consumption_flux_equilibrium_resource(mu) << " (cons) " << std::endl;
   }
   std::cout << std::endl;
+  std::cout << "Order parameter : " << model.order_parameter() << std::endl;
 
   return 0;
 }
