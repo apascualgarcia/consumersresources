@@ -7,5 +7,6 @@ MATRIX_LIST="critical_matrix_list_NR25_NS25"
 CORES=$1
 COMMAND_NAME="build/compute_critical_Delta_at_alpha_max"
 OUTPUT_NAME="cd_alpha_max"
+ADDITIONAL_CHANGES="l_0=2 R0=1"
 
-python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND_NAME $OUTPUT_NAME
+python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND_NAME $OUTPUT_NAME $ADDITIONAL_CHANGES

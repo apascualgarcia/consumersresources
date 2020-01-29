@@ -271,7 +271,6 @@ bool convergence_criterion(const double threshold, const double t, const double 
       stay_condition=stay_condition and i < sys_size-1;
     }
     converged = all_smaller_than_threshold;
-    std::cout << std::endl;
   }else{
     if(wm.write){
       for(size_t i=0; i < sys_size;++i){

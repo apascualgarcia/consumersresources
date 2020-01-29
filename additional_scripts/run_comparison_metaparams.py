@@ -9,7 +9,9 @@ m_list = sys.argv[2]
 cores = int(sys.argv[3])
 command_name = sys.argv[4]
 output_name = sys.argv[5]
-additional_metaparams = sys.argv[6]
+if(len(sys.argv)>6):
+    additional_metaparams = ' '.join(sys.argv[6:])
+    output_name = output_name+'_'+'_'.join(sys.argv[6:])
 
 with open('./config/' + config_file + '.in') as f:
     mylist = f.read().splitlines()
@@ -31,7 +33,8 @@ for i in range(0, cores):
         seed_number += 1
     cmd_core = cmd_core[:-3]
     cmd_core += '&'
-    os.system(cmd_core)
+    #os.system(cmd_core)
+    print(cmd_core)
     now = datetime.now()
     dt_string = now.strftime('%d/%m/%Y %H:%M:%S')
     cmd_write = '[' + dt_string + '] ' + cmd_core
