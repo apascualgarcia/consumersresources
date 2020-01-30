@@ -166,7 +166,7 @@ nmatrix CRModel::jacobian_at_equilibrium() const{
   nvector Seq = (*eq_vals)[0][1];
 
   Dynamical_variables dyn_var(&Req, &Seq);
-  nmatrix jac_eq = jacobian(dyn_var);
+  nmatrix jac_eq = this->jacobian(dyn_var);
   return jac_eq;
 }
 ncvector CRModel::eigenvalues_at_equilibrium() const{
@@ -174,8 +174,15 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
   nmatrix jac_eq = this->jacobian_at_equilibrium();
   ntype min_element(std::abs(jac_eq[0][0]));
 
-  for(size_t i = 0; i < jac_eq.size(); ++i){
-    for(size_t j=0; j < jac_eq[i].size(); ++j){
+  /* the jacobian should always be a square matrix */
+  const unsigned int jacobian_size=jac_eq.size();
+
+  for(size_t i = 0; i < jacobian_size; ++i){
+    if(jac_eq[i].size()!=jacobian_size){
+      std::cerr << "Jacobian is ill formed (not a square matrix). " << std::endl;
+      abort();
+    }
+    for(size_t j=0; j < jacobian_size; ++j){
       if(jac_eq[i][j]*jac_eq[i][j] > 0. and std::abs(jac_eq[i][j]) < min_element){
         min_element = std::abs(jac_eq[i][j]);
       }
@@ -186,14 +193,11 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
   //min_element = 1.;
   //std::cout << " put min_element as 1" << std::endl;
 
-  const unsigned int NR = this->model_param->get_parameters()->NR;
-  const unsigned int NS = this->model_param->get_parameters()->NS;
-
   Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> jacob;
-  jacob.resize(NR+NS, NR+NS);
+  jacob.resize(jacobian_size, jacobian_size);
   // we rescale the jacobian such that even the smallest value is of order 1
-  for(size_t i=0; i < NR+NS; ++i){
-    for(size_t j=0; j < NR+NS; ++j){
+  for(size_t i=0; i < jacobian_size; ++i){
+    for(size_t j=0; j < jacobian_size; ++j){
       jacob(i,j) = jac_eq[i][j]/min_element;
     }
   }

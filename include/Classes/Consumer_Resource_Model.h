@@ -25,9 +25,7 @@ public:
   ~CRModel();
   void create_model_parameters(Metaparameters&);
   void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
-  nmatrix jacobian_at_equilibrium() const;
   ncvector eigenvalues_at_equilibrium() const;
-  nmatrix jacobian(const Dynamical_variables&) const; // returns the jacobian for the given dynamical variables
   void save(std::ostream&) const; // outputs the model to the external file
   std::ostream& display(std::ostream&) const;
   bool energy_constraint() const;
@@ -41,6 +39,13 @@ public:
   void perturb_parameters() const;
   void perturb_parameters(const ntype &) const;
   void save_new_equilibrium(const Extinction&) const;
+
+  /* virtual functions */
+  virtual nmatrix jacobian_at_equilibrium() const;
+  virtual nmatrix jacobian(const Dynamical_variables&) const; // returns the jacobian for the given dynamical variables
+
+
+
 
   Metaparameters* get_metaparameters() const;
   Model_parameters* get_model_parameters() const;

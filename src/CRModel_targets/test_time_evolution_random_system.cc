@@ -18,9 +18,13 @@ int main(int argc, char * argv[]){
     writemode ecriture(true, myfile);
     writemode eff_ecriture(true, eff_file);
 
-    model.perturb_parameters(0.3);
-    model.evolve_until_equilibrium(metaparams.convergence_threshold, equilibre,ecriture);
-    //eff_model.evolve_until_equilibrium(metaparams.convergence_threshold, equilibre,eff_ecriture);
+    nmatrix perturbed_abundances = model.perturb_abundances(0.1);
+    model.evolve_until_equilibrium_from_abundances(perturbed_abundances,metaparams.convergence_threshold, equilibre,ecriture);
+    eff_model.evolve_until_equilibrium_from_abundances(perturbed_abundances, metaparams.convergence_threshold, equilibre,eff_ecriture);
+
+    //std::cout << "Actual eigenvalues at equilibrium : " << model.eigenvalues_at_equilibrium() << std::endl;
+    //std::cout << "Effective eigenvalues at equilibrium : " <<  eff_model.eigenvalues_at_equilibrium() << std::endl;
+
     if(metaparams.verbose > 0){
       std::cout << "Finished writing the time evolution until equilibrium" << std::endl;
     }

@@ -8,6 +8,10 @@ public:
   EffectiveCRModel(Metaparameters&);
   EffectiveCRModel(const foodmatrix&, Metaparameters&);
   EffectiveCRModel(const CRModel &);
+
+  /* implements the effective jacobian at equilibrium*/
+  virtual nmatrix jacobian_at_equilibrium() const;
+  virtual nmatrix jacobian(const Dynamical_variables&)const;
 };
 
 #endif

@@ -244,12 +244,6 @@ bool convergence_criterion(const double threshold, const double t, const double 
   Parameter_set* p = &(*(Parameter_set*) params);
   const unsigned int sys_size=p->NR+p->NS;
   if(counts>=INDICES_FOR_AVERAGE){
-    double dydt[sys_size];
-    /* computes dNi/dt in dydt */
-    /* CHECK WHY THIS DOES NOT GIVE APPROPRIATE RESULTS */
-    equ_evol(t, y, dydt, params);
-
-
     bool all_smaller_than_threshold=true;
     bool stay_condition = true;
 
@@ -257,7 +251,9 @@ bool convergence_criterion(const double threshold, const double t, const double 
       double local_error=0.;
       /* we check the convergence only of non extinct species */
       if(y[i] > SPECIES_EXTINCT){
-        local_error = abs(dydt[i]/y[i]);
+        double dy = abs(previous_y[i][counts%INDICES_FOR_AVERAGE]-y[i]);
+        // if the resource/species is not extinct, we compute its relative error
+        local_error= dy/y[i];
       }
       if(local_error > threshold){
         all_smaller_than_threshold = false;

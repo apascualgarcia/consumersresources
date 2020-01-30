@@ -8,7 +8,7 @@ using namespace std;
     to increase syntrophy while still building a reasonable amount of systems for the same time */
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
-  unsigned int Npoints = 30;
+  unsigned int Npoints = 10;
   /* loading the different matrices */
   std::vector<std::string> matrices;
   std::ifstream in(metaparams.foodmatrixpath);
