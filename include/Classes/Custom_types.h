@@ -31,6 +31,7 @@ enum fitmode{sigmoidal, polynomial, sigmoidal_erf};
 enum stabilitymode{dynamical, structural};
 
 enum systemstability {stable, marginal, unstable};
+enum CRModelType{full, effective};
 
 /*  writemode is used in the general time evolution of the system. It tells you whether you should, and if so Where
     write the time evolution of the system */

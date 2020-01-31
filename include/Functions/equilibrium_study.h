@@ -6,7 +6,7 @@
 #include "../Global_Constants.h"
 
 /* finds the probability that the metaparameters yield a feasible system (probability estimated with Nruns runs) */
-ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nruns=1000);
+ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nruns=1000,CRModelType model_type=full);
 
 // for a given set of metaparameters, computes the average extinction of the system
 Extinction_statistics compute_average_extinction(Metaparameters*, const ntype &, unsigned int);

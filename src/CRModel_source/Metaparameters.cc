@@ -64,8 +64,8 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
 
   Solver_Parameters solv;
   solv.metaparameters = &meta;
-  solv.Nsimul=1000;
-  solv.target=0.95;
+  solv.Nsimul=100;
+  solv.target=0.99;
 
   F.function = &function_proba_feasability_solver;
   F.params = &solv;
@@ -73,7 +73,7 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
   /* we first find the alpha_max for which the feasability probability is roughly 0.98 */
   alpha_max = find_zero(&F, this->verbose, interval(0, this->physical_maximum_alpha0()));
   meta.alpha0 = alpha_max;
-
+  std::cout << "Potential alpha max is " << alpha_max << std::endl;
   /*  we take a tiny step back and wait for the first alpha which is = 1
       this works because we know the shape of the feasability vs alpha curve */
   while(find_feasability_probability(meta) < 1.){
@@ -86,4 +86,32 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
   }
 
   return alpha_max;
+}
+
+ntype Metaparameters::feasible_alpha_min(ntype alpha_accuracy) const{
+  ntype alpha_min=0.;
+  ntype upper_bound = this->feasible_alpha_max(alpha_accuracy)-alpha_accuracy;
+
+  gsl_function F;
+  Metaparameters meta = *this;
+
+  Solver_Parameters solv;
+  solv.metaparameters = &meta;
+  solv.Nsimul=1000;
+  solv.target=0.95;
+
+  F.function = &function_proba_feasability_solver;
+  F.params = &solv;
+
+  /* we first find the alpha_max for which the feasability probability is roughly 0.98 */
+  alpha_min = find_zero(&F, this->verbose, interval(0, upper_bound));
+  meta.alpha0 = alpha_min;
+
+  if(this->verbose > 0){
+    std::cout << "Minimum feasible alpha0 for " << this->foodmatrixpath << " is " << alpha_min << std::endl;
+  }
+
+
+
+  return alpha_min;
 }

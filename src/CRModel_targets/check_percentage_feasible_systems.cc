@@ -9,23 +9,7 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   /* loading the different matrices */
-  std::vector<std::string> matrices;
-  std::ifstream in(metaparams.foodmatrixpath);
-  if (!in) {
-    std::cerr << "Cannot open file containing the list of matrices " << metaparams.foodmatrixpath << " to measure their critical probability feasability" << std::endl;
-  }else{
-    do{
-      std::string a;
-      in >> a;
-      matrices.push_back(a);
-    }while(!in.eof());
-    /* remove last string if white space */
-    std::string str = matrices[matrices.size()-1];
-    if(str.find_first_not_of(' ') == std::string::npos){
-      matrices.pop_back();
-    }
-  }
-  in.close();
+  std::vector<std::string> matrices=load_food_matrix_list(metaparams.foodmatrixpath);
   for(size_t i=0; i < matrices.size();++i){
     std::cout << matrices[i] << std::endl;
   }
@@ -34,8 +18,8 @@ int main(int argc, char * argv[]){
   unsigned int Nsystems = 100;
   /* we check for N_alpha values of alpha between alpha_min and alpha_max*/
   unsigned int N_alpha = 100;
-  ntype alpha_min = 4.;
-  ntype alpha_max = 16.5;
+  ntype alpha_min = 0.;
+  ntype alpha_max = 0.2;
 
   nvector alpha_range;
   for(size_t i=0; i < N_alpha; ++i){
@@ -55,20 +39,17 @@ int main(int argc, char * argv[]){
       metaparams.foodmatrixpath = matrices[i];
       nvector proba_range;
       bool completely_feasible = true;
+      myfile << matrices[i] << " ";
       for(size_t j=0; j < N_alpha;++j){
         metaparams.alpha0 = alpha_range[j];
         ntype proba = find_feasability_probability(metaparams, Nsystems);
         if(proba*proba < 1.){
           completely_feasible = false;
         }
+        myfile << alpha_range[j] << " " << proba << " ";
         proba_range.push_back(proba);
       }
-      if(not(completely_feasible)){
-        myfile << matrices[i] << " ";
-        myfile << proba_range << std::endl;
-      }else{
-        std::cerr << "Matrix " << matrices[i] << " has a critical alpha outside the range considered " << std::endl;
-      }
+      myfile << std::endl;
     }
   }
   myfile.close();

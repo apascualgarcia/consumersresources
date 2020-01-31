@@ -2,17 +2,37 @@
 #include <gsl/gsl_statistics.h>
 
 
-ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nruns){
+ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nruns, CRModelType model_type){
   foodmatrix F = load_food_matrix(metaparams);
   ntype proba = 0.;
-  CRModel model;
-  model.create_model_parameters(metaparams);
-  for(size_t j=0; j < Nruns;++j){
-    model.attempt_to_build_model(F, metaparams, 0);
-    if(model.constraints_fulfilled(metaparams)){
-      proba+=1./Nruns;
+  switch(model_type){
+    case full:{
+      CRModel model;
+      model.create_model_parameters(metaparams);
+      for(size_t j=0; j < Nruns;++j){
+        model.attempt_to_build_model(F, metaparams, 0);
+        if(model.constraints_fulfilled(metaparams)){
+          proba+=1./Nruns;
+        }
+      }
+      break;
+    }
+    case effective:{
+      EffectiveCRModel model;
+      model.create_model_parameters(metaparams);
+      for(size_t j=0; j < Nruns;++j){
+        model.attempt_to_build_model(F, metaparams, 0);
+        if(model.constraints_fulfilled(metaparams)){
+          proba+=1./Nruns;
+        }
+      }
+      break;
+    }
+    default:{
+
     }
   }
+
   if(metaparams.verbose > 1){
     std::cout << "The probability of feasability for alpha0 = " << metaparams.alpha0 << " is " << proba << std::endl;
   }

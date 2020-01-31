@@ -6,18 +6,8 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   initialize_random_engine(metaparams);
-  vector<string> matrices_path;
-  std::ifstream in(metaparams.foodmatrixpath);
-  if (!in) {
-    std::cerr << "Cannot open file " << metaparams.foodmatrixpath << " to compute critical deltas" << std::endl;
-  }else{
-    do{
-      std::string a;
-      in >> a;
-      matrices_path.push_back(a);
-    }while(!in.eof());
-  }
-  in.close();
+  std::vector<std::string> matrices_path=load_food_matrix_list(metaparams.foodmatrixpath);
+  
   std::ofstream myfile;
   myfile.open(metaparams.save_path, std::ios::app);
   if(metaparams.verbose > 0){
@@ -36,6 +26,7 @@ int main(int argc, char * argv[]){
     save_success = true;
     for(size_t i = 0; i < matrices_path.size();++i){
         metaparams.foodmatrixpath = matrices_path[i];
+        std::cout << "Maximum feasible alpha : " << metaparams.feasible_alpha_max() << std::endl;
         delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
         statistics delta = compute_critical_Delta(metaparams, solv_params);
         std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;

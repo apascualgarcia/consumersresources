@@ -30,5 +30,9 @@ nvector operator-(const nvector&);
 nvector operator-(const nvector&, const nvector&);
 ntype operator*(const nvector&, const nvector&);
 
+/*  returns a vector of string containing the path of the matrices (loads
+    path_to_list file) */
+std::vector<std::string> load_food_matrix_list(std::string path_to_list);
+
 
 #endif

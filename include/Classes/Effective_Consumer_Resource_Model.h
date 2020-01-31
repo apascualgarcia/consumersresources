@@ -5,6 +5,7 @@
 
 class EffectiveCRModel:public CRModel{
 public:
+  EffectiveCRModel();
   EffectiveCRModel(Metaparameters&);
   EffectiveCRModel(const foodmatrix&, Metaparameters&);
   EffectiveCRModel(const CRModel &);

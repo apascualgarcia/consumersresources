@@ -9,23 +9,7 @@ using namespace std;
 int main(int argc, char * argv[]){
   Metaparameters metaparams(argc, argv);
   /* loading the different matrices */
-  std::vector<std::string> matrices;
-  std::ifstream in(metaparams.foodmatrixpath);
-  if (!in) {
-    std::cerr << "Cannot open file containing the list of matrices " << metaparams.foodmatrixpath << " to measure their critical probability feasability" << std::endl;
-  }else{
-    do{
-      std::string a;
-      in >> a;
-      matrices.push_back(a);
-    }while(!in.eof());
-    /* remove last string if white space */
-    std::string str = matrices[matrices.size()-1];
-    if(str.find_first_not_of(' ') == std::string::npos){
-      matrices.pop_back();
-    }
-  }
-  in.close();
+  std::vector<std::string> matrices = load_food_matrix_list(metaparams.foodmatrixpath);
   for(size_t i=0; i < matrices.size();++i){
     std::cout << matrices[i] << std::endl;
   }

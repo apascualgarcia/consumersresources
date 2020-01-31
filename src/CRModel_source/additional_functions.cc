@@ -208,11 +208,32 @@ writemode::writemode():write(false), write_path(std::cout){}
 nvector operator-(const nvector& v1, const nvector& v2){
   return v1+(-v2);
 }
-
 ntype operator*(const nvector& v1, const nvector& v2){
   ntype dot_prod=0.;
   for(size_t i=0; i < v1.size(); ++i){
     dot_prod += v1[i]*v2[i];
   }
   return dot_prod;
+}
+
+
+std::vector<std::string> load_food_matrix_list(std::string path_to_list){
+  std::vector<std::string> matrices;
+  std::ifstream in(path_to_list);
+  if (!in) {
+    std::cerr << "Cannot open file containing the list of matrices " << path_to_list << std::endl;
+  }else{
+    do{
+      std::string a;
+      in >> a;
+      matrices.push_back(a);
+    }while(!in.eof());
+    /* remove last string if white space */
+    std::string str = matrices[matrices.size()-1];
+    if(str.find_first_not_of(' ') == std::string::npos){
+      matrices.pop_back();
+    }
+  }
+  in.close();
+  return matrices;
 }

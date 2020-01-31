@@ -1,6 +1,17 @@
 #include "../../include/CRModel.h"
 
+EffectiveCRModel::EffectiveCRModel(){
+  this->metaparameters = NULL;
+  this->eq_vals = NULL;
+  this->model_param = NULL;
+  this->equations_of_evolution = &effective_ode_equations_of_evolution;
+  return;
+}
+
 EffectiveCRModel::EffectiveCRModel(Metaparameters& meta):CRModel(meta){
+  if(meta.verbose > 1){
+    std::cout << "Created an effective CR Model" << std::endl;
+  }
   this->equations_of_evolution = &effective_ode_equations_of_evolution;
 }
 EffectiveCRModel::EffectiveCRModel(const foodmatrix& F, Metaparameters& meta):CRModel(F, meta){

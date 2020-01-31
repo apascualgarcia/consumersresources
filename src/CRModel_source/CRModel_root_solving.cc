@@ -106,7 +106,7 @@ double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
   gsl_root_fsolver* s;
 
   double x_lo = bounds.begin, x_hi = bounds.end, r=0.05;
-  double tolerance = 0.05;
+  double tolerance = 0.01;
   int status;
   int iter = 0;
 
@@ -115,7 +115,6 @@ double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
 
   gsl_root_fsolver_set(s, f, x_lo, x_hi);
 
-  // the idea is first to find an interval where the solution roughly should be
   do{
     iter++;
     status = gsl_root_fsolver_iterate(s);
@@ -125,6 +124,7 @@ double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
     status = gsl_root_test_interval(x_lo, x_hi, 0, tolerance);
   }while(status==GSL_CONTINUE);
   estimate = r;
+  std::cout << "Found estimate " << estimate << std::endl;
 
   gsl_root_fsolver_free(s);
   return estimate;
