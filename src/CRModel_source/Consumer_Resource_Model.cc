@@ -13,6 +13,14 @@ CRModel::CRModel(){
   this->equations_of_evolution = NULL;
   return;
 }
+
+CRModel::CRModel(const CRModel& model){
+  this->metaparameters= &(*(model.get_metaparameters()));
+  this->eq_vals = new ntensor(*(model.get_equilibrium_abundances()));
+  this->model_param = new Model_parameters(*(model.get_model_parameters()));
+  this->equations_of_evolution = func_equ_evol(model.get_equations_of_evolution());
+}
+
 CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
@@ -57,8 +65,8 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evoluti
   return;
 }
 CRModel::~CRModel(){
-  //delete this->model_param;
-  //delete this->eq_vals;
+  delete this->model_param;
+  delete this->eq_vals;
   return;
 }
 void CRModel::create_model_parameters(Metaparameters& meta){
@@ -662,4 +670,7 @@ Model_parameters* CRModel::get_model_parameters() const{
 }
 ntensor* CRModel::get_equilibrium_abundances() const{
   return this->eq_vals;
+}
+func_equ_evol CRModel::get_equations_of_evolution() const{
+  return this->equations_of_evolution;
 }

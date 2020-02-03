@@ -1,7 +1,6 @@
 #ifndef GLOBAL_CONSTANTS_H
 #define GLOBAL_CONSTANTS_H
 
-
 const unsigned int print_precision = 15;
 const ntype EIGENSOLVER_PRECISION = 1e-15;
 

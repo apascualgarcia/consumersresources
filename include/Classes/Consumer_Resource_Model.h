@@ -19,10 +19,11 @@ protected:
 
 public:
   CRModel();
+  CRModel(const CRModel&);
   CRModel(Metaparameters&);
   CRModel(const foodmatrix&, Metaparameters&);
   CRModel(Model_parameters*);
-  ~CRModel();
+  virtual ~CRModel();
   void create_model_parameters(Metaparameters&);
   void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
   ncvector eigenvalues_at_equilibrium() const;
@@ -51,6 +52,7 @@ public:
   Model_parameters* get_model_parameters() const;
   ntensor* get_equilibrium_abundances() const;
   Parameter_set* get_parameter_set() const;
+  func_equ_evol get_equations_of_evolution() const;
 
   double get_m0() const;
   double get_d0() const;
