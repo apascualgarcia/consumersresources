@@ -15,7 +15,9 @@ do
     then
       CURRENT_NAME="${CURRENT_NAME}_${ADDITIONAL_MODIF}"
     fi
-    COMMAND_NAME="build/compute_critical_Delta_matrices config/$f.in path_to_save_file=data_output/$CURRENT_NAME.out path_to_food_matrix=config/$MATRIX_LIST.in $ADDITIONAL_MODIF convergence_threshold=$conv > logs/$CURRENT_NAME.log 2>logs/err_$CURRENT_NAME.log"
-    nohup ${COMMAND_NAME} &
+    COMMAND_NAME="build/compute_critical_Delta_matrices config/$f.in path_to_save_file=data_output/$CURRENT_NAME.out path_to_food_matrix=config/$MATRIX_LIST.in $ADDITIONAL_MODIF convergence_threshold=$conv"
+    LOG_NAME= "logs/$CURRENT_NAME.log"
+    ERR_LOG_NAME= "logs/err_$CURRENT_NAME.log"
+    nohup ${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME} &
   done
 done
