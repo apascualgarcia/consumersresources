@@ -2,22 +2,28 @@
 CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0"
 MATRIX_LIST="matrix_list_NR25_NS25_test"
 SAVENAME="critical_delta_convergence_study"
-CONV_LIST="1e-1 1e-2 1e-3 1e-4 1e-5 1e-6 1e-7 1e-8 1e-9"
+CONV_LIST="1e-2"
 ADDITIONAL_MODIF=""
 
 for f in $CONFIG_LIST
 do
   for conv in $CONV_LIST
   do
-    VAL_CONV="conv="$conv
+    VAL_CONV="conv="${conv}
     CURRENT_NAME="${SAVENAME}_${VAL_CONV}_${f}"
-    if [ ! -z "$ADDITIONAL_MODIF"]
+    if [ ! -z "${ADDITIONAL_MODIF}"]
     then
       CURRENT_NAME="${CURRENT_NAME}_${ADDITIONAL_MODIF}"
     fi
-    COMMAND_NAME="build/compute_critical_Delta_matrices config/$f.in path_to_save_file=data_output/$CURRENT_NAME.out path_to_food_matrix=config/$MATRIX_LIST.in $ADDITIONAL_MODIF convergence_threshold=$conv"
-    LOG_NAME= "logs/$CURRENT_NAME.log"
-    ERR_LOG_NAME= "logs/err_$CURRENT_NAME.log"
-    nohup ${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME} &
+    COMMAND_NAME="build/compute_critical_Delta_matrices config/${f}.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=config/${MATRIX_LIST}.in ${ADDITIONAL_MODIF} convergence_threshold=${conv}"
+    LOG_NAME="logs/${CURRENT_NAME}.log"
+    ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
+
+    # execute command
+    nohup ${COMMAND_NAME} > ${LOG_NAME} 2> ${ERR_LOG_NAME} &
+    # write command to log
+    now="["$(date)"]"
+    echo "${now} nohup ${COMMAND_NAME} > ${LOG_NAME} 2> ${ERR_LOG_NAME} &" >> logs/commands.log
   done
 done
+echo "Launched commands in the background, please check appropriate log files for progress"
