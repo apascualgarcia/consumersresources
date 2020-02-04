@@ -18,7 +18,7 @@ int main(int argc, char * argv[]){
     writemode ecriture(true, myfile);
     writemode eff_ecriture(true, eff_file);
 
-    nmatrix perturbed_abundances = model.perturb_abundances(0.1);
+    nmatrix perturbed_abundances = model.perturb_abundances(0.4);
     model.evolve_until_equilibrium_from_abundances(perturbed_abundances,metaparams.convergence_threshold, equilibre,ecriture);
     eff_model.evolve_until_equilibrium_from_abundances(perturbed_abundances, metaparams.convergence_threshold, equilibre,eff_ecriture);
 

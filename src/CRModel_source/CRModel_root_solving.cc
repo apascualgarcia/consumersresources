@@ -60,7 +60,8 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
   }
   s->target = 0.01;
   double x_lo = find_zero(f, verbose, bounds);
-
+  /* we do not forget to set the target back to its initial value */
+  s->target = initial_target;
 
 
   /* we then find a second point such that f(x1) < 1. It will be taken as the end of the interval */
@@ -72,7 +73,11 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
   /*  we first check if the point where f(x1) = 1-eps is outside of [0,1].
       This happens if f(1) < 1., we check that here */
   double x_hi=1.;
-  if(GSL_FN_EVAL(f, 1) < 1.){
+  s->target=0.;
+  double proba_extinction_at_one = GSL_FN_EVAL(f,1.);
+  s->target=initial_target;
+  if(proba_extinction_at_one < 1.){
+    std::cout << " Probability of extinction at one is smaller than one : " << proba_extinction_at_one<< std::endl;
     high_point_greater_than_one = true;
     if(verbose>0){
       std::cout << "It turns out that one does not saturate, so we take it as the end of the interval" << std::endl;
@@ -83,11 +88,12 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
   if(not(high_point_greater_than_one)){
     s->target = 0.9;
     x_hi = find_zero(f, verbose, bounds);
+    /* we do not forget to set the target back to its initial value */
+    s->target = initial_target;
   }
 
 
-  /* we do not forget to set the target back to its initial value */
-  s->target = initial_target;
+
   interval r_interval(x_lo, x_hi);
   if(verbose > 0){
     std::cout << "Found an interval for the critical value :" << r_interval<< std::endl;

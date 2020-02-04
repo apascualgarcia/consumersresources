@@ -10,7 +10,7 @@ import matplotlib
 # rc('text', usetex=False)
 
 folder = './data_output'
-filename = 'cd_alpha_max_configuration_comparison_NR25_NS25_s05_a1_critical_matrix_list_NR25_NS25_3'
+filename = 'cd_alpha_max_l_0=2_R0=1_configuration_comparison_NR25_NS25_s05_a0_critical_matrix_list_NR25_NS25_2'
 save_folder = './plots'
 save_name = filename
 title = r''

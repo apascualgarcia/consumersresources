@@ -209,7 +209,11 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
       }
       std::cout << ")" << std::endl;
     }else if(eq_mode == convergence){
-      std::cout << "\t Time to get convergence on all the resources/consumers time lines : " << t << std::endl;
+      std::cout << "\t Time to get convergence on all the resources/consumers time lines : " << t  << " ";
+      if(one_extinct){
+        std::cout << ", at least one species got extinct ";
+      }
+      std::cout << std::endl;
     }
   }
 
