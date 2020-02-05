@@ -162,3 +162,7 @@ std::ostream& operator<<(std::ostream& os, const stability& stab){
   os << stab.unstable << " " << stab.marginally_stable << " " << stab.stable;
   return os;
 }
+
+std::ostream& operator<<(std::ostream& os, const error& e){
+  os << "Error during runtime : " << e.message << std::endl;
+}

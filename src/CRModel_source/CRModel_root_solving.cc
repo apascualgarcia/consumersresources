@@ -116,6 +116,11 @@ double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
   int status;
   int iter = 0;
 
+  if(GSL_SIGN(GSL_FN_EVAL(f, x_lo)*GSL_FN_EVAL(f, x_hi))>0){
+    error err("It looks like the function does not vanish in the promised interval. Therefore the simulation will be aborted.");
+    throw err;
+  }
+
   T = gsl_root_fsolver_brent;
   s = gsl_root_fsolver_alloc(T);
 
@@ -150,9 +155,9 @@ nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int 
       break;
 
     default:
-      std::cerr << "Cannot find rought interval to compute delta critical with that fitting mode" << std::endl;
-      std::cerr << "It either does not exist or has not been implemented yet. Aborting the simulation now" << std::endl;
-      abort();
+      error err("Cannot find rought interval to compute delta critical with that fitting mode. It either does not exist or has not been implemented yet.");
+      throw err;
+      break;
   }
 }
 statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_solv){
@@ -174,9 +179,8 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
       target=1.;
       break;
     default:
-      std::cerr << "This type of equilibrium has not been implemented yet or does not exist " << std::endl;
-      std::cerr << "Abort the program now " << std::endl;
-      abort();
+      error err("This type of equilibrium has not been implemented yet or does not exist.");
+      throw err;
       break;
   }
 
@@ -192,9 +196,8 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
       interval_length= COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH;
       break;
     default:
-      std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;
-      std::cerr << "Aborting the program now" << std::endl;
-      abort();
+      error err("This type of fitting mode has not been implemented yet or does not exist.");
+      throw err;
       break;
   }
 
@@ -314,9 +317,8 @@ double function_av_extinct_solver(double delta, void*params){
       return probability_of_extinction_greather_than_one(m, delta, Nsimul)-target;
       break;
     default:
-      std::cerr << "equilibrium type not implemented yet"<< std::endl;
-      std::cerr << "Aborting simulation now" << std::endl;
-      abort();
+      error err("Equilibrium type not implemented yet.");
+      throw err;
       break;
   }
 }
@@ -342,25 +344,26 @@ statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double &
   }
 
   switch(delta_solv.fit_mode){
-    case sigmoidal:
+    case sigmoidal:{
       estimate = gsl_vector_get(fit_parameters.fit_parameters,0);
       error = gsl_vector_get(fit_parameters.error, 0);
       break;
-    case sigmoidal_erf:
+    }
+    case sigmoidal_erf:{
       estimate = gsl_vector_get(fit_parameters.fit_parameters,0);
       error = gsl_vector_get(fit_parameters.error, 0);
-
-    case polynomial:
-      std::cerr << "PLEASE IMPLEMENT THE FUNCTION TO SOLVE FOR DELTA WITH POLYNOMIAL FIT" << std::endl;
-      std::cerr << "Aborting the simulation now";
-      abort();
+    }
+    case polynomial:{
+      struct error err("PLEASE IMPLEMENT THE FUNCTION TO SOLVE FOR DELTA WITH POLYNOMIAL FIT.");
+      throw err;
       break;
+    }
 
-    default:
-      std::cerr << "This type of fitting mode has not been implemented yet or does not exist" << std::endl;
-      std::cerr << "Abort simulation now " << std::endl;
-      abort();
+    default:{
+      struct error err("This type of fitting mode has not been implemented yet or does not exist.");
+      throw err;
       break;
+    }
   }
   statistics delta;
   delta.mean_ = estimate;

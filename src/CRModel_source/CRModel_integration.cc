@@ -74,8 +74,8 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
     /* evolve the system to the next state */
     int status = gsl_odeiv2_evolve_apply(e,c,s, &sys, &t, tmax, &step_size, y);
     if (status != GSL_SUCCESS){
-      std::cerr << "Error in the integration of the ODE!" << std::endl;
-      abort();
+      error err("Error in the integration of the ODE!");
+      throw err;
       break;
     }
     ntype ERROR_ON_THE_SOLUTION =0.;

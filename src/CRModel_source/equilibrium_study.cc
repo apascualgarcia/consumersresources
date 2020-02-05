@@ -131,9 +131,8 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
       break;
     };
     default:{
-      std::cerr << "Inexistent type of stability in probability_of_extinction_greather_than_one" << std::endl;
-      std::cerr << "Aborting simulation now "<< std::endl;
-      abort();
+      error err("Inexistent type of stability in probability_of_extinction_greather_than_one.");
+      throw err;
       break;
     }
   }
@@ -165,9 +164,8 @@ statistics distance_between_equilibria(Metaparameters* metaparams, const ntype& 
         break;
       }
       default:{
-        std::cerr << "average_distance_between_equilibria not yet implemented for this type of stability mode " << std::endl;
-        std::cerr << "Aborting simulation now" << std::endl;
-        abort();
+        error err("average_distance_between_equilibria not yet implemented for this type of stability mode.");
+        throw err;
         break;
       }
     }
@@ -199,9 +197,8 @@ statistics angle_between_equilibria(Metaparameters* metaparams, const ntype& del
       break;
     }
     default:{
-      std::cerr << "average_distance_between_equilibria not yet implemented for this type of stability mode " << std::endl;
-      std::cerr << "Aborting simulation now" << std::endl;
-      abort();
+      error err("average_distance_between_equilibria not yet implemented for this type of stability mode.");
+      throw err;
       break;
     }
   }

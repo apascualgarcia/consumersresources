@@ -27,4 +27,5 @@ std::ostream& operator<<(std::ostream&, const interval&);
 std::ostream& operator<<(std::ostream&, const fitmode &);
 std::ostream& operator<<(std::ostream&, const systemstability&);
 std::ostream& operator<<(std::ostream&, const stability&);
+std::ostream& operator<<(std::ostream&, const error&);
 #endif

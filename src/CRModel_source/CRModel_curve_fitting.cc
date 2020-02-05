@@ -60,16 +60,16 @@ void set_jacobian_matrix_fit(const gsl_vector* params, void* data, gsl_matrix* J
     case sigmoidal:
       set_jacobian_matrix_sigmoidal_fit(params, data, J);
       break;
-    case polynomial:
-      std::cerr << "Please implement the jacobian for the polynomial fit " << std::endl;
-      std::cerr << "Aborting the simulation." << std::endl;
-      abort();
+    case polynomial:{
+      error err("Jacobian for the polynomial fit not implemented.");
+      throw err;
       break;
-    default:
-      std::cerr << "The jacobian for this type of fitting has not been implemented or does not exist yet" << std::endl;
-      std::cerr << "Aborting the simulation." << std::endl;
-      abort();
+    }
+    default:{
+      error err("Jacobian for this type of fitting does not exist or not implemented yet.");
+      throw err;
       break;
+    }
   }
   return;
 }
@@ -101,9 +101,8 @@ double fitting_function(double x, const gsl_vector* a, fitmode fit_mode){
     case polynomial:
       return polynomial_fit(x,a);
     default:
-      std::cerr << "This type of fitting either does not exist or has not been implemented yet " << std::endl;
-      std::cerr << "Aborting the program now" << std::endl;
-      abort();
+      error err("This type of fitting either does not exist or has not been implemented yet.");
+      throw err;
       break;
   }
 }
@@ -271,9 +270,8 @@ nvector guess_initial_fit_parameters(const nvector& x, const nvector& y, fitmode
     }
 
     default:{
-      std::cerr << "This type of fitting has not been implemented yet or does not exist"<<std::endl;
-      std::cerr << "Aborting the simulation now"<<std::endl;
-      abort();
+      error err("This type of fitting has not been implemented yet or does not exist.");
+      throw err;
       break;
     }
   }
@@ -306,9 +304,8 @@ statistics estimate_delta_crit_from_interval(const nvector& interval, const nvec
       fit_type = "degree 3 polynomial";
       break;
     default:
-      std::cerr << "This type of fitting has not been implemented yet or does not exist." << std::endl;
-      std::cerr << "The program will now abort" << std::endl;
-      abort();
+      error err("This type of fitting has not been implemented yet or does not exist.");
+      throw err;
       break;
   }
 
@@ -353,9 +350,8 @@ statistics estimate_alpha_crit_from_interval(const nvector& interval, const nvec
       NUMBER_OF_FITTING_PARAMETERS = 2;
       break;
     default:
-      std::cerr << "This type of fitting has not been implemented yet or does not exist " << std::endl;
-      std::cerr << "The program will now abort" << std::endl;
-      abort();
+      error err("This type of fitting has not been implemented yet or does not exist.");
+      throw err;
       break;
   }
   /* Then we actually find the parameters that fit our choice of function best */

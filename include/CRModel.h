@@ -29,6 +29,7 @@
 #include<fstream>
 #include<iostream>
 #include<iomanip>
+#include<cmath>
 #include "Global_Constants.h"
 
 #endif

@@ -14,10 +14,8 @@ foodmatrix load_food_matrix(const Metaparameters& m){
   }
   std::ifstream in(m.foodmatrixpath);
   if (!in) {
-    std::cerr << "Cannot open file for the matrix " << m.foodmatrixpath << std::endl;
-    std::cerr << "Now aborting the simulation" << std::endl;
-    abort();
-    return f;
+    error err("Cannot open file for the matrix "+m.foodmatrixpath);
+    throw err;
   }
   for (unsigned int x = 0; x < m.NS; x++) {
     for (unsigned int y = 0; y < m.NR; y++) {
@@ -236,4 +234,9 @@ std::vector<std::string> load_food_matrix_list(std::string path_to_list){
   }
   in.close();
   return matrices;
+}
+
+void error::handle(){
+  std::cerr << (*this) << std::endl;
+  abort();
 }

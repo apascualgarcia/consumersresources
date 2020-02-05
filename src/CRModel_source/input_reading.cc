@@ -30,9 +30,8 @@ alphamode string_to_alpha_mode(std::string mode){
   }else if(mode=="no_release_when_eat"){
     return alphamode(no_release_when_eat);
   }else{
-    std::cerr << "Error, that value of alphamode has not been implemented yet or does not exist"<<std::endl;
-    std::cerr << "Aborting simulation" << std::endl;
-    abort();
+    error err("Error, that value of alphamode has not been implemented yet or does not exist.");
+    throw err;
   }
 }
 eqmode string_to_eq_mode(std::string mode){
@@ -41,8 +40,7 @@ eqmode string_to_eq_mode(std::string mode){
     }else if(mode=="convergence"){
       return eqmode(convergence);
     }else{
-      std::cerr<< "Error, that value of equilibrium_mode has not been implemented yet or does not exist" << std::endl;
-      std::cerr << "Aborting simulation" << std::endl;
-      abort();
+      error err("Error, that value of equilibrium_mode has not been implemented yet or does not exist.");
+      throw err;
     }
 }

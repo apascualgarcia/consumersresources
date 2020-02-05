@@ -7,7 +7,6 @@
 #include <gsl/gsl_vector.h>
 #include <fstream>
 
-
 typedef long double ntype;
 
 typedef std::complex<ntype> nctype;
@@ -101,6 +100,12 @@ struct stability{
   ntype stable;
   ntype marginally_stable;
   ntype unstable;
+};
+
+struct error{
+  std::string message;
+  error(std::string a):message(a){};
+  void handle();
 };
 
 

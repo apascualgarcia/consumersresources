@@ -4,35 +4,39 @@
 using namespace std;
 
 int main(int argc, char * argv[]){
-  Metaparameters metaparams(argc, argv);
-  initialize_random_engine(metaparams);
-  std::vector<std::string> matrices_path=load_food_matrix_list(metaparams.foodmatrixpath);
-  
-  std::ofstream myfile;
-  myfile.open(metaparams.save_path, std::ios::app);
-  if(metaparams.verbose > 0){
-    std::cout << "The critical deltas for the following matrices will be computed :";
-    for(size_t i = 0 ; i < matrices_path.size(); ++i){
-      std::cout << std::endl << matrices_path[i];
-    }
-  }
-  bool save_success(false);
-  if(not(myfile.is_open())){
-    std::cerr << "Could not open " << metaparams.save_path << " to write the new equilibrium of the system" << std::endl;
-  }else{
+  try{
+    Metaparameters metaparams(argc, argv);
+    initialize_random_engine(metaparams);
+    std::vector<std::string> matrices_path=load_food_matrix_list(metaparams.foodmatrixpath);
+
+    std::ofstream myfile;
+    myfile.open(metaparams.save_path, std::ios::app);
     if(metaparams.verbose > 0){
-      std::cout << "Successfully opened " << metaparams.save_path <<", attempting now to find the critical delta of every listed matrix " << std::endl;
+      std::cout << "The critical deltas for the following matrices will be computed :";
+      for(size_t i = 0 ; i < matrices_path.size(); ++i){
+        std::cout << std::endl << matrices_path[i];
+      }
+      std::cout << std::endl;
     }
-    save_success = true;
-    for(size_t i = 0; i < matrices_path.size();++i){
-        metaparams.foodmatrixpath = matrices_path[i];
-        std::cout << "Maximum feasible alpha : " << metaparams.feasible_alpha_max() << std::endl;
-        delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
-        statistics delta = compute_critical_Delta(metaparams, solv_params);
-        std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
-        myfile << matrices_path[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
+    bool save_success(false);
+    if(not(myfile.is_open())){
+      std::cerr << "Could not open " << metaparams.save_path << " to write the new equilibrium of the system" << std::endl;
+    }else{
+      if(metaparams.verbose > 0){
+        std::cout << "Successfully opened " << metaparams.save_path <<", attempting now to find the critical delta of every listed matrix " << std::endl;
+      }
+      save_success = true;
+      for(size_t i = 0; i < matrices_path.size();++i){
+          metaparams.foodmatrixpath = matrices_path[i];
+          delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct)};
+          statistics delta = compute_critical_Delta(metaparams, solv_params);
+          std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
+          myfile << matrices_path[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
+      }
     }
+    myfile.close();
+  }catch (error e){
+    e.handle();
   }
-  myfile.close();
   return 0;
 }

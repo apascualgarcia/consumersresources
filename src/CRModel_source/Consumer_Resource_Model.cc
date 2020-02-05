@@ -187,8 +187,8 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
 
   for(size_t i = 0; i < jacobian_size; ++i){
     if(jac_eq[i].size()!=jacobian_size){
-      std::cerr << "Jacobian is ill formed (not a square matrix). " << std::endl;
-      abort();
+      error err("Jacobian is ill formed (not a square matrix).");
+      throw err;
     }
     for(size_t j=0; j < jacobian_size; ++j){
       if(jac_eq[i][j]*jac_eq[i][j] > 0. and std::abs(jac_eq[i][j]) < min_element){
@@ -257,17 +257,23 @@ bool CRModel::energy_constraint() const{
 }
 bool CRModel::positive_parameters() const{
   Parameter_set* p = this->model_param->get_parameters();
-  if(not(non_neg_elements(p->d)) and this->metaparameters->verbose>2){
-    std::cerr << "\t \t System unfeasible : d contains negative elements : " << p->d << std::endl;
+  if(not(non_neg_elements(p->d))){
+    if(this->metaparameters->verbose>2){
+      std::cerr << "\t \t System unfeasible : d contains negative elements : " << p->d << std::endl;
+    }
     return false;
   }
-  if(not(non_neg_elements(p->l)) and this->metaparameters->verbose>2){
-    std::cerr << "\t \t System unfeasible: l contains negative elements : " << p->l << std::endl;
+  if(not(non_neg_elements(p->l))){
+    if(this->metaparameters->verbose>2){
+      std::cerr << "\t \t System unfeasible: l contains negative elements : " << p->l << std::endl;
+    }
     return false;
   }
-  if(not(non_neg_elements(p->m)) and this->metaparameters->verbose>2){
-    std::cerr << "\t \t System unfeasible: m contains negative elements : ";
-    std::cerr << p->m << std::endl;
+  if(not(non_neg_elements(p->m))){
+    if(this->metaparameters->verbose>2){
+      std::cerr << "\t \t System unfeasible: m contains negative elements : ";
+      std::cerr << p->m << std::endl;
+    }
     return false;
   }
   return true;

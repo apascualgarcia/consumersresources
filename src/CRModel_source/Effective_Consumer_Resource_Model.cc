@@ -24,8 +24,8 @@ EffectiveCRModel::EffectiveCRModel(const CRModel & model):CRModel(model){
 nmatrix EffectiveCRModel::jacobian(const Dynamical_variables& dyn_var) const{
   const Parameter_set* p = this->model_param->get_parameters();
   nmatrix J(p->NS, nvector(p->NS, 0.));
-  std::cerr << "Effective jacobian at all times not implemented yet, please do not use this " << std::endl;
-  abort();
+  error err("Effective jacobian at all times not implemented yet, please do not use this.");
+  throw err;
   return J;
 }
 
