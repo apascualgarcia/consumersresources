@@ -2,7 +2,7 @@
 CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0"
 MATRIX_LIST="random_matrix_NR25_NS25"
 SAVENAME="critical_delta_convergence_study"
-CONV_LIST="1e-1 1e-2 1e-3 1e-4 1e-5 1e-6 1e-7 1e-8"
+CONV_LIST="1e-2"
 ADDITIONAL_MODIF=""
 
 for f in $CONFIG_LIST
@@ -10,7 +10,7 @@ do
   for conv in $CONV_LIST
   do
     VAL_CONV="conv="${conv}
-    CURRENT_NAME="${SAVENAME}_${VAL_CONV}_${f}"
+    CURRENT_NAME="${SAVENAME}_${VAL_CONV}_${f}_${MATRIX_LIST}"
     if [ ! -z "${ADDITIONAL_MODIF}"]
     then
       CURRENT_NAME="${CURRENT_NAME}_${ADDITIONAL_MODIF}"
@@ -19,8 +19,9 @@ do
     LOG_NAME="logs/${CURRENT_NAME}.log"
     ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
 
+    echo ${COMMAND_NAME}
     # execute command
-    nohup ${COMMAND_NAME} > ${LOG_NAME} 2> ${ERR_LOG_NAME} &
+    nohup ${COMMAND_NAME} | ts "[%Y-%m-%d %H:%M:%S]"> ${LOG_NAME} 2> ${ERR_LOG_NAME} &
     # write command to log
     now="["$(date)"]"
     echo "${now} nohup ${COMMAND_NAME} > ${LOG_NAME} 2> ${ERR_LOG_NAME} &" >> logs/commands.log

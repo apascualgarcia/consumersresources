@@ -212,8 +212,22 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
   if(metaparams.verbose > 0){
     std::cout << "Now attempting to find the critical delta for the following set of parameters : " << metaparams << std::endl;
     std::cout << "We first find a rough interval where we know the critical delta will lie ("<<params.Nsimul << " runs per point). " << std::endl;
+    std::cout << "We first test if the probability of extinction is strictly greater than zero for Delta=1" << std::endl;
   }
 
+  double proba_extinction_at_one = GSL_FN_EVAL(&F, 1.);
+  if(proba_extinction_at_one<=0){
+    if(metaparams.verbose > 0){
+      std::cout << "We will hence return the default value of Delta=1 which is synonym of global stability." << std::endl;
+    }
+    statistics globally_stable;
+    globally_stable.mean_=1.;
+    return globally_stable;
+  }else if(proba_extinction_at_one<0.5){
+    if(metaparams.verbose > 0){
+      std::cout << "We expect the critical delta to be outside the range [0,1] " << std::endl;
+    }
+  }
   nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose, delta_solv.fit_mode, initial_guess);
 
   /* when we have found an interval we highly suspect of containing the root
