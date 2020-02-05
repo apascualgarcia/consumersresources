@@ -58,6 +58,9 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
 
   if(write_mode.write){
     write_mode.write_path << std::setprecision(print_precision);
+    write_mode.write_path << "#[Time t] " << " [Resources ("<< p->NR << ")]";
+    write_mode.write_path << " [Consumers ("<<p->NS <<")]" << " [Error on the solution]";
+    write_mode.write_path << " [Convergence criterion on all] " << std::endl;
   }
 
   /* system temporal evolution */

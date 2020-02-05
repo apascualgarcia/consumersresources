@@ -1,6 +1,6 @@
 #!/bin/bash
 CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0"
-MATRIX_LIST="matrix_list_NR25_NS25_test"
+MATRIX_LIST="random_matrix_NR25_NS25"
 SAVENAME="critical_delta_convergence_study"
 CONV_LIST="1e-1 1e-2 1e-3 1e-4 1e-5 1e-6 1e-7 1e-8"
 ADDITIONAL_MODIF=""

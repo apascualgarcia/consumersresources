@@ -12,16 +12,11 @@ int main(int argc, char * argv[]){
     std::cerr << "Could not open file " << std::endl;
   }else{
     CRModel model(metaparams);
-    EffectiveCRModel eff_model(model);
-
     eqmode equilibre(convergence);
     writemode ecriture(true, myfile);
-    writemode eff_ecriture(true, eff_file);
 
-    nmatrix perturbed_abundances = model.perturb_abundances(0.4);
-    model.evolve_until_equilibrium_from_abundances(perturbed_abundances,metaparams.convergence_threshold, equilibre,ecriture);
-    eff_model.evolve_until_equilibrium_from_abundances(perturbed_abundances, metaparams.convergence_threshold, equilibre,eff_ecriture);
-
+    model.perturb_parameters(0.2);
+    model.evolve_until_equilibrium(metaparams.convergence_threshold, equilibre,ecriture);
     //std::cout << "Actual eigenvalues at equilibrium : " << model.eigenvalues_at_equilibrium() << std::endl;
     //std::cout << "Effective eigenvalues at equilibrium : " <<  eff_model.eigenvalues_at_equilibrium() << std::endl;
 

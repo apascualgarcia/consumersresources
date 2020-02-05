@@ -14,7 +14,7 @@ const int INDICES_FOR_AVERAGE=10;
 
 /*  in our unit system, we say a species is extinct if it's abundance goes below
     the value of this constant */
-const double SPECIES_EXTINCT = 1e-6;
+const double SPECIES_EXTINCT = 1e-8;
 
 const unsigned int COMPUTE_CRITICAL_DELTA_POLY_FIRST_RUN=50;
 const unsigned int COMPUTE_CRITICAL_DELTA_POLY_SECOND_RUN=100;
