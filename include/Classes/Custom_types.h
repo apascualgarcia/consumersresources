@@ -104,7 +104,9 @@ struct stability{
 
 struct error{
   std::string message;
-  error(std::string a):message(a){};
+  unsigned int category;
+
+  error(std::string a, unsigned int cat=0):message(a), category(cat){};
   void handle();
 };
 

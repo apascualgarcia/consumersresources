@@ -1,10 +1,10 @@
 % Enter here the needed metaparameters to run the simulation :
-gamma_0 = 1.
-alpha_0 = 0.0012886363636364084
-sigma_0 = 0.75
+gamma0 = 1.
+alpha0 = 0.0012886363636364084
+sigma0 = 0.75
 R0 = 0.5
 S0 = 1.
-l_0 = 200.
+l0 = 200.
 epsilon = 0.1
 p = 0.5
 NR = 25

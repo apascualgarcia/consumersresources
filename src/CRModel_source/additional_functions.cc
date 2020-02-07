@@ -237,6 +237,42 @@ std::vector<std::string> load_food_matrix_list(std::string path_to_list){
 }
 
 void error::handle(){
-  std::cerr << (*this) << std::endl;
-  abort();
+  //std::cerr << (*this) << std::endl;
+  switch(this->category){
+    case 0:{
+      std::cerr << "This will abort the simulation." << std::endl;
+      abort();
+      break;
+    }
+    case 1:{
+      std::cerr<<"The simulation will keep running but please keep that in mind when interpreting results." << std::endl;
+      break;
+    }
+    default:{
+      break;
+    }
+  }
+  return;
+}
+
+bool is_an_error(ntype a){
+  return isnan(a);
+}
+
+std::ofstream open_external_file_append(std::string path){
+  std::ofstream myfile;
+  myfile.open(path, std::ios::app);
+  if(not(myfile.is_open())){
+    std::cerr << "Could not open " << path << std::endl;
+  }
+  return myfile;
+}
+
+std::ofstream open_external_file_truncate(std::string path){
+  std::ofstream myfile;
+  myfile.open(path, std::ios::trunc);
+  if(not(myfile.is_open())){
+    std::cerr << "Could not open " << path << std::endl;
+  }
+  return myfile;
 }

@@ -107,37 +107,45 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
 
 double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
   double estimate = 0.;
+  try{
+    const gsl_root_fsolver_type *T;
+    gsl_root_fsolver* s;
 
-  const gsl_root_fsolver_type *T;
-  gsl_root_fsolver* s;
+    double x_lo = bounds.begin, x_hi = bounds.end, r=0.05;
+    double tolerance = 0.01;
+    int status;
+    int iter = 0;
 
-  double x_lo = bounds.begin, x_hi = bounds.end, r=0.05;
-  double tolerance = 0.01;
-  int status;
-  int iter = 0;
+    if(GSL_SIGN(GSL_FN_EVAL(f, x_lo)*GSL_FN_EVAL(f, x_hi))>0){
+      estimate=NUMERICAL_ERROR;
+      error err("It looks like the function does not vanish in the promised interval. Will return the error value",1);
+      throw err;
+    }
 
-  if(GSL_SIGN(GSL_FN_EVAL(f, x_lo)*GSL_FN_EVAL(f, x_hi))>0){
-    error err("It looks like the function does not vanish in the promised interval. Therefore the simulation will be aborted.");
-    throw err;
+    T = gsl_root_fsolver_brent;
+    s = gsl_root_fsolver_alloc(T);
+
+    gsl_root_fsolver_set(s, f, x_lo, x_hi);
+
+    do{
+      iter++;
+      status = gsl_root_fsolver_iterate(s);
+      r = gsl_root_fsolver_root(s);
+      x_lo = gsl_root_fsolver_x_lower(s);
+      x_hi = gsl_root_fsolver_x_upper(s);
+      status = gsl_root_test_interval(x_lo, x_hi, 0, tolerance);
+    }while(status==GSL_CONTINUE);
+    estimate = r;
+    if((estimate<x_lo) || (estimate>x_hi)){
+      std::cout << "estimate outside of bound" << std::endl;
+      estimate=NUMERICAL_ERROR;
+      error err("It looks like the proposed zero is not in the desired interval. Will return the error value",1);
+      throw err;
+    }
+    gsl_root_fsolver_free(s);
+  }catch(error e){
+    e.handle();
   }
-
-  T = gsl_root_fsolver_brent;
-  s = gsl_root_fsolver_alloc(T);
-
-  gsl_root_fsolver_set(s, f, x_lo, x_hi);
-
-  do{
-    iter++;
-    status = gsl_root_fsolver_iterate(s);
-    r = gsl_root_fsolver_root(s);
-    x_lo = gsl_root_fsolver_x_lower(s);
-    x_hi = gsl_root_fsolver_x_upper(s);
-    status = gsl_root_test_interval(x_lo, x_hi, 0, tolerance);
-  }while(status==GSL_CONTINUE);
-  estimate = r;
-  std::cout << "Found estimate " << estimate << std::endl;
-
-  gsl_root_fsolver_free(s);
   return estimate;
 }
 nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose, fitmode fit_mode, interval bounds){

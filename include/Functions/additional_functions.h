@@ -5,6 +5,8 @@
 #include "../Classes/Custom_types.h"
 #include "../Classes/Extinction.h"
 #include<random>
+#include<string>
+#include<iostream>
 
 foodmatrix load_food_matrix(const Metaparameters&);
 ntype norm(const nvector&);
@@ -34,5 +36,11 @@ ntype operator*(const nvector&, const nvector&);
     path_to_list file) */
 std::vector<std::string> load_food_matrix_list(std::string path_to_list);
 
+/* checks is number is an error */
+bool is_an_error(ntype);
+
+/* open external file */
+std::ofstream open_external_file_append(std::string);
+std::ofstream open_external_file_truncate(std::string);
 
 #endif

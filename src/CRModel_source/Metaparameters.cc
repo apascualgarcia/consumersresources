@@ -14,9 +14,9 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
                                 // config_perso.in input_scan=[valeur]")
     configFile.process(argv[i]);
 
-  this->gamma0 = configFile.get<ntype>("gamma_0");
-  this->alpha0 = configFile.get<ntype>("alpha_0");
-  this->sigma0 = configFile.get<ntype>("sigma_0");
+  this->gamma0 = configFile.get<ntype>("gamma0");
+  this->alpha0 = configFile.get<ntype>("alpha0");
+  this->sigma0 = configFile.get<ntype>("sigma0");
   this->p = configFile.get<ntype>("p");
   this->R0 = configFile.get<ntype>("R0");
   this->S0 = configFile.get<ntype>("S0");
@@ -31,7 +31,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->nb_attempts = configFile.get<unsigned int>("number_of_attempts");
   this->save_path = configFile.get<std::string>("path_to_save_file");
   this->epsilon = configFile.get<ntype>("epsilon");
-  this->l0 = configFile.get<ntype>("l_0");
+  this->l0 = configFile.get<ntype>("l0");
   this->budget_constraint = configFile.get<bool>("budget_constraint");
   this->seed_number = configFile.get<unsigned int>("seed_number");
   this->tf = configFile.get<ntype>("tf");
@@ -40,7 +40,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->equilibrium = string_to_eq_mode(configFile.get<std::string>("equilibrium_mode"));
   this->convergence_threshold = configFile.get<ntype>("convergence_threshold");
   if(this->verbose > 0){
-    std::cout << "Loading metaparameters from " << inputPath << std::endl;
+    std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
   initialize_random_engine(*this);
 
@@ -57,6 +57,12 @@ ntype Metaparameters::physical_maximum_alpha0() const{
   return maxa0;
 }
 
+ntype Metaparameters::minimum_S0_guaranteed_feasability()const{
+  ntype result=(1.-this->epsilon)*this->l0;
+  result = result/(this->NS*this->gamma0*this->R0*gsl_pow_3(1+this->epsilon)-this->alpha0*gsl_pow_2(1-this->epsilon));
+  return result;
+}
+
 ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
   ntype alpha_max =0.;
   gsl_function F;
@@ -71,19 +77,30 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
   F.params = &solv;
 
   /* we first find the alpha_max for which the feasability probability is roughly 0.98 */
-  alpha_max = find_zero(&F, this->verbose, interval(0, this->physical_maximum_alpha0()));
-  meta.alpha0 = alpha_max;
-  std::cout << "Potential alpha max is " << alpha_max << std::endl;
-  /*  we take a tiny step back and wait for the first alpha which is = 1
-      this works because we know the shape of the feasability vs alpha curve */
-  while(find_feasability_probability(meta) < 1.){
-    alpha_max -= alpha_accuracy;
-    meta.alpha0=alpha_max;
+  try{
+    alpha_max = find_zero(&F, this->verbose, interval(0, this->physical_maximum_alpha0()));
+    meta.alpha0 = alpha_max;
+    /*  we take a tiny step back and wait for the first alpha which is = 1
+        this works because we know the shape of the feasability vs alpha curve */
+    while(find_feasability_probability(meta) < 1.){
+      alpha_max -= alpha_accuracy;
+      meta.alpha0=alpha_max;
+    }
+
+    if(this->verbose > 0){
+      std::cout << "Maximum feasible alpha0 for " << this->foodmatrixpath << " is " << alpha_max << std::endl;
+    }
+
+    if(is_an_error(alpha_max) || alpha_max < 0){
+      error err("Could not find an appropriate value for the feasible alpha_max. The exception value is returned.",1);
+      throw err;
+    }
+
+  }catch(error e){
+    e.handle();
+    return NUMERICAL_ERROR;
   }
 
-  if(this->verbose > 0){
-    std::cout << "Maximum feasible alpha0 for " << this->foodmatrixpath << " is " << alpha_max << std::endl;
-  }
 
   return alpha_max;
 }

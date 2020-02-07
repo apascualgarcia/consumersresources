@@ -24,6 +24,7 @@ const unsigned int COMPUTE_CRITICAL_DELTA_SIG_FIRST_RUN=50;
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_SECOND_RUN=200;
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH=100;
 
+const ntype NUMERICAL_ERROR = std::nanl("1");
 
 extern std::mt19937 random_engine;
 
