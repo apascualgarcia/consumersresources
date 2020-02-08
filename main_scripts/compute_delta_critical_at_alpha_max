@@ -3,10 +3,10 @@
 ## METAPARAMS_LIST and MATRIX_LIST are the list of metaparameters and matrices
 ## whose critical delta we want to find. They MUST be in the config folder
 METAPARAMS_LIST="list_of_config_files_comparison_test"
-MATRIX_LIST="matrix_list_NR25_NS25_test"
+MATRIX_LIST="random_matrix_NR25_NS25"
 CORES=$1
 COMMAND_NAME="build/compute_critical_Delta_at_alpha_max"
 OUTPUT_NAME="cd_alpha_max_fully_connected_network"
-ADDITIONAL_CHANGES="l_0=2 R0=1 convergence_threshold=1e-8"
+ADDITIONAL_CHANGES="S0=0.1 gamma0=0.5"
 
 python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND_NAME $OUTPUT_NAME $ADDITIONAL_CHANGES
