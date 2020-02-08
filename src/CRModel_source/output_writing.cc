@@ -165,4 +165,5 @@ std::ostream& operator<<(std::ostream& os, const stability& stab){
 
 std::ostream& operator<<(std::ostream& os, const error& e){
   os << "Error during runtime : " << e.message << std::endl;
+  return os;
 }

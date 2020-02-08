@@ -13,39 +13,47 @@ statistics compute_critical_Delta(Metaparameters metaparams, stabilitymode stab_
 }
 
 nvector find_rough_interval_polynomial_fit(gsl_function* f, unsigned int Npoints, unsigned int verbose, interval bounds){
-  nvector interval;
+  nvector interval(Npoints, 0.);
+  try{
+    const gsl_root_fsolver_type *T;
+    gsl_root_fsolver* s;
 
-  const gsl_root_fsolver_type *T;
-  gsl_root_fsolver* s;
+    double x_lo = bounds.begin, x_hi =bounds.end, r=0.1;
+    int status;
+    int iter = 0;
 
-  double x_lo = bounds.begin, x_hi =bounds.end, r=0.1;
-  int status;
-  int iter = 0;
-
-  T = gsl_root_fsolver_brent;
-  s = gsl_root_fsolver_alloc(T);
-
-  gsl_root_fsolver_set(s, f, x_lo, x_hi);
-
-  // the idea is first to find an interval where the solution roughly should be
-  do{
-    iter++;
-    status = gsl_root_fsolver_iterate(s);
-    r = gsl_root_fsolver_root(s);
-    x_lo = gsl_root_fsolver_x_lower(s);
-    x_hi = gsl_root_fsolver_x_upper(s);
-    status = gsl_root_test_interval(x_lo, x_hi, 0, 0.1);
-    if(status==GSL_SUCCESS and verbose > 0){
-      std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
+    if(GSL_FN_EVAL(f, x_lo)*GSL_FN_EVAL(f,x_hi)>0){
+      error err("It seems like the bounds of the initial interval in find_rough_interval_polynomial_fit do not contain zero. Return interval made of zeros.",1);
+      throw err;
     }
-  }while(status==GSL_CONTINUE);
 
-  gsl_root_fsolver_free(s);
+    T = gsl_root_fsolver_brent;
+    s = gsl_root_fsolver_alloc(T);
 
-  size_t interval_length = Npoints;
+    gsl_root_fsolver_set(s, f, x_lo, x_hi);
 
-  for(size_t i=0; i < interval_length; ++i){
-    interval.push_back(x_lo+i*(x_hi-x_lo)/(interval_length-1));
+    // the idea is first to find an interval where the solution roughly should be
+    do{
+      iter++;
+      status = gsl_root_fsolver_iterate(s);
+      r = gsl_root_fsolver_root(s);
+      x_lo = gsl_root_fsolver_x_lower(s);
+      x_hi = gsl_root_fsolver_x_upper(s);
+      status = gsl_root_test_interval(x_lo, x_hi, 0, 0.1);
+      if(status==GSL_SUCCESS and verbose > 0){
+        std::cout << "Found an interval for Delta critical : [" << x_lo << ";" << x_hi <<"]" << std::endl;
+      }
+    }while(status==GSL_CONTINUE);
+
+    gsl_root_fsolver_free(s);
+
+    size_t interval_length = Npoints;
+
+    for(size_t i=0; i < interval_length; ++i){
+      interval[i]=(x_lo+i*(x_hi-x_lo)/(interval_length-1));
+    }
+  }catch(error e){
+    e.handle();
   }
   return interval;
 }

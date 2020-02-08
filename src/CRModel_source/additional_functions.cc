@@ -240,12 +240,13 @@ void error::handle(){
   //std::cerr << (*this) << std::endl;
   switch(this->category){
     case 0:{
-      std::cerr << "This will abort the simulation." << std::endl;
+      std::cerr << *this << "This will abort the simulation." << std::endl;
       abort();
       break;
     }
     case 1:{
-      std::cerr<<"The simulation will keep running but please keep that in mind when interpreting results." << std::endl;
+      std::cerr << *this ;
+      std::cerr << "The simulation will keep running but please keep that in mind when interpreting results." << std::endl;
       break;
     }
     default:{
