@@ -4,8 +4,8 @@
 int main(int argc, char * argv[]){
   try{
     Metaparameters metaparams(argc, argv);
-    unsigned int Nsimuls = 100;
-    ntype alpha_min=0., alpha_max=metaparams.feasible_alpha_max();
+    unsigned int Nsimuls = 1000;
+    ntype alpha_min=0., alpha_max=metaparams.feasible_alpha_max(1e-7);
     unsigned int alpha_points=100;
 
     std::ofstream myfile, myfile_eff;
@@ -31,6 +31,7 @@ int main(int argc, char * argv[]){
         stability stab_eff = compute_proportion_stability(metaparams, Nsimuls, effective);
         std::cout << "Full stability :" << stab_full << std::endl;
         std::cout << "Effective stability : " << stab_eff << std::endl;
+        myfile << alpha_interval[j] << " " << stab_full << " " << stab_eff << std::endl;
       }
 
       myfile << std::endl;
