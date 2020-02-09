@@ -155,6 +155,28 @@ ntype distance(const nvector& v1, const nvector& v2){
   return norm(v1-v2);
 }
 
+nvector linear_interval(const ntype& begin, const ntype& end, unsigned int Npoints){
+  nvector interval(Npoints, 0.);
+  if(Npoints==1){
+    interval[0]=begin;
+  }else{
+    for(size_t i=0; i < Npoints; ++i){
+      interval[i] = begin+(end-begin)*i/(Npoints-1);
+    }
+  }
+  return interval;
+}
+
+nvector log_interval(const ntype& begin, const ntype& end, unsigned int Npoints){
+  nvector interval(Npoints,0.);
+  nvector log_interval=linear_interval(log10(begin), log10(end), Npoints);
+  for(size_t i=0; i < Npoints; ++i){
+    interval[i]=pow(10., log_interval[i]);
+  }
+  return interval;
+}
+
+
 nvector operator+(const nvector& v1, const nvector& v2){
   nvector diff;
   size_t N1 = v1.size(), N2 = v2.size(), N=N1;

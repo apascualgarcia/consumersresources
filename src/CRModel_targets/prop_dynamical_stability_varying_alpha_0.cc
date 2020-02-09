@@ -4,9 +4,9 @@
 int main(int argc, char * argv[]){
   try{
     Metaparameters metaparams(argc, argv);
-    unsigned int Nsimuls = 1000;
+    unsigned int Nsimuls = 2000;
     ntype alpha_min=0., alpha_max=metaparams.feasible_alpha_max(1e-7);
-    unsigned int alpha_points=100;
+    unsigned int alpha_points=1000;
 
     std::ofstream myfile, myfile_eff;
     myfile.open(metaparams.save_path, std::ofstream::out | std::ofstream::trunc);

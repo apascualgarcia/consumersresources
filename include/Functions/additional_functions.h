@@ -24,6 +24,9 @@ ntype mean(const nvector&);
 ntype standard_dev(const nvector&);
 ntype median(const nvector&);
 
+nvector linear_interval(const ntype& begin, const ntype& end, unsigned int Npoints);
+nvector log_interval(const ntype& begin, const ntype& end, unsigned int Npoints);
+
 ntype angle(const nvector&, const nvector&);
 ntype distance(const nvector&, const nvector&);
 
