@@ -287,6 +287,8 @@ std::ofstream open_external_file_append(std::string path){
   myfile.open(path, std::ios::app);
   if(not(myfile.is_open())){
     std::cerr << "Could not open " << path << std::endl;
+    error err("Could not open external file "+path);
+    throw err;
   }
   return myfile;
 }
@@ -296,6 +298,9 @@ std::ofstream open_external_file_truncate(std::string path){
   myfile.open(path, std::ios::trunc);
   if(not(myfile.is_open())){
     std::cerr << "Could not open " << path << std::endl;
+    std::cerr << "Could not open " << path << std::endl;
+    error err("Could not open external file "+path);
+    throw err;
   }
   return myfile;
 }
