@@ -13,7 +13,8 @@ std::ostream& operator<<(std::ostream& os, const Metaparameters& m){
   os << "S0 = " << m.S0 << "; ";
   os << "NR = " << m.NR << "; ";
   os << "NS = " << m.NS  << "; ";
-  os << "matrix path = " << m.foodmatrixpath ;
+  os << "matrix path = " << m.foodmatrixpath <<"; ";
+  os << "convergence threshold = " << m.convergence_threshold;
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nctype& number){
@@ -159,7 +160,7 @@ std::ostream& operator<<(std::ostream& os, const systemstability& stab){
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const stability& stab){
-  os << stab.unstable << " " << stab.marginally_stable << " " << stab.stable;
+  os << stab.unstable << " " << stab.marginally_stable << " " << stab.stable << " ";
   return os;
 }
 

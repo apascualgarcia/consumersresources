@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 from scipy.optimize import curve_fit
 
-save_folder='plots/Phase_diagrams/Fully_connected_network'
+save_folder='plots/Mon10Feb'
 data_folder = 'data_output'
-filename = 'test'
-title = r'$\alpha_0 = 0.1, \ \sigma_0 = 0.5$, $l_0=0.03$'
+filename = 'phase_diagram_configuration_comparison_NR25_NS25_s05_a0_S0=0.1_gamma0=0.1'
+title = r'$\alpha_0 = 0, \ \sigma_0 = 0.5, \gamma_0=0.1$'
 
 def power_fit(x, a, b):
     return b*np.power(x-1,a)
@@ -44,7 +44,7 @@ def plot_individual_stability_graphs(data, string_title_, save_extension):
     ax1.set_ylabel(r'Proportion')
     ax1.set_title(string_title_)
     fig1.tight_layout()
-    fig1.savefig(save_folder+'/equispeciesresources_'+filename+"_"+save_extension)
+    fig1.savefig(save_folder+'/equispeciesresources_'+filename+"_"+save_extension+'.pdf')
     fig1.clf()
 
     fig2 = plt.figure(2)
@@ -56,7 +56,7 @@ def plot_individual_stability_graphs(data, string_title_, save_extension):
     ax2.set_zlabel('Marginally stable systems')
     ax2.set_title(string_title_)
     fig2.tight_layout()
-    fig2.savefig(save_folder+'/surface_marginal_'+filename+"_"+save_extension)
+    fig2.savefig(save_folder+'/surface_marginal_'+filename+"_"+save_extension+'.pdf')
     fig2.clf()
 
     fig3 = plt.figure(3)
@@ -66,7 +66,7 @@ def plot_individual_stability_graphs(data, string_title_, save_extension):
     ax3.set_ylabel(r'$N_R$')
     ax3.set_title(string_title_)
     fig3.tight_layout()
-    fig3.savefig(save_folder+'/color_surf_'+filename+"_"+save_extension)
+    fig3.savefig(save_folder+'/color_surf_'+filename+"_"+save_extension+'.pdf')
     fig3.clf()
 
 fullmodel = np.loadtxt(data_folder+'/'+filename+'.out')

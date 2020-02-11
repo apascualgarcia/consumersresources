@@ -290,6 +290,7 @@ std::ofstream open_external_file_append(std::string path){
     error err("Could not open external file "+path);
     throw err;
   }
+  myfile << "# File opened on " << current_time() <<  std::setprecision(print_precision)<<std::endl;
   return myfile;
 }
 
@@ -302,5 +303,12 @@ std::ofstream open_external_file_truncate(std::string path){
     error err("Could not open external file "+path);
     throw err;
   }
+  myfile << "# File created on " << current_time() << std::setprecision(print_precision) << std::endl;
   return myfile;
+}
+
+std::string current_time(){
+  auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::string time_now(std::ctime(&timenow));
+  return time_now;
 }

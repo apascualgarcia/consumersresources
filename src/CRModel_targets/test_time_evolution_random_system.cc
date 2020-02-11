@@ -16,7 +16,7 @@ int main(int argc, char * argv[]){
       eqmode equilibre(convergence);
       writemode ecriture(true, myfile);
 
-      model.perturb_parameters(0.2);
+      model.perturb_parameters(metaparams.perturb_parameters);
       model.evolve_until_equilibrium(metaparams.convergence_threshold, equilibre,ecriture);
       //std::cout << "Actual eigenvalues at equilibrium : " << model.eigenvalues_at_equilibrium() << std::endl;
       //std::cout << "Effective eigenvalues at equilibrium : " <<  eff_model.eigenvalues_at_equilibrium() << std::endl;

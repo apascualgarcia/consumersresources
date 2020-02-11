@@ -10,7 +10,7 @@ import matplotlib
 # rc('text', usetex=False)
 
 folder = './data_output'
-filename = 'cd_alpha_max_l_0=2_R0=1_configuration_comparison_NR25_NS25_s05_a0_critical_matrix_list_NR25_NS25_2'
+filename = 'cd_alpha_max_fully_connected_network_S0=0.1_gamma0=0.5_configuration_comparison_NR25_NS25_s05_a0_random_matrix_NR25_NS25_0'
 save_folder = './plots'
 save_name = filename
 title = r''
@@ -67,4 +67,4 @@ ax1.set_title(r'$\sigma_0=0.5$, $N_R=N_S=25$, $\kappa=$'+str(data[3])+', $\eta=$
 ax1.set_xlabel(r'$\alpha_0$')
 ax1.set_ylabel(r'$\Delta^*$')
 fig1.tight_layout()
-fig1.savefig(save_folder+'/'+filename)
+fig1.savefig(save_folder+'/'+filename+'.pdf')

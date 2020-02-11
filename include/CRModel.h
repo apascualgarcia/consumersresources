@@ -30,6 +30,9 @@
 #include<iostream>
 #include<iomanip>
 #include<cmath>
+#include<chrono>
+#include<ctime>
+#include<complex>
 #include "Global_Constants.h"
 
 #endif

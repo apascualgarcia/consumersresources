@@ -1,8 +1,13 @@
 #!/bin/bash
 CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0"
-ADDITIONAL_MODIF="S0=0.1 gamma0=0.5 path_to_food_matrix=matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest1_Conn1.txt"
+ADDITIONAL_MODIF="S0=0.1 gamma0=0.1"
 
 for f in $CONFIG_LIST
 do
-  nohup build/prop_dynamical_stability_varying_NR_NS config/$f.in path_to_save_file=data_output/phase_diagram_${f}_${ADDITIONAL_MODIF}.out ${ADDITIONAL_MODIF} > logs/phase_diagram_${f}.log 2>logs/errphase_diagram_${f}.log&
+  TEXT_APPEND=""
+  for add in ${ADDITIONAL_MODIF}
+  do
+    TEXT_APPEND="${TEXT_APPEND}_${add}"
+  done
+  nohup build/prop_dynamical_stability_varying_NR_NS config/$f.in path_to_save_file=data_output/phase_diagram_${f}${TEXT_APPEND}.out ${ADDITIONAL_MODIF} > logs/phase_diagram_${f}.log 2>logs/errphase_diagram_${f}.log&
 done

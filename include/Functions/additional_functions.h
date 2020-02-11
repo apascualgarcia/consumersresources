@@ -39,6 +39,8 @@ ntype operator*(const nvector&, const nvector&);
     path_to_list file) */
 std::vector<std::string> load_food_matrix_list(std::string path_to_list);
 
+std::string current_time();
+
 /* checks is number is an error */
 bool is_an_error(ntype);
 
