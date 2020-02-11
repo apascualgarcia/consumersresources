@@ -4,7 +4,7 @@ int main(int argc, char* argv[]){
   try{
     Metaparameters metaparams(argc, argv);
     CRModel model(metaparams);
-
+    std::cout << "Jacobian at equilibrium: " << std::endl << model.jacobian_at_equilibrium() << std::endl;
     std::cout << "Eigenvalues at equilibrium : " << model.eigenvalues_at_equilibrium() << std::endl;
     std::cout << "Eigenvalues computed analytically : ";
 

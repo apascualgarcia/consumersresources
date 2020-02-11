@@ -12,6 +12,9 @@ filename = 'test'
 save_folder='plots/Problematic_time_evolution'
 added_text=''
 INTEGRATOR_ZERO=1e-14
+title= r"$\Delta=0.01, S_0=0.1, \gamma_0=0.1$ ($\eta=0.35, \kappa=0.08$, av. conv.time=7.62s)"
+save_name="8_slow_convergence"
+
 
 def compute_log_derivative(t, f):
     deriv = []
@@ -22,8 +25,6 @@ def compute_log_derivative(t, f):
     return np.array(time), np.array(deriv)
 
 data = np.loadtxt(folder_path + "/" + filename +file_ext)
-title= r"$\Delta=10^{-4}, S_0=0.1, \gamma_0=0.1$ (fully connected network, conv.time=67s)"
-save_name="3_slow_convergence"
 
 t = data[:, 0]
 steps = range(1,len(t)+1)

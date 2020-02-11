@@ -5,11 +5,12 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
     unsigned int Nsimuls = 1;
     double av_millisec=0.;
+    std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
 
     for(size_t i=0; i < Nsimuls; ++i){
       CRModel model(metaparams);
       eqmode equilibre(convergence);
-      writemode ecriture(false, std::cout);
+      writemode ecriture(true, myfile);
 
       model.perturb_parameters(metaparams.perturb_parameters);
       std::chrono::time_point<std::chrono::system_clock> start, end;
@@ -20,7 +21,8 @@ int main(int argc, char * argv[]){
       int elapsed_seconds = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
       av_millisec+= double(elapsed_seconds)/Nsimuls;
     }
-    std::cout << "Average CPU time for convergence : " << av_millisec << std::endl;
+    std::cout << "Average CPU time for convergence (ms) : " << av_millisec << std::endl;
+    myfile.close();
 
 
 
