@@ -141,7 +141,7 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
     /* if a resource/consumer is too small, we effectively set it to zero */
     bool local_exit = false;
     for(size_t i=0; i < p->NR+p->NS and not(local_exit); ++i){
-      if(y[i] < SPECIES_EXTINCT){
+      if(y[i] < SPECIES_EXTINCT*p->S0){
         y[i]=INTEGRATOR_ZERO;
         bool already_extinct;
         /* check if species is already extinct */
