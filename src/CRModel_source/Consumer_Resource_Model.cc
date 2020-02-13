@@ -15,10 +15,12 @@ CRModel::CRModel(){
 }
 
 CRModel::CRModel(const CRModel& model){
+  std::cout << "Entering copy constructor " << std::endl;
   this->metaparameters= &(*(model.get_metaparameters()));
   this->eq_vals = new ntensor(*(model.get_equilibrium_abundances()));
   this->model_param = new Model_parameters(*(model.get_model_parameters()));
   this->equations_of_evolution = func_equ_evol(model.get_equations_of_evolution());
+  std::cout << "Leaving copy constructor " << std::endl;
 }
 
 CRModel::CRModel(Model_parameters* mod_params):CRModel(){
@@ -65,8 +67,10 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evoluti
   return;
 }
 CRModel::~CRModel(){
+  std::cout << "Entering destructor of " << this << std::endl;
   delete this->model_param;
   delete this->eq_vals;
+  std::cout << "Leaving destructor" << std::endl;
   return;
 }
 void CRModel::create_model_parameters(Metaparameters& meta){

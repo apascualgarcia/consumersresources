@@ -52,8 +52,9 @@ std::ostream& operator<<(std::ostream& os, const Parameter_set& p){
   os << "NS = " << p.NS << std::endl;
   return os;
 }
+
 std::ostream& operator<<(std::ostream& os, const Model_parameters& M){
-  os << *(M.get_parameters()) << std::endl;
+  M.display(os);
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const ntensor& T){

@@ -114,7 +114,8 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
         /* CAREFUL HERE, WE REQUIRE THE MODEL TO BE DYNAMICALLY STABLE IN ORDER TO COMPUTE ITS STRUCTURAL STABILITY */
         while(!(model.is_dynamically_stable())){
           std::cout << "Model not dynamically stable so I create another one." << std::endl;
-          model = CRModel(*metaparams);
+          CRModel model2(*metaparams);
+          model = model2;
         }
         model.perturb_parameters(Delta);
         Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
