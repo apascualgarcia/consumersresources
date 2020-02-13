@@ -6,10 +6,15 @@ private:
   Parameter_set  params;
 public:
   Model_parameters();
+  Model_parameters(const Model_parameters&);
   ~Model_parameters();
+
   // this function allows to give ANOTHER relationship between the parameters
   // (e.g. if tau is for instance zero or given by already existing parameters)
   Parameter_set* get_parameters();
+
+  Parameter_set get_parameter_set() const;
+
 
   void display(std::ostream& ) const;
 

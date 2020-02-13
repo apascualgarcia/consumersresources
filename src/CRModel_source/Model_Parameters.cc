@@ -4,14 +4,24 @@ Model_parameters::Model_parameters(){
   params = Parameter_set();
   return;
 }
+
+Model_parameters::Model_parameters(const Model_parameters& other_mod){
+  this->params = other_mod.get_parameter_set();
+  return;
+}
+
 Model_parameters::~Model_parameters(){
   //delete this->params;
   return;
 }
 
 void Model_parameters::display(std::ostream& os) const{
-  os << params << std::endl;
+  os << params;
   return;
+}
+
+Parameter_set Model_parameters::get_parameter_set() const{
+  return params;
 }
 
 Parameter_set* Model_parameters::get_parameters(){

@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream& os, const Parameter_set& p){
   display_vector_w_name(os, "m", p.m);
   display_vector_w_name(os, "d", p.d);
   os << "NR = " << p.NR << std::endl;
-  os << "NS = " << p.NS << std::endl;
+  os << "NS = " << p.NS ;
   return os;
 }
 
@@ -61,7 +61,7 @@ std::ostream& operator<<(std::ostream& os, const ntensor& T){
   for(size_t i = 0; i < T.size()-1; ++i){
     os << "Element " << i << " of tensor :" << std::endl << T[i] << std::endl;
   }
-  os << "Element " << T.size()-1 << " of tensor :" << std::endl << T[T.size()-1] << std::endl;
+  os << "Element " << T.size()-1 << " of tensor :" << std::endl << T[T.size()-1];
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nvector& v){

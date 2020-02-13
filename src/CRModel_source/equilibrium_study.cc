@@ -113,7 +113,9 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
         CRModel model(*metaparams);
         /* CAREFUL HERE, WE REQUIRE THE MODEL TO BE DYNAMICALLY STABLE IN ORDER TO COMPUTE ITS STRUCTURAL STABILITY */
         while(!(model.is_dynamically_stable())){
-          std::cout << "Model not dynamically stable so I create another one." << std::endl;
+          if(metaparams->verbose > 1){
+            std::cout << "Model was not dynamically stable so we drew another one." << std::endl;
+          }
           CRModel model2(*metaparams);
           model = model2;
         }

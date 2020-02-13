@@ -18,12 +18,20 @@ protected:
   func_equ_evol equations_of_evolution;
 
 public:
+  /* CONSTRUCTORS */
   CRModel();
   CRModel(const CRModel&);
   CRModel(Metaparameters&);
   CRModel(const foodmatrix&, Metaparameters&);
   CRModel(Model_parameters*);
+
+  /* DESTRUCTOR */
   virtual ~CRModel();
+
+  /* OPERATORS OVERLOAD */
+  CRModel& operator=(const CRModel&);
+
+
   void create_model_parameters(Metaparameters&);
   void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
   ncvector eigenvalues_at_equilibrium() const;
@@ -112,5 +120,7 @@ public:
   /* returns the general extinction properties for the initial values init_val */
   Extinction evolve_until_equilibrium_general(const nmatrix& init_val, ntype threshold, eqmode eq_mode, writemode write_mode=writemode())const;
 };
+
+
 
 #endif

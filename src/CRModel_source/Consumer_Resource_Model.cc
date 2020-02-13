@@ -13,16 +13,12 @@ CRModel::CRModel(){
   this->equations_of_evolution = NULL;
   return;
 }
-
 CRModel::CRModel(const CRModel& model){
-  std::cout << "Entering copy constructor " << std::endl;
   this->metaparameters= &(*(model.get_metaparameters()));
   this->eq_vals = new ntensor(*(model.get_equilibrium_abundances()));
   this->model_param = new Model_parameters(*(model.get_model_parameters()));
   this->equations_of_evolution = func_equ_evol(model.get_equations_of_evolution());
-  std::cout << "Leaving copy constructor " << std::endl;
 }
-
 CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
@@ -67,11 +63,21 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evoluti
   return;
 }
 CRModel::~CRModel(){
-  std::cout << "Entering destructor of " << this << std::endl;
   delete this->model_param;
   delete this->eq_vals;
-  std::cout << "Leaving destructor" << std::endl;
   return;
+}
+CRModel& CRModel::operator=(const CRModel& other){
+  if(&other!=this){
+    this->metaparameters= &(*(other.get_metaparameters()));
+    /* first delete the old pointers and then build them again */
+    delete this->eq_vals;
+    this->eq_vals = new ntensor(*(other.get_equilibrium_abundances()));
+    delete this->model_param;
+    this->model_param = new Model_parameters(*(other.get_model_parameters()));
+    this->equations_of_evolution = func_equ_evol(other.get_equations_of_evolution());
+  }
+  return *this;
 }
 void CRModel::create_model_parameters(Metaparameters& meta){
   this->model_param = new Model_parameters();
@@ -230,7 +236,7 @@ std::ostream& CRModel::display(std::ostream& os) const{
   os << "The following equilibrium values have been found :" << std::endl;
   os << *eq_vals << std::endl;
   os << "The model is characterised by the following metaparameters" << std::endl;
-  os << *metaparameters << std::endl;
+  os << *metaparameters;
   return os;
 }
 bool CRModel::constraints_fulfilled(const Metaparameters& m) const{
