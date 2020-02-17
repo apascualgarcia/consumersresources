@@ -17,12 +17,12 @@ int main(int argc, char * argv[]){
     nmatrix alpha = p->alpha;
     */
 
-    nmatrix gamma = {
+    nmatrix gamma={
       {1,1,1},
       {0,1,1},
       {0,0,1}
     };
-    nmatrix alpha = {
+    nmatrix alpha={
       {0,1,1},
       {0,0,1},
       {0,0,0}
