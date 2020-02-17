@@ -33,6 +33,7 @@
 #include<chrono>
 #include<ctime>
 #include<complex>
+#include<list>
 #include "Global_Constants.h"
 
 #endif

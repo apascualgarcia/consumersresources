@@ -82,9 +82,11 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
     meta.alpha0 = alpha_max;
     /*  we take a tiny step back and wait for the first alpha which is = 1
         this works because we know the shape of the feasability vs alpha curve */
-    while(find_feasability_probability(meta) < 1.){
+    unsigned int steps=0;
+    while(find_feasability_probability(meta) < 1. and steps<=1000){
       alpha_max -= alpha_accuracy;
       meta.alpha0=alpha_max;
+      steps+=1;
     }
 
     if(this->verbose > 0){

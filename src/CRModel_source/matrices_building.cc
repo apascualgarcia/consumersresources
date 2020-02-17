@@ -67,10 +67,9 @@ nmatrix build_gamma(const foodmatrix& F, const Metaparameters& m){
         }
       }
       if(not(species_existing)){
-        std::cerr << "Problem in the food matrix "<< m.foodmatrixpath << ", species " << i << " does not eat anything." << std::endl;
-        std::cerr << "Check it out :" << std::endl;
-        std::cerr << F << std::endl;
-        exit(EXIT_FAILURE);
+        error e("Problem in the food matrix "+ m.foodmatrixpath + ", species " + std::to_string(i) +" does not eat anything.");
+        std::cerr << "The food matrix is " << F << std::endl;
+        throw e;
       }
     }
   }
@@ -110,8 +109,9 @@ nmatrix build_gamma(const foodmatrix& F, const Metaparameters& m){
           gamma[i][j] *= (m.gamma0*m.NR);
         }
       }else{
-        std::cerr << "Problem in the food matrix, species " << i << " does not eat anything." << std::endl;
-        exit(EXIT_FAILURE);
+        error e("Problem in the food matrix "+ m.foodmatrixpath + ", species " + std::to_string(i) +" does not eat anything.");
+        std::cerr << "The food matrix is " << F << std::endl;
+        throw e;
       }
     }
   }
@@ -134,15 +134,35 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
     case no_release_when_eat:{
       for(size_t i=0; i < p->NS; ++i){
         for(size_t mu=0; mu < p->NR; ++mu){
-          if(p->gamma[i][mu]>0. and ntype(empty_or_not_distrib(random_engine)) < m.p){
+          if(!(p->gamma[i][mu]>0.) || (ntype(empty_or_not_distrib(random_engine)) < m.p)){
             alpha[mu][i] = alpha_distrib(random_engine);
           }
         }
       }
+      break;
       //rescale_mean(alpha, m.alpha0);
     }
+
+    case one_release:{
+      for(size_t i=0; i < p->NS; ++i){
+        std::vector<unsigned int> uneaten_resources;
+        for(size_t mu=0; mu < p->NR; ++mu){
+          if(!(p->gamma[i][mu]>0)){
+            uneaten_resources.push_back(mu);
+          }
+        }
+        if(uneaten_resources.size()>0){
+          std::uniform_int_distribution<size_t> unif_int_dist(0, uneaten_resources.size()-1);
+          alpha[uneaten_resources[unif_int_dist(random_engine)]][i]=alpha_distrib(random_engine);
+        }
+      }
+      break;
+    }
+
     default:{
-      std::cerr << " This case of alpha mode has not been implemented yet " << std::endl;
+      error e("This alpha mode has not been implemented yet.");
+      throw e;
+      break;
     }
   }
   /* OLD CODE from Jan 27
@@ -255,7 +275,7 @@ nmatrix build_tau(Parameter_set* p, Metaparameters& m, unsigned int attempts){
       break;
     }
     default: {
-      std::cerr << "tau_mode value not implemented yet";
+      throw error("Tau value not implemented yet.");
       break;
     }
   };

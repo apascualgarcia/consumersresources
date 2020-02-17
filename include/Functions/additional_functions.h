@@ -14,6 +14,13 @@ ntype mean(const nmatrix &);
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
 
+nmatrix operator+(const nmatrix&, const nmatrix&);
+nmatrix operator-(const nmatrix&, const nmatrix &);
+nmatrix operator*(const nmatrix&, const nmatrix&);
+nmatrix operator-(const nmatrix&);
+
+nmatrix transpose(const nmatrix & m);
+
 bool non_neg_elements(const nmatrix&);
 bool non_neg_elements(const nvector&);
 
@@ -47,5 +54,7 @@ bool is_an_error(ntype);
 /* open external file */
 std::ofstream open_external_file_append(std::string);
 std::ofstream open_external_file_truncate(std::string);
+
+bool compare_complex(const nctype&, const nctype&);
 
 #endif

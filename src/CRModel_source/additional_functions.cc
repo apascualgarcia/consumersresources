@@ -9,6 +9,7 @@ std::mt19937 random_engine;
 
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
+  nmatrix input;
   if(m.verbose > 1){
     std::cout << "\t Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
@@ -17,12 +18,27 @@ foodmatrix load_food_matrix(const Metaparameters& m){
     error err("Cannot open file for the matrix "+m.foodmatrixpath);
     throw err;
   }
-  for (unsigned int x = 0; x < m.NS; x++) {
-    for (unsigned int y = 0; y < m.NR; y++) {
-      in >> f[x][y];
+  if(in.good()){
+    std::string line;
+    unsigned int index=0;
+    while(getline(in, line)){
+      std::istringstream iss(line);
+      input.push_back(nvector());
+      unsigned int element;
+      while(iss>>element){
+        input[index].push_back(element);
+      }
+      index+=1;
     }
   }
   in.close();
+
+  for (unsigned int x = 0; x < m.NS; x++) {
+    for (unsigned int y = 0; y < m.NR; y++) {
+      f[x][y]=input[x][y];
+    }
+  }
+
   return f;
 }
 ntype norm(const nvector& v){
@@ -61,6 +77,7 @@ nmatrix random_uniform_matrix(const unsigned int& R, const unsigned int& C, cons
   }
   return mat;
 }
+
 void rescale_mean(nmatrix& M, const ntype& mean){
   ntype total=0.;
   for(size_t i=0; i < M.size(); ++i){
@@ -78,6 +95,67 @@ void rescale_mean(nmatrix& M, const ntype& mean){
     std::cerr << "Error, matrix is zero" << std::endl;
   }
   return;
+}
+
+nmatrix operator+(const nmatrix & A , const nmatrix& B){
+  unsigned int rows = A.size(), cols = A[0].size();
+  if((rows!=B.size())||(cols!=B[0].size())){
+    error e("Impossible to add matrices, the dimensions do not match.");
+    throw e;
+  }
+  nmatrix Add(rows, nvector(cols, 0.));
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < cols; ++j){
+      Add[i][j] = A[i][j]+B[i][j];
+    }
+  }
+  return Add;
+}
+nmatrix operator-(const nmatrix& A){
+  nmatrix Opp(A.size(), nvector(A[0].size(), 0.));
+  for(size_t i=0; i < A.size(); ++i){
+    for(size_t j=0; j < A[0].size();++j){
+      Opp[i][j]= -A[i][j];
+    }
+  }
+  return Opp;
+}
+
+nmatrix operator-(const nmatrix& A, const nmatrix& B){
+  return A+(-B);
+}
+
+nmatrix operator*(const nmatrix& A, const nmatrix& B){
+  unsigned int rows_A = A.size(), cols_A = A[0].size();
+  unsigned int rows_B = B.size(), cols_B = B[0].size();
+
+  nmatrix P(rows_A, nvector(cols_B, 0.));
+
+  if(cols_A!=rows_B){
+    error e("Error in the matrix multiplication, the dimensions do not match.");
+    throw e;
+  }
+
+  for(size_t i=0; i < rows_A; ++i){
+    for(size_t j=0; j < cols_B; ++j){
+      for(size_t k=0; k < rows_B; ++k){
+        P[i][j] += A[i][k]*B[k][j];
+      }
+    }
+  }
+
+  return P;
+}
+
+nmatrix transpose(const nmatrix& m){
+  unsigned int rows_m = m.size(), cols_m = m[0].size();
+  nmatrix transp(cols_m, nvector(rows_m, 0.));
+  for(size_t i=0; i<cols_m; ++i){
+    for(size_t j=0; j < rows_m; ++j){
+      transp[i][j] = m[j][i];
+    }
+  }
+  return transp;
 }
 
 bool non_neg_elements(const nmatrix& m){
@@ -311,4 +389,8 @@ std::string current_time(){
   auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::string time_now(std::ctime(&timenow));
   return time_now;
+}
+
+bool compare_complex(const nctype& a, const nctype& b){
+  return(real(a)<real(b));
 }

@@ -40,7 +40,7 @@ public:
   bool energy_constraint() const;
   bool constraints_fulfilled(const Metaparameters& m) const;
   bool positive_parameters() const;
-  bool dynamically_stable() const;
+  bool is_dynamically_stable() const;
   void save_simulation() const;
   void save_jacobian_at_equilibrium(std::string) const;
   void write_death_rates(std::string) const;
@@ -48,6 +48,7 @@ public:
   void perturb_parameters() const;
   void perturb_parameters(const ntype &) const;
   void save_new_equilibrium(const Extinction&) const;
+  bool respects_equations_of_evolution_at_equilibrium() const;
 
   /* virtual functions */
   virtual nmatrix jacobian_at_equilibrium() const;
@@ -74,6 +75,11 @@ public:
 
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
+
+
+  /* gives back the Beta and Gamma matrices from the jacobian at equilibrium */
+  nmatrix get_Beta_matrix(unsigned int eq_number=0) const;
+  nmatrix get_Gamma_matrix(unsigned int eq_number=0) const;
 
   /* FLUXES PART */
   /* FLUXES FOR RESOURCES */
@@ -104,7 +110,7 @@ public:
   ntype order_parameter() const;
 
   /* tells you if the system is stable, marginally stable or unstable dynamically */
-  systemstability is_dynamically_stable() const;
+  systemstability assess_dynamical_stability() const;
 
   bool has_linearly_stable_eq() const;
 

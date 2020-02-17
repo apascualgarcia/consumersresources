@@ -10,7 +10,7 @@ CRModel::CRModel(){
   this->metaparameters = NULL;
   this->eq_vals = NULL;
   this->model_param = NULL;
-  this->equations_of_evolution = NULL;
+  this->equations_of_evolution = ode_equations_of_evolution;
   return;
 }
 CRModel::CRModel(const CRModel& model){
@@ -224,8 +224,10 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
     v.push_back(eivals(i)*min_element);
     //v.push_back(eivals(i));
   }
+  std::sort(v.begin(), v.end(), compare_complex);
   return v;
 }
+
 void CRModel::save(std::ostream& os) const{
   std::cout << " Still have to implement this, bye" << std::endl;
   return;
@@ -243,10 +245,13 @@ bool CRModel::constraints_fulfilled(const Metaparameters& m) const{
   if(not(this->positive_parameters())){
     return false;
   }
+
   if(m.energy_constraint and not(this->energy_constraint())){
     return false;
   }
-  return true;
+
+  return this->respects_equations_of_evolution_at_equilibrium();
+  //return true;
 }
 bool CRModel::energy_constraint() const{
   Parameter_set* p = this->model_param->get_parameters();
@@ -256,7 +261,7 @@ bool CRModel::energy_constraint() const{
       ntype somme = 0.;
       for(size_t nu=0; nu < p->NR; ++nu){
         somme+=(1-p->sigma[i][nu])*p->gamma[i][nu]*Req[nu];
-        somme-=p->alpha[nu][i];
+        somme-=p->tau[nu][i];
       }
       if(somme < 0.){
         return false;
@@ -288,14 +293,8 @@ bool CRModel::positive_parameters() const{
   }
   return true;
 }
-bool CRModel::dynamically_stable() const{
-  ncvector v = this->eigenvalues_at_equilibrium();
-  for(size_t i = 0; i< v.size(); ++i){
-    if(norm(v[i])>EIGENSOLVER_PRECISION){
-      return false;
-    }
-  }
-  return true;
+bool CRModel::is_dynamically_stable() const{
+  return (this->assess_dynamical_stability()==stable);
 }
 void CRModel::save_simulation() const{
   std::ofstream myfile;
@@ -571,7 +570,7 @@ bool CRModel::has_linearly_stable_eq() const{
   std::cout << "Could not determine whether or not the system was stable, returning false to make sure" << std::endl;
   return false;
 }
-systemstability CRModel::is_dynamically_stable() const{
+systemstability CRModel::assess_dynamical_stability() const{
   ncvector eigvals = this->eigenvalues_at_equilibrium();
   ntype max_real_eigval = real(eigvals[0]);
   for(size_t i=1; i < eigvals.size(); ++i){
@@ -689,4 +688,51 @@ ntensor* CRModel::get_equilibrium_abundances() const{
 }
 func_equ_evol CRModel::get_equations_of_evolution() const{
   return this->equations_of_evolution;
+}
+bool CRModel::respects_equations_of_evolution_at_equilibrium() const{
+  Parameter_set* p=this->get_parameter_set();
+
+  /* we check that for each equilibrium found, the equations of evolution are fulfilled */
+  for(size_t i=0; i < this->get_equilibrium_abundances()->size();++i){
+    double y[p->NR+p->NS];
+    double f[p->NR+p->NS];
+
+    nvector R = this->get_resources_equilibrium(i);
+    nvector S = this->get_consumers_equilibrium(i);
+    for(size_t nu=0; nu < p->NR;++nu){
+      y[nu]=R[nu];
+    }
+    for(size_t j=0; j < p->NS;++j){
+      y[p->NR+j]=S[j];
+    }
+
+    this->equations_of_evolution(0, y, f, p);
+
+    for(size_t j=0; j < p->NS+p->NR;++j){
+      if(abs(f[j])>ZERO){
+        return false;
+      }
+    }
+  }
+  return true;
+}
+nmatrix CRModel::get_Beta_matrix(unsigned int n) const{
+  Parameter_set* p= this->get_parameter_set();
+  nmatrix Beta(p->NS, nvector(p->NR, 0.));
+  for(size_t i=0; i < p->NS; ++i){
+    for(size_t nu=0; nu < p->NR; ++nu){
+      Beta[i][nu]=(p->sigma)[i][nu]*(p->gamma[i][nu])*(this->get_consumers_equilibrium(n))[i];
+    }
+  }
+  return Beta;
+}
+nmatrix CRModel::get_Gamma_matrix(unsigned int n) const{
+  Parameter_set* p= this->get_parameter_set();
+  nmatrix Gamma(p->NR, nvector(p->NS, 0.));
+  for(size_t mu=0; mu < p->NR; ++mu){
+    for(size_t j=0; j < p->NS; ++j){
+      Gamma[mu][j]= -(p->gamma)[j][mu]*(this->get_resources_equilibrium(n))[mu]+(p->alpha)[mu][j];
+    }
+  }
+  return Gamma;
 }

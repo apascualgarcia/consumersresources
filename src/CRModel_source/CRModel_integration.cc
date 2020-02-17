@@ -201,7 +201,7 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
 
   if(this->metaparameters->verbose>1){
     if(eq_mode == oneextinct){
-      std::cout << "\t Time to get to equilibrium : " << t ;
+      std::cout << "\t Time to get to equilibrium : " << t  << ", " << counts << " steps ";
       std::cout << " (";
       if(one_extinct){
         std::cout << "observed at least one extinction";
@@ -212,7 +212,7 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
       }
       std::cout << ")" << std::endl;
     }else if(eq_mode == convergence){
-      std::cout << "\t Time to get convergence on all the resources/consumers time lines : " << t  << " ";
+      std::cout << "\t Time to get convergence on all the resources/consumers time lines : " << t  << ", " << counts << " steps ";
       if(one_extinct){
         std::cout << ", at least one species got extinct ";
       }

@@ -29,7 +29,7 @@ ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nrun
       break;
     }
     default:{
-
+      break;
     }
   }
 
@@ -114,7 +114,7 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
         /* CAREFUL HERE, WE REQUIRE THE MODEL TO BE DYNAMICALLY STABLE IN ORDER TO COMPUTE ITS STRUCTURAL STABILITY */
         while(!(model.is_dynamically_stable())){
           if(metaparams->verbose > 1){
-            std::cout << "Model was not dynamically stable so we drew another one." << std::endl;
+            std::cout << "\t Model was not dynamically stable so we drew another one." << std::endl;
           }
           CRModel model2(*metaparams);
           model = model2;

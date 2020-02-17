@@ -1,9 +1,12 @@
 #include "CRModel.h"
 
 int ode_equations_of_evolution(double t, const double y[], double f[], void* params){
+
   Parameter_set* p = &(*(Parameter_set*) params);
   nvector R;
   nvector S;
+
+
 
   /*  we fill S and R and set every member of S and R to zero
       if it's smaller than the precision of the integrator */
@@ -20,7 +23,6 @@ int ode_equations_of_evolution(double t, const double y[], double f[], void* par
       S[i]=0.;
     }
   }
-
 
   for (size_t nu=0; nu < p->NR; ++nu){
     ntype result(0.);

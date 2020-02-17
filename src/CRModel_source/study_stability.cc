@@ -62,7 +62,7 @@ stability compute_proportion_stability(Metaparameters& meta, unsigned int Nsimul
     case full:{
       for(size_t i=0; i < Nsimuls;++i){
         CRModel model(meta);
-        switch(model.is_dynamically_stable()){
+        switch(model.assess_dynamical_stability()){
           case stable :{
             stab_prop.stable += toadd;
             break;
@@ -82,7 +82,7 @@ stability compute_proportion_stability(Metaparameters& meta, unsigned int Nsimul
     case effective:{
       for(size_t i=0; i < Nsimuls;++i){
         EffectiveCRModel model(meta);
-        switch(model.is_dynamically_stable()){
+        switch(model.assess_dynamical_stability()){
           case stable :{
             stab_prop.stable += toadd;
             break;
