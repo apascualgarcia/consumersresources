@@ -736,3 +736,8 @@ nmatrix CRModel::get_Gamma_matrix(unsigned int n) const{
   }
   return Gamma;
 }
+
+nctype CRModel::largest_eigenvalue_at_equilibrium() const{
+  ncvector eigvals = this->eigenvalues_at_equilibrium();
+  return eigvals[eigvals.size()-1];
+}

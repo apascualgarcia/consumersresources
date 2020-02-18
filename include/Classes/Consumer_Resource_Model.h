@@ -34,6 +34,7 @@ public:
 
   void create_model_parameters(Metaparameters&);
   void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
+  nctype largest_eigenvalue_at_equilibrium() const;
   ncvector eigenvalues_at_equilibrium() const;
   void save(std::ostream&) const; // outputs the model to the external file
   std::ostream& display(std::ostream&) const;

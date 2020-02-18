@@ -11,8 +11,11 @@
 foodmatrix load_food_matrix(const Metaparameters&);
 ntype norm(const nvector&);
 ntype mean(const nmatrix &);
+ntype det(const nmatrix&);
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
+
+
 
 nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
@@ -56,5 +59,7 @@ std::ofstream open_external_file_append(std::string);
 std::ofstream open_external_file_truncate(std::string);
 
 bool compare_complex(const nctype&, const nctype&);
+bool operator<(const nctype&, const nctype&);
+bool operator>(const nctype&, const nctype&);
 
 #endif

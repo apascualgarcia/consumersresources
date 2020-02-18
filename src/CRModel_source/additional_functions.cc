@@ -58,6 +58,16 @@ ntype mean(const nmatrix& m){
   }
   return mean;
 }
+ntype det(const nmatrix& m){
+  Eigen::MatrixXf mat(m.size(), m[0].size());
+  for(size_t i=0; i<m.size(); ++i){
+    for(size_t j=0; j < m[0].size();++j){
+      mat(i,j)=m[i][j];
+    }
+  }
+  return ntype(mat.determinant());
+}
+
 nmatrix random_uniform_matrix(const unsigned int& R, const unsigned int& C, const ntype& mean_){
   nmatrix mat(R, nvector(C, 0.));
   std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
@@ -393,4 +403,11 @@ std::string current_time(){
 
 bool compare_complex(const nctype& a, const nctype& b){
   return(real(a)<real(b));
+}
+
+bool operator<(const nctype& a, const nctype& b){
+  return(real(a)<real(b));
+}
+bool operator>(const nctype& a, const nctype& b){
+  return(real(a)>real(b));
 }

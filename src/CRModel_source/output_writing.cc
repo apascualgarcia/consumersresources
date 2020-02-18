@@ -17,6 +17,8 @@ std::ostream& operator<<(std::ostream& os, const Metaparameters& m){
   os << "convergence threshold = " << m.convergence_threshold;
   return os;
 }
+
+
 std::ostream& operator<<(std::ostream& os, const nctype& number){
   os << std::real(number);
   if(std::imag(number)>0.){
@@ -66,7 +68,7 @@ std::ostream& operator<<(std::ostream& os, const ntensor& T){
 }
 std::ostream& operator<<(std::ostream& os, const nvector& v){
   for (size_t i=0; i < v.size(); ++i){
-    os << std::right << std::fixed  << std::setprecision(print_precision) << v[i] << " ";
+    os << std::scientific << std::setprecision(print_precision) << v[i] << " ";
   }
   return os;
 }
