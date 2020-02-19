@@ -15,6 +15,7 @@ int main(int argc, char * argv[]){
         alpha_max=local_alpha_max;
       }
     }
+    std::cout << "Maximum common alpha0 is " << alpha_max << std::endl;
 
     /* now that we have found alpha max we can compute the maximal eigenvalue observed according to alpha */
     nvector alpha_range = linear_interval(0., alpha_max, Npoints);

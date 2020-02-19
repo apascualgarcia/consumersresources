@@ -135,6 +135,7 @@ double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
 
     gsl_root_fsolver_set(s, f, x_lo, x_hi);
 
+
     do{
       iter++;
       status = gsl_root_fsolver_iterate(s);
