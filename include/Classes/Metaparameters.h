@@ -46,6 +46,9 @@ struct Metaparameters{
       has an accuracy on alpha of roughly alpha_accuracy */
   ntype feasible_alpha_min(ntype alpha_accuracy = 1e-7) const;
 
+  /* returns the maximum feasible S0 taking into account the other metaparameters */
+  ntype feasible_S0_max(ntype S0_accuracy=1e-7) const;
+
 
 };
 

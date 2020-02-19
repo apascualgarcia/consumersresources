@@ -348,6 +348,17 @@ double function_proba_feasability_solver(double alpha, void* params){
   return find_feasability_probability(*m, Nsimul)-target;
 }
 
+double function_proba_feasability_solver_S0(double S, void* params){
+  Solver_Parameters* s = (Solver_Parameters*) params;
+  Metaparameters* m = s->metaparameters;
+  m->S0 = S;
+  unsigned int Nsimul = s->Nsimul;
+  double target = s->target;
+
+  return find_feasability_probability(*m, Nsimul)-target;
+
+}
+
 statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double & x_lo, double & x_hi, const Metaparameters& m, delta_solver delta_solv){
   double estimate = 0., error = 0.;
   if(m.verbose > 0){

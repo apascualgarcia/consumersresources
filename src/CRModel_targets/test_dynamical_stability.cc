@@ -8,7 +8,11 @@ int main(int argc, char * argv[]){
     EffectiveCRModel effmodel(model);
     nmatrix gamma=model.get_parameter_set()->gamma;
     nmatrix alpha=model.get_parameter_set()->alpha;
-  // std::cout << "Maximum feasible alpha0 : " << metaparams.feasible_alpha_max(1e-4) << std::endl;
+    ntype max_S0=metaparams.feasible_S0_max();
+    std::cout << "Maximum feasible S0 at this gamma0 : " << max_S0 << std::endl;
+    metaparams.S0=max_S0;
+    std::cout << "Set S0 to : " << max_S0 << std::endl;
+    std::cout << "Maximum feasible alpha0 : " << metaparams.feasible_alpha_max(1e-7) << std::endl;
     // std::cout << "Gamma matrix : " << std::endl << gamma << std::endl;
     // std::cout << "Alpha matrix : " << std::endl << alpha << std::endl;
     nmatrix GammaBeta= model.get_Gamma_matrix()*model.get_Beta_matrix();
@@ -24,6 +28,7 @@ int main(int argc, char * argv[]){
     std::cout << "---- EFFECTIVE MODEL -----" << std::endl;
     std::cout << "Eigenvalues at equilibrium : " << effmodel.eigenvalues_at_equilibrium() << std::endl;
     std::cout << "The model is " << effmodel.assess_dynamical_stability() << std::endl;
+
 
 
     // std::cout << "Rough jacobian : " << std::endl << gamma*alpha-gamma*transpose(gamma) << std::endl;

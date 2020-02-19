@@ -18,6 +18,10 @@ double find_zero(gsl_function* f, unsigned int verbose, interval);
 double function_av_extinct_solver(double, void*);
 statistics solve_for_delta_with_fit(fitting_parameters&, double&, double&, const Metaparameters&, delta_solver);
 
+/* takes an alpha0 and Solver Parameters as input, gives back feasability */
 double function_proba_feasability_solver(double, void*);
+/* takes an S0 and Solver Parameters as input, gives back feasability */
+double function_proba_feasability_solver_S0(double S, void* params);
+
 
 #endif

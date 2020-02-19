@@ -1,6 +1,6 @@
 #!/bin/bash
-CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0"
-ADDITIONAL_MODIF="S0=0.1 gamma0=0.1"
+CONFIG_LIST="configuration"
+ADDITIONAL_MODIF=""
 
 for f in $CONFIG_LIST
 do

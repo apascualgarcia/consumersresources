@@ -2,7 +2,7 @@
 #include "../../include/ConfigFile.tpp"
 
 Metaparameters::Metaparameters(int argc, char *argv[]){
-  std::string inputPath("configuration.in"); // Fichier d'input par defaut
+  std::string inputPath("config/configuration.in"); // Fichier d'input par defaut
   if (argc > 1) // Fichier d'input specifie par l'utilisateur ("./Exercice3
                 // config_perso.in")
     inputPath = argv[1];
@@ -63,6 +63,44 @@ ntype Metaparameters::minimum_S0_guaranteed_feasability()const{
   return result;
 }
 
+ntype Metaparameters::feasible_S0_max(ntype S0_accuracy) const{
+  ntype S0_max=0.;
+  gsl_function F;
+  Metaparameters meta = *this;
+
+  Solver_Parameters solv;
+  solv.metaparameters = &meta;
+  solv.Nsimul=100;
+  solv.target=0.99;
+
+  F.function = &function_proba_feasability_solver_S0;
+  F.params = &solv;
+
+  try{
+    S0_max = find_zero(&F, this->verbose, interval(0, this->R0));
+    meta.S0 = S0_max;
+
+    if(this->verbose > 0){
+      std::cout << "Maximum feasible S0 for " << this->foodmatrixpath << " is " << S0_max << std::endl;
+    }
+
+    if(is_an_error(S0_max)){
+      error err("Could not find an appropriate value for the feasible S0_max. The exception value is returned.",1);
+      throw err;
+    }
+    if(S0_max < 0){
+      error err("Found a negative S0_max. The exception value will be returned.", 1);
+      throw err;
+    }
+
+  }catch(error e){
+    e.handle();
+    return NUMERICAL_ERROR;
+  }
+
+  return S0_max;
+}
+
 ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
   ntype alpha_max =0.;
   gsl_function F;
@@ -82,12 +120,14 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
     meta.alpha0 = alpha_max;
     /*  we take a tiny step back and wait for the first alpha which is = 1
         this works because we know the shape of the feasability vs alpha curve */
+    /*
     unsigned int steps=0;
     while(find_feasability_probability(meta) < 1. and steps<=1000){
       alpha_max -= alpha_accuracy;
       meta.alpha0=alpha_max;
       steps+=1;
     }
+    */
 
     if(this->verbose > 0){
       std::cout << "Maximum feasible alpha0 for " << this->foodmatrixpath << " is " << alpha_max << std::endl;
