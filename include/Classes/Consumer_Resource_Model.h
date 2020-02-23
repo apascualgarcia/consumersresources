@@ -33,7 +33,6 @@ public:
 
 
   void create_model_parameters(Metaparameters&);
-  void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
   nctype largest_eigenvalue_at_equilibrium() const;
   ncvector eigenvalues_at_equilibrium() const;
   void save(std::ostream&) const; // outputs the model to the external file
@@ -52,6 +51,8 @@ public:
   bool respects_equations_of_evolution_at_equilibrium() const;
 
   /* virtual functions */
+  virtual void attempt_to_build_model(const foodmatrix&,Metaparameters&, unsigned int);
+  virtual void attempt_to_build_model_with_m(const foodmatrix&, Metaparameters&, unsigned int);
   virtual nmatrix jacobian_at_equilibrium() const;
   virtual nmatrix jacobian(const Dynamical_variables&) const; // returns the jacobian for the given dynamical variables
 

@@ -12,6 +12,7 @@ struct Metaparameters{
   ntype R0;
   ntype S0;
   ntype l0;
+  ntype m0;
   ntype epsilon;
   unsigned int NR;
   unsigned int NS;
@@ -30,6 +31,7 @@ struct Metaparameters{
   ntype perturb_parameters;
   eqmode equilibrium;
   ntype convergence_threshold;
+  buildingmode building_mode;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

@@ -23,24 +23,7 @@ CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
 }
-CRModel::CRModel(Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
-  unsigned int attempts(0);
-  this->create_model_parameters(meta);
-  do{
-    attempts+=1;
-    this->attempt_to_build_model(load_food_matrix(meta), meta, attempts);
-  }while(not(this->constraints_fulfilled(meta)));
-
-  if(meta.verbose > 1){
-    std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
-    if(attempts > meta.nb_attempts){
-      std::cout << "\t The metaparameters had to be changed.";
-    }else{
-      std::cout << "It was possible to use the initial metaparameters.";
-    }
-    std::cout << std::endl;
-  }
-
+CRModel::CRModel(Metaparameters& meta):CRModel(load_food_matrix(meta), meta){
   return;
 }
 CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
@@ -48,7 +31,19 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evoluti
   this->create_model_parameters(meta);
   do{
     attempts+=1;
-    this->attempt_to_build_model(F, meta, attempts);
+    switch(meta.building_mode){
+      case use_l:{
+        this->attempt_to_build_model(F, meta, attempts);
+        break;
+      }
+      case use_m:{
+        this->attempt_to_build_model_with_m(F, meta, attempts);
+        break;
+      }
+      default:{
+        throw error("Unrecognized building mode in model constructor.");
+      }
+    }
   }while(not(this->constraints_fulfilled(meta)));
 
   if(meta.verbose > 1){
@@ -86,7 +81,6 @@ void CRModel::create_model_parameters(Metaparameters& meta){
   return;
 }
 void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
-
   Parameter_set* p = this->model_param->get_parameters();
 
   /* first find the values for the equilibria */
@@ -127,14 +121,68 @@ void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, 
   p->d = d;
 
   /* still have to set l and m */
-  nvector l, m;
+  nvector l, m(meta.NR);
   l = build_l(meta);
   for(size_t nu=0; nu < p->NR; ++nu){
     ntype C = 0.;
     for(size_t j = 0; j < p->NS; ++j){
       C+=(p->alpha[nu][j]*Seq[j]-p->gamma[j][nu]*Req[nu]*Seq[j]);
     }
-    m.push_back(ntype(l[nu]+C)/Req[nu]);
+    m[nu]=(ntype(l[nu]+C)/Req[nu]);
+  }
+  p->l = l;
+  p->m = m;
+
+  return;
+}
+void CRModel::attempt_to_build_model_with_m(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
+  Parameter_set* p = this->model_param->get_parameters();
+
+  /* first find the values for the equilibria */
+  nvector Req = build_resources(meta);
+  nvector Seq = build_consumers(meta);
+
+  nmatrix equilibria;
+  equilibria.push_back(Req);
+  equilibria.push_back(Seq);
+
+  ntensor equilibria_vals;
+  equilibria_vals.push_back(equilibria);
+
+  *(this->eq_vals) = equilibria_vals;
+
+  p->NR = meta.NR;
+  p->NS = meta.NS;
+
+  /* then sigma */
+  p->sigma = build_sigma(meta);
+
+  /* then we build gamma according to the food matrix */
+  p->gamma = build_gamma(F,meta);
+
+  /* then we build alpha according to the other parameters */
+  p->alpha = build_alpha(p, meta, Req, attempts);
+  p->tau = build_tau(p, meta, attempts);
+
+  /* d is then set */
+  nvector d;
+  for (size_t i=0; i < meta.NS; ++i){
+    ntype result = 0.;
+    for (size_t mu =0 ; mu < meta.NR; ++mu){
+      result+=(p->sigma)[i][mu]*(p->gamma)[i][mu]*Req[mu]-(p->tau)[mu][i];
+    }
+    d.push_back(result);
+  }
+  p->d = d;
+
+  /* still have to set l and m */
+  nvector l(meta.NR, 0.), m(meta.NR, 0.);
+  m = build_m(meta);
+  for(size_t nu=0; nu < p->NR; ++nu){
+    l[nu]=m[nu]*Req[nu];
+    for(size_t j=0; j < p->NS; ++j){
+      l[nu]+=((p->gamma[j][nu]*Req[nu]-p->alpha[nu][j])*Seq[j]);
+    }
   }
   p->l = l;
   p->m = m;
@@ -243,15 +291,27 @@ std::ostream& CRModel::display(std::ostream& os) const{
 }
 bool CRModel::constraints_fulfilled(const Metaparameters& m) const{
   if(not(this->positive_parameters())){
+    if(m.verbose > 3){
+      std::cout << "Model rejected because some of the parameters are not positive" << std::endl;
+    }
     return false;
   }
 
   if(m.energy_constraint and not(this->energy_constraint())){
+    if(m.verbose > 3){
+      std::cout << "Model rejected because the energy constraint is not fulfilled" << std::endl;
+    }
     return false;
   }
 
-  return this->respects_equations_of_evolution_at_equilibrium();
-  //return true;
+  if(not(this->respects_equations_of_evolution_at_equilibrium())){
+    if(m.verbose > 3){
+      std::cout << "Model rejected because the equations of evolution are not respected at equilibrium " << std::endl;
+    }
+    return false;
+  }
+
+  return true;
 }
 bool CRModel::energy_constraint() const{
   Parameter_set* p = this->model_param->get_parameters();
@@ -710,12 +770,16 @@ bool CRModel::respects_equations_of_evolution_at_equilibrium() const{
 
     for(size_t j=0; j < p->NS+p->NR;++j){
       if(abs(f[j])>ZERO){
+        if(this->metaparameters->verbose>3){
+          std::cout << "System rejected because element " << j << " of system not fulfilling equations of evolution ("<<abs(f[j])<<")" << std::endl;
+        }
         return false;
       }
     }
   }
   return true;
 }
+
 nmatrix CRModel::get_Beta_matrix(unsigned int n) const{
   Parameter_set* p= this->get_parameter_set();
   nmatrix Beta(p->NS, nvector(p->NR, 0.));

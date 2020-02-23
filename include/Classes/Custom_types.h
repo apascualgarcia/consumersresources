@@ -32,6 +32,10 @@ enum stabilitymode{dynamical, structural};
 enum systemstability {stable, marginal, unstable};
 enum CRModelType{full, effective};
 
+/* different ways of building the system, do we choose l? m? */
+enum buildingmode{use_l, use_m};
+
+
 /*  writemode is used in the general time evolution of the system. It tells you whether you should, and if so Where
     write the time evolution of the system */
 struct writemode{

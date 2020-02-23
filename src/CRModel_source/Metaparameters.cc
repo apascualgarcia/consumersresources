@@ -18,6 +18,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->alpha0 = configFile.get<ntype>("alpha0");
   this->sigma0 = configFile.get<ntype>("sigma0");
   this->p = configFile.get<ntype>("p");
+  this->m0 = configFile.get<ntype>("m0");
   this->R0 = configFile.get<ntype>("R0");
   this->S0 = configFile.get<ntype>("S0");
   this->NR = configFile.get<unsigned int>("NR");
@@ -39,6 +40,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->perturb_parameters = configFile.get<ntype>("perturbation_parameters");
   this->equilibrium = string_to_eq_mode(configFile.get<std::string>("equilibrium_mode"));
   this->convergence_threshold = configFile.get<ntype>("convergence_threshold");
+  this->building_mode = string_to_building_mode(configFile.get<std::string>("building_mode"));
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }

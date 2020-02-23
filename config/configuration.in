@@ -2,6 +2,7 @@
 gamma0 = 0.2
 alpha0 = 0.
 sigma0 = 0.25
+m0 = 0.
 R0 = 1.
 S0 = 0.2
 l0 = 1.
@@ -13,6 +14,7 @@ tf = 10000000.
 gamma_mode = random_val
 tau_mode = taualpha
 alpha_mode = random_structure
+building_mode = use_l
 path_to_food_matrix = ./matrices/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.3_Conn0.1296.txt
 verbose-level = 0
 budget_constraint = false

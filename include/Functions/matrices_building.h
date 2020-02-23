@@ -12,5 +12,8 @@ nmatrix build_gamma(const foodmatrix&, const Metaparameters&);
 nmatrix build_alpha(const Parameter_set*, Metaparameters&, const nvector&, unsigned int);
 nmatrix build_tau(Parameter_set*, Metaparameters&, unsigned int);
 nvector build_l(const Metaparameters& );
+nvector build_m(const Metaparameters& ); 
+
+nmatrix build_sigma_Butler(const Metaparameters&);
 
 #endif

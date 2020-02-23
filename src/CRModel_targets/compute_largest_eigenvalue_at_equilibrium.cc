@@ -4,7 +4,8 @@ int main(int argc, char * argv[]){
   try{
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices=load_food_matrix_list(metaparams.foodmatrixpath);
-    unsigned int Npoints=100, Nsimuls=1000;
+    std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
+    unsigned int Npoints(100), Nsimuls(1e6);
 
     /* first compute the largest alpha feasible for every matrix considered */
     ntype alpha_max=1e9;
@@ -21,8 +22,9 @@ int main(int argc, char * argv[]){
     nvector alpha_range = linear_interval(0., alpha_max, Npoints);
     for(size_t i=0; i < matrices.size(); ++i){
       metaparams.foodmatrixpath = matrices[i];
-      std::cout << "For matrix " << matrices[i] << ":" << std::endl;
+      myfile << metaparams.foodmatrixpath << " ";
       for(size_t j=0; j < Npoints; ++j){
+        metaparams.alpha0 = alpha_range[j];
         CRModel  model(metaparams);
         nctype largest_eigenvalue_at_equilibrium=model.largest_eigenvalue_at_equilibrium();
         for(size_t k=0; k < Nsimuls; ++k){
@@ -32,11 +34,11 @@ int main(int argc, char * argv[]){
             largest_eigenvalue_at_equilibrium = local_largest;
           }
         }
-        std::cout << " \t at alpha0=" << alpha_range[j] << " maximum eigenvalue observed is " << largest_eigenvalue_at_equilibrium << std::endl;
+        myfile << metaparams.alpha0 << " " << largest_eigenvalue_at_equilibrium << " ";
       }
+      myfile << std::endl;
     }
-
-
+    myfile.close();
 
   }catch(error e){
     e.handle();

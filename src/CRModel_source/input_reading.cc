@@ -36,6 +36,18 @@ alphamode string_to_alpha_mode(std::string mode){
     throw err;
   }
 }
+
+buildingmode string_to_building_mode(std::string mode){
+  if(mode=="use_l"){
+    return buildingmode(use_l);
+  }else if(mode=="use_m"){
+    return buildingmode(use_m);
+  }else{
+    error err("Error, that value of building mode has not been implemented yet or does not exist.");
+    throw err;
+  }
+}
+
 eqmode string_to_eq_mode(std::string mode){
     if(mode=="one_extinct"){
       return eqmode(oneextinct);

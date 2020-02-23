@@ -14,6 +14,7 @@ EffectiveCRModel::EffectiveCRModel(Metaparameters& meta):CRModel(meta){
   }
   this->equations_of_evolution = &effective_ode_equations_of_evolution;
 }
+
 EffectiveCRModel::EffectiveCRModel(const foodmatrix& F, Metaparameters& meta):CRModel(F, meta){
   this->equations_of_evolution = &effective_ode_equations_of_evolution;
 }

@@ -171,3 +171,20 @@ std::ostream& operator<<(std::ostream& os, const error& e){
   os << "Error during runtime : " << e.message << std::endl;
   return os;
 }
+
+std::ostream& operator<<(std::ostream& os, const buildingmode & b){
+  switch(b){
+    case use_l:{
+      os << "use_l";
+      break;
+    }
+    case use_m:{
+      os << "use_m";
+      break;
+    }
+    default:{
+      break;
+    }
+  }
+  return os;
+}
