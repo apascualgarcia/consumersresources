@@ -82,7 +82,9 @@ void CRModel::create_model_parameters(Metaparameters& meta){
 }
 void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
   Parameter_set* p = this->model_param->get_parameters();
-
+  if(meta.verbose>3){
+    std::cout << "\t \t \t Build system choosing l " << std::endl;
+  }
   /* first find the values for the equilibria */
   nvector Req = build_resources(meta);
   nvector Seq = build_consumers(meta);
@@ -138,6 +140,10 @@ void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, 
 void CRModel::attempt_to_build_model_with_m(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
   Parameter_set* p = this->model_param->get_parameters();
 
+  if(meta.verbose>3){
+    std::cout << "\t \t \t Build system choosing m " << std::endl;
+  }
+
   /* first find the values for the equilibria */
   nvector Req = build_resources(meta);
   nvector Seq = build_consumers(meta);
@@ -155,7 +161,7 @@ void CRModel::attempt_to_build_model_with_m(const foodmatrix& F, Metaparameters&
   p->NS = meta.NS;
 
   /* then sigma */
-  p->sigma = build_sigma(meta);
+  p->sigma = build_sigma_Butler(meta);
 
   /* then we build gamma according to the food matrix */
   p->gamma = build_gamma(F,meta);

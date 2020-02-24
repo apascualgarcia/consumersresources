@@ -21,7 +21,7 @@ int main(int argc, char * argv[]){
 
     for(size_t i=0; i < matrices.size();++i){
       metaparams.foodmatrixpath=matrices[i];
-      CRModel model(metaparams);
+      ButlerModel model(metaparams);
 
       nmatrix gamma=model.get_parameter_set()->gamma;
       nmatrix alpha=model.get_parameter_set()->alpha;
