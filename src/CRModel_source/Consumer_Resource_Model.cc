@@ -102,7 +102,7 @@ void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, 
   p->NS = meta.NS;
 
   /* first sigma, Req, Seq are drawn randomly */
-  p->sigma = build_sigma(meta);
+  p->sigma = build_sigma_Butler(meta);
 
   /* then we build gamma according to the food matrix */
   p->gamma = build_gamma(F,meta);

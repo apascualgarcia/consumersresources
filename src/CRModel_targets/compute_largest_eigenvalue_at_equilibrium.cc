@@ -5,7 +5,7 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices=load_food_matrix_list(metaparams.foodmatrixpath);
     std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
-    unsigned int Npoints(100), Nsimuls(1e6);
+    unsigned int Npoints(10), Nsimuls(1000);
 
     /* first compute the largest alpha feasible for every matrix considered */
     ntype alpha_max=1e9;
@@ -35,6 +35,8 @@ int main(int argc, char * argv[]){
           }
         }
         myfile << metaparams.alpha0 << " " << largest_eigenvalue_at_equilibrium << " ";
+        std::cout << metaparams.alpha0 << " " << largest_eigenvalue_at_equilibrium << " ";
+
       }
       myfile << std::endl;
     }
