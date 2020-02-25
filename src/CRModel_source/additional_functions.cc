@@ -67,6 +67,20 @@ ntype det(const nmatrix& m){
   }
   return ntype(mat.determinant());
 }
+ntype connectance(const nmatrix& m){
+  ntype connectance=0.;
+  unsigned int rows=m.size(), cols=m[0].size();
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < rows; ++j){
+      if(m[i][j]*m[i][j]>0.){
+        connectance+=1.;
+      }
+    }
+  }
+  connectance/=(rows*cols);
+  return connectance;
+}
+
 
 nmatrix random_uniform_matrix(const unsigned int& R, const unsigned int& C, const ntype& mean_){
   nmatrix mat(R, nvector(C, 0.));
@@ -378,7 +392,7 @@ std::ofstream open_external_file_append(std::string path){
     error err("Could not open external file "+path);
     throw err;
   }
-  myfile << "# File opened on " << current_time() <<  std::setprecision(print_precision)<<std::endl;
+  myfile << "# File opened on " << current_time() <<  std::setprecision(print_precision);
   return myfile;
 }
 
@@ -391,7 +405,7 @@ std::ofstream open_external_file_truncate(std::string path){
     error err("Could not open external file "+path);
     throw err;
   }
-  myfile << "# File created on " << current_time() << std::setprecision(print_precision) << std::endl;
+  myfile << "# File created on " << current_time() << std::setprecision(print_precision);
   return myfile;
 }
 

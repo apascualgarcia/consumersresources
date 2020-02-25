@@ -12,6 +12,8 @@ foodmatrix load_food_matrix(const Metaparameters&);
 ntype norm(const nvector&);
 ntype mean(const nmatrix &);
 ntype det(const nmatrix&);
+/* here we take connectance as the number of links divided by the number of total possible links */
+ntype connectance(const nmatrix&);
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
 
