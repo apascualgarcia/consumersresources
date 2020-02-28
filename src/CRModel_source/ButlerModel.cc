@@ -10,7 +10,7 @@ ButlerModel::ButlerModel(Metaparameters& meta){
   this->equations_of_evolution=ode_equations_of_evolution;
   unsigned int attempts(0);
   this->create_model_parameters(meta);
-  foodmatrix F =load_food_matrix(meta);
+  foodmatrix F=load_food_matrix(meta);
   do{
     attempts+=1;
     this->attempt_to_build_model(F, meta, attempts);

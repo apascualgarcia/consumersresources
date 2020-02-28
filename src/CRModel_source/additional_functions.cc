@@ -3,6 +3,7 @@
 #include <fstream>
 #include <random>
 #include <cmath>
+#include <numeric>
 #include <algorithm>
 
 std::mt19937 random_engine;
@@ -39,8 +40,41 @@ foodmatrix load_food_matrix(const Metaparameters& m){
     }
   }
 
-  return f;
+  if(m.verbose > 1){
+    std::cout << "\t Note that the food matrix taken is " << m.foodmatrixpath << " but rearranged in the optimal way" << std::endl;
+  }
+
+  return foodmatrix(order_matrix_by_column_degree(order_matrix_by_column_degree(f)));
 }
+nmatrix order_matrix_by_row_degree(const nmatrix& m){
+  nmatrix ordered_mat;
+
+  unsigned int rows=m.size(), cols=m[0].size();
+  std::vector<unsigned int> row_degs(rows, 0);
+
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < cols; ++j){
+      if(m[i][j]*m[i][j]>0.){
+        row_degs[i]+=1;
+      }
+    }
+  }
+
+  /* contains the inverted sorted indices of row_degs i.e. sorted_indices[rows-1] is the row with the largest degree and so on*/
+  std::vector<size_t> sorted_indices=sort_indices(row_degs);
+
+  for(size_t i=0; i < rows; ++i){
+    ordered_mat.push_back(m[sorted_indices[rows-i-1]]);
+  }
+
+  return ordered_mat;
+}
+
+nmatrix order_matrix_by_column_degree(const nmatrix& m){
+  return transpose(order_matrix_by_row_degree(transpose(m)));
+}
+
+
 ntype norm(const nvector& v){
   ntype a=0.;
   for (size_t i =0 ; i < v.size(); ++i){
@@ -80,7 +114,50 @@ ntype connectance(const nmatrix& m){
   connectance/=(rows*cols);
   return connectance;
 }
+ntype nestedness(const nmatrix& mat){
+  ntype eta=0.;
+  unsigned int rows = mat.size(), cols=mat[0].size();
 
+  /* first build binary matrix out of mat */
+  nmatrix m(rows, nvector(cols, 0.));
+  std::vector<unsigned int> degrees;
+
+  /* and get the degree distribution */
+  for(size_t i=0; i < rows; ++i){
+    unsigned int local_degree=0.;
+    for(size_t j=0; j < cols; ++j){
+      if(mat[i][j]*mat[i][j]>0){
+        local_degree+=1;
+        m[i][j]=1;
+      }
+    }
+    degrees.push_back(local_degree);
+  }
+
+  nmatrix overlap=m*transpose(m);
+  ntype eta_num=0., eta_denom=0.;
+  for(size_t i=0; i < rows;++i){
+    for(size_t j=0; j < i; ++j){
+      eta_num+=overlap[i][j];
+      if(degrees[i]>degrees[j]){
+        eta_denom+=degrees[j];
+      }else{
+        eta_denom+=degrees[i];
+      }
+    }
+  }
+
+  eta=eta_num/eta_denom;
+
+  return eta;
+}
+ntype trace(const nmatrix& m){
+  ntype trace=0.;
+  for(size_t i=0; i < m.size() || i < m[0].size(); ++i){
+    trace+=m[i][i];
+  }
+  return trace;
+}
 
 nmatrix random_uniform_matrix(const unsigned int& R, const unsigned int& C, const ntype& mean_){
   nmatrix mat(R, nvector(C, 0.));

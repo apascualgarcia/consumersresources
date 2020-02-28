@@ -51,6 +51,8 @@ struct Metaparameters{
   /* returns the maximum feasible S0 taking into account the other metaparameters */
   ntype feasible_S0_max(ntype S0_accuracy=1e-7) const;
 
+  /* returns the maximum feasible gamma0 taking into account the other metaparameters */
+  ntype feasible_gamma0_max(ntype gamma0_accuracy=1e-7)const;
 
 };
 
