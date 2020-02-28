@@ -11,10 +11,13 @@
 
 /* loads the food matrix and relabels columns and resources such that gamma is "most triangular" */
 foodmatrix load_food_matrix(const Metaparameters&);
+nmatrix load_syntrophy_matrix(const Metaparameters&);
 /* relabels the row of  m such that degree of row i > degree of row j if i < j */
 nmatrix order_matrix_by_row_degree(const nmatrix&);
 /* relabels the columns of m such that degree of column i > degree of column j if i < j */
 nmatrix order_matrix_by_column_degree(const nmatrix& m);
+/* returns path of optimal alpha matrix for a given path to the gamma matrix */
+std::string optimal_alpha_matrix_path(const std::string&);
 ntype norm(const nvector&);
 ntype mean(const nmatrix &);
 ntype det(const nmatrix&);
@@ -68,6 +71,8 @@ bool is_an_error(ntype);
 /* open external file */
 std::ofstream open_external_file_append(std::string);
 std::ofstream open_external_file_truncate(std::string);
+
+std::ostream& display_food_matrix(std::ostream&, const foodmatrix&);
 
 bool compare_complex(const nctype&, const nctype&);
 bool operator<(const nctype&, const nctype&);

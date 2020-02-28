@@ -11,7 +11,7 @@ int main(int argc, char* argv[]){
       metaparams.save_path= matrices[i]+"_corr";
       std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
       foodmatrix f = load_food_matrix(metaparams);
-      myfile << order_matrix_by_column_degree(order_matrix_by_row_degree(f)) << std::endl;
+      display_food_matrix(myfile, order_matrix_by_column_degree(order_matrix_by_row_degree(f)));
       myfile.close();
 
     }

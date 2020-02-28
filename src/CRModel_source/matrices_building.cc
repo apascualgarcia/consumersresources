@@ -171,6 +171,19 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
         break;
       }
 
+      case optimal_matrix:{
+        alpha=load_syntrophy_matrix(m);
+        for(size_t mu=0; mu < p->NR; ++mu){
+          for(size_t i=0; i < p->NS; ++i){
+            if(alpha[mu][i]>0.){
+              alpha[mu][i] = alpha_distrib(random_engine);
+            }
+          }
+        }
+
+
+      }
+
       default:{
         error e("This alpha mode has not been implemented yet.");
         throw e;

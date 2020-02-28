@@ -31,6 +31,8 @@ alphamode string_to_alpha_mode(std::string mode){
     return alphamode(no_release_when_eat);
   }else if(mode=="one_release"){
     return alphamode(one_release);
+  }else if(mode=="optimal"){
+    return alphamode(optimal_matrix);
   }else{
     error err("Error, that value of alphamode has not been implemented yet or does not exist.");
     throw err;

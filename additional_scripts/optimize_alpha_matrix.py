@@ -1,28 +1,29 @@
 import numpy as np
 import copy
+import matplotlib.pyplot as plt
 
-gamma_matrix_folder='optimal_matrices/Nr25_Nc25'
-gamma_matrix_name='RandTrix_Nr25_Nc25_Nest0.2_Conn0.1312'
+gamma_matrix_folder='optimal_matrices/Nr50_Nc25'
+gamma_matrix_name='RandTrix_Nr50_Nc25_Nest0.45_Conn0.2768'
 # temperature (basically will decide how long the simulation runs)
-T = 1.
+T = 1
 # desired connectance of the alpha matrix
-connectance_in = 1.
+connectance_in = 0.
 # maximum number of steps allowed without changing alpha
 MaxStepsNotChangedAlpha = 1000
 # maximum number of total steps
-MaxSteps=1e6
+MaxSteps=7e3
 alpha_matrix_name="optimal_alpha_"+gamma_matrix_name
 
 
 ###### DO NOT MODIFY CODE BELOW THIS ########
-file_name = gamma_matrix_folder+'/'+gamma_matrix_name+'.txt'
+file_name = gamma_matrix_folder+'/'+gamma_matrix_name+'.txt_corr'
 gamma_matrix = np.loadtxt(file_name)
 
 ####### FUNCTIONS USED ARE DEFINED HERE ################
 def quadratic_form(alpha_):
     to_test = alpha_@gamma_matrix
-    to_test = 0.5*(to_test+np.transpose(to_test))
-    return np.max(np.linalg.eigvalsh(to_test))
+    return np.linalg.norm(to_test)
+
 def probability_density(alpha_, T_):
     return np.exp(-quadratic_form(alpha_)/T_)
 def proposed_new_alpha(alpha_):
@@ -41,8 +42,11 @@ def MC_algorithm(alpha_, T_):
     steps=0
     steps_not_changed=0
     connectance_=[]
+    qform_=[]
     while not(stop):
         (alpha_,changed)=choose_next_alpha(alpha_,T_)
+        connectance_.append(connectance(alpha_))
+        qform_.append(quadratic_form(alpha_))
         if not(changed):
             steps_not_changed+=1
         else:
@@ -52,8 +56,10 @@ def MC_algorithm(alpha_, T_):
         steps+=1
         if(steps>=MaxSteps):
             stop=True
-    return
-
+    return connectance_, qform_
+def random_unit_vector(length_):
+    v = np.random.rand(length_)
+    return v/np.linalg.norm(v)
 def create_alpha(connectance_in, gamma_):
     # we want the connectance of alpha to be connectance_
     rows = len(gamma_[0])
@@ -68,7 +74,6 @@ def proposed_new_alpha_exchange(alpha_):
     # either change two rows or two columns
     new_alpha_ = alpha_
     to_swap=[0,0]
-
     if(np.random.uniform()<0.5):
         rows = len(alpha_)
         to_swap = np.random.randint(0, rows, size=2)
@@ -110,5 +115,28 @@ def exchange_cols(i_, j_, mat_):
 
 ############ MAIN IS HERE ##########################
 alpha = create_alpha(connectance_in, gamma_matrix)
-MC_algorithm(alpha,T)
+connect, qdform=MC_algorithm(alpha,T)
 np.savetxt(gamma_matrix_folder+'/'+alpha_matrix_name+'.txt', alpha)
+
+fig1 = plt.figure(1)
+ax1 = fig1.add_subplot(111)
+ax1.set_xlabel('MC Iteration')
+ax1.set_ylabel('Connectance')
+ax1.plot(connect)
+fig1.tight_layout()
+
+fig2 = plt.figure(2)
+ax2 = fig2.add_subplot(111)
+ax2.set_xlabel('MC Iteration')
+ax2.set_ylabel('Quadratic form')
+ax2.plot(qdform)
+fig2.tight_layout()
+
+fig3 = plt.figure(3)
+ax3 = fig3.add_subplot(111)
+ax3.set_xlabel('Species')
+ax3.set_ylabel('Resources')
+ax3.matshow(alpha)
+fig3.tight_layout()
+
+plt.show()

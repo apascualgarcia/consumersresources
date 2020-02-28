@@ -46,6 +46,46 @@ foodmatrix load_food_matrix(const Metaparameters& m){
 
   return foodmatrix(order_matrix_by_column_degree(order_matrix_by_column_degree(f)));
 }
+
+nmatrix load_syntrophy_matrix(const Metaparameters& m){
+  nmatrix a(m.NR,nvector(m.NS, 0.));
+  nmatrix input;
+  std::string syntrophy_path = optimal_alpha_matrix_path(m.foodmatrixpath);
+  if(m.verbose > 1){
+    std::cout << "\t Loading alpha matrix from " << syntrophy_path << std::endl;
+  }
+  std::ifstream in(syntrophy_path);
+  if (!in) {
+    error err("Cannot open file for the alpha matrix "+syntrophy_path);
+    throw err;
+  }
+  if(in.good()){
+    std::string line;
+    unsigned int index=0;
+    while(getline(in, line)){
+      std::istringstream iss(line);
+      input.push_back(nvector());
+      unsigned int element;
+      while(iss>>element){
+        input[index].push_back(element);
+      }
+      index+=1;
+    }
+  }
+  in.close();
+
+  for (unsigned int x = 0; x < m.NR; x++) {
+    for (unsigned int y = 0; y < m.NS; y++) {
+      a[x][y]=input[x][y];
+    }
+  }
+
+  if(m.verbose > 1){
+    std::cout << "\t Note that the syntrophy matrix taken is " << syntrophy_path << " but rearranged in the optimal way" << std::endl;
+  }
+
+  return a;
+}
 nmatrix order_matrix_by_row_degree(const nmatrix& m){
   nmatrix ordered_mat;
 
@@ -69,9 +109,20 @@ nmatrix order_matrix_by_row_degree(const nmatrix& m){
 
   return ordered_mat;
 }
-
 nmatrix order_matrix_by_column_degree(const nmatrix& m){
   return transpose(order_matrix_by_row_degree(transpose(m)));
+}
+std::string optimal_alpha_matrix_path(const std::string& g_path){
+  /* IT IS IMPORTANT THAT THE FILE EXTENSION IS .txt */
+  std::string alpha_path=g_path;
+  if(g_path.size()<=3){
+    throw error("Invalid path to gamma matrix (name is too short)");
+  }
+  for(size_t i=0; i<3; ++i){
+    alpha_path.pop_back();
+  }
+  return alpha_path+"_optimal_alpha.txt";
+
 }
 
 
@@ -501,4 +552,15 @@ bool operator<(const nctype& a, const nctype& b){
 }
 bool operator>(const nctype& a, const nctype& b){
   return(real(a)>real(b));
+}
+
+std::ostream& display_food_matrix(std::ostream& os, const foodmatrix& f){
+  os << std::fixed << std::setprecision(0);
+  for(size_t i=0; i < f.size(); ++i){
+    for(size_t j=0; j < f[0].size();++j){
+      os << f[i][j] << " ";
+    }
+    os << std::endl;
+  }
+  return os;
 }
