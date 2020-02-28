@@ -16,13 +16,7 @@ alpha_matrix_name="optimal_alpha_"+gamma_matrix_name
 
 ###### DO NOT MODIFY CODE BELOW THIS ########
 file_name = gamma_matrix_folder+'/'+gamma_matrix_name+'.txt'
-#gamma_matrix = np.loadtxt(file_name)
-gamma_matrix = np.array([
-[1,1,1,1],
-[1,1,1,0],
-[1,1,0,0],
-[1,0,0,0]
-])
+gamma_matrix = np.loadtxt(file_name)
 
 ####### FUNCTIONS USED ARE DEFINED HERE ################
 def quadratic_form(alpha_):
