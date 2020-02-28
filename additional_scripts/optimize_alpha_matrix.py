@@ -1,6 +1,5 @@
 import numpy as np
 import copy
-import matplotlib.pyplot as plt
 
 gamma_matrix_folder='optimal_matrices/Nr25_Nc25'
 gamma_matrix_name='RandTrix_Nr25_Nc25_Nest0.2_Conn0.1312'
@@ -12,7 +11,10 @@ connectance_in = 1.
 MaxStepsNotChangedAlpha = 1000
 # maximum number of total steps
 MaxSteps=1e6
+alpha_matrix_name="optimal_alpha_"+gamma_matrix_name
 
+
+###### DO NOT MODIFY CODE BELOW THIS ########
 file_name = gamma_matrix_folder+'/'+gamma_matrix_name+'.txt'
 #gamma_matrix = np.loadtxt(file_name)
 gamma_matrix = np.array([
@@ -56,8 +58,8 @@ def MC_algorithm(alpha_, T_):
         steps+=1
         if(steps>=MaxSteps):
             stop=True
-        connectance_.append(connectance(alpha_))
     return
+
 def create_alpha(connectance_in, gamma_):
     # we want the connectance of alpha to be connectance_
     rows = len(gamma_[0])
@@ -114,5 +116,5 @@ def exchange_cols(i_, j_, mat_):
 
 ############ MAIN IS HERE ##########################
 alpha = create_alpha(connectance_in, gamma_matrix)
-connectance=MC_algorithm(alpha,T)
-print(connectance)
+MC_algorithm(alpha,T)
+np.savetxt(gamma_matrix_folder+'/'+alpha_matrix_name+'.txt', alpha)

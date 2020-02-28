@@ -35,6 +35,7 @@
 #include<ctime>
 #include<complex>
 #include<list>
+#include<algorithm>
 #include<Eigen/Dense>
 #include "Global_Constants.h"
 

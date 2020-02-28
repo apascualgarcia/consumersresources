@@ -4,6 +4,7 @@
 #include "../Classes/Metaparameters.h"
 #include "../Classes/Custom_types.h"
 #include "../Classes/Extinction.h"
+#include<algorithm>
 #include<random>
 #include<string>
 #include<iostream>
