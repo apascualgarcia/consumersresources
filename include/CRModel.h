@@ -21,6 +21,7 @@
 #include "Functions/input_reading.h"
 #include "Functions/model_characteristics.h"
 #include "Functions/equilibrium_study.h"
+#include "Functions/optimize_alpha_matrix.h"
 
 
 #include <gsl/gsl_vector.h>

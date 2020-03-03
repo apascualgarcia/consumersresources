@@ -22,14 +22,17 @@ foodmatrix load_food_matrix(const Metaparameters& m){
   if(in.good()){
     std::string line;
     unsigned int index=0;
-    while(getline(in, line)){
-      std::istringstream iss(line);
-      input.push_back(nvector());
-      unsigned int element;
-      while(iss>>element){
-        input[index].push_back(element);
+    while(std::getline(in, line)){
+      /* skip line if it starts with a comment */
+      if(line[0]!='#'){
+        std::istringstream iss(line);
+        input.push_back(nvector());
+        unsigned int element;
+        while(iss>>element){
+          input[index].push_back(element);
+        }
+        index+=1;
       }
-      index+=1;
     }
   }
   in.close();
@@ -115,10 +118,10 @@ nmatrix order_matrix_by_column_degree(const nmatrix& m){
 std::string optimal_alpha_matrix_path(const std::string& g_path){
   /* IT IS IMPORTANT THAT THE FILE EXTENSION IS .txt */
   std::string alpha_path=g_path;
-  if(g_path.size()<=3){
-    throw error("Invalid path to gamma matrix (name is too short)");
+  if(g_path.size()<=4){
+    throw error("Invalid path to gamma matrix (name "+g_path+" is too short)");
   }
-  for(size_t i=0; i<3; ++i){
+  for(size_t i=0; i<4; ++i){
     alpha_path.pop_back();
   }
   return alpha_path+"_optimal_alpha.txt";
@@ -432,6 +435,39 @@ nvector operator-(const nvector& v1){
   return opp;
 }
 
+nvector operator*(const nmatrix& M, const nvector& v){
+  nvector result;
+  for(size_t i=0; i < M.size(); ++i){
+    ntype value=0.;
+    for(size_t j=0; j < M[0].size(); ++j){
+      if(M[i].size()!=v.size()){
+        throw error("Dimensions do not match for matrix*vector multiplication");
+      }
+      value+= M[i][j]*v[j];
+    }
+    result.push_back(value);
+  }
+
+  return result;
+}
+
+nvector operator*(const nvector& v, const nmatrix& M){
+  nvector result;
+  if(M.size()!=v.size()){
+    throw error("Dimensions do not match for matrix*vector multiplication");
+  }
+  for(size_t j=0; j < M[0].size(); ++j){
+    ntype value=0.;
+    for(size_t i=0; i < M.size(); ++i){
+      value+= M[i][j]*v[i];
+    }
+    result.push_back(value);
+  }
+
+  return result;
+}
+
+
 statistics::statistics(const nvector& v){
   this->mean_ = mean(v);
   this->std_deviation_ = standard_dev(v);
@@ -554,13 +590,22 @@ bool operator>(const nctype& a, const nctype& b){
   return(real(a)>real(b));
 }
 
-std::ostream& display_food_matrix(std::ostream& os, const foodmatrix& f){
-  os << std::fixed << std::setprecision(0);
-  for(size_t i=0; i < f.size(); ++i){
-    for(size_t j=0; j < f[0].size();++j){
-      os << f[i][j] << " ";
-    }
-    os << std::endl;
+bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
+  unsigned int NR=alpha.size();
+  unsigned int NS=alpha[0].size();
+
+  if(gamma.size()!=NS || gamma[0].size()!=NR){
+    throw error("Please throw alpha and gamma of appropriate dimensions when checking if there is coprophagy");
   }
-  return os;
+
+  for(size_t mu=0; mu < NR; ++mu){
+    for(size_t i=0; i < NS ;++i){
+      if(alpha[mu][i]*gamma[i][mu]>0.){
+        return false;
+      }
+    }
+  }
+
+
+  return false;
 }

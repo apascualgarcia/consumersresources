@@ -188,3 +188,19 @@ std::ostream& operator<<(std::ostream& os, const buildingmode & b){
   }
   return os;
 }
+
+std::ostream& display_food_matrix(std::ostream& os, const foodmatrix& f){
+  for(size_t i=0; i < f.size(); ++i){
+    for(size_t j=0; j < f[i].size(); ++j){
+      if(f[i][j]>0){
+        os << "1 ";
+      }else{
+        os << "0 ";
+      }
+    }
+    if(i < f.size()-1){
+      os << std::endl;
+    }
+  }
+  return os;
+}

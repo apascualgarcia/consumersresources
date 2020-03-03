@@ -28,9 +28,7 @@ ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
-
-
-
+bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
 nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
 nmatrix operator*(const nmatrix&, const nmatrix&);
@@ -58,6 +56,11 @@ nvector operator+(const nvector&, const nvector&);
 nvector operator-(const nvector&);
 nvector operator-(const nvector&, const nvector&);
 ntype operator*(const nvector&, const nvector&);
+nvector operator*(const nmatrix&, const nvector&);
+
+/* /!\ THIS CORRESPONDS TO v^T M for v a vector */
+nvector operator*(const nvector& v, const nmatrix& M);
+
 
 /*  returns a vector of string containing the path of the matrices (loads
     path_to_list file) */
@@ -72,7 +75,6 @@ bool is_an_error(ntype);
 std::ofstream open_external_file_append(std::string);
 std::ofstream open_external_file_truncate(std::string);
 
-std::ostream& display_food_matrix(std::ostream&, const foodmatrix&);
 
 bool compare_complex(const nctype&, const nctype&);
 bool operator<(const nctype&, const nctype&);
