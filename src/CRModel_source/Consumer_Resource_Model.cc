@@ -647,10 +647,19 @@ systemstability CRModel::assess_dynamical_stability() const{
   }
 
   if(max_real_eigval > EIGENSOLVER_PRECISION){
+    if(this->metaparameters->verbose>1){
+      std::cout << "\t The system is unstable" << std::endl;
+    }
     return systemstability(unstable);
   }else if(abs(max_real_eigval) <= EIGENSOLVER_PRECISION){
+    if(this->metaparameters->verbose>1){
+      std::cout << "\t The system is marginally stable" << std::endl;
+    }
     return systemstability(marginal);
   }else{
+    if(this->metaparameters->verbose>1){
+      std::cout << "\t The system is stable" << std::endl;
+    }
     return systemstability(stable);
   }
 }
@@ -810,4 +819,30 @@ nmatrix CRModel::get_Gamma_matrix(unsigned int n) const{
 nctype CRModel::largest_eigenvalue_at_equilibrium() const{
   ncvector eigvals = this->eigenvalues_at_equilibrium();
   return eigvals[eigvals.size()-1];
+}
+
+
+bool CRModel::is_in_low_intra_resource_interaction() const{
+  nmatrix Gamma=this->get_Gamma_matrix();
+  nmatrix Beta=this->get_Beta_matrix();
+  nmatrix GammaBeta=Gamma*Beta;
+
+  for(size_t mu=0; mu < GammaBeta.size(); ++mu){
+    ntype abs_outer_diag=0.;
+    for(size_t nu=0; nu < GammaBeta.size(); ++nu){
+      if(mu!=nu){
+        abs_outer_diag+=abs(GammaBeta[mu][nu]);
+      }
+    }
+    if(GammaBeta[mu][mu]>=-abs_outer_diag){
+      if(this->metaparameters->verbose>1){
+        std::cout << "\t The system is not in the low intra resources interaction regime." << std::endl;
+      }
+      return false;
+    }
+  }
+  if(this->metaparameters->verbose>1){
+    std::cout << "\t The system is in the low intra resources interaction regime." << std::endl;
+  }
+  return true;
 }

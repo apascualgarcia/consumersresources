@@ -5,7 +5,7 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices=load_food_matrix_list(metaparams.foodmatrixpath);
     std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
-    unsigned int Npoints(10), Nsimuls(1000);
+    unsigned int Npoints(100), Nsimuls(1000);
 
     /*  Algorithmic procedure : for each matrix we find the largest feasible alpha0
         we then compute many points to see where lies the transition from dynamically

@@ -4,6 +4,7 @@ import sys
 
 file_to_load = sys.argv[1]
 matrices_folder = './optimal_matrices/Nr25_Nc25'
+ZERO = 1e-15
 
 def remove_strings_from_file(filename):
     file = open(filename + '.out', "r")
@@ -31,14 +32,22 @@ connectance=data[:,3]
 alpha0=data[:, 4::2]
 max_l = data[:, 5::2]
 
+marginally_stable=[]
+always_unstable=[]
+always_stable=[]
+transition_observed=[]
+
 # for each matrix, we estimate with a linear fit when max(lambda)(alpha0)=0
 for i in range(len(data)):
     if max_l[i,0]*max_l[i,-1]>0:
-        if max_l[i,0]<0:
-            print("Matrix is dynamically stable in its feasability range")
+        if max_l[i,-1] < -ZERO:
+            always_stable.append(i)
+        elif max_l[i,-1] > ZERO:
+            always_unstable.append(i)
         else:
-            print("Matrix is dynamically unstable in its feasability range")
+            marginally_stable.append(i)
     else:
+        transition_observed.append(i)
         linear_fit=np.polyfit(alpha0, max_l, 1)
         max_dyn_stable_a0=-linear_fit[1]/linear_fit[0]
         print("For this matrix, maximal dynamically stable a0 is ", max_dyn_stable_a0)
