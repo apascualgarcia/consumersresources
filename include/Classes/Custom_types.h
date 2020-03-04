@@ -114,5 +114,12 @@ struct error{
   void handle();
 };
 
+struct MonteCarloSolver{
+  ntype T;
+  unsigned int max_steps;
+  unsigned int max_fails;
+  unsigned int display_stride;
+};
+
 
 #endif
