@@ -5,20 +5,6 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices = load_food_matrix_list(metaparams.foodmatrixpath);
 
-
-    ntype alpha_max=10;
-
-    // for(size_t i=0; i < matrices.size(); ++i){
-    //   metaparams.foodmatrixpath=matrices[i];
-    //   ntype local_al=metaparams.feasible_alpha_max();
-    //   if(local_al < alpha_max){
-    //     alpha_max = local_al;
-    //   }
-    // }
-    alpha_max=0.0015;
-
-    std::cout << "Maximal feasible alpha :" << alpha_max << std::endl;
-
     for(size_t i=0; i < matrices.size();++i){
       metaparams.foodmatrixpath=matrices[i];
       ButlerModel model(metaparams);

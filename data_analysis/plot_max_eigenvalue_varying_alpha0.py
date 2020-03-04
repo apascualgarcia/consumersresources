@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
-file_folder='data_output'
-file_name = 'largest_eigenvalues_varying_alpha0'
-matrices_folder = 'matrices/Nr25_Nc25'
+file_to_load = sys.argv[1]
+matrices_folder = './optimal_matrices/Nr25_Nc25'
 
 def remove_strings_from_file(filename):
     file = open(filename + '.out', "r")
@@ -21,9 +21,7 @@ def remove_strings_from_file(filename):
         f.write(a + '\n')
     f.close()
 
-file_to_load = file_folder+'/'+file_name
 remove_strings_from_file(file_to_load)
-
 data = np.loadtxt(file_to_load+'_filtered.out')
 
 NR=data[:,0]
@@ -33,9 +31,14 @@ connectance=data[:,3]
 alpha0=data[:, 4::2]
 max_l = data[:, 5::2]
 
-fig1 = plt.figure(1)
-ax1 = fig1.add_subplot(111)
-ax1.plot(alpha0[2], max_l[2])
-
-fig1.tight_layout()
-plt.show()
+# for each matrix, we estimate with a linear fit when max(lambda)(alpha0)=0
+for i in range(len(data)):
+    if max_l[i,0]*max_l[i,-1]>0:
+        if max_l[i,0]<0:
+            print("Matrix is dynamically stable in its feasability range")
+        else:
+            print("Matrix is dynamically unstable in its feasability range")
+    else:
+        linear_fit=np.polyfit(alpha0, max_l, 1)
+        max_dyn_stable_a0=-linear_fit[1]/linear_fit[0]
+        print("For this matrix, maximal dynamically stable a0 is ", max_dyn_stable_a0)

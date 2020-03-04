@@ -7,22 +7,14 @@ int main(int argc, char * argv[]){
     std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
     unsigned int Npoints(10), Nsimuls(1000);
 
-    /* first compute the largest alpha feasible for every matrix considered */
-    ntype alpha_max=1e9;
-    for(size_t i=0; i < matrices.size();++i){
-      metaparams.foodmatrixpath=matrices[i];
-      ntype local_alpha_max=metaparams.feasible_alpha_max();
-      if(local_alpha_max < alpha_max){
-        alpha_max=local_alpha_max;
-      }
-    }
-    std::cout << "Maximum common alpha0 is " << alpha_max << std::endl;
-
-    /* now that we have found alpha max we can compute the maximal eigenvalue observed according to alpha */
-    nvector alpha_range = linear_interval(0., alpha_max, Npoints);
+    /*  Algorithmic procedure : for each matrix we find the largest feasible alpha0
+        we then compute many points to see where lies the transition from dynamically
+        stable to unstable */
     for(size_t i=0; i < matrices.size(); ++i){
       metaparams.foodmatrixpath = matrices[i];
       myfile << metaparams.foodmatrixpath << " ";
+      ntype max_alpha0 = metaparams.feasible_alpha_max(1e-6);
+      nvector alpha_range = linear_interval(0., max_alpha0, Npoints);
       for(size_t j=0; j < Npoints; ++j){
         metaparams.alpha0 = alpha_range[j];
         CRModel  model(metaparams);
@@ -35,8 +27,6 @@ int main(int argc, char * argv[]){
           }
         }
         myfile << metaparams.alpha0 << " " << largest_eigenvalue_at_equilibrium << " ";
-        std::cout << metaparams.alpha0 << " " << largest_eigenvalue_at_equilibrium << " ";
-
       }
       myfile << std::endl;
     }

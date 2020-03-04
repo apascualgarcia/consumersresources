@@ -180,8 +180,7 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
             }
           }
         }
-
-
+        break;
       }
 
       default:{

@@ -2,10 +2,10 @@ import numpy as np
 from os import listdir
 from os.path import isfile, join
 
-matrix_folder="matrices/Nr25_Nc25"
+matrix_folder="optimal_matrices/Nr25_Nc25"
 matrices=[f for f in listdir(matrix_folder) if isfile(join(matrix_folder, f))]
 
-write_file="config/full_rank_food_matrix.in"
+write_file="config/full_rank_opt_mat_NR25_NS25.in"
 f = open(write_file, 'w+')
 for mat in matrices:
     if(mat[0:3]=='Ran'):

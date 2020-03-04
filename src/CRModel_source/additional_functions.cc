@@ -11,7 +11,7 @@ std::mt19937 random_engine;
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
   nmatrix input;
-  if(m.verbose > 1){
+  if(m.verbose > 2){
     std::cout << "\t Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
   std::ifstream in(m.foodmatrixpath);
@@ -42,19 +42,14 @@ foodmatrix load_food_matrix(const Metaparameters& m){
       f[x][y]=input[x][y];
     }
   }
-
-  if(m.verbose > 1){
-    std::cout << "\t Note that the food matrix taken is " << m.foodmatrixpath << " but rearranged in the optimal way" << std::endl;
-  }
-
-  return foodmatrix(order_matrix_by_column_degree(order_matrix_by_column_degree(f)));
+  return f;
 }
 
 nmatrix load_syntrophy_matrix(const Metaparameters& m){
   nmatrix a(m.NR,nvector(m.NS, 0.));
   nmatrix input;
   std::string syntrophy_path = optimal_alpha_matrix_path(m.foodmatrixpath);
-  if(m.verbose > 1){
+  if(m.verbose > 2){
     std::cout << "\t Loading alpha matrix from " << syntrophy_path << std::endl;
   }
   std::ifstream in(syntrophy_path);
@@ -66,13 +61,15 @@ nmatrix load_syntrophy_matrix(const Metaparameters& m){
     std::string line;
     unsigned int index=0;
     while(getline(in, line)){
-      std::istringstream iss(line);
-      input.push_back(nvector());
-      unsigned int element;
-      while(iss>>element){
-        input[index].push_back(element);
+      if(line[0]!='#'){
+        std::istringstream iss(line);
+        input.push_back(nvector());
+        unsigned int element;
+        while(iss>>element){
+          input[index].push_back(element);
+        }
+        index+=1;
       }
-      index+=1;
     }
   }
   in.close();
@@ -82,11 +79,6 @@ nmatrix load_syntrophy_matrix(const Metaparameters& m){
       a[x][y]=input[x][y];
     }
   }
-
-  if(m.verbose > 1){
-    std::cout << "\t Note that the syntrophy matrix taken is " << syntrophy_path << " but rearranged in the optimal way" << std::endl;
-  }
-
   return a;
 }
 nmatrix order_matrix_by_row_degree(const nmatrix& m){
@@ -198,7 +190,7 @@ ntype nestedness(const nmatrix& mat){
       }else{
         eta_denom+=degrees[i];
       }
-      eta+=(eta_num/(rows*cols*eta_denom))
+      eta+=(eta_num/(rows*cols*eta_denom));
     }
   }
   return eta;
