@@ -198,11 +198,9 @@ ntype nestedness(const nmatrix& mat){
       }else{
         eta_denom+=degrees[i];
       }
+      eta+=(eta_num/(rows*cols*eta_denom))
     }
   }
-
-  eta=eta_num/eta_denom;
-
   return eta;
 }
 ntype trace(const nmatrix& m){
