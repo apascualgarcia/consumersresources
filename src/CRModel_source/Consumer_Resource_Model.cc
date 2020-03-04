@@ -3,128 +3,197 @@
 #include <fstream>
 #include <Eigen/Dense>
 #include <Eigen/Eigenvalues>
+#include <algorithm>
 
-CRModel::CRModel(Model_parameters* mod_params){
-  model_param=mod_params;
-  eq_vals=NULL;
-  metaparameters=NULL;
+/*  default constructor, every pointer is initialized to NULL */
+CRModel::CRModel(){
+  this->metaparameters = NULL;
+  this->eq_vals = NULL;
+  this->model_param = NULL;
+  this->equations_of_evolution = ode_equations_of_evolution;
   return;
 }
-CRModel::CRModel(Metaparameters& meta){
-  foodmatrix food_matrix = load_food_matrix(meta);
-  *this = CRModel::CRModel(food_matrix, meta);
+CRModel::CRModel(const CRModel& model){
+  this->metaparameters= &(*(model.get_metaparameters()));
+  this->eq_vals = new ntensor(*(model.get_equilibrium_abundances()));
+  this->model_param = new Model_parameters(*(model.get_model_parameters()));
+  this->equations_of_evolution = func_equ_evol(model.get_equations_of_evolution());
 }
-CRModel::CRModel(const foodmatrix& F, Metaparameters& meta){
+CRModel::CRModel(Model_parameters* mod_params):CRModel(){
+  model_param=mod_params;
+  return;
+}
+CRModel::CRModel(Metaparameters& meta):CRModel(load_food_matrix(meta), meta){
+  return;
+}
+CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
   unsigned int attempts(0);
-  this->model_param = new Model_parameters();
-  Parameter_set* p = model_param->get_parameters();
-
+  this->create_model_parameters(meta);
   do{
     attempts+=1;
-
-    nvector Req = build_resources(meta);
-    nvector Seq = build_consumers(meta);
-
-    this->eq_vals = new ntensor();
-    nmatrix equilibria;
-    equilibria.push_back(Req);
-    equilibria.push_back(Seq);
-    eq_vals->push_back(equilibria);
-
-    p->NR = meta.NR;
-    p->NS = meta.NS;
-
-    // first sigma, Req, Seq are drawn randomly
-    p->sigma=build_sigma(meta);
-
-    // then we build gamma according to the food matrix
-    p->gamma=build_gamma(F,meta);
-
-    // then we build alpha according to the other parameters
-    p->alpha=build_alpha(p, meta, Req, attempts);
-    p->tau = build_tau(p, meta, attempts);
-
-    // d is then set
-    nvector d;
-    for (size_t i=0; i < meta.NS; ++i){
-      ntype result = 0.;
-      for (size_t mu =0 ; mu < meta.NR; ++mu){
-        result+=(p->sigma)[i][mu]*(p->gamma)[i][mu]*Req[mu]-(p->tau)[mu][i];
+    switch(meta.building_mode){
+      case use_l:{
+        this->attempt_to_build_model(F, meta, attempts);
+        break;
       }
-      d.push_back(result);
-    }
-    p->d = d;
-
-    // still have to set l and m
-    nvector l, m;
-    l = build_l(meta);
-    for(size_t nu=0; nu < p->NR; ++nu){
-      ntype C = 0.;
-      for(size_t j = 0; j < p->NS; ++j){
-        C+=(p->alpha[nu][j]*Seq[j]-p->gamma[j][nu]*Req[nu]*Seq[j]);
+      case use_m:{
+        this->attempt_to_build_model_with_m(F, meta, attempts);
+        break;
       }
-      m.push_back(ntype(l[nu]+C)/Req[nu]);
+      default:{
+        throw error("Unrecognized building mode in model constructor.");
+      }
     }
-
-    // std::exponential_distribution<ntype> exp_distrib(1.);
-    // for(size_t nu = 0; nu < p->NR; ++nu){
-    //   ntype  C = 0.;
-    //   for(size_t j = 0; j < p->NS; ++j){
-    //     C+= (p->alpha[nu][j]-p->gamma[j][nu]*Req[nu])*Seq[j];
-    //   }
-    //   if(C > 0.){
-    //     l.push_back(exp_distrib(random_device));
-    //   }else{
-    //     l.push_back(exp_distrib(random_device) - C);
-    //   }
-    //   m.push_back(ntype(l[nu]+C)/Req[nu]);
-    // }
-
-    p->l = l;
-    p->m = m;
   }while(not(this->constraints_fulfilled(meta)));
 
-  this->metaparameters = &meta;
   if(meta.verbose > 1){
-    std::cout << "Feasible system build in "<<attempts<<" iteration(s). ";
+    std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
     if(attempts > meta.nb_attempts){
-      std::cout << "The metaparameters had to be changed.";
+      std::cout << "\t The metaparameters had to be changed.";
     }else{
       std::cout << "It was possible to use the initial metaparameters.";
     }
     std::cout << std::endl;
   }
+  return;
+}
+CRModel::~CRModel(){
+  delete this->model_param;
+  delete this->eq_vals;
+  return;
+}
+CRModel& CRModel::operator=(const CRModel& other){
+  if(&other!=this){
+    this->metaparameters= &(*(other.get_metaparameters()));
+    /* first delete the old pointers and then build them again */
+    delete this->eq_vals;
+    this->eq_vals = new ntensor(*(other.get_equilibrium_abundances()));
+    delete this->model_param;
+    this->model_param = new Model_parameters(*(other.get_model_parameters()));
+    this->equations_of_evolution = func_equ_evol(other.get_equations_of_evolution());
+  }
+  return *this;
+}
+void CRModel::create_model_parameters(Metaparameters& meta){
+  this->model_param = new Model_parameters();
+  this->eq_vals = new ntensor();
+  this->metaparameters = &meta;
+  return;
+}
+void CRModel::attempt_to_build_model(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
+  Parameter_set* p = this->model_param->get_parameters();
+  if(meta.verbose>3){
+    std::cout << "\t \t \t Build system choosing l " << std::endl;
+  }
+  /* first find the values for the equilibria */
+  nvector Req = build_resources(meta);
+  nvector Seq = build_consumers(meta);
 
+  nmatrix equilibria;
+  equilibria.push_back(Req);
+  equilibria.push_back(Seq);
+
+  ntensor equilibria_vals;
+  equilibria_vals.push_back(equilibria);
+
+  *(this->eq_vals) = equilibria_vals;
+
+  p->NR = meta.NR;
+  p->NS = meta.NS;
+
+  /* first sigma, Req, Seq are drawn randomly */
+  p->sigma = build_sigma_Butler(meta);
+
+  /* then we build gamma according to the food matrix */
+  p->gamma = build_gamma(F,meta);
+
+  /* then we build alpha according to the other parameters */
+  p->alpha = build_alpha(p, meta, Req, attempts);
+  p->tau = build_tau(p, meta, attempts);
+
+  /* d is then set */
+  nvector d;
+  for (size_t i=0; i < meta.NS; ++i){
+    ntype result = 0.;
+    for (size_t mu =0 ; mu < meta.NR; ++mu){
+      result+=(p->sigma)[i][mu]*(p->gamma)[i][mu]*Req[mu]-(p->tau)[mu][i];
+    }
+    d.push_back(result);
+  }
+  p->d = d;
+
+  /* still have to set l and m */
+  nvector l, m(meta.NR);
+  l = build_l(meta);
+  for(size_t nu=0; nu < p->NR; ++nu){
+    ntype C = 0.;
+    for(size_t j = 0; j < p->NS; ++j){
+      C+=(p->alpha[nu][j]*Seq[j]-p->gamma[j][nu]*Req[nu]*Seq[j]);
+    }
+    m[nu]=(ntype(l[nu]+C)/Req[nu]);
+  }
+  p->l = l;
+  p->m = m;
 
   return;
 }
-nvector CRModel::equations_of_evolution(const Dynamical_variables& dyn_var) const{
-  nvector v;
-  const Parameter_set* p = this->model_param->get_parameters();
-  const nvector R = *dyn_var.get_resources();
-  const nvector S = *dyn_var.get_consumers();
+void CRModel::attempt_to_build_model_with_m(const foodmatrix& F, Metaparameters& meta, unsigned int attempts){
+  Parameter_set* p = this->model_param->get_parameters();
 
-  for (size_t nu=0; nu < p->NR; ++nu){
-    ntype result(0.);
-    result+=p->l[nu];
-    result-=p->m[nu]*R[nu];
-    for (size_t j=0; j < p->NS; ++j){
-      result-=p->gamma[j][nu]*R[nu]*S[j];
-      result+=p->alpha[nu][j]*S[j];
-    }
-    v.push_back(result);
+  if(meta.verbose>3){
+    std::cout << "\t \t \t Build system choosing m " << std::endl;
   }
 
-  for (size_t i=0; i<p->NS; ++i){
-    ntype result=0.;
-    for (size_t mu=0; mu < p->NR; ++mu){
-      result+=p->sigma[i][mu]*p->gamma[i][mu]*S[i]*R[mu];
-      result-=p->tau[mu][i]*S[i];
+  /* first find the values for the equilibria */
+  nvector Req = build_resources(meta);
+  nvector Seq = build_consumers(meta);
+
+  nmatrix equilibria;
+  equilibria.push_back(Req);
+  equilibria.push_back(Seq);
+
+  ntensor equilibria_vals;
+  equilibria_vals.push_back(equilibria);
+
+  *(this->eq_vals) = equilibria_vals;
+
+  p->NR = meta.NR;
+  p->NS = meta.NS;
+
+  /* then sigma */
+  p->sigma = build_sigma_Butler(meta);
+
+  /* then we build gamma according to the food matrix */
+  p->gamma = build_gamma(F,meta);
+
+  /* then we build alpha according to the other parameters */
+  p->alpha = build_alpha(p, meta, Req, attempts);
+  p->tau = build_tau(p, meta, attempts);
+
+  /* d is then set */
+  nvector d;
+  for (size_t i=0; i < meta.NS; ++i){
+    ntype result = 0.;
+    for (size_t mu =0 ; mu < meta.NR; ++mu){
+      result+=(p->sigma)[i][mu]*(p->gamma)[i][mu]*Req[mu]-(p->tau)[mu][i];
     }
-    result-=p->d[i]*S[i];
-    v.push_back(result);
+    d.push_back(result);
   }
-  return v;
+  p->d = d;
+
+  /* still have to set l and m */
+  nvector l(meta.NR, 0.), m(meta.NR, 0.);
+  m = build_m(meta);
+  for(size_t nu=0; nu < p->NR; ++nu){
+    l[nu]=m[nu]*Req[nu];
+    for(size_t j=0; j < p->NS; ++j){
+      l[nu]+=((p->gamma[j][nu]*Req[nu]-p->alpha[nu][j])*Seq[j]);
+    }
+  }
+  p->l = l;
+  p->m = m;
+
+  return;
 }
 nmatrix CRModel::jacobian(const Dynamical_variables& dyn_var) const{
   const Parameter_set* p = this->model_param->get_parameters();
@@ -169,7 +238,7 @@ nmatrix CRModel::jacobian_at_equilibrium() const{
   nvector Seq = (*eq_vals)[0][1];
 
   Dynamical_variables dyn_var(&Req, &Seq);
-  nmatrix jac_eq = jacobian(dyn_var);
+  nmatrix jac_eq = this->jacobian(dyn_var);
   return jac_eq;
 }
 ncvector CRModel::eigenvalues_at_equilibrium() const{
@@ -177,8 +246,15 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
   nmatrix jac_eq = this->jacobian_at_equilibrium();
   ntype min_element(std::abs(jac_eq[0][0]));
 
-  for(size_t i = 0; i < jac_eq.size(); ++i){
-    for(size_t j=0; j < jac_eq[i].size(); ++j){
+  /* the jacobian should always be a square matrix */
+  const unsigned int jacobian_size=jac_eq.size();
+
+  for(size_t i = 0; i < jacobian_size; ++i){
+    if(jac_eq[i].size()!=jacobian_size){
+      error err("Jacobian is ill formed (not a square matrix).");
+      throw err;
+    }
+    for(size_t j=0; j < jacobian_size; ++j){
       if(jac_eq[i][j]*jac_eq[i][j] > 0. and std::abs(jac_eq[i][j]) < min_element){
         min_element = std::abs(jac_eq[i][j]);
       }
@@ -189,14 +265,11 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
   //min_element = 1.;
   //std::cout << " put min_element as 1" << std::endl;
 
-  const unsigned int NR = this->model_param->get_parameters()->NR;
-  const unsigned int NS = this->model_param->get_parameters()->NS;
-
   Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> jacob;
-  jacob.resize(NR+NS, NR+NS);
+  jacob.resize(jacobian_size, jacobian_size);
   // we rescale the jacobian such that even the smallest value is of order 1
-  for(size_t i=0; i < NR+NS; ++i){
-    for(size_t j=0; j < NR+NS; ++j){
+  for(size_t i=0; i < jacobian_size; ++i){
+    for(size_t j=0; j < jacobian_size; ++j){
       jacob(i,j) = jac_eq[i][j]/min_element;
     }
   }
@@ -205,8 +278,10 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
     v.push_back(eivals(i)*min_element);
     //v.push_back(eivals(i));
   }
+  std::sort(v.begin(), v.end(), compare_complex);
   return v;
 }
+
 void CRModel::save(std::ostream& os) const{
   std::cout << " Still have to implement this, bye" << std::endl;
   return;
@@ -217,16 +292,31 @@ std::ostream& CRModel::display(std::ostream& os) const{
   os << "The following equilibrium values have been found :" << std::endl;
   os << *eq_vals << std::endl;
   os << "The model is characterised by the following metaparameters" << std::endl;
-  os << *metaparameters << std::endl;
+  os << *metaparameters;
   return os;
 }
 bool CRModel::constraints_fulfilled(const Metaparameters& m) const{
   if(not(this->positive_parameters())){
+    if(m.verbose > 3){
+      std::cout << "Model rejected because some of the parameters are not positive" << std::endl;
+    }
     return false;
   }
+
   if(m.energy_constraint and not(this->energy_constraint())){
+    if(m.verbose > 3){
+      std::cout << "Model rejected because the energy constraint is not fulfilled" << std::endl;
+    }
     return false;
   }
+
+  if(not(this->respects_equations_of_evolution_at_equilibrium())){
+    if(m.verbose > 3){
+      std::cout << "Model rejected because the equations of evolution are not respected at equilibrium " << std::endl;
+    }
+    return false;
+  }
+
   return true;
 }
 bool CRModel::energy_constraint() const{
@@ -237,7 +327,7 @@ bool CRModel::energy_constraint() const{
       ntype somme = 0.;
       for(size_t nu=0; nu < p->NR; ++nu){
         somme+=(1-p->sigma[i][nu])*p->gamma[i][nu]*Req[nu];
-        somme-=p->alpha[nu][i];
+        somme-=p->tau[nu][i];
       }
       if(somme < 0.){
         return false;
@@ -249,28 +339,28 @@ bool CRModel::energy_constraint() const{
 bool CRModel::positive_parameters() const{
   Parameter_set* p = this->model_param->get_parameters();
   if(not(non_neg_elements(p->d))){
-    std::cerr << "d contains negative elements" << std::endl;
+    if(this->metaparameters->verbose>2){
+      std::cerr << "\t \t System unfeasible : d contains negative elements : " << p->d << std::endl;
+    }
     return false;
   }
   if(not(non_neg_elements(p->l))){
-    std::cerr << "l contains negative elements" << std::endl;
+    if(this->metaparameters->verbose>2){
+      std::cerr << "\t \t System unfeasible: l contains negative elements : " << p->l << std::endl;
+    }
     return false;
   }
   if(not(non_neg_elements(p->m))){
-    std::cerr << "m contains negative elements : ";
-    std::cerr << p->m << std::endl;
+    if(this->metaparameters->verbose>2){
+      std::cerr << "\t \t System unfeasible: m contains negative elements : ";
+      std::cerr << p->m << std::endl;
+    }
     return false;
   }
   return true;
 }
-bool CRModel::dynamically_stable() const{
-  ncvector v = this->eigenvalues_at_equilibrium();
-  for(size_t i = 0; i< v.size(); ++i){
-    if(norm(v[i])>EIGENSOLVER_PRECISION){
-      return false;
-    }
-  }
-  return true;
+bool CRModel::is_dynamically_stable() const{
+  return (this->assess_dynamical_stability()==stable);
 }
 void CRModel::save_simulation() const{
   std::ofstream myfile;
@@ -382,38 +472,6 @@ void CRModel::write_death_rates(std::string savepath) const{
 
   return;
 }
-void CRModel::write_time_evolution(const Dynamical_variables & dyn, ntype tf) const{
-  Metaparameters* m = this->metaparameters;
-  std::ofstream myfile;
-  myfile.open(m->save_path, std::ios::app);
-  bool save_success(false);
-  if(not(myfile.is_open())){
-    std::cerr << "Could not open " << m->save_path << " to write the temporal evolution" << std::endl;
-  }else{
-    save_success = true;
-  }
-
-  nmatrix evolution = this->time_evolution(dyn, tf);
-  for(size_t i =0; i < evolution.size() ; ++i){
-    myfile << evolution[i] << std::endl;
-  }
-
-  if(m->verbose > 0){
-    if(save_success){
-      std::cout << "Successfully saved temporal evolution of system to " << m->save_path << std::endl;
-    }
-  }
-  myfile.close();
-  return;
-}
-void CRModel::write_time_evolution_from_equilibrium() const{
-  nvector* eq_resources = &(*eq_vals)[0][0];
-  nvector* eq_consumers = &(*eq_vals)[0][1];
-
-  Dynamical_variables dyn(eq_resources, eq_consumers);
-  write_time_evolution(dyn, this->metaparameters->tf);
-  return ;
-}
 Dynamical_variables CRModel::perturb_equilibrium() const{
   nvector unp_resources = (*eq_vals)[0][0];
   nvector unp_consumers = (*eq_vals)[0][1];
@@ -446,7 +504,7 @@ void CRModel::perturb_parameters(const ntype & Delta) const{
   }
 
   if(this->metaparameters->verbose > 1){
-    std::cout <<" Structurally perturbed the system with parameter delta =" << Delta << std::endl;
+    std::cout <<"\t Structurally perturbed the system with parameter delta =" << Delta << std::endl;
   }
 
   return;
@@ -480,7 +538,6 @@ void CRModel::save_new_equilibrium(const Extinction& ext) const{
 
   return;
 }
-
 double CRModel::get_m0() const{
   Parameter_set* p = this->model_param->get_parameters();
   double m0 = 0.;
@@ -490,7 +547,6 @@ double CRModel::get_m0() const{
   }
   return m0;
 }
-
 double CRModel::get_d0() const{
   Parameter_set* p = this->model_param->get_parameters();
   double d0 = 0.;
@@ -500,17 +556,14 @@ double CRModel::get_d0() const{
   }
   return d0;
 }
-
 nvector CRModel::get_m() const{
   Parameter_set* p = this->model_param->get_parameters();
   return p->m;
 }
-
 nvector CRModel::get_d()const{
   Parameter_set* p = this->model_param->get_parameters();
   return p->d;
 }
-
 nmatrix CRModel::perturb_abundances(const ntype& delta){
   nmatrix* current_eq = &(*eq_vals)[0];
   nmatrix perturb_eq;
@@ -528,11 +581,9 @@ nmatrix CRModel::perturb_abundances(const ntype& delta){
   }
   return perturb_eq;
 }
-
 nmatrix CRModel::get_first_equilibrium() const{
   return (*eq_vals)[0];
 }
-
 ntype CRModel::get_resilience_jacobian() const{
   /* resilience is defined as 1/l1 where l1 is the largest real part of an eigenvalue of the jacobian at equilibrium */
   ntype resilience = 0.;
@@ -550,4 +601,213 @@ ntype CRModel::get_resilience_dynamical_stability(const ntype& delta){
   /* we perturb all the abundances by delta */
   double tend = 0.;
   return ntype(tend);
+}
+bool CRModel::has_linearly_stable_eq() const{
+  using namespace Eigen;
+  unsigned int NR = this->metaparameters->NR, NS = this->metaparameters->NS;
+  Matrix<ntype, Dynamic, Dynamic> jacob_sym;
+  jacob_sym.resize(NR+NS, NR+NS);
+
+  nmatrix jac_eq = this->jacobian_at_equilibrium();
+  for(size_t i = 0; i < NR+NS; ++i){
+    for(size_t j=0; j < NR+NS; ++j){
+      jacob_sym(i,j) = 0.5*(jac_eq[i][j]+jac_eq[j][i]);
+    }
+  }
+
+  SelfAdjointEigenSolver<Matrix<ntype, Dynamic, Dynamic>> eigensolver(jacob_sym);
+  Matrix<ntype, Dynamic,1> eigvals = eigensolver.eigenvalues();
+  nvector eigenvalues;
+  for(size_t i=0; i < eigvals.rows();++i){
+    eigenvalues.push_back(eigvals(i));
+  }
+
+  ntype min_eigval = *std::min_element(eigenvalues.begin(), eigenvalues.end());
+  ntype max_eigval = *std::max_element(eigenvalues.begin(), eigenvalues.end());
+
+  if(min_eigval > 0.){
+    return false;
+  }
+
+  if(max_eigval < 0.){
+    return true;
+  }
+
+  std::cout << "Could not determine whether or not the system was stable, returning false to make sure" << std::endl;
+  return false;
+}
+systemstability CRModel::assess_dynamical_stability() const{
+  ncvector eigvals = this->eigenvalues_at_equilibrium();
+  ntype max_real_eigval = real(eigvals[0]);
+  for(size_t i=1; i < eigvals.size(); ++i){
+    ntype test = real(eigvals[i]);
+    if(test > max_real_eigval){
+      max_real_eigval = test;
+    }
+  }
+
+  if(max_real_eigval > EIGENSOLVER_PRECISION){
+    return systemstability(unstable);
+  }else if(abs(max_real_eigval) <= EIGENSOLVER_PRECISION){
+    return systemstability(marginal);
+  }else{
+    return systemstability(stable);
+  }
+}
+nvector CRModel::get_resources_equilibrium(unsigned int n) const {
+  return (*eq_vals)[n][0];
+}
+nvector CRModel::get_consumers_equilibrium(unsigned int n)const {
+  return (*eq_vals)[n][1];
+}
+ntype CRModel::environmental_flux_resource(unsigned int mu) const {
+  return this->model_param->get_parameters()->l[mu];
+}
+ntype CRModel::environmental_flux_equilibrium_resource (unsigned int mu, unsigned int equilibrium_number) const {
+  return this->environmental_flux_resource(mu);
+}
+ntype CRModel::diffusion_flux_resource(unsigned int mu, const nvector& R) const {
+  return -this->model_param->get_parameters()->m[mu]*R[mu];
+}
+ntype CRModel::diffusion_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number) const {
+  return this->diffusion_flux_resource(mu, get_resources_equilibrium(equilibrium_number));
+}
+ntype CRModel::syntrophy_flux_resource(unsigned int mu, const nvector& R, const nvector& S)const {
+  Parameter_set * p = this->model_param->get_parameters();
+  ntype flux=0.;
+  for(size_t j=0; j < S.size(); ++j){
+    flux+=p->alpha[mu][j]*S[j];
+  }
+  return flux;
+}
+ntype CRModel::syntrophy_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number) const {
+  return this->syntrophy_flux_resource(mu, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
+}
+ntype CRModel::consumption_flux_resource(unsigned int mu, const nvector& R, const nvector& S) const {
+  Parameter_set * p = this->model_param->get_parameters();
+  ntype flux=0.;
+  for(size_t j=0; j < S.size(); ++j){
+    flux-=p->gamma[j][mu]*R[mu]*S[j];
+  }
+  return flux;
+}
+ntype CRModel::consumption_flux_equilibrium_resource(unsigned int mu, unsigned int equilibrium_number) const {
+  return this->consumption_flux_resource(mu, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
+}
+ntype CRModel::consumption_intake_flux_consumer(unsigned int i, const nvector&R, const nvector& S) const {
+  Parameter_set* p=this->model_param->get_parameters();
+  ntype flux=0.;
+  for(size_t mu=0; mu < R.size();++mu){
+    flux+=p->sigma[i][mu]*p->gamma[i][mu]*S[i]*R[mu];
+  }
+  return flux;
+}
+ntype CRModel::consumption_intake_flux_equilibrium_consumer(unsigned int i, unsigned int equilibrium_number) const {
+  return this->consumption_intake_flux_consumer(i, this->get_resources_equilibrium(equilibrium_number), this->get_consumers_equilibrium(equilibrium_number));
+}
+ntype CRModel::diffusion_flux_consumer(unsigned int i, const nvector& S) const {
+  return -this->model_param->get_parameters()->d[i]*S[i];
+}
+ntype CRModel::diffusion_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number) const {
+  return this->diffusion_flux_consumer(i, this->get_consumers_equilibrium(eq_number));
+}
+ntype CRModel::syntrophy_flux_consumer(unsigned int i, const nvector& R, const nvector& S) const {
+  ntype flux=0.;
+  Parameter_set* p = this->model_param->get_parameters();
+  for(size_t mu=0; mu < R.size(); ++mu){
+    flux-=p->alpha[mu][i]*S[i];
+  }
+  return flux;
+}
+ntype CRModel::syntrophy_flux_equilibrium_consumer(unsigned int i, unsigned int eq_number) const {
+  return this->syntrophy_flux_consumer(i,this->get_resources_equilibrium(eq_number),this->get_consumers_equilibrium(eq_number));
+}
+ntype CRModel::order_parameter() const{
+  ntype syntrophy_flux_consumers = 0.;
+  ntype consumption_flux_consumers=0.;
+  ntype diffusion_flux_consumers=0.;
+  for(size_t i=0; i < this->metaparameters->NS; ++i){
+    syntrophy_flux_consumers+=this->syntrophy_flux_equilibrium_consumer(i);
+    consumption_flux_consumers+=this->consumption_intake_flux_equilibrium_consumer(i);
+    diffusion_flux_consumers+=this->diffusion_flux_equilibrium_consumer(i);
+  }
+  ntype environmental_flux=0.;
+  ntype diffusion_flux_resources=0.;
+  for(size_t mu=0; mu < this->metaparameters->NR;++mu){
+    environmental_flux+=this->environmental_flux_equilibrium_resource(mu);
+    diffusion_flux_resources+=this->diffusion_flux_equilibrium_resource(mu);
+  }
+
+  return environmental_flux/(diffusion_flux_resources+diffusion_flux_consumers);
+}
+Metaparameters* CRModel::get_metaparameters() const{
+  return this->metaparameters;
+}
+Parameter_set* CRModel::get_parameter_set() const{
+  return this->model_param->get_parameters();
+}
+Model_parameters* CRModel::get_model_parameters() const{
+  return this->model_param;
+}
+ntensor* CRModel::get_equilibrium_abundances() const{
+  return this->eq_vals;
+}
+func_equ_evol CRModel::get_equations_of_evolution() const{
+  return this->equations_of_evolution;
+}
+bool CRModel::respects_equations_of_evolution_at_equilibrium() const{
+  Parameter_set* p=this->get_parameter_set();
+
+  /* we check that for each equilibrium found, the equations of evolution are fulfilled */
+  for(size_t i=0; i < this->get_equilibrium_abundances()->size();++i){
+    double y[p->NR+p->NS];
+    double f[p->NR+p->NS];
+
+    nvector R = this->get_resources_equilibrium(i);
+    nvector S = this->get_consumers_equilibrium(i);
+    for(size_t nu=0; nu < p->NR;++nu){
+      y[nu]=R[nu];
+    }
+    for(size_t j=0; j < p->NS;++j){
+      y[p->NR+j]=S[j];
+    }
+
+    this->equations_of_evolution(0, y, f, p);
+
+    for(size_t j=0; j < p->NS+p->NR;++j){
+      if(abs(f[j])>ZERO){
+        if(this->metaparameters->verbose>3){
+          std::cout << "System rejected because element " << j << " of system not fulfilling equations of evolution ("<<abs(f[j])<<")" << std::endl;
+        }
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+nmatrix CRModel::get_Beta_matrix(unsigned int n) const{
+  Parameter_set* p= this->get_parameter_set();
+  nmatrix Beta(p->NS, nvector(p->NR, 0.));
+  for(size_t i=0; i < p->NS; ++i){
+    for(size_t nu=0; nu < p->NR; ++nu){
+      Beta[i][nu]=(p->sigma)[i][nu]*(p->gamma[i][nu])*(this->get_consumers_equilibrium(n))[i];
+    }
+  }
+  return Beta;
+}
+nmatrix CRModel::get_Gamma_matrix(unsigned int n) const{
+  Parameter_set* p= this->get_parameter_set();
+  nmatrix Gamma(p->NR, nvector(p->NS, 0.));
+  for(size_t mu=0; mu < p->NR; ++mu){
+    for(size_t j=0; j < p->NS; ++j){
+      Gamma[mu][j]= -(p->gamma)[j][mu]*(this->get_resources_equilibrium(n))[mu]+(p->alpha)[mu][j];
+    }
+  }
+  return Gamma;
+}
+
+nctype CRModel::largest_eigenvalue_at_equilibrium() const{
+  ncvector eigvals = this->eigenvalues_at_equilibrium();
+  return eigvals[eigvals.size()-1];
 }

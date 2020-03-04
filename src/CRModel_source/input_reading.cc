@@ -29,20 +29,34 @@ alphamode string_to_alpha_mode(std::string mode){
     return alphamode(random_structure);
   }else if(mode=="no_release_when_eat"){
     return alphamode(no_release_when_eat);
+  }else if(mode=="one_release"){
+    return alphamode(one_release);
+  }else if(mode=="optimal_matrix"){
+    return alphamode(optimal_matrix);
   }else{
-    std::cerr << "Error, that value of alphamode has not been implemented yet or does not exist"<<std::endl;
-    std::cerr << "Aborting simulation" << std::endl;
-    abort();
+    error err("Error, that value of alphamode has not been implemented yet or does not exist.");
+    throw err;
   }
 }
+
+buildingmode string_to_building_mode(std::string mode){
+  if(mode=="use_l"){
+    return buildingmode(use_l);
+  }else if(mode=="use_m"){
+    return buildingmode(use_m);
+  }else{
+    error err("Error, that value of building mode has not been implemented yet or does not exist.");
+    throw err;
+  }
+}
+
 eqmode string_to_eq_mode(std::string mode){
     if(mode=="one_extinct"){
       return eqmode(oneextinct);
     }else if(mode=="convergence"){
       return eqmode(convergence);
     }else{
-      std::cerr<< "Error, that value of equilibrium_mode has not been implemented yet or does not exist" << std::endl;
-      std::cerr << "Aborting simulation" << std::endl;
-      abort();
+      error err("Error, that value of equilibrium_mode has not been implemented yet or does not exist.");
+      throw err;
     }
 }

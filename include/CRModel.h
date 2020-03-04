@@ -9,6 +9,8 @@
 #include "Classes/Dynamical_variables.h"
 #include "Classes/Model_Parameters.h"
 #include "Classes/Consumer_Resource_Model.h"
+#include "Classes/Effective_Consumer_Resource_Model.h"
+#include "Classes/ButlerModel.h"
 
 #include "Functions/output_writing.h"
 #include "Functions/fitting.h"
@@ -19,11 +21,23 @@
 #include "Functions/input_reading.h"
 #include "Functions/model_characteristics.h"
 #include "Functions/equilibrium_study.h"
+#include "Functions/optimize_alpha_matrix.h"
 
 
-const unsigned int print_precision = 4;
-const ntype EIGENSOLVER_PRECISION = 1e-15;
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_math.h>
 
-extern std::mt19937 random_engine;
+#include<limits>
+#include<fstream>
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+#include<chrono>
+#include<ctime>
+#include<complex>
+#include<list>
+#include<algorithm>
+#include<Eigen/Dense>
+#include "Global_Constants.h"
 
 #endif

@@ -1,2 +1,11 @@
 #!/bin/bash
-nohup ./build/compute_critical_Delta_matrices config/configuration_comparison_NR25_NS25_s05_a0.in  path_to_food_matrix=./config/matrix_list_NR25_NS25_test.in path_to_save_file=./data_output/critical_delta_NR25_NS25_test.out |ts '[%Y-%m-%d %H:%M:%S]' > logs/critical_delta_NR25_NS25_test.log &
+
+## METAPARAMS_LIST and MATRIX_LIST are the list of metaparameters and matrices
+## whose critical delta we want to find. They MUST be in the config folder
+METAPARAMS_LIST="list_of_config_files_comparison_test"
+MATRIX_LIST="matrix_list_NR25_NS25"
+CORES=$1
+COMMAND="build/compute_critical_Delta_matrices"
+OUTPUT_NAME="critical_delta"
+
+python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND $OUTPUT_NAME

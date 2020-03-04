@@ -1,0 +1,13 @@
+#!/bin/bash
+CONFIG_LIST="configuration"
+ADDITIONAL_MODIF=""
+
+for f in $CONFIG_LIST
+do
+  TEXT_APPEND=""
+  for add in ${ADDITIONAL_MODIF}
+  do
+    TEXT_APPEND="${TEXT_APPEND}_${add}"
+  done
+  nohup build/prop_dynamical_stability_varying_NR_NS config/$f.in path_to_save_file=data_output/phase_diagram_${f}${TEXT_APPEND}.out ${ADDITIONAL_MODIF} > logs/phase_diagram_${f}.log 2>logs/errphase_diagram_${f}.log&
+done

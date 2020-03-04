@@ -8,7 +8,7 @@ from mpl_toolkits import mplot3d
 # # rc('font',**{'family':'serif','serif':['Palatino']})
 # rc('text', usetex=False)
 
-folder = './data_output'
+folder = './data_output/data_output_alberto_13Jan'
 filename = 'configuration_comparison_NR25_NS25_s05_a0_matrix_list_NR25_NS25_combined'
 save_folder = './plots'
 save_name = filename
@@ -27,6 +27,7 @@ target_conn = [0.08, 0.23, 0.33]
 not_all_nest = True
 target_nest = [0.1, 0.3, 0.5]
 
+actual_connectance = [0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 
 def remove_strings_from_file(filename):
     file = open(filename + '.out', "r")
@@ -44,12 +45,25 @@ def remove_strings_from_file(filename):
         f.write(a + '\n')
     f.close()
 
+def nearest_el_in_list(x, liste):
+    result = liste[0]
+    for i in range(len(liste)):
+        if((x-liste[i])**2 < (x-result)**2):
+            result = liste[i]
+    return result
+
+
 
 filename = folder + '/' + filename
 remove_strings_from_file(filename)
 data = np.loadtxt(filename + '_filtered.out')
 metadata = data[:, :4]
 
+for j in range(len(data)):
+    # we round the nestedness to two decimal values
+    data[j,2] = round(data[j,2], 2)
+    # we filter the connectance such that it's rounded to the actual target value
+    data[j,3] = nearest_el_in_list(data[j,3], actual_connectance)
 
 # sorted_size[i] contains the different system sizes
 sorted_size = []
@@ -74,8 +88,7 @@ for i in range(len(sorted_size)):
     save_string1 = save_folder + '/' + save_string + 'nest_fixed_conn'
     save_string2 = save_folder + '/' + save_string + '_conn_fixed_nest'
     data = sorted_mprop[i]
-    # we filter the data to round the connectance up to 2 decimals
-    data[:, 1] = np.array([round(data[i, 1], 2) for i in range(len(data))])
+
     # lists the different connectances available
     connectance = np.array(sorted(list(set(data[:, 1]))))
     # lists the different nestednesses available

@@ -4,6 +4,9 @@ data_output/*
 logs/*
 !.placeholder
 text/*
-!text/consumer_resource.pdf
 *.out
 process-palette.json
+*.pyc
+data_analysis/.*
+matplotlibrc
+old_*

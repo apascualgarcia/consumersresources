@@ -1,0 +1,33 @@
+#!/bin/bash
+CONFIG_LIST="configuration_comparison_NR25_NS25_s05_a0"
+MATRIX_LIST="random_matrix_NR25_NS25"
+SAVENAME="critical_delta_convergence_study"
+CONV_LIST="1e-1 1e-2 1e-3 1e-4 1e-5 1e-6 1e-7 1e-8"
+ADDITIONAL_MODIF="S0=0.1 gamma0=0.5"
+
+for f in $CONFIG_LIST
+do
+  for conv in $CONV_LIST
+  do
+    VAL_CONV="conv="${conv}
+    CURRENT_NAME="${SAVENAME}_${VAL_CONV}_${f}_${MATRIX_LIST}"
+    if [ ! -z "${ADDITIONAL_MODIF}" ]
+    then
+      for add in $ADDITIONAL_MODIF
+      do
+        CURRENT_NAME="${CURRENT_NAME}_${add}"
+      done
+    fi
+    COMMAND_NAME="build/compute_critical_Delta_matrices config/${f}.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=config/${MATRIX_LIST}.in ${ADDITIONAL_MODIF} convergence_threshold=${conv}"
+    COMMAND_NAME="${COMMAND_NAME} | ts \"[%Y-%m-%d %H:%M:%S]\""
+
+    LOG_NAME="logs/${CURRENT_NAME}.log"
+    ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
+    # execute command
+    nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
+    # write command to log
+    now="["$(date)"]"
+    echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+  done
+done
+echo "Launched commands in the background, please check appropriate log files for progress"

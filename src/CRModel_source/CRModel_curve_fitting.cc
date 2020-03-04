@@ -5,6 +5,8 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_sf_exp.h>
+#include <gsl/gsl_sf_erf.h>
+#include <gsl/gsl_math.h>
 #include <iostream>
 #include <array>
 #include <string>
@@ -36,6 +38,16 @@ double sigmoidal_fit(double x, const gsl_vector* a){
   return result;
 }
 
+double sigmoidal_fit_erf(double x, const gsl_vector* a){
+  double result = 0.;
+  double x0 = gsl_vector_get(a,0);
+  double scale = gsl_vector_get(a,1);
+
+  result = gsl_sf_erf(scale*(x-x0))*0.5+0.5;
+
+  return result;
+}
+
 int function_to_fit_df(const gsl_vector* params, void* data, gsl_matrix* J){
   set_jacobian_matrix_fit(params, data, J);
   return GSL_SUCCESS;
@@ -48,16 +60,16 @@ void set_jacobian_matrix_fit(const gsl_vector* params, void* data, gsl_matrix* J
     case sigmoidal:
       set_jacobian_matrix_sigmoidal_fit(params, data, J);
       break;
-    case polynomial:
-      std::cerr << "Please implement the jacobian for the polynomial fit " << std::endl;
-      std::cerr << "Aborting the simulation." << std::endl;
-      abort();
+    case polynomial:{
+      error err("Jacobian for the polynomial fit not implemented.");
+      throw err;
       break;
-    default:
-      std::cerr << "The jacobian for this type of fitting has not been implemented or does not exist yet" << std::endl;
-      std::cerr << "Aborting the simulation." << std::endl;
-      abort();
+    }
+    default:{
+      error err("Jacobian for this type of fitting does not exist or not implemented yet.");
+      throw err;
       break;
+    }
   }
   return;
 }
@@ -89,9 +101,8 @@ double fitting_function(double x, const gsl_vector* a, fitmode fit_mode){
     case polynomial:
       return polynomial_fit(x,a);
     default:
-      std::cerr << "This type of fitting either does not exist or has not been implemented yet " << std::endl;
-      std::cerr << "Aborting the program now" << std::endl;
-      abort();
+      error err("This type of fitting either does not exist or has not been implemented yet.");
+      throw err;
       break;
   }
 }
@@ -127,7 +138,6 @@ void callback(const size_t iter, void *params, const gsl_multifit_nlinear_worksp
   return;
 }
 void fit_points_with_function(const nvector& interval, const nvector& points, fitting_parameters& fit_parameters, fitmode fit_mode, const unsigned int& verbose){
-
   const gsl_multifit_nlinear_type *T = gsl_multifit_nlinear_trust;
   gsl_multifit_nlinear_workspace *w;
   gsl_multifit_nlinear_fdf fdf;
@@ -136,19 +146,6 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
   const size_t n = interval.size();
   const size_t p = NUMBER_OF_FITTING_PARAMETERS;
 
-  /* cout of the points to fit
-  std::cout << "[";
-  for(size_t i = 0; i < interval.size()-1; ++i){
-    std::cout << interval[i] << ",";
-  }
-  std::cout << interval[interval.size()-1] << "]" << std::endl;
-
-  std::cout << "[";
-  for(size_t i = 0; i < points.size()-1; ++i){
-    std::cout << points[i] << ",";
-  }
-  std::cout << points[points.size()-1] << "]" << std::endl;
-  */
 
   /* define the function to be minimized */
   gsl_vector* f;
@@ -158,6 +155,7 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
 
   double x[n], y[n], weights[n], a_init[p];
   nvector initial_guess = guess_initial_fit_parameters(interval, points, fit_mode);
+
 
   /* this is the data to be fitted */
   for (size_t i=0; i < n; ++i){
@@ -240,13 +238,14 @@ void fit_points_with_function(const nvector& interval, const nvector& points, fi
 
 nvector guess_initial_fit_parameters(const nvector& x, const nvector& y, fitmode fit_mode){
   const size_t p = NUMBER_OF_FITTING_PARAMETERS;
+  const size_t n = x.size();
   nvector a_init;
-
   switch(fit_mode){
+    case sigmoidal_erf:
     case sigmoidal: {
       /* for the estimate on the solution, we simply take the x whose y is closer to 0 */
       ntype approx_sol = x[0], val_of_approx_sol = y[0];
-      for(size_t i = 1; i < x.size(); ++i){
+      for(size_t i = 1; i < n; ++i){
         /* if y[i] is closer to zero than the previous value, change the estimate */
         if(y[i]*y[i] < val_of_approx_sol*val_of_approx_sol){
           approx_sol = x[i];
@@ -256,9 +255,9 @@ nvector guess_initial_fit_parameters(const nvector& x, const nvector& y, fitmode
 
       a_init.push_back(approx_sol);
 
-      /* for the estimate on the scale, we take 4/(interval length), (it's an okay approx)*/
-      ntype min_el = x[0], max_el = x[x.size()-1];
-      for(size_t i=0; i < x.size(); ++i){
+      /* for the estimate on the scale, we take 4/(interval length)*sign(y(x_lo)-y(x_hi)), (it's an okay approx)*/
+      ntype min_el = x[0], max_el = x[n-1];
+      for(size_t i=0; i < n; ++i){
         if(x[i] < min_el){
           min_el = x[i];
         }
@@ -266,13 +265,13 @@ nvector guess_initial_fit_parameters(const nvector& x, const nvector& y, fitmode
           max_el = x[i];
         }
       }
-      a_init.push_back(4/(max_el-min_el));
+      a_init.push_back(4/(max_el-min_el)*GSL_SIGN(y[n-1]-y[0]));
       break;
     }
+
     default:{
-      std::cerr << "This type of fitting has not been implemented yet or does not exist"<<std::endl;
-      std::cerr << "Aborting the simulation now"<<std::endl;
-      abort();
+      error err("This type of fitting has not been implemented yet or does not exist.");
+      throw err;
       break;
     }
   }
@@ -305,9 +304,8 @@ statistics estimate_delta_crit_from_interval(const nvector& interval, const nvec
       fit_type = "degree 3 polynomial";
       break;
     default:
-      std::cerr << "This type of fitting has not been implemented yet or does not exist." << std::endl;
-      std::cerr << "The program will now abort" << std::endl;
-      abort();
+      error err("This type of fitting has not been implemented yet or does not exist.");
+      throw err;
       break;
   }
 
@@ -329,9 +327,57 @@ statistics estimate_delta_crit_from_interval(const nvector& interval, const nvec
   statistics delta_crit = solve_for_delta_with_fit(fitting_parameters, x_lo, x_hi, m, delta_solver);
   gsl_vector_free(fit_parameters);
   if(m.verbose > 0){
-    std::cout << "Zero estimated at " << delta_crit.mean << "+/-" << delta_crit.std_deviation  << std::endl;
+    std::cout << "Zero estimated at " << delta_crit << std::endl;
   }
 
   /* finally, we return the estimated value */
   return delta_crit;
+}
+
+statistics estimate_alpha_crit_from_interval(const nvector& interval, const nvector& extinctions, const Metaparameters& m, fitmode fit_mode){
+  double x_lo = interval[0];
+  double x_hi = interval[interval.size()-1];
+
+  /* first select the points to fit */
+  nvector x_points_to_fit = interval;
+  nvector y_points_to_fit = extinctions;
+
+  switch(fit_mode){
+    case sigmoidal :
+      NUMBER_OF_FITTING_PARAMETERS = 2;
+      break;
+    case sigmoidal_erf:
+      NUMBER_OF_FITTING_PARAMETERS = 2;
+      break;
+    default:
+      error err("This type of fitting has not been implemented yet or does not exist.");
+      throw err;
+      break;
+  }
+  /* Then we actually find the parameters that fit our choice of function best */
+  unsigned int number_of_fitting_parameters = NUMBER_OF_FITTING_PARAMETERS;
+
+  /* define fitting parameters */
+  gsl_vector* fit_parameters = gsl_vector_alloc(number_of_fitting_parameters);
+  gsl_vector* error = gsl_vector_alloc(number_of_fitting_parameters);
+
+  fitting_parameters fitting_parameters = {fit_parameters, error};
+  if(m.verbose > 0){
+    std::cout << "Now fitting the " << x_points_to_fit.size() << " points chosen into the specific function (";
+    std::cout << fit_mode << ")"<< std::endl;
+  }
+
+  fit_points_with_function(x_points_to_fit, y_points_to_fit, fitting_parameters, fit_mode, m.verbose);
+  delta_solver dsolv;
+  dsolv.fit_mode = fit_mode;
+
+  /* with the fitting parameters estimated, we can actually solve for Delta numerically */
+  statistics alpha_crit = solve_for_delta_with_fit(fitting_parameters, x_lo, x_hi, m, dsolv);
+  gsl_vector_free(fit_parameters);
+  if(m.verbose > 0){
+    std::cout << "Zero estimated at " << alpha_crit << std::endl;
+  }
+
+  /* finally, we return the estimated value */
+  return alpha_crit;
 }

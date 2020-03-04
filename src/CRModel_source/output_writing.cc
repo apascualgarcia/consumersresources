@@ -7,13 +7,18 @@ std::ostream& operator<<(std::ostream& os, const Metaparameters& m){
   os << "gamma0 = " << m.gamma0 << "; ";
   os << "alpha0 = " << m.alpha0 << "; ";
   os << "sigma0 = " << m.sigma0 << "; ";
+  os << "l0 = " << m.l0 << ";";
   os << "p = " << m.p << "; ";
   os << "R0 = " << m.R0 << "; ";
   os << "S0 = " << m.S0 << "; ";
   os << "NR = " << m.NR << "; ";
-  os << "NS = " << m.NS ;
+  os << "NS = " << m.NS  << "; ";
+  os << "matrix path = " << m.foodmatrixpath <<"; ";
+  os << "convergence threshold = " << m.convergence_threshold;
   return os;
 }
+
+
 std::ostream& operator<<(std::ostream& os, const nctype& number){
   os << std::real(number);
   if(std::imag(number)>0.){
@@ -46,23 +51,24 @@ std::ostream& operator<<(std::ostream& os, const Parameter_set& p){
   display_vector_w_name(os, "m", p.m);
   display_vector_w_name(os, "d", p.d);
   os << "NR = " << p.NR << std::endl;
-  os << "NS = " << p.NS << std::endl;
+  os << "NS = " << p.NS ;
   return os;
 }
+
 std::ostream& operator<<(std::ostream& os, const Model_parameters& M){
-  os << *(M.get_parameters()) << std::endl;
+  M.display(os);
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const ntensor& T){
   for(size_t i = 0; i < T.size()-1; ++i){
     os << "Element " << i << " of tensor :" << std::endl << T[i] << std::endl;
   }
-  os << "Element " << T.size()-1 << " of tensor :" << std::endl << T[T.size()-1] << std::endl;
+  os << "Element " << T.size()-1 << " of tensor :" << std::endl << T[T.size()-1];
   return os;
 }
 std::ostream& operator<<(std::ostream& os, const nvector& v){
   for (size_t i=0; i < v.size(); ++i){
-    os << std::right << std::fixed  << std::setprecision(print_precision) << v[i] << " ";
+    os << std::scientific << std::setprecision(print_precision) << v[i] << " ";
   }
   return os;
 }
@@ -83,5 +89,118 @@ std::ostream& display_matrix_w_name(std::ostream& os, std::string mat_name, cons
 }
 std::ostream& display_vector_w_name(std::ostream& os, std::string vec_name, const nvector& vect){
   os << vec_name << " = " << vect << std::endl;
+  return os;
+}
+std::ostream& operator<<(std::ostream& os, const stability_metrics& m){
+  os << std::endl;
+  os << "Resilience : " << m.resilience<< std::endl;
+  os << "Number of extinctions : " << m.extinctions << std::endl;
+  os << "Angle between equilibria : " << m.angle_between_equilibria<< std::endl;
+  os << "Distance between equilibria : " << m.distance_between_equilibria;
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const statistics& stats){
+  os << stats.mean_ << "+/-" << stats.std_deviation_ << " (median : "<<stats.median_ << ")";
+  return os;
+}
+
+
+std::ostream& operator<<(std::ostream& os, const stabilitymode& stab){
+  switch(stab){
+    case dynamical:{
+      os << "dynamical";
+      break;
+    }
+    case structural:{
+      os << "structural";
+      break;
+    }
+    default:
+      break;
+  }
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const interval & interval_){
+  os <<  "[" << interval_.begin << ";" << interval_.end << "]";
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const fitmode & fit){
+  switch(fit){
+    case sigmoidal:
+      os << "sigmoidal";
+      break;
+    case sigmoidal_erf:
+      os << "sigmoidal erf";
+      break;
+    case polynomial:
+      os << "polynomial";
+      break;
+    default:
+      os << "unknown fit";
+      break;
+  }
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const systemstability& stab){
+  switch(stab){
+    case stable:{
+      os << "stable";
+      break;
+    }
+    case marginal:{
+      os << "marginally stable";
+      break;
+    }
+    case unstable:{
+      os << "unstable";
+      break;
+    }
+  }
+  return os;
+}
+std::ostream& operator<<(std::ostream& os, const stability& stab){
+  os << stab.unstable << " " << stab.marginally_stable << " " << stab.stable << " ";
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const error& e){
+  os << "Error during runtime : " << e.message << std::endl;
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const buildingmode & b){
+  switch(b){
+    case use_l:{
+      os << "use_l";
+      break;
+    }
+    case use_m:{
+      os << "use_m";
+      break;
+    }
+    default:{
+      break;
+    }
+  }
+  return os;
+}
+
+std::ostream& display_food_matrix(std::ostream& os, const foodmatrix& f){
+  for(size_t i=0; i < f.size(); ++i){
+    for(size_t j=0; j < f[i].size(); ++j){
+      if(f[i][j]>0){
+        os << "1 ";
+      }else{
+        os << "0 ";
+      }
+    }
+    if(i < f.size()-1){
+      os << std::endl;
+    }
+  }
   return os;
 }

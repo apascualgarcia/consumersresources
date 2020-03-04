@@ -12,6 +12,7 @@ struct Metaparameters{
   ntype R0;
   ntype S0;
   ntype l0;
+  ntype m0;
   ntype epsilon;
   unsigned int NR;
   unsigned int NS;
@@ -29,8 +30,30 @@ struct Metaparameters{
   ntype perturb_eq;
   ntype perturb_parameters;
   eqmode equilibrium;
+  ntype convergence_threshold;
+  buildingmode building_mode;
 
   Metaparameters(int argc, char *argv[]);
+  /* gives back the hard limit over which we know we won't find any feasible system*/
+  ntype physical_maximum_alpha0() const;
+
+  /* gives back a limit below which we know we will have a feasible system */
+  ntype minimum_S0_guaranteed_feasability() const;
+
+
+  /*  gives back the softer limit after which prob(draw feasible system) < 1,
+      has an accuracy on alpha of roughly alpha_accuracy */
+  ntype feasible_alpha_max(ntype alpha_accuracy = 1e-7) const;
+  /*  gives back the softer limit before which prob(draw feasible system) < 1,
+      has an accuracy on alpha of roughly alpha_accuracy */
+  ntype feasible_alpha_min(ntype alpha_accuracy = 1e-7) const;
+
+  /* returns the maximum feasible S0 taking into account the other metaparameters */
+  ntype feasible_S0_max(ntype S0_accuracy=1e-7) const;
+
+  /* returns the maximum feasible gamma0 taking into account the other metaparameters */
+  ntype feasible_gamma0_max(ntype gamma0_accuracy=1e-7)const;
+
 };
 
 
