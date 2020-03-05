@@ -19,8 +19,29 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
   apply_MC_algorithm(alpha, unit_gamma, u, coprophagy, mcs);
   return alpha;
 }
-ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, const nvector& u){
+ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, const nvector& u){
   return u*(alpha*gamma)*u;
+}
+ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, const nvector & u){
+  /* the goal is to minimize the maximal sum of LHS in the intra resource regime */
+  unsigned int NR=alpha.size();
+  nmatrix alpha_gamma=alpha*gamma;
+  nmatrix gamma_square=transpose(gamma)*gamma;
+
+  ntype to_minimize=0.;
+  /* we want the absolute trace to be as close to zero as possible*/
+  /* and we want the rest to be as close to zero as possible*/
+  ntype off_diag=0., trace=0.;
+  for(size_t mu=0; mu < NR;++mu){
+    trace+=abs(alpha_gamma[mu][mu]);
+    for(size_t nu=0; nu < NR;++nu){
+      if(nu!=mu){
+        off_diag+=abs(alpha_gamma[mu][nu]-gamma_square[mu][nu]);
+      }
+    }
+  }
+  to_minimize=trace+off_diag;
+  return to_minimize;
 }
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const nvector& u, const ntype& T){
   return exp(-quadratic_form(alpha, gamma, u)/T);
@@ -28,27 +49,43 @@ ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const nvec
 nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
   return proposed_new_alpha_Alberto(alpha, gamma, coprophagy,steps);
 }
-void choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, const nvector& u, bool coprophagy, const ntype& T, unsigned int steps, unsigned int& fails){
+bool choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, const nvector& u, bool coprophagy, const ntype& T, unsigned int steps, unsigned int& fails){
   nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps);
   ntype proba_ratio=probability_density(new_alpha, gamma, u, T)/probability_density(alpha, gamma, u, T);
   if(proba_ratio>1){
     alpha=new_alpha;
     fails=0;
+    return true;
   }else{
     fails+=1;
     std::uniform_real_distribution<ntype> real_distrib(0., 1.);
     if(real_distrib(random_engine)<proba_ratio){
       alpha=new_alpha;
+      return true;
     }
   }
-  return;
+  return false;
 }
 void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, const nvector& u, bool coprophagy, const MonteCarloSolver& mcs){
   bool stop=false;
+  ntype T=mcs.T;
   unsigned int steps=0;
   unsigned int fails=0;
+  bool changed=false;
   while(!stop){
-    choose_next_alpha(alpha, gamma, u, coprophagy, mcs.T, steps, fails);
+    changed=choose_next_alpha(alpha, gamma, u, coprophagy, T, steps, fails);
+    if(changed){
+      fails=0;
+    }else{
+      fails+=1;
+    }
+
+    /* when the move has not been accepted too many times, increase temp */
+    if(fails>=mcs.max_fails){
+      T*=2;
+      std::cout << "\t Multiplied the temperature by two" << std::endl;
+    }
+
     if(steps>=mcs.max_steps){
       stop=true;
     }

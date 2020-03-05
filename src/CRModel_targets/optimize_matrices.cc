@@ -7,7 +7,7 @@ int main(int argc, char* argv[]){
 
     MonteCarloSolver mcsolv;
     mcsolv.T=0.1;
-    mcsolv.max_steps=100000;
+    mcsolv.max_steps=1000000;
     mcsolv.max_fails=1000;
     mcsolv.display_stride=10000;
 
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
       metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath);
 
       foodmatrix gamma=load_food_matrix(metaparams);
-      std::ofstream myfile=open_external_file_truncate(metaparams.save_path);
+      std::ofstream myfile=open_external_file_truncate(metaparams.save_path+"_other");
 
       std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix ... " << std::endl;
       foodmatrix optimal_alpha=optimal_syntrophy_from_consumption(gamma, coprophagy, mcsolv);
