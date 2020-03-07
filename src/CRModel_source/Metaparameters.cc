@@ -27,6 +27,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->tau_mode = string_to_tau_mode(configFile.get<std::string>("tau_mode"));
   this->alpha_mode = string_to_alpha_mode(configFile.get<std::string>("alpha_mode"));
   this->foodmatrixpath = configFile.get<std::string>("path_to_food_matrix");
+  this->syntrophy_matrix_path=configFile.get<std::string>("path_to_syntrophy_matrix");
   this->verbose=configFile.get<unsigned int>("verbose-level");
   this->energy_constraint=configFile.get<bool>("energy_constraint");
   this->nb_attempts = configFile.get<unsigned int>("number_of_attempts");
@@ -129,7 +130,7 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
       meta.alpha0=alpha_max;
       steps+=1;
     }
-    
+
 
     if(this->verbose > 0){
       std::cout << "Maximum feasible alpha0 for " << this->foodmatrixpath << " is " << alpha_max << std::endl;
@@ -198,7 +199,7 @@ ntype Metaparameters::feasible_gamma0_max(ntype gamma0_accuracy)const{
     meta.gamma0 = gamma0_max;
 
     unsigned int steps=0;
-    while(find_feasability_probability(meta) < 1. and steps<=1000){
+    while(find_feasability_probability(meta) < 1. && steps<=1000){
       gamma0_max -= gamma0_accuracy;
       meta.gamma0=gamma0_max;
       steps+=1;
@@ -223,4 +224,21 @@ ntype Metaparameters::feasible_gamma0_max(ntype gamma0_accuracy)const{
   }
 
   return gamma0_max;
+}
+
+ntype Metaparameters::quadratic_form_low_intra_resource_interaction(const nmatrix& A, const nmatrix& G) const{
+  /*  the idea is that we want to have a syntrophy matrix such that the overlap A*G = 0 on the diagonal
+      and is as close as possible to GTG outside of it */
+  ntype to_minimize=0.;
+  nmatrix O=A*G, Gsquare=transpose(G)*G;
+  unsigned int nr=O.size();
+  for(size_t mu=0; mu < nr; ++mu){
+    to_minimize+=O[mu][mu];
+    for(size_t nu=0; nu < nr; ++nu){
+      if(mu!=nu){
+        to_minimize+=abs(this->alpha0*O[mu][nu]-this->gamma0*Gsquare[mu][nu]);
+      }
+    }
+  }
+  return to_minimize;
 }

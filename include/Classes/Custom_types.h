@@ -119,6 +119,9 @@ struct MonteCarloSolver{
   unsigned int max_steps;
   unsigned int max_fails;
   unsigned int display_stride;
+  /* important, the matrices in argument here have to be binary */
+  ntype(*cost_function)(const nmatrix&, const nmatrix&, void*);
+  void* additional_params;
 };
 
 

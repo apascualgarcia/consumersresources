@@ -48,7 +48,9 @@ foodmatrix load_food_matrix(const Metaparameters& m){
 nmatrix load_syntrophy_matrix(const Metaparameters& m){
   nmatrix a(m.NR,nvector(m.NS, 0.));
   nmatrix input;
-  std::string syntrophy_path = optimal_alpha_matrix_path(m.foodmatrixpath);
+  //old version, we now allow a syntrophy matrix in whatever path
+  //std::string syntrophy_path = optimal_alpha_matrix_path(m.foodmatrixpath);
+  std::string syntrophy_path=m.syntrophy_matrix_path;
   if(m.verbose > 2){
     std::cout << "\t Loading alpha matrix from " << syntrophy_path << std::endl;
   }
