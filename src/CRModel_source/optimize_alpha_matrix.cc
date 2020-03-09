@@ -86,8 +86,9 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       stop=true;
     }
     if(steps%mcs.display_stride==0){
-      std::cout << "\t Step " << steps <<", cost function =" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
+      std::cout << "\t Step " << steps <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
       std::cout << " nestedness=" << nestedness(alpha);
+      std::cout << " connectance=" << connectance(alpha);
       std::cout << std::endl;
     }
     steps+=1;

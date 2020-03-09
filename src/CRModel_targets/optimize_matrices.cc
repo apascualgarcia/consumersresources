@@ -15,6 +15,9 @@ int main(int argc, char* argv[]){
     mcsolv.cost_function=quadratic_form_low_intra_resource_interaction;
     mcsolv.additional_params=&metaparams;
 
+    /* set alpha0 to its maximal possible value */
+    metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
+
     bool coprophagy=false;
 
     for(size_t i=0; i < matrices_list.size();++i){
