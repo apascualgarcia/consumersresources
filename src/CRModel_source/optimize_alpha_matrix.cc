@@ -45,7 +45,29 @@ ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const Mont
 }
 nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
   return proposed_new_alpha_Alberto(alpha, gamma, coprophagy,steps);
+  //return flip_one_element(alpha, gamma, coprophagy);
 }
+
+nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy_allowed){
+  unsigned int row_index, col_index;
+  nmatrix new_alpha;
+
+  std::uniform_int_distribution<unsigned int> row_dist(0, alpha.size()-1);
+  std::uniform_int_distribution<unsigned int> col_dist(0, alpha[0].size()-1);
+  do{
+    /* set new_alpha to alpha so that in any case, new_alpha and alpha differ by one element */
+    new_alpha=alpha;
+    /* pick random element and flip it */
+    row_index=row_dist(random_engine);
+    col_index=col_dist(random_engine);
+
+    new_alpha[row_index][col_index]=1-alpha[row_index][col_index];
+
+  }while(not(coprophagy_allowed) && is_there_coprophagy(new_alpha, gamma));
+
+  return new_alpha;
+}
+
 bool choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs){
   nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps);
   ntype proba_ratio=probability_density(new_alpha, gamma, mcs)/probability_density(alpha, gamma, mcs);
@@ -78,17 +100,23 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
 
     /* when the move has not been accepted too many times, increase temp */
     if(fails>=mcs.max_fails){
-      mcs.T*=2;
-      std::cout << "\t Multiplied the temperature by two" << std::endl;
+      mcs.T/=mcs.annealing_const;
+    }
+
+    /* at a given frequency, the temperature is reduced */
+    if(steps%mcs.annealing_freq==0){
+      mcs.T*=mcs.annealing_const;
     }
 
     if(steps>=mcs.max_steps){
       stop=true;
     }
     if(steps%mcs.display_stride==0){
-      std::cout << "\t Step " << steps <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
-      std::cout << " nestedness=" << nestedness(alpha);
-      std::cout << " connectance=" << connectance(alpha);
+      std::cout << "\t Step " << steps;
+      std::cout << ", T=" << mcs.T;
+      std::cout <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
+      std::cout << ", nestedness=" << nestedness(alpha);
+      std::cout << ", connectance=" << connectance(alpha);
       std::cout << std::endl;
     }
     steps+=1;
