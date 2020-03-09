@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-gamma_folder_path='optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.1296.txt'
-alpha_folder_path='optimal_matrices/optimal_LRI/RandTrix_Nr25_Nc25_Nest0.1_Conn0.1296_optimal_alpha.txt'
+gamma_folder_path='optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168.txt'
+alpha_folder_path='optimal_matrices/optimal_LRI/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168_optimal_alpha.txt'
 
 alpha0=0.75
 gamma0=0.1
@@ -15,7 +15,7 @@ C = np.transpose(G)@G
 
 fig1=plt.figure(1)
 ax1=fig1.add_subplot(111)
-im=ax1.imshow(alpha0*O-gamma0*C)
+im=ax1.imshow(C)
 cbar=fig1.colorbar(im)
 
 plt.show()
