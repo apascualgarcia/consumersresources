@@ -233,7 +233,7 @@ ntype Metaparameters::quadratic_form_low_intra_resource_interaction(const nmatri
   nmatrix O=A*G, Gsquare=transpose(G)*G;
   unsigned int nr=O.size();
   for(size_t mu=0; mu < nr; ++mu){
-    to_minimize+=O[mu][mu];
+    to_minimize+=alpha0*O[mu][mu];
     for(size_t nu=0; nu < nr; ++nu){
       if(mu!=nu){
         to_minimize+=abs(this->alpha0*O[mu][nu]-this->gamma0*this->R0*Gsquare[mu][nu]);

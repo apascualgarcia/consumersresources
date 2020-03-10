@@ -188,7 +188,6 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   std::uniform_int_distribution<size_t> zero_els_indices(0, zero_els.size()-1);
   std::uniform_int_distribution<size_t> one_els_indices(0, one_els.size()-1);
 
-  /* /!\ potential line at fault */
   size_t zero_index=zero_els[zero_els_indices(random_engine)];
   size_t one_index=one_els[one_els_indices(random_engine)];
 
