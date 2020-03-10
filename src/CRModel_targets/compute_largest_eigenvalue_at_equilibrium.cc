@@ -4,6 +4,7 @@ int main(int argc, char * argv[]){
   try{
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices=load_food_matrix_list(metaparams.foodmatrixpath);
+    std::string syntrophy_folder=metaparams.syntrophy_matrix_path;
 
     std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
     unsigned int Npoints(100), Nsimuls(1000);
@@ -35,6 +36,7 @@ int main(int argc, char * argv[]){
         myfile << metaparams.alpha0 << " " << largest_eigenvalue_at_equilibrium << " ";
       }
       myfile << std::endl;
+      metaparams.syntrophy_matrix_path=syntrophy_folder;
     }
     myfile.close();
 
