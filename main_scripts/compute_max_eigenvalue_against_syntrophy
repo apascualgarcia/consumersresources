@@ -1,16 +1,17 @@
 #!/bin/bash
 # This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
 # for every matrix listed (one graph per matrix list) and alpha_mode chosen
-MATRIX_LIST="full_rank_opt_mat_NR25_NS25 opt_mat_NR25_NS50 opt_mat_NR50_NS25"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 ALPHA_MODE="random_structure no_release_when_eat optimal_matrix"
+OPTIMAL_MATRIX_FOLDER="optimal_LRI"
 SAVENAME="max_eigenvalues_variable_syntrophy"
-ADDITIONAL_MODIF=""
+ADDITIONAL_MODIF="verbose-level=4"
 
 for a in $ALPHA_MODE
 do
   for matl in $MATRIX_LIST
   do
-    CURRENT_NAME="${SAVENAME}_${a}_${matl}"
+    CURRENT_NAME="${SAVENAME}_${matl}_${a}_${OPTIMAL_MATRIX_FOLDER}"
     if [ ! -z "${ADDITIONAL_MODIF}" ]
     then
       for add in $ADDITIONAL_MODIF
@@ -18,7 +19,7 @@ do
         CURRENT_NAME="${CURRENT_NAME}_${add}"
       done
     fi
-    FIRST_COMMAND="build/compute_largest_eigenvalue_at_equilibrium config/configuration.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=config/${matl}.in alpha_mode=${a} ${ADDITIONAL_MODIF}"
+    FIRST_COMMAND="build/compute_largest_eigenvalue_at_equilibrium config/configuration.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} ${ADDITIONAL_MODIF}"
     FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
 
     SECOND_COMMAND="python3 data_analysis/plot_max_eigenvalue_varying_alpha0.py data_output/${CURRENT_NAME}"

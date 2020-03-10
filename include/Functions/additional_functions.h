@@ -17,7 +17,10 @@ nmatrix order_matrix_by_row_degree(const nmatrix&);
 /* relabels the columns of m such that degree of column i > degree of column j if i < j */
 nmatrix order_matrix_by_column_degree(const nmatrix& m);
 /* returns path of optimal alpha matrix for a given path to the gamma matrix */
+/*    use this one when path_to_syntrophy_matrix is a path to file */
 std::string optimal_alpha_matrix_path(const std::string&);
+/*    and this one when it is a path to a folder */
+std::string optimal_alpha_matrix_path_from_syntrophy_folder(const Metaparameters& m);
 ntype norm(const nvector&);
 ntype mean(const nmatrix &);
 ntype det(const nmatrix&);
