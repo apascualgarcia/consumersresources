@@ -48,7 +48,9 @@ foodmatrix load_food_matrix(const Metaparameters& m){
 nmatrix load_syntrophy_matrix(const Metaparameters& m){
   nmatrix a(m.NR,nvector(m.NS, 0.));
   nmatrix input;
-  std::string syntrophy_path = optimal_alpha_matrix_path(m.foodmatrixpath);
+  //old version, we now allow a syntrophy matrix in whatever path
+  //std::string syntrophy_path = optimal_alpha_matrix_path(m.foodmatrixpath);
+  std::string syntrophy_path=m.syntrophy_matrix_path;
   if(m.verbose > 2){
     std::cout << "\t Loading alpha matrix from " << syntrophy_path << std::endl;
   }
@@ -118,6 +120,14 @@ std::string optimal_alpha_matrix_path(const std::string& g_path){
   }
   return alpha_path+"_optimal_alpha.txt";
 
+}
+std::string optimal_alpha_matrix_path_from_syntrophy_folder(const Metaparameters& m){
+  std::string folder_path=m.syntrophy_matrix_path;
+  size_t index_start=m.foodmatrixpath.find_last_of("/");
+  size_t length=m.foodmatrixpath.size()-6-index_start+1;
+  std::string mat_name=m.foodmatrixpath.substr(index_start+1, length);
+
+  return folder_path+'/'+mat_name+"_optimal_alpha.txt";
 }
 
 

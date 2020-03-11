@@ -1,7 +1,7 @@
 #include "../../include/CRModel.h"
 
 
-nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, const MonteCarloSolver& mcs){
+nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
   nmatrix unit_gamma(gamma.size(), nvector(gamma[0].size(), 0.));
   for(size_t i=0; i < gamma.size(); ++i){
     for(size_t mu=0; mu < gamma[0].size(); ++mu){
@@ -11,18 +11,15 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
     }
   }
   ntype connectance_in=connectance(unit_gamma);
-  nmatrix alpha = create_alpha(connectance_in, unit_gamma);
-  nvector u;
-  for(size_t mu=0; mu < unit_gamma[0].size();++mu){
-    u.push_back(1.);
-  }
-  apply_MC_algorithm(alpha, unit_gamma, u, coprophagy, mcs);
+  nmatrix alpha = create_alpha(connectance_in, unit_gamma, coprophagy);
+  apply_MC_algorithm(alpha, unit_gamma, coprophagy, mcs);
   return alpha;
 }
-ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, const nvector& u){
+ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  const nvector& u = *(nvector*)(params);
   return u*(alpha*gamma)*u;
 }
-ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, const nvector & u){
+ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, void* params){
   /* the goal is to minimize the maximal sum of LHS in the intra resource regime */
   unsigned int NR=alpha.size();
   nmatrix alpha_gamma=alpha*gamma;
@@ -43,15 +40,37 @@ ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, const nvector &
   to_minimize=trace+off_diag;
   return to_minimize;
 }
-ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const nvector& u, const ntype& T){
-  return exp(-quadratic_form(alpha, gamma, u)/T);
+ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs){
+  return exp(-mcs.cost_function(alpha, gamma, mcs.additional_params)/mcs.T);
 }
 nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
   return proposed_new_alpha_Alberto(alpha, gamma, coprophagy,steps);
+  //return flip_one_element(alpha, gamma, coprophagy);
 }
-bool choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, const nvector& u, bool coprophagy, const ntype& T, unsigned int steps, unsigned int& fails){
+
+nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowed_coprophagy){
+  unsigned int row_index, col_index;
+  nmatrix new_alpha;
+
+  std::uniform_int_distribution<unsigned int> row_dist(0, alpha.size()-1);
+  std::uniform_int_distribution<unsigned int> col_dist(0, alpha[0].size()-1);
+  do{
+    /* set new_alpha to alpha so that in any case, new_alpha and alpha differ by one element */
+    new_alpha=alpha;
+    /* pick random element and flip it */
+    row_index=row_dist(random_engine);
+    col_index=col_dist(random_engine);
+
+    new_alpha[row_index][col_index]=1-alpha[row_index][col_index];
+
+  }while(not(allowed_coprophagy) && is_there_coprophagy(new_alpha, gamma));
+
+  return new_alpha;
+}
+
+bool choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs){
   nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps);
-  ntype proba_ratio=probability_density(new_alpha, gamma, u, T)/probability_density(alpha, gamma, u, T);
+  ntype proba_ratio=probability_density(new_alpha, gamma, mcs)/probability_density(alpha, gamma, mcs);
   if(proba_ratio>1){
     alpha=new_alpha;
     fails=0;
@@ -66,14 +85,13 @@ bool choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, const nvector& u, b
   }
   return false;
 }
-void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, const nvector& u, bool coprophagy, const MonteCarloSolver& mcs){
+void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
   bool stop=false;
-  ntype T=mcs.T;
   unsigned int steps=0;
   unsigned int fails=0;
   bool changed=false;
   while(!stop){
-    changed=choose_next_alpha(alpha, gamma, u, coprophagy, T, steps, fails);
+    changed=choose_next_alpha(alpha, gamma, coprophagy, steps, fails, mcs);
     if(changed){
       fails=0;
     }else{
@@ -82,32 +100,41 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, const nvector& u, 
 
     /* when the move has not been accepted too many times, increase temp */
     if(fails>=mcs.max_fails){
-      T*=2;
-      std::cout << "\t Multiplied the temperature by two" << std::endl;
+      mcs.T/=mcs.annealing_const;
+    }
+
+    /* at a given frequency, the temperature is reduced */
+    if(steps%mcs.annealing_freq==0){
+      mcs.T*=mcs.annealing_const;
     }
 
     if(steps>=mcs.max_steps){
       stop=true;
     }
     if(steps%mcs.display_stride==0){
-      std::cout << "\t Step " << steps <<", quadratic form=" << quadratic_form(alpha,gamma,u) ;
-      std::cout << " nestedness=" << nestedness(alpha);
+      std::cout << "\t Step " << steps;
+      std::cout << ", T=" << mcs.T;
+      std::cout <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
+      std::cout << ", nestedness=" << nestedness(alpha);
+      std::cout << ", connectance=" << connectance(alpha);
       std::cout << std::endl;
     }
     steps+=1;
   }
   return;
 }
-nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma){
+nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool allowed_coprophagy){
   nmatrix alpha(gamma[0].size(),nvector(gamma.size(), 0));
   std::uniform_real_distribution<ntype> real_distrib(0., 1.);
-  for(size_t mu=0; mu < alpha.size(); ++mu){
-    for(size_t i=0; i < alpha[mu].size();++i){
-      if(real_distrib(random_engine)<connectance_in){
-        alpha[mu][i]=1;
+  do{
+    for(size_t mu=0; mu < alpha.size(); ++mu){
+      for(size_t i=0; i < alpha[mu].size();++i){
+        if(real_distrib(random_engine)<connectance_in){
+          alpha[mu][i]=1;
+        }
       }
     }
-  }
+  }while(not(allowed_coprophagy) && is_there_coprophagy(alpha, gamma));
   std::cout << "Created initial alpha guess with nestedness " << nestedness(alpha) << std::endl;
   return alpha;
 }
@@ -163,7 +190,6 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   std::uniform_int_distribution<size_t> zero_els_indices(0, zero_els.size()-1);
   std::uniform_int_distribution<size_t> one_els_indices(0, one_els.size()-1);
 
-  /* /!\ potential line at fault */
   size_t zero_index=zero_els[zero_els_indices(random_engine)];
   size_t one_index=one_els[one_els_indices(random_engine)];
 
@@ -255,4 +281,10 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   }
 
   return;
+}
+
+
+ntype quadratic_form_low_intra_resource_interaction(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  Metaparameters* m = (Metaparameters*)(params);
+  return m->quadratic_form_low_intra_resource_interaction(alpha, gamma);
 }

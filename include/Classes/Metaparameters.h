@@ -20,6 +20,7 @@ struct Metaparameters{
   taumode tau_mode;
   alphamode alpha_mode;
   std::string foodmatrixpath;
+  std::string syntrophy_matrix_path;
   unsigned int verbose;
   bool energy_constraint;
   bool budget_constraint;
@@ -53,6 +54,8 @@ struct Metaparameters{
 
   /* returns the maximum feasible gamma0 taking into account the other metaparameters */
   ntype feasible_gamma0_max(ntype gamma0_accuracy=1e-7)const;
+
+  ntype quadratic_form_low_intra_resource_interaction(const nmatrix&, const nmatrix&) const;
 
 };
 
