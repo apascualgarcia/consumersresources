@@ -1,0 +1,167 @@
+\documentclass[12pt, titlepage]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+
+\begin{document}
+	\section{Definition}
+	We will consider a fully connected food network, that means the food matrix $f$ is given by :
+	\begin{equation}
+	f_{i\nu} = 1 \ \forall \ i, \nu.
+	\end{equation}
+	\section{Spectrum}
+	We here study the spectrum of the jacobian of the fully connected system.
+	\subsection{Full system}
+	The jacobian $J_F$ of the fully connected network is given by Eq.\eqref{eq : definition of jacobian alternative}.
+
+	\subsection{Standard deviation expansion}
+	We write every matrix of the problem in a convenient way \cite{barbier_cavity_2017},  \ie a general matrix $A$ is written as a sum of an average matrix + standard deviation :
+	 \begin{equation}
+	 A_{i\nu} = \av{A} + \sigma_A \tilde{a}_{i\nu}, \label{eq : separation matrix average standard dev}
+	 \end{equation}
+	 where
+	 \begin{equation}
+	 \av{A}\equiv \frac{1}{N_R N_S} \sum_{i\nu} A_{i\nu} \text{ and } \sigma_A^2 \equiv \av{A_{i\nu}^2}-\av{A}^2.
+	 \end{equation}
+	 It is easy to prove that
+	 \begin{equation}
+	 \av{\tilde{a}_{i\nu}} = 0 \text{ and } \av{\tilde{a}_{i\nu}^2} = 1.
+	 \end{equation}
+	 The general idea is to use this expansion to get equations where the variance of each matrix is clearly highlighted. We will then proceed to an expansion in small variance, since the variance of the interaction matrix drive the strength of the interactions \cite{barbier_cavity_2017},\textbf{add other ref}.
+	 \subsection{Rewriting the system - the introduction of metaparameters}
+	 Explain why we can parametrise the system this way (i.e. don't need m and d).
+
+
+	 We use the general idea of Eq.\eqref{eq : separation matrix average standard dev} to change the parameters that describe the model. We define :
+	 \begin{empheq}{align}
+	 l_\nu & \defined l_0 + \sigma_l \tilde{l}_\nu \\
+	 R^*_\nu & \defined R_0 + \sigma_R \tilde{r}_\nu \\
+	 S^*_i & \defined S_0 + \sigma_S \tilde{s}_i \\
+	 \gamma_{i\nu} & \defined \gamma_0 + \sigma_\gamma  \tilde{g}_{i\nu} \\
+	 \alpha_{\nu i} & \defined \alpha_0 + \sigma_\alpha \tilde{\alpha}_{\nu i} \\
+	 \sigma_{i\nu } & \defined \sigma_0 + \sigma_\sigma \tilde{\sigma}_{i\nu}
+	 \end{empheq}
+	 Explain properly metaparameters (like, define them and the variances).
+	 This allows us to rewrite the equations of evolution (do it) and the jacobian at equilibrium \eqref{eq : jacobian at equilibrium}. Indeed,
+	 \begin{empheq}[left=\empheqlbrace]{align}
+	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 + N_S \alpha_0 S_0 + \sigma_l \tilde{l}_\mu + \sigma_\alpha S_0 \sum_j \tilde{\alpha}_{\mu j} + \sigma_\alpha \sigma_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j}{R_0 + \sigma_R \tilde{r}_\mu} \\
+	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 + \alpha_0 + \sigma_\gamma R_0 \tilde{\gamma}_{j\mu} + \sigma_R \gamma_0 \tilde{r}_\mu + \sigma_\alpha \tilde{\alpha}_{\mu j} + \sigma_\gamma \sigma_R \tilde{\gamma}_{j\mu} \tilde{r}_\mu \\
+	 \sigma_{i\nu}\gamma_{i\nu}S^*_i &= \sigma_0 \gamma_0 S_0 + \sigma_\sigma \gamma_0 S_0 \tilde{\sigma}_{i\nu} + \sigma_{\gamma} \sigma_0 S_0 \tilde{\gamma}_{i\nu}+\sigma_S \sigma_0 \gamma_0 \tilde{s}_i + \sigma_\sigma \sigma_\gamma S_0 \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu} \nonumber \\
+	  & \ \ \ + \sigma_\sigma \sigma_S \gamma_0 \tilde{\sigma}_{i\nu} \tilde{s}_i + \sigma_\gamma \sigma_S \sigma_0 \tilde{\gamma}_{i\nu}\tilde{s}_i + \sigma_{\sigma} \sigma_{\gamma} \sigma_{S} \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu}\tilde{s}_i
+	 \end{empheq}
+	 It's easier to work with relative standard deviations, \ie we rewrite for all parameters :
+	 \begin{equation}
+	 \sigma_P \equiv \epsilon_P \av{P}, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
+	 \end{equation}
+	 The previous relations then become :
+	 \begin{empheq}[left=\empheqlbrace]{align}
+	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 \left(1+\epsilon_l \tilde{l}_\mu\right)+ \alpha_0 S_0 \left( N_S +\epsilon_\alpha \sum_j \tilde{\alpha}_{\mu j} + \epsilon_\alpha \epsilon_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j \right) }{R_0 \left(1+\epsilon_R\tilde{r}_\mu\right)} \\
+	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 \left(1+\epsilon_\gamma \tilde{\gamma}_{j\mu} + \epsilon_R  \tilde{r}_\mu + \epsilon_\gamma \epsilon_R  \tilde{\gamma}_{j\mu} \tilde{r}_\mu\right) + \alpha_0 \left(1+\epsilon_\alpha \tilde{\alpha}_{\mu j}  \right) \\
+	 \sigma_{i\nu}\gamma_{i\nu}S^*_i &= \sigma_0 \gamma_0 S_0 \left( 1 + \epsilon_\sigma \tilde{\sigma}_{i\nu} + \epsilon_{\gamma}  \tilde{\gamma}_{i\nu}+\epsilon_S  \tilde{s}_i + \epsilon_\sigma \epsilon_\gamma  \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu}  +\epsilon_\sigma \epsilon_S  \tilde{\sigma}_{i\nu} \tilde{s}_i  \right. \nonumber \\
+	  & \ \ \  \left. + \epsilon_\gamma \epsilon_S  \tilde{\gamma}_{i\nu}\tilde{s}_i+ \epsilon_{\sigma} \epsilon_{\gamma} \epsilon_{S}  \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu}\tilde{s}_i \right)
+	 \end{empheq}
+
+
+	 \subsubsection{Standard deviation expansion at first order}
+	 The idea is to limit our study in a so called \textit{small relative standard deviation regime}. This means we assume :
+	 \begin{equation}
+	 \epsilon_P \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
+	 \end{equation}
+	 The previous equations can be rewritten as :
+	 \begin{empheq}[left=\empheqlbrace]{align}
+	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0+N_S\alpha_0 S_0}{R_0} - \epsilon_R \frac{l_0+N_S\alpha_0 S_0}{R_0} \tilde{r}_\mu + \epsilon_l \frac{l_0}{R_0} \tilde{l}_\mu + \epsilon_\alpha \frac{\alpha_0 S_0}{R_0} \sum_j \tilde{\alpha}_{\mu j} \\
+	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &=  -\gamma_0 R_0 + \alpha_0 - \epsilon_\gamma \gamma_0 R_0 \tilde{\gamma}_{j \mu} - \epsilon_R \gamma_0 R_0 \tilde{r}_\mu +\epsilon_\alpha \alpha_0 \tilde{\alpha}_{\mu j}\\
+	 \sigma_{i\nu}\gamma_{i\nu}S^*_i &=\sigma_0 \gamma_0 S_0 \left( 1 + \epsilon_\sigma \tilde{\sigma}_{i\nu} + \epsilon_{\gamma}  \tilde{\gamma}_{i\nu}+\epsilon_S  \tilde{s}_i \right)
+	 \end{empheq}
+	 where we neglect all terms of order $\bigO(\epsilon^2)$.
+	 We now assume furthermore that the relative standard deviations of every parameter in the model more or less have the same value which again is assumed small, \ie we set :
+	 \begin{equation}
+	 \epsilon_P \approx \epsilon \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
+	 \end{equation}
+	 This allows us to rewrite the jacobian at equilibrium as :
+	 \begin{equation}
+	 J^* = J_0 + \epsilon \tilde{J},
+	 \end{equation}
+	 with
+	 \begin{equation}
+	 J_0 = \begin{pmatrix}
+	 -\Delta_0 & \Gamma_0  \\
+	 B_0 & 0
+	 \end{pmatrix}
+	 \end{equation}
+	 where
+	 \begin{empheq}{align}
+	 (\Delta_0)_{\mu \nu} &\defined \Delta_0 \delta_{\mu \nu } = \frac{l_0 + N_S \alpha_0 S_0}{R_0} \delta_{\mu \nu} \\
+	 (\Gamma_0)_{\mu i} & \defined \Gamma_0 = -\gamma_0 R_0 + \alpha_0 \\
+	 (\Beta_0)_{i \nu} & \defined \Beta_0 = \sigma_0 \gamma_0 S_0
+	 \end{empheq}
+	 and
+	 \begin{equation}
+	 \tilde{J} = \begin{pmatrix}
+	 \tilde{\Delta} & \tilde{\Gamma} \\
+	 \tilde{\Beta} & 0
+	 \end{pmatrix}
+	 \end{equation}
+	 with
+	 \begin{empheq}{align}
+	 \tilde{\Delta}_{\mu \nu} & \defined \left(-\Delta_0 \tilde{r}_\mu + \frac{l_0}{R_0}\tilde{l}_\mu+ \frac{\alpha_0 S_0}{R_0} \sum_j \tilde{\alpha}_{\mu j}\right)\delta_{\mu \nu} \\
+	 \tilde{\Gamma}_{\mu i} & \defined \alpha_0 \tilde{\alpha}_{\mu i} - \gamma_0 R_0 \left(\tilde{\gamma}_{i\mu}+\tilde{r}_\mu\right) \\
+	 \tilde{B}_{i \mu} & \defined B_0 \left(\tilde{\sigma}_{i\mu}+\tilde{\gamma}_{i\mu}+\tilde{s}_i\right)
+	 \end{empheq}
+	Using Jacobi's formula \cite{magnus_matrix_2019}, the equation $\det\left(J^*-\lambda\right)=0$ can be rewritten as :
+	\begin{equation}
+	\boxed{
+	\det(J_0-\lambda + \epsilon J^*)=\det(J_0-\lambda)+\epsilon \ \trace{\text{adj}(J_0-\lambda)\tilde{J}}=0.
+	}\label{eq : determinant variance first order}
+	\end{equation}
+	where $\text{adj}\left(\dots\right)$ is the adjugate operator (\ie which yields the transpose of the cofactor matrix). This equation is a complicated polynomial of degree $N_R+N_S$. As of now it does not seem to have an easily computable solution for $\epsilon > 0$. An explicit solution can however be computed when $\epsilon = 0$.
+
+	\paragraph{Zero variance case}
+	When $\epsilon=0$, Eq.\eqref{eq : determinant variance first order} becomes:
+	\begin{equation}
+	\det(J_0-\lambda)=\det\begin{pmatrix}
+	-\Delta_0-\lambda & \Gamma_0 \\
+	B_0 & -\lambda
+	\end{pmatrix}
+	=
+	0
+	\end{equation}
+	If we assume that $\lambda\neq 0$, using a reasoning similar to Section \ref{section : non marginal equilibria} we can write the previous equation as:
+	\begin{equation}
+	\det\left(\lambda^2+\Delta_0 \lambda - \Gamma_0 \Beta_0 \right)=0 \label{eq : determinant no variance}
+	\end{equation}
+	Component-wise, we have :
+	\begin{equation}
+	\left(\lambda^2+\Delta_0 \lambda - \Gamma_0 \Beta_0 \right)_{\mu\nu} = \left(\lambda^2+\Delta_0 \lambda\right)\delta_{\mu \nu} - \Gamma_0\Beta_0.
+	\end{equation}
+	Using Eq.\eqref{eq : formula special determinant}, the non-zero solutions of Eq.\eqref{eq : determinant no variance} are immediately found:
+	\begin{equation}
+	\left(\lambda+\Delta_0\right)^{N_R-1}\left(\lambda^2+\Delta_0 \lambda -N_R \Gamma_0 \Beta_0\right)=0.
+	\end{equation}
+	That equation gives us $N_R-1+2=N_R+1$ non-zero eigenvalues, which means that there are $N_S-1$ zero eigenvalues. The two eigenvalues different from $-\Delta_0$ or $0$ are the roots of the second degree polynomial:
+	\begin{equation}
+	\lambda^2 + \Delta_0 \lambda- N_R \Gamma_0 \Beta_0 =0.
+	\end{equation}
+	In the end, the spectrum is given by:
+	\begin{itemize}
+	\item if $\Gamma_0 < -\frac{\Delta_0^2}{4 N_R \Beta_0}$ :
+	\begin{equation}
+	\sigma(J_0)= \left\{0, \dots, 0, -\Delta_0, \dots, -\Delta_0, -\frac{\Delta_0}{2} \left(1\pm i \sqrt{-\left(1+\frac{4N_R\Gamma_0\Beta_0}{\Delta_0^2}\right)}\right)\right\}
+	\end{equation}
+	\item if $\Gamma_0 = -\frac{\Delta_0^2}{4 N_R \Beta_0}$ :
+	\begin{equation}
+	\sigma(J_0)= \left\{0, \dots, 0, -\Delta_0, \dots, -\Delta_0, -\frac{\Delta_0}{2}, -\frac{\Delta_0}{2}\right\}
+	\end{equation}
+	\item if $\Gamma_0 > -\frac{\Delta_0^2}{4 N_R \Beta_0}$ :
+	\begin{equation}
+	\sigma(J_0)= \left\{0, \dots, 0, -\Delta_0, \dots, -\Delta_0, -\frac{\Delta_0}{2} \left(1\pm \sqrt{1+\frac{4N_R\Gamma_0\Beta_0}{\Delta_0^2}}\right)\right\}
+	\end{equation}
+	\end{itemize}
+	It then becomes clear that the system is dynamically unstable if and only if $\frac{4N_R\Gamma_0 \Beta_0}{\Delta_0^2} > 0 $. Because $N_R, \Beta_0 > 0$, we get the condition:
+	\begin{equation}
+	\boxed{
+	\text{The non-variance system is dynamically unstable} \iff \Gamma_0 > 0.
+	}
+	\end{equation}
+
+
+\end{document}

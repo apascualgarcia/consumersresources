@@ -1,0 +1,37 @@
+\documentclass[12pt, titlepage]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+
+\begin{document}
+
+We want to be able to build feasible models numerically, \ie we would like to generate a set of constant numbers $\{
+l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}, \tau_{j\nu}\}$ such that the equilibria equations Eqs.\eqref{eq : equilibrium resources and species} are fulfilled.
+
+
+\subsection{Algorithmic procedure}
+We hereby detail the procedure used to numerically build feasible systems. It goes like this:
+\begin{enumerate}
+  \item We first draw randomly $R^*_\nu$
+  and $S^*_i$ as a uniform distribution of mean equal to the corresponding metaparameter, \ie :
+  \begin{equation}
+    \sum_\nu R^*_\nu = N_R R_0 \text{ and } \sum_i S^*_i = N_S S_0.
+  \end{equation}
+  \item The efficiency matrix $\sigma_{i\nu}$ is then drawn similarly, on a uniform distribution such that $\sigma_0$ is the average of the matrix :
+  \begin{equation}
+    \sum_{i,\nu} \sigma_{i\nu} = N_S N_R \sigma_0.
+  \end{equation}
+  \item We build gamma using the desired \textit{food matrix} $F$. $F$ is a binary matrix given by the user (in the \code{configuration.in} file) and is defined as the adjacency matrix of the consumption network (\ie it tells which species eats which resource). We then build $\gamma$ with the same network structure as $F$ (\ie both matrices have the same zero elements). The consumption rates are then randomly drawn from a uniform distribution and $\gamma$ is rescaled such that $\gamma_0$ represents the average consumption rate of the system :
+  \begin{equation}
+    \sum_{i,\nu} \gamma_{i\nu} = N_S N_R \gamma_0.
+  \end{equation}
+  \item We then need to build $\alpha_{\nu i}$. This is the tricky part of the algorithm because there are constraints on $\alpha$, for instance energy conservation/dissipation Eq.\eqref{eq : dissipation constraint}. The general strategy is to assume that the metaparameters are chosen in a way that those constraints will practically always be satisfied (see above). We can then build $\alpha$ from a random uniform distribution such that:
+  \begin{equation}
+    \sum_{i,\nu} \alpha_{\nu i} = N_S N_R \alpha_0.
+  \end{equation}
+  If for some reason the algorithm fails to build a feasible system this way after a given number of attempts, the $\alpha_{\nu i}$ are drawn by the algorithm and the initial $\alpha_0$ is rescaled accordingly.
+  \item We build $\tau_{\nu i}$. It usually is equal to $\alpha_{\nu i}$ or 0.
+  \item With all of these parameters drawn, we can solve Eq.\eqref{eq : equilibrium species} for the species death rate $d_i$ (with the caveat that $d_i > 0$, this is one of the constraints on $\tau$ and hence $\alpha$).
+  \item Finally, we solve Eq.\eqref{eq : equilibrium resources} for $l_\nu$ and $m_\nu$ imposing the constraint $l_\nu, m_\nu > 0$. In practice this means one of them is drawn randomly (in the code, $l_\nu$ comes from an exponential distribution) with constraints (in the code the minimum value of $l_\nu$) such that both $l_\nu$ and $m_\nu$ are positive.
+\end{enumerate}
+
+\end{document}
