@@ -5,7 +5,7 @@ from os.path import isfile, join
 matrix_folder="optimal_matrices/consumption/Nr25_Nc25"
 matrices=[f for f in listdir(matrix_folder) if isfile(join(matrix_folder, f))]
 
-write_file="matrix_list/full_rank_opt_mat_NR25_NS25.in"
+write_file="matrix_list/full_rank_opt_consumption_mat_NR25_NS25.in"
 f = open(write_file, 'w+')
 for mat in matrices:
     if(mat[0:3]=='Ran'):

@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
     /* set alpha0 to its maximal possible value */
     metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
 
-    bool coprophagy=false;
+    bool allow_coprophagy=false;
 
     for(size_t i=0; i < matrices_list.size();++i){
       metaparams.foodmatrixpath=matrices_list[i];
@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 
       std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix ... " << std::endl;
       mcsolv.T=T0;
-      foodmatrix optimal_alpha=optimal_syntrophy_from_consumption(gamma,coprophagy, mcsolv);
+      foodmatrix optimal_alpha=optimal_syntrophy_from_consumption(gamma, allow_coprophagy, mcsolv);
       display_food_matrix(myfile, optimal_alpha);
       std::cout << "An optimal syntrophy matrix was found and saved in " << metaparams.save_path << std::endl;
 

@@ -11,7 +11,7 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
     }
   }
   ntype connectance_in=connectance(unit_gamma);
-  nmatrix alpha = create_alpha(connectance_in, unit_gamma);
+  nmatrix alpha = create_alpha(connectance_in, unit_gamma, coprophagy);
   apply_MC_algorithm(alpha, unit_gamma, coprophagy, mcs);
   return alpha;
 }
@@ -48,7 +48,7 @@ nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool cop
   //return flip_one_element(alpha, gamma, coprophagy);
 }
 
-nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy_allowed){
+nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowed_coprophagy){
   unsigned int row_index, col_index;
   nmatrix new_alpha;
 
@@ -63,7 +63,7 @@ nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool coprop
 
     new_alpha[row_index][col_index]=1-alpha[row_index][col_index];
 
-  }while(not(coprophagy_allowed) && is_there_coprophagy(new_alpha, gamma));
+  }while(not(allowed_coprophagy) && is_there_coprophagy(new_alpha, gamma));
 
   return new_alpha;
 }
@@ -123,16 +123,18 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
   }
   return;
 }
-nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma){
+nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool allowed_coprophagy){
   nmatrix alpha(gamma[0].size(),nvector(gamma.size(), 0));
   std::uniform_real_distribution<ntype> real_distrib(0., 1.);
-  for(size_t mu=0; mu < alpha.size(); ++mu){
-    for(size_t i=0; i < alpha[mu].size();++i){
-      if(real_distrib(random_engine)<connectance_in){
-        alpha[mu][i]=1;
+  do{
+    for(size_t mu=0; mu < alpha.size(); ++mu){
+      for(size_t i=0; i < alpha[mu].size();++i){
+        if(real_distrib(random_engine)<connectance_in){
+          alpha[mu][i]=1;
+        }
       }
     }
-  }
+  }while(not(allowed_coprophagy) && is_there_coprophagy(alpha, gamma));
   std::cout << "Created initial alpha guess with nestedness " << nestedness(alpha) << std::endl;
   return alpha;
 }

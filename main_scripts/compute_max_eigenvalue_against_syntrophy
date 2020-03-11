@@ -22,7 +22,7 @@ do
     FIRST_COMMAND="build/compute_largest_eigenvalue_at_equilibrium config/configuration.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} ${ADDITIONAL_MODIF}"
     FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
 
-    SECOND_COMMAND="python3 data_analysis/plot_max_eigenvalue_varying_alpha0.py data_output/${CURRENT_NAME}"
+    SECOND_COMMAND="python3 data_analysis/plot_max_eigenvalue_varying_alpha0.py data_output/${CURRENT_NAME} data_output/max_dynamical_stability_${matl}_${a}_${OPTIMAL_MATRIX_FOLDER}.out"
 
     COMMAND_NAME="${FIRST_COMMAND} && ${SECOND_COMMAND}"
 
