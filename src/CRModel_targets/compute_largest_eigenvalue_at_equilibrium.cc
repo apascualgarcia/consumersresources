@@ -20,6 +20,8 @@ int main(int argc, char * argv[]){
         std::cout << "\t and syntrophy matrix " << metaparams.syntrophy_matrix_path << std::endl;
       }
 
+      myfile << metaparams.foodmatrixpath << " ";
+
       ntype max_alpha0 = metaparams.feasible_alpha_max(1e-6);
       nvector alpha_range = linear_interval(0., max_alpha0, Npoints);
       for(size_t j=0; j < Npoints; ++j){
