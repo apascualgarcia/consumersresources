@@ -648,17 +648,17 @@ systemstability CRModel::assess_dynamical_stability() const{
 
   if(max_real_eigval > EIGENSOLVER_PRECISION){
     if(this->metaparameters->verbose>1){
-      std::cout << "\t The system is unstable" << std::endl;
+      std::cout << "\t The system is dynamically unstable" << std::endl;
     }
     return systemstability(unstable);
   }else if(abs(max_real_eigval) <= EIGENSOLVER_PRECISION){
     if(this->metaparameters->verbose>1){
-      std::cout << "\t The system is marginally stable" << std::endl;
+      std::cout << "\t The system is dynamically marginally stable" << std::endl;
     }
     return systemstability(marginal);
   }else{
     if(this->metaparameters->verbose>1){
-      std::cout << "\t The system is stable" << std::endl;
+      std::cout << "\t The system is dynamically stable" << std::endl;
     }
     return systemstability(stable);
   }

@@ -2,11 +2,11 @@
 
 ## METAPARAMS_LIST and MATRIX_LIST are the list of metaparameters and matrices
 ## whose critical delta we want to find. They MUST be in the config folder
-METAPARAMS_LIST="list_of_config_files_comparison"
-MATRIX_LIST="matrix_list_NR25_NS25"
+METAPARAMS_LIST="list_of_config_structural_stability"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 CORES=$1
 COMMAND="build/compute_critical_Delta_matrices"
-OUTPUT_NAME="critical_delta"
-ADDITIONAL_MODIF="S0=0.1 gamma0=0.5"
+OUTPUT_NAME="critical_delta_mincommona0_LRI_syntrophy_mat"
+ADDITIONAL_MODIF=""
 
 python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND $OUTPUT_NAME $ADDITIONAL_MODIF

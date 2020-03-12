@@ -12,6 +12,8 @@ output_name = sys.argv[5]
 if(len(sys.argv)>6):
     additional_metaparams = ' '.join(sys.argv[6:])
     output_name = output_name+'_'+'_'.join(sys.argv[6:])
+else:
+    additional_metaparams=''
 
 with open('./config/' + config_file + '.in') as f:
     mylist = f.read().splitlines()

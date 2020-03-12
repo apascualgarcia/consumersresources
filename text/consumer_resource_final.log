@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  10 MAR 2020 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  12 MAR 2020 11:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1581,7 +1581,7 @@ input line 27.
 [25
 
 ]) (./numerical_analysis_dynamical_stability.tex [26]
-<figures/eigenvalues_Nest015_Conn01808_sigma_uniform.pdf, id=629, 462.52798pt x
+<figures/eigenvalues_Nest015_Conn01808_sigma_uniform.pdf, id=631, 462.52798pt x
  346.89601pt>
 File: figures/eigenvalues_Nest015_Conn01808_sigma_uniform.pdf Graphic file (typ
 e pdf)
@@ -1590,7 +1590,7 @@ Package pdftex.def Info: figures/eigenvalues_Nest015_Conn01808_sigma_uniform.pd
 f used on input line 45.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-<figures/eigenvalues_Nest015_Conn01808_sigma_spread.pdf, id=630, 462.52798pt x 
+<figures/eigenvalues_Nest015_Conn01808_sigma_spread.pdf, id=632, 462.52798pt x 
 346.89601pt>
 File: figures/eigenvalues_Nest015_Conn01808_sigma_spread.pdf Graphic file (type
  pdf)
@@ -1600,7 +1600,7 @@ Package pdftex.def Info: figures/eigenvalues_Nest015_Conn01808_sigma_spread.pdf
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Typical_time_evolution/Typical_time_evolution_resources_species_high
-_threshold.pdf, id=631, 462.52798pt x 346.89601pt>
+_threshold.pdf, id=633, 462.52798pt x 346.89601pt>
 File: ./figures/Typical_time_evolution/Typical_time_evolution_resources_species
 _high_threshold.pdf Graphic file (type pdf)
 
@@ -1611,7 +1611,7 @@ n_resources_species_high_threshold.pdf used on input line 54.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <figures/Typical_time_evolution/Typical_time_evolution_log_derivative_high_thre
-shold.pdf, id=632, 462.52798pt x 346.89601pt>
+shold.pdf, id=634, 462.52798pt x 346.89601pt>
 File: figures/Typical_time_evolution/Typical_time_evolution_log_derivative_high
 _threshold.pdf Graphic file (type pdf)
 
@@ -1626,7 +1626,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 <./figures/Typical_time_evolution/Typical_time_evolution_resources_species_low_
-threshold.pdf, id=633, 462.52798pt x 346.89601pt>
+threshold.pdf, id=635, 462.52798pt x 346.89601pt>
 File: ./figures/Typical_time_evolution/Typical_time_evolution_resources_species
 _low_threshold.pdf Graphic file (type pdf)
 
@@ -1637,7 +1637,7 @@ n_resources_species_low_threshold.pdf used on input line 61.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <figures/Typical_time_evolution/Typical_time_evolution_log_derivative_low_thres
-hold.pdf, id=634, 462.52798pt x 346.89601pt>
+hold.pdf, id=636, 462.52798pt x 346.89601pt>
 File: figures/Typical_time_evolution/Typical_time_evolution_log_derivative_low_
 threshold.pdf Graphic file (type pdf)
 
@@ -1651,7 +1651,7 @@ log_derivative_low_threshold.pdf used on input line 63.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-<figures/alpha0_probability_of_feasability.pdf, id=635, 462.52798pt x 346.89601
+<figures/alpha0_probability_of_feasability.pdf, id=637, 462.52798pt x 346.89601
 pt>
 File: figures/alpha0_probability_of_feasability.pdf Graphic file (type pdf)
  <use figures/alpha0_probability_of_feasability.pdf>
@@ -1721,9 +1721,9 @@ Package logreq Info: Writing requests to 'consumer_resource_final.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 39.
  ) 
 Here is how much of TeX's memory you used:
- 18022 strings out of 493013
- 295575 string characters out of 6133344
- 763538 words of memory out of 5000000
+ 18023 strings out of 493013
+ 295590 string characters out of 6133344
+ 763568 words of memory out of 5000000
  20906 multiletter control sequences out of 15000+600000
  99503 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1764,10 +1764,10 @@ l/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb></usr/lo
 cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 
-Output written on consumer_resource_final.pdf (36 pages, 12604918 bytes).
+Output written on consumer_resource_final.pdf (36 pages, 12605535 bytes).
 PDF statistics:
- 1006 PDF objects out of 1200 (max. 8388607)
- 894 compressed objects within 9 object streams
- 305 named destinations out of 1000 (max. 500000)
+ 1008 PDF objects out of 1200 (max. 8388607)
+ 896 compressed objects within 9 object streams
+ 306 named destinations out of 1000 (max. 500000)
  316 words of extra memory for PDF output out of 10000 (max. 10000000)
 
