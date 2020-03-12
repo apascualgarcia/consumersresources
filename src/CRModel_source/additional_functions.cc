@@ -157,17 +157,22 @@ ntype det(const nmatrix& m){
   }
   return ntype(mat.determinant());
 }
-ntype connectance(const nmatrix& m){
-  ntype connectance=0.;
-  unsigned int rows=m.size(), cols=m[0].size();
-  for(size_t i=0; i < rows; ++i){
-    for(size_t j=0; j < rows; ++j){
-      if(m[i][j]*m[i][j]>0.){
-        connectance+=1.;
+
+unsigned int number_of_links(const nmatrix & mat){
+  unsigned int links=0;
+  for(size_t i=0; i < mat.size(); ++i){
+    for(size_t j=0; j < mat[i].size(); ++j){
+      if(mat[i][j]*mat[i][j]>0.){
+        links+=1;
       }
     }
   }
-  connectance/=(rows*cols);
+  return links;
+}
+
+ntype connectance(const nmatrix& m){
+  unsigned int rows=m.size(), cols=m[0].size();
+  ntype connectance=ntype(number_of_links(m))/ntype(rows*cols);
   return connectance;
 }
 ntype nestedness(const nmatrix& mat){

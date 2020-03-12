@@ -19,15 +19,15 @@ int main(int argc, char* argv[]){
     /* set alpha0 to its maximal possible value */
     metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
 
-    bool allow_coprophagy=false;
+    bool allow_coprophagy=true;
 
     for(size_t i=0; i < matrices_list.size();++i){
       metaparams.foodmatrixpath=matrices_list[i];
       metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath);
       foodmatrix gamma=load_food_matrix(metaparams);
       std::ofstream myfile=open_external_file_truncate(metaparams.save_path+"_other");
-
-      std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix ... " << std::endl;
+      std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix for ";
+      std::cout << metaparams.foodmatrixpath << std::endl;
       mcsolv.T=T0;
       foodmatrix optimal_alpha=optimal_syntrophy_from_consumption(gamma, allow_coprophagy, mcsolv);
       display_food_matrix(myfile, optimal_alpha);
