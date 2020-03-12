@@ -6,7 +6,6 @@ int main(int argc, char* argv[]){
   try{
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices_list=load_food_matrix_list(metaparams.foodmatrixpath);
-    std::cout<< matrices_list << std::endl;
     MonteCarloSolver mcsolv;
     ntype T0=10.;
     mcsolv.max_steps=1000000;
@@ -25,7 +24,6 @@ int main(int argc, char* argv[]){
     for(size_t i=0; i < matrices_list.size();++i){
       metaparams.foodmatrixpath=matrices_list[i];
       metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath);
-      std::cout << metaparams.foodmatrixpath << std::endl;
       foodmatrix gamma=load_food_matrix(metaparams);
       std::ofstream myfile=open_external_file_truncate(metaparams.save_path+"_other");
 
