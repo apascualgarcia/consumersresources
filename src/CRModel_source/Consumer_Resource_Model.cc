@@ -821,6 +821,39 @@ nctype CRModel::largest_eigenvalue_at_equilibrium() const{
   return eigvals[eigvals.size()-1];
 }
 
+ntype CRModel::critical_radius() const{
+  nmatrix Gamma=this->get_Gamma_matrix();
+  nmatrix Beta=this->get_Beta_matrix();
+
+  ntype max_Gamma=0.;
+  ntype max_Beta=0.;
+
+  for(size_t i=0; i < this->metaparams->NS; ++i){
+    ntype local_Beta=0.;
+    for(size_t nu=0; nu < this->metaparams->NR; ++nu){
+      local_Beta+=abs(Beta[i][nu]);
+    }
+    if(local_Beta>max_Beta){
+      max_Beta=local_Beta;
+    }
+  }
+
+  for(size_t mu=0; mu < this->metaparams->NR; ++mu){
+    ntype local_Gamma=0.;
+    for(size_t j=0; j < this->metaparams->NS; ++j){
+      local_Gamma+=abs(Gamma[mu][j]);
+    }
+    if(local_Gamma>max_Gamma){
+      max_Gamma=local_Gamma;
+    }
+  }
+
+  if(max_Gamma > max_Beta){
+    return max_Gamma;
+  }
+  return max_Beta;
+
+}
 
 bool CRModel::is_in_low_intra_resource_interaction() const{
   nmatrix Gamma=this->get_Gamma_matrix();
@@ -834,7 +867,7 @@ bool CRModel::is_in_low_intra_resource_interaction() const{
         abs_outer_diag+=abs(GammaBeta[mu][nu]);
       }
     }
-    if(GammaBeta[mu][mu]>=-abs_outer_diag){
+    if(GammaBeta[mu][mu]>=-abs_outer_diag-pow(this->critical_radius(),2.)){
       if(this->metaparameters->verbose>1){
         std::cout << "\t The system is not in the low intra resources interaction regime." << std::endl;
       }

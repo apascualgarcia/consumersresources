@@ -157,6 +157,31 @@ R_C \defined \max\left\{\max_i\left\{\sum_\nu \abs{B_{i\nu}}\right\}, \max_\mu\l
 \end{equation}
 Intuitively, this means every eigenvalue must lie in a circle around the origin. The radius of this circle is given by whichever is larger between the largest column-sums of the $\Beta$ and $\Gamma$ matrices.
 
+\paragraph{Critical radius in terms of metaparameters}
+We would like to estimate $R_C$ in terms of metaparameters, so that we can choose metaparameters that will give rise to systems in an LRI regime, which we know will be dynamically stable.
+
+Using techniques very similar to previous computations :
+\begin{equation}
+\sum_j \abs{\Gamma_{\mu j}} = \sum_j \abs{\alpha_{\mu j}-\gamma_{j\mu}R^*_\mu} \approx \deg(\Gamma, \mu)\abs{\alpha_0 - \gamma_0 R_0}.
+\end{equation}
+The difficult part is estimating $\deg(\Gamma, \mu) \approx \deg(A-G^T, \mu)$. If we assume that $\deg(A, \mu)\approx \deg(G^T, \mu) \ll N_S$ then we may use the very loose approximation
+\begin{equation}
+\deg(A-G^T, \mu) \approx \deg(A, \mu)+\deg(G, \mu).
+\end{equation}
+In that regime we then have :
+\begin{equation}
+\max_\mu\left\{\sum_j \abs{\Gamma_{\mu j}}\right\} \approx \max_\mu\left\{\deg(A, \mu)+\deg(G, \mu)\right\} \abs{\alpha_0-\gamma_0 R_0}.
+\end{equation}
+Similarly we find
+\begin{equation}
+\sum_\nu \abs{B_{i\nu}} \approx \deg(G, i) \sigma_0 \gamma_0 S_0,
+\end{equation}
+such that $R_C$ can be estimated roughly as :
+\begin{equation}\boxed{
+R_C \approx \max\left\{ \max_i\left(\deg(G,i)\right) \sigma_0 \gamma_0 S_0, \max_\mu\left(\deg(A,\mu)+\deg(G,\mu)\right)\abs{\alpha_0-\gamma_0 R_0}\right\}
+}\label{eq : estimate R_C metaparameters}
+\end{equation}
+The main factor that will determine $R_C$ (and hence the largest magnitude of any eigenvalue) is the structure of the food consumption matrix.
 
 \subsubsection{Marginally stable equilbria}
 We now investigate when Eq.\eqref{eq : master equation eigenvalues jacobian} admits a zero $\lambda$ as a solution. If $\lambda=0$ is a solution then :
@@ -271,7 +296,7 @@ As explained before that means that if $\real{\lambda_1} > 0 $ in Eq.\eqref{eq :
 So we found that if a system has parameters that respect Eq.\eqref{eq : LRI regime} then it is dynamically stable. A naturally arising question is then to ask in what measure this is compatible with the feasability equations Eqs.\eqref{eq: feasability energy conservation}, \eqref{eq : feasability positivity d} and \eqref{eq : feasability positivity m}.
 
 \noindent Finding an approximation of the resource interaction matrix $(\Gamma\Beta)_{\mu \nu}$ using the metaparameters allows to find a necessary condition on the metaparameters. Indeed, using the metaparameters approximations Eq.\eqref{eq : metaparameters approximations}, we get:
-\begin{equation}
+\begin{equation}\label{eq : metaparam approximation GammaBeta}
 \left(\Gamma \Beta\right)_{\mu \nu}\approx \sigma_0 \gamma_0 S_0 \left(\alpha_0 \sum_i A_{\mu i}G_{i\nu}-\gamma_0 R_0 \sum_i G_{i\mu}G_{i\nu}\right)\defined \sigma_0 \gamma_0 S_0 \left(\alpha_0 O_{\mu \nu}-\gamma_0R_0 C_{\mu\nu}\right)
 \end{equation}
 where we defined the syntrophy overlap matrix $O_{\mu\nu}$ and the consumption overlap matrix $C_{\mu\nu}$ as :
@@ -301,6 +326,8 @@ Combining this with the approximation of $\Gamma\Beta$ above we get an approxima
 \alpha_0 O_{\mu \mu}-\gamma_0R_0 C_{\mu\mu} \lessapprox - \deg(\mu, O-C) \max_{\nu\neq\mu}\abs{\alpha_0 O_{\mu \nu}-\gamma_0 R_0 C_{\mu\nu}}-\frac{R_C^2}{\sigma_0\gamma_0 S_0} \ \forall \mu.
 }\label{eq : LRI metaparams sufficient}
 \end{equation}
+Since $R_C$ essentially scales with the largest degree of $G$ (see Eq.\ref{eq : estimate R_C metaparameters}) we only expect systems with a low connectance food consumption adjacency matrix to be able to achieve an LRI state.
+
 This allows to give a necessary condition on the magnitude of $\alpha_0$. Indeed, since the RHS of the previous equation is negative, we need:
 \begin{equation}
 \alpha_0 O_{\mu \mu}-\gamma_0 R_0 C_{\mu\mu} < 0 \ \forall \mu \implies {\alpha_0 \max_\mu \left\{ \frac{O_{\mu\mu}}{C_{\mu\mu}}  \right\} < \gamma_0 R_0 .} \label{eq : LRI necessary maximum alpha0}
@@ -313,6 +340,31 @@ Combining Eq.\eqref{eq : feasability positivity m} and \eqref{eq : LRI necessary
 \end{equation}
 Although that equation gives us a necessary condition, it is not sufficient. Eq.\eqref{eq : LRI metaparams sufficient}, on the other hand, is and provides an intuitive way of finding a syntrophy adjacency matrix $A_{\mu i}$ that would put a system with a given consumption adjacency $G_{\mu i}$ in an LRI regime. Section \ref{section : numerical analysis LRI MC solver} explains in details how this can be achieved numerically.
 
+\paragraph{LRI state for an identity food consumption matrix}
+We would like to know which systems can be in an LRI regime. Consider here the case of $N_R=N_S$ and every species consumes exactly one resource, to each its own. This means the food consumption adjacency matrix is precisely the identity matrix :
+\begin{equation}
+G_{i\mu} = \delta_{i\mu}.
+\end{equation}
+We can then compute explicitly the $\Gamma\Beta$ matrix :
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \left(\alpha_{\mu i}- \gamma_{i\mu}R_\mu^*\right) \sigma_{i\nu}\gamma_{i\nu}S_i^*=\delta_{\mu\nu}\left(\alpha_{\mu\nu}-\gamma_{\nu\mu}R_\mu^*\right)\sigma_{\mu\nu}\gamma_{\mu\nu}S_\nu^*.
+\end{equation}
+Also,
+\begin{equation}
+\sum_\nu \abs{B_{i\nu}} = \sum_\nu \sigma_{i\nu}\gamma_{i\nu} S_i^* = \sigma_{\nu\nu}\gamma_{\nu\nu}S^*_\nu,
+\end{equation}
+and
+\begin{equation}
+\sum_j \abs{\Gamma_{\mu j}}= \abs{\Gamma_{\mu\mu}}=\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu,
+\end{equation}
+such that
+\begin{equation}
+R_C = \max\left(\max_\mu\left\{\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}, \max_\mu \left\{\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}\right).
+\end{equation}
+Then we have clearly :
+\begin{empheq}{align}
+(\Gamma\Beta)_{\mu\mu} = \left(\alpha_{\mu\mu}-\gamma_{\mu\mu}R_\mu^*\right)\sigma_{\mu\mu}\gamma_{\mu\mu}S_\mu^*
+\end{empheq}
 \subsection{Effective system}
 Models which involve the dynamics of species only are in general better known than consumers-resources models [\textbf{insert reference}]. In particular, a huge body of literature exists on the study of Lotka-Volterra systems [\textbf{insert reference}]. We may profit from this knowledge by transforming the effect of the resources dynamics into an effective consumers-only system.
 
