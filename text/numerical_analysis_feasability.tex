@@ -11,27 +11,62 @@ l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}, \tau
 \subsection{Algorithmic procedure}
 We hereby detail the procedure used to numerically build feasible systems. It goes like this:
 \begin{enumerate}
-  \item We first draw randomly $R^*_\nu$
-  and $S^*_i$ as a uniform distribution of mean equal to the corresponding metaparameter, \ie :
+  \item We first draw randomly each $R^*_\nu$
+  and $S^*_i$ from a uniform distribution of mean equal to the corresponding metaparameter, \ie :
   \begin{equation}
-    \sum_\nu R^*_\nu = N_R R_0 \text{ and } \sum_i S^*_i = N_S S_0.
+     R^*_\nu = \mathcal{R} \ \forall \nu=1, \dots, N_R\text{ and }  S^*_i = \mathcal{S} \ \forall i=1, \dots, N_S,
   \end{equation}
-  \item The efficiency matrix $\sigma_{i\nu}$ is then drawn similarly, on a uniform distribution such that $\sigma_0$ is the average of the matrix :
+  where $\mathcal{R}$ and $\mathcal{S}$ are random variables coming from a distribution of mean equal to the corresponding metaparameter and relative standard deviation\footnote{By relative standard deviation, we mean the standard deviation measured in units of the average value.} $\epsilon$. In our simulations, we chose uniform distributions :
   \begin{equation}
-    \sum_{i,\nu} \sigma_{i\nu} = N_S N_R \sigma_0.
+  \mathcal{R} \sim \text{Unif}(R_0, \epsilon) \text{ and } \mathcal{S} \sim \text{Unif}(S_0, \epsilon).
   \end{equation}
-  \item We build gamma using the desired \textit{food matrix} $F$. $F$ is a binary matrix given by the user (in the \code{configuration.in} file) and is defined as the adjacency matrix of the consumption network (\ie it tells which species eats which resource). We then build $\gamma$ with the same network structure as $F$ (\ie both matrices have the same zero elements). The consumption rates are then randomly drawn from a uniform distribution and $\gamma$ is rescaled such that $\gamma_0$ represents the average consumption rate of the system :
+  \item The efficiency matrix $\sigma_{i\nu}$ is then drawn similarly, from a distribution with average $\sigma_0$. In order to simplify the problem\footnote{Indeed, a non uniform $\sigma_0$ introduces instability in the system}, we will take a zero-variance à la \citeauthor{butler_stability_2018} in \cite{butler_stability_2018}, \ie all species consume resources at the same global efficiency :
   \begin{equation}
-    \sum_{i,\nu} \gamma_{i\nu} = N_S N_R \gamma_0.
+    \sigma_{i\nu} = \sigma_0.
   \end{equation}
-  \item We then need to build $\alpha_{\nu i}$. This is the tricky part of the algorithm because there are constraints on $\alpha$, for instance energy conservation/dissipation Eq.\eqref{eq : dissipation constraint}. The general strategy is to assume that the metaparameters are chosen in a way that those constraints will practically always be satisfied (see above). We can then build $\alpha$ from a random uniform distribution such that:
+  \item We build the consumption matrix $\gamma_{i\nu}$. Its adjacency matrix $G$ is loaded through a user-provided file.
+  %$G$ is a binary matrix given by the user (in the \code{configuration.in} file) and is defined as the adjacency matrix of the consumption network (\ie it tells which species eats which resource). We then build $\gamma$ with the same network structure as $F$ (\ie both matrices have the same zero elements).
+  While $G$ gives the structure of $\gamma$, \ie if a given $\gamma_{i\nu}$ is zero or not, the actual values of $\gamma_{i\nu}$ need then to be determined. They are drawn from a uniform distribution of mean $\gamma_0$ and relative standard deviation $\epsilon$:
   \begin{equation}
-    \sum_{i,\nu} \alpha_{\nu i} = N_S N_R \alpha_0.
+    \gamma_{i\nu} = \text{Unif}(\gamma_0, \epsilon) G_{i\nu}.
   \end{equation}
-  If for some reason the algorithm fails to build a feasible system this way after a given number of attempts, the $\alpha_{\nu i}$ are drawn by the algorithm and the initial $\alpha_0$ is rescaled accordingly.
-  \item We build $\tau_{\nu i}$. It usually is equal to $\alpha_{\nu i}$ or 0.
-  \item With all of these parameters drawn, we can solve Eq.\eqref{eq : equilibrium species} for the species death rate $d_i$ (with the caveat that $d_i > 0$, this is one of the constraints on $\tau$ and hence $\alpha$).
-  \item Finally, we solve Eq.\eqref{eq : equilibrium resources} for $l_\nu$ and $m_\nu$ imposing the constraint $l_\nu, m_\nu > 0$. In practice this means one of them is drawn randomly (in the code, $l_\nu$ comes from an exponential distribution) with constraints (in the code the minimum value of $l_\nu$) such that both $l_\nu$ and $m_\nu$ are positive.
+  \item We draw the resources external feeding rates, similarly to the other parameters :
+  \begin{equation}
+  l_\mu = \text{Unif}(l_0, \epsilon) \ \forall \mu=1, \dots, N_R.
+  \end{equation}
+  \item The last free parameter is the syntrophy matrix $\alpha_{\nu i}$, the $d_i$ and $l_\mu$ are determined through the equations of evolution at equilibrium. This is the tricky part of the algorithm because $\alpha$ has to follow three constraints, namely energy conservation/dissipation Eq.\eqref{eq : dissipation constraint} and positiveness of $d_i$ and $l_\mu$ [\textbf{insert reference to equation}]. The general strategy is to choose the metaparameters in a way that these constraints should \textit{almost always} be satisfied, \ie we pick metaparameters that follow the feasibility constraint Eq.\eqref{eq : overall feasibility constraint metaparameters}. The adjacency matrix $A$ of $\alpha$ needs then to be specified. At the moment, it can be chosen in three different ways : fully connected, or in a way that no resource eaten by a given species can be released by that same species (\ie $G_{i\mu}>0 \iff A_{\mu i}=0$) or by a user provided matrix. After the adjacency matrix is loaded, we can build $\alpha$ from a uniform distribution of mean $\alpha_0$ and relative standard deviation $\epsilon$:
+  \begin{equation}
+    \alpha_{\nu i} = \text{Unif}(\alpha_0, \epsilon) A_{\nu i} .
+  \end{equation}
+  %\item We build $\tau_{\nu i}$. It usually is equal to $\alpha_{\nu i}$ or 0.
+  \item With all of these parameters drawn, we can solve Eq.\eqref{eq : equilibrium species} for the species death rate $d_i$.
+  \item We solve Eq.\eqref{eq : equilibrium resources} for $m_\nu$. All the parameters of the model are now fully determined.
+  \item We check if the constraints Eq.\textbf{(insert reference)} on the parameters are fulfilled. If they are not, we go back to step 1. Otherwise, we can exist the algorithm, a feasible system has been built.
 \end{enumerate}
+
+\subsection{The feasibility volume}
+The algorithmic procedure above explains how feasible systems can be built. However, it implies that we first found a combination of metaparameters that will most of the time lead to the realisation of feasible systems when they are taken as an input of the algorithm.
+
+Overall we have six metaparameters that we can play with : $\gamma_0$, $\alpha_0$, $l_0$, $\sigma_0$, $S_0$ and $R_0$. However, following the analysis of \cite{barbier_cavity_2017}, we notice that our system \eqref{eq : differential eq for resources and species} is arbitrary on some level. Indeed we have a ``scale freedom'', that means we decide in which set of units we work. There are two physical quantities at stake here : biomass and time, and we may choose, however we want it, a specific set of units describing both of them.
+
+We will measure biomass in units of the average resource abundance at equilibrium\footnote{Note that this is not a completely innocent choice. Indeed we will see later that the matrix $\alpha_{\nu i}-\gamma_{i \nu} R^*_\nu$ is a crucial quantity here. Setting $\av{R^*}=1$ allows us to simply study the impact of $\gamma$ against $\alpha$ instead of the more complicated $\gamma R^*$ versus $\alpha$.}, that means :
+\begin{equation}
+ \av{R_\mu} = R_0 = 1.
+\end{equation}
+Similarly, we will measure time such that the average external resource uptake rate is one, that is :
+\begin{equation}
+\av{l_\mu} = l_0 = 1.
+\end{equation}
+After this manipulation, our number of metaparameters is reduced from six to four : only $\gamma_0$, $S_0$, $\alpha_0$ and $\sigma_0$ remain.
+
+For the sake of simplicity, we will keep the same $\sigma_0$ throughout our whole study. We take a value close to the efficiency of real microbial systems [\textbf{insert ref}], that is $\sigma_0 =0.3$.
+
+Overall, we need to choose the last three remaining metaparameters: $\alpha_0$, $\gamma_0$ and $S_0$. What Eq.\eqref{eq : overall feasability constraint metaparameters} tells us is that as soon if we choose $\gamma_0$ and $S_0$, we will get a feasability range for $\alpha_0$.
+We will then choose $\gamma_0$ and $S_0$ such that they lead to feasible systems for every consumption matrix considered here \textbf{when there is no syntrophy}, \ie $\alpha_0=0$. We will then study the impact of varying $\alpha_0$ at those values of $\gamma_0$ and $S_0$.
+
+Formally, we can define for a consumption adjacency matrix $G$ the volume of the metaparameters space $\mathcal{V}^G_x$ that will lead to a ratio $x$ of feasible systems \ie :
+\begin{equation}
+V^G_x \defined 
+\end{equation}
 
 \end{document}

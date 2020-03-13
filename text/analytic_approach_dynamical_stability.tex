@@ -340,31 +340,32 @@ Combining Eq.\eqref{eq : feasability positivity m} and \eqref{eq : LRI necessary
 \end{equation}
 Although that equation gives us a necessary condition, it is not sufficient. Eq.\eqref{eq : LRI metaparams sufficient}, on the other hand, is and provides an intuitive way of finding a syntrophy adjacency matrix $A_{\mu i}$ that would put a system with a given consumption adjacency $G_{\mu i}$ in an LRI regime. Section \ref{section : numerical analysis LRI MC solver} explains in details how this can be achieved numerically.
 
-\paragraph{LRI state for an identity food consumption matrix}
-We would like to know which systems can be in an LRI regime. Consider here the case of $N_R=N_S$ and every species consumes exactly one resource, to each its own. This means the food consumption adjacency matrix is precisely the identity matrix :
-\begin{equation}
-G_{i\mu} = \delta_{i\mu}.
-\end{equation}
-We can then compute explicitly the $\Gamma\Beta$ matrix :
-\begin{equation}
-\left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \left(\alpha_{\mu i}- \gamma_{i\mu}R_\mu^*\right) \sigma_{i\nu}\gamma_{i\nu}S_i^*=\delta_{\mu\nu}\left(\alpha_{\mu\nu}-\gamma_{\nu\mu}R_\mu^*\right)\sigma_{\mu\nu}\gamma_{\mu\nu}S_\nu^*.
-\end{equation}
-Also,
-\begin{equation}
-\sum_\nu \abs{B_{i\nu}} = \sum_\nu \sigma_{i\nu}\gamma_{i\nu} S_i^* = \sigma_{\nu\nu}\gamma_{\nu\nu}S^*_\nu,
-\end{equation}
-and
-\begin{equation}
-\sum_j \abs{\Gamma_{\mu j}}= \abs{\Gamma_{\mu\mu}}=\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu,
-\end{equation}
-such that
-\begin{equation}
-R_C = \max\left(\max_\mu\left\{\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}, \max_\mu \left\{\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}\right).
-\end{equation}
-Then we have clearly :
-\begin{empheq}{align}
-(\Gamma\Beta)_{\mu\mu} = \left(\alpha_{\mu\mu}-\gamma_{\mu\mu}R_\mu^*\right)\sigma_{\mu\mu}\gamma_{\mu\mu}S_\mu^*
-\end{empheq}
+
+% \paragraph{LRI state for an identity food consumption matrix}
+% We would like to know which systems can be in an LRI regime. Consider here the case of $N_R=N_S$ and every species consumes exactly one resource, to each its own. This means the food consumption adjacency matrix is precisely the identity matrix :
+% \begin{equation}
+% G_{i\mu} = \delta_{i\mu}.
+% \end{equation}
+% We can then compute explicitly the $\Gamma\Beta$ matrix :
+% \begin{equation}
+% \left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \left(\alpha_{\mu i}- \gamma_{i\mu}R_\mu^*\right) \sigma_{i\nu}\gamma_{i\nu}S_i^*=\delta_{\mu\nu}\left(\alpha_{\mu\nu}-\gamma_{\nu\mu}R_\mu^*\right)\sigma_{\mu\nu}\gamma_{\mu\nu}S_\nu^*.
+% \end{equation}
+% Also,
+% \begin{equation}
+% \sum_\nu \abs{B_{i\nu}} = \sum_\nu \sigma_{i\nu}\gamma_{i\nu} S_i^* = \sigma_{\nu\nu}\gamma_{\nu\nu}S^*_\nu,
+% \end{equation}
+% and
+% \begin{equation}
+% \sum_j \abs{\Gamma_{\mu j}}= \abs{\Gamma_{\mu\mu}}=\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu,
+% \end{equation}
+% such that
+% \begin{equation}
+% R_C = \max\left(\max_\mu\left\{\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}, \max_\mu \left\{\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}\right).
+% \end{equation}
+% Then we have clearly :
+% \begin{empheq}{align}
+% (\Gamma\Beta)_{\mu\mu} = \left(\alpha_{\mu\mu}-\gamma_{\mu\mu}R_\mu^*\right)\sigma_{\mu\mu}\gamma_{\mu\mu}S_\mu^*
+% \end{empheq}
 \subsection{Effective system}
 Models which involve the dynamics of species only are in general better known than consumers-resources models [\textbf{insert reference}]. In particular, a huge body of literature exists on the study of Lotka-Volterra systems [\textbf{insert reference}]. We may profit from this knowledge by transforming the effect of the resources dynamics into an effective consumers-only system.
 
@@ -461,18 +462,6 @@ We see that we without surprise we find again the $\Beta, \Gamma $ and $\Delta$ 
 This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.
 
 
-\subsection{Scaling the problem}
-Following the analysis of \cite{barbier_cavity_2017}, we notice that the system \eqref{eq : differential eq for resources and species} is arbitrary on some level. The first step is choosing a scale for the system, that means we decide in which set of units we work. There are two physical quantities at stake here : biomass and time, and we are free to choose a specific set of units describing both of them.
-
-We will measure biomass in units of the average resource abundance at equilibrium\footnote{Note that this is not a completely innocent choice. Indeed we will see later that the matrix $\alpha_{\nu i}-\gamma_{i \nu} R^*_\nu$ is a crucial quantity here. Setting $\av{R^*}=1$ allows us to simply study the impact of $\gamma$ against $\alpha$ instead of the more complicated $\gamma R^*$ versus $\alpha$.}, that means :
-\begin{equation}
- \av{R_\mu} = R_0 = 1.
-\end{equation}
-Similarly, we will measure time such that the average external resource uptake rate is one, that is :
-\begin{equation}
-\av{l_\mu} = l_0 = 1.
-\end{equation}
-This will greatly simplify our lives, especially in the case of numerical calculations (see Chapter \ref{chapter : numerical analysis}), since the number of free parameters is reduced from five to three.
 
 \subsection{Identifying the order parameter}
 \subsubsection{Flux analysis}

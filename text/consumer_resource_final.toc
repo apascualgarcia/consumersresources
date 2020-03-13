@@ -56,47 +56,45 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Feasability of the low intra resources interaction regime}{16}{section*.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{LRI state for an identity food consumption matrix}{17}{section*.22}
+\contentsline {subsection}{\numberline {2.2.4}Effective system}{17}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.4}Effective system}{18}{subsection.2.2.4}
+\contentsline {subsubsection}{Perturbation analysis}{18}{section*.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Perturbation analysis}{19}{section*.24}
+\contentsline {subsection}{\numberline {2.2.5}Identifying the order parameter}{20}{subsection.2.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.5}Scaling the problem}{20}{subsection.2.2.5}
+\contentsline {subsubsection}{Flux analysis}{20}{section*.23}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.6}Identifying the order parameter}{21}{subsection.2.2.6}
+\contentsline {section}{\numberline {2.3}Structural stability}{20}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Flux analysis}{21}{section*.25}
+\contentsline {chapter}{\numberline {3}Fully connected network}{21}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Structural stability}{21}{section.2.3}
+\contentsline {section}{\numberline {3.1}Definition}{21}{section.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Fully connected network}{22}{chapter.3}
+\contentsline {section}{\numberline {3.2}Spectrum}{21}{section.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Definition}{22}{section.3.1}
+\contentsline {subsection}{\numberline {3.2.1}Full system}{21}{subsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Spectrum}{22}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.2}Standard deviation expansion}{21}{subsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Full system}{22}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.3}Rewriting the system - the introduction of metaparameters}{22}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.2}Standard deviation expansion}{22}{subsection.3.2.2}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{22}{section*.27}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.3}Rewriting the system - the introduction of metaparameters}{23}{subsection.3.2.3}
+\contentsline {paragraph}{Zero variance case}{23}{section*.31}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Standard deviation expansion at first order}{23}{section*.29}
+\contentsline {chapter}{\numberline {4}Numerical analysis}{25}{chapter.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Zero variance case}{24}{section*.33}
+\contentsline {section}{\numberline {4.1}Feasability}{25}{section.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Numerical analysis}{26}{chapter.4}
+\contentsline {subsection}{\numberline {4.1.1}Algorithmic procedure}{25}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Feasability}{26}{section.4.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Algorithmic procedure}{26}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}The feasibility volume}{26}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Dynamical stability}{27}{section.4.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.1}LRI regime}{27}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.34}
+\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.32}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.2}The effect of sigma non uniform}{31}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 

@@ -34,7 +34,7 @@ ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nrun
   }
 
   if(metaparams.verbose > 1){
-    std::cout << "The probability of feasability for alpha0 = " << metaparams.alpha0 << " is " << proba << std::endl;
+    std::cout << "The probability of feasability for these metaparameters is " << proba << std::endl;
   }
   return proba;
 }

@@ -7,6 +7,6 @@ MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 CORES=$1
 COMMAND="build/compute_critical_Delta_matrices"
 OUTPUT_NAME="critical_delta_mincommona0_LRI_syntrophy_mat"
-ADDITIONAL_MODIF=""
+ADDITIONAL_MODIF="verbose-level=1"
 
 python3 additional_scripts/run_comparison_metaparams.py $METAPARAMS_LIST $MATRIX_LIST $CORES $COMMAND $OUTPUT_NAME $ADDITIONAL_MODIF
