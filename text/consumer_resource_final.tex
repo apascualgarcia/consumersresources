@@ -1,0 +1,39 @@
+\documentclass[12pt, titlepage]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+  \title{Consumer resources model}
+  \author{L\'eo Buchenel}
+  \maketitle
+  \tableofcontents
+  \chapter{Introduction}
+  \input{introduction}
+
+  \chapter{Analytical approach}\label{chapter : analytical approach}
+  \section{Feasability}
+  \input{analytic_approach_feasability}
+  \section{Dynamical stability}
+  \input{analytic_approach_dynamical_stability}
+  \section{Structural stability}
+  \input{analytic_approach_structural_stability}
+
+  \chapter{Fully connected network}\label{chapter : fully connected network}
+  \input{fully_connected_network}
+
+  \chapter{Numerical analysis}\label{chapter : numerical analysis}
+  \section{Feasability}
+  \input{numerical_analysis_feasability}
+  \section{Dynamical stability}
+  \input{numerical_analysis_dynamical_stability}
+  \section{Structural stability}
+  \input{numerical_analysis_structural_stability}
+
+%  \input{old_results}
+  \chapter{Appendices}
+  \section{Demonstrations}
+  \input{demonstrations}
+  \printbibliography
+\end{document}

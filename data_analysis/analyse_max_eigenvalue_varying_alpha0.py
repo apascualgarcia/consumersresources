@@ -58,8 +58,11 @@ for i in range(len(data)):
             string+=" is marginally stable"
     else:
         transition_observed.append(i)
-        linear_fit=np.polyfit(alpha0[i], max_l[i], 1)
-        max_dyn_stable_a0=-linear_fit[1]/linear_fit[0]
+        # gives the index of the last negative element
+        index=0
+        while(max_l[i][index]<0):
+            index+=1
+        max_dyn_stable_a0=0.5*(alpha0[i][index]+alpha0[i][index+1])
         file.write(str(max_dyn_stable_a0))
         string += ", maximally dynamically stable a0 is " + str(max_dyn_stable_a0)
     file.write(' '+str(alpha0[i,-1]))

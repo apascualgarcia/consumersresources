@@ -3,7 +3,7 @@ import numpy as np
 
 
 def separate_file(conf_file, CORES):
-    with open('config/' + conf_file + '.in') as f:
+    with open('matrix_list/' + conf_file + '.in') as f:
         mylist = f.read().splitlines()
     indices_tables = np.array_split(np.arange(0, len(mylist)), CORES)
     filenames = []

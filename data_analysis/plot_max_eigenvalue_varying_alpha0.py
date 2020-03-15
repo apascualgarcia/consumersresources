@@ -6,10 +6,9 @@ file_name = 'max_eigenvalues_variable_syntrophy_full_rank_opt_consumption_mat_NR
 matrices_folder = 'optimal_matrices/consumption/Nr25_Nc25'
 ZERO = 1e-15
 
-index_mat = 1
-
-
+index_mat = 20
 data_folder='data_output'
+save_folder='plots'
 
 
 file_to_load = data_folder+'/'+file_name
@@ -41,18 +40,30 @@ max_l = data[:, 5::2]
 
 
 color=[]
+stable=[]
+unstable=[]
+alpha0_u=[]
+alpha0_s=[]
 for i in range(len(alpha0[index_mat])):
     if max_l[index_mat][i] > 0:
-        color.append('red')
+        unstable.append(max_l[index_mat][i])
+        alpha0_u.append(alpha0[index_mat][i])
     else:
-        color.append('blue')
+        stable.append(-max_l[index_mat][i])
+        alpha0_s.append(alpha0[index_mat][i])
+
 
 
 fig1 = plt.figure(1)
 ax1 = fig1.add_subplot(111)
-ax1.plot(alpha0[index_mat], max_l[index_mat])
-ax1.set_yscale('symlog')
+ax1.set_yscale('log')
+ax1.plot(alpha0_u, unstable, c='red', label=r'$|\max(\lambda)|=\max(\lambda)$')
+ax1.plot(alpha0_s, stable, c='blue', label=r'$|\max(\lambda)|=-\max(\lambda)$')
+ax1.set_xlabel(r'$\alpha_0$')
+ax1.set_ylabel(r'$|\max(\lambda)|$')
+ax1.set_title(r'$N_R='+str(int(NR[index_mat]))+'\ N_S='+str(int(NS[index_mat]))+', \kappa='+str(connectance[index_mat])+', \eta='+str(nestedness[index_mat])+'$')
+ax1.legend()
 
-ax1.set_title('')
-
+fig1.tight_layout()
+plt.savefig(save_folder+'/typical_maximum_lambda_varying_alpha0.pdf')
 plt.show()

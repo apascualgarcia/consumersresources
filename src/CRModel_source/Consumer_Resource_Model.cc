@@ -648,17 +648,17 @@ systemstability CRModel::assess_dynamical_stability() const{
 
   if(max_real_eigval > EIGENSOLVER_PRECISION){
     if(this->metaparameters->verbose>1){
-      std::cout << "\t The system is unstable" << std::endl;
+      std::cout << "\t The system is dynamically unstable" << std::endl;
     }
     return systemstability(unstable);
   }else if(abs(max_real_eigval) <= EIGENSOLVER_PRECISION){
     if(this->metaparameters->verbose>1){
-      std::cout << "\t The system is marginally stable" << std::endl;
+      std::cout << "\t The system is dynamically marginally stable" << std::endl;
     }
     return systemstability(marginal);
   }else{
     if(this->metaparameters->verbose>1){
-      std::cout << "\t The system is stable" << std::endl;
+      std::cout << "\t The system is dynamically stable" << std::endl;
     }
     return systemstability(stable);
   }
@@ -821,8 +821,42 @@ nctype CRModel::largest_eigenvalue_at_equilibrium() const{
   return eigvals[eigvals.size()-1];
 }
 
+ntype CRModel::critical_radius() const{
+  nmatrix Gamma=this->get_Gamma_matrix();
+  nmatrix Beta=this->get_Beta_matrix();
 
-bool CRModel::is_in_low_intra_resource_interaction() const{
+  ntype max_Gamma=0.;
+  ntype max_Beta=0.;
+
+  for(size_t i=0; i < this->metaparameters->NS; ++i){
+    ntype local_Beta=0.;
+    for(size_t nu=0; nu < this->metaparameters->NR; ++nu){
+      local_Beta+=abs(Beta[i][nu]);
+    }
+    if(local_Beta>max_Beta){
+      max_Beta=local_Beta;
+    }
+  }
+
+  for(size_t mu=0; mu < this->metaparameters->NR; ++mu){
+    ntype local_Gamma=0.;
+    for(size_t j=0; j < this->metaparameters->NS; ++j){
+      local_Gamma+=abs(Gamma[mu][j]);
+    }
+    if(local_Gamma>max_Gamma){
+      max_Gamma=local_Gamma;
+    }
+  }
+
+  if(max_Gamma > max_Beta){
+    return max_Gamma;
+  }
+  return max_Beta;
+
+}
+
+
+bool CRModel::is_in_weak_LRI() const{
   nmatrix Gamma=this->get_Gamma_matrix();
   nmatrix Beta=this->get_Beta_matrix();
   nmatrix GammaBeta=Gamma*Beta;
@@ -836,13 +870,38 @@ bool CRModel::is_in_low_intra_resource_interaction() const{
     }
     if(GammaBeta[mu][mu]>=-abs_outer_diag){
       if(this->metaparameters->verbose>1){
-        std::cout << "\t The system is not in the low intra resources interaction regime." << std::endl;
+        std::cout << "\t The system is not in the weak LRI regime." << std::endl;
       }
       return false;
     }
   }
   if(this->metaparameters->verbose>1){
-    std::cout << "\t The system is in the low intra resources interaction regime." << std::endl;
+    std::cout << "\t The system is in the weak LRI regime." << std::endl;
+  }
+  return true;
+}
+
+bool CRModel::is_in_strong_LRI() const{
+  nmatrix Gamma=this->get_Gamma_matrix();
+  nmatrix Beta=this->get_Beta_matrix();
+  nmatrix GammaBeta=Gamma*Beta;
+
+  for(size_t mu=0; mu < GammaBeta.size(); ++mu){
+    ntype abs_outer_diag=0.;
+    for(size_t nu=0; nu < GammaBeta.size(); ++nu){
+      if(mu!=nu){
+        abs_outer_diag+=abs(GammaBeta[mu][nu]);
+      }
+    }
+    if(GammaBeta[mu][mu]>=-abs_outer_diag-pow(this->critical_radius(),2.)){
+      if(this->metaparameters->verbose>1){
+        std::cout << "\t The system is not in the strong LRI regime." << std::endl;
+      }
+      return false;
+    }
+  }
+  if(this->metaparameters->verbose>1){
+    std::cout << "\t The system is in the strong LRI regime." << std::endl;
   }
   return true;
 }

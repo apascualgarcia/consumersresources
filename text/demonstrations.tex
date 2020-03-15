@@ -1,0 +1,91 @@
+\documentclass[12pt]{report}
+\usepackage{consumer_resource_final}
+\begin{document}
+\subsection{Determinant computations}
+We want to knwo when the determinant of the following $N$-dimensional square matrix is zero:
+\begin{equation}
+A_N = \begin{pmatrix}
+a & b & b  \\
+b & \ddots & b  \\
+b & b & a
+\end{pmatrix}, \ie \ A_{ij} = b+(a-b)\delta_{ij}.
+\end{equation}
+The equation we want to solve is:
+\begin{equation}
+\det\left(A_N\right)=0. \label{app: eq : det A_N 0}
+\end{equation}
+Note that, using Gaussian elimination, Eq.\eqref{app: eq : det A_N 0} can be transformed in:
+\begin{equation}
+\det\begin{pmatrix}
+a & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}=0
+\end{equation}
+Using Laplace's expansion, this can be written as:
+\begin{equation}
+ a \det\begin{pmatrix}
+a-b & 0 & \dots & 0 \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}+(a-b)
+\det\begin{pmatrix}
+b & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}=0 \label{app : eq : laplace expansion}
+\end{equation}
+Since the first term of the previous equation is a lower triangular matrix, its determinant is easily found :
+\begin{equation}
+a \det\begin{pmatrix}
+a-b & 0 & \dots & 0 \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix} = a\left(a-b\right)^{n-1}.
+\end{equation}
+Finding an explicit equation for the left term is a bit more involving. Let us define the general $n$ square matrix $F_n(a,b)$ :
+\begin{equation}
+F_n(a,b) = \begin{pmatrix}
+b & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}.
+\end{equation}
+With a Laplace expansion one gets:
+\begin{equation}
+\det\left(F_n(a,b)\right)= b
+\det\begin{pmatrix}
+a-b & 0 & 0 \\
+b-a & \ddots & 0 \\
+0 & b-a & a-b
+\end{pmatrix}+(a-b)\det\begin{pmatrix}
+b & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}.
+\end{equation}
+This means :
+\begin{equation}
+\det(F_n(a,b))=b(a-b)^{n-1}+(a-b)\det(F_{n-1}(a,b)).
+\end{equation}
+It is easy to check that the solution to the previous equation is:
+\begin{equation}
+\det(F_n(a,b))=\left[(n-1)b+\det\left(F_1(a,b)\right)\right](a-b)^{n-1}.
+\end{equation}
+Since $\det\left(F_1(a,b)\right)=1$, we get:
+\begin{equation}
+\det\left(F_n(a,b)\right)=n(a-b)^{n-1}b
+\end{equation}
+Inserting this in Eq.\eqref{app : eq : laplace expansion} yields:
+\begin{equation}
+\boxed{
+\det(A_N)=0 \iff (a-b)^{N-1}\left[a+(N-1)b\right]=0.
+}\label{eq : formula special determinant}
+\end{equation}
+\end{document}

@@ -24,6 +24,10 @@ std::string optimal_alpha_matrix_path_from_syntrophy_folder(const Metaparameters
 ntype norm(const nvector&);
 ntype mean(const nmatrix &);
 ntype det(const nmatrix&);
+
+/* computes number of links in a matrix */
+unsigned int number_of_links(const nmatrix&);
+
 /* here we take connectance as the number of links divided by the number of total possible links */
 ntype connectance(const nmatrix&);
 /* here we take the nestedness as defined in Bastolla's 2013 paper */

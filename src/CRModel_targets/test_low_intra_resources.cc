@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
       CRModel model(metaparams);
       if(model.is_dynamically_stable()){
         step+=1;
-        if(model.is_in_low_intra_resource_interaction()){
+        if(model.is_in_weak_LRI()){
           proba_low_interaction+=1./Nsimuls;
         }
       }

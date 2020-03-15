@@ -115,7 +115,9 @@ public:
   systemstability assess_dynamical_stability() const;
 
   bool has_linearly_stable_eq() const;
-  bool is_in_low_intra_resource_interaction() const;
+  ntype critical_radius() const;
+  bool is_in_weak_LRI() const;
+  bool is_in_strong_LRI() const;
 
   nmatrix get_first_equilibrium() const;
 
