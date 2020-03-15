@@ -35,7 +35,13 @@ ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
+
 bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
+/* returns true if gamma has one row filled with zeros only */
+bool has_an_empty_row(const nmatrix& gamma);
+/* returns true if gamma has one column filled with zeros only */
+bool has_an_empty_column(const nmatrix& gamma);
+
 nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
 nmatrix operator*(const nmatrix&, const nmatrix&);

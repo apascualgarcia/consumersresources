@@ -613,6 +613,24 @@ bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
     }
   }
 
-
   return false;
+}
+
+bool has_an_empty_row(const nmatrix& gamma){
+  for(size_t i=0; i < gamma.size(); ++i){
+    bool row_is_empty=true;
+    for(size_t j=0; j < gamma[i].size() && row_is_empty ; ++j){
+      if(gamma[i][j]*gamma[i][j]>0){
+        row_is_empty=false;
+      }
+    }
+    if(row_is_empty){
+      return true;
+    }
+  }
+  return false;
+}
+
+bool has_an_empty_column(const nmatrix& gamma){
+  return has_an_empty_row(transpose(gamma));
 }

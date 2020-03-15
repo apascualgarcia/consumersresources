@@ -48,6 +48,57 @@ nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool cop
   //return flip_one_element(alpha, gamma, coprophagy);
 }
 
+/* creates an optimal consumption matrix with connectance ctarg  */
+nmatrix optimal_consumption_matrix(unsigned int NR, unsigned int NS, const ntype& ctarg, MonteCarloSolver& mcs){
+  nmatrix gamma = create_gamma(NR, NS, ctarg);
+  nmatrix dummy(NS, nvector(NR, 0.));
+  apply_MC_algorithm(gamma, dummy, true, mcs);
+  return gamma;
+}
+
+nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& ctarg){
+  nmatrix gamma(NS, nvector(NR,0.));
+  std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
+  std::cout << "Try to create gamma with connectance " << ctarg << std::endl;
+  /*  we fill gamma such that its connectance is ctarg while making sure that
+      every species eats something and every resource is eaten by one species */
+  unsigned int number_of_links = ctarg*NR*NS;
+  unsigned int diag_elements = std::min(NR, NS);
+
+  if(diag_elements > number_of_links){
+    throw error("The target connectance is too low.");
+  }
+
+  if(diag_elements==number_of_links){
+    if(has_an_empty_row(gamma)|| has_an_empty_column(gamma)){
+      throw error("Please increase connectance, filling up the diagonal took all available links.");
+    }
+  }
+
+  /* we fill up the diagonal elements first, in the case NR=NS this ensures that no column or row is empty */
+  for(size_t k=0; k < diag_elements; ++k){
+    gamma[k][k]=1;
+  }
+  
+  unsigned int to_fill = number_of_links-diag_elements;
+  ntype proba = ntype(to_fill/(NR*NS));
+
+  /* finally we fill the remaining links */
+  do{
+    for(size_t i=0; i < NS; ++i){
+      for(size_t mu=0; mu < NR ;++mu){
+        if(i!=mu){
+          gamma[i][mu]=0.;
+          if(unif_distrib(random_engine) < proba){
+            gamma[i][mu]=1.;
+          }
+        }
+      }
+    }
+
+  }while(has_an_empty_row(gamma)|| has_an_empty_column(gamma));
+  return gamma;
+}
 nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowed_coprophagy){
   unsigned int row_index, col_index;
   nmatrix new_alpha;
@@ -67,8 +118,7 @@ nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowe
 
   return new_alpha;
 }
-
-bool choose_next_alpha(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs){
+bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs){
   nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps);
   ntype proba_ratio=probability_density(new_alpha, gamma, mcs)/probability_density(alpha, gamma, mcs);
   if(proba_ratio>1){
@@ -90,8 +140,10 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
   unsigned int steps=0;
   unsigned int fails=0;
   bool changed=false;
+  bool reached_zero=false;
   while(!stop){
-    changed=choose_next_alpha(alpha, gamma, coprophagy, steps, fails, mcs);
+    changed=choose_next_matrix(alpha, gamma, coprophagy, steps, fails, mcs);
+    reached_zero=(mcs.cost_function(alpha,gamma, mcs.additional_params)<1e-15);
     if(changed){
       fails=0;
     }else{
@@ -111,12 +163,17 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
     if(steps>=mcs.max_steps){
       stop=true;
     }
-    if(steps%mcs.display_stride==0){
+    if(steps%mcs.display_stride==0 || reached_zero){
       std::cout << "\t Step " << steps;
       std::cout << ", T=" << mcs.T;
       std::cout <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
       std::cout << ", nestedness=" << nestedness(alpha);
       std::cout << ", connectance=" << connectance(alpha);
+      if(reached_zero){
+        std::cout << " -> reached zero on the cost function, ending the algorithm now." << std::endl;
+        std::cout << std::endl;
+        return;
+      }
       std::cout << std::endl;
     }
     steps+=1;
@@ -283,8 +340,11 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   return;
 }
 
-
 ntype quadratic_form_low_intra_resource_interaction(const nmatrix& alpha, const nmatrix& gamma, void* params){
   Metaparameters* m = (Metaparameters*)(params);
   return m->quadratic_form_low_intra_resource_interaction(alpha, gamma);
+}
+ntype quadratic_form_nestedness(const nmatrix& gamma, const nmatrix& dummy, void*params){
+  ntype* target = (ntype*)(params);
+  return abs(nestedness(gamma)-(*target));
 }
