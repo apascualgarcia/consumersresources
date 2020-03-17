@@ -1,19 +1,19 @@
 [0] Config.pm:354> INFO - This is Biber 2.7
-[1] Config.pm:357> INFO - Logfile is 'consumer_resource_final.blg'
-[128] biber-darwin:303> INFO - === Fri Mar 13, 2020, 15:36:22
-[155] Biber.pm:359> INFO - Reading 'consumer_resource_final.bcf'
-[327] Biber.pm:835> INFO - Found 11 citekeys in bib section 0
-[344] Biber.pm:3670> INFO - Processing section 0
-[367] Biber.pm:3840> INFO - Looking for bibtex format file 'sources.bib' for section 0
-[384] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
-[447] bibtex.pm:1292> INFO - Found BibTeX data source 'sources.bib'
-[502] Utils.pm:164> WARN - ISBN '978-3-319-03025-8 978-3-319-03026-5' in entry 'iannelli_introduction_2014' is invalid - run biber with '--validate_datamodel' for details.
-[521] Utils.pm:164> WARN - ISBN '978-1-119-54119-6 978-1-119-54116-5' in entry 'magnus_matrix_2019' is invalid - run biber with '--validate_datamodel' for details.
-[523] Utils.pm:164> WARN - ISBN '978-3-319-91085-7 978-3-319-91086-4' in entry 'gendreau_simulated_2019' is invalid - run biber with '--validate_datamodel' for details.
-[548] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[548] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[549] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'en-US'
-[549] Biber.pm:3505> INFO - No sort tailoring available for locale 'en-US'
-[561] bbl.pm:608> INFO - Writing 'consumer_resource_final.bbl' with encoding 'UTF-8'
-[565] bbl.pm:712> INFO - Output to consumer_resource_final.bbl
-[565] Biber.pm:109> INFO - WARNINGS: 3
+[0] Config.pm:357> INFO - Logfile is 'consumer_resource_final.blg'
+[50] biber-darwin:303> INFO - === Tue Mar 17, 2020, 17:50:37
+[90] Biber.pm:359> INFO - Reading 'consumer_resource_final.bcf'
+[254] Biber.pm:835> INFO - Found 14 citekeys in bib section 0
+[270] Biber.pm:3670> INFO - Processing section 0
+[287] Biber.pm:3840> INFO - Looking for bibtex format file 'sources.bib' for section 0
+[305] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[344] bibtex.pm:1292> INFO - Found BibTeX data source 'sources.bib'
+[392] Utils.pm:164> WARN - ISBN '978-3-319-03025-8 978-3-319-03026-5' in entry 'iannelli_introduction_2014' is invalid - run biber with '--validate_datamodel' for details.
+[409] Utils.pm:164> WARN - ISBN '978-1-119-54119-6 978-1-119-54116-5' in entry 'magnus_matrix_2019' is invalid - run biber with '--validate_datamodel' for details.
+[418] Utils.pm:164> WARN - ISBN '978-3-319-91085-7 978-3-319-91086-4' in entry 'gendreau_simulated_2019' is invalid - run biber with '--validate_datamodel' for details.
+[442] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[442] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[442] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'en-US'
+[442] Biber.pm:3505> INFO - No sort tailoring available for locale 'en-US'
+[453] bbl.pm:608> INFO - Writing 'consumer_resource_final.bbl' with encoding 'UTF-8'
+[457] bbl.pm:712> INFO - Output to consumer_resource_final.bbl
+[457] Biber.pm:109> INFO - WARNINGS: 3

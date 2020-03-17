@@ -318,6 +318,17 @@ INPUT fully_connected_network.tex
 INPUT fully_connected_network.tex
 INPUT numerical_analysis_feasability.tex
 INPUT numerical_analysis_feasability.tex
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm5.tfm
+INPUT ./figures/Results/typical_feasibility_volume.pdf
+INPUT ./figures/Results/typical_feasibility_volume.pdf
+INPUT ./figures/Results/typical_feasibility_volume.pdf
 INPUT numerical_analysis_dynamical_stability.tex
 INPUT numerical_analysis_dynamical_stability.tex
 INPUT figures/eigenvalues_Nest015_Conn01808_sigma_uniform.pdf
@@ -362,6 +373,7 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmbx12.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmex10.pfb

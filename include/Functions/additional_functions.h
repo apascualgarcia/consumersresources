@@ -28,6 +28,9 @@ ntype det(const nmatrix&);
 /* computes number of links in a matrix */
 unsigned int number_of_links(const nmatrix&);
 
+std::vector<unsigned int> row_degrees(const nmatrix& M);
+std::vector<unsigned int> columns_degrees(const nmatrix& M);
+
 /* here we take connectance as the number of links divided by the number of total possible links */
 ntype connectance(const nmatrix&);
 /* here we take the nestedness as defined in Bastolla's 2013 paper */
@@ -111,6 +114,16 @@ std::vector<size_t> sort_indices(const std::vector<T> &v) {
 
   return idx;
 }
+
+template<typename T>
+T minimum(const std::vector<T> &vec){
+  return *std::min_element(vec.begin(), vec.end());
+};
+
+template<typename T>
+T maximum(const std::vector<T> & vec){
+  return *std::max_element(vec.begin(), vec.end());
+};
 
 
 #endif

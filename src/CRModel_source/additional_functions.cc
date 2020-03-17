@@ -634,3 +634,21 @@ bool has_an_empty_row(const nmatrix& gamma){
 bool has_an_empty_column(const nmatrix& gamma){
   return has_an_empty_row(transpose(gamma));
 }
+
+std::vector<unsigned int> row_degrees(const nmatrix& M){
+  std::vector<unsigned int> degs;
+  for(size_t i=0; i < M.size(); ++i){
+    unsigned int local_deg=0;
+    for(size_t j=0; j < M[i].size();++j){
+      if(M[i][j]*M[i][j]>0.){
+        local_deg+=1;
+      }
+    }
+    degs.push_back(local_deg);
+  }
+  return degs;
+}
+
+std::vector<unsigned int> columns_degrees(const nmatrix& M){
+  return row_degrees(transpose(M));
+}

@@ -2139,8 +2139,12 @@
     <bcf:citekey order="15">magnus_matrix_2019</bcf:citekey>
     <bcf:citekey order="16">butler_stability_2018</bcf:citekey>
     <bcf:citekey order="17">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="18">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="19">gendreau_simulated_2019</bcf:citekey>
+    <bcf:citekey order="18">may_will_1972</bcf:citekey>
+    <bcf:citekey order="19">allesina_stability_2012</bcf:citekey>
+    <bcf:citekey order="19">allesina_predicting_2015</bcf:citekey>
+    <bcf:citekey order="19">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="20">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="21">gendreau_simulated_2019</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

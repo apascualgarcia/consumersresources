@@ -10,7 +10,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Metaparameters}{4}{section*.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Matrix properties}{5}{section*.5}
+\contentsline {subsubsection}{Matrix properties}{5}{section*.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Analytical approach}{7}{chapter.2}
 \defcounter {refsection}{0}\relax 
@@ -20,49 +20,49 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Feasability conditions}{7}{subsection.2.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Energy conservation/dissipation}{7}{section*.6}
+\contentsline {paragraph}{Energy conservation/dissipation}{7}{section*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Positivity of the parameters}{8}{section*.7}
+\contentsline {paragraph}{Positivity of the parameters}{8}{section*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Combining the feasability conditions}{8}{section*.8}
+\contentsline {subsubsection}{Combining the feasability conditions}{8}{section*.9}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Dynamical stability}{9}{section.2.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.1}Equilibria of the model and their stability}{9}{subsection.2.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Linear stability}{9}{section*.10}
+\contentsline {subsubsection}{Linear stability}{9}{section*.11}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Dynamical stability}{10}{section*.11}
+\contentsline {subsubsection}{Dynamical stability}{10}{section*.12}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Structural stability}{11}{section*.13}
+\contentsline {subsubsection}{Structural stability}{11}{section*.14}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.2}The quest for a full solution}{11}{subsection.2.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{The master equation for positive valued equilibria}{11}{section*.14}
+\contentsline {subsubsection}{The master equation for positive valued equilibria}{11}{section*.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Bounds on the eigenvalues}{12}{section*.15}
+\contentsline {subsubsection}{Bounds on the eigenvalues}{12}{section*.16}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Gerschgorin's circle theorem}{12}{section*.16}
+\contentsline {paragraph}{Gerschgorin's circle theorem}{12}{section*.17}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Critical radius in terms of metaparameters}{13}{section*.17}
+\contentsline {paragraph}{Critical radius in terms of metaparameters}{13}{section*.18}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Marginally stable equilbria}{14}{section*.18}
+\contentsline {subsubsection}{Marginally stable equilbria}{14}{section*.19}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Non marginal equilibria}{14}{section*.19}
+\contentsline {subsubsection}{Non marginal equilibria}{14}{section*.20}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Reductio ad absurdum}{15}{section*.20}
+\contentsline {subsubsection}{Reductio ad absurdum}{15}{section*.21}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.3}Low intra resources interaction (LRI) regime }{15}{subsection.2.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Feasability of the low intra resources interaction regime}{16}{section*.21}
+\contentsline {subsubsection}{Feasability of the low intra resources interaction regime}{16}{section*.22}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.4}Effective system}{17}{subsection.2.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Perturbation analysis}{18}{section*.22}
+\contentsline {subsubsection}{Perturbation analysis}{18}{section*.23}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.5}Identifying the order parameter}{20}{subsection.2.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Flux analysis}{20}{section*.23}
+\contentsline {subsubsection}{Flux analysis}{20}{section*.24}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Structural stability}{20}{section.2.3}
 \defcounter {refsection}{0}\relax 
@@ -78,9 +78,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.3}Rewriting the system - the introduction of metaparameters}{22}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Standard deviation expansion at first order}{22}{section*.27}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{22}{section*.28}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Zero variance case}{23}{section*.31}
+\contentsline {paragraph}{Zero variance case}{23}{section*.32}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}Numerical analysis}{25}{chapter.4}
 \defcounter {refsection}{0}\relax 
@@ -88,28 +88,30 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.1}Algorithmic procedure}{25}{subsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}The feasibility volume}{26}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.2}Basic concepts}{26}{subsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Dynamical stability}{27}{section.4.2}
+\contentsline {subsection}{\numberline {4.1.3}The feasibility volume}{28}{subsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}LRI regime}{27}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.2}Dynamical stability}{29}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.32}
+\contentsline {subsection}{\numberline {4.2.1}LRI regime}{29}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}The effect of sigma non uniform}{31}{subsection.4.2.2}
+\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{29}{section*.35}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}Time evolution}{31}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.2}The effect of sigma non uniform}{34}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}Allowed parameters : syntrophy range}{31}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.3}Time evolution}{34}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}Studying the impact of the food network structure}{31}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.4}Allowed parameters : syntrophy range}{34}{subsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}Studying the impact of syntrophy}{31}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.5}Studying the impact of the food network structure}{34}{subsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Structural stability}{32}{section.4.3}
+\contentsline {subsection}{\numberline {4.2.6}Studying the impact of syntrophy}{34}{subsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Appendices}{33}{chapter.5}
+\contentsline {section}{\numberline {4.3}Structural stability}{35}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Demonstrations}{33}{section.5.1}
+\contentsline {chapter}{\numberline {5}Appendices}{36}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Determinant computations}{33}{subsection.5.1.1}
+\contentsline {section}{\numberline {5.1}Demonstrations}{36}{section.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.1}Determinant computations}{36}{subsection.5.1.1}

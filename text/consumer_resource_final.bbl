@@ -507,6 +507,165 @@
       \endverb
       \keyw{Differential calculus,Econometrics,Matrices,Statistics}
     \endentry
+    \entry{may_will_1972}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7839dca46168bf1aadb43a80fbb62c92}{%
+           family={{MAY}},
+           familyi={M\bibinitperiod},
+           given={{ROBERT}\bibnamedelima M.},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{7839dca46168bf1aadb43a80fbb62c92}
+      \strng{fullhash}{7839dca46168bf1aadb43a80fbb62c92}
+      \strng{authornamehash}{7839dca46168bf1aadb43a80fbb62c92}
+      \strng{authorfullhash}{7839dca46168bf1aadb43a80fbb62c92}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Gardner and Ashby1 have suggested that large complex systems which are assembled (connected) at random may be expected to be stable up to a certain critical level of connectance, and then, as this increases, to suddenly become unstable. Their conclusions were based on the trend of computer studies of systems with 4, 7 and 10 variables.}
+      \field{day}{1}
+      \field{issn}{1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{8}
+      \field{number}{5364}
+      \field{shortjournal}{Nature}
+      \field{title}{Will a Large Complex System be Stable?}
+      \field{volume}{238}
+      \field{year}{1972}
+      \field{dateera}{ce}
+      \field{pages}{413\bibrangedash 414}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1038/238413a0
+      \endverb
+      \verb{file}
+      \verb Full Text:/Users/leobuchenelepfl/Zotero/storage/396KWD85/MAY - 1972 - Will a Large Complex System be Stable.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/238413a0
+      \endverb
+    \endentry
+    \entry{allesina_stability_2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
+           family={Allesina},
+           familyi={A\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Si},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{fullhash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{authornamehash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{authorfullhash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Forty years ago, Robert May questioned a central belief in ecology by proving that sufﬁciently large or complex ecological networks have probability of persisting close to zero. To prove this point, he analyzed large networks in which species interact at random. However, in natural systems pairs of species have well-deﬁned interactions (e.g., predator-prey, mutualistic or competitive). Here we extend May’s results to these relationships and ﬁnd remarkable differences between predator-prey interactions, which increase stability, and mutualistic and competitive, which are destabilizing. We provide analytic stability criteria for all cases. These results have broad applicability in ecology. For example, we show that, surprisingly, the probability of stability for predator-prey networks is decreased when we impose realistic food web structure or we introduce a large preponderance of weak interactions. Similarly, stability is negatively impacted by nestedness in bipartite mutualistic networks.}
+      \field{eprinttype}{arxiv}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{langid}{english}
+      \field{month}{3}
+      \field{number}{7388}
+      \field{shortjournal}{Nature}
+      \field{title}{Stability Criteria for Complex Ecosystems}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{483}
+      \field{year}{2012}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{205\bibrangedash 208}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1038/nature10832
+      \endverb
+      \verb{eprint}
+      \verb 1105.2071
+      \endverb
+      \verb{file}
+      \verb Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/IALU4JYE/Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1105.2071
+      \endverb
+      \keyw{Quantitative Biology - Populations and Evolution}
+    \endentry
+    \entry{allesina_predicting_2015}{article}{}
+      \name{author}{6}{}{%
+        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
+           family={Allesina},
+           familyi={A\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3064f9d6b3abcc38b08984f4eda68610}{%
+           family={Grilli},
+           familyi={G\bibinitperiod},
+           given={Jacopo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=95265fff5586e8e16d7ac99edc581f2e}{%
+           family={Barabás},
+           familyi={B\bibinitperiod},
+           given={György},
+           giveni={G\bibinitperiod}}}%
+        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Si},
+           giveni={S\bibinitperiod}}}%
+        {{hash=778769d404e18a06a71dac73dbb20edc}{%
+           family={Aljadeff},
+           familyi={A\bibinitperiod},
+           given={Johnatan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cc482a45ac9ec277907a2a62353259b3}{%
+           family={Maritan},
+           familyi={M\bibinitperiod},
+           given={Amos},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{227544e0c494d31321e8a5ac09a59016}
+      \strng{fullhash}{848a5cef939f17a93c604df5b757697f}
+      \strng{authornamehash}{227544e0c494d31321e8a5ac09a59016}
+      \strng{authorfullhash}{848a5cef939f17a93c604df5b757697f}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2041-1723}
+      \field{journaltitle}{Nature Communications}
+      \field{langid}{english}
+      \field{month}{11}
+      \field{number}{1}
+      \field{shortjournal}{Nat Commun}
+      \field{title}{Predicting the stability of large structured food webs}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{6}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{7842}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/ncomms8842
+      \endverb
+      \verb{file}
+      \verb Allesina et al. - 2015 - Predicting the stability of large structured food .pdf:/Users/leobuchenelepfl/Zotero/storage/U4STJYJ5/Allesina et al. - 2015 - Predicting the stability of large structured food .pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/ncomms8842
+      \endverb
+    \endentry
     \entry{gendreau_simulated_2019}{incollection}{}
       \name{author}{3}{}{%
         {{hash=724f19394ff905be4ed7b245765f1656}{%
@@ -549,8 +708,8 @@
       \strng{authorfullhash}{d0d6c52cffbe38f91adb7894454bf665}
       \strng{editornamehash}{428631794113b74d16ac1f3a6f241136}
       \strng{editorfullhash}{428631794113b74d16ac1f3a6f241136}
-      \field{sortinit}{1}
-      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{booktitle}{Handbook of Metaheuristics}

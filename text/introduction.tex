@@ -52,7 +52,8 @@ Studying the equilibria of our CRM will lead us to establish and study several r
 where $\mathcal{Q}$ is a random variable of mean $Q_0$ and standard deviation $\sigma_Q$. $Q_{i\mu}$ is a binary matrix that, if interpreted as an adjacency matrix, tells about the network structure of the quantity $q_{i\mu}$.
 
 \noindent We apply this way of thinking to the parameters of our problem, namely we can write :
-\begin{empheq}{align*}
+\begin{subequations}
+\begin{empheq}{align}
 l_\mu &= \mathcal{L} \\
 m_\mu &= \mathcal{M} \\
 \gamma_{i\mu} &= \mathcal{G} G_{i\mu} \\
@@ -63,10 +64,12 @@ d_i &= \mathcal{D} \\
 R^*_\mu &= \mathcal{R} \\
 S^*_i &= \mathcal{S}
 \end{empheq}
+\end{subequations}
 Note that we did not put any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero (in particular for $S^*$ and $R^*$, we require positive-valued equilibria \cite{butler_stability_2018}).
 
 In order to make computations analytically tractable, we will require a small standard deviation on the parameters involved in the problem. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$. While studying things analytically we will hence often come back to the following approximation:
-\begin{empheq}{align}\label{eq : metaparameters approximations}
+\begin{subequations}\label{eq : metaparameters approximations}
+\begin{empheq}{align}
 l_\mu &\approx l_0 \\
 m_\mu &\approx m_0 \\
 \gamma_{i\mu} &\approx\gamma_0 G_{i\mu} \\
@@ -77,9 +80,10 @@ d_i &\approx d_0 \\
 R^*_\mu &\approx R_0 \\
 S^*_i &\approx S_0
 \end{empheq}
+\end{subequations}
 This greatly reduces the number of parameters from $3N_R+2N_S+4N_RN_S$ (continous) to $9$ (continous) + $3N_RN_S$ (binary).
 
-We hence will work 
+Mathematically, we hence will mostly work in the 9-dimensional metaparameters space $\mathcal{M}$.
 
 \subsubsection{Matrix properties}
 Instead of looking at each entry of the binary matrices $G, A$ and $T$ individually, we will reduce even more the complexity of the problem by considering only some globally defined quantities of these matrices. For a matrix $M_{ij}$ the metrics interesting to us are most of all:
