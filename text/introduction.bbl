@@ -1,0 +1,297 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{none/global/}
+    \entry{pascual-garcia_mutualism_2017}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2eff1c0a6cc6cc7f56a551031dd93109}{%
+           family={Pascual-García},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Alberto},
+           giveni={A\bibinitperiod}}}%
+        {{hash=1dead4af4f1f332e182d428df19c7fd4}{%
+           family={Bastolla},
+           familyi={B\bibinitperiod},
+           given={Ugo},
+           giveni={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{429041643207998cd41b4976d516eb94}
+      \strng{fullhash}{429041643207998cd41b4976d516eb94}
+      \strng{authornamehash}{429041643207998cd41b4976d516eb94}
+      \strng{authorfullhash}{429041643207998cd41b4976d516eb94}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2041-1723}
+      \field{journaltitle}{Nature Communications}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{number}{1}
+      \field{shortjournal}{Nat Commun}
+      \field{title}{Mutualism supports biodiversity when the direct competition is weak}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{8}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{14326}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/ncomms14326
+      \endverb
+      \verb{file}
+      \verb Pascual-García and Bastolla - 2017 - Mutualism supports biodiversity when the direct co.pdf:/Users/leobuchenelepfl/Zotero/storage/NSSVWCSE/Pascual-García and Bastolla - 2017 - Mutualism supports biodiversity when the direct co.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/ncomms14326
+      \endverb
+    \endentry
+    \entry{butler_stability_2018}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2c1628e8bb6b0d834a75e543b6a3522f}{%
+           family={Butler},
+           familyi={B\bibinitperiod},
+           given={Stacey},
+           giveni={S\bibinitperiod}}}%
+        {{hash=aee56d172d9e69703a6d62e1296062ff}{%
+           family={O’Dwyer},
+           familyi={O\bibinitperiod},
+           given={James\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{25f5f646a41153be48d49e5e473ced6e}
+      \strng{fullhash}{25f5f646a41153be48d49e5e473ced6e}
+      \strng{authornamehash}{25f5f646a41153be48d49e5e473ced6e}
+      \strng{authorfullhash}{25f5f646a41153be48d49e5e473ced6e}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2041-1723}
+      \field{journaltitle}{Nature Communications}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{number}{1}
+      \field{shortjournal}{Nat Commun}
+      \field{title}{Stability criteria for complex microbial communities}
+      \field{urlday}{17}
+      \field{urlmonth}{2}
+      \field{urlyear}{2020}
+      \field{volume}{9}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{2970}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41467-018-05308-z
+      \endverb
+      \verb{file}
+      \verb Butler and O’Dwyer - 2018 - Stability criteria for complex microbial communiti.pdf:/Users/leobuchenelepfl/Zotero/storage/5F4KGCD8/Butler and O’Dwyer - 2018 - Stability criteria for complex microbial communiti.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/s41467-018-05308-z
+      \endverb
+    \endentry
+    \entry{iannelli_introduction_2014}{book}{}
+      \name{author}{2}{}{%
+        {{hash=32721d009eba394ac84b34b752e213e8}{%
+           family={Iannelli},
+           familyi={I\bibinitperiod},
+           given={Mimmo},
+           giveni={M\bibinitperiod}}}%
+        {{hash=94d2718b94056043eb3d656bd746336e}{%
+           family={Pugliese},
+           familyi={P\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{dc3023ddfd051d1d7ed704cc19391f51}
+      \strng{fullhash}{dc3023ddfd051d1d7ed704cc19391f51}
+      \strng{authornamehash}{dc3023ddfd051d1d7ed704cc19391f51}
+      \strng{authorfullhash}{dc3023ddfd051d1d7ed704cc19391f51}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-3-319-03025-8 978-3-319-03026-5}
+      \field{langid}{english}
+      \field{series}{{UNITEXT}}
+      \field{title}{An Introduction to Mathematical Population Dynamics}
+      \field{urlday}{10}
+      \field{urlmonth}{3}
+      \field{urlyear}{2020}
+      \field{volume}{79}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1007/978-3-319-03026-5
+      \endverb
+      \verb{file}
+      \verb Iannelli and Pugliese - 2014 - An Introduction to Mathematical Population Dynamic.pdf:/Users/leobuchenelepfl/Zotero/storage/PTLI72Z8/Iannelli and Pugliese - 2014 - An Introduction to Mathematical Population Dynamic.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/978-3-319-03026-5
+      \endverb
+    \endentry
+    \entry{bastolla_architecture_2009}{article}{}
+      \name{author}{6}{}{%
+        {{hash=1dead4af4f1f332e182d428df19c7fd4}{%
+           family={Bastolla},
+           familyi={B\bibinitperiod},
+           given={Ugo},
+           giveni={U\bibinitperiod}}}%
+        {{hash=30168ba8b9630697d83625cb9923df5b}{%
+           family={Fortuna},
+           familyi={F\bibinitperiod},
+           given={Miguel\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=2eff1c0a6cc6cc7f56a551031dd93109}{%
+           family={Pascual-García},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Alberto},
+           giveni={A\bibinitperiod}}}%
+        {{hash=61fee61e3f009c8cd4f3ec7c971ee7ed}{%
+           family={Ferrera},
+           familyi={F\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+        {{hash=29b20d5d77de0e14da1bd2840c5cbd50}{%
+           family={Luque},
+           familyi={L\bibinitperiod},
+           given={Bartolo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b71c47fff97792c37706210243e23ae5}{%
+           family={Bascompte},
+           familyi={B\bibinitperiod},
+           given={Jordi},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{75de2a38c3715e256f02efb65dfafb7a}
+      \strng{fullhash}{6dc008f65c0c21486b6076bcdc1b1437}
+      \strng{authornamehash}{75de2a38c3715e256f02efb65dfafb7a}
+      \strng{authorfullhash}{6dc008f65c0c21486b6076bcdc1b1437}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{langid}{english}
+      \field{month}{4}
+      \field{number}{7241}
+      \field{shortjournal}{Nature}
+      \field{title}{The architecture of mutualistic networks minimizes competition and increases biodiversity}
+      \field{urlday}{9}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{458}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1018\bibrangedash 1020}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1038/nature07950
+      \endverb
+      \verb{file}
+      \verb Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:/Users/leobuchenelepfl/Zotero/storage/V9IVBN69/Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:application/pdf;Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:/Users/leobuchenelepfl/Zotero/storage/BE73MJCT/Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/nature07950
+      \endverb
+    \endentry
+    \entry{jonhson_factors_2013}{article}{}
+      \name{author}{3}{}{%
+        {{hash=426786ea0d9c452ef0e341466922316c}{%
+           family={Jonhson},
+           familyi={J\bibinitperiod},
+           given={Samuel},
+           giveni={S\bibinitperiod}}}%
+        {{hash=744940a16bbc64acba923f2909ebb18f}{%
+           family={Domínguez-García},
+           familyi={D\bibinithyphendelim G\bibinitperiod},
+           given={Virginia},
+           giveni={V\bibinitperiod}}}%
+        {{hash=bcbcae8bfd1f424d51935bed00201785}{%
+           family={Muñoz},
+           familyi={M\bibinitperiod},
+           given={Miguel\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=fd7704b9919bacabcce647fd178fd1e6}{%
+           family={Moreno},
+           familyi={M\bibinitperiod},
+           given={Yamir},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{7992a837870655a1ea6b67f430b47df2}
+      \strng{fullhash}{7992a837870655a1ea6b67f430b47df2}
+      \strng{authornamehash}{7992a837870655a1ea6b67f430b47df2}
+      \strng{authorfullhash}{7992a837870655a1ea6b67f430b47df2}
+      \strng{editornamehash}{fd7704b9919bacabcce647fd178fd1e6}
+      \strng{editorfullhash}{fd7704b9919bacabcce647fd178fd1e6}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Understanding the causes and effects of network structural features is a key task in deciphering complex systems. In this context, the property of network nestedness has aroused a fair amount of interest as regards ecological networks. Indeed, Bastolla et al. introduced a simple measure of network nestedness which opened the door to analytical understanding, allowing them to conclude that biodiversity is strongly enhanced in highly nested mutualistic networks. Here, we suggest a slightly refined version of such a measure of nestedness and study how it is influenced by the most basic structural properties of networks, such as degree distribution and degree-degree correlations (i.e. assortativity). We find that most of the empirically found nestedness stems from heterogeneity in the degree distribution. Once such an influence has been discounted – as a second factor – we find that nestedness is strongly correlated with disassortativity and hence – as random networks have been recently found to be naturally disassortative – they also tend to be naturally nested just as the result of chance.}
+      \field{day}{19}
+      \field{issn}{1932-6203}
+      \field{journaltitle}{{PLoS} {ONE}}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{9}
+      \field{shortjournal}{{PLoS} {ONE}}
+      \field{title}{Factors Determining Nestedness in Complex Networks}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2020}
+      \field{volume}{8}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{e74025}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0074025
+      \endverb
+      \verb{file}
+      \verb Jonhson et al. - 2013 - Factors Determining Nestedness in Complex Networks.pdf:/Users/leobuchenelepfl/Zotero/storage/BNJ4V79A/Jonhson et al. - 2013 - Factors Determining Nestedness in Complex Networks.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://dx.plos.org/10.1371/journal.pone.0074025
+      \endverb
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

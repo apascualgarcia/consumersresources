@@ -5,10 +5,10 @@
 \begin{document}
 
 We want to be able to build feasible models numerically, \ie we would like to generate a set of constant numbers $\{
-l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}, \tau_{j\nu}\}$ such that the equilibria equations Eqs.\eqref{eq : equilibrium resources and species} are fulfilled.
+l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}\}$ such that the equilibria equations Eqs.\eqref{eq : equilibrium resources and species} are fulfilled.
 
 
-\subsection{Algorithmic procedure}
+\subsection{Algorithmic procedure}\label{sec : algorithmic procedure}
 We hereby detail the procedure used to numerically build feasible systems. It goes like this:
 \begin{enumerate}
   \item We first draw randomly each $R^*_\nu$
@@ -56,12 +56,12 @@ Asking for the model parameters to be biological simply means we want them to ha
 In our study, this equation will be slightly restricted since we are looking for positive-valued equilibria, so we require
 $R^*_\mu, S^*_i > 0$ specifically for these two parameters. Also, we require also a non-zero efficiency\footnote{It wouldn't make sense to say that species $i$ eats resource $\mu$ with efficiency $0$, since this is equivalent to species $i$ not eating resource $\mu$, and this is already encoded in the network structure.}. Finally every resource feeding rate should be non-zero in order to avoid resource depletion and every resource and consumer must eventually die out in the absence of interaction. In the end this means we require:
 \begin{equation}
-R^*_\mu, S^*_i, \sigma_{i\mu}, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i}, \tau_{\mu i} \geq 0. \label{eq : feasibility positive parameters}
+R^*_\mu, S^*_i, \sigma_{i\mu}, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i} \geq 0. \label{eq : feasibility positive parameters}
 \end{equation}
 Remember that not all the parameters of our models are free : there are $3 N_R +2 N_S + 4 N_R N_S $ parameters constrained by $N_R + N_S $ equations. So if we set $2 N_R + N_S + 4 N_R N_S$ parameters, the remaining $N_R + N_S$ are not free but set by the equilibrium equations \textbf{Insert ref equation}. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for reasons explained in \textbf{insert ref}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \textit{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eq.\eqref{eq : feasibility positive parameters} is equivalent to :
 \begin{subequations}\label{eq : feasibility positive d and m}
 \begin{empheq}[left=\empheqlbrace]{align}
-d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R_\nu - \tau_{\nu i} \right) > 0 \ \forall i=1, \dots, N_S \\
+d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R_\nu - \alpha_{\nu i} \right) > 0 \ \forall i=1, \dots, N_S \\
 m_\mu &= \frac{l_\mu - \sum_j \left(\gamma_{j\mu}R_\mu-\alpha_{\mu j}\right)S_j}{R_\mu} > 0 \ \forall \mu = 1, \dots, N_R
 \end{empheq}
 \end{subequations}
@@ -82,14 +82,14 @@ We can hence define the \define{parameters set feasibility function} $\mathfrak{
 \end{cases}
 \end{equation}
 However as explained above we will usually not work with a parameter set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameter set $m \in \mathcal{M}$ and a binary consumption matrix $G \in \mathcal{B}_{N_R \times N_S}$ instead. We can similarly define a
-\define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with a matrix $G$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameter set :
+\define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with binary matrices $B=(G, A)$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameter set :
 \begin{equation}\boxed{
-\mathcal{F}(m, G)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, G)\right)=1\right\}
+\mathcal{F}(m, B)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, B)\right)=1\right\}
 }
 \end{equation}
-We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it is easier to handle metaparameters. In practice $\mathcal{F}(m, G)$ is estimated numerically by generating $N$ parameters sets from $(m,G)$ and calculating the number of feasible ones :
+We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it is easier to handle metaparameters. In practice $\mathcal{F}(m, B)$ is estimated numerically by generating $N$ parameters sets from $(m,B)$ and calculating the number of feasible ones :
 \begin{equation}
-\mathcal{F}(m, G) = \lim_{N\rightarrow \infty} \sum_{i=1}^N \frac{\mathfrak{F}(A(m,G))}{N} \approx \sum_{i=1}^N \frac{\mathfrak{F}(A(m,G))}{N} \text{ for } N \gg 1.
+\mathcal{F}(m, B) = \lim_{N\rightarrow \infty} \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \approx \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \text{ for } N \gg 1.
 \end{equation}
 
 \subsection{The feasibility volume}

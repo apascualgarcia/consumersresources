@@ -293,6 +293,11 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmtt.fd
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmtt12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/ec-lmr10.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/rm-lmr5.tfm
@@ -300,6 +305,9 @@ INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/lmmi5.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/lm/lmsy5.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm5.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/mathabx/matha5.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/mathabx/mathb5.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/mathabx/mathx10.tfm
@@ -318,14 +326,6 @@ INPUT fully_connected_network.tex
 INPUT fully_connected_network.tex
 INPUT numerical_analysis_feasability.tex
 INPUT numerical_analysis_feasability.tex
-INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
-INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
-INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm5.tfm
 INPUT ./figures/Results/typical_feasibility_volume.pdf
 INPUT ./figures/Results/typical_feasibility_volume.pdf
 INPUT ./figures/Results/typical_feasibility_volume.pdf

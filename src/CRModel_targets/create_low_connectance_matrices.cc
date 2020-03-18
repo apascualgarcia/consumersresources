@@ -32,12 +32,12 @@ int main(int argc, char* argv[]){
         nmatrix gamma = optimal_consumption_matrix(metaparams.NR, metaparams.NS, conn, mcsolv);
         std::string mat_name="RandTrix_Nr"+std::to_string(metaparams.NR)+"_Nc"+std::to_string(metaparams.NS);
         mat_name+="_Nest";
-        mat_name+=std::to_string(nestedness(gamma))+"_Conn"+std::to_string(connectance(gamma))+".txt";
-
+        mat_name+=std::to_string(round(nestedness(gamma)*100)/100)+"_Conn"+std::to_string(round(connectance(gamma)*100)/100)+".txt";
+        std::cout << "Saving matrix in " << "test_matrices/"+mat_name << std::endl;
         std::ofstream myfile=open_external_file_truncate("test_matrices/"+mat_name);
         display_food_matrix(myfile, gamma);
         myfile.close();
-        
+
       }
     }
 

@@ -11,7 +11,7 @@ of our model if they are fixed points of it, that means if the following equatio
 \begin{subequations}\label{eq : equilibrium resources and species}
 \begin{empheq}[left=\empheqlbrace]{align}
   0 &= l_\mu - m_\mu R^*_\mu - \sum_{j} \gamma_{j\mu} R^*_\mu S^*_j + \sum_j \alpha_{\mu j} S^*_j \label{eq : equilibrium resources} \\
- 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \tau_{\nu i} S^*_i \label{eq : equilibrium species}
+ 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i \label{eq : equilibrium species}
 \end{empheq}
 \end{subequations}
 As said above, our main goal is to study the stability of such equilibria. Before introducing different notions around equilibria, we focus on simplifying the problem first as much as we can.
@@ -27,14 +27,14 @@ We can define in general the \textit{jacobian} $J$ of our system as the jacobian
 =
 \begin{pmatrix}
   \left(-m_\mu-\sum_j \gamma_{j\mu}S_j\right)\delta_{\mu\nu} & -\gamma_{j\mu}R_\mu+\alpha_{\mu j} \\
-  \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \tau_{\nu i}\right)\delta_{ij}
+  \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
 \end{pmatrix}, \label{eq : definition of jacobian}
 \end{equation}
 where $\delta$ is the Kronecker delta symbol. Using the fact that we are only interested in equilibria where every resource is positive and Eq.\eqref{eq : equilibrium species}, this can be rewritten as :
 \begin{equation}
  J = \begin{pmatrix}
    \frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\delta_{\mu\nu} & -\gamma_{j\mu}R_\mu+\alpha_{\mu j} \\
-   \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \tau_{\nu i}\right)\delta_{ij}
+   \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
  \end{pmatrix}, \label{eq : definition of jacobian alternative}
 \end{equation}
 
@@ -44,7 +44,7 @@ We will furthermore say that a given equilibrium is \textit{linearly stable} if 
 
 Note that if we are interested only in positive valued equilibria (\ie $S^*_i > 0 \ \forall i$), then Eq.\eqref{eq : equilibrium species} is equivalent to :
 \begin{equation}
-  \sum_\nu \sigma_{i\nu} \gamma_{i\nu}R^*_\nu -d_i - \sum_\nu \tau_{\nu i} = 0,
+  \sum_\nu \sigma_{i\nu} \gamma_{i\nu}R^*_\nu -d_i - \sum_\nu \alpha_{\nu i} = 0,
 \end{equation}
 which means that the lower right block of the jacobian in Eq.\eqref{eq : definition of jacobian} will be zero. Hence at equilibrium the jacobian $J^*$ will have the following block form:
 \begin{equation}
@@ -380,7 +380,7 @@ Using Eq.\eqref{eq : differential eq for resources}, we get an explicit value fo
 \end{equation}
 This expression can be used in Eq.\eqref{eq : differential eq for species} to get an effective system which describes the dynamics of the $N_S$ consumers :
 \begin{equation}
-  \frac{dS_i}{dt} = \left(\sum_\nu \left(\frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k} - \tau_{\nu i}\right) -d_i + \sum_{\nu j} \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}S_j \right) S_i.
+  \frac{dS_i}{dt} = \left(\sum_\nu \left(\frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k} - \alpha_{\nu i}\right) -d_i + \sum_{\nu j} \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}S_j \right) S_i.
 \end{equation}
 This can be rewritten in a more compact way:
 \begin{equation}
@@ -388,7 +388,7 @@ This can be rewritten in a more compact way:
 \end{equation}
 with
 \begin{equation}
-    p_i(S) = -\left(d_i+\sum_{\nu}\tau_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k}\text{ and } M_{ij}(S)=\sum_{\nu}\frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}.
+    p_i(S) = -\left(d_i+\sum_{\nu}\alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k}\text{ and } M_{ij}(S)=\sum_{\nu}\frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}.
 \end{equation}
 If we assume the species $S_k$ are not too far away from their equilibrium values\footnote{Note that this is very rarely true, especially in the context of the study of structural stability, where entire species sometimes die out.}, \ie
 \begin{equation}
@@ -400,7 +400,7 @@ m_\nu + \sum_k \gamma_{k\nu} S_k \approx m_\nu + \sum_k \gamma_{k\nu}S^*_k = \fr
 \end{equation}
 Hence, the explicit dynamical dependence on $S$ can be removed from $p_i$ and $M_{ij}$:
 \begin{equation}
-p_i(S) \approx p_i \equiv - \left(d_i + \sum_\nu \tau_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu R^*_\nu}{l_\nu + \sum_k \alpha_{\nu k}S^*_k},
+p_i(S) \approx p_i \equiv - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu R^*_\nu}{l_\nu + \sum_k \alpha_{\nu k}S^*_k},
 \end{equation} and
 \begin{equation}
 M_{ij}(S) \approx M_{ij} \equiv \sum_\nu \frac{\sigma_{i\nu} \gamma_{i\nu} R^*_\nu \alpha_{\nu j}}{l_\nu + \sum_k{\alpha_{\nu k} S^*_k}}.
@@ -428,7 +428,7 @@ E_{ij} \equiv \left(\partiald{p_i}{S_j}\evaluatedat{S^*}+M_{ij}(S^*)+\sum_k \par
 \end{equation}
 After some computations, we can get $\tilde{p}_i$ and $E_{ij}$ in terms of the initial parameters. Indeed,
 \begin{equation}
-p_i(S^*)= -\left(d_i + \sum_\nu \tau_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}
+p_i(S^*)= -\left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}
 \end{equation}
 and
 \begin{equation}
@@ -436,11 +436,11 @@ M_{ik}(S^*) = \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu + \
 \end{equation}
 Hence, using Eq.\eqref{eq : tilde p effective system} :
 \begin{equation}
-\tilde{p}_i = - \left(d_i + \sum_\nu \tau_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}\left(l_\nu+\sum_{j}\alpha_{\nu j} S^*_j\right).
+\tilde{p}_i = - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}\left(l_\nu+\sum_{j}\alpha_{\nu j} S^*_j\right).
 \end{equation}
 This can be simplified using Eq.\eqref{eq : equality fluxes resource} and Eq.\eqref{eq : equilibrium species} :
 \begin{equation}
-\tilde{p}_i=-d_i +\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu = \sum_\nu \tau_{\nu i}.
+\tilde{p}_i=-d_i +\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu = \sum_\nu \alpha_{\nu i}.
 \end{equation}
 With a similar computation, one finds
 \begin{equation}
@@ -452,11 +452,11 @@ Finally, Eq.\eqref{eq : effective equ evol at O(D2)} can be recast in
 \end{equation}
 where the effective $N_S\times N_S$ jacobian matrix $J_E$ is defined by:
 \begin{equation}
-(J_E)_{ij}=\sum_\nu \left[\frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right)+\tau_{\nu i}\delta_{ij}\right].
+(J_E)_{ij}=\sum_\nu \left[\frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right)+\alpha_{\nu i}\delta_{ij}\right].
 \end{equation}
 We see that we without surprise we find again the $\Beta, \Gamma $ and $\Delta$ matrices coming from the jacobian at equilibrium :
 \begin{equation}
-\left(J_E\right)_{ij}=\sum_\nu \left[\frac{\Beta_{i\nu}\Gamma_{\nu j}}{\Delta_\nu}+\tau_{\nu i} \delta_{ij}\right]
+\left(J_E\right)_{ij}=\sum_\nu \left[\frac{\Beta_{i\nu}\Gamma_{\nu j}}{\Delta_\nu}+\alpha_{\nu i} \delta_{ij}\right]
 \end{equation}
 
 This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.

@@ -59,7 +59,6 @@ nmatrix optimal_consumption_matrix(unsigned int NR, unsigned int NS, const ntype
 nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& ctarg){
   nmatrix gamma(NS, nvector(NR,0.));
   std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
-  std::cout << "Try to create gamma with connectance " << ctarg << std::endl;
   /*  we fill gamma such that its connectance is ctarg while making sure that
       every species eats something and every resource is eaten by one species */
   unsigned int number_of_links = ctarg*NR*NS;
@@ -79,9 +78,9 @@ nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& ctarg){
   for(size_t k=0; k < diag_elements; ++k){
     gamma[k][k]=1;
   }
-  
+
   unsigned int to_fill = number_of_links-diag_elements;
-  ntype proba = ntype(to_fill/(NR*NS));
+  ntype proba = ntype(to_fill)/ntype(NR*NS);
 
   /* finally we fill the remaining links */
   do{
@@ -97,6 +96,7 @@ nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& ctarg){
     }
 
   }while(has_an_empty_row(gamma)|| has_an_empty_column(gamma));
+  std::cout << "Created gamma with connectance " << connectance(gamma) << std::endl;
   return gamma;
 }
 nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowed_coprophagy){
@@ -171,7 +171,6 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       std::cout << ", connectance=" << connectance(alpha);
       if(reached_zero){
         std::cout << " -> reached zero on the cost function, ending the algorithm now." << std::endl;
-        std::cout << std::endl;
         return;
       }
       std::cout << std::endl;
@@ -207,11 +206,7 @@ nmatrix proposed_new_alpha_Alberto(const nmatrix& alpha, const nmatrix& gamma, b
 void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   /*  we first choose a random row (i.e. resource) that is neither completely empty nor
       completely filled */
-  // display_food_matrix(std::cout, alpha);
-  // std::cout << std::endl;
-  // std::cout << "All good until here" << std::endl;
   unsigned int NR = alpha.size();
-  //std::cout << "Does it petouille here?" << std::endl;
   unsigned int NS = alpha[0].size();
   std::vector<unsigned int> sum_row(NR, 0.);
 
@@ -250,15 +245,14 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   size_t zero_index=zero_els[zero_els_indices(random_engine)];
   size_t one_index=one_els[one_els_indices(random_engine)];
 
-  // size_t zero_index=zero_els[0];
-  // size_t one_index=one_els[0];
-
   /*  we check if there is another non empty value in the column (i.e.
       check if that species releases to something else) */
   bool conditionRel=false;
   for(size_t nu=0; nu < NR && !conditionRel; ++nu){
-    if(alpha[nu][one_index]==1){
-      conditionRel=true;
+    if(mu!=nu){
+      if(alpha[nu][one_index]==1){
+        conditionRel=true;
+      }
     }
   }
 
@@ -318,8 +312,10 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
       if the resource is being released by another species */
   bool conditionRel=false;
   for(size_t i=0; i < NS && !conditionRel; ++i){
-    if(alpha[one_index][i]==1){
-      conditionRel=true;
+    if(i!=k){
+      if(alpha[one_index][i]==1){
+        conditionRel=true;
+      }
     }
   }
 
