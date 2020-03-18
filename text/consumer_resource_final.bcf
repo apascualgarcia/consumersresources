@@ -2128,23 +2128,23 @@
     <bcf:citekey order="5">jonhson_factors_2013</bcf:citekey>
     <bcf:citekey order="6">bastolla_architecture_2009</bcf:citekey>
     <bcf:citekey order="7">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="8">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="9">ives_stability_2007</bcf:citekey>
-    <bcf:citekey order="9">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="10">biroli_marginally_2018</bcf:citekey>
-    <bcf:citekey order="11">gerschgorin_uber_1931</bcf:citekey>
+    <bcf:citekey order="8">may_will_1972</bcf:citekey>
+    <bcf:citekey order="9">allesina_stability_2012</bcf:citekey>
+    <bcf:citekey order="9">allesina_predicting_2015</bcf:citekey>
+    <bcf:citekey order="9">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="10">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="11">butler_stability_2018</bcf:citekey>
     <bcf:citekey order="12">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="13">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="14">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="15">magnus_matrix_2019</bcf:citekey>
-    <bcf:citekey order="16">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="13">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="14">ives_stability_2007</bcf:citekey>
+    <bcf:citekey order="14">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="15">biroli_marginally_2018</bcf:citekey>
+    <bcf:citekey order="16">gerschgorin_uber_1931</bcf:citekey>
     <bcf:citekey order="17">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="18">may_will_1972</bcf:citekey>
-    <bcf:citekey order="19">allesina_stability_2012</bcf:citekey>
-    <bcf:citekey order="19">allesina_predicting_2015</bcf:citekey>
+    <bcf:citekey order="18">gendreau_simulated_2019</bcf:citekey>
     <bcf:citekey order="19">barbier_cavity_2017</bcf:citekey>
     <bcf:citekey order="20">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="21">gendreau_simulated_2019</bcf:citekey>
+    <bcf:citekey order="21">magnus_matrix_2019</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

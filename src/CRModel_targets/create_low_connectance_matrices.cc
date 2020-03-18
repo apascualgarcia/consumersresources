@@ -25,11 +25,12 @@ int main(int argc, char* argv[]){
       mcsolv.additional_params=&nest;
       nvector conn_range=linear_interval(min_conn, nest, 5);
       for(auto conn: conn_range){
-
+        mcsolv.T=10.;
         std::cout << "Creating gamma matrix with target connectance " << conn ;
         std::cout << " and nestedness " << nest << std::endl;
 
         nmatrix gamma = optimal_consumption_matrix(metaparams.NR, metaparams.NS, conn, mcsolv);
+        gamma=order_matrix_by_row_degree(order_matrix_by_column_degree(gamma));
         std::string mat_name="RandTrix_Nr"+std::to_string(metaparams.NR)+"_Nc"+std::to_string(metaparams.NS);
         mat_name+="_Nest";
         mat_name+=std::to_string(round(nestedness(gamma)*100)/100)+"_Conn"+std::to_string(round(connectance(gamma)*100)/100)+".txt";
