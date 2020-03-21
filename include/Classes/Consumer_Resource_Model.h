@@ -56,7 +56,12 @@ public:
   virtual nmatrix jacobian_at_equilibrium() const;
   virtual nmatrix jacobian(const Dynamical_variables&) const; // returns the jacobian for the given dynamical variables
 
-
+  /* tells you whether your model is feasible */
+  bool is_feasible() const;
+  bool has_linearly_stable_eq() const;
+  ntype critical_radius() const;
+  bool is_in_weak_LRI() const;
+  bool is_in_strong_LRI() const;
 
 
   Metaparameters* get_metaparameters() const;
@@ -114,15 +119,15 @@ public:
   /* tells you if the system is stable, marginally stable or unstable dynamically */
   systemstability assess_dynamical_stability() const;
 
-  bool has_linearly_stable_eq() const;
-  ntype critical_radius() const;
-  bool is_in_weak_LRI() const;
-  bool is_in_strong_LRI() const;
+  /* returns the largest perturbation (with accuracy acc) for which the system still is dynamically stable */
+  ntype max_perturbation_dynamically_stable(ntype acc) const;
+
+
 
   nmatrix get_first_equilibrium() const;
 
   /* returns dynamical variables perturbed away from their equilibrium value*/
-  nmatrix perturb_abundances(const ntype& );
+  nmatrix perturb_abundances(const ntype& ) const;
 
   /* returns the extinction properties with the initial values of abundances */
   Extinction evolve_until_equilibrium_from_abundances(const nmatrix& , ntype threshold=1e-9, eqmode eq_mode = oneextinct, writemode write_mode=writemode()) const;

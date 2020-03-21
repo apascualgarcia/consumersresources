@@ -9,28 +9,29 @@ int main(int argc, char * argv[]){
   try{
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrix_list = load_food_matrix_list(metaparams.foodmatrixpath);
-    std::string syntrophy_folder = metaparams.syntrophy_matrix_path;
+    nvector gamma0_interval=linear_interval(0.01, 1., 100);
+    unsigned int Nsimuls=100;
 
-    ntype min_gamma0=0.01, max_gamma0=1.;
-    ntype min_S0=0.01, max_S0=1.;
-
-    nvector gamma0_interval=linear_interval(min_gamma0, max_gamma0, 30);
-    nvector S0_interval=linear_interval(min_S0, max_S0, 30);
-
-    std::ofstream myfile = open_external_file_append(metaparams.save_path);
+    std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
     for(auto mat: matrix_list){
       metaparams.foodmatrixpath=mat;
-      metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
       myfile << metaparams.foodmatrixpath << " ";
       for(auto g : gamma0_interval){
+        // S0 only goes up to its maximum value
+        nvector S0_interval=linear_interval(0.01, 0.04261718*g-0.00456834, 100);
         for(auto S : S0_interval){
           metaparams.gamma0=g;
           metaparams.S0=S;
-          ntype feasability_proba = find_feasability_probability(metaparams);
-          myfile << g << " " << S << " " << feasability_proba << " ";
+          ntype dynamically_stab=0.;
+          for(size_t i=0; i < Nsimuls; ++i){
+            CRModel model(metaparams);
+            if(model.is_dynamically_stable()){
+              dynamically_stab+=1./Nsimuls;
+            }
+          }
+          myfile << g << " " << S << " " << dynamically_stab << " ";
         }
       }
-      metaparams.syntrophy_matrix_path=syntrophy_folder;
       myfile << std::endl;
     }
 

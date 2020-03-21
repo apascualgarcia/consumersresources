@@ -8,7 +8,7 @@ We want to be able to build feasible models numerically, \ie we would like to ge
 l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}\}$ such that the equilibria equations Eqs.\eqref{eq : equilibrium resources and species} are fulfilled.
 
 
-\subsection{Basic concepts}
+\subsection{Basic concepts}\label{sec : methods feasibility basic concepts}
 Since its very inception \cite{may_will_1972}, the study of ecological interactions has been and still is tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is assuming we are at a feasible equilibrium point, where some matrix of the model (\eg the species-interaction matrix or the jacobian) is approximated as random, and then study the dynamical stability of said feasible point.
 
 This framework is not satisfying for the study we would like to conduct, because the question ``does a given set of random parameters lead to a feasible system?'' is not trivial at all. Indeed for our model to make sense, we impose two conditions on any system deemed as feasible : the model parameters must be ``biological'' and biomass must be conserved.
@@ -56,7 +56,7 @@ We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it
 \mathcal{F}(m, B) = \lim_{N\rightarrow \infty} \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \approx \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \text{ for } N \gg 1.
 \end{equation}
 
-\subsection{The feasibility volume}
+\subsection{The feasibility volume}\label{sec : methods feasibility volume}
 The algorithmic procedure detailed in Section \ref{sec : algorithmic procedure} explains how feasible systems can be built. However, it implies that we first found a combination of metaparameters that will most of the time lead to the realisation of feasible systems when they are taken as an input of the algorithm.
 
 Overall we have six metaparameters that we can play with : $\gamma_0$, $\alpha_0$, $l_0$, $\sigma_0$, $S_0$ and $R_0$. However, following the analysis of \cite{barbier_cavity_2017}, we notice that our system \eqref{eq : differential eq for resources and species} is arbitrary on some level. Indeed we have a ``scale freedom'', that means we decide in which set of units we work. There are two physical quantities at stake here : biomass and time, and we may choose, however we want it, a specific set of units describing both of them.
@@ -71,7 +71,7 @@ Similarly, we will measure time such that the average external resource uptake r
 \end{equation}
 After this manipulation, our number of metaparameters is reduced from six to four : only $\gamma_0$, $S_0$, $\alpha_0$ and $\sigma_0$ remain.
 
-For the sake of simplicity, we will keep the same $\sigma_0$ throughout our whole study. We take a value close to the efficiency of real microbial systems [\textbf{insert ref}], that is $\sigma_0 =0.3$.
+For the sake of simplicity, we will keep the same $\sigma_0$ throughout our whole study. We take a value close to the efficiency of real microbial systems [\textbf{insert ref}], that is $\sigma_0 =0.25I$.
 
 Overall, we need to choose the last three remaining metaparameters: $\alpha_0$, $\gamma_0$ and $S_0$. As soon if we choose $\gamma_0$ and $S_0$, we will get a range of $\alpha_0$ which will give rise to feasible systems.
 We will then choose $\gamma_0$ and $S_0$ such that they lead to feasible systems for every consumption matrix considered here \textbf{when there is no syntrophy}, \ie $\alpha_0=0$. We will then study the impact of varying $\alpha_0$ at those values of $\gamma_0$ and $S_0$.
@@ -80,17 +80,17 @@ Formally, we can define for a consumption adjacency matrix $G$ coupled with a sy
 \begin{equation}
 \mathcal{V}^{G,A}_x \defined \left\{m \in \mathcal{M} : \mathcal{F}\left(m, (G,A)\right)\geq x \right\}. \label{eq : x feasible volume}
 \end{equation}
-It is clear that $\mathcal{V}^{G,A}_0 = \mathcal{M}$ $\forall G$ and $\mathcal{V}^{G,A}_{x} \leq \mathcal{V}^{G,A}_{y}$ $\forall x > y, G$ . We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \textit{common feasibility} volume $\mathcal{V}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
+It is clear that $\mathcal{V}^{G,A}_0 = \mathcal{M}$ $\forall G$ and $\text{Vol}\left(\mathcal{V}^{G,A}_{x}\right) \leq \text{Vol}\left(\mathcal{V}^{G,A}_{y}\right)$ $\forall x > y, G$ . We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \textit{common feasibility} volume $\mathcal{V}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
 \begin{equation}
-\mathcal{V}^S_x = \intersection{(G,A) \in S} \mathcal{V}^{G,A}_x.
+\mathcal{V}^S_x \defined \intersection{(G,A) \in S} \mathcal{V}^{G,A}_x.
 \end{equation}
-We also define for a matrix set $S$, its critical feasibility $x^*(S)$, which is the largest feasibility we can get while still having a non-zero common volume :
+We also define for a matrix set $S$, its critical feasibility $f^*(S)$, which is the largest feasibility we can get while still having a non-zero common volume :
 \begin{equation}
-x^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \mathcal{V}^S_x > 0 \right\}.
+f^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \text{Vol}\left(\mathcal{V}^S_x\right) > 0 \right\}.
 \end{equation}
 For actual computations, we will choose a matrix set $S_M$, stick to it during the whole thesis, and work in its critical feasibility volume $\mathcal{V}^*$, defined as :
 \begin{equation}\boxed{
-\mathcal{V}^* \defined \mathcal{V}^{S_M}_{x^*(S_M)}.
+\mathcal{V}^* \defined \mathcal{V}^{S_M}_{f^*(S_M)}.
 }
 \end{equation}
 
@@ -101,11 +101,11 @@ As stated before, we require that biomass is conserved in our model. This was eq
 \begin{equation}
 \sum_\nu \left(1-\sigma_{i\nu}\right)\gamma_{i\nu}R^*_\nu \geq \sum_\nu \alpha_{\nu i} \ \forall i=1,\dots, N_S.
 \end{equation}
-The idea is to neglect the variance of every quantity involved \ie we use the approximation :
+The idea is to neglect the variance of every quantity involved \ie we use the approximation
 \begin{equation}
 \gamma_{i\mu} \approx \gamma_0 G_{i\mu}, \ \alpha_{\mu i}\approx \alpha_0 A_{\mu i}, \ \sigma_{i\nu} = \sigma_0 \text{ and }R^*_\nu \approx R_0.
 \end{equation}
-This means the RHS of Eq.\eqref{eq : feasability biomass conservation} is roughly approximated by
+This means the RHS of Eq.\eqref{eq : feasability biomass conservation} is roughly given by
 \begin{equation}
 \sum_\nu \alpha_{\nu i} \approx \deg(A, i) \alpha_0
 \end{equation}
@@ -140,30 +140,30 @@ Using a reasoning similar to above, we get :
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox \sigma_0R_0 \gamma_0
 }.
 \end{equation}
-Also for $m_\nu$ to be positive we need:
+Also, the resources diffusion rates $m_\nu$ need to be positive:
 \begin{equation}
 l_\nu + \sum_j \alpha_{\nu j} S^*_j > \sum_j \gamma_{j\nu}R^*_\nu S^*_j \ \forall \nu=1,\dots,N_R
 \end{equation}
 Which is equivalent to
 \begin{equation}
-l_0 + k_\nu^\alpha \alpha_0 S_0 \gtrapprox k_\nu^\gamma \gamma_0 R_0 S_0 \ \forall \nu
+l_0 + k_\nu^\alpha \alpha_0 S_0 \gtrapprox \deg(G,\nu) \gamma_0 R_0 S_0 \ \forall \nu
 \end{equation}
 Since $k_\nu^\gamma>0$ (every resource is at least consumed by one species), the $N_R$ equations above can be rewritten as:
 \begin{equation} \label{eq : feasability positivity m}
 \boxed{
-\min_\nu\left\{\frac{l_0}{k_\nu^\gamma S_0} + \frac{k_\nu^\alpha}{k_\nu^\gamma}\alpha_0\right\} \gtrapprox \gamma_0 R_0
+\min_\nu\left\{\frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\} \gtrapprox \gamma_0 R_0
 }
 \end{equation}
-This says that systems where the ratio $\frac{\#\text{number of species that release to me}}{\#\text{number of species that consume me}}$ is large for every resource are more feasible. The strategy should be then to have $\gamma$'s that have large $k^\gamma_\nu$ (\ie resources are consumed by many species) and large $k_i^\gamma$ (\ie species consume a lot of species), and the other way around for $\alpha$ (not sure about this for the last one).
+This says that systems where the ratio $\frac{\#\text{number of species that release to me}}{\#\text{number of species that consume me}}$ is large for every resource are more feasible. The strategy should be then to have $\gamma$'s that have large $\deg(G,\nu)$ (\ie resources are consumed by many species) and large $\deg(G,i)$ (\ie species consume a lot of species), and the other way around for $\alpha$ (not sure about this for the last one).
 
 \subsubsection{Combining both conditions}
 The two upper bounds Eqs.\eqref{eq : feasability biomass conservation}-\eqref{eq : feasability positivity d} on $\alpha_0$ can be combined in a single inequality :
 \begin{equation} \label{eq : largest feasible alpha0 with structure}
-\max_i{\frac{k_i^\alpha}{k_i^\gamma}} \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
+\max_i{\frac{\deg(A,i)}{\deg(G,i)}} \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
 \end{equation}
-Note that when $\alpha_0 > 0$, we will trivially require that the syntrophy matrix is not empty, \ie there exists at least an $i$ for which $k_i^\alpha \geq 1$. Note also that the largest value $k_i^\gamma$ can get (for any $i$) is $N_R$. Hence,
+Note that when $\alpha_0 > 0$, we will trivially require that the syntrophy matrix is not empty, \ie there exists at least an $i$ for which $\deg(A,i) \geq 1$. Note also that the largest value $\deg(G,i)$ can get (for any $i$) is $N_R$. Hence,
 \begin{equation}
-\max_i\left\{ \frac{k_i^\alpha}{k_i^\gamma} \right\} \geq \frac{1}{N_R},
+\max_i\left\{ \frac{\deg(A,i)}{\deg(G,i)} \right\} \geq \frac{1}{N_R},
 \end{equation}
 and we can find a largest allowed theoretical non-zero $\alpha_0$ :
 \begin{equation}
@@ -172,11 +172,11 @@ and we can find a largest allowed theoretical non-zero $\alpha_0$ :
 Finally, Eq.\eqref{eq : largest feasible alpha0 with structure} and \eqref{eq : feasability positivity m} can be combined into a single one, which gives us the volume of the metaparameters space that make the system feasible:
 \begin{equation}
 \boxed{
-\max_i\left\{\frac{k_i^\alpha}{k_i^\gamma}\right\} \alpha_0
+\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0
 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
 \lessapprox
-\min \left(1-\sigma_0, \sigma_0 \right) \min_\nu \left\{ \frac{l_0}{k_\nu^\gamma S_0} + \frac{k_\nu^\alpha}{k_\nu^\gamma}\alpha_0\right\}
-}\label{eq : overall feasability constraint metaparameters}
+\min \left(1-\sigma_0, \sigma_0 \right) \min_\nu \left\{ \frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\}
+}\label{eq : fully feasible volume}
 \end{equation}
 
 

@@ -16,10 +16,11 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{mathtools}
-\RequirePackage{subcaption}
 \RequirePackage{standalone}
 \RequirePackage{empheq}
 \RequirePackage{amsthm}
+\RequirePackage[separate-uncertainty=true, scientific-notation=true]{siunitx}
+\RequirePackage[caption=false]{subfig}
 \theoremstyle{theorem}
 \newtheorem{theorem}{Theorem}[]
 \newtheorem{lemma}{Lemma}[]
@@ -37,7 +38,9 @@
     sorting=none]{biblatex}
 \addbibresource{sources.bib}
 
-
+\captionsetup{font=it, size=small}
+\captionsetup[subfigure]{labelformat = parens,singlelinecheck=off}
+\captionsetup[subfigure]{captionskip = -165pt, margin = 35pt}
 
 \newcommand{\vect}[1]{\textbf{#1}}
 \newcommand{\abs}[1]{\left|{#1}\right|}

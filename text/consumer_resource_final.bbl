@@ -598,6 +598,70 @@
       \verb http://stacks.iop.org/1367-2630/20/i=8/a=083051?key=crossref.eb2ea792ef1892155c3ce3f806e602f3
       \endverb
     \endentry
+    \entry{perron_zur_nodate}{article}{}
+      \name{author}{1}{}{%
+        {{hash=cf067f41eebfa71d132aeeb7386f498c}{%
+           family={Perron},
+           familyi={P\bibinitperiod},
+           given={{OSCAR}},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{cf067f41eebfa71d132aeeb7386f498c}
+      \strng{fullhash}{cf067f41eebfa71d132aeeb7386f498c}
+      \strng{authornamehash}{cf067f41eebfa71d132aeeb7386f498c}
+      \strng{authorfullhash}{cf067f41eebfa71d132aeeb7386f498c}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{german}
+      \field{title}{Zur Theorie der Matrices}
+      \field{pages}{16}
+      \range{pages}{1}
+      \verb{file}
+      \verb PRRONin - Zur Theorie der Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/ZZDN8M7E/PRRONin - Zur Theorie der Matrices.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{powell_calculating_2011}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e6f70be57b75ffdda56f443c2b9e7e65}{%
+           family={Powell},
+           familyi={P\bibinitperiod},
+           given={Philip\bibnamedelima D.},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \strng{fullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \strng{authornamehash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \strng{authorfullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents a method for expressing the determinant of an N × N complex block matrix in terms of its constituent blocks. The result allows one to reduce the determinant of a matrix with N 2 blocks to the product of the determinants of N distinct combinations of single blocks. This procedure proves useful in the analytic description of physical systems with multiple discrete variables, as it provides a systematic method for evaluating determinants which might otherwise be analytically intractable.}
+      \field{day}{15}
+      \field{eprinttype}{arxiv}
+      \field{journaltitle}{{arXiv}:1112.4379 [math]}
+      \field{langid}{english}
+      \field{month}{12}
+      \field{title}{Calculating Determinants of Block Matrices}
+      \field{urlday}{21}
+      \field{urlmonth}{3}
+      \field{urlyear}{2020}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{eprint}
+      \verb 1112.4379
+      \endverb
+      \verb{file}
+      \verb Powell - 2011 - Calculating Determinants of Block Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/IBHJEKET/Powell - 2011 - Calculating Determinants of Block Matrices.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1112.4379
+      \endverb
+      \keyw{15A15 (Primary) 15A09 (Secondary),Mathematics - Numerical Analysis,Mathematics - Rings and Algebras}
+    \endentry
     \entry{gerschgorin_uber_1931}{article}{}
       \name{author}{1}{}{%
         {{hash=6ba497dc57e5e9c6501f3c610a4d4f76}{%
@@ -668,8 +732,8 @@
       \strng{authorfullhash}{d0d6c52cffbe38f91adb7894454bf665}
       \strng{editornamehash}{428631794113b74d16ac1f3a6f241136}
       \strng{editorfullhash}{428631794113b74d16ac1f3a6f241136}
-      \field{sortinit}{1}
-      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{booktitle}{Handbook of Metaheuristics}

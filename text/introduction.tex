@@ -19,7 +19,7 @@ The coupled evolution of the set of variables $\{R_\mu, S_i\}$ is given by:
 
 We will call the variables $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ \define{parameters of the model} \textbf{add $R^*$ and $S^*$}. On the other hand, because they may dynamically evolve, $\{R_\mu, S_i\}$ will be refered to as \define{dynamical variables} or simply \textit{variables}. Note that there are in this model a lot of different symbols that may be easy to confuse. We will at least try to keep the following conventions :
 \begin{itemize}
-  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ abudance $R_\mu$). Quantities related to species have subscripts in latin alphabet (\eg the species $i$ abundance $S_i$). Finally, quantities related to both have both indices.
+  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ abundance $R_\mu$). Quantities related to species have subscripts in latin alphabet (\eg the species $i$ abundance $S_i$). Finally, quantities related to both have both indices.
   \item Vectors (\ie quantities with one index) are written with the latin alphabet (\eg the resource $\mu$ death rate $m_\mu$).
   \item Matrices (\ie quantities with two indices, usually relating resources and species) are written with the greek alphabet (\eg the rate $\gamma_{i\mu}$ at which species $i$ consumes resource $\mu$).
 \end{itemize}
@@ -41,6 +41,17 @@ We will mostly focus on the case where no resource coming from syntrophy is lost
 
 The aim of the project is to study equilibria points of this model and their stability. In particular, we are interested in how syntrophy changes the robustness of the equilibria.
 
+\subsection{Equilibria of the model}
+We are interested in studying the stability of the equilibrium points of our model Eqs.\eqref{eq : differential eq for resources and species}. We say that $\{R^*_\mu, S^*_j\}$ is an \textit{equilibrium}\footnote{For the sake of brevity, we will sometimes drop the $\mu$ and $j$ subscripts when we write $\{R^*_\mu, S^*_j\}$.}
+of our model if they are fixed points of it, that means if the following equations are fulfilled :
+\begin{subequations}\label{eq : equilibrium resources and species}
+\begin{empheq}[left=\empheqlbrace]{align}
+  0 &= l_\mu - m_\mu R^*_\mu - \sum_{j} \gamma_{j\mu} R^*_\mu S^*_j + \sum_j \alpha_{\mu j} S^*_j \label{eq : equilibrium resources} \\
+ 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i \label{eq : equilibrium species}
+\end{empheq}
+\end{subequations}
+As said above, our main goal is to study the stability of such equilibria. Before introducing different notions around equilibria, we focus on simplifying the problem first as much as we can. Note that we consider $R^*_\mu$ and $S^*_i$ as parameters of the model.
+
 \subsection{Attack strategy and important notions}
 Before jumping right into the matter, it is important to explain how we will study this system of differential equations. Mainly two different but complimenteray approaches will be used : analytical and numerical. Note that the $\sim$ 5'000 lines of code we wrote from scratch and that we use to get the results of Section \ref{chapter : numerical analysis} is available at the address \url{https://gitlab.ethz.ch/palberto/consumersresources.git}.
 
@@ -50,7 +61,7 @@ We define the \define{parameters space} $\mathcal{P}$ as the space that contains
 \begin{equation}
 \mathcal{P} \defined \left\{ p: p = (l_\mu,  m_\mu,d_i,  \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, R^*_\mu, S^*_i) \right\}
 \end{equation}
-Without taking into account the constraints on these parameters, there are $3N_R+2N_S+3N_RN_S$ free parameters, so $\mathcal{P} \simeq \mathbb{R}^{3 N_R+2 N_S + 4 N_R N_S}$. The difficulty of task becomes clear : $\mathcal{P}$ is a huge, complicated space so we need to find a way to simplify it.
+Without taking into account the constraints on these parameters, there are $3N_R+2N_S+3N_RN_S$ free parameters, so $\mathcal{P} \simeq \mathbb{R}_+^{3 N_R+2 N_S + 4 N_R N_S}$. The difficulty of task becomes clear : $\mathcal{P}$ is a huge, complicated space so we need to find a way to simplify it.
 
  Indeed, the goal is to study microbial communities with a large number of consumers and resources, typically $N_R, N_S \approx 25, 50, 100, \dots$ \ie $\sim 2'500$ or more free parameters and so it is clear that a precise study on each element of each matrix is way too tenuous of a job. It's easier to look at it from a statistical point of view, \ie we will write a matrix $q_{i\mu}$ as \cite{pascual-garcia_mutualism_2017} :
  \begin{equation}

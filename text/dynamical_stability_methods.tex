@@ -3,19 +3,37 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
-\subsection{Equilibria of the model and their stability}
-We are interested in studying the stability of the equilibrium points of our model Eqs.\eqref{eq : differential eq for resources and species}. We say that $\{R^*_\mu, S^*_j\}$ are \textit{equilibria}\footnote{For the sake of brevity, we will sometimes drop the $\mu$ and $j$ subscripts when we write $\{R^*_\mu, S^*_j\}$.}
-of our model if they are fixed points of it, that means if the following equations are fulfilled :
-\begin{subequations}\label{eq : equilibrium resources and species}
-\begin{empheq}[left=\empheqlbrace]{align}
-  0 &= l_\mu - m_\mu R^*_\mu - \sum_{j} \gamma_{j\mu} R^*_\mu S^*_j + \sum_j \alpha_{\mu j} S^*_j \label{eq : equilibrium resources} \\
- 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i \label{eq : equilibrium species}
-\end{empheq}
-\end{subequations}
-As said above, our main goal is to study the stability of such equilibria. Before introducing different notions around equilibria, we focus on simplifying the problem first as much as we can.
+As stated in the introduction, we are interested in the equilibria points of the set of coupled differential equations \eqref{eq : differential eq for resources and species}. In particular we want to know how \important{stable} a given equilibrium is. However the notion of \important{stability} itself is not trivial : what does it mean exactly that a system is stable under a given perturbation? How is a perturbation even defined? These questions have many different possible answers. Throughout this thesis different notions of stability will be tackled : the first is \important{dynamical stability}.
 
-\subsubsection{Linear stability}
-We can define in general the \textit{jacobian} $J$ of our system as the jacobian matrix of its temporal evolution \eqref{eq : differential eq for resources and species}:
+The main idea behind dynamical stability is simple. We want to answer the following question :
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+Given an equilibrium point $\{ R^*_\mu, S^*_i\}$, does the system go back to a positive-valued equilibrium when the consumers and resources abundances are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a positive-valued equilibrium?
+\end{minipage}}
+\end{centering}
+\subsection{Definitions}
+\subsubsection{Local dynamical stability}
+The first notion to introduce is \define{local dynamical stability} : a system is said to be \important{locally dynamically stable} if it goes back to \important{its initial equilibrium point} $\{ R^*_\mu, S^*_i \} $ after $R^*_\mu$ and $S^*_i$ have been perturbed by an infinitesimal amount $\{ \Delta R_\mu, \Delta S_i \}$.
+Because the perturbations are supposed to be very small, we can write :
+\begin{equation}
+\begin{pmatrix}
+\frac{dR_\mu(t)}{dt} \\
+\frac{dS_i(t)}{dt}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{d\Delta R_\mu(t)}{dt} \\
+\frac{d\Delta S_i(t)}{dt}
+\end{pmatrix}
+=
+J
+\begin{pmatrix}
+\Delta R_\mu(t) \\
+\Delta S_i(t)
+\end{pmatrix}
+\end{equation}
+where $J$ is the \define{jacobian} of our system \ie the jacobian matrix of its temporal evolution \eqref{eq : differential eq for resources and species}:
 \begin{equation}
   J \defined
 \begin{pmatrix}
@@ -35,12 +53,10 @@ where $\delta$ is the Kronecker delta symbol. Using the fact that we are only in
    \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
  \end{pmatrix}, \label{eq : definition of jacobian alternative}
 \end{equation}
+We can then define for a given equilibrium point $\{R^*_\mu, S^*_i\}$ the \define{jacobian at equilibrium} $J^*$ as the jacobian of said equilibrium.
+We will hence say that a given equilibrium is \textit{locally dynamically stable} if its jacobian $J^*$ is negative definite, \ie if the largest real part of the eigenvalues of $J^*$ is negative.
 
-We can then define for a given equilibrium point $\{R^*_\mu, S^*_i\}$ the \textit{jacobian at equilibrium} $J^*$ as the jacobian of said equilibrium.
-
-We will furthermore say that a given equilibrium is \textit{linearly stable} if its jacobian $J^*$ is not positive definite, \ie if the largest eigenvalue of $J^*$ has a non positive real part.
-
-Note that if we are interested only in positive valued equilibria (\ie $S^*_i > 0 \ \forall i$), then Eq.\eqref{eq : equilibrium species} is equivalent to :
+Note that since we are interested only in positive valued equilibria (\ie $S^*_i > 0 \ \forall i$), then Eq.\eqref{eq : equilibrium species} is equivalent to :
 \begin{equation}
   \sum_\nu \sigma_{i\nu} \gamma_{i\nu}R^*_\nu -d_i - \sum_\nu \alpha_{\nu i} = 0,
 \end{equation}
@@ -52,19 +68,60 @@ which means that the lower right block of the jacobian in Eq.\eqref{eq : definit
 \end{pmatrix}, \label{eq : jacobian at equilibrium}
 \end{equation}
 where
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
 \begin{itemize}
-  \item $\Delta_{\mu\nu} = \text{diag}(m_\mu+\sum_j \gamma_{j\mu} S^*_j)$ is a positive $N_R \times N_R$ diagonal matrix,
+  \item $\Delta_{\mu\nu} = \text{diag}(m_\mu+\sum_j \gamma_{j\mu} S^*_j) = \text{diag}\left(\frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\right)$ is a positive $N_R \times N_R$ diagonal matrix,
   \item $\Gamma_{\mu j} = -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j}$ is a $N_R \times N_S$ matrix which does not have entries with a definite sign.
   \item $\Beta_{i\nu} = \sigma_{i\nu} \gamma_{i\nu} S^*_i$ is a $N_S \times N_R$ matrix with positive entries.
 \end{itemize}
+\end{minipage}}
+\end{centering}
 
-\subsubsection{Dynamical stability}
-Once we established that a system is linearly stable [\textbf{Check if the following is true}], we would like to quantify \textit{how stable} it is. One way of doing this is studying its dynamical stability \cite{pascual-garcia_mutualism_2017}. The idea is to take an equilibrium point $\{R^*_\mu, S^*_i\}$ and perturb the abundance of the species and resources at that point :
-\begin{empheq}{align}
+\subsubsection{The locally dynamically stable volume $\mathcal{D}^{G,A}_{L,x}$}
+Similarly to what was conducted in Methods \ref{sec : methods feasibility}, one can define the \define{parameters set local dynamical stability function} $\mathfrak{D}_L : \mathcal{P} \rightarrow \{
+0,1\}$, which tells you whether a given set of parameters $p \in \mathcal{P}$ is locally dynamically stable or not :
+\begin{equation}
+\mathfrak{D}_L(p)\defined\begin{cases}
+1 \text{ if } p \text{ is locally dynamically stable} \\
+0 \text{ else.}
+\end{cases}
+\end{equation}
+Note that trivially $p$ has to be feasible in order to be locally dynamically stable :
+\begin{equation}
+\mathfrak{D}_L(p)=1 \implies \mathfrak{F}(p)=1. \label{eq : locally dynamically stable implies feasible}
+\end{equation}
+Again, we also define the \define{metaparameters set local dynamical stability function} $\mathcal{D}_L : \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ which tells you, given a set of metaparamters $m \in \mathcal{M}$ and a consumption-syntrophy network $B=(G,A)$ the chance that you draw a locally dynamically stable set of parameters :
+\begin{equation}
+\boxed{\mathcal{D}_L(m, B)\defined\text{Probability}\left\{\mathfrak{D}_L(\mathcal{A}(m, B))=1\right\}}.
+\end{equation}
+We also define the $x$ locally dynamically stable (lds) volume $\mathcal{D}_{L,x}^{G,A}$ by the region of the metaparameters space that gives rise to a percentage of $x$ dynamically stable systems:
+\begin{equation}
+\mathcal{D}_{L,x}^{G,A} \defined \left\{m \in \mathcal{M} : \mathcal{D}_L(m, (G,A)) \geq x \right\}
+\end{equation}
+Clearly, $\mathcal{D}_{L,0}^{G,A}=\mathcal{M}$, $\text{Vol}\left(\mathcal{D}_{L,x}^{G,A}\right) \leq \text{Vol}\left(\mathcal{D}_{L,y}^{G,A}\right)$ $\forall x \geq y$, and more importantly, Eq.\eqref{eq : locally dynamically stable implies feasible} is equivalent to $\mathcal{D}_{L,x}^{G,A} \subset \mathcal{V}_x^{G,A}$. We can also define for a set of $N$ couples of matrices $S=\left\{(G_1, A_1) \dots, (G_N, A_N)\right\}$ their common $x$ (lds) volume $\mathcal{D}_{L,x}^S$ :
+\begin{equation}
+\mathcal{D}_{L,x}^S \defined \intersection{(G,A) \in S} \mathcal{D}_{L,x}^{G,A}.
+\end{equation}
+For such a set $S$ we define also its critical local dynamical stability $d_L^*(S)$ which is the largest local dynamical stability we can get while still having a non-zero common volume :
+\begin{equation}
+d_L^*(S) = \max_{x \in [0,1]}\left\{x : \text{Vol}(D_{L,x}) > 0\right\}.
+\end{equation}
+Finally the critical common local dynamical stability volume $\mathcal{D}^S_{L}$ is the common lds volume at critical lds :
+\begin{equation}
+\mathcal{D}^*_L \defined \mathcal{D}_{L, d_L^*(S)}^S.
+\end{equation}
+
+\subsubsection{Global dynamical stability}
+If we established that a system is locally dynamically stable, we know that it will come back to the same equilibrium after an infinitesimal perturbation of the resources and consumers abundances. The next natural question is : \important{how much} can these be perturbed before the system goes to a point where either at least a species has gone extinct or reaches another positive valued equilibrium $\{ \tilde{R}^*_\mu, \tilde{S}^*_i\}$ or simply does not reach a new dynamical equilibrium?
+One way of studying this \cite{pascual-garcia_mutualism_2017} is to simply take an equilibrium point $\{ R^*_\mu, S^*_i\}$ and perturb the abundance of the species and resources at that point by a fixed number $\Delta_D \in \left[0, 1\right]$ which allows us to quantify the perturbation:
+\begin{empheq}[left=\empheqlbrace]{align}
   R^*_\mu \rightarrow R_\mu(t_0) \equiv  R^*_\mu \left(1+\Delta_D \nu_\mu\right), \\
   S^*_i \rightarrow S_\mu(t_0) \equiv S^*_i \left(1+\Delta_D \nu_i \right),
 \end{empheq}
-where the $\nu_{\mu, i}$ are random numbers drawn from a uniform distribution between -1 and +1, $t_0$ is the time where the previously at equilibrium system is perturbed and $\Delta_D \in \left[-1,1\right]$ is a fixed number quantifying the magnitude of the perturbation. The system with the initial values $\{R(t_0), S(t_0)\}$ can then be time evolved from $t=t_0$ until it reaches an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ which may be different from the equilibrium $\{R^*, S^*\}$ initially considered.
+where the $\nu_{\mu, i}$ are random numbers drawn from a uniform distribution between -1 and +1 and $t_0$ is the time where the previously at equilibrium system is perturbed. This is basically the same procedure as local dynamical stability except we allow the perturbation $\Delta_D$ to be non-zero. The question we will often ask is precisely how big can $\Delta_D$ be.
+The system with the initial values $\{R(t_0), S(t_0)\}$ can then be time evolved from $t=t_0$ until it reaches an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ which may be different from the equilibrium $\{R^*, S^*\}$ initially considered.
 
 A certain number of quantities, that all depend on the perturbation $\Delta_D$, can then be measured to quantify the dynamical stability of the system :
 \begin{itemize}
@@ -77,33 +134,100 @@ A certain number of quantities, that all depend on the perturbation $\Delta_D$, 
 \end{itemize}
 These quantities have either been already introduced in previous papers or are natural extensions of standard quantities \cite{ives_stability_2007,pascual-garcia_mutualism_2017}. They allow us to quantify the robustness of a given equilibrium.
 
-\subsubsection{Structural stability}
-Very similarly to dynamical stability, where the abundances of the resources and species are changed, one can perturb the parameters of a model at an equilibrium point. Namely the idea of \textit{structural stability} is the following : one takes a given equilibrium point [\textbf{Check whether it needs to be linearly stable or not}] $\{R^*, S^*\}$ and changes some or all the parameters of the model. We will focus here on perturbing the external feeding rate of the resources\footnote{This choice may seem a bit arbitrary at first hand. It stems from the idea that we wanted to keep things simple and hence decided to change only one parameter of the model. We chose the external feeding rate of the resources because it simply is the easiest one to control in an actual experimental setup.} :
-\begin{equation}
-l_\mu \rightarrow \tilde{l}_\mu \equiv l_\mu \left(1+\Delta_S\right).
-\end{equation}
-The system is then time evolved under the equations of evolution \eqref{eq : differential eq for resources and species}, except that $l_\mu \rightarrow \tilde{l}_\mu$, until an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ is reached. The same metrics as before can be used to quantify the structural stability.
-
 \subsection{The quest for a full solution}
-Here we aim to find the spectrum of the jacobian at equilibrium, which we will inform us about the dynamics of the model at hand.
-\subsubsection{The master equation for positive valued equilibria}
-As explained, we seek a solution to the problem $\det\left(J^* - \lambda \right) = 0$. Explicitly :
+The question of global dynamical stability is mathematically tedious, so we start by focusing on local dynamical stability.
+
+Here we aim to find the spectrum of the jacobian at equilibrium, which will tell us whether the system is locally dynamically stable or not (see above).
+
+\subsubsection{How to determine local dynamical stability}
+As explained, we need to determine the sign of the largest real part of all the eigenvalues of $J^*$.
+More precisely, mathematically we are interested in the real part of $\lambda_1$, which itself is defined by the following property:
 \begin{equation}
-\det
-\begin{pmatrix}
-  -\Delta - \lambda  & \Gamma \\
-  \Beta & 0-\lambda
-\end{pmatrix} = 0 \label{eq : master equation eigenvalues jacobian}
+\forall \lambda \in \sigma(J^*), \ \real{\lambda} \leq \real{\lambda_1},
 \end{equation}
-The idea is that the sign of the real part of the largest eigenvalue, denoted $\lambda_1$, will govern the local stability of the system at equilibrium. Namely :
+where $\sigma(J^*)$ is the set of eigenvalues of $J^*$, called the \define{spectrum} of $J^*$.
+The sign of $\lambda_1$, will govern the local stability of the system at equilibrium. Namely \textbf{Need to add resource?} :
 \begin{itemize}
 \item $\real{\lambda_1} < 0$ : any perturbation on the abundances will be exponentially supressed. The system is stable.
 \item $\real{\lambda_1} > 0$ : any perturbation on the abundances will be exponentially amplified. The system is unstable.
 \item $\real{\lambda_1}=0$ : a second order perturbation analysis is required to assess the system local stability. We will call such systems \textit{marginally stable} \cite{biroli_marginally_2018}.
 \end{itemize}
 
-\subsubsection{Bounds on the eigenvalues}
-\paragraph{Gerschgorin's circle theorem}
+\subsubsection{The master equation for local dynamical stability}
+In order to get $\real{\lambda_1}$, we have to get the full spectrum of $J^*$, as sadly easier standard techniques like the Perron-Frobenius theorem \cite{perron_zur_nodate} cannot be applied. The eigenvalues of $J^*$ are obtained through the eigenvalue problem:
+\begin{equation}
+\det\left(J^* - \lambda \right) = 0.
+\end{equation}
+More explicitly, using Eq.\eqref{eq : jacobian at equilibrium}, we state the \important{master equation for local dynamical stability} :
+\begin{equation}
+\boxed{
+\det
+\begin{pmatrix}
+ -\Delta - \lambda  & \Gamma \\
+ \Beta & 0-\lambda
+\end{pmatrix} = 0
+}\label{eq : master equation eigenvalues jacobian}
+\end{equation}
+Before proceeding any further, we first eliminate systems where local dynamical stability cannot be decided with the first order perturbation analysis that we are conducting, \ie marginally stable equilibria.
+
+\subsubsection{Marginally stable equilbria}
+We want to avoid the case $\real{\lambda_1}=0$, because it is way harder to handle mathematically. To make things easier, we will in our analytical computations\footnote{For numerical computations we will get rid of marginally stable systems individually, meaning we may have some systems where $0 \in \sigma(J^*)$.} get rid of all systems where 0 is part of the spectrum. Even though this is a harsh condition, we know that for such systems, local dynamical stability can be decided by the computations we conduct. $\lambda=0$ is part of the spectrum if and only if it solves the master equation \eqref{eq : master equation eigenvalues jacobian}:
+\begin{equation}
+\det
+\begin{pmatrix}
+  -\Delta   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = 0 \label{eq : determinant marginally stable equilibria}
+\end{equation}
+Using the fact that $\Delta$ is invertible, we can make use of the equality\footnote{This uses a formula which is trivially analogous to one found in \cite{powell_calculating_2011}.}:
+\begin{equation}
+\det\begin{pmatrix}
+  -\Delta   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = \det(-\Delta)\det(\Gamma\Delta^{-1}\Beta) = (-1)^{N_R}\det(\Gamma\Beta).
+\end{equation}
+Eq.\eqref{eq : determinant marginally stable equilibria} then becomes :
+\begin{equation}
+\det(\Gamma\Beta)=\det(\Beta\Gamma)=0
+\end{equation}
+which means that $\Gamma\Beta$ and $\Beta\Gamma$ are not full rank, \ie $\Gamma$ or $\Beta$ is not full rank.
+
+\subsubsection{Non marginal equilibria}\label{section : non marginal equilibria}
+For now we will concentrate on equilibria that are clearly either stable or unstable\footnote{The case of marginally stable systems, where the maximum eigenvalue is zero, will be covered later.}, \ie:
+\begin{equation}
+\lambda_1 \neq 0.
+\end{equation}
+For the sake of simplicity, we will first look for the non zero solutions of the spectrum, \ie for now we assume:
+\begin{equation}
+\lambda \neq 0.
+\end{equation}
+This immediately implies
+\begin{equation}
+\det\left(\lambda\right)\neq 0,
+\end{equation}
+where $\lambda$ actually stands for the $N_S \times N_S$ identity matrix multiplied by a scalar $\lambda$. One can use this condition to simplify Eq.\eqref{eq : master equation eigenvalues jacobian} using the properties of block matrices \cite{powell_calculating_2011} :
+\begin{equation}
+\det
+\begin{pmatrix}
+  -\Delta - \lambda  & \Gamma \\
+  \Beta & 0-\lambda
+\end{pmatrix} =
+\det\left(-\lambda\right)\det\left(-\Delta- \lambda+\frac{1}{\lambda}\Gamma \Beta\right).
+\end{equation}
+Hence Eq.\eqref{eq : master equation eigenvalues jacobian} becomes:
+\begin{equation}
+\boxed{
+\det\left(\lambda^2+\Delta \lambda-\Gamma \Beta\right)=0. \label{eq : master equation non marginal}
+}
+\end{equation}
+The complexity here is already reduced because we go from the determinant of a $N_R+N_S$ square matrix to a $N_R$ square matrix. We see from the previous expression that the dynamics is essentially dictated by the $\Gamma \Beta$ $N_R$-dimensional square matrix, which is given by :
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \Gamma_{\mu i} \Beta_{i \nu} = \sum_i \left(\alpha_{\mu i}-\gamma_{i \mu} R^*_\mu \right)\sigma_{i\nu}\gamma_{i\nu}S^*_i.
+\end{equation}
+There are many strategies here to find regimes of stability. One is the so-called ``Reductio ad absurdum'', which is explored later in Methods \ref{subsubsec : reductio ad absurdum}.
+
+\subsection{Bounds on the eigenvalues}
+\subsubsection{Gerschgorin's circle theorem}
 Gerschgorin's circle theorem \cite{gerschgorin_uber_1931} allows us to get a better idea of the location of the eigenvalues in the complex plane. It states that every eigenvalue of a $N\times N$ square matrix $A$
 is located in one of the $N$ discs $D_i$ defined by :
 \begin{equation}
@@ -155,7 +279,7 @@ R_C \defined \max\left\{\max_i\left\{\sum_\nu \abs{B_{i\nu}}\right\}, \max_\mu\l
 \end{equation}
 Intuitively, this means every eigenvalue must lie in a circle around the origin. The radius of this circle is given by whichever is larger between the largest column-sums of the $\Beta$ and $\Gamma$ matrices.
 
-\paragraph{Critical radius in terms of metaparameters}
+\subsubsection{Critical radius in terms of metaparameters}
 We would like to estimate $R_C$ in terms of metaparameters, so that we can choose metaparameters that will give rise to systems in an LRI regime, which we know will be dynamically stable.
 
 Using techniques very similar to previous computations :
@@ -181,65 +305,13 @@ R_C \approx \max\left\{ \max_i\left(\deg(G,i)\right) \sigma_0 \gamma_0 S_0, \max
 \end{equation}
 The main factor that will determine $R_C$ (and hence the largest magnitude of any eigenvalue) is the structure of the food consumption matrix.
 
-\subsubsection{Marginally stable equilbria}
-We now investigate when Eq.\eqref{eq : master equation eigenvalues jacobian} admits a zero $\lambda$ as a solution. If $\lambda=0$ is a solution then :
-\begin{equation}
-0 \in \sigma(J) \iff
-\det
-\begin{pmatrix}
-  -\Delta   & \Gamma \\
-  \Beta & 0
-\end{pmatrix} = 0
-\end{equation}
-Since $\Delta$ is invertible, this is equivalent to :
-\begin{equation}
-\det(-\Delta) \det\left(\Beta\Delta^{-1}\Gamma\right)=0 \iff \det(\Gamma\Beta)=0.
-\end{equation}
-which means that $\Gamma\Beta$ is not full rank. Hence we see that :
-\begin{equation}
-0 \in \sigma(J) \iff \det(\Beta\Gamma)=0.
-\end{equation}
 
-
-\subsubsection{Non marginal equilibria}\label{section : non marginal equilibria}
-For now we will concentrate on equilibria that are clearly either stable or unstable\footnote{The case of marginally stable systems, where the maximum eigenvalue is zero, will be covered later.}, \ie:
+\subsection{Low intra resources interaction (LRI) regime }
+\subsubsection{Reductio ad absurdum} \label{subsubsec : reductio ad absurdum}
+Now that we have a bound on how big the eigenvalues can be, we need to find strategies to find regimes where we \important{know} $\real{\lambda_1} < 0 $, \ie local dynamical stability is guaranteed. We inspire ourselves from the general idea of the mathematical proofs of \cite{butler_stability_2018}.
+We first rewrite Eq.\eqref{eq : master equation non marginal} as\footnote{We can do this because since $m_\mu > 0$, we know $\Delta$ will always be invertible.} :
 \begin{equation}
-\lambda_1 \neq 0.
-\end{equation}
-For the sake of simplicity, we will first look for the non zero solutions of the spectrum, \ie for now we assume:
-\begin{equation}
-\lambda \neq 0.
-\end{equation}
-This immediately implies
-\begin{equation}
-\det\left(\lambda\right)\neq 0,
-\end{equation}
-where $\lambda$ actually stands for the $N_S \times N_S$ identity matrix multiplied by a scalar $\lambda$. One can use this condition to simplify Eq.\eqref{eq : master equation eigenvalues jacobian} using the properties of block matrices [\textbf{insert ref here}] :
-\begin{equation}
-\det
-\begin{pmatrix}
-  -\Delta - \lambda  & \Gamma \\
-  \Beta & 0-\lambda
-\end{pmatrix} =
-\det\left(-\lambda\right)\det\left(-\Delta- \lambda+\frac{1}{\lambda}\Gamma \Beta\right).
-\end{equation}
-Hence Eq.\eqref{eq : master equation eigenvalues jacobian} becomes:
-\begin{equation}
-\boxed{
-\det\left(\lambda^2+\Delta \lambda-\Gamma \Beta\right)=0.
-}\label{eq : lambda equation}
-\end{equation}
-The complexity here is already reduced because we go from the determinant of a $N_R+N_S$ square matrix to a $N_R$ square matrix. We see from the previous expression that the dynamics is essentially dictated by the $\Gamma \Beta$ $N_R$-dimensional square matrix, which is given by :
-\begin{equation}
-\left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \Gamma_{\mu i} \Beta_{i \nu} = \sum_i \left(\alpha_{\mu i}-\gamma_{i \mu} R^*_\mu \right)\sigma_{i\nu}\gamma_{i\nu}S^*_i.
-\end{equation}
-There are many strategies here to find regimes of stability.
-
-\subsubsection{Reductio ad absurdum}
-One of them is following the general idea of the mathematical proofs of \cite{butler_stability_2018}.
-We first rewrite Eq.\eqref{eq : lambda equation} as\footnote{We can do this because since $m_\mu > 0$, we know $\Delta$ will always be invertible.} :
-\begin{equation}
-\det\left(S(\lambda)-\lambda\right)=0
+\det\left(-\Delta^{-1}\right)\det\left(-\Delta^{-1}\lambda^2-\lambda+\Delta^{-1}\Gamma\Beta\right)=0\iff \boxed{\det\left(S(\lambda)-\lambda\right)=0} \label{eq : eigenvalue problem S}
 \end{equation}
 with
 \begin{equation}
@@ -249,15 +321,13 @@ or, component-wise:
 \begin{equation}
 S_{\mu \nu} = \frac{1}{\Delta_\mu}\left[\left(\sum_i \Gamma_{\mu i}\Beta_{i \nu}\right) - \lambda^2 \delta_{\mu\nu}\right] \label{eq : definition S component wise}
 \end{equation}
-The idea is to assume we are in an unstable regime, there exists a \ie $\lambda > 0$ satisfying Eq.\eqref{eq : lambda equation}. We then have to find the conditions under which the spectrum of $S(\lambda)$ is entirely negative, implying that $\lambda \leq 0$. As this is a contradiction to the hypothesis that the regime is unstable, we must conclude that the regime is stable\footnote{Indeed, Eq.\eqref{eq : lambda equation} assumes already that either $\lambda >0$ or $\lambda < 0$.}.
+The idea is to assume we are in an unstable regime, there exists at least $\lambda \in \sigma(J^*)$ which satisfies Eq.\eqref{eq : master equation non marginal} and such that $\real{\lambda} > 0$. By Eq.\eqref{eq : eigenvalue problem S}, $\lambda$ is also an eigenvalue of $S(\lambda)$. If we find conditions under which the real part of the spectrum of $S(\lambda)$ is entirely negative, we will know that $\real{\lambda} \leq 0$. As this is a contradiction to the hypothesis that the regime is unstable, we must conclude that the regime is stable\footnote{Indeed, Eq.\eqref{eq : master equation non marginal} assumes already that either $\real{\lambda_1} >0$ or $\real{\lambda_1} < 0$.}.
 
 Hence, the general strategy is to find regimes where we know that the spectrum of $S$, written as $\sigma(S)$, will be entirely negative for a positive $\lambda$.
-
-\subsection{Low intra resources interaction (LRI) regime }
-We can use Lemma \ref{lemma : lemma Gerschgorin circle} to state the following theorem.
-\begin{theorem}
+\subsubsection{Strong LRI regime}
+\begin{theorem}\label{theorem : strong LRI regime}
 If a model is not marginally stable at equilibrium and it verifies :
-\begin{equation}\label{eq : LRI regime}
+\begin{equation}
 \left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} - R_C^2 \ \forall \mu,
 \end{equation}
 then it is dynamically stable.
@@ -290,6 +360,38 @@ Looking at Eq.\eqref{eq : definition S component wise}, we see that this is equi
 Using Lemma \ref{lemma : lemma Gerschgorin circle}, we know that all the eigenvalues of $S(\lambda)$ will have a negative real part.
 As explained before that means that if $\real{\lambda_1} > 0 $ in Eq.\eqref{eq : equation stability S} (unstable regime), then $\real{\lambda_1} < 0$, which leads to a contradiction. This then implies that the equilibrium is dynamically stable.
 \end{proof}
+\subsubsection{Weak LRI regime}
+A weaker version of Theorem \ref{theorem : strong LRI regime} can also be stated.
+\begin{theorem}\label{theorem : weak LRI regime}
+If a model is not marginally stable at equilibrium and it verifies :
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu,
+\end{equation}
+then its real eigenvalues are negative.
+\end{theorem}
+\begin{proof}
+We assume
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}}  \ \forall \mu.
+\end{equation}
+Let $\lambda \in \mathbb{R}$, then the following will also trivially hold:
+\begin{equation}
+  \left(\Gamma\Beta \right)_{\mu\mu} -\lambda^2 < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu. \label{eq : low species bound 1}
+\end{equation}
+Dividing Eq.\eqref{eq : low species bound 1} by\footnote{This works because $\Delta_\mu > 0$} $\Delta_\mu$, we get :
+\begin{equation}
+\frac{1}{\Delta_\mu}\left[\left(\sum_i \Gamma_{\mu i} \Beta_{i \mu} \right)-{\lambda^2}\right] < - \sum_{\nu \neq \mu } \abs{\frac{\sum_i \Gamma_{\mu i}\Beta_{i\nu}}{\Delta_\mu}} \ \forall \mu.
+\end{equation}
+Looking at Eq.\eqref{eq : definition S component wise}, we see that this is equivalent to:
+\begin{equation}
+S_{\mu \mu} + \sum_{\nu \neq \mu} \abs{S_{\mu \nu}} < 0\ \forall \mu.
+\end{equation}
+Using Lemma \ref{lemma : lemma Gerschgorin circle}, we know that all the real eigenvalues of $S(\lambda)$ will have a negative real part.
+We can conclude with the statement of the theorem.
+\end{proof}
+
+
+
 \subsubsection{Feasability of the low intra resources interaction regime}
 So we found that if a system has parameters that respect Eq.\eqref{eq : LRI regime} then it is dynamically stable. A naturally arising question is then to ask in what measure this is compatible with the feasability equations Eqs.\eqref{eq: feasability energy conservation}, \eqref{eq : feasability positivity d} and \eqref{eq : feasability positivity m}.
 
@@ -337,6 +439,38 @@ Combining Eq.\eqref{eq : feasability positivity m} and \eqref{eq : LRI necessary
 \alpha_0 \left[\max_\mu \left\{O_{\mu\mu}\right\}-\min_\mu \left\{ \frac{k^\alpha_\mu}{k^\gamma_\mu} \right\} \right] \leq \frac{l_0}{\min_\mu\left(k_\mu^\gamma\right)S_0}}.
 \end{equation}
 Although that equation gives us a necessary condition, it is not sufficient. Eq.\eqref{eq : LRI metaparams sufficient}, on the other hand, is and provides an intuitive way of finding a syntrophy adjacency matrix $A_{\mu i}$ that would put a system with a given consumption adjacency $G_{\mu i}$ in an LRI regime. Section \ref{section : numerical analysis LRI MC solver} explains in details how this can be achieved numerically.
+
+\subsubsection{Monte Carlo algorithm for the optimal syntrophy matrix} \label{section : numerical analysis LRI MC solver}
+We want to find a general algorithm which, for a given food consumption adjacency matrix $G$ gives back an optimal syntrophy adjacency matrix $A$. Strategically, we would like an $A$ such that Eq.\eqref{eq : LRI metaparams sufficient} is as close to being satisfied as possible. If it were satisfied, it would put the system in an LRI regime, which we have proven is dynamically stable.
+
+One way of trying to satisfy Eq.\eqref{eq : LRI metaparams sufficient} is to increase the magnitude of its LHS and minimize the magnitude of the RHS. The LHS is minimized if $(AG)_{\mu\mu}$ is set to its lowest possible value for every $\mu$, that is zero. On the other hand, the RHS is minimized if $\alpha_0(AG)_{\mu\nu}\approx\gamma_0R_0 (G^TG)_{\mu\nu} \ \forall \nu\neq\mu$.
+
+Intuitively, we then search for systems where $AG$ is zero on the diagonal, \ie where no coprophagy is observed, and $AG \approx \frac{\gamma_0R_0}{\alpha_0}G^TG$ outside the diagonal. It can be formalized by writing a proper Metropolis-Hastings Markov Chain Monte Carlo (MCMC) method. We designed the following algorithmic procedure to build a syntrophy adjacency matrix $A$:
+\begin{enumerate}
+\item Create a random $A$. Its connectance is chosen as the one of the consumption matrix $G$.
+\item Do the following for a given number of steps:
+\begin{itemize}
+\item Choose a random row or, every other iteration, a column.
+\item In that row/column, try to swap a zero and a one while preserving the ``releasers'': if a species releases some resource, it has to keep releasing something (the resource can change though). The ``releasees'' are preserved as well : if a resource is being released by some species, it has to keep being released (but it does not have to be by the same species). \textbf{why do we impose those conditions?}
+\item The swap is accepted, \ie $A$ is modified, if the energy difference $\Delta E$ is negative or if a random number drawn uniformly between zero and one is smaller than $e^{-\Delta E/T}$ where $T$ is the current temperature. More on $\Delta E$ and $T$ below.
+\end{itemize}
+\item Return $A$.
+\end{enumerate}
+A couple comments on this algorithm can be made:
+\begin{itemize}
+\item The algorithm preserves the connectance of $A$ but not its nestedness. The question of what value to choose is open, but we choose $\kappa(A)=\kappa(G)$ as a first approach, \ie syntrophy and consumption networks have the same connectance.
+\item The temperature $T$ changes dynamically during the simulation. It is obtained in a way close to the spirit of simulated annealing techniques \cite{gendreau_simulated_2019} : the temperature $T$ is multiplied by a factor $\lambda=0.99$ at a fixed frequency (for instance every 1000 steps). We add the requirement that if new moves are rejected during too many consecutive steps, we multiply the temperature by $1/\lambda$.
+\item The energy difference $\Delta E$ between the new proposed $A'$ and the old $A$ is computed by assigning an energy $E$ to both $A'$ and $A$ and subtracting them:
+\begin{equation}
+\Delta E \defined E(A')-E(A).
+\end{equation}
+The choice of the energy function $E$ is crucial. In essence, this MCMC algorithm will find the specific $A$ which minimizes $E(A)$. Since we want to work with systems in the LRI regime, we use the simplest and most natural function that is compatible with the intuitively expected characteristics of $A$ explained above (\ie $AG$ is zero on the diagonal and equal to $\frac{\gamma_0 R_0}{\alpha_0} G^TG$ outside of it):
+\begin{equation}
+E(A) \defined \sum_\mu \left( \abs{\alpha_0(AG)_{\mu\mu}} + \sum_{\nu\neq\mu} \abs{(\alpha_0 AG-\gamma_0 R_0 G^TG)_{\mu\nu} }\right).
+\end{equation}
+The energy function and hence the optimal syntrophy adjacency matrix $A$ depend on the ratio $\frac{\alpha_0}{\gamma_0 R_0}$. This prompts then the question of which $\alpha_0$ can be deemed sensible. As a first step, we will take the value of Eq.\eqref{eq : largest feasible alpha0} : $\alpha_0 = \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 N_R$. This means that the outcome of the algorithm is an optimized $A$ \textbf{for the largest feasible syntrophy}. Since the expression we have for the largest feasible syntrophy is independent of the $G$ matrix, this choice of $\alpha_0$ provides us a sensible way of comparing different consumption networks.
+\end{itemize}
+
 
 
 % \paragraph{LRI state for an identity food consumption matrix}
@@ -478,37 +612,6 @@ A natural order parameter $O$ is then
 O \equiv \frac{S_{\text{tot}}}{C_{\text{tot}}} = \frac{\sum_{i, \nu} \alpha_{\nu i} S_i}{\sum_{i,\nu}\sigma_{i\nu} \gamma_{i\nu}R_\nu S_i} \approx \frac{N_S N_R \alpha_0 S_0}{\sigma_0 R_0 S_0 N_S N_R \gamma_0} = \frac{\alpha_0}{\sigma_0 R_0 \gamma_0}.
 \end{equation}
 
-\subsection{LRI regime}
-\subsubsection{Monte Carlo algorithm for the optimal syntrophy matrix} \label{section : numerical analysis LRI MC solver}
-We want to find a general algorithm which, for a given food consumption adjacency matrix $G$ gives back an optimal syntrophy adjacency matrix $A$. Strategically, we would like an $A$ such that Eq.\eqref{eq : LRI metaparams sufficient} is as close to being satisfied as possible. If it were satisfied, it would put the system in an LRI regime, which we have proven is dynamically stable.
-
-One way of trying to satisfy Eq.\eqref{eq : LRI metaparams sufficient} is to increase the magnitude of its LHS and minimize the magnitude of the RHS. The LHS is minimized if $(AG)_{\mu\mu}$ is set to its lowest possible value for every $\mu$, that is zero. On the other hand, the RHS is minimized if $\alpha_0(AG)_{\mu\nu}\approx\gamma_0R_0 (G^TG)_{\mu\nu} \ \forall \nu\neq\mu$.
-
-Intuitively, we then search for systems where $AG$ is zero on the diagonal, \ie where no coprophagy is observed, and $AG \approx \frac{\gamma_0R_0}{\alpha_0}G^TG$ outside the diagonal. It can be formalized by writing a proper Metropolis-Hastings Markov Chain Monte Carlo (MCMC) method. We designed the following algorithmic procedure to build a syntrophy adjacency matrix $A$:
-\begin{enumerate}
-\item Create a random $A$. Its connectance is chosen as the one of the consumption matrix $G$.
-\item Do the following for a given number of steps:
-\begin{itemize}
-\item Choose a random row or, every other iteration, a column.
-\item In that row/column, try to swap a zero and a one while preserving the ``releasers'': if a species releases some resource, it has to keep releasing something (the resource can change though). The ``releasees'' are preserved as well : if a resource is being released by some species, it has to keep being released (but it does not have to be by the same species). \textbf{why do we impose those conditions?}
-\item The swap is accepted, \ie $A$ is modified, if the energy difference $\Delta E$ is negative or if a random number drawn uniformly between zero and one is smaller than $e^{-\Delta E/T}$ where $T$ is the current temperature. More on $\Delta E$ and $T$ below.
-\end{itemize}
-\item Return $A$.
-\end{enumerate}
-A couple comments on this algorithm can be made:
-\begin{itemize}
-\item The algorithm preserves the connectance of $A$ but not its nestedness. The question of what value to choose is open, but we choose $\kappa(A)=\kappa(G)$ as a first approach, \ie syntrophy and consumption networks have the same connectance.
-\item The temperature $T$ changes dynamically during the simulation. It is obtained in a way close to the spirit of simulated annealing techniques \cite{gendreau_simulated_2019} : the temperature $T$ is multiplied by a factor $\lambda=0.99$ at a fixed frequency (for instance every 1000 steps). We add the requirement that if new moves are rejected during too many consecutive steps, we multiply the temperature by $1/\lambda$.
-\item The energy difference $\Delta E$ between the new proposed $A'$ and the old $A$ is computed by assigning an energy $E$ to both $A'$ and $A$ and subtracting them:
-\begin{equation}
-\Delta E \defined E(A')-E(A).
-\end{equation}
-The choice of the energy function $E$ is crucial. In essence, this MCMC algorithm will find the specific $A$ which minimizes $E(A)$. Since we want to work with systems in the LRI regime, we use the simplest and most natural function that is compatible with the intuitively expected characteristics of $A$ explained above (\ie $AG$ is zero on the diagonal and equal to $\frac{\gamma_0 R_0}{\alpha_0} G^TG$ outside of it):
-\begin{equation}
-E(A) \defined \sum_\mu \left( \abs{\alpha_0(AG)_{\mu\mu}} + \sum_{\nu\neq\mu} \abs{(\alpha_0 AG-\gamma_0 R_0 G^TG)_{\mu\nu} }\right).
-\end{equation}
-The energy function and hence the optimal syntrophy adjacency matrix $A$ depend on the ratio $\frac{\alpha_0}{\gamma_0 R_0}$. This prompts then the question of which $\alpha_0$ can be deemed sensible. As a first step, we will take the value of Eq.\eqref{eq : largest feasible alpha0} : $\alpha_0 = \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 N_R$. This means that the outcome of the algorithm is an optimized $A$ \textbf{for the largest feasible syntrophy}. Since the expression we have for the largest feasible syntrophy is independent of the $G$ matrix, this choice of $\alpha_0$ provides us a sensible way of comparing different consumption networks.
-\end{itemize}
 
 
 \end{document}

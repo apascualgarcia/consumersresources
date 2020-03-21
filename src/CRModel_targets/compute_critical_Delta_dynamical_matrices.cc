@@ -9,6 +9,8 @@ int main(int argc, char * argv[]){
     std::vector<std::string> matrices_path=load_food_matrix_list(metaparams.foodmatrixpath);
     std::string syntrophy_folder=metaparams.syntrophy_matrix_path;
 
+    /* CAREFUL WE SOLVE FOR DYNAMICAL STABILITY HERE */
+    stabilitymode stab = dynamical;
 
     std::ofstream myfile;
     myfile.open(metaparams.save_path, std::ios::app);
@@ -31,8 +33,7 @@ int main(int argc, char * argv[]){
           metaparams.foodmatrixpath = matrices_path[i];
           metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
           std::cout << "Feasability probability is " << find_feasability_probability(metaparams) << std::endl;
-          delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct), stabilitymode(structural)};
-          statistics delta = compute_critical_Delta(metaparams, solv_params);
+          statistics delta = compute_critical_Delta(metaparams, stab);
           std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
           myfile << matrices_path[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
           metaparams.syntrophy_matrix_path=syntrophy_folder;

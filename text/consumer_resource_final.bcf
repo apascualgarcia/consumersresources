@@ -2139,12 +2139,15 @@
     <bcf:citekey order="14">ives_stability_2007</bcf:citekey>
     <bcf:citekey order="14">pascual-garcia_mutualism_2017</bcf:citekey>
     <bcf:citekey order="15">biroli_marginally_2018</bcf:citekey>
-    <bcf:citekey order="16">gerschgorin_uber_1931</bcf:citekey>
-    <bcf:citekey order="17">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="18">gendreau_simulated_2019</bcf:citekey>
-    <bcf:citekey order="19">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="20">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="21">magnus_matrix_2019</bcf:citekey>
+    <bcf:citekey order="16">perron_zur_nodate</bcf:citekey>
+    <bcf:citekey order="17">powell_calculating_2011</bcf:citekey>
+    <bcf:citekey order="18">powell_calculating_2011</bcf:citekey>
+    <bcf:citekey order="19">gerschgorin_uber_1931</bcf:citekey>
+    <bcf:citekey order="20">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="21">gendreau_simulated_2019</bcf:citekey>
+    <bcf:citekey order="22">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="23">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="24">magnus_matrix_2019</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

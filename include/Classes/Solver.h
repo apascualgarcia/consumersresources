@@ -10,6 +10,7 @@ struct Solver_Parameters{
   Metaparameters* metaparameters;
   unsigned int Nsimul;
   eqmode equilibrium;
+  stabilitymode stab_mode; // either structural or dynamical
   double target; //basically allows us to say we want to solve f(x)=shift instead of f(x)=0
 };
 

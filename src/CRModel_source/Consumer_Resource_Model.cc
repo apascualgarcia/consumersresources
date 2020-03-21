@@ -504,7 +504,7 @@ void CRModel::perturb_parameters(const ntype & Delta) const{
   }
 
   if(this->metaparameters->verbose > 1){
-    std::cout <<"\t Structurally perturbed the system with parameter delta =" << Delta << std::endl;
+    std::cout <<"\t Structurally perturbed the l_mu's the system with parameter delta =" << Delta << std::endl;
   }
 
   return;
@@ -564,7 +564,7 @@ nvector CRModel::get_d()const{
   Parameter_set* p = this->model_param->get_parameters();
   return p->d;
 }
-nmatrix CRModel::perturb_abundances(const ntype& delta){
+nmatrix CRModel::perturb_abundances(const ntype& delta) const{
   nmatrix* current_eq = &(*eq_vals)[0];
   nmatrix perturb_eq;
   perturb_eq.push_back(nvector());
@@ -578,6 +578,9 @@ nmatrix CRModel::perturb_abundances(const ntype& delta){
   }
   for(size_t i=0; i < p->NS; ++i){
     perturb_eq[1].push_back((*current_eq)[1][i]*(1+delta*uniform_distrib(random_engine)));
+  }
+  if(this->metaparameters->verbose>1){
+    std::cout << "\t Perturbed the resources and consumers abundances with magnitude " << delta << std::endl;
   }
   return perturb_eq;
 }
@@ -881,6 +884,16 @@ bool CRModel::is_in_weak_LRI() const{
   return true;
 }
 
+ntype CRModel::max_perturbation_dynamically_stable(ntype accuracy) const{
+  ntype delta=0.;
+  Extinction new_equilib;
+  do{
+    delta+=accuracy;
+    new_equilib = this->evolve_until_equilibrium_from_abundances(this->perturb_abundances(delta), this->metaparameters->convergence_threshold);
+  }while(new_equilib.extinct<1.);
+  return delta;
+}
+
 bool CRModel::is_in_strong_LRI() const{
   nmatrix Gamma=this->get_Gamma_matrix();
   nmatrix Beta=this->get_Beta_matrix();
@@ -902,6 +915,31 @@ bool CRModel::is_in_strong_LRI() const{
   }
   if(this->metaparameters->verbose>1){
     std::cout << "\t The system is in the strong LRI regime." << std::endl;
+  }
+  return true;
+}
+
+bool CRModel::is_feasible() const{
+  Metaparameters* m = this->metaparameters;
+  if(not(this->positive_parameters())){
+    if(m->verbose > 3){
+      std::cout << "Model rejected because some of the parameters are not positive" << std::endl;
+    }
+    return false;
+  }
+
+  if(m->energy_constraint and not(this->energy_constraint())){
+    if(m->verbose > 3){
+      std::cout << "Model rejected because the energy constraint is not fulfilled" << std::endl;
+    }
+    return false;
+  }
+
+  if(not(this->respects_equations_of_evolution_at_equilibrium())){
+    if(m->verbose > 3){
+      std::cout << "Model rejected because the equations of evolution are not respected at equilibrium " << std::endl;
+    }
+    return false;
   }
   return true;
 }
