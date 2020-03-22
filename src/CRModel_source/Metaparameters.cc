@@ -42,6 +42,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->equilibrium = string_to_eq_mode(configFile.get<std::string>("equilibrium_mode"));
   this->convergence_threshold = configFile.get<ntype>("convergence_threshold");
   this->building_mode = string_to_building_mode(configFile.get<std::string>("building_mode"));
+  this->volume_of_interest_path=configFile.get<std::string>("path_to_volume");
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
@@ -302,4 +303,36 @@ nmatrix Metaparameters::set_of_feasible_points() const{
     }
   }
   return feasible_points;
+}
+
+nmatrix Metaparameters::load_volume() const{
+  nmatrix input;
+  if(this->verbose > 1){
+    std::cout << "\t Loading volume from " << this->volume_of_interest_path << std::endl;
+  }
+  std::ifstream in(this->volume_of_interest_path);
+  if (!in) {
+    error err("Cannot open file for the volume "+this->volume_of_interest_path+" or file is empty, giving back null matrix",1);;
+    throw err;
+    return input;
+  }
+  if(in.good()){
+    std::string line;
+    unsigned int index=0;
+    while(std::getline(in, line)){
+      /* skip line if it starts with a comment */
+      if(line[0]!='#'){
+        std::istringstream iss(line);
+        input.push_back(nvector());
+        ntype element;
+        while(iss>>element){
+          input[index].push_back(element);
+        }
+        index+=1;
+      }
+    }
+  }
+  in.close();
+
+  return input;
 }

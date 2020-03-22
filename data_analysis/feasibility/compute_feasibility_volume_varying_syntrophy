@@ -1,0 +1,27 @@
+#!/bin/bash
+# This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
+# for every matrix listed (one graph per matrix list) and alpha_mode chosen
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+ALPHA_MODE="random_structure no_release_when_eat optimal_matrix"
+LOADNAME="feasibility_NR25_NS25"
+OPTIMAL_MATRIX_FOLDER="optimal_LRI"
+ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
+MAT_FOLDER="optimal_matrices/consumption/Nr25_Nc25"
+SAVENAME="common_feasibility_volume_NR25_NS25"
+
+for a in $ALPHA_MODE
+do
+  for matl in $MATRIX_LIST
+  do
+    for alpha in $ALPHA_VALS
+    do
+      LOADFILE="${LOADNAME}_${matl}_${a}_${OPTIMAL_MATRIX_FOLDER}_alpha0=${alpha}"
+      SAVEFILE="${SAVENAME}_${matl}_${a}_${OPTIMAL_MATRIX_FOLDER}_alpha0=${alpha}.out"
+
+
+      python3 data_analysis/compute_common_feasibility_volume.py data_output/${LOADFILE} ${MAT_FOLDER} data_output/${SAVEFILE}
+      # execute command
+      echo "data_output/${SAVEFILE}" >> data_output/${SAVENAME}.out
+    done
+  done
+done

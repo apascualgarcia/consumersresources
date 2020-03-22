@@ -33,6 +33,8 @@ struct Metaparameters{
   eqmode equilibrium;
   ntype convergence_threshold;
   buildingmode building_mode;
+  /* path to which point should be studied (eg common feasible volume) */
+  std::string volume_of_interest_path;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/
@@ -65,6 +67,8 @@ struct Metaparameters{
   /* returns the set of (gamma0,S0) which are fully feasible */
   nmatrix set_of_feasible_points() const;
 
+  /* loads the points given in the path */
+  nmatrix load_volume() const;
 };
 
 
