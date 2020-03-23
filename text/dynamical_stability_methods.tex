@@ -392,7 +392,7 @@ We can conclude with the statement of the theorem.
 
 
 
-\subsubsection{Feasability of the low intra resources interaction regime}
+\subsubsection{Feasibility of the low intra resources interaction regime}
 So we found that if a system has parameters that respect Eq.\eqref{eq : LRI regime} then it is dynamically stable. A naturally arising question is then to ask in what measure this is compatible with the feasability equations Eqs.\eqref{eq: feasability energy conservation}, \eqref{eq : feasability positivity d} and \eqref{eq : feasability positivity m}.
 
 \noindent Finding an approximation of the resource interaction matrix $(\Gamma\Beta)_{\mu \nu}$ using the metaparameters allows to find a necessary condition on the metaparameters. Indeed, using the metaparameters approximations Eq.\eqref{eq : metaparameters approximations}, we get:
@@ -440,7 +440,7 @@ Combining Eq.\eqref{eq : feasability positivity m} and \eqref{eq : LRI necessary
 \end{equation}
 Although that equation gives us a necessary condition, it is not sufficient. Eq.\eqref{eq : LRI metaparams sufficient}, on the other hand, is and provides an intuitive way of finding a syntrophy adjacency matrix $A_{\mu i}$ that would put a system with a given consumption adjacency $G_{\mu i}$ in an LRI regime. Section \ref{section : numerical analysis LRI MC solver} explains in details how this can be achieved numerically.
 
-\subsubsection{Monte Carlo algorithm for the optimal syntrophy matrix} \label{section : numerical analysis LRI MC solver}
+\subsubsection{Monte Carlo algorithm for the optimal syntrophy matrix} \label{section : methods LRI MC solver}
 We want to find a general algorithm which, for a given food consumption adjacency matrix $G$ gives back an optimal syntrophy adjacency matrix $A$. Strategically, we would like an $A$ such that Eq.\eqref{eq : LRI metaparams sufficient} is as close to being satisfied as possible. If it were satisfied, it would put the system in an LRI regime, which we have proven is dynamically stable.
 
 One way of trying to satisfy Eq.\eqref{eq : LRI metaparams sufficient} is to increase the magnitude of its LHS and minimize the magnitude of the RHS. The LHS is minimized if $(AG)_{\mu\mu}$ is set to its lowest possible value for every $\mu$, that is zero. On the other hand, the RHS is minimized if $\alpha_0(AG)_{\mu\nu}\approx\gamma_0R_0 (G^TG)_{\mu\nu} \ \forall \nu\neq\mu$.

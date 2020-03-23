@@ -7,7 +7,8 @@ SAVENAME="local_dynamical_stability_NR25_NS25"
 OPTIMAL_MATRIX_FOLDER="optimal_LRI"
 ADDITIONAL_MODIF="verbose-level=1"
 ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
-VOL_NAME="common_feasibility_volume_NR25_NS25"
+# for old version
+# VOL_NAME="common_feasibility_volume_NR25_NS25"
 
 for a in $ALPHA_MODE
 do
@@ -27,7 +28,9 @@ do
       CURRENT_NAME="${CURRENT_NAME}_alpha0=${alpha}"
       VOLUME_PATH="${VOLUME_PATH}_alpha0=${alpha}"
 
-      FIRST_COMMAND="build/find_lds_points_in_feasible_region config/configuration.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha} path_to_volume='feasibility/${VOLUME_PATH}.out' ${ADDITIONAL_MODIF}"
+      FIRST_COMMAND="build/check_percentage_dynamically_stable_systems config/configuration.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha}  ${ADDITIONAL_MODIF}"
+      # for old version
+      # FIRST_COMMAND="${FIRST_COMMAND} path_to_volume='feasibility/${VOLUME_PATH}.out'"
       FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
 
       COMMAND_NAME="${FIRST_COMMAND}"
@@ -35,11 +38,11 @@ do
       LOG_NAME="logs/${CURRENT_NAME}.log"
       ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
       # execute command
-      #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-      echo $COMMAND_NAME
+      nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
+      #echo $COMMAND_NAME
       # write command to log
-      #now="["$(date)"]"
-      #echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+      now="["$(date)"]"
+      echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
     done
   done
 done

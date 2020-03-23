@@ -7,7 +7,7 @@ import matplotlib.tri as tr
 import copy
 
 alpha_mode=['random_structure', 'no_release_when_eat', 'optimal_matrix']
-label=['random structure', 'no release when eat', 'optimal LRI']
+label=['fully connected', 'no release when eat', 'optimal LRI']
 filename = 'feasibility/feasibility_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
 alpha0=[0, 0.0013, 0.0026, 0.0039, 0.0052, 0.0065, 0.0078, 0.0091, 0.0104, 0.014]
 # feasibility region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the feasibility of said point

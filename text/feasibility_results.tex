@@ -27,7 +27,9 @@ This relation is interesting in many ways. First of all it tells us that at fixe
 \item the largest column-degree of the consumption matrix decreases. The degree of a given column $\nu$ of the consumption matrix tells you how many species eat from resource $\nu$. This encourages communities of specialists, where each consumer eats from its own and no other resource.
 \end{itemize}
 Overall we see that feasibility increases when the \important{consumption flow} $\simeq \gamma_0 S_0 \deg(G,\nu) $ is low $\forall \nu$.
-Eq.\eqref{eq : fully feasible volume no syntrophy} can be confronted to simulations. Figure \ref{fig : typical feasibility region} shows the proportion of feasible systems without syntrophy $\mathcal{F}(\gamma_0, S_0, \alpha_0=0, G)$ and $R_0=l_0=1$, $\sigma_0=0.25$ (see Methods \ref{sec : methods feasibility volume}), for two matrices $G_1$ and $G_2$ of our set. $G_1$ has connectance $\kappa_1=0.17$ and nestedness $\eta_1=0.2$, $G_2$ is more connected and more nested : $\kappa_2=0.37$ and $\eta_2=0.4$.
+Eq.\eqref{eq : fully feasible volume no syntrophy} can be confronted to simulations. First of all note that for all the matrices in the set we chose, there existed a fully feasible zone. Fortunately, there was an overlap between all of these, such that the critical feasibility $f^*(S)=1$ and the critical volume is the fully feasible volume which we denote $\mathcal{V}^1$.
+
+ Figure \ref{fig : typical feasibility region} shows the proportion of feasible systems without syntrophy $\mathcal{F}(\gamma_0, S_0, \alpha_0=0, G)$ and $R_0=l_0=1$, $\sigma_0=0.25$ (see Methods \ref{sec : methods feasibility volume}), for two matrices $G_1$ and $G_2$ of our set. $G_1$ has connectance $\kappa_1=0.17$ and nestedness $\eta_1=0.2$, $G_2$ is more connected and more nested : $\kappa_2=0.37$ and $\eta_2=0.4$.
 
 We observe a very sharp transition from a fully feasible to a fully unfeasible regime. Theoretically, this sharp transition happens when both sides of the inequality \eqref{eq : fully feasible volume no syntrophy} are equal, \ie at $\gamma_0 R_0 = l_0/\max_\nu\{\deg(G,\nu)\}S_0$.
  Numerically we fit the points which are at ``the boundary'' of the common feasible volume, \ie points where $0.4 \leq \mathcal{F}(\gamma_0, S_0, G) \leq 0.6$.
@@ -60,15 +62,20 @@ while the theoretical value matches better a fit of the points $0.4 \leq \mathca
 \end{figure}
 
 \subsection{Evolution of the fully feasible volume with syntrophy}
+Above we computed the fully feasible volume when there is no syntrophy \ie $\mathcal{V}^1(\alpha_0=0)$. Since $\alpha_0=0$, we did not need to specify what the structure of $A$ was. The next naturally arising question is then : what happens to the fully feasible volume when we add a syntrophic interaction? More precisely, how does $\mathcal{V}^1$'s shape change?
 
-\begin{figure}[h]
+The problem gets a bit more complex here 
+
+\begin{figure}[h!]
 \hspace{-0.1\linewidth}
-\subfloat{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_random_structure}}
-\subfloat{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_no_release_when_eat}}
+\captionsetup[subfigure]{captionskip = -185pt, margin = 205pt}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_random_structure}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_no_release_when_eat}}
 \begin{center}
-\subfloat{\includegraphics[width=0.6\linewidth]{figures/Results/common_feasibility_volume_varying_syntrophy_optimal_matrix}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{figures/Results/common_feasibility_volume_varying_syntrophy_optimal_matrix}}
 \end{center}
-\caption{Evolution of the fully feasible volume as syntrophy grows. Note that even though it is not very clear on the figure $\mathcal{V}^*(\alpha_0^+) \subset \mathcal{V}^*(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy.}
+\caption[caption for LOF]{Surface plot of the fully feasible volume $\mathcal{V}^1(\alpha_0)$. The color bar on the side indicates the value of $\alpha_0$ to which the surface corresponds. The white part of the plot corresponds to points that \important{never} are fully feasible. Note that even though it is not very clear on the figure $\mathcal{V}^1(\alpha_0^+) \subset \mathcal{V}^1(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy. The different subplots correspond to different structures for the syntrophy matrix : (a) $A$ is fully connected, (b) $A$ has a structure such that no resources consumed are eaten and (c) $A$ is obtained through the LRI MC algorithm\footnotemark described in Methods \ref{section : methods LRI MC solver}.} \label{fig : results feasibility cfv variation with syntrophy}
 \end{figure}
+ \footnotetext{Note that we took a constant value $\alpha_0$ as explained in Methods \ref{section : methods LRI MC solver} by lack of time.}
 
 \end{document}

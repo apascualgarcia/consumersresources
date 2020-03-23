@@ -32,9 +32,44 @@ ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nrun
       break;
     }
   }
-
   if(metaparams.verbose > 1){
-    std::cout << "The probability of feasability for these metaparameters is " << proba << std::endl;
+    std::cout << "The probability of local dynamical stability for these metaparameters is " << proba << std::endl;
+  }
+  return proba;
+}
+
+ntype find_local_dynamical_stability_probability(Metaparameters& metaparams, unsigned int Nruns, CRModelType model_type){
+  foodmatrix F = load_food_matrix(metaparams);
+  ntype proba = 0.;
+  switch(model_type){
+  case full:{
+      CRModel model;
+      model.create_model_parameters(metaparams);
+      for(size_t j=0; j < Nruns;++j){
+        model.attempt_to_build_model(F, metaparams, 0);
+        if(model.is_feasible() && model.is_dynamically_stable()){
+          proba+=1./Nruns;
+        }
+      }
+      break;
+    }
+  case effective:{
+    EffectiveCRModel model;
+      model.create_model_parameters(metaparams);
+      for(size_t j=0; j < Nruns;++j){
+        model.attempt_to_build_model(F, metaparams, 0);
+        if(model.is_feasible() && model.is_dynamically_stable()){
+          proba+=1./Nruns;
+        }
+      }
+      break;
+    }
+  default:{
+      break;
+      }
+  }
+  if(metaparams.verbose > 1){
+    std::cout << "The probability of local dynamical stability for these metaparameters is " << proba << std::endl;
   }
   return proba;
 }
