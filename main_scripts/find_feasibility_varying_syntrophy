@@ -31,8 +31,8 @@ do
       LOG_NAME="logs/${CURRENT_NAME}.log"
       ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
       # execute command
-      # nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-      echo $COMMAND_NAME
+      nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
+      #echo $COMMAND_NAME
       # write command to log
       #now="["$(date)"]"
       #echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
