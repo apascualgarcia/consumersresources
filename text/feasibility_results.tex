@@ -41,7 +41,7 @@ For $G_2$, we expect $S_0 = 0.077 /\gamma_0$. A fit gives $S_0=(\num[scientific-
 \label{fig : typical feasibility region}
 \end{figure}
 
-The numerical estimate does not always match that well with the theoretical value. Fig.\ref{fig : deviation away from theory feasibility} shows the relative error $\Delta_G = 1 -$ (theoretical value)/(numerical estimate). We see that in general the theoretical expectation tends to overestimate the fully feasible region. This is probably due to the noise (\ie the deviations away from the metaparameters) in the actual systems and the structure of the $G$ matrix. Indeed Fig.\ref{fig : deviation away from theory feasibility} shows that the lower the nestedness and connectance of $G$, the worse the theoretical estimate. In the future a better approximation can surely be found taking into account the variance of the metaparameters and the nestedness of $G$.
+The numerical estimate does not always match that well the theoretical value. Fig.\ref{fig : deviation away from theory feasibility} shows the relative error $\Delta_G = 1 -$ (theoretical value)/(numerical estimate). We see that in general the theoretical expectation tends to overestimate the fully feasible region. This is probably due to the noise (\ie the deviations away from the metaparameters) in the actual systems and the structure of the $G$ matrix. Indeed Fig.\ref{fig : deviation away from theory feasibility} shows that the lower the nestedness and connectance of $G$, the worse the theoretical estimate. In the future a better approximation can surely be found taking into account the variance of the metaparameters and the nestedness of $G$.
 \begin{figure}[h!]
 	\captionsetup[subfigure]{captionskip = -165pt, margin = 45pt}
 \subfloat[\label{fig : deviation away from theory feasibility fixed nestedness}]{\includegraphics[width=0.49\linewidth]{Results/feasibility_away_from_theory_fixed_nestedness}}
@@ -57,6 +57,18 @@ while the theoretical value matches better a fit of the points $0.4 \leq \mathca
 \includegraphics[width=0.7\linewidth]{Results/common_feasibility_volume}
 \caption{Plot of the common feasability region. The blue area indicates the common feasibility volume, computed numerically, while the dashed line shows the analytical prediction. Although the match is not as good as before, the relative error is only of the order of $20 \%$. The red part is the area where not all matrices are fully feasible. From now on, it will not be considered anymore.}
 \label{fig : common feasible volume}
+\end{figure}
+
+\subsection{Evolution of the fully feasible volume with syntrophy}
+
+\begin{figure}[h]
+\hspace{-0.1\linewidth}
+\subfloat{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_random_structure}}
+\subfloat{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_no_release_when_eat}}
+\begin{center}
+\subfloat{\includegraphics[width=0.6\linewidth]{figures/Results/common_feasibility_volume_varying_syntrophy_optimal_matrix}}
+\end{center}
+\caption{Evolution of the fully feasible volume as syntrophy grows. Note that even though it is not very clear on the figure $\mathcal{V}^*(\alpha_0^+) \subset \mathcal{V}^*(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy.}
 \end{figure}
 
 \end{document}

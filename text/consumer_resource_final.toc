@@ -44,18 +44,19 @@
 \contentsline {chapter}{\numberline {3}Results}{31}{chapter.3}
 \contentsline {section}{\numberline {3.1}Feasibility}{31}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{31}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Evolution of the fully feasible volume with syntrophy}{33}{subsection.3.1.2}
 \contentsline {section}{\numberline {3.2}Dynamical stability}{34}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}LRI regime}{34}{subsection.3.2.1}
 \contentsline {subsubsection}{Outcome of the Monte Carlo algorithm}{34}{section*.29}
 \contentsline {section}{\numberline {3.3}Structural stability}{35}{section.3.3}
-\contentsline {chapter}{\numberline {4}Fully connected network}{36}{chapter.4}
-\contentsline {section}{\numberline {4.1}Definition}{36}{section.4.1}
-\contentsline {section}{\numberline {4.2}Spectrum}{36}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Full system}{36}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Standard deviation expansion}{36}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Rewriting the system - the introduction of metaparameters}{37}{subsection.4.2.3}
-\contentsline {subsubsection}{Standard deviation expansion at first order}{37}{section*.33}
-\contentsline {paragraph}{Zero variance case}{38}{section*.37}
-\contentsline {chapter}{\numberline {5}Appendices}{40}{chapter.5}
-\contentsline {section}{\numberline {5.1}Demonstrations}{40}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Special determinant computation}{40}{subsection.5.1.1}
+\contentsline {chapter}{\numberline {4}Fully connected network}{37}{chapter.4}
+\contentsline {section}{\numberline {4.1}Definition}{37}{section.4.1}
+\contentsline {section}{\numberline {4.2}Spectrum}{37}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Full system}{37}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Standard deviation expansion}{37}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Rewriting the system - the introduction of metaparameters}{38}{subsection.4.2.3}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{38}{section*.33}
+\contentsline {paragraph}{Zero variance case}{39}{section*.37}
+\contentsline {chapter}{\numberline {5}Appendices}{41}{chapter.5}
+\contentsline {section}{\numberline {5.1}Demonstrations}{41}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Special determinant computation}{41}{subsection.5.1.1}

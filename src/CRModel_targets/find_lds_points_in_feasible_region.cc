@@ -31,7 +31,6 @@ int main(int argc, char * argv[]){
             proba_lds+=(1./Nsimuls);
           }
         }
-        std::cout << "Found proba " << proba_lds << std::endl;
         myfile << metaparams.gamma0 << " " << metaparams.S0 << " " << proba_lds << " ";
       }
       myfile << std::endl;
