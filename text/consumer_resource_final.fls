@@ -200,6 +200,8 @@ INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/t1enc.def
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/base/t1enc.def
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/chngcntr/chngcntr.sty
+INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT consumer_resource_final.aux
@@ -383,6 +385,9 @@ INPUT ./figures/Results/feasibility_away_from_theory_fixed_connectance.pdf
 INPUT ./figures/Results/common_feasibility_volume.pdf
 INPUT ./figures/Results/common_feasibility_volume.pdf
 INPUT ./figures/Results/common_feasibility_volume.pdf
+INPUT figures/Results/measure_common_feasibility_volume_varying_syntrophy.pdf
+INPUT ./figures/Results/measure_common_feasibility_volume_varying_syntrophy.pdf
+INPUT ./figures/Results/measure_common_feasibility_volume_varying_syntrophy.pdf
 INPUT ./figures/Results/common_feasibility_volume_varying_syntrophy_random_structure.pdf
 INPUT ./figures/Results/common_feasibility_volume_varying_syntrophy_random_structure.pdf
 INPUT ./figures/Results/common_feasibility_volume_varying_syntrophy_random_structure.pdf
