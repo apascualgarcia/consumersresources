@@ -1,6 +1,6 @@
 \documentclass[12pt, titlepage]{report}
 \usepackage{consumer_resource_final}
-\graphicspath{{./figures/}}
+\graphicspath{{./figures/Results/feasibility}}
 
 \begin{document}
 As explained in Methods \ref{sec : methods feasibility}, before addressing the question of the stability of a system, be it dynamical or structural, it is important to study whether that system is \important{feasible}. In short we must answer the question : ``does it make sense to talk about this system? Does it even exist?''.
@@ -38,7 +38,7 @@ We observe a very sharp transition from a fully feasible to a fully unfeasible r
 For $G_2$, we expect $S_0 = 0.077 /\gamma_0$. A fit gives $S_0=(\num[scientific-notation=false]{0.075}\pm\num{2e-8})/\gamma_0 +(\num{3.6e-4}\pm\num{1e-7})$. Again, the theoretical value is very close to the measured value.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{Results/typical_feasibility_volume}
+\includegraphics[width=0.7\linewidth]{typical_feasibility_volume}
 \caption{Plot of the feasability region. The color curve indicicates the feasibility function $\mathcal{F}(\gamma_0, S_0, \alpha_0=0, G)$ for $G_1$ (left) and $G_2$ (right). We observe a steep descent which marks a very clear transition from a totally feasible regime to a totally unfeasible regime, which allows us to precisely get the boundary of $\mathcal{V}^{G}_1$. The dashed lines indicate the theoretical predictions, which for both $G_1$ and $G_2$ are accurate to the order of $0.1 \%$.}
 \label{fig : typical feasibility region}
 \end{figure}
@@ -46,9 +46,9 @@ For $G_2$, we expect $S_0 = 0.077 /\gamma_0$. A fit gives $S_0=(\num[scientific-
 The numerical estimate does not always match that well the theoretical value. Fig.\ref{fig : deviation away from theory feasibility} shows the relative error $\Delta_G = 1 -$ (theoretical value)/(numerical estimate). We see that in general the theoretical expectation tends to overestimate the fully feasible region. This is probably due to the noise (\ie the deviations away from the metaparameters) in the actual systems and the structure of the $G$ matrix. Indeed Fig.\ref{fig : deviation away from theory feasibility} shows that the lower the nestedness and connectance of $G$, the worse the theoretical estimate. In the future a better approximation can surely be found taking into account the variance of the metaparameters and the nestedness of $G$.
 \begin{figure}[h!]
 	\captionsetup[subfigure]{captionskip = -165pt, margin = 45pt}
-\subfloat[\label{fig : deviation away from theory feasibility fixed nestedness}]{\includegraphics[width=0.49\linewidth]{Results/feasibility_away_from_theory_fixed_nestedness}}
+\subfloat[\label{fig : deviation away from theory feasibility fixed nestedness}]{\includegraphics[width=0.49\linewidth]{feasibility_away_from_theory_fixed_nestedness}}
 \captionsetup[subfigure]{captionskip = -175pt, margin = 45pt}
-\subfloat[\label{fig : deviation away from theory feasibility fixed connectance}]{\includegraphics[width=0.49\linewidth]{Results/feasibility_away_from_theory_fixed_connectance}}
+\subfloat[\label{fig : deviation away from theory feasibility fixed connectance}]{\includegraphics[width=0.49\linewidth]{feasibility_away_from_theory_fixed_connectance}}
 \caption{Relative error in the determination of the boundary of $\mathcal{V}^{G,0}_1$ (a) varying connectance at fixed nestedness and (b) varying nestedness at fixed connectance. The theoretical prediction tends to overestimate the measured value. The larger the nestedness and connectance, the better the estimate.}\label{fig : deviation away from theory feasibility}
 \end{figure}
 
@@ -56,21 +56,42 @@ We can similarly measure the common fully feasible volume $\mathcal{V^*}$, which
 while the theoretical value matches better a fit of the points $0.4 \leq \mathcal{F} \leq 0.6$ \textbf{make this more understandable}.
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.7\linewidth]{Results/common_feasibility_volume}
+\includegraphics[width=0.7\linewidth]{common_feasibility_volume_no_syntrophy}
 \caption{Plot of the common feasability region. The blue area indicates the common feasibility volume, computed numerically, while the dashed line shows the analytical prediction. Although the match is not as good as before, the relative error is only of the order of $20 \%$. The red part is the area where not all matrices are fully feasible. From now on, it will not be considered anymore.}
 \label{fig : common feasible volume}
 \end{figure}
 
-\subsection{Evolution of the fully feasible volume with syntrophy}
-Above we computed the fully feasible volume when there is no syntrophy \ie $\mathcal{V}^1(\alpha_0=0)$. Since $\alpha_0=0$, we did not need to specify what the structure of $A$ was. The next naturally arising question is then : what happens to the fully feasible volume when we add a syntrophic interaction? More precisely, how does $\mathcal{V}^1$'s shape change?
+\subsection{Evolution of the feasible volume with syntrophy}
 
-The problem gets a bit more complex here. When we computed $\mathcal{V}^1(\alpha_0=0)$, we only had to take into account the structure of $G$, since there was no syntrophy. Now, we have an additional complexity because we have to think about the structure of the syntrophy network $A$ as well. The choice of $A$, which is at the core of the problem, is far from trivial. We investigated three different cases :
+Above we computed feasibles volumes when there is no syntrophy \ie $\mathcal{V}^{G}_1(\alpha_0=0)$. Since $\alpha_0=0$, we did not need to specify what the structure of $A$ was. The next naturally arising question is then : what happens to the feasible volume of a given matrix $G$ when we add a syntrophic interaction? More precisely, how does $\mathcal{V}^G_1$'s shape change?
+
+The problem gets a bit more complex here. When we computed $\mathcal{V}^G_1(\alpha_0=0)$, we only had to take into account the structure of $G$, since there was no syntrophy. Now, we have an additional complexity because we have to think about the structure of the syntrophy network $A$ as well. The choice of $A$, which is at the core of the problem, is far from trivial. We investigated three different cases :
 \begin{itemize}
   \item ``fully connected'': $A$ is filled with ones only, $A_{\mu i}=1$. This corresponds to a so-called ``mean-field'' approximation. Every consumer releases every resource at (up to some noise) the same intensity.
   \item ``no coprophagy'' : the structure of $A$ is such that consumers are not allowed to release what they consume.
   \item ``optimal LRI'' : $A$ is the outcome of the Monte Carlo algorithm \footnote{Note that we took a constant value $\alpha_0$ (given in Methods \ref{section : methods LRI MC solver}) and $\gamma_0=0.2$. A more thorough analysis should build the optimal LRI matrix \important{corresponding to each $(\gamma_0, \alpha_0)$}. That would take too much time which is why we decided to keep $\gamma_0$ and $\alpha_0$ constant.}
  described in Methods \ref{section : methods LRI MC solver}, whose purpose is to make systems ``more dynamically stable'' and hence more feasible.
   \end{itemize}
+  \subsubsection{The influence of matrix structure}
+  \begin{figure}
+  \vspace{-120pt}
+  \hspace{-0.1\linewidth}
+  \subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_wc_NR25_NS25_Nest0.6_Conn0.3168}.pdf}}
+
+  \vspace{-68pt}
+  \hspace{-0.1\linewidth}
+  \subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_wc_NR25_NS25_Nest0.35_Conn0.2208}.pdf}}
+
+  \vspace{-68pt}
+  \hspace{-0.1\linewidth}
+  \subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808}.pdf}}
+
+  \caption{}
+  \end{figure}
+
+
+
+  \subsubsection{Common fully feasible volume}
   We looked at ten different $\alpha_0$ values\footnote{This choice was made because after $\alpha_0 \approx 0.01$ the common feasibility volume shrinks down to zero.} from $0$ to $0.015$. Figure \ref{fig : feasibility results volume of cfr depending on syntrophy} shows that the volume of the common feasibility region shrinks down pretty fast until it reaches zero. The maximal feasible $\alpha_0$ can be estimated with the help of Eq.\eqref{eq : fully feasible volume}:
   \begin{equation}
   \alpha_0 \lessapprox \frac{\min(1-\sigma_0, \sigma_0)\gamma_0 R_0}{\max_{(G,A)\in S}\left\{\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\}\right\}} \approx 0.01 \gamma_0 \leq 0.01,
@@ -78,17 +99,17 @@ The problem gets a bit more complex here. When we computed $\mathcal{V}^1(\alpha
   so the maximal feasible syntrophy is well predicted by theory.
 \begin{figure}
 \centering
-\includegraphics[width=0.7\linewidth]{figures/Results/measure_common_feasibility_volume_varying_syntrophy}
+\includegraphics[width=0.7\linewidth]{measure_common_feasibility_volume_varying_syntrophy}
 \caption{Volume of the common feasibility region $\mathcal{V}^1(\alpha_0)$ as a function of syntrophic interaction strength $\alpha_0$. The curves indicate the different structures used for the syntrophy network $A$.}\label{fig : feasibility results volume of cfr depending on syntrophy}
 \end{figure}
 
 \begin{figure}[h!]
 \hspace{-0.1\linewidth}
-\captionsetup[subfigure]{captionskip = -185pt, margin = 205pt}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_random_structure}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{Results/common_feasibility_volume_varying_syntrophy_no_release_when_eat}}
+\captionsetup[subfigure]{captionskip = -185pt, margin = 195pt}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_random_structure}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_no_release_when_eat}}
 \begin{center}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{figures/Results/common_feasibility_volume_varying_syntrophy_optimal_matrix}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_optimal_matrix}}
 \end{center}
 \caption[caption for LOF]{Surface plot of the fully feasible volume $\mathcal{V}^1(\alpha_0)$. The color bar on the side indicates the value of $\alpha_0$ to which the surface corresponds. The white part of the plot corresponds to points that \important{never} are fully feasible. Note that even though it is not very clear on the figure $\mathcal{V}^1(\alpha_0^+) \subset \mathcal{V}^1(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy. The different subplots correspond to different structures for the syntrophy matrix : (a) $A$ is fully connected, (b) $A$ has a structure such that no resources consumed are eaten (no coprophagy) and (c) $A$ is obtained through the LRI MC algorithm described in Methods \ref{section : methods LRI MC solver}.} \label{fig : results feasibility cfv variation with syntrophy}
 \end{figure}

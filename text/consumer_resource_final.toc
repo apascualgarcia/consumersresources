@@ -44,19 +44,21 @@
 \contentsline {chapter}{\numberline {3}Results}{31}{chapter.3}
 \contentsline {section}{\numberline {3.1}Feasibility}{31}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{31}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Evolution of the fully feasible volume with syntrophy}{33}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Dynamical stability}{37}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}LRI regime}{37}{subsection.3.2.1}
-\contentsline {subsubsection}{Outcome of the Monte Carlo algorithm}{37}{section*.29}
-\contentsline {section}{\numberline {3.3}Structural stability}{38}{section.3.3}
-\contentsline {chapter}{\numberline {4}Fully connected network}{39}{chapter.4}
-\contentsline {section}{\numberline {4.1}Definition}{39}{section.4.1}
-\contentsline {section}{\numberline {4.2}Spectrum}{39}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Full system}{39}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Standard deviation expansion}{39}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Rewriting the system - the introduction of metaparameters}{40}{subsection.4.2.3}
-\contentsline {subsubsection}{Standard deviation expansion at first order}{40}{section*.33}
-\contentsline {paragraph}{Zero variance case}{41}{section*.37}
-\contentsline {chapter}{\numberline {5}Appendices}{43}{chapter.5}
-\contentsline {section}{\numberline {5.1}Demonstrations}{43}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Special determinant computation}{43}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{33}{subsection.3.1.2}
+\contentsline {subsubsection}{The influence of matrix structure}{36}{section*.29}
+\contentsline {subsubsection}{Common fully feasible volume}{36}{section*.30}
+\contentsline {section}{\numberline {3.2}Dynamical stability}{38}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}LRI regime}{38}{subsection.3.2.1}
+\contentsline {subsubsection}{Outcome of the Monte Carlo algorithm}{38}{section*.31}
+\contentsline {section}{\numberline {3.3}Structural stability}{39}{section.3.3}
+\contentsline {chapter}{\numberline {4}Fully connected network}{40}{chapter.4}
+\contentsline {section}{\numberline {4.1}Definition}{40}{section.4.1}
+\contentsline {section}{\numberline {4.2}Spectrum}{40}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Full system}{40}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Standard deviation expansion}{40}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Rewriting the system - the introduction of metaparameters}{41}{subsection.4.2.3}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{41}{section*.35}
+\contentsline {paragraph}{Zero variance case}{42}{section*.39}
+\contentsline {chapter}{\numberline {5}Appendices}{44}{chapter.5}
+\contentsline {section}{\numberline {5.1}Demonstrations}{44}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Special determinant computation}{44}{subsection.5.1.1}

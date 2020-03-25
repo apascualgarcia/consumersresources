@@ -174,7 +174,7 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
         return;
       }
       std::cout << ", matrix = " << std::endl;
-      display_food_matrix(std::cout, gamma);
+      display_food_matrix(std::cout, alpha);
       std::cout << std::endl;
     }
     steps+=1;
@@ -208,8 +208,8 @@ nmatrix proposed_new_alpha_Alberto(const nmatrix& alpha, const nmatrix& gamma, b
 void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   /*  we first choose a random row (i.e. resource) that is neither completely empty nor
       completely filled */
-  unsigned int NR = alpha.size();
-  unsigned int NS = alpha[0].size();
+  const unsigned int NR = alpha.size();
+  const unsigned int NS = alpha[0].size();
   std::vector<unsigned int> sum_row(NR, 0.);
 
 
@@ -223,7 +223,7 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
 
   unsigned int mu=random_resources(random_engine);
 
-  while(sum_row[mu]==0 || sum_row[mu]==NR){
+  while(sum_row[mu]==0 || sum_row[mu]==NS){
     mu=random_resources(random_engine);
   }
 
@@ -233,19 +233,48 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   std::vector<size_t> one_els;
 
   for(size_t i=0; i < NS; ++i){
-    if(!(alpha[mu][i]!=0)){
+    if(alpha[mu][i]<1e-15){
       zero_els.push_back(i);
     }else if(alpha[mu][i]==1){
       one_els.push_back(i);
     }
   }
 
-  /* we choose one index which has one and another which has zero */
+  /*  we choose one index which has one and another which has zero, may have a problem here :
+      we did not explicitly check that zero_els.size() was at least 1 !! could have the setting where
+      zero_els is empty and one_els is full or vice-versa */
+  if(zero_els.size()==0){
+    std::cout << "NR = " << NR << ", NS=" << NS << std::endl;
+    std::cout << "Picked row " << mu << std::endl;
+    std::cout << "The zero elements are " << zero_els << std::endl;
+    throw error("zero_els has size 0 (row) ", 1);
+  }
+
+  if(one_els.size()==0){
+    std::cout << "NR = " << NR << ", NS=" << NS << std::endl;
+    std::cout << "Picked row " << mu << std::endl;
+    std::cout << "The one elements are " << one_els << std::endl;
+    throw error("one_els has size 0 (row) ", 1);
+  }
   std::uniform_int_distribution<size_t> zero_els_indices(0, zero_els.size()-1);
   std::uniform_int_distribution<size_t> one_els_indices(0, one_els.size()-1);
 
   size_t zero_index=zero_els[zero_els_indices(random_engine)];
   size_t one_index=one_els[one_els_indices(random_engine)];
+
+  if(one_index>=NS){
+    display_food_matrix(std::cout, alpha);
+    std::cout << "NR = " << NR << ", NS=" << NS << std::endl;
+    std::cout << "one_index=" << one_index << std::endl;
+    throw error("one_index has an index larger than it should have (row)",1);
+  }
+
+  if(zero_index>=NS){
+    display_food_matrix(std::cout, alpha);
+    std::cout << "NR = " << NR << ", NS=" << NS << std::endl;
+    std::cout << "zero_index=" << zero_index << std::endl;
+    throw error("zero_index has an index larger than it should have (row)",1);
+  }
 
   /*  we check if there is another non empty value in the column (i.e.
       check if that species releases to something else) */
@@ -276,8 +305,8 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
 void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   /*  we first choose a random column (i.e consumer) that is not empty and
       not completely filled */
-  unsigned int NR = alpha.size();
-  unsigned int NS = alpha[0].size();
+  const unsigned int NR = alpha.size();
+  const unsigned int NS = alpha[0].size();
   std::vector<unsigned int> sum_column(NS, 0.);
   for(size_t mu=0; mu < NR; ++mu){
     for(size_t i=0; i < NS; ++i){
@@ -287,7 +316,7 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
 
   std::uniform_int_distribution<size_t> random_consumers(0, NS-1);
   unsigned int k=random_consumers(random_engine);
-  while(sum_column[k]==0 || sum_column[k]==NS){
+  while(sum_column[k]==0 || sum_column[k]==NR){
     k=random_consumers(random_engine);
   }
 
@@ -296,11 +325,34 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   std::vector<size_t> zero_els;
   std::vector<size_t> one_els;
   for(size_t mu=0; mu < NR; ++mu){
-    if(!(alpha[mu][k]!=0)){
+    if(alpha[mu][k]<1e-15){
       zero_els.push_back(mu);
     }else if(alpha[mu][k]==1){
       one_els.push_back(mu);
     }
+  }
+
+  if(zero_els.size()==0){
+    std::ofstream myfile=open_external_file_truncate("data_output/error_matrix.out");
+    std::cout << std::endl;
+    display_food_matrix(myfile, alpha);
+    myfile.close();
+    display_food_matrix(std::cout, alpha);
+    std::cout << std::endl;
+    std::cout << "NR = " << NR << ", NS=" << NS << std::endl;
+    std::cout << "Picked column " << k << std::endl;
+    std::cout << "The zero elements are " << zero_els << std::endl;
+    throw error("zero_els has size 0 (column)", 1);
+  }
+
+  if(one_els.size()==0){
+    std::cout << std::endl;
+    display_food_matrix(std::cout, alpha);
+    std::cout << std::endl;
+    std::cout << "NR = " << NR << ", NS=" << NS << std::endl;
+    std::cout << "Picked column " << k << std::endl;
+    std::cout << "The one elements are " << one_els << std::endl;
+    throw error("one_els has size 0 (column)", 1);
   }
 
   /*  we then choose randomly one of the zero elements and one of the one elements */
@@ -309,6 +361,20 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
 
   size_t zero_index=zero_els[zero_els_indices(random_engine)];
   size_t one_index=one_els[one_els_indices(random_engine)];
+
+  if(one_index>=NR){
+    std::cout << std::endl;
+    display_food_matrix(std::cout, alpha);
+    std::cout << "one_index=" << one_index << std::endl;
+    throw error("one_index has an index larger than it should have (column)",1);
+  }
+
+  if(zero_index>=NR){
+    std::cout << std::endl;
+    display_food_matrix(std::cout, alpha);
+    std::cout << "zero_index=" << zero_index << std::endl;
+    throw error("zero_index has an index larger than it should have (column)",1);
+  }
 
   /*  we check if there is another non empty value in the row with the one, i.e.
       if the resource is being released by another species */

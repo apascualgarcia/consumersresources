@@ -3,6 +3,16 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import matplotlib.tri as tr
 
+def closest_element_in_list(el, liste):
+    closest_index=0
+    distance=abs(el-liste[0])
+    for i in range(1, len(liste)):
+        dist = abs(el-liste[i])
+        if(dist<=distance):
+            distance=dist
+            closest_index=i
+    return liste[closest_index]
+
 def remove_strings_from_file(matrices_folder,filename):
     file = open(filename + '.out', "r")
     metadata = []
@@ -26,8 +36,8 @@ def plot_points_as_area(ax, points, col):
     ax.fill_between(g0fit,0, np.multiply(S0fit, g0fit), facecolor=col)
     return
 
-# the first dimension are the different alpha0's
-def plot_feasibility_region_for_one_matrix(data):
+
+def data_levels(data):
     NR=data[:,0]
     NS=data[:,1]
     nestedness=data[:,2]
@@ -36,15 +46,16 @@ def plot_feasibility_region_for_one_matrix(data):
     S0=data[:, 5::3]
     feasability=data[:, 6::3]
     ff_indices=[]
-    fig=plt.figure()
-    ax=fig.add_subplot(111)
     for i in range(len(feasability)):
         # find the fully feasible_indices for this matrix at this alpha0
         full_feas_indices=[j for j in range(len(feasability[i])) if feasability[i,j]==1.]
         ff_indices.append(full_feas_indices)
     feasibility_level=[]
+    # a level of -1 means you are not feasible, level 0 means you are feasible
+    # for alpha0[0] but not after, level[1] means you are feasible for alpha0[1] but
+    # not after and so on
     for i in range(len(feasability[0])):
-        level=0
+        level=-1
         j=0
         exit=False
         while(not(exit) and j < len(feasability)):
@@ -54,29 +65,56 @@ def plot_feasibility_region_for_one_matrix(data):
                 exit=True
             j+=1
         feasibility_level.append(level)
-    max_level=max(feasibility_level)
-    levels=[i for i in range(max_level+1)]
+    return feasibility_level
 
-    isbad=np.less(feasibility_level, 0.5)
+
+# the first dimension are the different alpha0's
+def plot_region_for_one_matrix(fig, ax, data):
+    feasibility_level=feasibility_levels(data)
+    max_level=max(feasibility_level)
+    levels=[i for i in range(1,max_level+2)]
+
+    # isbad=np.less(feasibility_level, 0.5)
     triang = tr.Triangulation(gamma0[0], S0[0])
-    mask = np.all(np.where(isbad[triang.triangles], True, False), axis=1)
-    triang.set_mask(mask)
-    im=ax.tricontourf(triang, feasibility_level, level=levels, cmap='Greys')
+    # mask = np.all(np.where(isbad[triang.triangles], True, False), axis=1)
+    # triang.set_mask(mask)
+    im=ax.tricontourf(triang, feasibility_level,levels=levels, cmap='jet_r')
     #im=ax.scatter(gamma0[0], S0[0], c=feasibility_level)
+    #ax.set_yticklabels([])
 
     ax.set_xlim(0., 1.)
     ax.set_ylim(0., 1.)
     ax.set_xlabel(r'$\gamma_0$')
-    ax.set_ylabel(r'$S_0$')
-    cbar=fig.colorbar(im)
-    cbar.set_ticks(levels[0:max_level])
+    ax.set_xticks([0, 0.5, 1])
+    ax.set_xticklabels([0, 0.5, 1])
+    ax.set_yticks([])
     #cbar.set_ticklabels(alpha0[0:max_level])
-    ax.set_title(r'$N_R=25, N_S=25$ ')
-    fig.tight_layout()
-    #plt.show()
-    return
+    return im, max_level
 
+# data : get
+def shrink_volume_for_one_matrix(data):
+    NR=data[:,0]
+    NS=data[:,1]
+    nestedness=data[:,2]
+    connectance=data[:,3]
+    gamma0=data[:, 4::3]
+    S0=data[:, 5::3]
+    feasability=data[:, 6::3]
+    ff_indices=[]
+    volume=[]
+    for i in range(len(feasability)):
+        # find the fully feasible_indices for this matrix at this alpha0
+        full_feas_indices=[j for j in range(len(feasability[i])) if feasability[i,j]==1.]
+        volume.append(len(full_feas_indices))
+    #init_vol = volume[0]
+    init_vol=900
+    for i in range(len(feasability)):
+        volume[i]=volume[i]/init_vol
 
+    return volume
+
+def exp_fit(x, a, b, c):
+    return abs(a)*np.exp(b*x)+c
 
 def func_to_fit(x, k2, k3):
     return k2*x+k3
