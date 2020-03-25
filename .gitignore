@@ -11,3 +11,4 @@ matplotlibrc
 old_*
 !feasibility/*.out
 !local_dynamical_stability/*.out
+!largest_eigenvalue/*.out
