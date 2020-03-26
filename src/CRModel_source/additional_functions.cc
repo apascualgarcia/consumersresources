@@ -613,6 +613,42 @@ bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
     }
   }
 
-
   return false;
+}
+
+bool has_an_empty_row(const nmatrix& gamma){
+  for(size_t i=0; i < gamma.size(); ++i){
+    bool row_is_empty=true;
+    for(size_t j=0; j < gamma[i].size() && row_is_empty ; ++j){
+      if(gamma[i][j]*gamma[i][j]>0){
+        row_is_empty=false;
+      }
+    }
+    if(row_is_empty){
+      return true;
+    }
+  }
+  return false;
+}
+
+bool has_an_empty_column(const nmatrix& gamma){
+  return has_an_empty_row(transpose(gamma));
+}
+
+std::vector<unsigned int> row_degrees(const nmatrix& M){
+  std::vector<unsigned int> degs;
+  for(size_t i=0; i < M.size(); ++i){
+    unsigned int local_deg=0;
+    for(size_t j=0; j < M[i].size();++j){
+      if(M[i][j]*M[i][j]>0.){
+        local_deg+=1;
+      }
+    }
+    degs.push_back(local_deg);
+  }
+  return degs;
+}
+
+std::vector<unsigned int> columns_degrees(const nmatrix& M){
+  return row_degrees(transpose(M));
 }

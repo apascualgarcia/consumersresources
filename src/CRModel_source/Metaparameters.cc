@@ -42,6 +42,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->equilibrium = string_to_eq_mode(configFile.get<std::string>("equilibrium_mode"));
   this->convergence_threshold = configFile.get<ntype>("convergence_threshold");
   this->building_mode = string_to_building_mode(configFile.get<std::string>("building_mode"));
+  this->volume_of_interest_path=configFile.get<std::string>("path_to_volume");
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
@@ -241,4 +242,97 @@ ntype Metaparameters::quadratic_form_low_intra_resource_interaction(const nmatri
     }
   }
   return to_minimize;
+}
+
+nmatrix Metaparameters::common_feasible_volume(unsigned int Npoints) const{
+  /* Npoints^2 x 2 matrix */
+  nmatrix feasible_volume;
+  nvector g0_interval = linear_interval(0.01, 1., Npoints);
+  for(size_t i=0; i < g0_interval.size();++i){
+    nvector S0_interval = linear_interval(0.01, 0.043/g0_interval[i]-0.0046, Npoints);
+    for(size_t j=0; j < S0_interval.size();++j){
+      feasible_volume.push_back(nvector({g0_interval[i], S0_interval[j]}));
+    }
+  }
+  return feasible_volume;
+}
+
+/* for a given alpha0 returns the set of (gamma0,S0) which are fully locally dynamically stable */
+nmatrix Metaparameters::set_of_lds_points() const{
+  Metaparameters m = *this;
+  nmatrix feasible_vol = this->common_feasible_volume(5);
+  nmatrix lds_points;
+  for(auto point : feasible_vol){
+    unsigned int Nsimul=100;
+    bool exit = false;
+    for(size_t i=0; i < Nsimul && not(exit);++i){
+      CRModel model(m);
+      if(not(model.is_dynamically_stable())){
+        exit=true;
+      }
+    }
+    if(not(exit)){
+      lds_points.push_back(point);
+    }else{
+      lds_points.push_back(nvector({0,0}));
+    }
+  }
+  return lds_points;
+}
+/* for a given alpha0 returns the set of (gamma0,S0) which are fully feasible */
+nmatrix Metaparameters::set_of_feasible_points() const{
+  Metaparameters metaparams = *this;
+  nmatrix c_vol = this->common_feasible_volume(5);
+  nmatrix feasible_points;
+  CRModel model;
+  model.create_model_parameters(metaparams);
+
+  for(auto point : c_vol){
+    unsigned int Nsimul=100;
+    bool exit = false;
+    for(size_t i=0; i < Nsimul && not(exit);++i){
+      model.attempt_to_build_model(load_food_matrix(metaparams), metaparams, 0);
+      if(not(model.is_feasible())){
+        exit=true;
+      }
+    }
+    if(not(exit)){
+      feasible_points.push_back(point);
+    }else{
+      feasible_points.push_back(nvector({0,0}));
+    }
+  }
+  return feasible_points;
+}
+
+nmatrix Metaparameters::load_volume() const{
+  nmatrix input;
+  if(this->verbose > 1){
+    std::cout << "\t Loading volume from " << this->volume_of_interest_path << std::endl;
+  }
+  std::ifstream in(this->volume_of_interest_path);
+  if (!in) {
+    error err("Cannot open file for the volume "+this->volume_of_interest_path+" or file is empty, giving back null matrix",1);;
+    throw err;
+    return input;
+  }
+  if(in.good()){
+    std::string line;
+    unsigned int index=0;
+    while(std::getline(in, line)){
+      /* skip line if it starts with a comment */
+      if(line[0]!='#'){
+        std::istringstream iss(line);
+        input.push_back(nvector());
+        ntype element;
+        while(iss>>element){
+          input[index].push_back(element);
+        }
+        index+=1;
+      }
+    }
+  }
+  in.close();
+
+  return input;
 }

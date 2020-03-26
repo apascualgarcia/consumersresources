@@ -1,115 +1,64 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
 \select@language {english}
-\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.1}Establishing the model and the goals}{3}{section.1.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.1}Attack strategy and important notions}{4}{subsection.1.1.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Metaparameters}{4}{section*.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Matrix properties}{5}{section*.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Analytical approach}{7}{chapter.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Feasability}{7}{section.2.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.1}Conditions on the model parameters}{7}{subsection.2.1.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.2}Feasability conditions}{7}{subsection.2.1.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Energy conservation/dissipation}{7}{section*.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Positivity of the parameters}{8}{section*.7}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Combining the feasability conditions}{8}{section*.8}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Dynamical stability}{9}{section.2.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Equilibria of the model and their stability}{9}{subsection.2.2.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Linear stability}{9}{section*.10}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Dynamical stability}{10}{section*.11}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Structural stability}{11}{section*.13}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}The quest for a full solution}{11}{subsection.2.2.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{The master equation for positive valued equilibria}{11}{section*.14}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Bounds on the eigenvalues}{12}{section*.15}
-\defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Gerschgorin's circle theorem}{12}{section*.16}
-\defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Critical radius in terms of metaparameters}{13}{section*.17}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Marginally stable equilbria}{14}{section*.18}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Non marginal equilibria}{14}{section*.19}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Reductio ad absurdum}{15}{section*.20}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}Low intra resources interaction (LRI) regime }{15}{subsection.2.2.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Feasability of the low intra resources interaction regime}{16}{section*.21}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.4}Effective system}{17}{subsection.2.2.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Perturbation analysis}{18}{section*.22}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.5}Identifying the order parameter}{20}{subsection.2.2.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Flux analysis}{20}{section*.23}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Structural stability}{20}{section.2.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Fully connected network}{21}{chapter.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Definition}{21}{section.3.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Spectrum}{21}{section.3.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.1}Full system}{21}{subsection.3.2.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.2}Standard deviation expansion}{21}{subsection.3.2.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2.3}Rewriting the system - the introduction of metaparameters}{22}{subsection.3.2.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Standard deviation expansion at first order}{22}{section*.27}
-\defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{Zero variance case}{23}{section*.31}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Numerical analysis}{25}{chapter.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Feasability}{25}{section.4.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Algorithmic procedure}{25}{subsection.4.1.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}The feasibility volume}{26}{subsection.4.1.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Dynamical stability}{27}{section.4.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}LRI regime}{27}{subsection.4.2.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.32}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}The effect of sigma non uniform}{31}{subsection.4.2.2}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}Time evolution}{31}{subsection.4.2.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}Allowed parameters : syntrophy range}{31}{subsection.4.2.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.5}Studying the impact of the food network structure}{31}{subsection.4.2.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.6}Studying the impact of syntrophy}{31}{subsection.4.2.6}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Structural stability}{32}{section.4.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Appendices}{33}{chapter.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Demonstrations}{33}{section.5.1}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Determinant computations}{33}{subsection.5.1.1}
+\contentsline {section}{\numberline {1.1}Why Consumers Resources Models in microbial ecology?}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Establishing the model and the goals}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Equilibria of the model}{4}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Attack strategy and important notions}{4}{subsection.1.2.2}
+\contentsline {subsubsection}{Metaparameters and matrix properties}{5}{section*.4}
+\contentsline {subsubsection}{Losing complexity -- how to gain it back}{7}{section*.7}
+\contentsline {chapter}{\numberline {2}Methods}{8}{chapter.2}
+\contentsline {section}{\numberline {2.1}Feasibility}{8}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Basic concepts}{8}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}The feasibility volume}{10}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Estimating the fully feasible volume $\mathcal {V}^{G,A}_1$}{11}{subsection.2.1.3}
+\contentsline {subsubsection}{Biomass conservation}{11}{section*.9}
+\contentsline {subsubsection}{Positivity of the parameters}{12}{section*.10}
+\contentsline {subsubsection}{Combining both conditions}{12}{section*.11}
+\contentsline {subsection}{\numberline {2.1.4}Algorithmic procedure}{13}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Dynamical stability}{15}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Definitions}{15}{subsection.2.2.1}
+\contentsline {subsubsection}{Local dynamical stability}{15}{section*.12}
+\contentsline {subsubsection}{The locally dynamically stable volume $\mathcal {D}^{G,A}_{L,x}$}{16}{section*.13}
+\contentsline {subsubsection}{Global dynamical stability}{17}{section*.14}
+\contentsline {subsection}{\numberline {2.2.2}The quest for a full solution}{18}{subsection.2.2.2}
+\contentsline {subsubsection}{How to determine local dynamical stability}{18}{section*.16}
+\contentsline {subsubsection}{The master equation for local dynamical stability}{18}{section*.17}
+\contentsline {subsubsection}{Marginally stable equilbria}{19}{section*.18}
+\contentsline {subsubsection}{Non marginal equilibria}{19}{section*.19}
+\contentsline {subsection}{\numberline {2.2.3}Bounds on the eigenvalues}{20}{subsection.2.2.3}
+\contentsline {subsubsection}{Gerschgorin's circle theorem}{20}{section*.20}
+\contentsline {subsubsection}{Critical radius in terms of metaparameters}{21}{section*.21}
+\contentsline {subsection}{\numberline {2.2.4}Low intra resources interaction (LRI) regime }{22}{subsection.2.2.4}
+\contentsline {subsubsection}{Reductio ad absurdum}{22}{section*.22}
+\contentsline {subsubsection}{Strong LRI regime}{22}{section*.23}
+\contentsline {subsubsection}{Weak LRI regime}{23}{section*.24}
+\contentsline {subsubsection}{Feasibility of the low intra resources interaction regime}{24}{section*.25}
+\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{25}{section*.26}
+\contentsline {subsection}{\numberline {2.2.5}Effective system}{26}{subsection.2.2.5}
+\contentsline {subsubsection}{Perturbation analysis}{28}{section*.27}
+\contentsline {subsection}{\numberline {2.2.6}Identifying the order parameter}{29}{subsection.2.2.6}
+\contentsline {subsubsection}{Flux analysis}{29}{section*.28}
+\contentsline {section}{\numberline {2.3}Structural stability}{30}{section.2.3}
+\contentsline {chapter}{\numberline {3}Results}{31}{chapter.3}
+\contentsline {section}{\numberline {3.1}Feasibility}{31}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{31}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{33}{subsection.3.1.2}
+\contentsline {subsubsection}{The influence of matrix structure}{36}{section*.29}
+\contentsline {subsubsection}{Common fully feasible volume}{36}{section*.30}
+\contentsline {section}{\numberline {3.2}Dynamical stability}{38}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}LRI regime}{38}{subsection.3.2.1}
+\contentsline {subsubsection}{Outcome of the Monte Carlo algorithm}{38}{section*.31}
+\contentsline {section}{\numberline {3.3}Structural stability}{39}{section.3.3}
+\contentsline {chapter}{\numberline {4}Fully connected network}{40}{chapter.4}
+\contentsline {section}{\numberline {4.1}Definition}{40}{section.4.1}
+\contentsline {section}{\numberline {4.2}Spectrum}{40}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Full system}{40}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Standard deviation expansion}{40}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Rewriting the system - the introduction of metaparameters}{41}{subsection.4.2.3}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{41}{section*.35}
+\contentsline {paragraph}{Zero variance case}{42}{section*.39}
+\contentsline {chapter}{\numberline {5}Appendices}{44}{chapter.5}
+\contentsline {section}{\numberline {5.1}Demonstrations}{44}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Special determinant computation}{44}{subsection.5.1.1}

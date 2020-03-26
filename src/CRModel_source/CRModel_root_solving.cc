@@ -224,6 +224,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
   params.Nsimul = Nsimul_frun;
   params.equilibrium = equilibrium;
   params.target = target;
+  params.stab_mode=delta_solv.stab_mode;
 
   gsl_function F;
   F.function = &function_av_extinct_solver;
@@ -331,7 +332,7 @@ double function_av_extinct_solver(double delta, void*params){
       return average_number_of_extinctions(delta, m, Nsimul)-target;
       break;
     case oneextinct:
-      return probability_of_extinction_greather_than_one(m, delta, Nsimul)-target;
+      return probability_of_extinction_greather_than_one(m, delta, Nsimul, s->stab_mode)-target;
       break;
     default:
       error err("Equilibrium type not implemented yet.");

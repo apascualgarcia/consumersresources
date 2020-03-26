@@ -1,0 +1,483 @@
+\documentclass[12pt]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+
+\begin{document}
+
+
+\subsection{Equilibria of the model and their stability}
+We are interested in studying the stability of the equilibrium points of our model Eqs.\eqref{eq : differential eq for resources and species}. We say that $\{R^*_\mu, S^*_j\}$ are \textit{equilibria}\footnote{For the sake of brevity, we will sometimes drop the $\mu$ and $j$ subscripts when we write $\{R^*_\mu, S^*_j\}$.}
+of our model if they are fixed points of it, that means if the following equations are fulfilled :
+\begin{subequations}\label{eq : equilibrium resources and species}
+\begin{empheq}[left=\empheqlbrace]{align}
+  0 &= l_\mu - m_\mu R^*_\mu - \sum_{j} \gamma_{j\mu} R^*_\mu S^*_j + \sum_j \alpha_{\mu j} S^*_j \label{eq : equilibrium resources} \\
+ 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i \label{eq : equilibrium species}
+\end{empheq}
+\end{subequations}
+As said above, our main goal is to study the stability of such equilibria. Before introducing different notions around equilibria, we focus on simplifying the problem first as much as we can.
+
+\subsubsection{Linear stability}
+We can define in general the \textit{jacobian} $J$ of our system as the jacobian matrix of its temporal evolution \eqref{eq : differential eq for resources and species}:
+\begin{equation}
+  J \defined
+\begin{pmatrix}
+  \partiald{\dot{R_\mu}}{R_\nu}& \partiald{\dot{R_\mu}}{S_j} \\
+  \partiald{\dot{S_i}}{R_\nu} & \partiald{\dot{S_i}}{S_j}
+\end{pmatrix}
+=
+\begin{pmatrix}
+  \left(-m_\mu-\sum_j \gamma_{j\mu}S_j\right)\delta_{\mu\nu} & -\gamma_{j\mu}R_\mu+\alpha_{\mu j} \\
+  \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
+\end{pmatrix}, \label{eq : definition of jacobian}
+\end{equation}
+where $\delta$ is the Kronecker delta symbol. Using the fact that we are only interested in equilibria where every resource is positive and Eq.\eqref{eq : equilibrium species}, this can be rewritten as :
+\begin{equation}
+ J = \begin{pmatrix}
+   \frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\delta_{\mu\nu} & -\gamma_{j\mu}R_\mu+\alpha_{\mu j} \\
+   \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
+ \end{pmatrix}, \label{eq : definition of jacobian alternative}
+\end{equation}
+
+We can then define for a given equilibrium point $\{R^*_\mu, S^*_i\}$ the \textit{jacobian at equilibrium} $J^*$ as the jacobian of said equilibrium.
+
+We will furthermore say that a given equilibrium is \textit{linearly stable} if its jacobian $J^*$ is not positive definite, \ie if the largest eigenvalue of $J^*$ has a non positive real part.
+
+Note that if we are interested only in positive valued equilibria (\ie $S^*_i > 0 \ \forall i$), then Eq.\eqref{eq : equilibrium species} is equivalent to :
+\begin{equation}
+  \sum_\nu \sigma_{i\nu} \gamma_{i\nu}R^*_\nu -d_i - \sum_\nu \alpha_{\nu i} = 0,
+\end{equation}
+which means that the lower right block of the jacobian in Eq.\eqref{eq : definition of jacobian} will be zero. Hence at equilibrium the jacobian $J^*$ will have the following block form:
+\begin{equation}
+  J^* = \begin{pmatrix}
+  -\Delta & \Gamma \\
+  \Beta & 0
+\end{pmatrix}, \label{eq : jacobian at equilibrium}
+\end{equation}
+where
+\begin{itemize}
+  \item $\Delta_{\mu\nu} = \text{diag}(m_\mu+\sum_j \gamma_{j\mu} S^*_j)$ is a positive $N_R \times N_R$ diagonal matrix,
+  \item $\Gamma_{\mu j} = -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j}$ is a $N_R \times N_S$ matrix which does not have entries with a definite sign.
+  \item $\Beta_{i\nu} = \sigma_{i\nu} \gamma_{i\nu} S^*_i$ is a $N_S \times N_R$ matrix with positive entries.
+\end{itemize}
+
+\subsubsection{Dynamical stability}
+Once we established that a system is linearly stable [\textbf{Check if the following is true}], we would like to quantify \textit{how stable} it is. One way of doing this is studying its dynamical stability \cite{pascual-garcia_mutualism_2017}. The idea is to take an equilibrium point $\{R^*_\mu, S^*_i\}$ and perturb the abundance of the species and resources at that point :
+\begin{empheq}{align}
+  R^*_\mu \rightarrow R_\mu(t_0) \equiv  R^*_\mu \left(1+\Delta_D \nu_\mu\right), \\
+  S^*_i \rightarrow S_\mu(t_0) \equiv S^*_i \left(1+\Delta_D \nu_i \right),
+\end{empheq}
+where the $\nu_{\mu, i}$ are random numbers drawn from a uniform distribution between -1 and +1, $t_0$ is the time where the previously at equilibrium system is perturbed and $\Delta_D \in \left[-1,1\right]$ is a fixed number quantifying the magnitude of the perturbation. The system with the initial values $\{R(t_0), S(t_0)\}$ can then be time evolved from $t=t_0$ until it reaches an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ which may be different from the equilibrium $\{R^*, S^*\}$ initially considered.
+
+A certain number of quantities, that all depend on the perturbation $\Delta_D$, can then be measured to quantify the dynamical stability of the system :
+\begin{itemize}
+  \item The resilience $t_R$: this is the time scale over which the system reaches its new equilibrium.
+  \item The number of extinctions $E$ : this is the number of species or resources which died during the time it took the system to reach its new equilibrium.
+  \item The angle $\alpha$ between two equilibria : this quantifies how close the old and new equilibria are. $\alpha$ is defined through its standard scalar product formula :
+  \begin{equation}
+  \cos(\alpha) \equiv \frac{\sum_\mu R^*_\mu \tilde{R}^*_\mu + \sum_j S^*_j\tilde{S}^*_j}{\sqrt{\sum_\mu \left(R^*_\mu\right)^2 + \sum_i \left(S^*_i\right)^2}\sqrt{\sum_\mu \left(\tilde{R}^*_\mu\right)^2 + \sum_i \left(\tilde{S}^*_i\right)^2}}.
+  \end{equation}
+\end{itemize}
+These quantities have either been already introduced in previous papers or are natural extensions of standard quantities \cite{ives_stability_2007,pascual-garcia_mutualism_2017}. They allow us to quantify the robustness of a given equilibrium.
+
+\subsubsection{Structural stability}
+Very similarly to dynamical stability, where the abundances of the resources and species are changed, one can perturb the parameters of a model at an equilibrium point. Namely the idea of \textit{structural stability} is the following : one takes a given equilibrium point [\textbf{Check whether it needs to be linearly stable or not}] $\{R^*, S^*\}$ and changes some or all the parameters of the model. We will focus here on perturbing the external feeding rate of the resources\footnote{This choice may seem a bit arbitrary at first hand. It stems from the idea that we wanted to keep things simple and hence decided to change only one parameter of the model. We chose the external feeding rate of the resources because it simply is the easiest one to control in an actual experimental setup.} :
+\begin{equation}
+l_\mu \rightarrow \tilde{l}_\mu \equiv l_\mu \left(1+\Delta_S\right).
+\end{equation}
+The system is then time evolved under the equations of evolution \eqref{eq : differential eq for resources and species}, except that $l_\mu \rightarrow \tilde{l}_\mu$, until an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ is reached. The same metrics as before can be used to quantify the structural stability.
+
+\subsection{The quest for a full solution}
+Here we aim to find the spectrum of the jacobian at equilibrium, which we will inform us about the dynamics of the model at hand.
+\subsubsection{The master equation for positive valued equilibria}
+As explained, we seek a solution to the problem $\det\left(J^* - \lambda \right) = 0$. Explicitly :
+\begin{equation}
+\det
+\begin{pmatrix}
+  -\Delta - \lambda  & \Gamma \\
+  \Beta & 0-\lambda
+\end{pmatrix} = 0 \label{eq : master equation eigenvalues jacobian}
+\end{equation}
+The idea is that the sign of the real part of the largest eigenvalue, denoted $\lambda_1$, will govern the local stability of the system at equilibrium. Namely :
+\begin{itemize}
+\item $\real{\lambda_1} < 0$ : any perturbation on the abundances will be exponentially supressed. The system is stable.
+\item $\real{\lambda_1} > 0$ : any perturbation on the abundances will be exponentially amplified. The system is unstable.
+\item $\real{\lambda_1}=0$ : a second order perturbation analysis is required to assess the system local stability. We will call such systems \textit{marginally stable} \cite{biroli_marginally_2018}.
+\end{itemize}
+
+\subsubsection{Bounds on the eigenvalues}
+\paragraph{Gerschgorin's circle theorem}
+Gerschgorin's circle theorem \cite{gerschgorin_uber_1931} allows us to get a better idea of the location of the eigenvalues in the complex plane. It states that every eigenvalue of a $N\times N$ square matrix $A$
+is located in one of the $N$ discs $D_i$ defined by :
+\begin{equation}
+D_i\defined \left\{z \in \mathbb{C} : \abs{z-A_{ii}} \leq \sum_{j\neq i} \abs{A_{ij}} \right\}. \label{eq : definition discs Gerschgorin}
+\end{equation}
+This can be reformulated as :
+\begin{equation}
+\sigma(A) \subset \union_{i=1}^N D_i. \label{eq : circle theorem}
+\end{equation}
+The geometrical interpretation is that the eigenvalues of a matrix deviate from the diagonal elements by a value bounded by the sum of the off-diagonal elements.
+It is then easy to see that if all the discs $D_i$ are located to the left of the imaginary axis (\ie the discs contain only numbers with a negative real part), then the eigenvalues of $A$ are all negative. Geometrically this corresponds to the following lemma :
+\begin{lemma}\label{lemma : lemma Gerschgorin circle}
+If for a matrix $A$ the following equations are verified :
+\begin{equation}
+\real{A_{ii}} + \sum_{j\neq i} \abs{A_{ij}} < 0, \forall \ i, \label{eq : alternative version circle theorem}
+\end{equation}
+then $\real{\lambda} < 0 \ \forall \lambda \in \sigma(A)$.
+\end{lemma}
+
+Gerschgorin's circle theorem allows us to get a precious bound on the modulus of each eigenvalue and hence on the interesting one $\lambda_1$. Indeed we know that all eigenvalues of $J^*$ will be located in one of the discs (as defined in Eq.\eqref{eq : definition discs Gerschgorin}) of $J^*$. There are precisely $N_R + N_S$ discs of $J^*$, these are the ``resources'' discs:
+\begin{equation}
+D^R_\mu  \defined \left\{ z \in \mathbb{C} : \abs{z+\Delta_\mu} \leq \sum_j \abs{\Gamma_{\mu j}} \right\}  \ \forall \mu = 1, \dots, N_R,
+\end{equation}
+and the ``consumers'' discs :
+\begin{equation}
+D^C_i \defined \left\{ z \in \mathbb{C} : \abs{z} \leq \sum_\nu \abs{B_{i\nu}}\right\} \ \forall i=1, \dots, N_S.
+\end{equation}
+The circle's theorem Eq.\eqref{eq : circle theorem} tells us that all eigenvalues will be in the union of these circles, \ie there exists $\forall \lambda \in \sigma\left(J^*\right)$ at least one $\mu^*$ or  one $i^*$ such that:
+\begin{equation}
+\abs{\lambda} \leq \sum_\nu \abs{B_{i^*\nu}} \label{eq : bound lambda consumers}
+\end{equation}
+or
+\begin{equation}
+\abs{\lambda+\Delta_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}} \label{eq : bound lambda 1 resources}
+\end{equation}
+Note furthermore that, because $\Delta_\mu > 0$ and $\imag{\Delta_\mu}=0$, Eq.\eqref{eq : bound lambda 1 resources} implies
+\begin{equation}
+\abs{\lambda} \leq \sum_j \abs{\Gamma_{\mu^* j}}. \label{eq : bound lambda resources better}
+\end{equation}
+The only way both Eq.\eqref{eq : bound lambda consumers} and \eqref{eq : bound lambda resources better} are satisfied for all eigenvalues, and especially the one with the highest real part $\lambda_1$ is if they are bound by the maximum of both RHS of these equations. More precisely :
+\begin{equation}
+\boxed{
+\abs{\lambda} \leq R_C \ \forall \lambda \in \sigma(J^*), \label{eq : overall bound on lambda}
+}
+\end{equation}
+where we defined the critical radius as :
+\begin{equation}
+R_C \defined \max\left\{\max_i\left\{\sum_\nu \abs{B_{i\nu}}\right\}, \max_\mu\left\{\sum_j \abs{\Gamma_{\mu j}}\right\}\right\}.
+\end{equation}
+Intuitively, this means every eigenvalue must lie in a circle around the origin. The radius of this circle is given by whichever is larger between the largest column-sums of the $\Beta$ and $\Gamma$ matrices.
+
+\paragraph{Critical radius in terms of metaparameters}
+We would like to estimate $R_C$ in terms of metaparameters, so that we can choose metaparameters that will give rise to systems in an LRI regime, which we know will be dynamically stable.
+
+Using techniques very similar to previous computations :
+\begin{equation}
+\sum_j \abs{\Gamma_{\mu j}} = \sum_j \abs{\alpha_{\mu j}-\gamma_{j\mu}R^*_\mu} \approx \deg(\Gamma, \mu)\abs{\alpha_0 - \gamma_0 R_0}.
+\end{equation}
+The difficult part is estimating $\deg(\Gamma, \mu) \approx \deg(A-G^T, \mu)$. If we assume that $\deg(A, \mu)\approx \deg(G^T, \mu) \ll N_S$ then we may use the very loose approximation
+\begin{equation}
+\deg(A-G^T, \mu) \approx \deg(A, \mu)+\deg(G, \mu).
+\end{equation}
+In that regime we then have :
+\begin{equation}
+\max_\mu\left\{\sum_j \abs{\Gamma_{\mu j}}\right\} \approx \max_\mu\left\{\deg(A, \mu)+\deg(G, \mu)\right\} \abs{\alpha_0-\gamma_0 R_0}.
+\end{equation}
+Similarly we find
+\begin{equation}
+\sum_\nu \abs{B_{i\nu}} \approx \deg(G, i) \sigma_0 \gamma_0 S_0,
+\end{equation}
+such that $R_C$ can be estimated roughly as :
+\begin{equation}\boxed{
+R_C \approx \max\left\{ \max_i\left(\deg(G,i)\right) \sigma_0 \gamma_0 S_0, \max_\mu\left(\deg(A,\mu)+\deg(G,\mu)\right)\abs{\alpha_0-\gamma_0 R_0}\right\}
+}\label{eq : estimate R_C metaparameters}
+\end{equation}
+The main factor that will determine $R_C$ (and hence the largest magnitude of any eigenvalue) is the structure of the food consumption matrix.
+
+\subsubsection{Marginally stable equilbria}
+We now investigate when Eq.\eqref{eq : master equation eigenvalues jacobian} admits a zero $\lambda$ as a solution. If $\lambda=0$ is a solution then :
+\begin{equation}
+0 \in \sigma(J) \iff
+\det
+\begin{pmatrix}
+  -\Delta   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = 0
+\end{equation}
+Since $\Delta$ is invertible, this is equivalent to :
+\begin{equation}
+\det(-\Delta) \det\left(\Beta\Delta^{-1}\Gamma\right)=0 \iff \det(\Gamma\Beta)=0.
+\end{equation}
+which means that $\Gamma\Beta$ is not full rank. Hence we see that :
+\begin{equation}
+0 \in \sigma(J) \iff \det(\Beta\Gamma)=0.
+\end{equation}
+
+
+\subsubsection{Non marginal equilibria}\label{section : non marginal equilibria}
+For now we will concentrate on equilibria that are clearly either stable or unstable\footnote{The case of marginally stable systems, where the maximum eigenvalue is zero, will be covered later.}, \ie:
+\begin{equation}
+\lambda_1 \neq 0.
+\end{equation}
+For the sake of simplicity, we will first look for the non zero solutions of the spectrum, \ie for now we assume:
+\begin{equation}
+\lambda \neq 0.
+\end{equation}
+This immediately implies
+\begin{equation}
+\det\left(\lambda\right)\neq 0,
+\end{equation}
+where $\lambda$ actually stands for the $N_S \times N_S$ identity matrix multiplied by a scalar $\lambda$. One can use this condition to simplify Eq.\eqref{eq : master equation eigenvalues jacobian} using the properties of block matrices [\textbf{insert ref here}] :
+\begin{equation}
+\det
+\begin{pmatrix}
+  -\Delta - \lambda  & \Gamma \\
+  \Beta & 0-\lambda
+\end{pmatrix} =
+\det\left(-\lambda\right)\det\left(-\Delta- \lambda+\frac{1}{\lambda}\Gamma \Beta\right).
+\end{equation}
+Hence Eq.\eqref{eq : master equation eigenvalues jacobian} becomes:
+\begin{equation}
+\boxed{
+\det\left(\lambda^2+\Delta \lambda-\Gamma \Beta\right)=0.
+}\label{eq : lambda equation}
+\end{equation}
+The complexity here is already reduced because we go from the determinant of a $N_R+N_S$ square matrix to a $N_R$ square matrix. We see from the previous expression that the dynamics is essentially dictated by the $\Gamma \Beta$ $N_R$-dimensional square matrix, which is given by :
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \Gamma_{\mu i} \Beta_{i \nu} = \sum_i \left(\alpha_{\mu i}-\gamma_{i \mu} R^*_\mu \right)\sigma_{i\nu}\gamma_{i\nu}S^*_i.
+\end{equation}
+There are many strategies here to find regimes of stability.
+
+\subsubsection{Reductio ad absurdum}
+One of them is following the general idea of the mathematical proofs of \cite{butler_stability_2018}.
+We first rewrite Eq.\eqref{eq : lambda equation} as\footnote{We can do this because since $m_\mu > 0$, we know $\Delta$ will always be invertible.} :
+\begin{equation}
+\det\left(S(\lambda)-\lambda\right)=0
+\end{equation}
+with
+\begin{equation}
+\boxed{S(\lambda)=\Delta^{-1}\Gamma\Beta-\Delta^{-1}\lambda^2}, \label{eq : equation stability S}
+\end{equation}
+or, component-wise:
+\begin{equation}
+S_{\mu \nu} = \frac{1}{\Delta_\mu}\left[\left(\sum_i \Gamma_{\mu i}\Beta_{i \nu}\right) - \lambda^2 \delta_{\mu\nu}\right] \label{eq : definition S component wise}
+\end{equation}
+The idea is to assume we are in an unstable regime, there exists a \ie $\lambda > 0$ satisfying Eq.\eqref{eq : lambda equation}. We then have to find the conditions under which the spectrum of $S(\lambda)$ is entirely negative, implying that $\lambda \leq 0$. As this is a contradiction to the hypothesis that the regime is unstable, we must conclude that the regime is stable\footnote{Indeed, Eq.\eqref{eq : lambda equation} assumes already that either $\lambda >0$ or $\lambda < 0$.}.
+
+Hence, the general strategy is to find regimes where we know that the spectrum of $S$, written as $\sigma(S)$, will be entirely negative for a positive $\lambda$.
+
+\subsection{Low intra resources interaction (LRI) regime }
+We can use Lemma \ref{lemma : lemma Gerschgorin circle} to state the following theorem.
+\begin{theorem}
+If a model is not marginally stable at equilibrium and it verifies :
+\begin{equation}\label{eq : LRI regime}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} - R_C^2 \ \forall \mu,
+\end{equation}
+then it is dynamically stable.
+\end{theorem}
+\begin{proof}
+We assume
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} -R_C^2 \ \forall \mu.
+\end{equation}
+This implies :
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} + R_C^2< - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu.
+\end{equation}
+Using Eq.\eqref{eq : overall bound on lambda} and $\imag{\lambda}^2 \leq \abs{\lambda}^2$, we get:
+\begin{equation}
+  \left(\Gamma\Beta \right)_{\mu\mu} + \imag{\lambda}^2 < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu. \label{eq : low species bound 1}
+\end{equation}
+It is not difficult to prove that for any complex number :
+\begin{equation}
+\imag{c}^2 \geq - \real{c^2} \ \forall c \in \mathbb{C}.
+\end{equation}
+Using this result and dividing Eq.\eqref{eq : low species bound 1} by\footnote{This works because $\Delta_\mu > 0$} $\Delta_\mu$, we get :
+\begin{equation}
+\frac{1}{\Delta_\mu}\left[\left(\sum_i \Gamma_{\mu i} \Beta_{i \mu} \right)-\real{\lambda^2}\right] < - \sum_{\nu \neq \mu } \abs{\frac{\sum_i \Gamma_{\mu i}\Beta_{i\nu}}{\Delta_\mu}} \ \forall \mu.
+\end{equation}
+Looking at Eq.\eqref{eq : definition S component wise}, we see that this is equivalent to:
+\begin{equation}
+\real{S_{\mu \mu}} + \sum_{\nu \neq \mu} \abs{S_{\mu \nu}} < 0\ \forall \mu.
+\end{equation}
+Using Lemma \ref{lemma : lemma Gerschgorin circle}, we know that all the eigenvalues of $S(\lambda)$ will have a negative real part.
+As explained before that means that if $\real{\lambda_1} > 0 $ in Eq.\eqref{eq : equation stability S} (unstable regime), then $\real{\lambda_1} < 0$, which leads to a contradiction. This then implies that the equilibrium is dynamically stable.
+\end{proof}
+\subsubsection{Feasability of the low intra resources interaction regime}
+So we found that if a system has parameters that respect Eq.\eqref{eq : LRI regime} then it is dynamically stable. A naturally arising question is then to ask in what measure this is compatible with the feasability equations Eqs.\eqref{eq: feasability energy conservation}, \eqref{eq : feasability positivity d} and \eqref{eq : feasability positivity m}.
+
+\noindent Finding an approximation of the resource interaction matrix $(\Gamma\Beta)_{\mu \nu}$ using the metaparameters allows to find a necessary condition on the metaparameters. Indeed, using the metaparameters approximations Eq.\eqref{eq : metaparameters approximations}, we get:
+\begin{equation}\label{eq : metaparam approximation GammaBeta}
+\left(\Gamma \Beta\right)_{\mu \nu}\approx \sigma_0 \gamma_0 S_0 \left(\alpha_0 \sum_i A_{\mu i}G_{i\nu}-\gamma_0 R_0 \sum_i G_{i\mu}G_{i\nu}\right)\defined \sigma_0 \gamma_0 S_0 \left(\alpha_0 O_{\mu \nu}-\gamma_0R_0 C_{\mu\nu}\right)
+\end{equation}
+where we defined the syntrophy overlap matrix $O_{\mu\nu}$ and the consumption overlap matrix $C_{\mu\nu}$ as :
+\begin{equation}
+O_{\mu\nu} \defined \left(AG\right)_{\mu \nu} \text{ and } C_{\mu\nu} \defined \left(G^TG\right)_{\mu\nu}.
+\end{equation}
+The fight syntrophy vs. consumption between these two binary matrices essentially builds the dynamics of our model and an intuition about their meaning can be very helpful.
+
+The syntrophy overlap matrix $O_{\mu\nu}$ is defined as :
+\begin{equation}
+O_{\mu\nu} \defined \sum_k A_{\mu k} G_{k\nu}.
+\end{equation}
+Although $A$ and $G$ are binary, $O$ does not have to and usually won't be. A given consumer $k$ contributes to $O_{\mu\nu}$ if and only if both $A_{\mu k}$ and $G_{k\nu}$ are non zero, that is if consumer $k$ releases resource $\mu$ \textit{and} consumes resource $\nu$. Hence $O_{\mu\nu}$ essentially tells how many species effectively link resource $\mu$ to resource $\nu$ through the indirect interaction of the species consumption.
+
+\noindent Similarly, the consumption overlap matrix is defined as :
+\begin{equation}
+C_{\mu\nu}=\sum_k G_{k \mu}G_{k \nu}.
+\end{equation}
+Like $O$, $C$ usually will not be binary. The intuition behind $C_{\mu\nu}$ is straight forward: it counts how many species eat both resource $\mu$ and $\nu$. Note that $C_{\mu\nu}=C_{\nu\mu}$ (interesting : hard part comes from the antisymmetric part of S).
+
+We then find a lowerbound for the RHS of Eq.\eqref{eq : LRI regime} :
+\begin{equation}
+-\sum_{\nu\neq\mu}\abs{\Gamma\Beta}_{\mu\nu} \geq - \sum_{\nu \neq \mu} \max_{\nu \neq \mu} \abs{\Gamma\Beta}_{\mu\nu} \geq - \deg\left(\mu, O-C \right) \max_{\nu \neq \mu} \abs{\Gamma\Beta}_{\mu\nu}.
+\end{equation}
+Combining this with the approximation of $\Gamma\Beta$ above we get an approximative LRI regime condition on the metaparameters :
+\begin{equation}\boxed{
+\alpha_0 O_{\mu \mu}-\gamma_0R_0 C_{\mu\mu} \lessapprox - \deg(\mu, O-C) \max_{\nu\neq\mu}\abs{\alpha_0 O_{\mu \nu}-\gamma_0 R_0 C_{\mu\nu}}-\frac{R_C^2}{\sigma_0\gamma_0 S_0} \ \forall \mu.
+}\label{eq : LRI metaparams sufficient}
+\end{equation}
+Since $R_C$ essentially scales with the largest degree of $G$ (see Eq.\ref{eq : estimate R_C metaparameters}) we only expect systems with a low connectance food consumption adjacency matrix to be able to achieve an LRI state.
+
+This allows to give a necessary condition on the magnitude of $\alpha_0$. Indeed, since the RHS of the previous equation is negative, we need:
+\begin{equation}
+\alpha_0 O_{\mu \mu}-\gamma_0 R_0 C_{\mu\mu} < 0 \ \forall \mu \implies {\alpha_0 \max_\mu \left\{ \frac{O_{\mu\mu}}{C_{\mu\mu}}  \right\} < \gamma_0 R_0 .} \label{eq : LRI necessary maximum alpha0}
+\end{equation}
+It is clear that systems with the maximal ratio of $O_{\mu\mu}$ and $C_{\mu\mu}$ is small will be more easily into a LRI regime. The most favoured systems will be those where $S_{\mu\mu}=0 \ \forall \mu$, \ie systems where no species consumes what it itself produces. In that way we may say that coprophagy tends to destabilize microbial communities.
+Combining Eq.\eqref{eq : feasability positivity m} and \eqref{eq : LRI necessary maximum alpha0} gives us a necessary condition on $\alpha_0$ for feasible systems (need more details?):
+\begin{equation}
+\boxed{
+\alpha_0 \left[\max_\mu \left\{O_{\mu\mu}\right\}-\min_\mu \left\{ \frac{k^\alpha_\mu}{k^\gamma_\mu} \right\} \right] \leq \frac{l_0}{\min_\mu\left(k_\mu^\gamma\right)S_0}}.
+\end{equation}
+Although that equation gives us a necessary condition, it is not sufficient. Eq.\eqref{eq : LRI metaparams sufficient}, on the other hand, is and provides an intuitive way of finding a syntrophy adjacency matrix $A_{\mu i}$ that would put a system with a given consumption adjacency $G_{\mu i}$ in an LRI regime. Section \ref{section : numerical analysis LRI MC solver} explains in details how this can be achieved numerically.
+
+
+% \paragraph{LRI state for an identity food consumption matrix}
+% We would like to know which systems can be in an LRI regime. Consider here the case of $N_R=N_S$ and every species consumes exactly one resource, to each its own. This means the food consumption adjacency matrix is precisely the identity matrix :
+% \begin{equation}
+% G_{i\mu} = \delta_{i\mu}.
+% \end{equation}
+% We can then compute explicitly the $\Gamma\Beta$ matrix :
+% \begin{equation}
+% \left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \left(\alpha_{\mu i}- \gamma_{i\mu}R_\mu^*\right) \sigma_{i\nu}\gamma_{i\nu}S_i^*=\delta_{\mu\nu}\left(\alpha_{\mu\nu}-\gamma_{\nu\mu}R_\mu^*\right)\sigma_{\mu\nu}\gamma_{\mu\nu}S_\nu^*.
+% \end{equation}
+% Also,
+% \begin{equation}
+% \sum_\nu \abs{B_{i\nu}} = \sum_\nu \sigma_{i\nu}\gamma_{i\nu} S_i^* = \sigma_{\nu\nu}\gamma_{\nu\nu}S^*_\nu,
+% \end{equation}
+% and
+% \begin{equation}
+% \sum_j \abs{\Gamma_{\mu j}}= \abs{\Gamma_{\mu\mu}}=\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu,
+% \end{equation}
+% such that
+% \begin{equation}
+% R_C = \max\left(\max_\mu\left\{\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}, \max_\mu \left\{\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}\right).
+% \end{equation}
+% Then we have clearly :
+% \begin{empheq}{align}
+% (\Gamma\Beta)_{\mu\mu} = \left(\alpha_{\mu\mu}-\gamma_{\mu\mu}R_\mu^*\right)\sigma_{\mu\mu}\gamma_{\mu\mu}S_\mu^*
+% \end{empheq}
+\subsection{Effective system}
+Models which involve the dynamics of species only are in general better known than consumers-resources models [\textbf{insert reference}]. In particular, a huge body of literature exists on the study of Lotka-Volterra systems [\textbf{insert reference}]. We may profit from this knowledge by transforming the effect of the resources dynamics into an effective consumers-only system.
+
+This can be done by assuming that the resources reach an equilibrium way faster than the consumers.
+Mathematically, that is equivalent to
+\begin{equation}
+  \frac{dR_\mu}{dt} \approx 0, \\ \forall \mu.
+\end{equation}
+Using Eq.\eqref{eq : differential eq for resources}, we get an explicit value for the resources:
+\begin{equation}
+  R_\mu \approx \frac{l_\mu+\sum_j \alpha_{\mu j}S_j}{m_\mu + \sum_k \gamma_{k\mu}S_k}.
+\end{equation}
+This expression can be used in Eq.\eqref{eq : differential eq for species} to get an effective system which describes the dynamics of the $N_S$ consumers :
+\begin{equation}
+  \frac{dS_i}{dt} = \left(\sum_\nu \left(\frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k} - \alpha_{\nu i}\right) -d_i + \sum_{\nu j} \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}S_j \right) S_i.
+\end{equation}
+This can be rewritten in a more compact way:
+\begin{equation}
+  \frac{dS_i}{dt} = p_i(S) S_i + \sum_j M_{ij}(S)S_i S_j \label{eq : effective equations of evolution}
+\end{equation}
+with
+\begin{equation}
+    p_i(S) = -\left(d_i+\sum_{\nu}\alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k}\text{ and } M_{ij}(S)=\sum_{\nu}\frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}.
+\end{equation}
+If we assume the species $S_k$ are not too far away from their equilibrium values\footnote{Note that this is very rarely true, especially in the context of the study of structural stability, where entire species sometimes die out.}, \ie
+\begin{equation}
+S_k \approx S^*_k \ \forall k,
+\end{equation}
+then using Eq.\eqref{eq : positive m_nu} we can simplify $p_i$. Indeed,
+\begin{equation}
+m_\nu + \sum_k \gamma_{k\nu} S_k \approx m_\nu + \sum_k \gamma_{k\nu}S^*_k = \frac{l_\nu + \sum_k \alpha_{\nu k}S^*_k}{R^*_\nu} \label{eq : equality fluxes resource}
+\end{equation}
+Hence, the explicit dynamical dependence on $S$ can be removed from $p_i$ and $M_{ij}$:
+\begin{equation}
+p_i(S) \approx p_i \equiv - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu R^*_\nu}{l_\nu + \sum_k \alpha_{\nu k}S^*_k},
+\end{equation} and
+\begin{equation}
+M_{ij}(S) \approx M_{ij} \equiv \sum_\nu \frac{\sigma_{i\nu} \gamma_{i\nu} R^*_\nu \alpha_{\nu j}}{l_\nu + \sum_k{\alpha_{\nu k} S^*_k}}.
+\end{equation}
+\subsubsection{Perturbation analysis}
+We study a system that we put close to an equilibrium $S^*$, \ie
+\begin{equation}
+S=S^*+\Delta S, \\ \text{with } \Delta S \ll 1.
+\end{equation}
+Written this way, the effective equations of motion Eq.\eqref{eq : effective equations of evolution} are equivalent to:
+\begin{equation}
+\frac{d\Delta S_i}{dt} = p_i(S^*+\Delta S)\left(S^*_i + \Delta S_i\right)+\sum_j M_{ij}(S^*+\Delta S)\left(S^*_i +\Delta S_i\right)\left(S^*_j +\Delta S_j\right).
+\end{equation}
+Since the deviations from equilibrium $\Delta S_i \ll 1$, we can forget the terms in higher power than quadratic:
+\begin{equation}
+\frac{d\Delta S_i}{dt} = \tilde{p}_i \Delta S_i + \sum_j E_{ij} \Delta S_j + \bigO(\Delta S^2),\label{eq : effective equ evol at O(D2)}
+\end{equation}
+with
+\begin{equation}
+\tilde{p}_i \equiv p_i(S^*) + \sum_k M_{ik}(S^*)S_k^*, \label{eq : tilde p effective system}
+\end{equation}
+and
+\begin{equation}
+E_{ij} \equiv \left(\partiald{p_i}{S_j}\evaluatedat{S^*}+M_{ij}(S^*)+\sum_k \partiald{M_{ik}}{S_j}\evaluatedat{S^*}S^*_k\right)S^*_i.
+\end{equation}
+After some computations, we can get $\tilde{p}_i$ and $E_{ij}$ in terms of the initial parameters. Indeed,
+\begin{equation}
+p_i(S^*)= -\left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}
+\end{equation}
+and
+\begin{equation}
+M_{ik}(S^*) = \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}.
+\end{equation}
+Hence, using Eq.\eqref{eq : tilde p effective system} :
+\begin{equation}
+\tilde{p}_i = - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}\left(l_\nu+\sum_{j}\alpha_{\nu j} S^*_j\right).
+\end{equation}
+This can be simplified using Eq.\eqref{eq : equality fluxes resource} and Eq.\eqref{eq : equilibrium species} :
+\begin{equation}
+\tilde{p}_i=-d_i +\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu = \sum_\nu \alpha_{\nu i}.
+\end{equation}
+With a similar computation, one finds
+\begin{equation}
+E_{ij}=\sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right).
+\end{equation}
+Finally, Eq.\eqref{eq : effective equ evol at O(D2)} can be recast in
+\begin{equation}
+\frac{d\Delta S_i}{dt} = \sum_j (J_E)_{ij} \Delta S_j,
+\end{equation}
+where the effective $N_S\times N_S$ jacobian matrix $J_E$ is defined by:
+\begin{equation}
+(J_E)_{ij}=\sum_\nu \left[\frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right)+\alpha_{\nu i}\delta_{ij}\right].
+\end{equation}
+We see that we without surprise we find again the $\Beta, \Gamma $ and $\Delta$ matrices coming from the jacobian at equilibrium :
+\begin{equation}
+\left(J_E\right)_{ij}=\sum_\nu \left[\frac{\Beta_{i\nu}\Gamma_{\nu j}}{\Delta_\nu}+\alpha_{\nu i} \delta_{ij}\right]
+\end{equation}
+
+This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.
+
+
+
+\subsection{Identifying the order parameter}
+\subsubsection{Flux analysis}
+A natural scale free order parameter that at first sight controls the behaviour of the system is the ratio of the syntrophy and consumption fluxes.
+
+The rate of consumption (or \textit{consumption flux}) of species $i$ is given by $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R_\nu S_i$. Hence the total consumption flux $C_{\text{tot}}$ is given by :
+\begin{equation}
+C_{\text{tot}} = \sum_{i, \nu} \sigma_{i\nu} \gamma_{i\nu}R_\nu S_i.
+\end{equation}
+We can similarly define the total syntrophy flux of the system $S_{\text{tot}}$ :
+\begin{equation}
+S_{\text{tot}} = \sum_{i, \nu} \alpha_{\nu i} S_i.
+\end{equation}
+A natural order parameter $O$ is then
+\begin{equation}
+O \equiv \frac{S_{\text{tot}}}{C_{\text{tot}}} = \frac{\sum_{i, \nu} \alpha_{\nu i} S_i}{\sum_{i,\nu}\sigma_{i\nu} \gamma_{i\nu}R_\nu S_i} \approx \frac{N_S N_R \alpha_0 S_0}{\sigma_0 R_0 S_0 N_S N_R \gamma_0} = \frac{\alpha_0}{\sigma_0 R_0 \gamma_0}.
+\end{equation}
+
+\end{document}

@@ -28,6 +28,9 @@ ntype det(const nmatrix&);
 /* computes number of links in a matrix */
 unsigned int number_of_links(const nmatrix&);
 
+std::vector<unsigned int> row_degrees(const nmatrix& M);
+std::vector<unsigned int> columns_degrees(const nmatrix& M);
+
 /* here we take connectance as the number of links divided by the number of total possible links */
 ntype connectance(const nmatrix&);
 /* here we take the nestedness as defined in Bastolla's 2013 paper */
@@ -35,7 +38,13 @@ ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
+
 bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
+/* returns true if gamma has one row filled with zeros only */
+bool has_an_empty_row(const nmatrix& gamma);
+/* returns true if gamma has one column filled with zeros only */
+bool has_an_empty_column(const nmatrix& gamma);
+
 nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
 nmatrix operator*(const nmatrix&, const nmatrix&);
@@ -105,6 +114,16 @@ std::vector<size_t> sort_indices(const std::vector<T> &v) {
 
   return idx;
 }
+
+template<typename T>
+T minimum(const std::vector<T> &vec){
+  return *std::min_element(vec.begin(), vec.end());
+};
+
+template<typename T>
+T maximum(const std::vector<T> & vec){
+  return *std::max_element(vec.begin(), vec.end());
+};
 
 
 #endif

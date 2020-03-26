@@ -1,0 +1,184 @@
+Creating gamma matrix with target connectance 0.044 and nestedness 0.05
+Try to create gamma with connectance 0.044
+	 Step 0, T=9.9, cost function=0.0466667, nestedness=0.00333333, connectance=0.04
+	 Step 4842, T=9.5099, cost function=2.77488e-18, nestedness=0.05, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.0455 and nestedness 0.05
+Try to create gamma with connectance 0.0455
+	 Step 0, T=9.4148, cost function=0.0466667, nestedness=0.00333333, connectance=0.04
+	 Step 774, T=9.4148, cost function=2.77488e-18, nestedness=0.05, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.047 and nestedness 0.05
+Try to create gamma with connectance 0.047
+	 Step 0, T=9.32065, cost function=0.0466667, nestedness=0.00333333, connectance=0.04
+	 Step 58, T=9.32065, cost function=2.77488e-18, nestedness=0.05, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.0485 and nestedness 0.05
+Try to create gamma with connectance 0.0485
+	 Step 0, T=9.22745, cost function=0.0466667, nestedness=0.00333333, connectance=0.04
+	 Step 217, T=9.22745, cost function=2.77488e-18, nestedness=0.05, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.05 and nestedness 0.05
+Try to create gamma with connectance 0.05
+	 Step 0, T=9.13517, cost function=0.0466667, nestedness=0.00333333, connectance=0.04
+	 Step 145, T=9.13517, cost function=2.77488e-18, nestedness=0.05, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.044 and nestedness 0.1875
+Try to create gamma with connectance 0.044
+	 Step 0, T=9.04382, cost function=0.184167, nestedness=0.00333333, connectance=0.04
+	 Step 2289, T=8.86385, cost function=3.46945e-18, nestedness=0.1875, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.079875 and nestedness 0.1875
+Try to create gamma with connectance 0.079875
+	 Step 0, T=8.77521, cost function=0.184167, nestedness=0.00333333, connectance=0.04
+	 Step 10000, T=7.93614, cost function=0.0932971, nestedness=0.0942029, connectance=0.04
+	 Step 10394, T=7.93614, cost function=3.46945e-18, nestedness=0.1875, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.11575 and nestedness 0.1875
+Try to create gamma with connectance 0.11575
+	 Step 0, T=7.85678, cost function=0.184167, nestedness=0.00333333, connectance=0.04
+	 Step 746, T=7.85678, cost function=3.46945e-18, nestedness=0.1875, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.151625 and nestedness 0.1875
+Try to create gamma with connectance 0.151625
+	 Step 0, T=7.77821, cost function=0.184167, nestedness=0.00333333, connectance=0.04
+	 Step 9808, T=7.10553, cost function=3.46945e-18, nestedness=0.1875, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.1875 and nestedness 0.1875
+Try to create gamma with connectance 0.1875
+	 Step 0, T=7.03448, cost function=0.184167, nestedness=0.00333333, connectance=0.04
+	 Step 10000, T=6.36185, cost function=0.0570652, nestedness=0.130435, connectance=0.04
+	 Step 20000, T=5.75355, cost function=0.127799, nestedness=0.0597015, connectance=0.04
+	 Step 30000, T=5.20341, cost function=0.113971, nestedness=0.0735294, connectance=0.04
+	 Step 40000, T=4.70587, cost function=0.0818662, nestedness=0.105634, connectance=0.04
+	 Step 50000, T=4.2559, cost function=0.0965909, nestedness=0.0909091, connectance=0.04
+	 Step 60000, T=3.84896, cost function=0.0875, nestedness=0.1, connectance=0.04
+	 Step 70000, T=3.48093, cost function=0.0881623, nestedness=0.0993377, connectance=0.04
+	 Step 80000, T=3.14809, cost function=0.107143, nestedness=0.0803571, connectance=0.04
+	 Step 83570, T=3.05459, cost function=3.46945e-18, nestedness=0.1875, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.044 and nestedness 0.325
+Try to create gamma with connectance 0.044
+	 Step 0, T=3.02404, cost function=0.321667, nestedness=0.00333333, connectance=0.04
+	 Step 10000, T=2.73489, cost function=0.274045, nestedness=0.0509554, connectance=0.04
+	 Step 20000, T=2.47339, cost function=0.260484, nestedness=0.0645161, connectance=0.04
+	 Step 30000, T=2.23689, cost function=0.244118, nestedness=0.0808824, connectance=0.04
+	 Step 40000, T=2.023, cost function=0.233451, nestedness=0.0915493, connectance=0.04
+	 Step 50000, T=1.82957, cost function=0.175, nestedness=0.15, connectance=0.04
+	 Step 60000, T=1.65463, cost function=0.275355, nestedness=0.0496454, connectance=0.04
+	 Step 70000, T=1.49641, cost function=0.211525, nestedness=0.113475, connectance=0.04
+	 Step 80000, T=1.35333, cost function=0.23104, nestedness=0.0939597, connectance=0.04
+	 Step 90000, T=1.22393, cost function=0.24626, nestedness=0.0787402, connectance=0.04
+	 Step 100000, T=1.1069, cost function=0.239062, nestedness=0.0859375, connectance=0.04
+	 Step 110000, T=1.00106, cost function=0.250373, nestedness=0.0746269, connectance=0.04
+	 Step 120000, T=0.90534, cost function=0.263776, nestedness=0.0612245, connectance=0.04
+	 Step 130000, T=0.818773, cost function=0.281989, nestedness=0.0430108, connectance=0.04
+	 Step 140000, T=0.740484, cost function=0.26485, nestedness=0.0601504, connectance=0.04
+	 Step 150000, T=0.66968, cost function=0.226316, nestedness=0.0986842, connectance=0.04
+	 Step 160000, T=0.605647, cost function=0.270946, nestedness=0.0540541, connectance=0.04
+	 Step 170000, T=0.547736, cost function=0.231977, nestedness=0.0930233, connectance=0.04
+	 Step 180000, T=0.495363, cost function=0.238978, nestedness=0.0860215, connectance=0.04
+	 Step 190000, T=0.447997, cost function=0.21672, nestedness=0.10828, connectance=0.04
+	 Step 200000, T=0.40516, cost function=0.269751, nestedness=0.0552486, connectance=0.04
+	 Step 210000, T=0.36642, cost function=0.240493, nestedness=0.084507, connectance=0.04
+	 Step 220000, T=0.331384, cost function=0.243919, nestedness=0.0810811, connectance=0.04
+	 Step 230000, T=0.299697, cost function=0.257836, nestedness=0.0671642, connectance=0.04
+	 Step 240000, T=0.271041, cost function=0.271429, nestedness=0.0535714, connectance=0.04
+	 Step 250000, T=0.245125, cost function=0.233451, nestedness=0.0915493, connectance=0.04
+	 Step 260000, T=0.221686, cost function=0.23911, nestedness=0.0858896, connectance=0.04
+	 Step 270000, T=0.200489, cost function=0.235569, nestedness=0.0894309, connectance=0.04
+	 Step 280000, T=0.181319, cost function=0.25017, nestedness=0.0748299, connectance=0.04
+	 Step 290000, T=0.163981, cost function=0.248567, nestedness=0.0764331, connectance=0.04
+	 Step 300000, T=0.148302, cost function=0.219366, nestedness=0.105634, connectance=0.04
+	 Step 310000, T=0.134122, cost function=0.221825, nestedness=0.103175, connectance=0.04
+	 Step 320000, T=0.121297, cost function=0.198134, nestedness=0.126866, connectance=0.04
+	 Step 330000, T=0.109699, cost function=0.238462, nestedness=0.0865385, connectance=0.04
+	 Step 340000, T=0.0992097, cost function=0.230983, nestedness=0.0940171, connectance=0.04
+	 Step 350000, T=0.0897235, cost function=0.268662, nestedness=0.056338, connectance=0.04
+	 Step 360000, T=0.0811443, cost function=0.199016, nestedness=0.125984, connectance=0.04
+	 Step 370000, T=0.0733855, cost function=0.270122, nestedness=0.054878, connectance=0.04
+	 Step 380000, T=0.0663685, cost function=0.247535, nestedness=0.0774648, connectance=0.04
+	 Step 390000, T=0.0600225, cost function=0.222959, nestedness=0.102041, connectance=0.04
+	 Step 400000, T=0.0542833, cost function=0.227985, nestedness=0.0970149, connectance=0.04
+	 Step 410000, T=0.0490928, cost function=0.267675, nestedness=0.0573248, connectance=0.04
+	 Step 420000, T=0.0443987, cost function=0.212218, nestedness=0.112782, connectance=0.04
+	 Step 430000, T=0.0401534, cost function=0.224083, nestedness=0.100917, connectance=0.04
+	 Step 440000, T=0.036314, cost function=0.218617, nestedness=0.106383, connectance=0.04
+	 Step 450000, T=0.0328417, cost function=0.254134, nestedness=0.0708661, connectance=0.04
+	 Step 460000, T=0.0297015, cost function=0.216304, nestedness=0.108696, connectance=0.04
+	 Step 470000, T=0.0268615, cost function=0.134524, nestedness=0.190476, connectance=0.04
+	 Step 480000, T=0.024293, cost function=0.242293, nestedness=0.0827068, connectance=0.04
+	 Step 490000, T=0.0219702, cost function=0.152869, nestedness=0.172131, connectance=0.04
+	 Step 492686, T=0.021533, cost function=9.70361e-18, nestedness=0.325, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.11425 and nestedness 0.325
+Try to create gamma with connectance 0.11425
+	 Step 0, T=0.0213176, cost function=0.321667, nestedness=0.00333333, connectance=0.04
+	 Step 3792, T=0.0206845, cost function=9.70361e-18, nestedness=0.325, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.1845 and nestedness 0.325
+Try to create gamma with connectance 0.1845
+	 Step 0, T=0.0204776, cost function=0.321667, nestedness=0.00333333, connectance=0.04
+	 Step 8609, T=0.0188956, cost function=9.70361e-18, nestedness=0.325, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.25475 and nestedness 0.325
+Try to create gamma with connectance 0.25475
+	 Step 0, T=0.0187067, cost function=0.321667, nestedness=0.00333333, connectance=0.04
+	 Step 5784, T=0.0177899, cost function=9.70361e-18, nestedness=0.325, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.325 and nestedness 0.325
+Try to create gamma with connectance 0.325
+	 Step 0, T=0.017612, cost function=0.321667, nestedness=0.00333333, connectance=0.04
+	 Step 2367, T=0.0172615, cost function=9.70361e-18, nestedness=0.325, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.044 and nestedness 0.4625
+Try to create gamma with connectance 0.044
+	 Step 0, T=0.0170889, cost function=0.459167, nestedness=0.00333333, connectance=0.04
+	 Step 4318, T=0.0164155, cost function=1.59649e-17, nestedness=0.4625, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.148625 and nestedness 0.4625
+Try to create gamma with connectance 0.148625
+	 Step 0, T=0.0162513, cost function=0.459167, nestedness=0.00333333, connectance=0.04
+	 Step 2757, T=0.0159279, cost function=1.59649e-17, nestedness=0.4625, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.25325 and nestedness 0.4625
+Try to create gamma with connectance 0.25325
+	 Step 0, T=0.0157687, cost function=0.459167, nestedness=0.00333333, connectance=0.04
+	 Step 10000, T=0.0142609, cost function=0.0854508, nestedness=0.377049, connectance=0.04
+	 Step 10280, T=0.0142609, cost function=1.59649e-17, nestedness=0.4625, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.357875 and nestedness 0.4625
+Try to create gamma with connectance 0.357875
+	 Step 0, T=0.0141183, cost function=0.459167, nestedness=0.00333333, connectance=0.04
+	 Step 1508, T=0.0139771, cost function=1.59649e-17, nestedness=0.4625, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.4625 and nestedness 0.4625
+Try to create gamma with connectance 0.4625
+	 Step 0, T=0.0138373, cost function=0.459167, nestedness=0.00333333, connectance=0.04
+	 Step 1493, T=0.013699, cost function=1.59649e-17, nestedness=0.4625, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.044 and nestedness 0.6
+Try to create gamma with connectance 0.044
+	 Step 0, T=0.013562, cost function=0.596667, nestedness=0.00333333, connectance=0.04
+	 Step 1424, T=0.0134264, cost function=2.22261e-17, nestedness=0.6, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.183 and nestedness 0.6
+Try to create gamma with connectance 0.183
+	 Step 0, T=0.0132921, cost function=0.596667, nestedness=0.00333333, connectance=0.04
+	 Step 783, T=0.0132921, cost function=2.22261e-17, nestedness=0.6, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.322 and nestedness 0.6
+Try to create gamma with connectance 0.322
+	 Step 0, T=0.0131592, cost function=0.596667, nestedness=0.00333333, connectance=0.04
+	 Step 595, T=0.0131592, cost function=2.22261e-17, nestedness=0.6, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.461 and nestedness 0.6
+Try to create gamma with connectance 0.461
+	 Step 0, T=0.0130276, cost function=0.596667, nestedness=0.00333333, connectance=0.04
+	 Step 948, T=0.0130276, cost function=2.22261e-17, nestedness=0.6, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
+Creating gamma matrix with target connectance 0.6 and nestedness 0.6
+Try to create gamma with connectance 0.6
+	 Step 0, T=0.0128973, cost function=0.596667, nestedness=0.00333333, connectance=0.04
+	 Step 997, T=0.0128973, cost function=2.22261e-17, nestedness=0.6, connectance=0.04 -> reached zero on the cost function, ending the algorithm now.
+
