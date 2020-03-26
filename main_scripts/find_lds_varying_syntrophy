@@ -4,7 +4,7 @@
 MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
 ALPHA_MODE="random_structure no_release_when_eat optimal_matrix"
 SAVENAME="local_dynamical_stability_NR50_NS25"
-OPTIMAL_MATRIX_FOLDER="optimal_LRI/Nr50_Nc25"
+OPTIMAL_MATRIX_FOLDER="optimal_LRI_Nr50_Nc25"
 ADDITIONAL_MODIF="verbose-level=1"
 ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 # for old version
