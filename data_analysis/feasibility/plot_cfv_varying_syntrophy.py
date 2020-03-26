@@ -195,7 +195,7 @@ for k in range(len(feasibility_region)):
     ax.set_title(label[k])
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     fig.tight_layout()
-    fig.savefig('plots/feasibility_NR25_NS25_exp_fit_fixed_nestedness_'+label[k]+'.pdf')
+    fig.savefig('plots/feasibility_NR25_NS25_exp_fit_fixed_nestedness_'+alpha_mode[k]+'.pdf')
     plt.close(k)
 
     fig = plt.figure(k)
@@ -209,5 +209,5 @@ for k in range(len(feasibility_region)):
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     ax.set_title(label[k])
     fig.tight_layout()
-    fig.savefig('plots/feasibility_NR25_NS25_exp_fit_fixed_connectance_'+label[k]+'.pdf')
+    fig.savefig('plots/feasibility_NR25_NS25_exp_fit_fixed_connectance_'+alpha_mode[k]+'.pdf')
     plt.close(k)

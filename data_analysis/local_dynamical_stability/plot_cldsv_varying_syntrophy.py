@@ -95,6 +95,8 @@ for k in range(len(local_dynamical_stability_region)):
     fig.tight_layout()
     fig.savefig("plots/common_local_dynamical_stability_volume_varying_syntrophy_"+alpha_mode[k]+'.pdf')
     plt.close(k)
+
+
 # now we produce a similar plot for all the matrices listed here
 for j in range(len(local_dynamical_stability_region[0,0])):
 #for j in range(1):
@@ -133,18 +135,25 @@ for j in range(len(local_dynamical_stability_region[0,0])):
         axs[i].set_xticklabels([0, 0.5, 1])
         axs[i].set_title(label[i])
 
+    save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
+
     axs[0].set_ylabel(r'$S_0$')
     axs[0].set_yticks([0, 0.5, 1])
     axs[0].set_yticklabels([0, 0.5, 1])
+
     fig.subplots_adjust(bottom=0.2, top=0.95)
+
+    fig.savefig('plots/local_dynamical_stability_wt_wc_region_'+save_name+'.pdf')
+
     cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
     cbar=fig.colorbar(im, cax=cbar_ax, orientation='horizontal')
     cbar.set_label(r'$\alpha_0$')
     cbar.set_ticks([a +0.5 for a in levels])
     cbar.set_ticklabels(alpha0)
 
+    fig.savefig('plots/local_dynamical_stability_wt_region_'+save_name+'.pdf')
+
     fig.suptitle(r'Fully dynamically stable region $\mathcal{D}^G_{L,1}$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
-    save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
     fig.savefig('plots/local_dynamical_stability_region_'+save_name+'.pdf')
     plt.close()
 
