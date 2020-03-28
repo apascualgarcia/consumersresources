@@ -2147,7 +2147,10 @@
     <bcf:citekey order="21">gendreau_simulated_2019</bcf:citekey>
     <bcf:citekey order="22">barbier_cavity_2017</bcf:citekey>
     <bcf:citekey order="23">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="24">magnus_matrix_2019</bcf:citekey>
+    <bcf:citekey order="24">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="25">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="26">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="27">magnus_matrix_2019</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

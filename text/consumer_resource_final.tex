@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{chngcntr}
 \usepackage{graphicx}
-\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}}
+\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}{./figures/Results/largest_eigenvalue/}}
 \counterwithout{footnote}{chapter}
 
 \begin{document}
@@ -18,18 +18,22 @@
   \chapter{Methods}
   \section{Feasibility}\label{sec : methods feasibility}
   \input{feasibility_methods}
+  \FloatBarrier
   \newpage
   \section{Dynamical stability}
   \input{dynamical_stability_methods}
+  \FloatBarrier
   \newpage
   \section{Structural stability}
   \input{structural_stability_methods}
   \chapter{Results}
   \section{Feasibility}
   \input{feasibility_results}
+  \FloatBarrier
   \newpage
   \section{Dynamical stability}
   \input{dynamical_stability_results}
+  \FloatBarrier
   \newpage
   \section{Structural stability}
   \input{structural_stability_results}
@@ -42,8 +46,6 @@
   % \section{Structural stability}
   % \input{analytic_approach_structural_stability}
   %
-  \chapter{Fully connected network}\label{chapter : fully connected network}
-  \input{fully_connected_network}
   %
   % \chapter{Numerical analysis}\label{chapter : numerical analysis}
   % \section{Feasability}

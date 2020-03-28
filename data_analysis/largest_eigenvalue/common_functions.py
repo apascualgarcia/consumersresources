@@ -42,10 +42,17 @@ def linear_function(x, a, b):
 def exponential_function(x, a, b, c):
     return a*np.exp(-b*x)-c
 
+def power_function(x, a, b, c):
+    return a*np.power(x,b)+c
+
 def fit_data(function_to_use, xdata, ydata):
     if function_to_use==exponential_function:
         bounds=((0, 0, 0), (np.inf, np.inf, np.inf))
         popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
+    elif function_to_use==power_function:
+        bounds=((-np.inf, -np.inf, -np.inf), (np.inf, np.inf, np.inf))
+        popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
+
     else:
         popt, pcov = curve_fit(function_to_use, xdata, ydata)
     fitted_y = [function_to_use(x, *popt) for x in xdata]
@@ -63,6 +70,9 @@ def zero_from_fit(function_to_use, popt, pcov):
     elif function_to_use==exponential_function:
         rel_error = pcov[0]/popt[0]+pcov[1]/popt[1]+pcov[2]/popt[2]
         result = np.log(abs(popt[0])/abs(popt[2]))/abs(popt[1])
+    elif function_to_use==power_function:
+        a,b,c = popt
+        result = np.power(-c/a, 1./b)
     error = abs(rel_error*result)
     return result, error
 

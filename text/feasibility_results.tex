@@ -86,23 +86,29 @@ The problem gets a bit more complex here. When we computed $\mathcal{V}^G_1(\alp
   \hspace{-0.1\linewidth}
   \subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808}.pdf}}
 
-  \caption{}
+  \caption{Fully feasible region in the $(\gamma_0,S_0) \in [0,1] \times [0,1]$ unit square as a function of syntrophy for different consumption matrices $G$ : (a)
+  $\eta_G=0.6$, $\kappa_G=0.32$, (b) $\eta_G=0.35$, $\kappa_G=0.22$ and (c) $\eta_G=0.15$, $\kappa_G=0.18$.
+  The white zone corresponds to points that are never fully feasible. The colour of a given point tells until which syntrophy that point is fully feasible, \eg
+  a light blue point is fully feasible for $0 \leq \alpha_0 \leq \num{9.1e-3}$. The size of the feasibility regions depend heavily on the topology of the matrix, which makes the problem far from trivial.}
   \end{figure}
 
 
   \begin{figure}
+  \vspace{-84pt}
   \hspace{-0.1\linewidth}
   \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_NR25_NS25_exp_fit_fixed_nestedness_fully_connected}.pdf}}
   \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_NR25_NS25_exp_fit_fixed_connectance_fully_connected}.pdf}}
 
+  \vspace{-12pt}
   \hspace{-0.1\linewidth}
   \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_NR25_NS25_exp_fit_fixed_nestedness_no_release_when_eat}.pdf}}
   \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_NR25_NS25_exp_fit_fixed_connectance_no_release_when_eat}.pdf}}
 
+  \vspace{-12pt}
   \hspace{-0.1\linewidth}
   \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_NR25_NS25_exp_fit_fixed_nestedness_optimal_LRI}.pdf}}
   \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_NR25_NS25_exp_fit_fixed_connectance_optimal_LRI}.pdf}}
-
+  \caption{Feasibility decay rate. Plots on the first column (a)-(c)-(e) show how $\lambda_F$ changes with connectance for a given ecological overlap, while plot on the second column (b)-(d)-(f) show how it evolves when ecological overlap is changed and connectance is kept fixed. Different structures of the $A$ matrix are considered : (a)-(b) fully connected, (c)-(d) without intraspecific syntrophy and (e)-(f) outcome of the MC algorithm.}
   \end{figure}
 
 
@@ -127,7 +133,7 @@ The problem gets a bit more complex here. When we computed $\mathcal{V}^G_1(\alp
 \begin{center}
 \subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_optimal_matrix}}
 \end{center}
-\caption[caption for LOF]{Surface plot of the fully feasible volume $\mathcal{V}^1(\alpha_0)$. The color bar on the side indicates the value of $\alpha_0$ to which the surface corresponds. The white part of the plot corresponds to points that \important{never} are fully feasible. Note that even though it is not very clear on the figure $\mathcal{V}^1(\alpha_0^+) \subset \mathcal{V}^1(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy. The different subplots correspond to different structures for the syntrophy matrix : (a) $A$ is fully connected, (b) $A$ has a structure such that no resources consumed are eaten (no coprophagy) and (c) $A$ is obtained through the LRI MC algorithm described in Methods \ref{section : methods LRI MC solver}.} \label{fig : results feasibility cfv variation with syntrophy}
+\caption[caption for LOF]{Surface plot of the fully feasible volume $\mathcal{V}^1(\alpha_0)$. The color bar on the side indicates the value of $\alpha_0$ to which the surface corresponds. The white part of the plot corresponds to points that \important{never} are fully feasible. Note that even though it is not very clear on the figure $\mathcal{V}^1(\alpha_0^+) \subset \mathcal{V}^1(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy. The different subplots correspond to different structures for the syntrophy matrix : (a) $A$ is fully connected, (b) $A$ has a structure such that intraspecific syntrophy is restricted and (c) $A$ is obtained through the LRI MC algorithm described in Methods \ref{section : methods LRI MC solver}.} \label{fig : results feasibility cfv variation with syntrophy}
 \end{figure}
 
 \end{document}

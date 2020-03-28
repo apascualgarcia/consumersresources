@@ -10,7 +10,7 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrix_list = load_food_matrix_list(metaparams.foodmatrixpath);
     nvector gamma0_interval=linear_interval(0.01, 1., 5);
-    unsigned int Nsimuls=100;
+    unsigned int Nsimuls=1;
 
     std::ofstream myfile = open_external_file_truncate(metaparams.save_path);
     for(auto mat: matrix_list){

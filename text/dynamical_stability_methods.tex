@@ -595,8 +595,7 @@ This matrix determines the stability of the equilibrium. Namely if the largest e
 
 
 
-\subsection{Identifying the order parameter}
-\subsubsection{Flux analysis}
+\subsection{Flux analysis - a way to get a sense of scales}
 A natural scale free order parameter that at first sight controls the behaviour of the system is the ratio of the syntrophy and consumption fluxes.
 
 The rate of consumption (or \textit{consumption flux}) of species $i$ is given by $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R_\nu S_i$. Hence the total consumption flux $C_{\text{tot}}$ is given by :
@@ -611,6 +610,9 @@ A natural order parameter $O$ is then
 \begin{equation}
 O \equiv \frac{S_{\text{tot}}}{C_{\text{tot}}} = \frac{\sum_{i, \nu} \alpha_{\nu i} S_i}{\sum_{i,\nu}\sigma_{i\nu} \gamma_{i\nu}R_\nu S_i} \approx \frac{N_S N_R \alpha_0 S_0}{\sigma_0 R_0 S_0 N_S N_R \gamma_0} = \frac{\alpha_0}{\sigma_0 R_0 \gamma_0}.
 \end{equation}
+
+\subsection{Application : fully connected consumption and syntrophy networks}
+\input{fully_connected_network}
 
 
 

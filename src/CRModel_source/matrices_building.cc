@@ -78,7 +78,9 @@ nmatrix build_gamma(const foodmatrix& F, const Metaparameters& m){
         }
         if(not(species_existing)){
           error e("Problem in the food matrix "+ m.foodmatrixpath + ", species " + std::to_string(i) +" does not eat anything.");
-          std::cerr << "The food matrix is " << F << std::endl;
+          std::cerr << "The food matrix is " << std::endl;
+          display_food_matrix(std::cerr, F);
+          std::cerr << std::endl;
           throw e;
         }
       }

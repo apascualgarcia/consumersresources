@@ -88,4 +88,10 @@ Inserting this in Eq.\eqref{app : eq : laplace expansion} yields:
 \det(A_N)=0 \iff (a-b)^{N-1}\left[a+(N-1)b\right]=0.
 }\label{eq : formula special determinant}
 \end{equation}
+\subsection{The optimal $S_0$ for locally dynamically stable systems} \label{sec : appendix how to handle S0}
+How $S_0$ should be adjusted is a bit tricky because it is present in two terms that do not have the same behaviour : $l_0^2/S_0$ and $N_S^2 \alpha_0^2 S_0$. So we need to compute the minimum value the sum of these two terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is given by
+\begin{equation}
+\frac{d}{dS_0} \left[\frac{l_0^2}{S_0}+N_S^2\alpha_0^2 S_0\right]_{S_0=S_0^*}=0 \iff S_0^* = \frac{l_0}{N_S \alpha_0}.
+\end{equation}
+One checks really easily that this point is indeed a minimum. So if $S_0 > S_0^*$ it should be decreased, and otherwise increased.
 \end{document}
