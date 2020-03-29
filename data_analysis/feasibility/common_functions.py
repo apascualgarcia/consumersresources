@@ -36,6 +36,46 @@ def plot_points_as_area(ax, points, col):
     ax.fill_between(g0fit,0, np.multiply(S0fit, g0fit), facecolor=col)
     return
 
+def linear_function(x, a, b):
+    return a*x+b
+
+def exponential_function(x, a, b, c):
+    return a*np.exp(-b*x)-c
+
+def power_function(x, a, b, c):
+    return a*np.power(x,b)+c
+
+def fit_data(function_to_use, xdata, ydata):
+    if function_to_use==exponential_function:
+        bounds=((0, 0, 0), (np.inf, np.inf, np.inf))
+        popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
+    elif function_to_use==power_function:
+        bounds=((-np.inf, -np.inf, -np.inf), (np.inf, np.inf, np.inf))
+        popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
+
+    else:
+        popt, pcov = curve_fit(function_to_use, xdata, ydata)
+    fitted_y = [function_to_use(x, *popt) for x in xdata]
+    return fitted_y, popt, np.sqrt(np.diagonal(pcov))
+
+
+def zero_from_fit(function_to_use, popt, pcov):
+    result = 0
+    rel_error = 0
+    error = 0
+
+    if function_to_use==linear_function:
+        rel_error = (pcov[0]/popt[0]+pcov[1]/popt[1])
+        result = -popt[1]/popt[0]
+    elif function_to_use==exponential_function:
+        rel_error = pcov[0]/popt[0]+pcov[1]/popt[1]+pcov[2]/popt[2]
+        result = np.log(abs(popt[0])/abs(popt[2]))/abs(popt[1])
+    elif function_to_use==power_function:
+        a,b,c = popt
+        result = np.power(-c/a, 1./b)
+    error = abs(rel_error*result)
+    return result, error
+
 
 def data_levels(data):
     NR=data[:,0]
@@ -113,8 +153,7 @@ def shrink_volume_for_one_matrix(data):
 
     return volume
 
-def exp_fit(x, a, b, c):
-    return abs(a)*np.exp(b*x)+c
+
 
 def func_to_fit(x, k2, k3):
     return k2*x+k3

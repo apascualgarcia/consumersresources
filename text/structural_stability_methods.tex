@@ -3,10 +3,65 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
-Very similarly to dynamical stability, where the abundances of the resources and species are changed, one can perturb the parameters of a model at an equilibrium point. Namely the idea of \textit{structural stability} is the following : one takes a given equilibrium point [\textbf{Check whether it needs to be linearly stable or not}] $\{R^*, S^*\}$ and changes some or all the parameters of the model. We will focus here on perturbing the external feeding rate of the resources\footnote{This choice may seem a bit arbitrary at first hand. It stems from the idea that we wanted to keep things simple and hence decided to change only one parameter of the model. We chose the external feeding rate of the resources because it simply is the easiest one to control in an actual experimental setup.} :
+When studying dynamical stability, we investigate what happens when the equilibria abundances $\{R^*_\mu, S^*_i\}$ of a given equilibrium point are perturbed. The question of \define{structural stability} looks also at the behaviour of a given system when perturbed away from equilibrium. However, structural stability focuses on the perturbations of the parameters of the model \ie  $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$. Namely we will try to answer the following question :
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+Given an equilibrium point, does the system go back to a positive-valued equilibrium when some of the model parameters are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a positive-valued equilibrium?
+\end{minipage}}
+\end{centering}
+
+\subsection{Definitions}
+Studying how a system responds to the perturbation of all parameters $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$ is a quite difficult problem. So we will try to simplify it by perturbing \important{only one} parameter. We make the somewhat arbitrary choice of perturbing the external feeding rate $l_\mu$, since it is essentially the only parameter one can control experimentally [\textbf{is this true?}]. More precisely, consider $\Delta_S \in [0,1]$, we say that a given system $p \in \mathcal{P}$ is \define{structurally stable} under the perturbation $\Delta_S$, if under the transformation
 \begin{equation}
-l_\mu \rightarrow \tilde{l}_\mu \equiv l_\mu \left(1+\Delta_S\right).
+l_\mu \rightarrow \hat{l}_\mu \defined l_\mu\left( 1+\Delta_S \nu_\mu \right)
 \end{equation}
-The system is then time evolved under the equations of evolution \eqref{eq : differential eq for resources and species}, except that $l_\mu \rightarrow \tilde{l}_\mu$, until an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ is reached. The same metrics as before can be used to quantify the structural stability.
+the transformed set of parameters $\left\{ \hat{l}_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i \right\}$ gives rise under time evolution to a positive valued-equilibrium $\left\{\hat{R}^*_\mu, \hat{S}^*_i\right\}$. In the equation above, $\nu_\mu$ is a random variable drawn from a uniform distribution of support $[-1, 1]$.
+
+Similarly to what was done for feasibility and dynamical stability, we can define the \define{parameters set structural stability function} $\mathfrak{S} : [0,1] \times \mathcal{P} \rightarrow \left\{0,1\right\}$ in the following way $\forall \Delta_S \in [0,1], p \in \mathcal{P}$:
+\begin{equation}
+\mathfrak{S}(\Delta_S, p)=
+\begin{cases}
+1 \text{ if }p \text{ is structurally stable under the perturbation }\Delta_S, \\
+0 \text{ otherwise.}
+\end{cases}
+\end{equation}
+For a fixed $p$, we expect $\mathfrak{S}(\Delta_S, p)$ to behave as a step function of $\Delta_S$ : it makes sense that we may only perturb the parameters so much before they become structurally unstable.
+
+The corresponding metaparameters set function, the \define{metaparameters set structural stability function} $\mathcal{S}$
+can also be defined as the function which, given a set of metaparameters and a consumption-syntrophy couple of binary matrices, tells you how probable it is that you draw a system structurally stable under a perturbation $\Delta_S$. Mathematically, $\mathcal{S} : [0,1] \times \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ is defined $\forall \Delta_S \in [0,1], m \in \mathcal{M}, B=(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ :
+\begin{equation}
+\boxed{
+\mathcal{S}(\Delta_S, m, B)= \text{Probability}\left\{\mathfrak{S}(\Delta_S, \mathcal{A}(m, B))=1\right\}
+}
+\end{equation}
+Because we expect a step-like drop of $\mathfrak{S}$ as $\Delta_S$ increases, we expect also a somewhat sharp drop from $\mathcal{S} \approx 1$ to $\mathcal{S} \approx 0$. To quantify this, one can define the \define{critical structural perturbation} $\Delta_S^*(m,G,A)$ of a consumption-syntrophy network couple implicitly as :
+\begin{equation}
+\mathcal{S}(\Delta_S^*(m, G, A), m, G,A)=0.5
+\end{equation}
+Methods \ref{sec : structural stability methods numerical estimate critical perturbation} below explains how $\Delta_S^*(m, G,A)$ can be estimated numerically.
+
+For a given consumption-syntrophy network couple, we may finally define the $(\Delta_S,x)$-structurally stable region $\mathcal{S}^{G,A}_{\Delta_S, x}$ of the metaparameter space $\mathcal{M}$ :
+\begin{equation}
+\mathcal{S}^{G,A}_{\Delta_S, x} \defined \left\{ m \in \mathcal{M} : \mathcal{S}(\Delta_S, m, G, A)=x \right\}
+\end{equation}
+which is the set of all points in the metaparameters space that have a probability $x$ of being stable under a perturbation $\Delta_S$.
+
+
+\subsection{Numerical estimate of the critical structural perturbation}\label{sec : structural stability methods numerical estimate critical perturbation}
+As explained above, the critical structural perturbation of set of metaparameters $m$ and a consumption-syntrophy couple of matrices is the point where we shift from structural stability to instability. In that sense, $\Delta_S^*(m, G, A)$ is a measure of how good $(m, G, A)$ respond to structural perturbation and can be interpreted geometrically as the radius of a sphere of ``tolerance'' around $m$ \textbf{Shouldn't we change all metaparameters in order to achieve this?}. It turns out that $\Delta_S^*$ can be estimated numerically quite easily.
+
+Indeed, to decide whether a system is structurally stable or not, one can simply perturb the parameters of the system, let it time-evolve until it reaches a new equilibrium and count how many of the original consumers are still present at the new equilibrium. By repeating this procedure many times one gets a good estimate of the \define{probability of observing an extinction} $P_E(\Delta_S, m, G, A)$
+after a structural perturbation $\Delta_S$ and it is clear that
+\begin{equation}
+\mathcal{S}(\Delta_S, m, G, A)=1-P_E(\Delta_S, m, G, A).
+\end{equation}
+So $\Delta_S^*(m, G, A)$ can be found by computing $P_E(\Delta_S, m, G, A)$ over the range $[0,1]$ and finding at which point it is equal to zero. In practice, a general solver involving methods from the C++ \code{GSL} library was implemented in order to get a good estimate on $\Delta_S^*(m, G, A)$ (see Results \ref{sec : results structural stability procedure to estimate critical structural perturbation}).
+
+% Very similarly to dynamical stability, where the abundances of the resources and species are changed, one can perturb the parameters of a model at an equilibrium point. Namely the idea of \textit{structural stability} is the following : one takes a given equilibrium point  $\{R^*, S^*\}$ and changes some or all the parameters of the model. We will focus here on perturbing the external feeding rate of the resources\footnote{This choice may seem a bit arbitrary at first hand. It stems from the idea that we wanted to keep things simple and hence decided to change only one parameter of the model. We chose the external feeding rate of the resources because it simply is the easiest one to control in an actual experimental setup.} :
+% \begin{equation}
+% l_\mu \rightarrow \tilde{l}_\mu \equiv l_\mu \left(1+\Delta_S\right).
+% \end{equation}
+% The system is then time evolved under the equations of evolution \eqref{eq : differential eq for resources and species}, except that $l_\mu \rightarrow \tilde{l}_\mu$, until an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ is reached. The same metrics as before can be used to quantify the structural stability.
 
 \end{document}

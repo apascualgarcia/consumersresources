@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from common_functions import remove_strings_from_file
+import common_functions as cf
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import sys
@@ -23,16 +24,18 @@ for al_mo in alpha_mode:
     for a in alpha0:
         file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)+'.out'
         local_data=np.loadtxt(file)
-        local_vector.append(len(local_data))
+        local_vector.append(len(local_data)/900)
     no_synt_vol = local_vector[0]
     for i in range(len(local_vector)):
         local_vector[i]=local_vector[i]/no_synt_vol
     cfv_region.append(local_vector)
-    ax.plot(alpha0, local_vector, label=label[k])
+    fitted_vol, popt, pcov = cf.fit_data(cf.exponential_function, alpha0, local_vector)
+    print(popt, pcov)
+    ax.plot(alpha0, local_vector, label=label[k],markersize=10, linewidth=2.5, markeredgewidth=3)
     k+=1
 ax.set_xlabel(r'$\alpha_0$')
-ax.set_ylabel(r'Vol $\mathcal{V}^1(\alpha_0)$/Vol $\mathcal{V}^1(0)$')
-ax.set_yscale('linear')
+ax.set_ylabel(r'Vol $\left(\mathcal{F}^{S_M}_1(\alpha_0)\right)$ (normalized)')
+ax.set_yscale('log')
 ax.legend()
 fig.tight_layout()
 fig.savefig('plots/measure_common_feasibility_volume_varying_syntrophy.pdf')

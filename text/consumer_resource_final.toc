@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {1.1}Why Consumers Resources Models in microbial ecology?}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Establishing the model and the goals}{3}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}Equilibria of the model}{4}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Attack strategy and important notions}{4}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.2}Attack strategy and important notions}{5}{subsection.1.2.2}
 \contentsline {subsubsection}{Metaparameters and matrix properties}{5}{section*.4}
 \contentsline {subsubsection}{Losing complexity -- how to gain it back}{7}{section*.7}
 \contentsline {chapter}{\numberline {2}Methods}{8}{chapter.2}
@@ -45,18 +45,21 @@
 \contentsline {subsubsection}{Standard deviation expansion at first order}{31}{section*.33}
 \contentsline {paragraph}{Zero variance case}{32}{section*.37}
 \contentsline {section}{\numberline {2.3}Structural stability}{34}{section.2.3}
-\contentsline {chapter}{\numberline {3}Results}{35}{chapter.3}
-\contentsline {section}{\numberline {3.1}Feasibility}{35}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{35}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{37}{subsection.3.1.2}
-\contentsline {subsubsection}{The influence of matrix structure}{41}{section*.38}
-\contentsline {subsubsection}{Common fully feasible volume}{41}{section*.39}
-\contentsline {section}{\numberline {3.2}Dynamical stability}{43}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}LRI regime -- Outcome of the Monte Carlo algorithm}{43}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Fully dynamically stable volume}{43}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Largest eigenvalue of the jacobian}{43}{subsection.3.2.3}
-\contentsline {section}{\numberline {3.3}Structural stability}{48}{section.3.3}
-\contentsline {chapter}{\numberline {4}Appendices}{49}{chapter.4}
-\contentsline {section}{\numberline {4.1}Demonstrations}{49}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Special determinant computation}{49}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}The optimal $S_0$ for locally dynamically stable systems}{50}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {2.3.1}Definitions}{34}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Numerical estimate of the critical structural perturbation}{35}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}Results}{36}{chapter.3}
+\contentsline {section}{\numberline {3.1}Feasibility}{36}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{36}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{38}{subsection.3.1.2}
+\contentsline {subsubsection}{The influence of matrix structure}{40}{section*.38}
+\contentsline {subsubsection}{Common fully feasible volume}{42}{section*.39}
+\contentsline {section}{\numberline {3.2}Dynamical stability}{46}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}LRI regime -- Outcome of the Monte Carlo algorithm}{46}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Fully dynamically stable volume}{46}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Largest eigenvalue of the jacobian}{46}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Structural stability}{53}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Estimating the critical structural perturbation}{53}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}Appendices}{55}{chapter.4}
+\contentsline {section}{\numberline {4.1}Demonstrations}{55}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Special determinant computation}{55}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}The optimal $S_0$ for locally dynamically stable systems}{56}{subsection.4.1.2}
