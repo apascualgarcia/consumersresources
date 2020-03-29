@@ -1,7 +1,7 @@
 #!/bin/bash
 # This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
 # for every matrix listed (one graph per matrix list) and alpha_mode chosen
-MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 ALPHA_MODE="random_structure no_release_when_eat optimal_matrix"
 SAVENAME="effective_feasibility_NR25_NS25"
 OPTIMAL_MATRIX_FOLDER="optimal_LRI"
