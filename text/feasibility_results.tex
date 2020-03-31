@@ -60,7 +60,7 @@ while the theoretical value matches better a fit of the points $0.4 \leq \mathca
 \caption{Plot of the common feasability region. The blue area indicates the common feasibility volume, computed numerically, while the dashed line shows the analytical prediction. Although the match is not as good as before, the relative error is only of the order of $20 \%$. The red part is the area where not all matrices are fully feasible. From now on, it will not be considered anymore.}
 \label{fig : common feasible volume}
 \end{figure}
-
+\FloatBarrier
 \subsection{Evolution of the feasible volume with syntrophy}
 
 Above we computed feasibles volumes when there is no syntrophy \ie $\mathcal{V}^{G}_1(\alpha_0=0)$. Since $\alpha_0=0$, we did not need to specify what the structure of $A$ was. The next naturally arising question is then : what happens to the feasible volume of a given matrix $G$ when we add a syntrophic interaction? More precisely, how does $\mathcal{V}^G_1$'s shape change?
@@ -77,7 +77,7 @@ The problem gets a bit more complex here. When we computed $\mathcal{V}^G_1(\alp
   \alpha_0 \lessapprox \frac{\min(1-\sigma_0, \sigma_0)\gamma_0 R_0}{\max_{(G,A)\in S}\left\{\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\}\right\}} \approx 0.01 \gamma_0 \leq 0.01.
   \end{equation}
   So we will look at ten different $\alpha_0$ values from $0$ to $0.015$. We first consider the effect of syntrophy on each consumption network $G$ then on the common fully feasible volume.
-
+  \FloatBarrier
   \subsubsection{The influence of matrix structure}
   Because Eq.\eqref{eq : fully feasible volume} depends on the structure of $G$ and of $A$, we expect $\mathcal{F}^{G,A}_1$ to depend heavily on the topology of both consumption and syntrophy matrices. Figure \ref{fig : feasibility results fully feasible volume different consumption matrices} shows that indeed $\mathcal{F}^G_1$ not only changes with syntrophy but also with the network structure of the consumption matrix.
   \begin{figure}
@@ -138,18 +138,25 @@ The problem gets a bit more complex here. When we computed $\mathcal{V}^G_1(\alp
   \caption{Feasibility decay rate. Plots on the first column (a)-(c)-(e) show how $d_F$ changes with connectance for a given ecological overlap, while plot on the second column (b)-(d)-(f) show how it evolves when ecological overlap is changed and connectance is kept fixed. Different structures of the $A$ matrix are considered : (a)-(b) fully connected, (c)-(d) without intraspecific syntrophy and (e)-(f) outcome of the MC algorithm.}\label{fig : feasibility results feasibility decay rate vs matrix structure}
   \end{figure}
 
-
-
+  \FloatBarrier
   \subsubsection{Common fully feasible volume}
  After studying the structure of each matrix individually, we can focus on the common fully feasible volume $\mathcal{F}_1^{S_M}$. Figure \ref{fig : results feasibility cfv variation with syntrophy} show the evolution of the common feasible volume as syntrophy increases. Once again, the structure of the syntrophy matrix does not seem to play a significant role in the shape of $\mathcal{F}_1^{S_M}$. Note that at $\alpha_0=\num{9.1e-3}$, $\text{Vol}\left(\mathcal{F}_1^{S_M}\right)=0$ but at $\alpha_0=\num{7.8e-3}$ the common feasible region was still non-zero. So the \define{critical common feasibility} $\alpha_0^F$, defined as the smallest syntrophy which gives rise to a zero fully feasible volume respects $\num{7.8e-3} < \alpha_0^F \leq \num{9.1e-3}$. It was estimated above that $\alpha_0^F \approx 0.01$, which is the right order of magnitude.
 \begin{figure}[h!]
-\hspace{-0.1\linewidth}
 \captionsetup[subfigure]{captionskip = -185pt, margin = 195pt}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_random_structure}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_no_release_when_eat}}
-\begin{center}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_varying_syntrophy_optimal_matrix}}
-\end{center}
+
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR25_NS25_varying_syntrophy_random_structure}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR50_NS25_varying_syntrophy_random_structure}}
+
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR25_NS25_varying_syntrophy_no_release_when_eat}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR50_NS25_varying_syntrophy_no_release_when_eat}}
+
+
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR25_NS25_varying_syntrophy_optimal_matrix}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR50_NS25_varying_syntrophy_optimal_matrix}}
+
 \caption[caption for LOF]{Surface plot of the fully feasible volume $\mathcal{V}^1(\alpha_0)$. The color bar on the side indicates the value of $\alpha_0$ to which the surface corresponds. The white part of the plot corresponds to points that \important{never} are fully feasible. Note that even though it is not very clear on the figure $\mathcal{V}^1(\alpha_0^+) \subset \mathcal{V}^1(\alpha_0^-) \ \forall \alpha_0^+ > \alpha_0^-$, \ie the common fully feasible region of higher syntrophy is included in the one of lower syntrophy. The different subplots correspond to different structures for the syntrophy matrix : (a) $A$ is fully connected, (b) $A$ has a structure such that intraspecific syntrophy is restricted and (c) $A$ is obtained through the LRI MC algorithm described in Methods \ref{section : methods LRI MC solver}.} \label{fig : results feasibility cfv variation with syntrophy}
 \end{figure}
 Figure \ref{fig : feasibility results volume of cfr depending on syntrophy} shows that unsurpisingly $\text{Vol}\left(\mathcal{F}_1^{S_M}(\alpha_0)\right)$ also decays exponentially with a rate $d_F(S_M)=\num[scientific-notation=false]{480(50)}$ per unit of syntrophy which is a bit larger than the largest $d_F(G,A)$ observed in Fig.\ref{fig : feasibility results feasibility decay rate vs matrix structure}. Without any surprise as well we observe the same shift of $\mathcal{F}_1^{S_M}$ towards points with a high $\gamma_0$ and consequently a small $S_0$ \textbf{Add interpretation on this?}.
@@ -160,6 +167,26 @@ Figure \ref{fig : feasibility results volume of cfr depending on syntrophy} show
 \includegraphics[width=0.7\linewidth]{measure_common_feasibility_volume_varying_syntrophy}
 \caption{Volume of the common feasibility region $\mathcal{V}^1(\alpha_0)$ as a function of syntrophic interaction strength $\alpha_0$. The curves indicate the different structures used for the syntrophy network $A$.}\label{fig : feasibility results volume of cfr depending on syntrophy}
 \end{figure}
+
+\FloatBarrier
+\subsubsection{The influence of the matrix dimensions}
+
+\begin{figure}
+\vspace{-120pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_wc_NR50_NS25_Nest0.6_Conn0.3344}.pdf}}
+
+\vspace{-68pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_wc_NR50_NS25_Nest0.35_Conn0.2296}.pdf}}
+
+\vspace{-68pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=1.2\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.15_Conn0.12}.pdf}}
+\caption{To be compared with Fig.\ref{fig : feasibility results fully feasible volume different consumption matrices} Sort colorbar}
+\end{figure}
+
+
 
 
 \end{document}

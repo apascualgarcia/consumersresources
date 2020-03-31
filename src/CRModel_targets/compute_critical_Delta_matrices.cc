@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(int argc, char * argv[]){
+  try{
     Metaparameters metaparams(argc, argv);
     initialize_random_engine(metaparams);
     std::vector<std::string> matrices_path=load_food_matrix_list(metaparams.foodmatrixpath);
@@ -30,7 +31,6 @@ int main(int argc, char * argv[]){
       for(size_t i = 0; i < matrices_path.size();++i){
           metaparams.foodmatrixpath = matrices_path[i];
           metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
-          std::cout << "Feasability probability is " << find_feasability_probability(metaparams) << std::endl;
           delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct), stabilitymode(structural)};
           statistics delta = compute_critical_Delta(metaparams, solv_params);
           std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
@@ -39,5 +39,9 @@ int main(int argc, char * argv[]){
       }
     }
     myfile.close();
+  }catch(error e){
+    e.handle();
+  }
+
   return 0;
 }

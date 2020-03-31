@@ -26,8 +26,8 @@ largest_eigenvalue_region = []
 for al_mo in alpha_mode:
     local_vector=[]
     for a in alpha0:
-        # file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)
-        # cf.remove_strings_from_file('optimal_matrices/consumption/Nr25_Nc25', file)
+        file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)
+        cf.remove_strings_from_file('optimal_matrices/consumption/Nr25_Nc25', file)
         file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)+'_filtered.out'
         local_data=np.loadtxt(file, dtype=complex)
         local_vector.append(local_data)
@@ -92,99 +92,100 @@ alpha0=np.array(alpha0)
 #             plt.close()
 
 critical_alpha0 = []
-# for j in range(len(largest_eigenvalue_region[0,0])):
-    # decline_volume = []
-    # indices_max_vol=[]
-    # # find largest alpha0 that has non-zero volume
-    # for k in range(len(largest_eigenvalue_region)):
-    #     volumes=[]
-    #     max_vol = 0
-    #     i = 0
-    #     continue_loop=True
-    #     while continue_loop:
-    #         data = np.ma.masked_invalid(largest_eigenvalue_region[k,i,j])
-    #         gamma0=np.real(data[4::3])
-    #         S0=np.real(data[5::3])
-    #         NR=np.real(data[0])
-    #         NS=np.real(data[1])
-    #         nestedness=np.real(data[2])
-    #         connectance=np.real(data[3])
-    #         largest_ev=data[6::3]
-    #
-    #         if not(data[6::3].mask.all()):
-    #             max_vol +=1
-    #         else:
-    #             continue_loop=False
-    #         continue_loop= (continue_loop and (i < len(largest_eigenvalue_region[0])-1))
-    #         i+=1
-    #
-    #
-    #     for i in range(max_vol):
-    #         data = np.ma.masked_invalid(largest_eigenvalue_region[k,i,j])
-    #         volumes.append(data[6::3].count()/Npoints)
-    #     decline_volume.append(volumes)
-    #     indices_max_vol.append(max_vol)
-    #
-    # fig = plt.figure()
-    # ax = fig.add_subplot(111)
-    # local_crit=[]
-    # for k in range(len(largest_eigenvalue_region)):
-    #     ax.plot(alpha0[:indices_max_vol[k]], decline_volume[k], label=label[k])
-    #     start_fit=max_vol-4
-    #     fit_function = cf.linear_function
-    #     fit_volumes, popt, perror = cf.fit_data(fit_function, alpha0[start_fit:max_vol], decline_volume[k][start_fit:max_vol])
-    #     alpha0_crit, alpha0_error = cf.zero_from_fit(fit_function, popt, perror)
-    #     print(alpha0_crit, alpha0_error)
-    #     local_crit.append(alpha0_crit)
-    #     ax.plot(alpha0[start_fit:max_vol], fit_volumes, marker='None', linestyle='solid')
-    # critical_alpha0.append(local_crit)
-    # ax.legend()
-    # save_name ='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
-    # title=r'$N_R='+str(int(NR))+', N_S='+str(int(NS))+', \eta='+str(nestedness)+', \kappa='+str(connectance)+'$'
-    # ax.set_title(title)
-    # ax.set_xlabel(r'$\alpha_0$')
-    # ax.set_ylabel(r'Vol($\mathcal{D}_{L,1}$) (normalized)')
-    # fig.tight_layout()
-    # fig.savefig("plots/size_of_dynamical_volume_"+save_name+".pdf")
-    # #plt.show()
-    # plt.close()
-#critical_alpha0=np.transpose(critical_alpha0)
+for j in range(len(largest_eigenvalue_region[0,0])):
+    decline_volume = []
+    indices_max_vol=[]
+    # find largest alpha0 that has non-zero volume
+    for k in range(len(largest_eigenvalue_region)):
+        volumes=[]
+        max_vol = 0
+        i = 0
+        continue_loop=True
+        while continue_loop:
+            data = np.ma.masked_invalid(largest_eigenvalue_region[k,i,j])
+            gamma0=np.real(data[4::3])
+            S0=np.real(data[5::3])
+            NR=np.real(data[0])
+            NS=np.real(data[1])
+            nestedness=np.real(data[2])
+            connectance=np.real(data[3])
+            largest_ev=data[6::3]
+
+            if not(data[6::3].mask.all()):
+                max_vol +=1
+            else:
+                continue_loop=False
+            continue_loop= (continue_loop and (i < len(largest_eigenvalue_region[0])-1))
+            i+=1
+
+
+        for i in range(max_vol):
+            data = np.ma.masked_invalid(largest_eigenvalue_region[k,i,j])
+            volumes.append(data[6::3].count()/Npoints)
+        decline_volume.append(volumes)
+        indices_max_vol.append(max_vol)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    local_crit=[]
+    for k in range(len(largest_eigenvalue_region)):
+        ax.plot(alpha0[:indices_max_vol[k]], decline_volume[k], label=label[k],markersize=10, linewidth=2.5, markeredgewidth=3)
+        max_vol = indices_max_vol[k]
+        start_fit=max_vol-4
+        fit_function = cf.linear_function
+        fit_volumes, popt, perror = cf.fit_data(fit_function, alpha0[start_fit:max_vol], decline_volume[k][start_fit:max_vol])
+        alpha0_crit, alpha0_error = cf.zero_from_fit(fit_function, popt, perror)
+        print(alpha0_crit, alpha0_error)
+        local_crit.append(alpha0_crit)
+        ax.plot(alpha0[start_fit:max_vol], fit_volumes, marker='None', linestyle='solid')
+    critical_alpha0.append(local_crit)
+    ax.legend()
+    save_name ='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
+    title=r'$N_R='+str(int(NR))+', N_S='+str(int(NS))+', \eta='+str(nestedness)+', \kappa='+str(connectance)+'$'
+    ax.set_title(title)
+    ax.set_xlabel(r'$\alpha_0$')
+    ax.set_ylabel(r'Vol$\left(\mathcal{D}^{G,A}_{L,1}(\alpha_0)\right)$ (normalized)')
+    fig.tight_layout()
+    fig.savefig("plots/size_of_dynamical_volume_"+save_name+".pdf")
+    #plt.show()
+    plt.close()
+critical_alpha0=np.transpose(critical_alpha0)
 
 connectance = np.real(largest_eigenvalue_region[0,0][:,3])
 nestedness = np.real(largest_eigenvalue_region[0,0][:,2])
-# for k in range(len(largest_eigenvalue_region)):
-#     # plot critical alpha0
-#     fig = plt.figure()
-#     ax = fig.add_subplot(111)
-#     for nest in all_nestedness:
-#         indices = [int(i) for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-#         sorted_indices=np.array([indices[a] for a in np.argsort(connectance[indices])])
-#         connectance_to_plot=[connectance[i] for i in sorted_indices]
-#         critical_alpha0_to_plot=[critical_alpha0[k][i] for i in sorted_indices]
-#         ax.plot(connectance_to_plot, critical_alpha0_to_plot, label=r'$\eta\approx'+str(nest)+'$', markersize=10, linewidth=2.5, markeredgewidth=3)
-#     ax.set_xlabel(r'Connectance $\kappa$')
-#     ax.set_ylabel(r'$\alpha_0^*$')
-#     ax.set_title(label[k])
-#     ax.legend(bbox_to_anchor=(1.0, 1.0))
-#     fig.tight_layout()
-#     fig.savefig('plots/largest_eigenvalue_NR25_NS25_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
-#     plt.close()
-#
-#     fig = plt.figure()
-#     ax = fig.add_subplot(111)
-#     for conn in all_connectance:
-#         indices = [int(i) for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
-#         sorted_indices=np.array([indices[a] for a in np.argsort(nestedness[indices])])
-#         nestedness_to_plot=[nestedness[i] for i in sorted_indices]
-#         critical_alpha0_to_plot=[critical_alpha0[k][i] for i in sorted_indices]
-#         ax.plot(nestedness_to_plot, critical_alpha0_to_plot, label=r'$\kappa\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
-#     ax.set_xlabel(r'Ecological overlap $\eta$')
-#     ax.set_ylabel(r'$\alpha_0^*$')
-#     ax.set_title(label[k])
-#     ax.legend(bbox_to_anchor=(1.0, 1.0))
-#     fig.tight_layout()
-#     fig.savefig('plots/largest_eigenvalue_NR25_NS25_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
-#     plt.close()
+for k in range(len(largest_eigenvalue_region)):
+    # plot critical alpha0
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for nest in all_nestedness:
+        indices = [int(i) for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
+        sorted_indices=np.array([indices[a] for a in np.argsort(connectance[indices])])
+        connectance_to_plot=[connectance[i] for i in sorted_indices]
+        critical_alpha0_to_plot=[critical_alpha0[k][i] for i in sorted_indices]
+        ax.plot(connectance_to_plot, critical_alpha0_to_plot, label=r'$\eta_G\approx'+str(nest)+'$', markersize=10, linewidth=2.5, markeredgewidth=3)
+    ax.set_xlabel(r'Connectance $\kappa_G$')
+    ax.set_ylabel(r'$\alpha_0^D(G,A)$')
+    ax.set_title(label[k])
+    ax.legend(bbox_to_anchor=(1.0, 1.0))
+    fig.tight_layout()
+    fig.savefig('plots/largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+    plt.close()
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for conn in all_connectance:
+        indices = [int(i) for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
+        sorted_indices=np.array([indices[a] for a in np.argsort(nestedness[indices])])
+        nestedness_to_plot=[nestedness[i] for i in sorted_indices]
+        critical_alpha0_to_plot=[critical_alpha0[k][i] for i in sorted_indices]
+        ax.plot(nestedness_to_plot, critical_alpha0_to_plot, label=r'$\kappa_G\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+    ax.set_xlabel(r'Ecological overlap $\eta_G$')
+    ax.set_ylabel(r'$\alpha_0^D(G,A)$')
+    ax.set_title(label[k])
+    ax.legend(bbox_to_anchor=(1.0, 1.0))
+    fig.tight_layout()
+    fig.savefig('plots/largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    plt.close()
 
 # now plot largest eigenvalue observed
 exponents=[]
@@ -235,7 +236,7 @@ for k in range(len(largest_eigenvalue_region)):
     ax.set_title(label[k])
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     fig.tight_layout()
-    fig.savefig('plots/fit_exponent_largest_eigenvalue_NR25_NS25_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+    fig.savefig('plots/fit_exponent_largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
     plt.close()
 
     fig = plt.figure()
@@ -251,5 +252,5 @@ for k in range(len(largest_eigenvalue_region)):
     ax.set_title(label[k])
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     fig.tight_layout()
-    fig.savefig('plots/fit_exponent_largest_eigenvalue_NR25_NS25_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    fig.savefig('plots/fit_exponent_largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
     plt.close()

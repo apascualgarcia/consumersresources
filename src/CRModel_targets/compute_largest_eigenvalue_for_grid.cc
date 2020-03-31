@@ -16,8 +16,8 @@ int main(int argc, char * argv[]){
 
     unsigned int Nsimuls=100;
 
-    nvector gamma0_interval=linear_interval(min_gamma0, max_gamma0, 30);
-    nvector S0_interval=linear_interval(min_S0, max_S0, 30);
+    nvector gamma0_interval=linear_interval(min_gamma0, max_gamma0, 100);
+    nvector S0_interval=linear_interval(min_S0, max_S0, 100);
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
     for(auto mat: matrix_list){
