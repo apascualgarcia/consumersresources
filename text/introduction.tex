@@ -4,79 +4,94 @@
 
 \begin{document}
 
-\section{Why Consumers Resources Models in microbial ecology?}
-Why biology?
-Why microbes?
-Why consumer resources models?
-What is a chemostat and why?
-Why not flux balance?
+\section{Consumer Resource
+ Models in microbial ecology}
+% Why biology?
+%   - Biology always has been a field of interest for physicists and mathematicians , namely because some problems in biology are very apt to the formalism of physics (talk not only about biophysics but also about model flock of birds with fluid dynamics equations and how statistical physics is used in ecology community: PT between neutral and niche)
 
-\section{Establishing the model and the goals}
-We want to write down a consumers-resources model (CRM) which describes the coupled evolution between $N_S$ different species of biomass (denoted $S_i$ with $i = 1, \dots, N_S$) and the $N_R$ resources they feed off (denoted $R_\mu$ with $\mu = 1, \dots, N_R$).
+Biology and Physics have always been tightly intertwined. Especially the years following the end of World War II saw many famous physicists getting interested in the blooming field of Biology \cite{jogalekar_physicists_nodate}, Leo Szilard or Erwin Schroedinger and his \citetitle{schrodinger_what_1944} \cite{schrodinger_what_1944} among others. That exodus is no surprise, many biological phenomena at different scales are well modelled with Physics weaponry: from the use of Statistical Physics to solve protein folding problems \cite{chan_protein_1993} and find phase transitions in ecological communities \cite{fisher_transition_2014} to the application of Hamiltonian dynamics to describe the movement of starling flocks \cite{attanasi_information_2014}.
 
-The coupled evolution of the set of variables $\{R_\mu, S_i\}$ is given by:
-\begin{subequations}\label{eq : differential eq for resources and species}
-\begin{empheq}[left=\empheqlbrace]{align}
-  \frac{dR_\mu}{dt} &= l_\mu - m_\mu R_\mu - \sum_{j} \gamma_{j\mu} R_\mu S_j + \sum_j \alpha_{\mu j} S_j \label{eq : differential eq for resources}\\
-  \frac{dS_i}{dt} &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R_\nu S_i- d_i S_i - \sum_\nu \alpha_{\nu i} S_i \label{eq : differential eq for species}
+% Why microbes?
+%   - microbial communities are useful: due to complex interactions (microorganisms tightly shaped to humans), substantial impact on human health and ecosystem functioning in natural environments (cite verterbrate gut paper for health and water paper + ocean paper for environment)
+
+However, Physics has not solved every problem yet: the study of microbial communities remains one of the biggest and most interesting challenges of contemporal microbiology. Indeed microbes and their complex interactions have a substantial, non trivial and very large impact on humans and their environment in various ways: we only start to understand the role of microbiological interactions in verterbrates' guts \cite{ley_worlds_2008}, or how they shape our soils \cite{becerra-castro_wastewater_2015} and oceans \cite{falkowski_biogeochemical_1998}.
+% Why consumer resources models?
+
+Population dynamics in ecological communities are often approximated by variations of the Lotka-Volterra model \cite{lotka_analytical_1920}. This approach works well when the mediators of the competitive interaction between species reach a steady state fast enough such that their own dynamics can be eliminated \cite{momeni_lotka-volterra_2017}. However, such an assumption is not always true and one must in general always ask themselves whether it may be applied \cite{odwyer_whence_2018}. For microbial communities, previous literature shows that the population dynamics are not always well captured by a Lotka-Volterra model \cite{momeni_lotka-volterra_2017}, which explains the need of a more mechanistic approach, where the dynamics of both the microbes and their resources are explicitly modelled. Robert MacArthur is one of the first ecologists to establish and study such a \important{Consumer Resource Model} (CRM) \cite{macarthur_species_1970}, launching a field still active today \cite{brunner_metabolite_2019}.
+% Why syntrophic interaction?
+%   - basically because those effects come from the metabolic activity of the MCs, and a big part of it is syntrophy,
+
+In the light of recent developments in the microbiology literature \cite{morris_microbial_2013}, we propose here a CRM\footnote{One could argue that Flux Balance Analysis (FBA) \cite{orth_what_2010} would be well suited for such a study. We ruled it out because it is known to scale badly \cite{thiele_multiscale_2012} with system size and we do not want to be hindered by this limitation.} which explicitly takes into account syntrophy. This process, which is largely observed in microbial communities \cite{morris_microbial_2013}, by definition occurs when microbes release, through a metabolic process, byproducts that are consumed by some members of the microbial community. In short, we want to know what happens when consumers are also allowed to release resources.
+% What are the assumptions of our model?
+%   - setup chemostat: explain what it is (cite paper) and why chemostat instead of other models, eg flux balance scale poorly (cite paper).
+% Syntrophic interactions have already been studied in flux balance models (find citations) but these scale badly so take chemostat
+% What is a chemostat and why?
+% Why not flux balance?
+
+\section{Establishing the model and goals}
+
+We write down a CRM which describes the coupled evolution of the biomass of $N_S$ different species   and their $N_R$ resources in a chemostat\footnote{In a chemostat, new nutrients are continuously added, while at the same time microorganisms and resources are removed in order to keep the culture volume constant \cite{james_continuous_1961}.}. Resources are labelled $\mu=1, \dots, N_R$ and consumers $i=1, \dots, N_S$. The coupled time evolution of their respective abundances $\{R_\mu, S_i\}$ is given by:
+\begin{subequations}\label{eq: differential eq for resources and species}
+\begin{empheq}[box=\fbox]{align}
+\frac{dR_\mu}{dt} &= l_\mu - m_\mu R_\mu - \sum_{j} \gamma_{j\mu} R_\mu S_j + \sum_j \alpha_{\mu j} S_j \label{eq: differential eq for resources}\\
+\frac{dS_i}{dt} &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R_\nu S_i- d_i S_i - \sum_\nu \alpha_{\nu i} S_i \label{eq: differential eq for species}
 \end{empheq}
 \end{subequations}
-
-We will call the variables $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ \define{parameters of the model} \textbf{add $R^*$ and $S^*$}. On the other hand, because they may dynamically evolve, $\{R_\mu, S_i\}$ will be refered to as \define{dynamical variables} or simply \textit{variables}. Note that there are in this model a lot of different symbols that may be easy to confuse. We will at least try to keep the following conventions :
+The set of quantities $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ has no explicit dynamics and is taken as constant. On the other hand, $\{R_\mu, S_i\}$ may dynamically evolve and will be refered to as \define{dynamical variables}. Note that there are in this model a lot of different symbols that may be easy to confuse. We will at least try to keep the following conventions:
 \begin{itemize}
-  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ abundance $R_\mu$). Quantities related to species have subscripts in latin alphabet (\eg the species $i$ abundance $S_i$). Finally, quantities related to both have both indices.
-  \item Vectors (\ie quantities with one index) are written with the latin alphabet (\eg the resource $\mu$ death rate $m_\mu$).
-  \item Matrices (\ie quantities with two indices, usually relating resources and species) are written with the greek alphabet (\eg the rate $\gamma_{i\mu}$ at which species $i$ consumes resource $\mu$).
+  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ has abundance $R_\mu$). Quantities related to species have subscripts in latin alphabet (\eg the species $i$ has abundance $S_i$). Finally, quantities related to both have both indices.
+  \item Vectors (\ie quantities with one index) are written with the latin alphabet (\eg the resource $\mu$ has death rate $m_\mu$).
+  \item Matrices (\ie quantities with two indices, usually relating resources and species) are written with the greek alphabet (\eg $\gamma_{i\mu}$ is the rate at which species $i$ consumes resource $\mu$).
 \end{itemize}
-
-Our model tries to take numerous phenomena into account and it therefore may be helpful to take the time to explain the different terms of each differential equation. The temporal evolution of a resource $R_\mu$ is essentially driven by the following processes:
+Our model takes numerous phenomena into account and it may be helpful to take the time to explain the different terms of each differential equation. The temporal evolution of the biomass $R_\mu$ of a resource $\mu$ is essentially driven by the following processes:
 \begin{itemize}
-  \item Constant input from an outsider experimenter : this corresponds to the constant $+l_\mu$ term,
-  \item Natural diffusion/deterioration at rate $m_\mu$ : this corresponds to the $-m_\mu R_\mu$ term,
-  \item Consumption by the biomass species $S_j$ at a rate $\gamma_{j\mu}$. In total this corresponds to the Lotka-Volterra style term [\textbf{insert ref}] $-\sum_j \gamma_{j\mu}R_\nu S_j$,
-  \item Production coming from the species $S_j$ at a rate $\alpha_{\mu j}$: $+\sum_j \alpha_{\mu j} S_j$. This is essentially what makes this model different from traditional CRMs [\textbf{insert ref}].
+  \item Constant external inflow coming from the experimental setup: this corresponds to the constant $+l_\mu$ term.
+  \item Natural diffusion/deterioration at rate $m_\mu$: this corresponds to the $-m_\mu R_\mu$ term.
+  \item Consumption by the species $j$ at a rate $\gamma_{j\mu}$ : $-\gamma_{j\mu} R_\mu S_j$. Summing up the contributions of every species, we get the Lotka-Volterra style \cite{lotka_analytical_1920} term  $-\sum_j \gamma_{j\mu}R_\nu S_j$,
+  \item Intrasystemic inflow coming from the syntrophy of species $j$ at a rate $\alpha_{\mu j}$: $+\sum_j \alpha_{\mu j} S_j$.
 \end{itemize}
-On the other hand, biomass of species $S_i$ changes because of the following processes [\textbf{insert figure}]:
+On the other hand, biomass of species $S_i$ changes because of the following processes:
 \begin{itemize}
-  \item Consumption of resource $R_\nu$ at a rate $\gamma_{i\nu}$. Only a fraction $\sigma_{i\nu}$ of this is allocated to biomass growth : $+\sum_\nu \sigma_{i\nu} \gamma_{i\nu}R_\nu S_i$.
-  \item Cell death/diffusion at rate $d_i$ : this is the $-d_i S_i$ term.
-  \item Release of resource $R_\nu$ at rate $\alpha_{\nu i}$ (this is the syntrophic interaction). In total $-\sum_\nu \alpha_{\nu i} S_i$.
+  \item Consumption of resource $R_\nu$ at a rate $\gamma_{i\nu}$. Only a fraction $\sigma_{i\nu}$ of this is allocated to biomass growth: $+\sum_\nu \sigma_{i\nu} \gamma_{i\nu}R_\nu S_i$.
+  \item Cell death/diffusion at rate $d_i$: this is the $-d_i S_i$ term.
+  \item Syntrophic interaction : release of resource $\nu$ at rate $\alpha_{\nu i}$. In total $-\sum_\nu \alpha_{\nu i} S_i$.
 \end{itemize}
-We will mostly focus on the case where no resource coming from syntrophy is lost, \ie $\tau_{\mu i} = \alpha_{\mu i}$.
-
 The aim of the project is to study equilibria points of this model and their stability. In particular, we are interested in how syntrophy changes the robustness of the equilibria.
 
 \subsection{Equilibria of the model}
-We are interested in studying the stability of the equilibrium points of our model Eqs.\eqref{eq : differential eq for resources and species}. We say that $\{R^*_\mu, S^*_j\}$ is an \textit{equilibrium}\footnote{For the sake of brevity, we will sometimes drop the $\mu$ and $j$ subscripts when we write $\{R^*_\mu, S^*_j\}$.}
-of our model if they are fixed points of it, that means if the following equations are fulfilled :
-\begin{subequations}\label{eq : equilibrium resources and species}
+%We are interested in studying the stability of the equilibrium points of our model Eqs.\eqref{eq: differential eq for resources and species}.
+We say that abundances $\{R^*_\mu, S^*_j\}$ are an \define{equilibrium}\footnote{For the sake of brevity, we will sometimes drop the $\mu$ and $j$ subscripts and simply write $\{R^*, S^*\}$.}
+of our model if they are fixed points of it, that means if the following equations are fulfilled:
+\begin{subequations}\label{eq: equilibrium resources and species}
 \begin{empheq}[left=\empheqlbrace]{align}
-  0 &= l_\mu - m_\mu R^*_\mu - \sum_{j} \gamma_{j\mu} R^*_\mu S^*_j + \sum_j \alpha_{\mu j} S^*_j \label{eq : equilibrium resources} \\
- 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i \label{eq : equilibrium species}
+  0 &= l_\mu - m_\mu R^*_\mu - \sum_{j} \gamma_{j\mu} R^*_\mu S^*_j + \sum_j \alpha_{\mu j} S^*_j \label{eq: equilibrium resources} \\
+ 0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i \label{eq: equilibrium species}
 \end{empheq}
 \end{subequations}
-As said above, our main goal is to study the stability of such equilibria. Before introducing different notions around equilibria, we focus on simplifying the problem first as much as we can. Note that we consider $R^*_\mu$ and $S^*_i$ as parameters of the model.
+%As said above, our main goal is to study the stability of such equilibria. Before explaining what we mean by this, we focus first on simplifying the problem as much as we can.
+%Note that we consider $R^*_\mu$ and $S^*_i$ as parameters of the model.
 
 \subsection{Attack strategy and important notions}
-Before jumping right into the matter, it is important to explain how we will study this system of differential equations. Mainly two different but complimenteray approaches will be used : analytical and numerical. Note that the $\sim$ 5'000 lines of code we wrote from scratch and that we use to get the results of Section \ref{chapter : numerical analysis} is available at the address \url{https://gitlab.ethz.ch/palberto/consumersresources.git}.
+Before jumping right into the matter, it is important to explain how we will study this system of differential equations. Mainly two different but complimenteray approaches will be used: analytical and numerical. Note that the $\sim$ 5'000 lines of code we wrote from scratch and that we use to get the results of Section \ref{chapter : results} are available at the address \url{https://gitlab.ethz.ch/palberto/consumersresources.git}.
 
 \subsubsection{Metaparameters and matrix properties}
-Studying the equilibria of our CRM will lead us to establish and study several relations involving the different parameters of the problem. Namely, these are : $l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i, R^*_\mu$ and $S^*_i$ $\forall i=1, \dots, N_S; \mu=1, \dots, N_R$.
-We define the \define{parameters space} $\mathcal{P}$ as the space that contains all the parameters :
+Studying the equilibria of our CRM will lead us to establish and study several relations involving the different \define{parameters} of the problem. Namely, these are: $l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i, R^*_\mu$ and $S^*_i$ $\forall i=1, \dots, N_S; \mu=1, \dots, N_R$.
+We define the \define{parameters space} $\mathcal{P}$ as the space that contains all the parameters:
 \begin{equation}
 \mathcal{P} \defined \left\{ p: p = (l_\mu,  m_\mu,d_i,  \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, R^*_\mu, S^*_i) \right\}
 \end{equation}
-Without taking into account the constraints on these parameters, there are $3N_R+2N_S+3N_RN_S$ free parameters, so $\mathcal{P} \simeq \mathbb{R}_+^{3 N_R+2 N_S + 4 N_R N_S}$. The difficulty of task becomes clear : $\mathcal{P}$ is a huge, complicated space so we need to find a way to simplify it.
+Without taking into account the constraints on these parameters, there are $3N_R+2N_S+3N_RN_S$ free parameters, so $\mathcal{P} \simeq \mathbb{R}_+^{3 N_R+2 N_S + 3 N_R N_S}$.
+Our goal is to study microbial communities with a large number of consumers and resources, typically $N_R, N_S \approx 25, 50, 100, \dots$ \ie $\mathcal{P} \simeq \mathbb{R}^{\sim 2000}$. It is clear that a precise study on each one of the $2000$ elements is way too tenuous of a job. Another, simpler, approach is needed.
 
- Indeed, the goal is to study microbial communities with a large number of consumers and resources, typically $N_R, N_S \approx 25, 50, 100, \dots$ \ie $\sim 2'500$ or more free parameters and so it is clear that a precise study on each element of each matrix is way too tenuous of a job. It's easier to look at it from a statistical point of view, \ie we will write a matrix $q_{i\mu}$ as \cite{pascual-garcia_mutualism_2017} :
+We decide to look at the problem from a statistical point of view, \ie we write a matrix $q_{i\mu}$ as \cite{pascual-garcia_mutualism_2017}:
  \begin{equation}
  q_{i\mu} = \mathfrak{Q} Q_{i\mu}
  \end{equation}
 where $\mathfrak{Q}$ is a random variable of mean $Q_0$ and standard deviation $\sigma_Q$. $Q_{i\mu}$ is a binary matrix that, if interpreted as an adjacency matrix, tells about the network structure of the quantity $q_{i\mu}$.
 
-\noindent We apply this way of thinking to the parameters of our problem, namely we can write :
+\noindent We apply this way of thinking to the parameters of our problem, namely we write:
 \begin{subequations}
-\begin{empheq}{align}
+\begin{empheq}[left=\empheqlbrace]{align}
 l_\mu &= \mathfrak{L} \\
 m_\mu &= \mathfrak{M} \\
 \gamma_{i\mu} &= \mathfrak{G} G_{i\mu} \\
@@ -87,11 +102,11 @@ R^*_\mu &= \mathfrak{R} \\
 S^*_i &= \mathfrak{S}
 \end{empheq}
 \end{subequations}
-Note that we did not put any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero (in particular for $S^*$ and $R^*$, we require positive-valued equilibria \cite{butler_stability_2018}).
+Note that we do not add any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero. In particular, we require positive-valued equilibria \cite{butler_stability_2018}.
 
-In order to make computations analytically tractable, we will require a small standard deviation on the parameters involved in the problem. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$, that we call a \define{metaparameter}. While studying things analytically we will hence often come back to the following approximation:
-\begin{subequations}\label{eq : metaparameters approximations}
-\begin{empheq}{align}
+In order to make computations analytically tractable, we require the standard deviation on the parameters involved in the problem to be small, \ie not larger than typically $10\%$. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$. We call $Q_0$ a \define{metaparameter}. While studying things analytically we will hence often come back to the following approximation:
+\begin{subequations}\label{eq: metaparameters approximations}
+\begin{empheq}[left=\empheqlbrace]{align}
 l_\mu &\approx l_0 \\
 m_\mu &\approx m_0 \\
 \gamma_{i\mu} &\approx\gamma_0 G_{i\mu} \\
@@ -102,15 +117,15 @@ R^*_\mu &\approx R_0 \\
 S^*_i &\approx S_0
 \end{empheq}
 \end{subequations}
-This is mathematically equivalent to collapsing the parameter space $\mathcal{P}$ to a lower dimensional space. Formally that lower dimensional space is the Cartesian product of $\mathcal{M}$ and $\mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S}$, where $\mathcal{M}$ is the \define{metaparameters space} :
+This simplification is mathematically equivalent to collapsing the parameter space $\mathcal{P}$ to a lower dimensional space. Formally that lower dimensional space is the Cartesian product of $\mathcal{M}$ and $\mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S}$, where $\mathcal{M}$ is the \define{metaparameters space}:
 \begin{equation}
-\mathcal{M} \defined \left\{ m : m=(l_0, m_0, d_0, \gamma_0, \alpha_0, \sigma_0, R_0, S_0)\right\}
+\mathcal{M} \defined \left\{ m: m=(l_0, m_0, d_0, \gamma_0, \alpha_0, \sigma_0, R_0, S_0)\right\}
 \end{equation}
-and $\mathcal{B}_{N\times M}$ is the set of binary matrices of dimensions $N \times M$. To summarize, what we did was simply designing a collapsing procedure $\mathcal{C} : \mathcal{P} \rightarrow \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S}$ in order to simplify our problem.
+and $\mathcal{B}_{N\times M}$ is the set of binary matrices of dimensions $N \times M$. To summarize, we simply designed a \important{collapsing procedure} $\mathcal{C}: \mathcal{P} \rightarrow \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S}$ in order to simplify our problem.
 
-Mathematically, when we do analytical computations, we will mostly work in the collapsed space $\mathcal{C}(\mathcal{P})$ because it reduces the number of parameters from $3N_R+2N_S+3N_RN_S$ (continous) to $8$ (continous) + $3N_RN_S$ (binary). And to make the problem even simpler, instead of looking at each entry of the binary matrices $G$ and $A$ individually, we will consider only some globally defined quantities of these matrices. For a matrix $M_{ij}$ the metrics interesting to us are most of all:
+Mathematically, when we do analytical computations, we mostly work in the collapsed space $\mathcal{C}(\mathcal{P})$ because it reduces the number of parameters from $3N_R+2N_S+3N_RN_S$ (continous) to $8$ (continous) + $3N_RN_S$ (binary). And to make the problem even simpler, instead of looking at each entry of the binary matrices $G$ and $A$ individually, we will consider only some globally defined quantities of these matrices. For a matrix $M_{ij}$ the metrics interesting to us are most of all:
 \begin{itemize}
-\item Its \textbf{nestedness}: this measures how ``nested'' the system is, \ie if there are clusters grouped together\footnote{In typical Lotka-Volterra models, where only species-species interactions are considered, \eg \cite{iannelli_introduction_2014}, measuring the nestedness of the $\gamma$ consumption matrix would be in the same spirit as counting how many niches there are in the community.}. It is known \cite{bastolla_architecture_2009, pascual-garcia_mutualism_2017} that nestedness can play a profound role in the dynamics of ecological communities. Although it is somewhat controversed \cite{jonhson_factors_2013}, we will keep the definition of the nestedness $\eta(M)$ of a binary matrix $M$ as it was used in \cite{bastolla_architecture_2009}:
+\item its \textbf{nestedness}\footnote{For the matrix consumption $G$, we will call it especially the ``ecological overlap''.}: this measures how ``nested'' the system is, \ie if there are clusters grouped together\footnote{In typical Lotka-Volterra models, where only species-species interactions are considered, \eg \cite{iannelli_introduction_2014}, measuring the nestedness of the $\gamma$ consumption matrix would be in the same spirit as counting how many niches there are in the community.}. It is known \cite{bastolla_architecture_2009, pascual-garcia_mutualism_2017} that nestedness can play a profound role in the dynamics of ecological communities. Although it is somewhat controversed \cite{jonhson_factors_2013}, we will keep the definition of the nestedness $\eta(M)$ of a binary matrix $M$ as it was used in \cite{bastolla_architecture_2009}:
 \begin{equation}
 \eta(M)\defined \frac{\sum_{i<j} n_{ij}}{\sum_{i < j} \min(n_i, n_j)}
 \end{equation}
@@ -123,7 +138,7 @@ and $n_{ij}$ is the overlap matrix defined as
 n_{ij}\defined \sum_k M_{ik}M_{jk}.
 \end{equation}
 
-\item Its \textbf{nestedness}\footnote{For the matrix consumption $G$, we will call it especially the ``ecological overlap''.} : this measure, simply defined as the ratio of non-zero links in a matrix, is central in the study of plants-and-animals systems \cite{pascual-garcia_mutualism_2017}. It is formally defined for a matrix $q_{ij}$  of size $N\times M$ as :
+\item its \textbf{connectance}: this measure, simply defined as the ratio of non-zero links in a matrix, is central in the study of plants-and-animals systems \cite{pascual-garcia_mutualism_2017}. It is formally defined for a matrix $q_{ij}$  of size $N\times M$ as:
 \begin{equation}
 \kappa(q)\defined \frac{\sum_{ij} Q_{ij}}{NM}
 \end{equation}
@@ -131,7 +146,11 @@ where $Q$ is the (binary) network adjacency matrix of $q$.
 \end{itemize}
 
 \subsubsection{Losing complexity -- how to gain it back}
-As explained above, the idea is to simplify the study of a system with a large number of parameters to a system with a manageable number of so-called ``metaparameters''. Of course, collapsing a very high dimensional space to a low-dimensional space will make us lose information. Losing information -- and hence complexity -- is convenient when doing analytical computations but it is not when we want to produce precise numerical results.
+As explained above, the idea is to simplify the study of a system with a large number of parameters to a system with a manageable number of so-called ``metaparameters''. Of course, collapsing a very high dimensional space to a low-dimensional space makes us lose information. Losing some information -- and hence complexity -- is desired when doing analytical computations but it is not when we want to produce precise and detailed numerical results.
 
-So, how do we bridge the gap between what we work with analytically, \ie a set of metaparameters and binary matrices, to precise measurements of quantities defined in our model Eq.\eqref{eq : differential eq for resources and species}? The answer is simple : we define a function $ \mathcal{A} : \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow \mathcal{P} $ which brings us from the collapsed space to the parameter space\footnote{Note that since the collapsed space is lower dimensional than the parameters space, $\mathcal{A}$ is not the inverse of $\mathcal{C}$.}. Numerically what we will do is : from a set of metaparameters $m \in \mathcal{M}$ and binary matrices $B=(G, A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$, produce a (or several) set(s) of parameters $p = \mathcal{A}(m, B) \in \mathcal{P}$ and study properties of it. Section \ref{sec : algorithmic procedure} details how $\mathcal{A}$ is constructed.
+So, how do we bridge the gap between what we work with analytically, \ie a set of metaparameters and binary matrices, to precise measurements of quantities defined in our model Eq.\eqref{eq: differential eq for resources and species}? The answer is simple: we define a function
+\begin{equation}
+\mathcal{A}: \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow \mathcal{P}
+\end{equation}
+which brings us from the collapsed space to the parameter space\footnote{Note that since the collapsed space is lower dimensional than the parameters space, $\mathcal{A}$ is not the inverse of $\mathcal{C}$.}. Numerically, from a set of metaparameters $m \in \mathcal{M}$ and binary matrices $B=(G, A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$, we produce a (or several) set(s) of parameters $p = \mathcal{A}(m, B) \in \mathcal{P}$ and study properties of it. Section \ref{sec : feasibility methods algorithmic procedure} details how $\mathcal{A}$ is constructed.
 \end{document}

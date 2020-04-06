@@ -47,6 +47,9 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
   initialize_random_engine(*this);
+  if(this->verbose>0){
+    std::cout << "Random engine initialized" << std::endl;
+  }
 
   return;
 }

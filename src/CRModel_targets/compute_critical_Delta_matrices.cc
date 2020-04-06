@@ -5,6 +5,7 @@ using namespace std;
 
 int main(int argc, char * argv[]){
   try{
+
     Metaparameters metaparams(argc, argv);
     initialize_random_engine(metaparams);
     std::vector<std::string> matrices_path=load_food_matrix_list(metaparams.foodmatrixpath);
@@ -32,8 +33,15 @@ int main(int argc, char * argv[]){
           metaparams.foodmatrixpath = matrices_path[i];
           metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
           delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct), stabilitymode(structural)};
+
+          std::time_t start, end;
+          std::time(&start);
           statistics delta = compute_critical_Delta(metaparams, solv_params);
-          std::cout << "Computed critical delta for " << matrices_path[i] << std::endl;
+          std::time(&end);
+          std::cout << "Computed critical delta for " << matrices_path[i];
+          double time_taken = double(end-start);
+          std::cout << " in " << time_taken << " seconds " << std::endl;
+          std::cout << "The relative error achieved with those parameters is " <<  delta.std_deviation_/delta.mean_*100. << "%" << std::endl;
           myfile << matrices_path[i] << " " << delta.mean_ << " " << delta.std_deviation_ << std::endl;
           metaparams.syntrophy_matrix_path=syntrophy_folder;
       }

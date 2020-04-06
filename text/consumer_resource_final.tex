@@ -1,15 +1,39 @@
-\documentclass[12pt, titlepage]{report}
+\documentclass[12pt, titlepage, twoside, openright]{report}
 \usepackage{consumer_resource_final}
-\usepackage{lmodern}
+
+%% CHOOSE FONT
+%\usepackage{lmodern}
 \usepackage[T1]{fontenc}
-\usepackage{chngcntr}
+\usepackage{charter}
+\usepackage[expert]{mathdesign}
+
+%% SET UP IMAGES
 \usepackage{graphicx}
 \graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}{./figures/Results/largest_eigenvalue/}{./figures/Results/matrix_structure/}{./figures/Results/structural_stability/}}
+
+%% SET UP HEADERS AND FOOTERS
+\usepackage{fancyhdr}
+\fancyhf[HLE,HRO]{\leftmark}
+\fancyhf[HRE,HLO]{\rightmark}
+\fancyhf[FLE,FRO]{\thepage}
+\fancyhf[FRE, FLO]{\footnotesize\textit{Syntrophic interaction in microbial communities}}
+\pagestyle{fancy}
+% remove normal page number
+\cfoot{}
+
+
+
+%% ADDITIONAL PACKAGES
+\usepackage{chngcntr}
 \counterwithout{footnote}{chapter}
 
+
+%\interfootnotelinepenalty=10000
+
 \begin{document}
-  \title{Consumer resources model}
+  \title{Syntrophic interaction in microbial communities}
   \author{L\'eo Buchenel}
+  \date{\today}
   \maketitle
   \tableofcontents
   \chapter{Introduction}
@@ -26,7 +50,7 @@
   \newpage
   \section{Structural stability}
   \input{structural_stability_methods}
-  \chapter{Results}
+  \chapter{Results}\label{chapter : results}
   \section{Feasibility}
   \input{feasibility_results}
   \FloatBarrier

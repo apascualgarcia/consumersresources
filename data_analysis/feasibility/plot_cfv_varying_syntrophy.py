@@ -10,7 +10,7 @@ import copy
 
 alpha_mode=['random_structure', 'no_release_when_eat', 'optimal_matrix']
 label=['fully connected', 'intraspecific syntrophy restricted', 'optimal LRI']
-filename = 'feasibility/feasibility_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
+filename = 'feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
@@ -23,9 +23,9 @@ feasibility_region = []
 for al_mo in alpha_mode:
     local_vector=[]
     for a in alpha0:
-        file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)
-        cf.remove_strings_from_file('optimal_matrices/consumption/Nr25_Nc25', file)
-        file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)+'_filtered.out'
+        #file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)
+        #cf.remove_strings_from_file('optimal_matrices/consumption/Nr25_Nc25', file)
+        file = filename+'_'+al_mo+'_optimal_LRI_Nr50_Nc25_alpha0='+str(a)+'_filtered.out'
         #print('Loading ', file)
         local_data=np.loadtxt(file)
         local_vector.append(local_data)
@@ -95,7 +95,7 @@ for k in range(len(feasibility_region)):
     cbar.set_label(r'$\alpha_0$')
     ax.set_title(r'$\mathcal{F}^*_1$ for $N_R='+str(int(NR[0]))+', N_S='+str(int(NS[0]))+'$ '+label[k])
     fig.tight_layout()
-    fig.savefig('plots/common_feasibility_volume_NR'+str(int(NR[0]))+'_NS'+str(int(NS[0]))+'_varying_syntrophy_'+alpha_mode[k]+'.pdf')
+    #fig.savefig('plots/common_feasibility_volume_NR'+str(int(NR[0]))+'_NS'+str(int(NS[0]))+'_varying_syntrophy_'+alpha_mode[k]+'.pdf')
     plt.close(k)
 #
 # now we produce a similar plot for all the matrices listed here
@@ -141,15 +141,15 @@ for j in range(len(feasibility_region[0,0])):
     axs[0].set_yticklabels([0, 0.5, 1])
     fig.subplots_adjust(bottom=0.2, top=0.95)
     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
-    fig.savefig('plots/feasibility_region_wt_wc_'+save_name+'.pdf')
+    #fig.savefig('plots/feasibility_region_wt_wc_'+save_name+'.pdf')
     cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
     cbar=fig.colorbar(im, cax=cbar_ax, orientation='horizontal')
     cbar.set_label(r'$\alpha_0$')
     cbar.set_ticks([a +0.5 for a in levels])
     cbar.set_ticklabels(alpha0)
-    fig.savefig('plots/feasibility_region_wt_'+save_name+'.pdf')
+    #fig.savefig('plots/feasibility_region_wt_'+save_name+'.pdf')
     fig.suptitle(r'Fully feasible region $\mathcal{F}^G_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
-    fig.savefig('plots/feasibility_region_'+save_name+'.pdf')
+    #fig.savefig('plots/feasibility_region_'+save_name+'.pdf')
     plt.close()
 
 decline =[]
@@ -180,7 +180,7 @@ for j in range(len(feasibility_region[0][0])):
     ax.set_title(title)
     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
     fig.tight_layout()
-    fig.savefig('plots/size_feasibility_region_'+save_name+'.pdf')
+    #fig.savefig('plots/size_feasibility_region_'+save_name+'.pdf')
     decline.append(local_decline)
     critical_alpha0.append(local_critical)
     #plt.show()
@@ -192,13 +192,20 @@ critical_alpha0=np.array(critical_alpha0)
 decline = np.transpose(decline)
 critical_alpha0=np.transpose(critical_alpha0)
 
-print(decline)
+
 
 # plot a feasibility decay rate curve vs nestedness and connectance
 connectance = feasibility_region[0,0][:,3]
 nestedness = feasibility_region[0,0][:,2]
 NR = feasibility_region[0,0][0,0]
 NS = feasibility_region[0,0][0,1]
+
+for k in range(len(alpha_mode)):
+    to_save = [[NR, NS,nestedness[i], connectance[i], decline[k][i]] for i in range(len(decline[k]))]
+    np.savetxt(filename+'_decay_rate_'+alpha_mode[k]+'.out', np.array(to_save))
+
+
+
 print(connectance)
 print(nestedness)
 print(decline)
@@ -217,7 +224,7 @@ for k in range(len(feasibility_region)):
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     fig.tight_layout()
 
-    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+    #fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_nestedness_'+alpha_mode[k]+'.pdf')
     plt.close(k)
 
     fig = plt.figure(k)
@@ -232,7 +239,7 @@ for k in range(len(feasibility_region)):
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     ax.set_title(label[k])
     fig.tight_layout()
-    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    #fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_connectance_'+alpha_mode[k]+'.pdf')
     plt.close(k)
 
 ylim = (np.min(critical_alpha0)*0.9, np.max(critical_alpha0)*1.1)
@@ -249,7 +256,7 @@ for k in range(len(feasibility_region)):
     ax.set_title(label[k])
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     fig.tight_layout()
-    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+    #fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
     plt.close()
 
     fig = plt.figure()
@@ -264,5 +271,5 @@ for k in range(len(feasibility_region)):
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     ax.set_title(label[k])
     fig.tight_layout()
-    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    #fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
     plt.close()

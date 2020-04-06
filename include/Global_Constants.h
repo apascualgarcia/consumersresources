@@ -1,6 +1,7 @@
 #ifndef GLOBAL_CONSTANTS_H
 #define GLOBAL_CONSTANTS_H
 
+
 const unsigned int print_precision = 15;
 const ntype EIGENSOLVER_PRECISION = 1e-15;
 
@@ -29,5 +30,6 @@ const unsigned int COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH=50;
 const ntype NUMERICAL_ERROR = std::nanl("1");
 
 extern std::mt19937 random_engine;
+
 
 #endif
