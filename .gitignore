@@ -2,6 +2,7 @@ build/*
 .DS_Store
 data_output/*
 logs/*
+plots/*
 !.placeholder
 *.out
 process-palette.json

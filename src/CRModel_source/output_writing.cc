@@ -189,6 +189,36 @@ std::ostream& operator<<(std::ostream& os, const buildingmode & b){
   return os;
 }
 
+std::ostream& operator<<(std::ostream& os, const alphamode& a){
+  switch(a){
+    case random_structure:{
+      os << "random structure";
+      break;
+    };
+
+    case no_release_when_eat:{
+      os << "no intraspecific syntrophy";
+      break;
+    };
+
+    case optimal_matrix:{
+      os << "optimized matrix";
+      break;
+    };
+
+    case fully_connected:{
+      os << "fully connected";
+      break;
+    };
+
+    default:{
+      throw error("This mode of alpha_mode has not been implemented yet in the << operator",1);
+      break;
+    }
+  }
+  return os;
+}
+
 std::ostream& display_food_matrix(std::ostream& os, const foodmatrix& f){
   for(size_t i=0; i < f.size(); ++i){
     for(size_t j=0; j < f[i].size(); ++j){

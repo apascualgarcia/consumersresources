@@ -33,6 +33,8 @@ alphamode string_to_alpha_mode(std::string mode){
     return alphamode(one_release);
   }else if(mode=="optimal_matrix"){
     return alphamode(optimal_matrix);
+  }else if(mode=="fully_connected"){
+    return alphamode(fully_connected);
   }else{
     error err("Error, that value of alphamode has not been implemented yet or does not exist.");
     throw err;

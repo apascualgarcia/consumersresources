@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import common_functions as cf
+import consumer_resource_data_analysis as cf
 import os
 import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable

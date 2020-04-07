@@ -13,8 +13,8 @@ np.set_printoptions(threshold=sys.maxsize)
 
 alpha_mode=['random_structure', 'no_release_when_eat', 'optimal_matrix']
 label=['fully connected', 'no intraspecific syntrophy', 'optimal LRI']
-filename_dynamical = 'local_dynamical_stability/local_dynamical_stability_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
-filename_feasible = 'feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
+filename_dynamical = 'local_dynamical_stability/local_dynamical_stability_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+filename_feasible = 'feasibility/feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
@@ -27,7 +27,7 @@ local_dynamical_stability_region = []
 for al_mo in alpha_mode:
     local_vector=[]
     for a in alpha0:
-        file = filename_dynamical+'_'+al_mo+'_optimal_LRI_Nr50_Nc25_alpha0='+str(a)+'_filtered.out'
+        file = filename_dynamical+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)+'_filtered.out'
         local_data=np.loadtxt(file)
         local_vector.append(local_data)
     local_dynamical_stability_region.append(local_vector)
@@ -37,7 +37,7 @@ feasibility_region = []
 for al_mo in alpha_mode:
     local_vector=[]
     for a in alpha0:
-        file = filename_feasible+'_'+al_mo+'_optimal_LRI_Nr50_Nc25_alpha0='+str(a)+'_filtered.out'
+        file = filename_feasible+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)+'_filtered.out'
         local_data=np.loadtxt(file)
         local_vector.append(local_data)
     feasibility_region.append(local_vector)

@@ -13,7 +13,8 @@ int main(int argc, char* argv[]){
       CRModel model(metaparams);
       foodmatrix alpha = model.get_parameter_set()->alpha;
       foodmatrix gamma = model.get_parameter_set()->gamma;
-      std::cout << nestedness(alpha) << std::endl;
+      std::cout << nestedness(alpha) << " and connectance ";
+      std::cout << connectance(alpha) << std::endl;
 
       metaparams.save_path="data_output/optimal_LRI_for_NR"+std::to_string(metaparams.NR)+"_NS"+std::to_string(metaparams.NS)+"_Nest"+std::to_string(nestedness(gamma))+"_Conn"+std::to_string(connectance(gamma))+".out";
       // std::ofstream myfile=open_external_file_truncate(metaparams.save_path);
