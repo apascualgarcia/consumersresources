@@ -129,7 +129,7 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
         this works because we know the shape of the feasability vs alpha curve */
 
     unsigned int steps=0;
-    while(find_feasability_probability(meta) < 1. and steps<=1000){
+    while(find_feasability_probability(meta, solv.Nsimul) < 1. and steps<=1000){
       alpha_max -= alpha_accuracy;
       meta.alpha0=alpha_max;
       steps+=1;
@@ -142,6 +142,51 @@ ntype Metaparameters::feasible_alpha_max(ntype alpha_accuracy)const{
 
     if(is_an_error(alpha_max) || alpha_max < 0){
       error err("Could not find an appropriate value for the feasible alpha_max. The exception value is returned.",1);
+      throw err;
+    }
+
+  }catch(error e){
+    e.handle();
+    return NUMERICAL_ERROR;
+  }
+
+
+  return alpha_max;
+}
+ntype Metaparameters::dynamical_alpha_max(ntype alpha_accuracy) const{
+  ntype alpha_max =0.;
+  gsl_function F;
+  Metaparameters meta = *this;
+
+  Solver_Parameters solv;
+  solv.metaparameters = &meta;
+  solv.Nsimul=100;
+  solv.target=0.99;
+
+  F.function = &function_proba_dynamical_stability_solver;
+  F.params = &solv;
+
+  /* we first find the alpha_max for which the feasability probability is roughly 0.98 */
+  try{
+    alpha_max = find_zero(&F, this->verbose, interval(0, this->physical_maximum_alpha0()));
+    meta.alpha0 = alpha_max;
+    /*  we take a tiny step back and wait for the first alpha which is = 1
+        this works because we know the shape of the feasability vs alpha curve */
+
+    unsigned int steps=0;
+    while(find_local_dynamical_stability_probability(meta,solv.Nsimul) < 1. and steps<=1000){
+      alpha_max -= alpha_accuracy;
+      meta.alpha0=alpha_max;
+      steps+=1;
+    }
+
+
+    if(this->verbose > 0){
+      std::cout << "Critical dynamical syntrophy alpha0 for " << this->foodmatrixpath << " is " << alpha_max << std::endl;
+    }
+
+    if(is_an_error(alpha_max) || alpha_max < 0){
+      error err("Could not find an appropriate value for the critical dynamical syntrophy alpha_max. The exception value is returned.",1);
       throw err;
     }
 

@@ -2,40 +2,50 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import matplotlib.tri as tr
+import matplotlib as mpl
 import copy
+import sys
+np.set_printoptions(threshold=sys.maxsize)
+mpl.rcParams['lines.linewidth']=2.5
+mpl.rcParams['lines.markersize']=10
+mpl.rcParams['lines.markeredgewidth']=3
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
+alpha_mode_colours=['blue', 'green', 'red']
 label=['fully connected', 'no intraspecific syntrophy', 'LRI regime']
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 min_gamma0, max_gamma0=0.01, 1
 min_S0, max_S0=0.01, 1
+nestedness_label=r'Ecological overlap $\eta_G$'
+connectance_label=r'Connectance $\kappa_G$'
 
 # region contains all data for each alphamode, alpha0 and network
 def plot_common_region(region, alpha_mode_, colors_, labels_):
     fig, axs = plt.subplots(1, 3, sharey=True, sharex=True, figsize=(10.5,4.5))
+    quantity=region[:,:,:,6::3]
+    gamma0=region[:,:,:,4::3]
+    S0=region[:,:,:,5::3]
+    Nmatrices=len(region[0,0])
+
+    # do that computation for each alpha_mode
     for k in range(len(region)):
         ax=axs[k]
-        data=region[0][0]
-        gamma0=data[:, 4::3]
-        S0=data[:, 5::3]
-        Npoints=len(S0[0])
+
         # contains the indices which have quantity 1 for all matrices at different alpha0
         f_indices=[]
+        # do that for all alpha0
         for l in range(len(region[k])):
-            data=region[k,l]
-            NR=data[:,0]
-            NS=data[:,1]
-            nestedness=data[:,2]
-            connectance=data[:,3]
-            quantity=data[:, 6::3]
+            Npoints=len(quantity[k,l,0])
             # find the indices that have quantity=1 for this alpha0 and this alpha mode
-            full_indices=[j for j in range(len(quantity[0])) if quantity[0,j]==1.]
-            for m in range(1,len(quantity)):
+            full_indices=full_indices_in_data_set(quantity[k,l,0])
+            for m in range(1,Nmatrices):
                 oldfi=copy.deepcopy(full_indices)
-                full_indices=[n for n in range(len(quantity[m])) if (quantity[m,n]==1. and n in oldfi)]
+                full_indices_current_mat=full_indices_in_data_set(quantity[k,l,m])
+                full_indices=[j for j in range(Npoints) if j in oldfi and j in full_indices_current_mat]
             f_indices.append(full_indices)
+            print('Full indices with method', len(full_indices))
         data_levels=[]
         for i in range(Npoints):
             level=-1
@@ -50,7 +60,7 @@ def plot_common_region(region, alpha_mode_, colors_, labels_):
             data_levels.append(level)
         max_level=max(data_levels)
         levels=[i for i in range(max_level+2)]
-        triang = tr.Triangulation(gamma0[0], S0[0])
+        triang = tr.Triangulation(gamma0[k,0,0], S0[k,0,0])
         ax.set_aspect('equal')
         ax.set_xlabel(r'$\gamma_0$')
         im=ax.tricontourf(triang, data_levels, levels=levels, colors=colors_)
@@ -92,6 +102,10 @@ def levels_different_alpha0(data):
         lds_levels.append(data_levels(data[i]))
     return np.array(lds_levels)
 
+# returns the indices of the elements equal to one in the data set
+def full_indices_in_data_set(data_):
+    return [j for j in range(len(data_)) if data_[j]==1.]
+
 # plot levels, the level -1 is not plotted, it has two indices, first is alphamode, second is alpha0
 # colors is the colors chosen for all alpha0
 def plot_levels(data, colors, labels_):
@@ -127,8 +141,6 @@ def add_colorbar_to_plot_levels(fig, im, levels, ticks):
     cbar.set_ticks([a +0.5 for a in levels])
     cbar.set_ticklabels(ticks)
     return cbar
-
-
 
 
 def closest_element_in_list(el, liste):
@@ -184,13 +196,21 @@ def power_function(x, a, b, c):
     return a*np.power(x,b)+c
 
 def fit_data(function_to_use, xdata, ydata):
+    Npoints = len(xdata)
     if function_to_use==exponential_function:
         bounds=((0, 0, 0), (np.inf, np.inf, np.inf))
         popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
     elif function_to_use==power_function:
         bounds=((-np.inf, -np.inf, -np.inf), (np.inf, np.inf, np.inf))
         popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
-
+    elif function_to_use==linear_function:
+        if Npoints>2:
+            popt, pcov = curve_fit(function_to_use, xdata, ydata)
+        else:
+            a_ = (ydata[0]-ydata[1])/(xdata[0]-xdata[1])
+            b_ = ydata[0]-a_*xdata[0]
+            popt=[a_,b_]
+            pcov=[[0,0],[0,0]]
     else:
         popt, pcov = curve_fit(function_to_use, xdata, ydata)
     fitted_y = [function_to_use(x, *popt) for x in xdata]
@@ -280,15 +300,48 @@ def shrink_volume_for_one_matrix(data):
     feasability=data[:, 6::3]
     ff_indices=[]
     volume=[]
-    for i in range(len(feasability)):
+    Nalpha0=len(feasability)
+    Npoints=len(feasability[0])
+
+    for i in range(Nalpha0):
         # find the fully feasible_indices for this matrix at this alpha0
         full_feas_indices=[j for j in range(len(feasability[i])) if feasability[i,j]==1.]
-        volume.append(len(full_feas_indices))
-    init_vol = len(feasability)
-    for i in range(len(feasability)):
-        volume[i]=volume[i]/init_vol
+        volume.append(len(full_feas_indices)/Npoints)
 
     return volume
+
+# scurve contains the data of the shrinkage curve
+def fit_shrinkage_curve(alpha0_,scurve_):
+    # we do a linear fit removing the first point up ontil the first zero point
+    end_index=len(scurve_)
+    zero_indices = [j for j in range(len(scurve_)) if scurve_[j]==0.]
+    start_index=1
+    if(len(zero_indices)>0):
+        end_index=np.min(zero_indices)
+    if end_index>2:
+        fit_function=linear_function
+        fitted_curve, popt, perr = fit_data(fit_function, alpha0_[start_index:end_index], scurve_[start_index:end_index])
+
+        from scipy.stats import linregress
+        slope, intercept, r_value, p_value, stderr = linregress(alpha0_[start_index:end_index], scurve_[start_index:end_index])
+        print("p-value: ", p_value)
+        # we now get the estimated critical alpha0 and the estimated vol at alpha0=0
+        estimated_alpha_crit, err_alpha_crit=zero_from_fit(fit_function, popt, perr)
+        estimated_vol_zero_syntrophy = fit_function(0, *popt)
+    else:
+        estimated_vol_zero_syntrophy = scurve_[0]
+        fitted_curve=scurve_[1:end_index]
+        if end_index==2:
+            a = (scurve_[0]-scurve_[1])/(alpha0_[0]-alpha0_[1])
+            b = scurve_[0]-a*alpha0_[0]
+            estimated_alpha_crit= -b/a
+        else:
+            estimated_alpha_crit=alpha0
+    remaining_points=[0 for j in range(end_index, len(scurve_))]
+    fitted_curve = [estimated_vol_zero_syntrophy]+fitted_curve
+    fitted_alpha0 = alpha0_[0:end_index]
+
+    return fitted_alpha0, fitted_curve, estimated_alpha_crit, estimated_vol_zero_syntrophy
 
 
 
