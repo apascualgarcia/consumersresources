@@ -10,9 +10,9 @@ mpl.rcParams['lines.linewidth']=2.5
 mpl.rcParams['lines.markersize']=10
 mpl.rcParams['lines.markeredgewidth']=3
 
-alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
-alpha_mode_colours=['blue', 'green', 'red']
-label=['fully connected', 'no intraspecific syntrophy', 'LRI regime']
+alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
+alpha_mode_colours=['blue', 'green', 'red', 'black']
+label=['fully connected', 'no intraspecific syntrophy', 'LRI regime', 'random structure']
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
@@ -21,9 +21,11 @@ min_S0, max_S0=0.01, 1
 nestedness_label=r'Ecological overlap $\eta_G$'
 connectance_label=r'Connectance $\kappa_G$'
 
+N_alphamodes=len(alpha_mode)
+
 # region contains all data for each alphamode, alpha0 and network
 def plot_common_region(region, alpha_mode_, colors_, labels_):
-    fig, axs = plt.subplots(1, 3, sharey=True, sharex=True, figsize=(10.5,4.5))
+    fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
     quantity=region[:,:,:,6::3]
     gamma0=region[:,:,:,4::3]
     S0=region[:,:,:,5::3]
@@ -45,7 +47,7 @@ def plot_common_region(region, alpha_mode_, colors_, labels_):
                 full_indices_current_mat=full_indices_in_data_set(quantity[k,l,m])
                 full_indices=[j for j in range(Npoints) if j in oldfi and j in full_indices_current_mat]
             f_indices.append(full_indices)
-            print('Full indices with method', len(full_indices))
+            #print('Full indices with method', len(full_indices))
         data_levels=[]
         for i in range(Npoints):
             level=-1
@@ -113,7 +115,7 @@ def plot_levels(data, colors, labels_):
     S0=data[0,0,5::3]
 
 
-    fig, axs = plt.subplots(1, 3, sharey=True, sharex=True, figsize=(10.5,4.5))
+    fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
     function_levels=levels_different_alpha0(data)
     max_level=np.amax(function_levels)
     levels=[i for i in range(max_level+2)]

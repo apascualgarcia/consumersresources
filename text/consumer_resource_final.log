@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  3 APR 2020 16:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  9 APR 2020 17:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3841,8 +3841,19 @@ pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
 on_local_dynamical_stability_volume_NR50_NS25_varying_syntrophy_optimal_matrix.
 pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >] (./structural_stability_results.tex
+<./figures/Results/structural_stability/typical_probability_structural_stabilit
+y_curve.pdf, id=2424, 462.52798pt x 346.89601pt>
+File: ./figures/Results/structural_stability/typical_probability_structural_sta
+bility_curve.pdf Graphic file (type pdf)
+
+<use ./figures/Results/structural_stability/typical_probability_structural_stab
+ility_curve.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/typical_probabi
+lity_structural_stability_curve.pdf used on input line 8.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
 <./figures/Results/structural_stability/critical_structural_perturbation_NR25_N
-S25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf, id=2424, 462.52798pt x 346.896
+S25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf, id=2425, 462.52798pt x 346.896
 01pt>
 File: ./figures/Results/structural_stability/critical_structural_perturbation_N
 R25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf Graphic file (type pdf)
@@ -3851,11 +3862,11 @@ R25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf Graphic file (type pdf)
 25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_struct
 ural_perturbation_NR25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf used on
- input line 11.
+ input line 15.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_structural_perturbation_NR25_N
-S25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf, id=2425, 462.52798pt x 346.896
+S25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf, id=2426, 462.52798pt x 346.896
 01pt>
 File: ./figures/Results/structural_stability/critical_structural_perturbation_N
 R25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf Graphic file (type pdf)
@@ -3864,10 +3875,10 @@ R25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf Graphic file (type pdf)
 25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_struct
 ural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf used on
- input line 12.
+ input line 16.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 9--13
+Overfull \hbox (49.738pt too wide) in paragraph at lines 13--17
 []  [][][][] 
  []
 
@@ -3887,7 +3898,15 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[71 <./figures/Results/structural_stability/critical_structural_perturbation_NR
+[71 <./figures/Results/structural_stability/typical_probability_structural_stab
+ility_curve.pdf>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[72 <./figures/Results/structural_stability/critical_structural_perturbation_NR
 25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf> <./figures/Results/structu
 ral_stability/critical_structural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixe
 d_nest_all_points.pdf
@@ -3896,17 +3915,10 @@ pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
 structural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf):
  PDF inclusion: multiple pdfs with page group included in a single page
 >]
-
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[72
+Chapter 4.
+(./demonstrations.tex [73
 
 ]
-Chapter 4.
-(./demonstrations.tex [73]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 91.
@@ -3997,10 +4009,10 @@ Package logreq Info: Writing requests to 'consumer_resource_final.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 89.
  ) 
 Here is how much of TeX's memory you used:
- 28222 strings out of 493013
- 547765 string characters out of 6133344
+ 28227 strings out of 493013
+ 548190 string characters out of 6133344
  953338 words of memory out of 5000000
- 30741 multiletter control sequences out of 15000+600000
+ 30745 multiletter control sequences out of 15000+600000
  78374 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,14n,98p,10413b,2697s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -4037,10 +4049,10 @@ pe1/public/mathabx-type1/mathx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/
 type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dis
 t/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on consumer_resource_final.pdf (81 pages, 1284005 bytes).
+Output written on consumer_resource_final.pdf (81 pages, 1287674 bytes).
 PDF statistics:
- 2825 PDF objects out of 2984 (max. 8388607)
- 2459 compressed objects within 25 object streams
+ 2847 PDF objects out of 2984 (max. 8388607)
+ 2479 compressed objects within 25 object streams
  545 named destinations out of 1000 (max. 500000)
- 630 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 635 words of extra memory for PDF output out of 10000 (max. 10000000)
 
