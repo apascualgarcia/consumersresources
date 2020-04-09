@@ -6,7 +6,6 @@ import numpy as np
 from os import listdir
 
 CORES=int(sys.argv[1])
-print(CORES)
 LOG_NAME='logs/structural_stability_computations_core'
 
 command = 'build/compute_critical_Delta'
@@ -31,5 +30,6 @@ for i in range(CORES):
         command_core+=" | ts \'[%Y-%m-%d %H:%M:%S]\' "
         command_core+=' && '
     command_core=command_core[:-4]+'"'
-    command_core = "nohup sh -c "+command_core+' > '+log_name+' &'
+    command_core = "nohup sh -c "+command_core+' > '+log_name+' 2>&1 &'
     os.system(command_core)
+print("Launched "+str(len(files))+" runs on "+str(CORES)+".")
