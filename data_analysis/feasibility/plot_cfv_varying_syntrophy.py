@@ -129,7 +129,7 @@ for k in range(len(feasibility_region)):
     fig.tight_layout()
 
     fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_nestedness_'+alpha_mode[k]+'.pdf')
-    plt.close(k)
+    plt.close()
 
     fig = plt.figure(k)
     ax = fig.add_subplot(111)
@@ -144,7 +144,7 @@ for k in range(len(feasibility_region)):
     ax.set_title(label[k])
     fig.tight_layout()
     fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_connectance_'+alpha_mode[k]+'.pdf')
-    plt.close(k)
+    plt.close()
 
 ylim = (np.min(critical_alpha0)*0.9, np.max(critical_alpha0)*1.1)
 # plot critical alpha0 curve vs nestedness and connectance
