@@ -32,4 +32,4 @@ for i in range(CORES):
         command_core+=' && '
     command_core=command_core[:-4]+'"'
     command_core = "nohup sh -c "+command_core+' > '+log_name+' &'
-    print(command_core)
+    os.system(command_core)
