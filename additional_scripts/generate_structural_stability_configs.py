@@ -80,7 +80,7 @@ for i in range(len(matrix_name)):
 
     # then add the extra lines needed
     to_add = []
-    to_add.append('alpha0='+str(common_alpha0))
+    to_add.append('alpha0='+str(0))
     to_add.append('alpha_mode='+alpha_mode[0])
     to_add.append('path_to_food_matrix='+matrix_name[i])
     to_add.append('path_to_save_file='+path_to_save)

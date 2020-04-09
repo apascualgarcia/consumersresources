@@ -27,7 +27,9 @@ for i in range(CORES):
     log_name=LOG_NAME+'_'+str(i)+'.log'
     command_core = '"'
     for j in range(len(files_per_core[i])):
-        command_core+= command +' '+files_per_core[i][j]+' && '
+        command_core+= command +' '+files_per_core[i][j]
+        command_core+=" | ts \'[%Y-%m-%d %H:%M:%S]\' "
+        command_core+=' && '
     command_core=command_core[:-4]+'"'
     command_core = "nohup sh -c "+command_core+' > '+log_name+' &'
-    os.system(command_core)
+    print(command_core)
