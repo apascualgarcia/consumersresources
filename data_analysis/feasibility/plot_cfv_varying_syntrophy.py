@@ -73,7 +73,7 @@ for j in range(len(feasibility_region[0][0])):
         local_decline.append(popt[1])
         local_critical.append(crit_alpha0)
         ax.plot(alpha0, fitted_vol, marker='None', linestyle='solid', linewidth=2, color=alpha_mode_colours[i])
-        ax.plot(alpha0, feas_volume, label=label[i], markersize=10, linestyle='None', markeredgewidth=3, color=alpha0_mode_colours[i])
+        ax.plot(alpha0, feas_volume, label=label[i], markersize=10, linestyle='None', markeredgewidth=3, color=alpha_mode_colours[i])
     ax.set_yscale('log')
     ax.set_xlabel(r'$\alpha_0$')
     ax.set_ylabel(r'Vol$(\mathcal{F}^G_1(\alpha_0))$ (normalized)')
