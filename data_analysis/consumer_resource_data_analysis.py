@@ -123,13 +123,14 @@ def plot_levels(data, colors, labels_):
         axs[i].set_aspect('equal')
         im = axs[i].tricontourf(triang, to_plot, levels=levels, colors=colors)
         axs[i].set_xlabel(r'$\gamma_0$')
-        axs[i].set_xticks([0, 0.5, 1])
-        axs[i].set_xticklabels([0, 0.5, 1])
+        axs[i].set_xticks([0.01, 0.5, 1])
+        axs[i].set_xticklabels([0.01, 0.5, 1])
         axs[i].set_title(labels_[i])
-
+        axs[i].set_xlim(0.01, 1)
+        axs[i].set_ylim(0.01, 1)
     axs[0].set_ylabel(r'$S_0$')
-    axs[0].set_yticks([0, 0.5, 1])
-    axs[0].set_yticklabels([0, 0.5, 1])
+    axs[0].set_yticks([0.01, 0.5, 1])
+    axs[0].set_yticklabels([0.01, 0.5, 1])
 
     fig.subplots_adjust(bottom=0.2, top=0.95)
 
