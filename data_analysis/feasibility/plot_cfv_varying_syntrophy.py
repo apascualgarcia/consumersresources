@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import consumer_resource_data_analysis as cf
-from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance
+from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours
 import os
 import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable
