@@ -173,8 +173,8 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
         std::cout << " -> reached zero on the cost function, ending the algorithm now." << std::endl;
         return;
       }
-      std::cout << ", matrix = " << std::endl;
-      display_food_matrix(std::cout, alpha);
+     // std::cout << ", matrix = " << std::endl;
+      //display_food_matrix(std::cout, alpha);
       std::cout << std::endl;
     }
     steps+=1;

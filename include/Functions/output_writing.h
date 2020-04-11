@@ -30,6 +30,7 @@ std::ostream& operator<<(std::ostream&, const systemstability&);
 std::ostream& operator<<(std::ostream&, const stability&);
 std::ostream& operator<<(std::ostream&, const error&);
 std::ostream& operator<<(std::ostream&, const buildingmode&);
+std::ostream& operator<<(std::ostream&, const alphamode&);
 
 template <class T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T> & t){

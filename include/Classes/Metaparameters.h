@@ -47,6 +47,10 @@ struct Metaparameters{
   /*  gives back the softer limit after which prob(draw feasible system) < 1,
       has an accuracy on alpha of roughly alpha_accuracy */
   ntype feasible_alpha_max(ntype alpha_accuracy = 1e-7) const;
+
+  /*  gives back the critical dynamical syntrophy for a set of metaparameters, ie
+      the largest syntrophy for which we have systems that are fully dynamically stable */
+  ntype dynamical_alpha_max(ntype alpha_accuracy = 1e-7) const;
   /*  gives back the softer limit before which prob(draw feasible system) < 1,
       has an accuracy on alpha of roughly alpha_accuracy */
   ntype feasible_alpha_min(ntype alpha_accuracy = 1e-7) const;

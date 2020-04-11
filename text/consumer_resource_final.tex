@@ -1,15 +1,40 @@
-\documentclass[12pt, titlepage]{report}
+\documentclass[12pt, titlepage, twoside, openright]{report}
 \usepackage{consumer_resource_final}
-\usepackage{lmodern}
+
+%% CHOOSE FONT
+%\usepackage{lmodern}
+%\usepackage{utopia}
+\usepackage{charter}
 \usepackage[T1]{fontenc}
-\usepackage{chngcntr}
+\usepackage[expert]{mathdesign}
+
+%% SET UP IMAGES
 \usepackage{graphicx}
-\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}}
+\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}{./figures/Results/largest_eigenvalue/}{./figures/Results/matrix_structure/}{./figures/Results/structural_stability/}}
+
+%% SET UP HEADERS AND FOOTERS
+\usepackage{fancyhdr}
+\fancyhf[HLE,HRO]{\leftmark}
+\fancyhf[HRE,HLO]{\rightmark}
+\fancyhf[FLE,FRO]{\thepage}
+\fancyhf[FRE, FLO]{\footnotesize\textit{Syntrophic interaction in microbial communities}}
+\pagestyle{fancy}
+% remove normal page number
+\cfoot{}
+
+
+
+%% ADDITIONAL PACKAGES
+\usepackage{chngcntr}
 \counterwithout{footnote}{chapter}
 
+
+%\interfootnotelinepenalty=10000
+
 \begin{document}
-  \title{Consumer resources model}
+  \title{Syntrophic interaction in microbial communities}
   \author{L\'eo Buchenel}
+  \date{\today}
   \maketitle
   \tableofcontents
   \chapter{Introduction}
@@ -18,18 +43,22 @@
   \chapter{Methods}
   \section{Feasibility}\label{sec : methods feasibility}
   \input{feasibility_methods}
+  \FloatBarrier
   \newpage
-  \section{Dynamical stability}
+  \section{Dynamical stability}\label{sec : methods dynamical stability}
   \input{dynamical_stability_methods}
+  \FloatBarrier
   \newpage
   \section{Structural stability}
   \input{structural_stability_methods}
-  \chapter{Results}
+  \chapter{Results}\label{chapter : results}
   \section{Feasibility}
   \input{feasibility_results}
+  \FloatBarrier
   \newpage
   \section{Dynamical stability}
   \input{dynamical_stability_results}
+  \FloatBarrier
   \newpage
   \section{Structural stability}
   \input{structural_stability_results}
@@ -42,8 +71,6 @@
   % \section{Structural stability}
   % \input{analytic_approach_structural_stability}
   %
-  \chapter{Fully connected network}\label{chapter : fully connected network}
-  \input{fully_connected_network}
   %
   % \chapter{Numerical analysis}\label{chapter : numerical analysis}
   % \section{Feasability}
@@ -57,5 +84,7 @@
   \chapter{Appendices}
   \section{Demonstrations}
   \input{demonstrations}
+  \section{Supplementary material}
+  \input{supplementary_material}
   \printbibliography
 \end{document}

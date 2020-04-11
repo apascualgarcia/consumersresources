@@ -1,6 +1,7 @@
 #ifndef GLOBAL_CONSTANTS_H
 #define GLOBAL_CONSTANTS_H
 
+
 const unsigned int print_precision = 15;
 const ntype EIGENSOLVER_PRECISION = 1e-15;
 
@@ -23,11 +24,23 @@ const unsigned int COMPUTE_CRITICAL_DELTA_POLY_SECOND_RUN=100;
 const unsigned int COMPUTE_CRITICAL_DELTA_POLY_INTERVAL_LENGTH=10;
 
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_FIRST_RUN=50;
+
+/* high cores version */
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_SECOND_RUN=200;
-const unsigned int COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH=50;
+const unsigned int COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH=250;
+
+/* low cores version
+const unsigned int COMPUTE_CRITICAL_DELTA_SIG_SECOND_RUN=50;
+const unsigned int COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH=125;
+*/
+
+
+
+
 
 const ntype NUMERICAL_ERROR = std::nanl("1");
 
 extern std::mt19937 random_engine;
+
 
 #endif

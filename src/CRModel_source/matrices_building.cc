@@ -78,7 +78,9 @@ nmatrix build_gamma(const foodmatrix& F, const Metaparameters& m){
         }
         if(not(species_existing)){
           error e("Problem in the food matrix "+ m.foodmatrixpath + ", species " + std::to_string(i) +" does not eat anything.");
-          std::cerr << "The food matrix is " << F << std::endl;
+          std::cerr << "The food matrix is " << std::endl;
+          display_food_matrix(std::cerr, F);
+          std::cerr << std::endl;
           throw e;
         }
       }
@@ -134,7 +136,7 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
   nmatrix alpha = nmatrix(p->NR, nvector(p->NS, 0.));
   if(m.alpha0 > 0){
     switch(m.alpha_mode){
-      case random_structure:{
+      case fully_connected:{
         for(size_t mu=0; mu < p->NR; ++mu){
           for(size_t i=0; i < p->NS; ++i){
             alpha[mu][i] = alpha_distrib(random_engine);
@@ -146,7 +148,7 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
       case no_release_when_eat:{
         for(size_t i=0; i < p->NS; ++i){
           for(size_t mu=0; mu < p->NR; ++mu){
-            if(!(p->gamma[i][mu]>0.) || (ntype(empty_or_not_distrib(random_engine)) < m.p)){
+            if(!(p->gamma[i][mu]>0.)){
               alpha[mu][i] = alpha_distrib(random_engine);
             }
           }
@@ -183,8 +185,22 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
         break;
       }
 
+      // for random structure, alpha has the same connectance as gamma but elements are placed randomly
+      case random_structure:{
+        ntype conn = connectance(p->gamma);
+        for(size_t mu=0; mu < p->NR;++mu){
+          for(size_t i=0; i < p->NS; ++i){
+            if(empty_or_not_distrib(random_engine)<conn){
+              alpha[mu][i] = alpha_distrib(random_engine);
+            }
+          }
+        }
+        break;
+      }
+
       default:{
-        error e("This alpha mode has not been implemented yet.");
+        std::cerr << "alpha mode : " << m.alpha_mode << std::endl;
+        error e("This alpha mode has not been implemented in build_alpha.");
         throw e;
         break;
       }

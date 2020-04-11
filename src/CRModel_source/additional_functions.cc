@@ -563,7 +563,7 @@ std::ofstream open_external_file_append(std::string path){
     error err("Could not open external file "+path);
     throw err;
   }
-  myfile << "# File opened on " << current_time() <<  std::setprecision(print_precision);
+  myfile << "# File last opened on " << current_time() <<  std::setprecision(print_precision);
   return myfile;
 }
 

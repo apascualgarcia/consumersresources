@@ -20,6 +20,8 @@ statistics solve_for_delta_with_fit(fitting_parameters&, double&, double&, const
 
 /* takes an alpha0 and Solver Parameters as input, gives back feasability */
 double function_proba_feasability_solver(double, void*);
+/* takes an alpha0 and Solver Parameters as input, gives back change of locally dynamically stable */
+double function_proba_dynamical_stability_solver(double alpha0, void*);
 /* takes an S0 and Solver Parameters as input, gives back feasability */
 double function_proba_feasability_solver_S0(double S, void* params);
 /* takes a gamma0 and Solver Parameters as input, gives back feasability */

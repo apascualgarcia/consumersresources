@@ -21,7 +21,7 @@ typedef int(*func_equ_evol)(double, const double[], double[], void *);
 // tau0 : tau = 0; taualpha : tau = alpha
 enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
-enum alphamode{random_structure, no_release_when_eat, one_release, optimal_matrix};
+enum alphamode{fully_connected, random_structure, no_release_when_eat, one_release, optimal_matrix};
 /* eqmode tells you when you stop your time evolution algorithm */
 enum eqmode{oneextinct, convergence};
 /*  when using polynomial please specify the degree manually otherwise,

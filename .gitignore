@@ -2,6 +2,7 @@ build/*
 .DS_Store
 data_output/*
 logs/*
+plots/*
 !.placeholder
 *.out
 process-palette.json
@@ -12,3 +13,4 @@ old_*
 !feasibility/*.out
 !local_dynamical_stability/*.out
 !largest_eigenvalue/*.out
+text/figures/*

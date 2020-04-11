@@ -349,6 +349,14 @@ double function_proba_feasability_solver(double alpha, void* params){
 
   return find_feasability_probability(*m, Nsimul)-target;
 }
+double function_proba_dynamical_stability_solver(double alpha, void* params){
+  Solver_Parameters* s=(Solver_Parameters*) params;
+  Metaparameters* m= s->metaparameters;
+  m->alpha0=alpha;
+  unsigned int Nsimul=s->Nsimul;
+  double target = s->target;
+  return find_local_dynamical_stability_probability(*m, Nsimul)-target;
+}
 double function_proba_feasability_solver_S0(double S, void* params){
   Solver_Parameters* s = (Solver_Parameters*) params;
   Metaparameters* m = s->metaparameters;

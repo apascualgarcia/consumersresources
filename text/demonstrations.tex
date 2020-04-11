@@ -12,9 +12,9 @@ b & b & a
 \end{equation}
 The equation we want to solve is:
 \begin{equation}
-\det\left(A_N\right)=0. \label{app: eq : det A_N 0}
+\det\left(A_N\right)=0. \label{app: eq: det A_N 0}
 \end{equation}
-Note that, using Gaussian elimination, Eq.\eqref{app: eq : det A_N 0} can be transformed in:
+Note that, using Gaussian elimination, Eq.\eqref{app: eq: det A_N 0} can be transformed in:
 \begin{equation}
 \det\begin{pmatrix}
 a & b & \dots & b \\
@@ -36,9 +36,9 @@ b & b & \dots & b \\
 b-a & a-b & 0 & 0 \\
 0 & \ddots & \ddots & 0 \\
 0 & 0 & b-a & a-b
-\end{pmatrix}=0 \label{app : eq : laplace expansion}
+\end{pmatrix}=0 \label{app: eq: laplace expansion}
 \end{equation}
-Since the first term of the previous equation is a lower triangular matrix, its determinant is easily found :
+Since the first term of the previous equation is a lower triangular matrix, its determinant is easily found:
 \begin{equation}
 a \det\begin{pmatrix}
 a-b & 0 & \dots & 0 \\
@@ -47,7 +47,7 @@ b-a & a-b & 0 & 0 \\
 0 & 0 & b-a & a-b
 \end{pmatrix} = a\left(a-b\right)^{n-1}.
 \end{equation}
-Finding an explicit equation for the left term is a bit more involving. Let us define the general $n$ square matrix $F_n(a,b)$ :
+Finding an explicit equation for the left term is a bit more involving. Let us define the general $n$ square matrix $F_n(a,b)$:
 \begin{equation}
 F_n(a,b) = \begin{pmatrix}
 b & b & \dots & b \\
@@ -70,7 +70,7 @@ b-a & a-b & 0 & 0 \\
 0 & 0 & b-a & a-b
 \end{pmatrix}.
 \end{equation}
-This means :
+This means:
 \begin{equation}
 \det(F_n(a,b))=b(a-b)^{n-1}+(a-b)\det(F_{n-1}(a,b)).
 \end{equation}
@@ -82,10 +82,16 @@ Since $\det\left(F_1(a,b)\right)=1$, we get:
 \begin{equation}
 \det\left(F_n(a,b)\right)=n(a-b)^{n-1}b
 \end{equation}
-Inserting this in Eq.\eqref{app : eq : laplace expansion} yields:
+Inserting this in Eq.\eqref{app: eq: laplace expansion} yields:
 \begin{equation}
 \boxed{
 \det(A_N)=0 \iff (a-b)^{N-1}\left[a+(N-1)b\right]=0.
-}\label{eq : formula special determinant}
+}\label{eq: formula special determinant}
 \end{equation}
+\subsection{The optimal $S_0$ for locally dynamically stable systems} \label{sec: appendix how to handle S0}
+How $S_0$ should be adjusted is a bit tricky because it is present in two terms that do not have the same behaviour: $l_0^2/S_0$ and $N_S^2 \alpha_0^2 S_0$. So we need to compute the minimum value the sum of these two terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is given by
+\begin{equation}
+\frac{d}{dS_0} \left[\frac{l_0^2}{S_0}+N_S^2\alpha_0^2 S_0\right]_{S_0=S_0^*}=0 \iff S_0^* = \frac{l_0}{N_S \alpha_0}.
+\end{equation}
+One checks really easily that this point is indeed a minimum. So if $S_0 > S_0^*$ it should be decreased, and otherwise increased.
 \end{document}

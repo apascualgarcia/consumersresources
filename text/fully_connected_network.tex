@@ -3,45 +3,48 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
-	\section{Definition}
-	We will consider a fully connected food network, that means the food matrix $f$ is given by :
-	\begin{equation}
-	f_{i\nu} = 1 \ \forall \ i, \nu.
-	\end{equation}
-	\section{Spectrum}
-	We here study the spectrum of the jacobian of the fully connected system.
-	\subsection{Full system}
-	The jacobian $J_F$ of the fully connected network is given by Eq.\eqref{eq : definition of jacobian alternative}.
+As an application, we consider the very special case of the fully connected consumption and syntrophy networks. In this ``mean-field'' theory, every consumer consumes from and releases each resource, \ie
+\begin{equation}
+G_{i\mu}=A_{\mu i}=1 \ \forall \mu=1, \dots, N_R \ \ \forall i=1, \dots, N_S.
+\end{equation}
+Our goal is to find the spectrum of systems with such matrices as their consumption and syntrophy networks.
+We follow the path explained by \citeauthor{barbier_cavity_2017} in \cite{barbier_cavity_2017} and perform a \important{standard deviation expansion}. They showed that the variance of the interaction matrix drives the strength of the interactions in their model \cite{barbier_cavity_2017}, so it is worth a try to follow their path.
 
-	\subsection{Standard deviation expansion}
-	We write every matrix of the problem in a convenient way \cite{barbier_cavity_2017},  \ie a general matrix $A$ is written as a sum of an average matrix + standard deviation :
-	 \begin{equation}
-	 A_{i\nu} = \av{A} + \sigma_A \tilde{a}_{i\nu}, \label{eq : separation matrix average standard dev}
-	 \end{equation}
-	 where
-	 \begin{equation}
-	 \av{A}\equiv \frac{1}{N_R N_S} \sum_{i\nu} A_{i\nu} \text{ and } \sigma_A^2 \equiv \av{A_{i\nu}^2}-\av{A}^2.
-	 \end{equation}
-	 It is easy to prove that
-	 \begin{equation}
-	 \av{\tilde{a}_{i\nu}} = 0 \text{ and } \av{\tilde{a}_{i\nu}^2} = 1.
-	 \end{equation}
-	 The general idea is to use this expansion to get equations where the variance of each matrix is clearly highlighted. We will then proceed to an expansion in small variance, since the variance of the interaction matrix drive the strength of the interactions \cite{barbier_cavity_2017},\textbf{add other ref}.
-	 \subsection{Rewriting the system - the introduction of metaparameters}
-	 Explain why we can parametrise the system this way (i.e. don't need m and d).
-
-
-	 We use the general idea of Eq.\eqref{eq : separation matrix average standard dev} to change the parameters that describe the model. We define :
-	 \begin{empheq}{align}
-	 l_\nu & \defined l_0 + \sigma_l \tilde{l}_\nu \\
-	 R^*_\nu & \defined R_0 + \sigma_R \tilde{r}_\nu \\
-	 S^*_i & \defined S_0 + \sigma_S \tilde{s}_i \\
-	 \gamma_{i\nu} & \defined \gamma_0 + \sigma_\gamma  \tilde{g}_{i\nu} \\
-	 \alpha_{\nu i} & \defined \alpha_0 + \sigma_\alpha \tilde{\alpha}_{\nu i} \\
-	 \sigma_{i\nu } & \defined \sigma_0 + \sigma_\sigma \tilde{\sigma}_{i\nu}
-	 \end{empheq}
-	 Explain properly metaparameters (like, define them and the variances).
-	 This allows us to rewrite the equations of evolution (do it) and the jacobian at equilibrium \eqref{eq : jacobian at equilibrium}. Indeed,
+\paragraph{Standard deviation expansion}
+The idea behind the standard deviation expansion (abbreviated SDE) is the following. Let $q_{i\mu}$ be an arbitrary matrix of size $N_S \times N_R$. Then the nice trick done in \cite{barbier_cavity_2017} is to write the elements of the $q$ matrix in terms of new variables $\tilde{q}_{i\mu}$:
+\begin{equation}
+q_{i\mu} = \av{q} + \sigma_q \tilde{q}_{i\mu}. \label{eq : separation matrix average standard dev}
+\end{equation}
+In that expression, $\av{q}$ is the average of $q$, element-wise
+\begin{equation}
+\av{q}\defined \frac{\sum_{\mu,i} q_{i\mu}}{N_S N_R},
+\end{equation}
+and $\sigma_q$ is the standard deviation of $q$, again element-wise:
+\begin{equation}
+\sigma_q \defined \sqrt{\av{q^2}-\av{q}^2} \text{ with } \av{q^2}\defined \frac{\sum_{\mu,i} q_{i\mu}^2}{N_S N_R}.
+\end{equation}
+The main advantage of this procedure is that we get a clear idea about the scales involved. A matrix element $q_{i\mu}$ is roughly the mean $\av{q}$ plus a deviation $\sigma_q$ multiplied by a factor of magnitude $sim$ 1. Indeed the $\tilde{q}_{i\mu}$ are not large since they follow the two equalities \cite{barbier_cavity_2017}:
+\begin{equation}
+\av{\tilde{q}} = 0 \text{ and } \av{\tilde{q}^2} = 1.
+\end{equation}
+We apply this framework to our problem by noticing that if the $q_{i\mu}$ are all random samples coming from the same distribution law $\mathfrak{Q}$, we can write the following approximation in the case $N_R, N_S \gg 1 $ :
+\begin{equation}
+\av{q} \approx \av{\mathfrak{Q}} \defined q_0.
+\end{equation}
+We can then rewrite the free parameters of our model\footnote{This works with $\gamma$ and $\alpha$ because $G$ and $A$ have a trivial topology. Otherwise we would have to take it into account and the computations would not be as easy.}:
+\begin{subequations}\label{eq : rewrite with metaparameters}
+\begin{empheq}[left=\empheqlbrace]{align}
+l_\nu & \approx l_0 + \sigma_l \tilde{l}_\nu \\
+R^*_\nu & \approx R_0 + \sigma_R \tilde{r}_\nu \\
+S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
+\gamma_{i\nu} & \approx \gamma_0 + \sigma_\gamma  \tilde{g}_{i\nu} \\
+\alpha_{\nu i} & \approx \alpha_0 + \sigma_\alpha \tilde{\alpha}_{\nu i} \\
+\sigma_{i\nu } & \approx \sigma_0 + \sigma_\sigma \tilde{\sigma}_{i\nu}
+\end{empheq}
+\end{subequations}
+	 The general idea is then to assume that the standard deviations are small and proceed to a first order Taylor expansion.
+	 \paragraph{Rewriting the jacobian at equilibrium}
+	 The different blocks of the jacobian at equilibrium \eqref{eq : jacobian at equilibrium} can be written with the new variables :
 	 \begin{empheq}[left=\empheqlbrace]{align}
 	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 + N_S \alpha_0 S_0 + \sigma_l \tilde{l}_\mu + \sigma_\alpha S_0 \sum_j \tilde{\alpha}_{\mu j} + \sigma_\alpha \sigma_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j}{R_0 + \sigma_R \tilde{r}_\mu} \\
 	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 + \alpha_0 + \sigma_\gamma R_0 \tilde{\gamma}_{j\mu} + \sigma_R \gamma_0 \tilde{r}_\mu + \sigma_\alpha \tilde{\alpha}_{\mu j} + \sigma_\gamma \sigma_R \tilde{\gamma}_{j\mu} \tilde{r}_\mu \\
@@ -62,7 +65,7 @@
 
 
 	 \subsubsection{Standard deviation expansion at first order}
-	 The idea is to limit our study in a so called \textit{small relative standard deviation regime}. This means we assume :
+	 We can then assume the relative standard deviations are small :
 	 \begin{equation}
 	 \epsilon_P \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
 	 \end{equation}
@@ -115,7 +118,7 @@
 	\end{equation}
 	where $\text{adj}\left(\dots\right)$ is the adjugate operator (\ie which yields the transpose of the cofactor matrix). This equation is a complicated polynomial of degree $N_R+N_S$. As of now it does not seem to have an easily computable solution for $\epsilon > 0$. An explicit solution can however be computed when $\epsilon = 0$.
 
-	\paragraph{Zero variance case}
+	\paragraph{Zero variance case}\label{sec : methods dynamical stability fully connected zero variance}
 	When $\epsilon=0$, Eq.\eqref{eq : determinant variance first order} becomes:
 	\begin{equation}
 	\det(J_0-\lambda)=\det\begin{pmatrix}
@@ -162,6 +165,18 @@
 	\text{The non-variance system is dynamically unstable} \iff \Gamma_0 > 0.
 	}
 	\end{equation}
+	If $\Gamma_0 \leq 0$, the fully connected system will be marginally stable.
+	Note that the RHS of the feasibility condition Eq.\eqref{eq : fully feasible volume} is equivalent in the fully connected case to :
+	\begin{equation}
+	\alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0)\gamma_0 R_0 \iff \Gamma_0 \lessapprox \left[\min(1-\sigma_0, \sigma_0)-1\right] \gamma_0 R_0 < 0,
+	\end{equation}
+	so we expect the fully connected case to be feasible and the non-zero eigenvalues to be negative.
+	We see that the non-zero part of the spectrum is essentially given by $\Delta_0$. However the sign of the parameter
+	$4N_R\Gamma_0\Beta_0+\Delta_0^2$ plays an essential role in the stability. Looking at its sign allows us to find possibly more locally dynamically stable zones of the metaparameters space $\mathcal{M}$. Indeed we expect to find more stable systems if
+	\begin{equation}
+	4 N_R \Gamma_0 \Beta_0 + \Delta_0 ^2 \ll 0 \iff 4N_R \sigma_0 \gamma_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{S_0}+2N_S\alpha_0  l_0 + N_S^2 \alpha_0^2 S_0 \ll 0. \label{eq : dynamical stability methods fully connected metaparameters}
+	\end{equation}
+
 
 
 \end{document}

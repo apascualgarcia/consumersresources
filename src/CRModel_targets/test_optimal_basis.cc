@@ -15,6 +15,10 @@ int main(int argc, char* argv[]){
     //   myfile.close();
     //}
     CRModel model(metaparams);
+    nmatrix gamma = model.get_parameter_set()->gamma;
+    nmatrix gamma2 = order_matrix_by_row_degree(order_matrix_by_column_degree(gamma));
+    std::cout << "Connectance = " << connectance(gamma) << " Nestedness = " << nestedness(gamma) << std::endl;
+    std::cout << "Connectance = " << connectance(gamma2) << " Nestedness = " << nestedness(gamma2) << std::endl;
 
 
   }catch(error e){

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  25 MAR 2020 18:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  9 APR 2020 17:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1370,12 +1370,15 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \sf@top=\skip69
 \sf@bottom=\skip70
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
 
-Package amsthm Warning: Unknown theoremstyle `theorem' on input line 24.
+Package amsthm Warning: Unknown theoremstyle `theorem' on input line 25.
 
 \c@theorem=\count199
 \c@lemma=\count266
-Package hyperref Info: Option `colorlinks' set `false' on input line 29.
+Package hyperref Info: Option `colorlinks' set `false' on input line 30.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2016/12/05 v3.7 programmable bibliographies (PK/JW/AB)
 
@@ -1593,40 +1596,8 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 )))
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/lmodern.sty
-Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
-(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
-LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
-(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
-LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
-LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/charter.sty
+Package: charter 2005/04/12 PSNFSS-v9.2a (P.Dyballa) 
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2017/02/22 v2.0g Standard LaTeX package
@@ -1635,6 +1606,31 @@ Package: fontenc 2017/02/22 v2.0g Standard LaTeX package
 File: t1enc.def 2017/02/22 v2.0g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/mathdesign/mathdesign.sty
+Package: mathdesign 2013/08/29 v2.31 Math Design Project
+
+
+Package mathdesign Warning: No font specified on input line 175.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2017/02/22 v2.0g Standard LaTeX package
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2017/02/22 v2.0g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+)))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2016/09/06 3.8 Extensive control of page headers and footers
+\fancy@headwidth=\skip85
+\f@ncyO@elh=\skip86
+\f@ncyO@erh=\skip87
+\f@ncyO@olh=\skip88
+\f@ncyO@orh=\skip89
+\f@ncyO@elf=\skip90
+\f@ncyO@erf=\skip91
+\f@ncyO@olf=\skip92
+\f@ncyO@orf=\skip93
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2009/09/02 v1.0a change counter resetting
 )
@@ -1652,28 +1648,28 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 \@quotereset=\count388
 (./consumer_resource_final.aux
 
-LaTeX Warning: Label `eq : low species bound 1' multiply defined.
+LaTeX Warning: Label `eq: low species bound 1' multiply defined.
 
 )
 \openout1 = `consumer_resource_final.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 10.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmr.fd
-File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Try loading font information for T1+bch on input line 34.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1bch.fd
+File: t1bch.fd 2004/10/18 font definitions for T1/bch.
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1682,7 +1678,7 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * paper: <default>
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: 
+* modes: twoside 
 * h-part:(L,W,R)=(71.13188pt, 472.03123pt, 71.13188pt)
 * v-part:(T,H,B)=(71.13188pt, 652.70622pt, 71.13188pt)
 * \paperwidth=614.295pt
@@ -1696,7 +1692,7 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \headsep=25.0pt
 * \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=44.0pt
+* \marginparwidth=95.0pt
 * \marginparsep=10.0pt
 * \columnsep=10.0pt
 * \skip\footins=10.8pt plus 4.0pt minus 2.0pt
@@ -1704,8 +1700,8 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \voffset=0.0pt
 * \mag=1000
 * \@twocolumnfalse
-* \@twosidefalse
-* \@mparswitchfalse
+* \@twosidetrue
+* \@mparswitchtrue
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
@@ -1740,7 +1736,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box57
-Package hyperref Info: Link coloring OFF on input line 10.
+Package hyperref Info: Link coloring OFF on input line 34.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1750,9 +1746,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count395
 )
-LaTeX Info: Redefining \ref on input line 10.
-LaTeX Info: Redefining \pageref on input line 10.
-LaTeX Info: Redefining \nameref on input line 10.
+LaTeX Info: Redefining \ref on input line 34.
+LaTeX Info: Redefining \pageref on input line 34.
+LaTeX Info: Redefining \nameref on input line 34.
 
 (./consumer_resource_final.out) (./consumer_resource_final.out)
 \@outlinefile=\write5
@@ -1851,119 +1847,135 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'consumer_resource_final.bbl' found.
  (./consumer_resource_final.bbl)
-Package biblatex Info: Reference section=0 on input line 10.
-Package biblatex Info: Reference segment=0 on input line 10.
+Package biblatex Info: Reference section=0 on input line 34.
+Package biblatex Info: Reference segment=0 on input line 34.
 \c__siunitx_mathsf_int=\count396
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 10.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/ot1lmr.fd
-File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 10.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 10.
-
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omslmsy.fd
-File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 10.
-
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omxlmex.fd
-File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 10.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 10.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 10.
-LaTeX Font Info:    Try loading font information for U+msa on input line 10.
+LaTeX Font Info:    Try loading font information for U+msa on input line 34.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 10.
+LaTeX Font Info:    Try loading font information for U+msb on input line 34.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 10.
-
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/ot1lmss.fd
-File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
 \c__siunitx_mathtt_int=\count397
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 10.
-
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 14.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 14.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 14.
  [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./consumer_resource_final.tocpdfTeX warning (ext4): destination with the same 
-identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.62 ...{\numberline {5}Appendices}{44}{chapter.5}
-                                                   [1
 
-])
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[2
+
+] (./consumer_resource_final.toc [3])
 \tf@toc=\write6
 \openout6 = `consumer_resource_final.toc'.
 
- [2]
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[4]
 Chapter 1.
-(./introduction.tex
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 22.
- (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omslmr.fd
-File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 22.
-[3
+(./introduction.tex [5
 
 ]
-Overfull \hbox (3.60666pt too wide) in paragraph at lines 38--39
-[]\T1/lmr/m/n/12 Release of re-source $\OML/lmm/m/it/12 R[]$ \T1/lmr/m/n/12 at 
-rate $\OML/lmm/m/it/12 []$ \T1/lmr/m/n/12 (this is the syn-trophic in-ter-ac-t
-ion). In to-tal $\U/matha/m/n/12 ^^A [][] \OML/lmm/m/it/12 []S[]$\T1/lmr/m/n/1
-2 . 
+LaTeX Font Info:    Try loading font information for OMS+bch on input line 42.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/omsbch.fd
+File: omsbch.fd 
+)
+LaTeX Font Info:    Font shape `OMS/bch/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 42.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[6]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 75.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+Overfull \hbox (2.30405pt too wide) in paragraph at lines 78--80
+\T1/bch/m/n/12 volv-ing the dif-fer-ent \T1/bch/m/it/12 pa-ram-e-ters \T1/bch/m
+/n/12 of the prob-lem. Namely, these are: $\OML/cmm/m/it/12 l[]; m[]; ^^M[]; [
+]; ^^[[]; d[]; R[]$
  []
 
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 45.
 
-LaTeX Warning: Reference `chapter : numerical analysis' on page 4 undefined on 
-input line 56.
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 56.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [4]
-LaTeX Font Info:    Try loading font information for U+euf on input line 68.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
-File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
-) [5] [6])
 [7]
-Chapter 2.
-(./feasibility_methods.tex [8
+LaTeX Font Info:    Try loading font information for U+euf on input line 88.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+)
 
-] [9] [10]
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[8]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[9])
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[10]
+Chapter 2.
+(./feasibility_methods.tex
+
+LaTeX Warning: Reference `eq : equilibrium resources and species' on page 11 un
+defined on input line 8.
+
+[11
+
+]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[12]
+
+LaTeX Warning: Reference `sec : algorithmic procedure' on page 13 undefined on 
+input line 60.
+
+
+LaTeX Warning: Reference `eq : differential eq for resources and species' on pa
+ge 13 undefined on input line 62.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[13]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 97.
@@ -1980,21 +1992,60 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 97.
 
-[11]
-Overfull \hbox (30.4153pt too wide) detected at line 180
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[14]
+Overfull \hbox (30.05061pt too wide) detected at line 180
 [][][]
  []
 
-[12]
 
-LaTeX Warning: Reference `eq : dissipation constraint' on page 13 undefined on 
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[15]
+
+LaTeX Warning: Reference `eq : dissipation constraint' on page 16 undefined on 
 input line 399.
 
 
 LaTeX Warning: Reference `eq : overall feasibility constraint metaparameters' o
-n page 13 undefined on input line 399.
+n page 16 undefined on input line 399.
 
-[13]) [14] (./dynamical_stability_methods.tex
+
+Overfull \hbox (11.4656pt too wide) in paragraph at lines 399--400
+\T1/bch/m/n/12 rithm be-cause $\OML/cmm/m/it/12 $ \T1/bch/m/n/12 has to fol-lo
+w three con-straints, namely en-ergy con-ser-va-tion/dissipation
+ []
+
+
+LaTeX Warning: Reference `eq : equilibrium species' on page 16 undefined on inp
+ut line 404.
+
+
+LaTeX Warning: Reference `eq : equilibrium resources' on page 16 undefined on i
+nput line 405.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[16])
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[17] (./dynamical_stability_methods.tex
 Overfull \hbox (6.79999pt too wide) in paragraph at lines 13--15
 [][]
  []
@@ -2004,7 +2055,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--15
 
  []
 
-[15]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[18]
 Overfull \hbox (6.79999pt too wide) in paragraph at lines 79--81
 [][]
  []
@@ -2014,35 +2071,208 @@ Underfull \hbox (badness 10000) in paragraph at lines 79--81
 
  []
 
-[16] [17] [18] [19] [20] [21] [22]
 
-LaTeX Warning: Reference `eq : LRI regime' on page 23 undefined on input line 3
-96.
+LaTeX Warning: Reference `sec: methods feasibility' on page 19 undefined on inp
+ut line 83.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[19]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[20]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[21]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[22]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
 [23]
 
-LaTeX Warning: Reference `eq : LRI regime' on page 24 undefined on input line 4
-20.
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
 [24]
 
-LaTeX Warning: Reference `section : numerical analysis LRI MC solver' on page 2
-5 undefined on input line 441.
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
 [25]
-Overfull \hbox (3.90529pt too wide) in paragraph at lines 502--503
-\T1/lmr/m/n/12 Models which in-volve the dy-nam-ics of species only are in gen-
-eral bet-ter known than consumers-
- []
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
 [26]
 
-LaTeX Warning: Reference `eq : positive m_nu' on page 27 undefined on input lin
-e 529.
+LaTeX Warning: Reference `eq: LRI regime' on page 27 undefined on input line 39
+6.
 
-[27] [28]) [29] (./structural_stability_methods.tex) [30]
+
+LaTeX Warning: Reference `eq: feasability positivity d' on page 27 undefined on
+ input line 396.
+
+
+LaTeX Warning: Reference `eq: feasability positivity m' on page 27 undefined on
+ input line 396.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[27]
+
+LaTeX Warning: Reference `eq: LRI regime' on page 28 undefined on input line 42
+0.
+
+
+LaTeX Warning: Reference `eq: feasability positivity m' on page 28 undefined on
+ input line 436.
+
+
+LaTeX Warning: Reference `section: numerical analysis LRI MC solver' on page 28
+ undefined on input line 441.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[28]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[29]
+
+LaTeX Warning: Reference `eq: largest feasible alpha0' on page 30 undefined on 
+input line 471.
+
+(./fully_connected_network.tex
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[30]
+
+LaTeX Warning: Reference `eq : jacobian at equilibrium' on page 31 undefined on
+ input line 47.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[31]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[32]
+
+LaTeX Warning: Reference `section : non marginal equilibria' on page 33 undefin
+ed on input line 131.
+
+
+LaTeX Warning: Reference `eq : formula special determinant' on page 33 undefine
+d on input line 139.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[33]))
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[34] (./structural_stability_methods.tex
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 11--13
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--13
+
+ []
+
+
+Overfull \hbox (5.09825pt too wide) in paragraph at lines 15--16
+\T1/bch/m/n/12 Studying how a sys-tem re-sponds to the per-tur-ba-tion of all p
+a-ram-e-ters $\U/matha/m/n/12 t\OML/cmm/m/it/12 l[]; m[]; ^^M[]; []; ^^[[]; d[
+]\U/matha/m/n/12 u$
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[35]
+
+LaTeX Warning: Reference `sec : results structural stability procedure to estim
+ate critical structural perturbation' on page 36 undefined on input line 59.
+
+)
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[36]
 Chapter 3.
 (./feasibility_results.tex
+
+LaTeX Warning: Reference `sec: methods feasibility' on page 37 undefined on inp
+ut line 6.
+
+
+LaTeX Warning: Reference `sec: methods feasibility basic concepts' on page 37 u
+ndefined on input line 8.
+
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
@@ -2059,10 +2289,23 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
 
-[31
+
+LaTeX Warning: Reference `sec: methods feasibility volume' on page 37 undefined
+ on input line 11.
+
+
+LaTeX Warning: Reference `eq: fully feasible volume' on page 37 undefined on in
+put line 11.
+
+[37
 
 ]
-<./figures/Results/feasibility/typical_feasibility_volume.pdf, id=706, 462.5279
+
+LaTeX Warning: Reference `sec: methods feasibility volume' on page 38 undefined
+ on input line 32.
+
+
+<./figures/Results/feasibility/typical_feasibility_volume.pdf, id=803, 462.5279
 8pt x 346.89601pt>
 File: ./figures/Results/feasibility/typical_feasibility_volume.pdf Graphic file
  (type pdf)
@@ -2072,8 +2315,12 @@ Package pdftex.def Info: ./figures/Results/feasibility/typical_feasibility_volu
 me.pdf used on input line 41.
 (pdftex.def)             Requested size: 330.42041pt x 247.82762pt.
 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 <./figures/Results/feasibility/feasibility_away_from_theory_fixed_nestedness.pd
-f, id=709, 462.52798pt x 346.89601pt>
+f, id=806, 462.52798pt x 346.89601pt>
 File: ./figures/Results/feasibility/feasibility_away_from_theory_fixed_nestedne
 ss.pdf Graphic file (type pdf)
 
@@ -2084,7 +2331,7 @@ eory_fixed_nestedness.pdf used on input line 49.
 (pdftex.def)             Requested size: 231.2979pt x 173.47403pt.
 
 <./figures/Results/feasibility/feasibility_away_from_theory_fixed_connectance.p
-df, id=710, 462.52798pt x 346.89601pt>
+df, id=807, 462.52798pt x 346.89601pt>
 File: ./figures/Results/feasibility/feasibility_away_from_theory_fixed_connecta
 nce.pdf Graphic file (type pdf)
 
@@ -2093,9 +2340,13 @@ ce.pdf>
 Package pdftex.def Info: ./figures/Results/feasibility/feasibility_away_from_th
 eory_fixed_connectance.pdf used on input line 51.
 (pdftex.def)             Requested size: 231.2979pt x 173.47403pt.
- [32 <./figures/Results/feasibility/typical_feasibility_volume.pdf>]
-<./figures/Results/feasibility/common_feasibility_volume_no_syntrophy.pdf, id=7
-40, 462.52798pt x 346.89601pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+<./figures/Results/feasibility/common_feasibility_volume_no_syntrophy.pdf, id=8
+09, 462.52798pt x 346.89601pt>
 File: ./figures/Results/feasibility/common_feasibility_volume_no_syntrophy.pdf 
 Graphic file (type pdf)
 
@@ -2107,63 +2358,127 @@ e_no_syntrophy.pdf used on input line 59.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[33 <./figures/Results/feasibility/feasibility_away_from_theory_fixed_nestednes
-s.pdf> <./figures/Results/feasibility/feasibility_away_from_theory_fixed_connec
-tance.pdf
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[38]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[39 <./figures/Results/feasibility/typical_feasibility_volume.pdf> <./figures/R
+esults/feasibility/feasibility_away_from_theory_fixed_nestedness.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_away_f
+rom_theory_fixed_nestedness.pdf): PDF inclusion: multiple pdfs with page group 
+included in a single page
+> <./figures/Results/feasibility/feasibility_away_from_theory_fixed_connectance
+.pdf
 
 pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_away_f
 rom_theory_fixed_connectance.pdf): PDF inclusion: multiple pdfs with page group
  included in a single page
 >]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[40 <./figures/Results/feasibility/common_feasibility_volume_no_syntrophy.pdf>]
+
+LaTeX Warning: Reference `eq: fully feasible volume' on page 41 undefined on in
+put line 75.
+
+
+LaTeX Warning: Reference `eq: fully feasible volume' on page 41 undefined on in
+put line 82.
+
+
 <./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.6_Conn0
-.3168.pdf, id=784, 758.835pt x 325.215pt>
+.3168.pdf, id=897, 758.835pt x 325.215pt>
 File: ./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.6_
 Conn0.3168.pdf Graphic file (type pdf)
 
 <use ./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.6_C
 onn0.3168.pdf>
 Package pdftex.def Info: ./figures/Results/feasibility/feasibility_region_wt_wc
-_NR25_NS25_Nest0.6_Conn0.3168.pdf used on input line 79.
+_NR25_NS25_Nest0.6_Conn0.3168.pdf used on input line 86.
 (pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
 
-Overfull \hbox (49.80988pt too wide) in paragraph at lines 78--80
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 85--87
 []  [][] 
  []
 
 
 <./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.35_Conn
-0.2208.pdf, id=785, 758.835pt x 325.215pt>
+0.2208.pdf, id=898, 758.835pt x 325.215pt>
 File: ./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.35
 _Conn0.2208.pdf Graphic file (type pdf)
 
 <use ./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.35_
 Conn0.2208.pdf>
 Package pdftex.def Info: ./figures/Results/feasibility/feasibility_region_wt_wc
-_NR25_NS25_Nest0.35_Conn0.2208.pdf used on input line 83.
+_NR25_NS25_Nest0.35_Conn0.2208.pdf used on input line 90.
 (pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
 
-Overfull \hbox (49.80988pt too wide) in paragraph at lines 82--84
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 89--91
 []  [][] 
  []
 
 
 <./figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1
-808.pdf, id=786, 758.835pt x 325.215pt>
+808.pdf, id=899, 758.835pt x 325.215pt>
 File: ./figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0.15_Co
 nn0.1808.pdf Graphic file (type pdf)
 
 <use ./figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0.15_Con
 n0.1808.pdf>
 Package pdftex.def Info: ./figures/Results/feasibility/feasibility_region_wt_NR
-25_NS25_Nest0.15_Conn0.1808.pdf used on input line 87.
+25_NS25_Nest0.15_Conn0.1808.pdf used on input line 94.
 (pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
 
-Overfull \hbox (49.80988pt too wide) in paragraph at lines 86--88
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 93--95
 []  [][] 
  []
 
-[34 <./figures/Results/feasibility/common_feasibility_volume_no_syntrophy.pdf>]
-[35 <./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.6_C
+
+LaTeX Warning: Reference `eq: fully feasible volume' on page 41 undefined on in
+put line 101.
+
+
+<./figures/Results/feasibility/size_feasibility_region_NR25_NS25_Nest0.25_Conn0
+.2336.pdf, id=901, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/size_feasibility_region_NR25_NS25_Nest0.25_
+Conn0.2336.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/size_feasibility_region_NR25_NS25_Nest0.25_C
+onn0.2336.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/size_feasibility_region_
+NR25_NS25_Nest0.25_Conn0.2336.pdf used on input line 106.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[41
+
+]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[42 <./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS25_Nest0.6_C
 onn0.3168.pdf> <./figures/Results/feasibility/feasibility_region_wt_wc_NR25_NS2
 5_Nest0.35_Conn0.2208.pdf
 
@@ -2177,107 +2492,1510 @@ pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_region
 _wt_NR25_NS25_Nest0.15_Conn0.1808.pdf): PDF inclusion: multiple pdfs with page 
 group included in a single page
 >]
+Overfull \hbox (23.5155pt too wide) in paragraph at lines 112--114
+\T1/bch/m/n/12 syntrophy cou-ple $\U/matha/m/n/12 p\OML/cmm/m/it/12 G; A\U/math
+a/m/n/12 q$\T1/bch/m/n/12 . In that sense $\OML/cmm/m/it/12 d[]\U/matha/m/n/12 
+p\OML/cmm/m/it/12 G; A\U/matha/m/n/12 q$ \T1/bch/m/n/12 pro-vides a mea-sure of
+ how good a consumption-
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[43 <./figures/Results/feasibility/size_feasibility_region_NR25_NS25_Nest0.25_C
+onn0.2336.pdf>]
+<./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_fix
+ed_nestedness_random_structure.pdf, id=1002, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rat
+e_fixed_nestedness_random_structure.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_nestedness_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_NR25_NS25_fe
+asibility_decay_rate_fixed_nestedness_random_structure.pdf used on input line 1
+26.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_fix
+ed_connectance_random_structure.pdf, id=1003, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rat
+e_fixed_connectance_random_structure.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_connectance_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_NR25_NS25_fe
+asibility_decay_rate_fixed_connectance_random_structure.pdf used on input line 
+127.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 125--128
+[]  [][][][] 
+ []
+
+
+<./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_fix
+ed_nestedness_no_release_when_eat.pdf, id=1004, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rat
+e_fixed_nestedness_no_release_when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_nestedness_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_NR25_NS25_fe
+asibility_decay_rate_fixed_nestedness_no_release_when_eat.pdf used on input lin
+e 131.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_fix
+ed_connectance_no_release_when_eat.pdf, id=1005, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rat
+e_fixed_connectance_no_release_when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_connectance_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_NR25_NS25_fe
+asibility_decay_rate_fixed_connectance_no_release_when_eat.pdf used on input li
+ne 132.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 130--133
+[]  [][][][] 
+ []
+
+
+<./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_fix
+ed_nestedness_optimal_matrix.pdf, id=1006, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rat
+e_fixed_nestedness_optimal_matrix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_nestedness_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_NR25_NS25_fe
+asibility_decay_rate_fixed_nestedness_optimal_matrix.pdf used on input line 136
+.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_fix
+ed_connectance_optimal_matrix.pdf, id=1007, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rat
+e_fixed_connectance_optimal_matrix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_connectance_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_NR25_NS25_fe
+asibility_decay_rate_fixed_connectance_optimal_matrix.pdf used on input line 13
+7.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 135--138
+[]  [][][][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 8.08786pt on input line 139.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[44]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[45 <./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate
+_fixed_nestedness_random_structure.pdf> <./figures/Results/feasibility/feasibil
+ity_NR25_NS25_feasibility_decay_rate_fixed_connectance_random_structure.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_NR25_N
+S25_feasibility_decay_rate_fixed_connectance_random_structure.pdf): PDF inclusi
+on: multiple pdfs with page group included in a single page
+> <./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_f
+ixed_nestedness_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_NR25_N
+S25_feasibility_decay_rate_fixed_nestedness_no_release_when_eat.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+> <./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_f
+ixed_connectance_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_NR25_N
+S25_feasibility_decay_rate_fixed_connectance_no_release_when_eat.pdf): PDF incl
+usion: multiple pdfs with page group included in a single page
+> <./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_f
+ixed_nestedness_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_NR25_N
+S25_feasibility_decay_rate_fixed_nestedness_optimal_matrix.pdf): PDF inclusion:
+ multiple pdfs with page group included in a single page
+> <./figures/Results/feasibility/feasibility_NR25_NS25_feasibility_decay_rate_f
+ixed_connectance_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_NR25_N
+S25_feasibility_decay_rate_fixed_connectance_optimal_matrix.pdf): PDF inclusion
+: multiple pdfs with page group included in a single page
+>]
+<./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_synt
+rophy_random_structure.pdf, id=1158, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying
+_syntrophy_random_structure.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_
+syntrophy_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
+e_NR25_NS25_varying_syntrophy_random_structure.pdf used on input line 148.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (121.46228pt too wide) in paragraph at lines 148--148
+[]\T1/bch/m/n/10.95 (a)|| 
+ []
+
+
+<./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_synt
+rophy_no_release_when_eat.pdf, id=1159, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying
+_syntrophy_no_release_when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_
+syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
+e_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf used on input line 149.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (121.81268pt too wide) in paragraph at lines 149--149
+[]\T1/bch/m/n/10.95 (b)|| 
+ []
+
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 147--150
+[]  [][][][] 
+ []
+
+
+<./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_synt
+rophy_optimal_matrix.pdf, id=1160, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying
+_syntrophy_optimal_matrix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_
+syntrophy_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
+e_NR25_NS25_varying_syntrophy_optimal_matrix.pdf used on input line 152.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (120.79434pt too wide) in paragraph at lines 152--152
+[]\T1/bch/m/n/10.95 (c)|| 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 <./figures/Results/feasibility/measure_common_feasibility_volume_varying_syntro
-phy.pdf, id=859, 462.52798pt x 346.89601pt>
+phy.pdf, id=1165, 462.52798pt x 346.89601pt>
 File: ./figures/Results/feasibility/measure_common_feasibility_volume_varying_s
 yntrophy.pdf Graphic file (type pdf)
 
 <use ./figures/Results/feasibility/measure_common_feasibility_volume_varying_sy
 ntrophy.pdf>
 Package pdftex.def Info: ./figures/Results/feasibility/measure_common_feasibili
-ty_volume_varying_syntrophy.pdf used on input line 102.
+ty_volume_varying_syntrophy.pdf used on input line 161.
 (pdftex.def)             Requested size: 330.42041pt x 247.82762pt.
 
-<./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_rand
-om_structure.pdf, id=860, 462.52798pt x 346.89601pt>
-File: ./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy
-_random_structure.pdf Graphic file (type pdf)
 
-<use ./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_
-random_structure.pdf>
-Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
-e_varying_syntrophy_random_structure.pdf used on input line 109.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
-Overfull \hbox (120.77028pt too wide) in paragraph at lines 109--109
-[]\T1/lmr/m/n/10.95 (a)|| 
+[46]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[47 <./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_
+syntrophy_random_structure.pdf> <./figures/Results/feasibility/common_feasibili
+ty_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/common_feasibility
+_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+> <./figures/Results/feasibility/common_feasibility_volume_NR25_NS25_varying_sy
+ntrophy_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/common_feasibility
+_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf): PDF inclusion: multipl
+e pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[48 <./figures/Results/feasibility/measure_common_feasibility_volume_varying_sy
+ntrophy.pdf>]
+<./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.6_Conn0.33
+44.pdf, id=1287, 758.835pt x 325.215pt>
+File: ./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.6_Con
+n0.3344.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.6_Conn
+0.3344.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_region_wt_NR
+50_NS25_Nest0.6_Conn0.3344.pdf used on input line 173.
+(pdftex.def)             Requested size: 519.23723pt x 222.53273pt.
+
+Overfull \hbox (26.135pt too wide) in paragraph at lines 172--174
+[]  [][] 
  []
 
 
-<./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_no_r
-elease_when_eat.pdf, id=861, 462.52798pt x 346.89601pt>
-File: ./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy
-_no_release_when_eat.pdf Graphic file (type pdf)
+<./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.35_Conn0.2
+296.pdf, id=1288, 758.835pt x 325.215pt>
+File: ./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.35_Co
+nn0.2296.pdf Graphic file (type pdf)
 
-<use ./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_
-no_release_when_eat.pdf>
-Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
-e_varying_syntrophy_no_release_when_eat.pdf used on input line 110.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+<use ./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.35_Con
+n0.2296.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_region_wt_NR
+50_NS25_Nest0.35_Conn0.2296.pdf used on input line 177.
+(pdftex.def)             Requested size: 519.23723pt x 222.53273pt.
 
-Overfull \hbox (121.37854pt too wide) in paragraph at lines 110--110
-[]\T1/lmr/m/n/10.95 (b)|| 
+Overfull \hbox (26.135pt too wide) in paragraph at lines 176--178
+[]  [][] 
  []
 
 
-Overfull \hbox (49.81708pt too wide) in paragraph at lines 107--111
+<./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.15_Conn0.1
+2.pdf, id=1289, 758.835pt x 325.215pt>
+File: ./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.15_Co
+nn0.12.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.15_Con
+n0.12.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/feasibility_region_wt_NR
+50_NS25_Nest0.15_Conn0.12.pdf used on input line 181.
+(pdftex.def)             Requested size: 519.23723pt x 222.53273pt.
+
+Overfull \hbox (26.135pt too wide) in paragraph at lines 180--183
+[]  [][] 
+ []
+
+
+<./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_synt
+rophy_random_structure.pdf, id=1294, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying
+_syntrophy_random_structure.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_
+syntrophy_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
+e_NR50_NS25_varying_syntrophy_random_structure.pdf used on input line 191.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (121.46228pt too wide) in paragraph at lines 191--191
+[]\T1/bch/m/n/10.95 (a)|| 
+ []
+
+
+<./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_synt
+rophy_no_release_when_eat.pdf, id=1295, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying
+_syntrophy_no_release_when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_
+syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
+e_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf used on input line 192.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (121.81268pt too wide) in paragraph at lines 192--192
+[]\T1/bch/m/n/10.95 (b)|| 
+ []
+
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 190--193
 []  [][][][] 
  []
 
 
-<./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_opti
-mal_matrix.pdf, id=862, 462.52798pt x 346.89601pt>
-File: ./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy
-_optimal_matrix.pdf Graphic file (type pdf)
+<./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_synt
+rophy_optimal_matrix.pdf, id=1296, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying
+_syntrophy_optimal_matrix.pdf Graphic file (type pdf)
 
-<use ./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_
-optimal_matrix.pdf>
+<use ./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_
+syntrophy_optimal_matrix.pdf>
 Package pdftex.def Info: ./figures/Results/feasibility/common_feasibility_volum
-e_varying_syntrophy_optimal_matrix.pdf used on input line 112.
+e_NR50_NS25_varying_syntrophy_optimal_matrix.pdf used on input line 195.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (120.16202pt too wide) in paragraph at lines 112--112
-[]\T1/lmr/m/n/10.95 (c)|| 
+Overfull \hbox (120.79434pt too wide) in paragraph at lines 195--195
+[]\T1/bch/m/n/10.95 (c)|| 
  []
+
+
+<./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_random_structure.
+pdf, id=1300, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_random_struc
+ture.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_random_struct
+ure.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/decay_rate_25_vs_50_nest
+edness_random_structure.pdf used on input line 203.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/feasibility/decay_rate_25_vs_50_connectance_random_structure
+.pdf, id=1301, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/decay_rate_25_vs_50_connectance_random_stru
+cture.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/decay_rate_25_vs_50_connectance_random_struc
+ture.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/decay_rate_25_vs_50_conn
+ectance_random_structure.pdf used on input line 204.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 202--205
+[]  [][][][] 
+ []
+
+
+<./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_no_release_when_e
+at.pdf, id=1302, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_no_release_w
+hen_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_no_release_wh
+en_eat.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/decay_rate_25_vs_50_nest
+edness_no_release_when_eat.pdf used on input line 208.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/feasibility/decay_rate_25_vs_50_connectance_no_release_when_
+eat.pdf, id=1303, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/decay_rate_25_vs_50_connectance_no_release_
+when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/decay_rate_25_vs_50_connectance_no_release_w
+hen_eat.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/decay_rate_25_vs_50_conn
+ectance_no_release_when_eat.pdf used on input line 209.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 207--210
+[]  [][][][] 
+ []
+
+
+<./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_optimal_matrix.pd
+f, id=1304, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_optimal_matr
+ix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_optimal_matri
+x.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/decay_rate_25_vs_50_nest
+edness_optimal_matrix.pdf used on input line 213.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/feasibility/decay_rate_25_vs_50_connectance_optimal_matrix.p
+df, id=1305, 462.52798pt x 346.89601pt>
+File: ./figures/Results/feasibility/decay_rate_25_vs_50_connectance_optimal_mat
+rix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/feasibility/decay_rate_25_vs_50_connectance_optimal_matr
+ix.pdf>
+Package pdftex.def Info: ./figures/Results/feasibility/decay_rate_25_vs_50_conn
+ectance_optimal_matrix.pdf used on input line 214.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 212--215
+[]  [][][][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 8.08786pt on input line 217.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) [36 <./figures/Results/feasibility/measure_common_feasibility_volume_varying_
-syntrophy.pdf>] (./dynamical_stability_results.tex) [37 <./figures/Results/feas
-ibility/common_feasibility_volume_varying_syntrophy_random_structure.pdf> <./fi
-gures/Results/feasibility/common_feasibility_volume_varying_syntrophy_no_releas
-e_when_eat.pdf
+)
 
-pdfTeX warning: pdflatex (file ./figures/Results/feasibility/common_feasibility
-_volume_varying_syntrophy_no_release_when_eat.pdf): PDF inclusion: multiple pdf
-s with page group included in a single page
-> <./figures/Results/feasibility/common_feasibility_volume_varying_syntrophy_op
-timal_matrix.pdf
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
 
-pdfTeX warning: pdflatex (file ./figures/Results/feasibility/common_feasibility
-_volume_varying_syntrophy_optimal_matrix.pdf): PDF inclusion: multiple pdfs wit
-h page group included in a single page
->] [38] (./structural_stability_results.tex) [39]
-Chapter 4.
-(./fully_connected_network.tex [40
-
-] [41] [42]) [43]
-Chapter 5.
-(./demonstrations.tex [44
-
-]) [45] [46
+[49
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 61.
- [47]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 61.
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[50 <./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.6_Conn
+0.3344.pdf> <./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest
+0.35_Conn0.2296.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_region
+_wt_NR50_NS25_Nest0.35_Conn0.2296.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
+> <./figures/Results/feasibility/feasibility_region_wt_NR50_NS25_Nest0.15_Conn0
+.12.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/feasibility_region
+_wt_NR50_NS25_Nest0.15_Conn0.12.pdf): PDF inclusion: multiple pdfs with page gr
+oup included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[51 <./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_
+syntrophy_random_structure.pdf> <./figures/Results/feasibility/common_feasibili
+ty_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/common_feasibility
+_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf): PDF inclusion: mu
+ltiple pdfs with page group included in a single page
+> <./figures/Results/feasibility/common_feasibility_volume_NR50_NS25_varying_sy
+ntrophy_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/common_feasibility
+_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf): PDF inclusion: multipl
+e pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[52 <./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_random_struct
+ure.pdf> <./figures/Results/feasibility/decay_rate_25_vs_50_connectance_random_
+structure.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/decay_rate_25_vs_5
+0_connectance_random_structure.pdf): PDF inclusion: multiple pdfs with page gro
+up included in a single page
+> <./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_no_release_when
+_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/decay_rate_25_vs_5
+0_nestedness_no_release_when_eat.pdf): PDF inclusion: multiple pdfs with page g
+roup included in a single page
+> <./figures/Results/feasibility/decay_rate_25_vs_50_connectance_no_release_whe
+n_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/decay_rate_25_vs_5
+0_connectance_no_release_when_eat.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
+> <./figures/Results/feasibility/decay_rate_25_vs_50_nestedness_optimal_matrix.
+pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/decay_rate_25_vs_5
+0_nestedness_optimal_matrix.pdf): PDF inclusion: multiple pdfs with page group 
+included in a single page
+> <./figures/Results/feasibility/decay_rate_25_vs_50_connectance_optimal_matrix
+.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/feasibility/decay_rate_25_vs_5
+0_connectance_optimal_matrix.pdf): PDF inclusion: multiple pdfs with page group
+ included in a single page
+>] (./dynamical_stability_results.tex
+<./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pdf, id
+=1542, 462.52798pt x 346.89601pt>
+File: ./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pd
+f Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pdf
+>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/typical_op
+timal_LRI_matrix.pdf used on input line 61.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
+<./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf, id=1
+546, 461.08258pt x 594.05943pt>
+File: ./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf 
+Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/optimal_LR
+I_requirements.pdf used on input line 67.
+(pdftex.def)             Requested size: 316.26006pt x 407.4812pt.
+
+Underfull \hbox (badness 3601) in paragraph at lines 70--70
+\T1/bch/m/n/12 The $\OML/cmm/m/it/12 A$ \T1/bch/m/n/12 and $\OML/cmm/m/it/12 G$
+ \T1/bch/m/n/12 ma-tri-ces
+ []
+
+
+Underfull \hbox (badness 3108) in paragraph at lines 70--70
+\T1/bch/m/n/12 of the first and sec-ond
+ []
+
+
+Underfull \hbox (badness 4254) in paragraph at lines 70--70
+\T1/bch/m/n/12 rows cor-re-spond to the
+ []
+
+
+Underfull \hbox (badness 4193) in paragraph at lines 70--70
+\T1/bch/m/n/12 re-spec-tive $\OML/cmm/m/it/12 A$ \T1/bch/m/n/12 and $\OML/cmm/m
+/it/12 G$ \T1/bch/m/n/12 of
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--70
+\T1/bch/m/n/12 in-traspe-cific co-prophagy
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 70--70
+\T1/bch/m/n/12 is lim-ited (the di-ag-o-nal
+ []
+
+
+Underfull \hbox (badness 2644) in paragraph at lines 70--70
+\T1/bch/m/n/12 of $\OML/cmm/m/it/12 AG$ \T1/bch/m/n/12 is roughly zero)
+ []
+
+
+Underfull \hbox (badness 1342) in paragraph at lines 70--70
+\T1/bch/m/n/12 Both re-la-tions are bet-ter
+ []
+
+
+Underfull \hbox (badness 1448) in paragraph at lines 70--70
+\T1/bch/m/n/12 sat-is-fied for con-sump-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--70
+\T1/bch/m/n/12 (and hence syn-tro-phy)
+ []
+
+
+<./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_neste
+dness.pdf, id=1550, 462.52798pt x 346.89601pt>
+File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_
+nestedness.pdf Graphic file (type pdf)
+
+<use ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_n
+estedness.pdf>
+Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
+rix_NR25_NS25_with_nestedness.pdf used on input line 77.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/matrix_structure/structure_alpha_matrix_NR25_N25_with_connec
+tance.pdf, id=1551, 462.52798pt x 346.89601pt>
+File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_N25_with_c
+onnectance.pdf Graphic file (type pdf)
+
+<use ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_N25_with_co
+nnectance.pdf>
+Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
+rix_NR25_N25_with_connectance.pdf used on input line 78.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 76--79
+[]  [][][][] 
+ []
+
+
+<./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_neste
+dness.pdf, id=1552, 462.52798pt x 346.89601pt>
+File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_
+nestedness.pdf Graphic file (type pdf)
+
+<use ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_n
+estedness.pdf>
+Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
+rix_NR50_NS25_with_nestedness.pdf used on input line 81.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_connec
+tance.pdf, id=1553, 462.52798pt x 346.89601pt>
+File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_c
+onnectance.pdf Graphic file (type pdf)
+
+<use ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_co
+nnectance.pdf>
+Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
+rix_NR50_N25_with_connectance.pdf used on input line 82.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 80--83
+[]  [][][][] 
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[53
+
+]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[54 <./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pdf
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[55 <./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[56 <./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_n
+estedness.pdf> <./figures/Results/matrix_structure/structure_alpha_matrix_NR25_
+N25_with_connectance.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/matrix_structure/structure_alp
+ha_matrix_NR25_N25_with_connectance.pdf): PDF inclusion: multiple pdfs with pag
+e group included in a single page
+> <./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_nes
+tedness.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/matrix_structure/structure_alp
+ha_matrix_NR50_NS25_with_nestedness.pdf): PDF inclusion: multiple pdfs with pag
+e group included in a single page
+> <./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_conn
+ectance.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/matrix_structure/structure_alp
+ha_matrix_NR50_N25_with_connectance.pdf): PDF inclusion: multiple pdfs with pag
+e group included in a single page
+>]
+<./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_wc_re
+gion_NR25_NS25_Nest0.35_Conn0.2208.pdf, id=1689, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_
+wc_region_NR25_NS25_Nest0.35_Conn0.2208.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_w
+c_region_NR25_NS25_Nest0.35_Conn0.2208.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
+mical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.2208.pdf used on input li
+ne 97.
+(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
+
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 96--98
+[]  [][] 
+ []
+
+
+<./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_wc_re
+gion_NR25_NS25_Nest0.35_Conn0.3216.pdf, id=1690, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_
+wc_region_NR25_NS25_Nest0.35_Conn0.3216.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_w
+c_region_NR25_NS25_Nest0.35_Conn0.3216.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
+mical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.3216.pdf used on input li
+ne 101.
+(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
+
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 100--102
+[]  [][] 
+ []
+
+
+<./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_regio
+n_NR25_NS25_Nest0.35_Conn0.272.pdf, id=1691, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_
+region_NR25_NS25_Nest0.35_Conn0.272.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_r
+egion_NR25_NS25_Nest0.35_Conn0.272.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
+mical_stability_wt_region_NR25_NS25_Nest0.35_Conn0.272.pdf used on input line 1
+05.
+(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
+
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 104--106
+[]  [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 4.1008pt on input line 109.
+
+
+<./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_Nest0
+.1_Conn0.1296.pdf, id=1693, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_
+Nest0.1_Conn0.1296.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_N
+est0.1_Conn0.1296.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/feasibilit
+y_vs_lds_NR25_NS25_Nest0.1_Conn0.1296.pdf used on input line 117.
+(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
+
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 116--118
+[]  [][] 
+ []
+
+
+<./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_Nest0
+.6_Conn0.3168.pdf, id=1694, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_
+Nest0.6_Conn0.3168.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_N
+est0.6_Conn0.3168.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/feasibilit
+y_vs_lds_NR25_NS25_Nest0.6_Conn0.3168.pdf used on input line 120.
+(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
+
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 119--121
+[]  [][] 
+ []
+
+
+LaTeX Warning: Reference `sec: methods dynamical stability' on page 57 undefine
+d on input line 124.
+
+
+<./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_Nest0.
+5_Conn0.416.pdf, id=1696, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_N
+est0.5_Conn0.416.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_Ne
+st0.5_Conn0.416.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/size_of_dynamical
+_volume_NR25_NS25_Nest0.5_Conn0.416.pdf used on input line 127.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
+ha0_fixed_connectance_random_structure.pdf, id=1703, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
+l_alpha0_fixed_connectance_random_structure.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_connectance_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_NR25_NS25_critical_alpha0_fixed_connectance_random_structure.pdf used on inpu
+t line 139.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
+ha0_fixed_nestedness_random_structure.pdf, id=1704, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
+l_alpha0_fixed_nestedness_random_structure.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_nestedness_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_NR25_NS25_critical_alpha0_fixed_nestedness_random_structure.pdf used on input
+ line 140.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 138--141
+[]  [][][][] 
+ []
+
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
+ha0_fixed_connectance_no_release_when_eat.pdf, id=1705, 462.52798pt x 346.89601
+pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
+l_alpha0_fixed_connectance_no_release_when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_connectance_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_NR25_NS25_critical_alpha0_fixed_connectance_no_release_when_eat.pdf used on i
+nput line 144.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
+ha0_fixed_nestedness_no_release_when_eat.pdf, id=1706, 462.52798pt x 346.89601p
+t>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
+l_alpha0_fixed_nestedness_no_release_when_eat.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_nestedness_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_NR25_NS25_critical_alpha0_fixed_nestedness_no_release_when_eat.pdf used on in
+put line 145.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 143--146
+[]  [][][][] 
+ []
+
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
+ha0_fixed_connectance_optimal_matrix.pdf, id=1707, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
+l_alpha0_fixed_connectance_optimal_matrix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_connectance_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_NR25_NS25_critical_alpha0_fixed_connectance_optimal_matrix.pdf used on input 
+line 149.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
+ha0_fixed_nestedness_optimal_matrix.pdf, id=1708, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
+l_alpha0_fixed_nestedness_optimal_matrix.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_nestedness_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_NR25_NS25_critical_alpha0_fixed_nestedness_optimal_matrix.pdf used on input l
+ine 150.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 148--152
+[]  [][][][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 11.04047pt on input line 153.
+
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR25_NS25_varying_syntrophy_random_structure.pdf, id=1710, 462.52798pt x 
+346.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR25_NS25_varying_syntrophy_random_structure.pdf Graphic file (type 
+pdf)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR25_NS25_varying_syntrophy_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR25_NS25_varying_syntrophy_random_structure.pdf 
+used on input line 158.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf, id=1711, 462.52798pt
+ x 346.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf Graphic file (ty
+pe pdf)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.p
+df used on input line 159.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 157--160
+[]  [][][][] 
+ []
+
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf, id=1712, 462.52798pt x 34
+6.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf Graphic file (type pd
+f)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf us
+ed on input line 162.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[57]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[58 <./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_w
+c_region_NR25_NS25_Nest0.35_Conn0.2208.pdf> <./figures/Results/local_dynamical_
+stability/local_dynamical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.3216.
+pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/loca
+l_dynamical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.3216.pdf): PDF incl
+usion: multiple pdfs with page group included in a single page
+> <./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_reg
+ion_NR25_NS25_Nest0.35_Conn0.272.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/loca
+l_dynamical_stability_wt_region_NR25_NS25_Nest0.35_Conn0.272.pdf): PDF inclusio
+n: multiple pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[59 <./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_N
+est0.1_Conn0.1296.pdf> <./figures/Results/local_dynamical_stability/feasibility
+_vs_lds_NR25_NS25_Nest0.6_Conn0.3168.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/feas
+ibility_vs_lds_NR25_NS25_Nest0.6_Conn0.3168.pdf): PDF inclusion: multiple pdfs 
+with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[60 <./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_Ne
+st0.5_Conn0.416.pdf>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[61 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical
+_alpha0_fixed_connectance_random_structure.pdf> <./figures/Results/largest_eige
+nvalue/largest_eigenvalue_NR25_NS25_critical_alpha0_fixed_nestedness_random_str
+ucture.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_NR25_NS25_critical_alpha0_fixed_nestedness_random_structure.pdf): PDF i
+nclusion: multiple pdfs with page group included in a single page
+> <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_a
+lpha0_fixed_connectance_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_NR25_NS25_critical_alpha0_fixed_connectance_no_release_when_eat.pdf): P
+DF inclusion: multiple pdfs with page group included in a single page
+> <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_a
+lpha0_fixed_nestedness_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_NR25_NS25_critical_alpha0_fixed_nestedness_no_release_when_eat.pdf): PD
+F inclusion: multiple pdfs with page group included in a single page
+> <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_a
+lpha0_fixed_connectance_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_NR25_NS25_critical_alpha0_fixed_connectance_optimal_matrix.pdf): PDF in
+clusion: multiple pdfs with page group included in a single page
+> <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_a
+lpha0_fixed_nestedness_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_NR25_NS25_critical_alpha0_fixed_nestedness_optimal_matrix.pdf): PDF inc
+lusion: multiple pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[62 <./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR25_NS25_varying_syntrophy_random_structure.pdf> <./figures/Results/
+local_dynamical_stability/common_local_dynamical_stability_volume_NR25_NS25_var
+ying_syntrophy_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
+on_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_no_release_when
+_eat.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
+ge
+> <./figures/Results/local_dynamical_stability/common_local_dynamical_stability
+_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
+on_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_optimal_matrix.
+pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+
+LaTeX Warning: Reference `eq: dynamical stability methods fully connected metap
+arameters' on page 63 undefined on input line 168.
+
+
+LaTeX Warning: Reference `sec: methods dynamical stability fully connected zero
+ variance' on page 63 undefined on input line 168.
+
+
+LaTeX Warning: Reference `eq: fully feasible volume' on page 63 undefined on in
+put line 175.
+
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1_C
+onn0.1296_alpha0=0.0.pdf, id=2085, 758.835pt x 325.215pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest
+0.1_Conn0.1296_alpha0=0.0.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
+.1_Conn0.1296_alpha0=0.0.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0.pdf used on input line 179.
+(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+
+Overfull \hbox (2.532pt too wide) in paragraph at lines 178--180
+[]  [][] 
+ []
+
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1_C
+onn0.1296_alpha0=0.0039.pdf, id=2086, 758.835pt x 325.215pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest
+0.1_Conn0.1296_alpha0=0.0039.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
+.1_Conn0.1296_alpha0=0.0039.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0039.pdf used on input line 183.
+(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+
+Overfull \hbox (2.532pt too wide) in paragraph at lines 182--184
+[]  [][] 
+ []
+
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1_C
+onn0.1296_alpha0=0.0078.pdf, id=2087, 758.835pt x 325.215pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest
+0.1_Conn0.1296_alpha0=0.0078.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
+.1_Conn0.1296_alpha0=0.0078.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0078.pdf used on input line 187.
+(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+
+Overfull \hbox (2.532pt too wide) in paragraph at lines 186--188
+[]  [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 5.21117pt on input line 189.
+
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_NR25
+_NS25_Nest0.3_Conn0.2272.pdf, id=2090, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy
+_NR25_NS25_Nest0.3_Conn0.2272.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_
+NR25_NS25_Nest0.3_Conn0.2272.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_varying_syntrophy_NR25_NS25_Nest0.3_Conn0.2272.pdf used on input line 194.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/local_dynamical_stability/size_local_dynamical_stability_reg
+ion_NR25_NS25_Nest0.3_Conn0.2272.pdf, id=2091, 462.52798pt x 346.89601pt>
+File: ./figures/Results/local_dynamical_stability/size_local_dynamical_stabilit
+y_region_NR25_NS25_Nest0.3_Conn0.2272.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/size_local_dynamical_stability
+_region_NR25_NS25_Nest0.3_Conn0.2272.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/size_local
+_dynamical_stability_region_NR25_NS25_Nest0.3_Conn0.2272.pdf used on input line
+ 195.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 192--196
+[]  [][][][] 
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[63]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[64 <./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
+.1_Conn0.1296_alpha0=0.0.pdf> <./figures/Results/largest_eigenvalue/largest_eig
+envalue_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0039.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0039.pdf): PDF inclusion: mult
+iple pdfs with page group included in a single page
+> <./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1
+_Conn0.1296_alpha0=0.0078.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/largest_eigenvalue/largest_eig
+envalue_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0078.pdf): PDF inclusion: mult
+iple pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[65 <./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_
+NR25_NS25_Nest0.3_Conn0.2272.pdf> <./figures/Results/local_dynamical_stability/
+size_local_dynamical_stability_region_NR25_NS25_Nest0.3_Conn0.2272.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/size
+_local_dynamical_stability_region_NR25_NS25_Nest0.3_Conn0.2272.pdf): PDF inclus
+ion: multiple pdfs with page group included in a single page
+>]
+
+LaTeX Warning: Reference `eq: dynamical stability methods fully connected metap
+arameters' on page 66 undefined on input line 201.
+
+
+<./figures/Results/local_dynamical_stability/local_dynamical_stability_region_N
+R25_NS25_Nest0.45_Conn0.3168.pdf, id=2231, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_reg
+ion_NR25_NS25_Nest0.45_Conn0.3168.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/local_dynamical_stability_regi
+on_NR25_NS25_Nest0.45_Conn0.3168.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
+mical_stability_region_NR25_NS25_Nest0.45_Conn0.3168.pdf used on input line 205
+.
+(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+
+<./figures/Results/local_dynamical_stability/local_dynamical_stability_region_N
+R50_NS25_Nest0.45_Conn0.3328.pdf, id=2232, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_reg
+ion_NR50_NS25_Nest0.45_Conn0.3328.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/local_dynamical_stability_regi
+on_NR50_NS25_Nest0.45_Conn0.3328.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
+mical_stability_region_NR50_NS25_Nest0.45_Conn0.3328.pdf used on input line 207
+.
+(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+
+<./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_NR50
+_NS25_Nest0.3_Conn0.2296.pdf, id=2237, 462.52798pt x 346.89601pt>
+File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy
+_NR50_NS25_Nest0.3_Conn0.2296.pdf Graphic file (type pdf)
+
+<use ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_
+NR50_NS25_Nest0.3_Conn0.2296.pdf>
+Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
+e_varying_syntrophy_NR50_NS25_Nest0.3_Conn0.2296.pdf used on input line 214.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/local_dynamical_stability/size_local_dynamical_stability_reg
+ion_NR50_NS25_Nest0.3_Conn0.2296.pdf, id=2238, 462.52798pt x 346.89601pt>
+File: ./figures/Results/local_dynamical_stability/size_local_dynamical_stabilit
+y_region_NR50_NS25_Nest0.3_Conn0.2296.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/size_local_dynamical_stability
+_region_NR50_NS25_Nest0.3_Conn0.2296.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/size_local
+_dynamical_stability_region_NR50_NS25_Nest0.3_Conn0.2296.pdf used on input line
+ 215.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 212--216
+[]  [][][][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR50_NS25_varying_syntrophy_random_structure.pdf, id=2245, 462.52798pt x 
+346.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR50_NS25_varying_syntrophy_random_structure.pdf Graphic file (type 
+pdf)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_random_structure.pdf 
+used on input line 239.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf, id=2246, 462.52798pt
+ x 346.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf Graphic file (ty
+pe pdf)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.p
+df used on input line 240.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 238--241
+[]  [][][][] 
+ []
+
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf, id=2247, 462.52798pt x 34
+6.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf Graphic file (type pd
+f)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf us
+ed on input line 243.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+)
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[66]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[67 <./figures/Results/local_dynamical_stability/local_dynamical_stability_regi
+on_NR25_NS25_Nest0.45_Conn0.3168.pdf> <./figures/Results/local_dynamical_stabil
+ity/local_dynamical_stability_region_NR50_NS25_Nest0.45_Conn0.3328.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/loca
+l_dynamical_stability_region_NR50_NS25_Nest0.45_Conn0.3328.pdf): PDF inclusion:
+ multiple pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[68 <./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_
+NR50_NS25_Nest0.3_Conn0.2296.pdf> <./figures/Results/local_dynamical_stability/
+size_local_dynamical_stability_region_NR50_NS25_Nest0.3_Conn0.2296.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/size
+_local_dynamical_stability_region_NR50_NS25_Nest0.3_Conn0.2296.pdf): PDF inclus
+ion: multiple pdfs with page group included in a single page
+>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[69 <./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_random_structure.pdf> <./figures/Results/
+local_dynamical_stability/common_local_dynamical_stability_volume_NR50_NS25_var
+ying_syntrophy_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
+on_local_dynamical_stability_volume_NR50_NS25_varying_syntrophy_no_release_when
+_eat.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
+ge
+> <./figures/Results/local_dynamical_stability/common_local_dynamical_stability
+_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
+on_local_dynamical_stability_volume_NR50_NS25_varying_syntrophy_optimal_matrix.
+pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] (./structural_stability_results.tex
+<./figures/Results/structural_stability/typical_probability_structural_stabilit
+y_curve.pdf, id=2424, 462.52798pt x 346.89601pt>
+File: ./figures/Results/structural_stability/typical_probability_structural_sta
+bility_curve.pdf Graphic file (type pdf)
+
+<use ./figures/Results/structural_stability/typical_probability_structural_stab
+ility_curve.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/typical_probabi
+lity_structural_stability_curve.pdf used on input line 8.
+(pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
+
+<./figures/Results/structural_stability/critical_structural_perturbation_NR25_N
+S25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf, id=2425, 462.52798pt x 346.896
+01pt>
+File: ./figures/Results/structural_stability/critical_structural_perturbation_N
+R25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf Graphic file (type pdf)
+
+<use ./figures/Results/structural_stability/critical_structural_perturbation_NR
+25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/critical_struct
+ural_perturbation_NR25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf used on
+ input line 16.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/structural_stability/critical_structural_perturbation_NR25_N
+S25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf, id=2426, 462.52798pt x 346.896
+01pt>
+File: ./figures/Results/structural_stability/critical_structural_perturbation_N
+R25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf Graphic file (type pdf)
+
+<use ./figures/Results/structural_stability/critical_structural_perturbation_NR
+25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/critical_struct
+ural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf used on
+ input line 17.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 14--18
+[]  [][][][] 
+ []
+
+)
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[70
+
+]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[71 <./figures/Results/structural_stability/typical_probability_structural_stab
+ility_curve.pdf>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[72 <./figures/Results/structural_stability/critical_structural_perturbation_NR
+25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points.pdf> <./figures/Results/structu
+ral_stability/critical_structural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixe
+d_nest_all_points.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
+structural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points.pdf):
+ PDF inclusion: multiple pdfs with page group included in a single page
+>]
+Chapter 4.
+(./demonstrations.tex [73
+
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 91.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 91.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 91.
+
+) (./supplementary_material.tex
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[74]
+
+LaTeX Warning: Reference `eq: positive m_nu' on page 75 undefined on input line
+ 32.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[75]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[76])
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[77]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[78
+
+] [79]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[80]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 90.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[81]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 90.
  (./consumer_resource_final.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 61.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 61.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 90.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 90.
 Package rerunfilecheck Info: File `consumer_resource_final.out' has not changed
 .
-(rerunfilecheck)             Checksum: 02F56810AD90D543C8F60C8FF40DFAF8;2523.
+(rerunfilecheck)             Checksum: F17DACA97A4F42FB9E7363CF1F0CD171;2975.
 
 
 LaTeX Warning: There were undefined references.
@@ -2288,57 +4006,53 @@ LaTeX Warning: There were multiply-defined labels.
 Package logreq Info: Writing requests to 'consumer_resource_final.run.xml'.
 \openout1 = `consumer_resource_final.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 61.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 90.
  ) 
 Here is how much of TeX's memory you used:
- 27603 strings out of 493013
- 512026 string characters out of 6133344
- 939173 words of memory out of 5000000
- 30322 multiletter control sequences out of 15000+600000
- 128373 words of font info for 115 fonts, out of 8000000 for 9000
+ 28228 strings out of 493013
+ 548201 string characters out of 6133344
+ 953338 words of memory out of 5000000
+ 30745 multiletter control sequences out of 15000+600000
+ 78374 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,14n,98p,10433b,2242s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/local/texlive/20
-16/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2016/texmf-dist/
-fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2016/texmf-dist/fonts/enc/
-dvips/lm/lm-mathsy.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmss12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmss17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-euler/eufm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmbx
-12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2016/texmf-d
-ist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/lm/lmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/lm/lmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/lm/lmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-lm/lmri10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmri12.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha12.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha7.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mathb12.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.p
-fb>
-Output written on consumer_resource_final.pdf (48 pages, 836284 bytes).
+ 64i,14n,98p,10413b,2697s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
+live/2016/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmss12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmss17.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
+amsfonts/euler/eufm10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/mathabx-type1/matha10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/mathabx-type1/matha12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/mathabx-type1/matha6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/
+public/mathabx-type1/matha7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/mathabx-type1/matha8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type
+1/public/mathabx-type1/mathb12.pfb></usr/local/texlive/2016/texmf-dist/fonts/ty
+pe1/public/mathabx-type1/mathx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on consumer_resource_final.pdf (81 pages, 1288050 bytes).
 PDF statistics:
- 1289 PDF objects out of 1440 (max. 8388607)
- 1166 compressed objects within 12 object streams
- 401 named destinations out of 1000 (max. 500000)
- 336 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2848 PDF objects out of 2984 (max. 8388607)
+ 2480 compressed objects within 25 object streams
+ 546 named destinations out of 1000 (max. 500000)
+ 635 words of extra memory for PDF output out of 10000 (max. 10000000)
 
