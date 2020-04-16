@@ -105,7 +105,7 @@ NR = feasibility_region[0,0][0,0]
 NS = feasibility_region[0,0][0,1]
 
 for k in range(len(alpha_mode)):
-    to_save = [[NR, NS,nestedness[i], connectance[i], decline[k][i]] for i in range(len(decline[k]))]
+    to_save = [[NR, NS, nestedness[i], connectance[i], decline[k][i]] for i in range(len(decline[k]))]
     np.savetxt(filename+'_decay_rate_'+alpha_mode[k]+'.out', np.array(to_save))
 
 
