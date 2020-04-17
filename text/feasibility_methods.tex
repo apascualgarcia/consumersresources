@@ -4,40 +4,58 @@
 
 \begin{document}
 
-We want to be able to build feasible models numerically, \ie we would like to generate a set of constant numbers $\{
-l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}\}$ such that the equilibria equations Eqs.\eqref{eq : equilibrium resources and species} are fulfilled.
 
+% We want to be able to build feasible models numerically, \ie we would like to generate a set of constant numbers $\{
+% l_\nu, m_\nu, R^*_\nu, S^*_j, \gamma_{j\nu}, \alpha_{\nu j}, \sigma_{j\nu}\}$ such that the equilibria equations Eqs.\eqref{eq : equilibrium resources and species} are fulfilled.
+Since its very inception \cite{may_will_1972}, the study of ecological interactions has been and still is tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is we assume a feasible equilibrium point, where some matrix of the model (\eg the species-interaction matrix or the jacobian) is approximated as random, and then study the dynamical or structural stability of said feasible point.
 
+That framework is not satisfying for the study we would like to conduct, because it does not take time to study whether random parameters make sense in the first place.
+Indeed, before studying whether a microbial community can sustain perturbations, we need to know if said community actually \important{exists}. Biological systems, like any other natural systems, are constrained by laws, whether they arise from physical or biological considerations. For instance, it would not make sense to consider microbial communities that \eg violate the laws of thermodynamics. In the following section, we explain how such considerations can help determining the answer to the \important{feasibility} question:
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+\itshape
+Can microbial communities arising from a random set of parameters make sense on a physical and biological level?
+If not, what are the conditions that should be imposed and how are these translated mathematically?
+\end{minipage}}
+\end{centering}
 \subsection{Basic concepts}\label{sec : methods feasibility basic concepts}
-Since its very inception \cite{may_will_1972}, the study of ecological interactions has been and still is tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is assuming we are at a feasible equilibrium point, where some matrix of the model (\eg the species-interaction matrix or the jacobian) is approximated as random, and then study the dynamical stability of said feasible point.
+As explained above, we want to impose conditions such that we only study systems that are compatible with biological and physical laws. Choosing such restrictions is a crucial task : we want to be as close to nature as possible but we also need to stay simple enough such that the model remains mathematically tractable. Our %-- somewhat arbitrary but still very justified ---
+choice is the following :
+ % Indeed for our model to make sense,
+  any system deemed as feasible must have ``biological'' model parameters and conserve biomass.
 
-This framework is not satisfying for the study we would like to conduct, because the question ``does a given set of random parameters lead to a feasible system?'' is not trivial at all. Indeed for our model to make sense, we impose two conditions on any system deemed as feasible : the model parameters must be ``biological'' and biomass must be conserved.
+Asking for the model parameters to be ``biological'' means we want them to carry their intended biological interpretation. This means \eg that any syntrophic interaction has to be non-negative $\alpha_{\mu i} \geq 0 $ otherwise it cannot be interpreted as a syntrophic interaction anymore! More generally, the values of the parameters will be restricted.
+%this is equivalent to requiring that all the model parameters are non-negative:
+% \begin{equation}
+%  p \geq 0 \ \forall p \in \mathcal{P}.
+% \end{equation}
+% In our study, this equation will be slightly restricted since
+Namely, we are looking for positive-valued equilibria. %, so we require $R^*_\mu, S^*_i > 0$ specifically for these two parameters.
+Also, we require that every consumer can allocate some of each resource it consumes to growth\footnote{It wouldn't make sense to say that species $i$ eats resource $\mu$ with efficiency $0$, since this is equivalent to species $i$ not eating resource $\mu$, and this is already encoded in the network structure.} : zero efficiencies are forbidden. Finally every resource external feeding rate should be non-zero in order to avoid resource depletion and every resource and consumer must eventually die out in the absence of interaction. Mathematically, these considerations are equivalent to:
+\begin{equation}
+\boxed{
+R^*_\mu, S^*_i, \sigma_{i\mu}, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i} \geq 0.
+}
+\label{eq : feasibility positive parameters}
+\end{equation}
 
-Asking for the model parameters to be biological simply means we want them to have the intended biological interpretation. This means \eg that any syntrophic interaction has to be non-negative $\alpha_{\mu i} \geq 0 $ otherwise it cannot be interpreted as a syntrophic interaction anymore. More generally this is equivalent to requiring that all the model parameters are non-negative:
-\begin{equation}
- p \geq 0 \ \forall p \in \mathcal{P}.
-\end{equation}
-In our study, this equation will be slightly restricted since we are looking for positive-valued equilibria, so we require
-$R^*_\mu, S^*_i > 0$ specifically for these two parameters. Also, we require also a non-zero efficiency\footnote{It wouldn't make sense to say that species $i$ eats resource $\mu$ with efficiency $0$, since this is equivalent to species $i$ not eating resource $\mu$, and this is already encoded in the network structure.}. Finally every resource feeding rate should be non-zero in order to avoid resource depletion and every resource and consumer must eventually die out in the absence of interaction. In the end this means we require:
-\begin{equation}
-R^*_\mu, S^*_i, \sigma_{i\mu}, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i} \geq 0. \label{eq : feasibility positive parameters}
-\end{equation}
-Remember that not all the parameters of our models are free : there are $3 N_R +2 N_S + 4 N_R N_S $ parameters constrained by $N_R + N_S $ equations. So if we set $2 N_R + N_S + 4 N_R N_S$ parameters, the remaining $N_R + N_S$ are not free but set by the equilibrium equations \textbf{Insert ref equation}. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for reasons explained in \textbf{insert ref}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \textit{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eq.\eqref{eq : feasibility positive parameters} is equivalent to :
+That condition already greatly restricts the choice of parameters $p\in \mathcal{P}$. However, additional complexity arises from the relationships parameters have to follow by definition. Indeed, the $3 N_R +2 N_S + 3 N_R N_S $ parameters are constrained by the $N_R + N_S $ equations \eqref{eq: equilibrium resources and species}. So if we choose $2 N_R + N_S + 3 N_R N_S$ parameters, the remaining $N_R + N_S$ are instantly determined. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for reasons explained in Appendix \ref{sec: explanation solve for d and m}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \important{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eqs.\eqref{eq : feasibility positive parameters} can be combined with Eqs.\ref{eq: equilibrium resources and species} into:
 \begin{subequations}\label{eq : feasibility positive d and m}
 \begin{empheq}[left=\empheqlbrace]{align}
-d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R_\nu - \alpha_{\nu i} \right) > 0 \ \forall i=1, \dots, N_S \label{eq : feasibility positive d}\\
-m_\mu &= \frac{l_\mu - \sum_j \left(\gamma_{j\mu}R_\mu-\alpha_{\mu j}\right)S_j}{R_\mu} > 0 \ \forall \mu = 1, \dots, N_R \label{eq : feasibility positive m}
+d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R^*_\nu - \alpha_{\nu i} \right) > 0 \ \forall i=1, \dots, N_S \label{eq : feasibility positive d}\\
+m_\mu &= \frac{l_\mu - \sum_j \left(\gamma_{j\mu}R^*_\mu-\alpha_{\mu j}\right)S^*_j}{R^*_\mu} > 0 \ \forall \mu = 1, \dots, N_R \label{eq : feasibility positive m}
 \end{empheq}
 \end{subequations}
 
-In addition to Eqs.\eqref{eq : feasibility positive d and m}, we want any feasible system to conserve biomass \important{at equilibrium}\footnote{This weak condition should hold only at equilibrium : we allow transition periods where biomass may not be conserved.}. This means no species should be able to produce more biomass than it physically can. More specifically, a consumer $i$ attains, from consuming resources, a total biomass of $\sum_\nu \gamma_{i\nu}R^*_\nu S^*_i$.
-From this available biomass, only a part $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu S^*_i$ is devoted to growth. From the remaining $\sum_\nu (1-\sigma_{i\nu})\gamma_{i\nu}R^*_\nu S^*_i$, a part $\sum_\nu \alpha_{\nu i} S^*_i$ is given back to the resources as a syntrophic interaction. We simply impose that the syntrophic interaction is smaller than or equal to the available remaining biomass :
+In addition to these constraints, any feasible system should conserve biomass \important{at equilibrium}\footnote{This weak condition should hold only at equilibrium : we allow transition periods where biomass may not be conserved.}: no species should be able to produce more biomass than it physically can. More specifically, a consumer $i$ attains, from resources consumption, a total biomass of $\sum_\nu \gamma_{i\nu}R^*_\nu S^*_i$.
+From this available biomass, only $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu S^*_i$ is devoted to growth. Out of the remaining $\sum_\nu (1-\sigma_{i\nu})\gamma_{i\nu}R^*_\nu S^*_i$, a part $\sum_\nu \alpha_{\nu i} S^*_i$ is given back to the resources as a syntrophic interaction. We simply impose that the syntrophic interaction is smaller than or equal to the available remaining biomass :
 \begin{equation}\label{eq : feasability biomass conservation}
  \sum_\nu (1-\sigma_{i\nu})\gamma_{i\nu}R^*_\nu  \geq \sum_\nu \alpha_{\nu i} \ \forall i=1, \dots, N_S.
 \end{equation}
-From now on, we will say that a parameter set $p$ is \define{feasible} if it satisfies Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation}.
+From now on, we will say that \textbf{a parameter set $p$ is \define{feasible} if it satisfies Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation}}.
 This is completely deterministic, in the sense that for a given parameters set $p \in \mathcal{P}$ one can without a doubt say whether it is feasible or not.
-We can hence define the \define{parameters set feasibility function} $\mathfrak{F} : P \rightarrow \{ 0, 1 \}$, which takes a parameter set as an input and tells you whether this parameter set is feasible or not:
+Hence we define the \define{parameters set feasibility function} $\mathfrak{F} : P \rightarrow \{ 0, 1 \}$, which takes a parameter set as an input and tells you whether this parameter set is feasible or not:
 \begin{equation}
 \mathfrak{F}(p)=
 \begin{cases}
@@ -45,80 +63,86 @@ We can hence define the \define{parameters set feasibility function} $\mathfrak{
 0 \text{ else.}
 \end{cases}
 \end{equation}
-However as explained above we will usually not work with a parameter set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameter set $m \in \mathcal{M}$ and a binary consumption matrix $G \in \mathcal{B}_{N_R \times N_S}$ instead. We can similarly define a
+However as explained in the introduction we will usually not work with a parameter set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameter set $m \in \mathcal{M}$ and a consumption-syntrophy network $(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ instead. We can  define a corresponding
 \define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with binary matrices $B=(G, A)$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameter set :
 \begin{equation}\boxed{
 \mathcal{F}(m, B)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, B)\right)=1\right\}
 }
 \end{equation}
-We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it is easier to handle metaparameters. In practice $\mathcal{F}(m, B)$ is estimated numerically by generating $N$ parameters sets from $(m,B)$ and calculating the number of feasible ones :
+%We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it is easier to handle metaparameters.
+In practice $\mathcal{F}(m, B)$ is estimated numerically by generating $N$ parameters sets from $(m,B)$ and calculating the number of feasible ones :
 \begin{equation}
 \mathcal{F}(m, B) = \lim_{N\rightarrow \infty} \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \approx \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \text{ for } N \gg 1.
 \end{equation}
 
-\subsection{The feasibility volume}\label{sec : methods feasibility volume}
-The algorithmic procedure detailed in Section \ref{sec : algorithmic procedure} explains how feasible systems can be built. However, it implies that we first found a combination of metaparameters that will most of the time lead to the realisation of feasible systems when they are taken as an input of the algorithm.
+\subsection{The feasibility region}\label{sec : methods feasibility volume}
+Appendix \ref{sec : feasibility methods algorithmic procedure} explains the algorithmic procedure $\mathcal{A}(m, B) \in \mathcal{P}$ which allows us to build feasible parameters out of a set of metaparameters and a consumption-syntrophy network. However, in order to work properly, the combination of metaparameters used as an input of the algorithm must most of the time lead to the realisation of feasible systems. We hence need to find what region of the metaparameters space lead to a high feasibility : this is precisely the idea behind the notion of the feasibility region discussed below.
 
-Overall we have six metaparameters that we can play with : $\gamma_0$, $\alpha_0$, $l_0$, $\sigma_0$, $S_0$ and $R_0$. However, following the analysis of \cite{barbier_cavity_2017}, we notice that our system \eqref{eq : differential eq for resources and species} is arbitrary on some level. Indeed we have a ``scale freedom'', that means we decide in which set of units we work. There are two physical quantities at stake here : biomass and time, and we may choose, however we want it, a specific set of units describing both of them.
-
-We will measure biomass in units of the average resource abundance at equilibrium\footnote{Note that this is not a completely innocent choice. Indeed we will see later that the matrix $\alpha_{\nu i}-\gamma_{i \nu} R^*_\nu$ is a crucial quantity here. Setting $\av{R^*}=1$ allows us to simply study the impact of $\gamma$ against $\alpha$ instead of the more complicated $\gamma R^*$ versus $\alpha$.}, that means :
+But first, let's see how our study can made simpler. Feasibility conditions discussed above tell us that we may choose six metaparameters\footnote{Indeed, we saw that $d_i$ and $m_\mu$ are set by the other parameters, so we cannot freely choose $d_0$ and $m_0$.} : $\gamma_0$, $\alpha_0$, $l_0$, $\sigma_0$, $S_0$ and $R_0$. However, following the analysis of \cite{barbier_cavity_2017}, we notice that our model Eqs.\eqref{eq: differential eq for resources and species} still possesses some freedom. Indeed we can choose the set of units we work in to fix the values of some metaparameters. There are two physical quantities at stake here : biomass and time, and we may choose, however we want it, a specific set of units describing both of them.
+We measure biomass in units of the average resource abundance at equilibrium\footnote{That choice is not completely innocent. Indeed we will see later that the matrix $\alpha_{\nu i}-\gamma_{i \nu} R^*_\nu$ is a crucial quantity here. Setting $\av{R^*}=1$ allows us to simply study the impact of $\gamma$ against $\alpha$ instead of the more complicated $\gamma R^*$ versus $\alpha$.}:
 \begin{equation}
  \av{R_\mu} = R_0 = 1.
 \end{equation}
-Similarly, we will measure time such that the average external resource uptake rate is one, that is :
+Similarly, we measure time such that the average external resource uptake rate is one, that is:
 \begin{equation}
 \av{l_\mu} = l_0 = 1.
 \end{equation}
-After this manipulation, our number of metaparameters is reduced from six to four : only $\gamma_0$, $S_0$, $\alpha_0$ and $\sigma_0$ remain.
+After this manipulation, the number of metaparameters is reduced from six to four : only $\gamma_0$, $S_0$, $\alpha_0$ and $\sigma_0$ remain.
 
-For the sake of simplicity, we will keep the same $\sigma_0$ throughout our whole study. We take a value close to the efficiency of real microbial systems [\textbf{insert ref}], that is $\sigma_0 =0.25I$.
+For the sake of simplicity, we keep the same $\sigma_0$ throughout our whole study. We take a value close to the efficiency of real microbial systems [\textbf{insert ref}], that is $\sigma_0 =0.25$.
 
-Overall, we need to choose the last three remaining metaparameters: $\alpha_0$, $\gamma_0$ and $S_0$. As soon if we choose $\gamma_0$ and $S_0$, we will get a range of $\alpha_0$ which will give rise to feasible systems.
-We will then choose $\gamma_0$ and $S_0$ such that they lead to feasible systems for every consumption matrix considered here \textbf{when there is no syntrophy}, \ie $\alpha_0=0$. We will then study the impact of varying $\alpha_0$ at those values of $\gamma_0$ and $S_0$.
+Overall, we need to choose the last three remaining metaparameters: $\alpha_0$, $\gamma_0$ and $S_0$. We will modify these metaparameters throughout the study. Since the remaining eight are fixed, we sometimes will elude them in the notation and will write instead of $m=(\gamma_0, S_0, \alpha_0, \sigma_0, R_0, l_0, d_0, m_0) \in \mathcal{M}$ simply $m=(\gamma_0, S_0, \alpha_0)$.
+%As soon as $\gamma_0$ and $S_0$ are chosen, we get a range of $\alpha_0$ which gives rise to feasible systems.
+%We will then choose $\gamma_0$ and $S_0$ such that they lead to feasible systems for every consumption matrix considered here \textbf{when there is no syntrophy}, \ie $\alpha_0=0$. We will then study the impact of varying $\alpha_0$ at those values of $\gamma_0$ and $S_0$.
 
-Formally, we can define for a consumption adjacency matrix $G$ coupled with a syntrophy adjacency matrix $A$ the $x$-feasible volume $\mathcal{V}^{G,A}_x$ of the metaparameters space $\mathcal{M}$ that will lead to at least a ratio $x$ of feasible systems \ie :
+Formally, we can define for a consumption matrix $G$ coupled with a syntrophy adjacency matrix $A$ the $x$-feasible volume $\mathcal{F}^{G,A}_x$ of the metaparameters space $\mathcal{M}$ that will lead to at least a ratio $x$ of feasible systems \ie :
 \begin{equation}
-\mathcal{V}^{G,A}_x \defined \left\{m \in \mathcal{M} : \mathcal{F}\left(m, (G,A)\right)\geq x \right\}. \label{eq : x feasible volume}
+\mathcal{F}^{G,A}_x \defined \left\{m \in \mathcal{M} : \mathcal{F}\left(m, (G,A)\right)\geq x \right\}. \label{eq : x feasible volume}
 \end{equation}
-It is clear that $\mathcal{V}^{G,A}_0 = \mathcal{M}$ $\forall G$ and $\text{Vol}\left(\mathcal{V}^{G,A}_{x}\right) \leq \text{Vol}\left(\mathcal{V}^{G,A}_{y}\right)$ $\forall x > y, G$ . We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \textit{common feasibility} volume $\mathcal{V}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
+It is clear that $\mathcal{F}^{G,A}_0 = \mathcal{M}$ $\forall G$ and $\text{Vol}\left(\mathcal{F}^{G,A}_{x}\right) \leq \text{Vol}\left(\mathcal{F}^{G,A}_{y}\right)$ $\forall x > y, G$ . We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \important{common feasibility} region $\mathcal{F}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
 \begin{equation}
-\mathcal{V}^S_x \defined \intersection{(G,A) \in S} \mathcal{V}^{G,A}_x.
+\mathcal{F}^S_x \defined \intersection{(G,A) \in S} \mathcal{F}^{G,A}_x.
 \end{equation}
 We also define for a matrix set $S$, its critical feasibility $f^*(S)$, which is the largest feasibility we can get while still having a non-zero common volume :
 \begin{equation}
-f^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \text{Vol}\left(\mathcal{V}^S_x\right) > 0 \right\}.
+f^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \text{Vol}\left(\mathcal{F}^S_x\right) > 0 \right\}.
 \end{equation}
-For actual computations, we will choose a matrix set $S_M$, stick to it during the whole thesis, and work in its critical feasibility volume $\mathcal{V}^*$, defined as :
+For actual computations, we will choose a matrix set $S_M$, stick to it during the whole thesis, and work in its critical feasibility region $\mathcal{F}^*$, defined as :
 \begin{equation}\boxed{
-\mathcal{V}^* \defined \mathcal{V}^{S_M}_{f^*(S_M)}.
+\mathcal{F}^* \defined \mathcal{F}^{S_M}_{f^*(S_M)}.
 }
 \end{equation}
+Our hope is that we may find a fully feasible common region, \ie $f^*(S)=1$.
 
-\subsection{Estimating the fully feasible volume $\mathcal{V}^{G,A}_1$}
-Now that we defined the $x$-feasible volume of a given couple consumption-syntrophy network $(G,A)$ in Eq.\eqref{eq : x feasible volume}, the goal is to get an estimate of the fully feasible volume $\mathcal{V}^{G,A}_1$ in terms of the metaparameters, such that we can directly and efficiently run simulations in the feasible region.
+\subsection{Estimating the fully feasible region $\mathcal{F}^{G,A}_1$}
+Now that we defined the $x$-feasible volume of a given couple consumption-syntrophy network $(G,A)$ in Eq.\eqref{eq : x feasible volume}, we would like to know what regions of the metaparameters space lead to fully feasible systems. We imposed two conditions that characterise the set of feasible parameters: Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation}. We use them as a start to get corresponding metaparameters equations that describe $\mathcal{F}^{G,A}_1$.
 \subsubsection{Biomass conservation}
-As stated before, we require that biomass is conserved in our model. This was equivalent to fulfilling Eq.\eqref{eq : feasability biomass conservation}, which we rewrite here :
+As stated above, we require that biomass is conserved in our model. This is equivalent to fulfilling Eq.\eqref{eq : feasability biomass conservation}, which we rewrite here:
 \begin{equation}
 \sum_\nu \left(1-\sigma_{i\nu}\right)\gamma_{i\nu}R^*_\nu \geq \sum_\nu \alpha_{\nu i} \ \forall i=1,\dots, N_S.
 \end{equation}
-The idea is to neglect the variance of every quantity involved \ie we use the approximation
+% The idea is to neglect the variance of every quantity involved \ie we use the approximation
+% \begin{equation}
+% \gamma_{i\mu} \approx \gamma_0 G_{i\mu}, \ \alpha_{\mu i}\approx \alpha_0 A_{\mu i}, \ \sigma_{i\nu} = \sigma_0 \text{ and }R^*_\nu \approx R_0.
+% \end{equation}
+%This means the RHS of Eq.\eqref{eq : feasability biomass conservation} is roughly given by
+Eqs.\eqref{eq: metaparameters approximations} can be used to estimate the RHS of this equation:
 \begin{equation}
-\gamma_{i\mu} \approx \gamma_0 G_{i\mu}, \ \alpha_{\mu i}\approx \alpha_0 A_{\mu i}, \ \sigma_{i\nu} = \sigma_0 \text{ and }R^*_\nu \approx R_0.
+\sum_\nu \alpha_{\nu i} \approx \deg(A, i) \alpha_0,
 \end{equation}
-This means the RHS of Eq.\eqref{eq : feasability biomass conservation} is roughly given by
+where $\deg(A,i)$ is the degree of the $i$-th column of the $\alpha$ matrix :
 \begin{equation}
-\sum_\nu \alpha_{\nu i} \approx \deg(A, i) \alpha_0
+\deg(A, i) = \sum_\nu A_{\nu i}.
 \end{equation}
-where $\deg(A,i)$ is the degree of the $i$-th column of the $\alpha$ matrix : $\deg(A, i) = \sum_\nu A_{\nu i}$.
 Similarly,
 \begin{equation}
 \sum_\nu \left(1-\sigma_{i\nu}\right)\gamma_{i\nu} R^*_\nu \approx (1-\sigma_0)R_0\sum_{\nu}\gamma_{i\nu} \approx \deg(G, i)(1-\sigma_0)R_0\gamma_0,
 \end{equation}
-Then energy conservation Eq.\eqref{eq : feasability biomass conservation} is equivalent to
+Energy conservation Eq.\eqref{eq : feasability biomass conservation} is then equivalent to
 \begin{equation}
 \deg(A,i) \alpha_0 \lessapprox \deg(G,i) (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S
 \end{equation}
-Since $\deg(G,i) > 0 $ (it is the number of resources species $i$ eats), we have:
+Since $\deg(G,i) > 0 $, we have\footnote{Indeed, $\deg(G,i)$ is the number of resources species $i$ eats. We of course ask every consumer to at least consume something, otherwise they would not be part of the microbial community.}:
 \begin{equation}
 \frac{\deg(A,i)}{\deg(G,i)} \alpha_0 \lessapprox (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S
 \end{equation}
@@ -129,12 +153,12 @@ This is fulfilled if :
 }.
 \end{equation}
   Systems where the ratio $\frac{\# \text{resources released to}}{\# \text{resources consumed}}$ is small for each species allow for a larger individual syntrophy interaction (which is very intuitive).
-\subsubsection{Positivity of the parameters}
-As said before, the consumers death rates $d_i$ have to be positive. This implied Eq.\eqref{eq : feasibility positive d}, which may be recast as :
+\subsubsection{Biological interpretation of the parameters}
+Additionally, the consumers death rates $d_i$ have to be positive. This implied Eq.\eqref{eq : feasibility positive d}, which may be recast as :
 \begin{equation}
 \sum_\mu \sigma_{i\mu}\gamma_{i\mu}R^*_\mu > \sum_\mu \alpha_{\mu i}
 \end{equation}
-Using a reasoning similar to above, we get :
+Using a reasoning similar to above, we get a corresponding metaparameters inequality:
 \begin{equation} \label{eq : feasability positivity d}
 \boxed{
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox \sigma_0R_0 \gamma_0
@@ -146,9 +170,9 @@ l_\nu + \sum_j \alpha_{\nu j} S^*_j > \sum_j \gamma_{j\nu}R^*_\nu S^*_j \ \foral
 \end{equation}
 Which is equivalent to
 \begin{equation}
-l_0 + k_\nu^\alpha \alpha_0 S_0 \gtrapprox \deg(G,\nu) \gamma_0 R_0 S_0 \ \forall \nu
+l_0 + \deg(A, \nu) \alpha_0 S_0 \gtrapprox \deg(G,\nu) \gamma_0 R_0 S_0 \ \forall \nu
 \end{equation}
-Since $k_\nu^\gamma>0$ (every resource is at least consumed by one species), the $N_R$ equations above can be rewritten as:
+Since $\deg(G,\nu)>0$, we\footnote{Similarly to a previous footnote, we require that every resource $\nu$ is eaten by at least one consumer, \ie $\deg(G,\nu)>0$, otherwise it does not belong to the community.} can divide the above equations by $\deg(G,\nu)>0$ and then recast these $N_R$ equations into a single condition:
 \begin{equation} \label{eq : feasability positivity m}
 \boxed{
 \min_\nu\left\{\frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\} \gtrapprox \gamma_0 R_0
@@ -157,19 +181,21 @@ Since $k_\nu^\gamma>0$ (every resource is at least consumed by one species), the
 This says that systems where the ratio $\frac{\#\text{number of species that release to me}}{\#\text{number of species that consume me}}$ is large for every resource are more feasible. The strategy should be then to have $\gamma$'s that have large $\deg(G,\nu)$ (\ie resources are consumed by many species) and large $\deg(G,i)$ (\ie species consume a lot of species), and the other way around for $\alpha$ (not sure about this for the last one).
 
 \subsubsection{Combining both conditions}
-The two upper bounds Eqs.\eqref{eq : feasability biomass conservation}-\eqref{eq : feasability positivity d} on $\alpha_0$ can be combined in a single inequality :
+The two upper bounds Eqs.\eqref{eq: feasability energy conservation}-\eqref{eq : feasability positivity d} on $\alpha_0$ can be combined in a single inequality :
 \begin{equation} \label{eq : largest feasible alpha0 with structure}
-\max_i{\frac{\deg(A,i)}{\deg(G,i)}} \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
+\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
 \end{equation}
-Note that when $\alpha_0 > 0$, we will trivially require that the syntrophy matrix is not empty, \ie there exists at least an $i$ for which $\deg(A,i) \geq 1$. Note also that the largest value $\deg(G,i)$ can get (for any $i$) is $N_R$. Hence,
+Note that when $\alpha_0 > 0$, we will trivially require that the syntrophy matrix is not empty, \ie there exists at least an $i$ for which $\deg(A,i) \geq 1$. Also, the largest value $\deg(G,i)$ can get (for any $i$) is $N_R$. Hence,
 \begin{equation}
 \max_i\left\{ \frac{\deg(A,i)}{\deg(G,i)} \right\} \geq \frac{1}{N_R},
 \end{equation}
-and we can find a largest allowed theoretical non-zero $\alpha_0$ :
+and we can find the largest allowed theoretical non-zero $\alpha_0$ :
 \begin{equation}
+\boxed{
 \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 N_R. \label{eq : largest feasible alpha0}
+}
 \end{equation}
-Finally, Eq.\eqref{eq : largest feasible alpha0 with structure} and \eqref{eq : feasability positivity m} can be combined into a single one, which gives us the volume of the metaparameters space that make the system feasible:
+Finally, Eq.\eqref{eq : feasability positivity m} and \eqref{eq : largest feasible alpha0 with structure} can be combined into a single one, which characterises the fully feasible region $\mathcal{F}^{G,A}_1$:
 \begin{equation}
 \boxed{
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0
@@ -370,40 +396,5 @@ Finally, Eq.\eqref{eq : largest feasible alpha0 with structure} and \eqref{eq : 
 % \end{empheq}
 % This means if $\sigma_0 \leq \frac{1}{2}$, the limiting factor will be system feasability while if $\sigma_0 \geq \frac{1}{2}$, it will be energy conservation.
 
-\subsection{Algorithmic procedure}\label{sec : feasibility methods algorithmic procedure}
-We hereby detail the procedure used to numerically build feasible systems. It goes like this:
-\begin{enumerate}
-  \item We first draw randomly each $R^*_\nu$
-  and $S^*_i$ from a uniform distribution of mean equal to the corresponding metaparameter, \ie :
-  \begin{equation}
-     R^*_\nu = \mathcal{R} \ \forall \nu=1, \dots, N_R\text{ and }  S^*_i = \mathcal{S} \ \forall i=1, \dots, N_S,
-  \end{equation}
-  where $\mathcal{R}$ and $\mathcal{S}$ are random variables coming from a distribution of mean equal to the corresponding metaparameter and relative standard deviation\footnote{By relative standard deviation, we mean the standard deviation measured in units of the average value.} $\epsilon$. In our simulations, we chose uniform distributions :
-  \begin{equation}
-  \mathcal{R} \sim \text{Unif}(R_0, \epsilon) \text{ and } \mathcal{S} \sim \text{Unif}(S_0, \epsilon).
-  \end{equation}
-  \item The efficiency matrix $\sigma_{i\nu}$ is then drawn similarly, from a distribution with average $\sigma_0$. In order to simplify the problem\footnote{Indeed, a non uniform $\sigma_0$ introduces instability in the system}, we will take a zero-variance à la \citeauthor{butler_stability_2018} in \cite{butler_stability_2018}, \ie all species consume resources at the same global efficiency :
-  \begin{equation}
-    \sigma_{i\nu} = \sigma_0.
-  \end{equation}
-  \item We build the consumption matrix $\gamma_{i\nu}$. Its adjacency matrix $G$ is loaded through a user-provided file.
-  %$G$ is a binary matrix given by the user (in the \code{configuration.in} file) and is defined as the adjacency matrix of the consumption network (\ie it tells which species eats which resource). We then build $\gamma$ with the same network structure as $F$ (\ie both matrices have the same zero elements).
-  While $G$ gives the structure of $\gamma$, \ie if a given $\gamma_{i\nu}$ is zero or not, the actual values of $\gamma_{i\nu}$ need then to be determined. They are drawn from a uniform distribution of mean $\gamma_0$ and relative standard deviation $\epsilon$:
-  \begin{equation}
-    \gamma_{i\nu} = \text{Unif}(\gamma_0, \epsilon) G_{i\nu}.
-  \end{equation}
-  \item We draw the resources external feeding rates, similarly to the other parameters :
-  \begin{equation}
-  l_\mu = \text{Unif}(l_0, \epsilon) \ \forall \mu=1, \dots, N_R.
-  \end{equation}
-  \item The last free parameter is the syntrophy matrix $\alpha_{\nu i}$, the $d_i$ and $l_\mu$ are determined through the equations of evolution at equilibrium. This is the tricky part of the algorithm because $\alpha$ has to follow three constraints, namely energy conservation/dissipation Eq.\eqref{eq : dissipation constraint} and positiveness of $d_i$ and $l_\mu$ [\textbf{insert reference to equation}]. The general strategy is to choose the metaparameters in a way that these constraints should \textit{almost always} be satisfied, \ie we pick metaparameters that follow the feasibility constraint Eq.\eqref{eq : overall feasibility constraint metaparameters}. The adjacency matrix $A$ of $\alpha$ needs then to be specified. At the moment, it can be chosen in three different ways : fully connected, or in a way that no resource eaten by a given species can be released by that same species (\ie $G_{i\mu}>0 \iff A_{\mu i}=0$) or by a user provided matrix. After the adjacency matrix is loaded, we can build $\alpha$ from a uniform distribution of mean $\alpha_0$ and relative standard deviation $\epsilon$:
-  \begin{equation}
-    \alpha_{\nu i} = \text{Unif}(\alpha_0, \epsilon) A_{\nu i} .
-  \end{equation}
-  %\item We build $\tau_{\nu i}$. It usually is equal to $\alpha_{\nu i}$ or 0.
-  \item With all of these parameters drawn, we can solve Eq.\eqref{eq : equilibrium species} for the species death rate $d_i$.
-  \item We solve Eq.\eqref{eq : equilibrium resources} for $m_\nu$. All the parameters of the model are now fully determined.
-  \item We check if the constraints Eq.\textbf{(insert reference)} on the parameters are fulfilled. If they are not, we go back to step 1. Otherwise, we can exist the algorithm, a feasible system has been built.
-\end{enumerate}
 
 \end{document}

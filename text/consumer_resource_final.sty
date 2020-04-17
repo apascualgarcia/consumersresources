@@ -36,7 +36,8 @@
     url=false,
     doi=true,
     eprint=false,
-    sorting=none]{biblatex}
+    sorting=none,
+    sortcites]{biblatex}
 \addbibresource{sources.bib}
 
 \captionsetup{font=it, size=small}
@@ -68,6 +69,8 @@
 \newcommand{\evaluatedat}[1]{\bigg\rvert_{#1}}
 \newcommand{\bigO}{\mathcal{O}}
 \newcommand{\av}[1]{\langle #1 \rangle}
+\RequirePackage{bbm}
+\newcommand{\identity}[1]{\ensuremath\mathbbm{1}_{#1}}
 
 
 \newcommand{\Beta}{\text{B}}

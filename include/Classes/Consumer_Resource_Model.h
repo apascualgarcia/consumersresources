@@ -88,6 +88,9 @@ public:
   nmatrix get_Beta_matrix(unsigned int eq_number=0) const;
   nmatrix get_Gamma_matrix(unsigned int eq_number=0) const;
 
+  /* gives back binary biomass flux network */
+  nmatrix get_biomass_flux_network() const;
+
   /* FLUXES PART */
   /* FLUXES FOR RESOURCES */
   /* environmental input biomass flux for resource mu */

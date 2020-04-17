@@ -943,3 +943,27 @@ bool CRModel::is_feasible() const{
   }
   return true;
 }
+
+nmatrix CRModel::get_biomass_flux_network()const{
+  unsigned int NS = this->metaparameters->NS;
+  unsigned int NR = this->metaparameters->NR;
+
+  nmatrix gamma = this->get_parameter_set()->gamma;
+  nmatrix alpha = this->get_parameter_set()->alpha;
+
+  nmatrix f_network(NS+NR, nvector(NS+NR, 0.));
+
+  // the only non-zero blocks are the outer diagonal blocks
+  for(size_t mu=0; mu < NR; ++mu){
+    for(size_t i=0; i < NS; ++i){
+      if(gamma[i][mu]>0){
+          f_network[mu][i+NR] = 1.;
+      }
+      if(alpha[mu][i]>0){
+        f_network[i+NR][mu] = 1.;
+      }
+    }
+  }
+
+  return f_network;
+}

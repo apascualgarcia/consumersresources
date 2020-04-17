@@ -6,6 +6,7 @@ import numpy as np
 from os import listdir
 
 CORES=int(sys.argv[1])
+
 LOG_NAME='logs/structural_stability_computations_core'
 
 command = 'build/compute_critical_Delta'
@@ -13,7 +14,9 @@ command = 'build/compute_critical_Delta'
 # first get all the config files we have to run
 config_folder = 'config/structural_stability'
 folders=['common_max_syntrophies', 'maximal_own_syntrophies', 'no_syntrophy']
-
+if(len(sys.argv)>1):
+    folders=[sys.argv[2]]
+    
 files = []
 config_paths=[config_folder+'/'+a for a in folders]
 for c in config_paths:

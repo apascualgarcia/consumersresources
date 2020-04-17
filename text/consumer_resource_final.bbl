@@ -19,13 +19,16 @@
 
 \refsection{0}
   \sortlist[entry]{none/global/}
-    \entry{jogalekar_physicists_nodate}{online}{}
+    \entry{jogalekar_physicists_nodate}{misc}{}
       \name{author}{1}{}{%
         {{hash=882be0f09c1d72afacd8753d01a84ba9}{%
            family={Jogalekar},
            familyi={J\bibinitperiod},
            given={Ashutosh},
            giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
       }
       \strng{namehash}{882be0f09c1d72afacd8753d01a84ba9}
       \strng{fullhash}{882be0f09c1d72afacd8753d01a84ba9}
@@ -36,10 +39,9 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{,}
-      \field{langid}{english}
+      \field{journaltitle}{Scientific American Blog Network}
       \field{note}{Library Catalog: blogs.scientificamerican.com}
-      \field{title}{Physicists in Biology; And Other Quirks of the Genomic Age}
-      \field{titleaddon}{Scientific American Blog Network}
+      \field{title}{Physicists in {Biology}; {And} {Other} {Quirks} of the {Genomic} {Age}}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
@@ -70,9 +72,8 @@
       \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{What is Life? The Physical Aspect of the Living Cell}
+      \field{title}{What is {Life}? {The} {Physical} {Aspect} of the {Living} {Cell}}
       \field{year}{1944}
-      \field{dateera}{ce}
     \endentry
     \entry{chan_protein_1993}{article}{}
       \name{author}{2}{}{%
@@ -87,6 +88,9 @@
            given={Ken\bibnamedelima A},
            giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{6fe02d7b6941a41f3dc1142429dad6fb}
       \strng{fullhash}{6fe02d7b6941a41f3dc1142429dad6fb}
       \strng{authornamehash}{6fe02d7b6941a41f3dc1142429dad6fb}
@@ -95,10 +99,8 @@
       \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{langid}{english}
-      \field{title}{The Protein Folding Problem}
+      \field{title}{The {Protein} {Folding} {Problem}}
       \field{year}{1993}
-      \field{dateera}{ce}
       \field{pages}{10}
       \range{pages}{1}
       \verb{file}
@@ -118,6 +120,9 @@
            given={P.},
            giveni={P\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{6ed3a25c887efe984797d73fa546e7f4}
       \strng{fullhash}{6ed3a25c887efe984797d73fa546e7f4}
       \strng{authornamehash}{6ed3a25c887efe984797d73fa546e7f4}
@@ -126,20 +131,16 @@
       \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{day}{9}
       \field{issn}{0027-8424, 1091-6490}
       \field{journaltitle}{Proceedings of the National Academy of Sciences}
-      \field{langid}{english}
       \field{month}{9}
       \field{number}{36}
-      \field{shortjournal}{Proceedings of the National Academy of Sciences}
       \field{title}{The transition between the niche and neutral regimes in ecology}
       \field{urlday}{8}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{111}
       \field{year}{2014}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{13111\bibrangedash 13116}
       \range{pages}{6}
@@ -211,6 +212,9 @@
            given={Massimiliano},
            giveni={M\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{b8f7014f53877244f1bb3b73aad47750}
       \strng{fullhash}{17ce05e2254912cf8a6eeb67db27e121}
       \strng{authornamehash}{b8f7014f53877244f1bb3b73aad47750}
@@ -221,17 +225,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{1745-2473, 1745-2481}
       \field{journaltitle}{Nature Physics}
-      \field{langid}{english}
       \field{month}{9}
       \field{number}{9}
-      \field{shortjournal}{Nature Phys}
       \field{title}{Information transfer and behavioural inertia in starling flocks}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{10}
       \field{year}{2014}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{691\bibrangedash 696}
       \range{pages}{6}
@@ -273,6 +274,9 @@
            given={Jeffrey\bibnamedelima I.},
            giveni={J\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{93075a7ba2ee446735a72c8f2a357783}
       \strng{fullhash}{70aa31366fbffad5da65bd945b120a7f}
       \strng{authornamehash}{93075a7ba2ee446735a72c8f2a357783}
@@ -281,13 +285,11 @@
       \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
-      \field{abstract}{In this Analysis we use published 16S ribosomal {RNA} gene sequences to compare the bacterial assemblages that are associated with humans and other mammals, metazoa and free-living microbial communities that span a range of environments. The composition of the vertebrate gut microbiota is influenced by diet, host morphology and phylogeny, and in this respect the human gut bacterial community is typical of an omnivorous primate. However, the vertebrate gut microbiota is different from free-living communities that are not associated with animal body habitats. We propose that the recently initiated international Human Microbiome Project should strive to include a broad representation of humans, as well as other mammalian and environmental samples, as comparative analyses of microbiotas and their microbiomes are a powerful way to explore the evolutionary history of the biosphere.}
+      \field{abstract}{In this Analysis we use published 16S ribosomal RNA gene sequences to compare the bacterial assemblages that are associated with humans and other mammals, metazoa and free-living microbial communities that span a range of environments. The composition of the vertebrate gut microbiota is influenced by diet, host morphology and phylogeny, and in this respect the human gut bacterial community is typical of an omnivorous primate. However, the vertebrate gut microbiota is different from free-living communities that are not associated with animal body habitats. We propose that the recently initiated international Human Microbiome Project should strive to include a broad representation of humans, as well as other mammalian and environmental samples, as comparative analyses of microbiotas and their microbiomes are a powerful way to explore the evolutionary history of the biosphere.}
       \field{issn}{1740-1526, 1740-1534}
       \field{journaltitle}{Nature Reviews Microbiology}
-      \field{langid}{english}
       \field{month}{10}
       \field{number}{10}
-      \field{shortjournal}{Nat Rev Microbiol}
       \field{shorttitle}{Worlds within worlds}
       \field{title}{Worlds within worlds: evolution of the vertebrate gut microbiota}
       \field{urlday}{2}
@@ -295,7 +297,6 @@
       \field{urlyear}{2020}
       \field{volume}{6}
       \field{year}{2008}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{776\bibrangedash 788}
       \range{pages}{13}
@@ -342,6 +343,9 @@
            given={Olga\bibnamedelima C.},
            giveni={O\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{9a1ee38366e133465f050b5ed5b2e0ce}
       \strng{fullhash}{9001679ea483ec4629fdac391b91a656}
       \strng{authornamehash}{9a1ee38366e133465f050b5ed5b2e0ce}
@@ -353,17 +357,14 @@
       \field{abstract}{The reuse of treated wastewater, in particular for irrigation, is an increasingly common practice, encouraged by governments and ofﬁcial entities worldwide. Irrigation with wastewater may have implications at two different levels: alter the physicochemical and microbiological properties of the soil and/or introduce and contribute to the accumulation of chemical and biological contaminants in soil. The ﬁrst may affect soil productivity and fertility; the second may pose serious risks to the human and environmental health. The sustainable wastewater reuse in agriculture should prevent both types of effects, requiring a holistic and integrated risk assessment. In this article we critically review possible effects of irrigation with treated wastewater, with special emphasis on soil microbiota. The maintenance of a rich and diversiﬁed autochthonous soil microbiota and the use of treated wastewater with minimal levels of potential soil contaminants are proposed as sine qua non conditions to achieve a sustainable wastewater reuse for irrigation.}
       \field{issn}{01604120}
       \field{journaltitle}{Environment International}
-      \field{langid}{english}
       \field{month}{2}
-      \field{shortjournal}{Environment International}
       \field{shorttitle}{Wastewater reuse in irrigation}
-      \field{title}{Wastewater reuse in irrigation: A microbiological perspective on implications in soil fertility and human and environmental health}
+      \field{title}{Wastewater reuse in irrigation: {A} microbiological perspective on implications in soil fertility and human and environmental health}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{75}
       \field{year}{2015}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{117\bibrangedash 135}
       \range{pages}{19}
@@ -385,6 +386,9 @@
            given={P.\bibnamedelimi G.},
            giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{04aa4894c8ab24f59aa58a629092a890}
       \strng{fullhash}{04aa4894c8ab24f59aa58a629092a890}
       \strng{authornamehash}{04aa4894c8ab24f59aa58a629092a890}
@@ -393,18 +397,15 @@
       \field{sortinithash}{2999ebab86052e6d71b434385f8b4ed2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{day}{10}
       \field{journaltitle}{Science}
-      \field{langid}{english}
       \field{month}{7}
       \field{number}{5374}
-      \field{title}{Biogeochemical Controls and Feedbacks on Ocean Primary Production}
+      \field{title}{Biogeochemical {Controls} and {Feedbacks} on {Ocean} {Primary} {Production}}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{281}
       \field{year}{1998}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{200\bibrangedash 206}
       \range{pages}{7}
@@ -426,6 +427,9 @@
            given={A\bibnamedelima J},
            giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {eng}%
+      }
       \strng{namehash}{bdfd4811eff5b3a5470e6f6c3ab685e8}
       \strng{fullhash}{bdfd4811eff5b3a5470e6f6c3ab685e8}
       \strng{authornamehash}{bdfd4811eff5b3a5470e6f6c3ab685e8}
@@ -434,23 +438,17 @@
       \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprinttype}{pubmed}
       \field{issn}{0027-8424}
       \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
       \field{month}{7}
       \field{number}{7}
-      \field{shortjournal}{Proc Natl Acad Sci U S A}
-      \field{title}{Analytical Note on Certain Rhythmic Relations in Organic Systems}
+      \field{title}{Analytical {Note} on {Certain} {Rhythmic} {Relations} in {Organic} {Systems}}
       \field{volume}{6}
       \field{year}{1920}
-      \field{dateera}{ce}
       \field{pages}{410\bibrangedash 415}
       \range{pages}{6}
       \verb{doi}
       \verb 10.1073/pnas.6.7.410
-      \endverb
-      \verb{eprint}
-      \verb 16576509
       \endverb
       \verb{file}
       \verb pnas01916-0016.pdf:/Users/leobuchenelepfl/Zotero/storage/MV54BMVK/pnas01916-0016.pdf:application/pdf
@@ -477,6 +475,9 @@
            given={Wenying},
            giveni={W\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{8a1880f4f4a08600394de87176e87bd3}
       \strng{fullhash}{8a1880f4f4a08600394de87176e87bd3}
       \strng{authornamehash}{8a1880f4f4a08600394de87176e87bd3}
@@ -486,18 +487,15 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Pairwise models are commonly used to describe many-species communities. In these models, an individual receives additive fitness effects from pairwise interactions with each species in the community ('additivity assumption'). All pairwise interactions are typically represented by a single equation where parameters reflect signs and strengths of fitness effects ('universality assumption'). Here, we show that a single equation fails to qualitatively capture diverse pairwise microbial interactions. We build mechanistic reference models for two microbial species engaging in commonly-found chemical-mediated interactions, and attempt to derive pairwise models. Different equations are appropriate depending on whether a mediator is consumable or reusable, whether an interaction is mediated by one or more mediators, and sometimes even on quantitative details of the community (e.g. relative fitness of the two species, initial conditions). Our results, combined with potential violation of the additivity assumption in many-species communities, suggest that pairwise modeling will often fail to predict microbial dynamics. , From the soil to our body, microbes, such as bacteria, are everywhere and affect us in many ways. Many microbes perform important roles in natural environments and for our health, but some of them can cause harm and lead to diseases. Often, microbes affect and interact with each other within large groups or communities. Because of their widespread ramifications, it is important to understand how microbial communities work. In addition to experiments, mathematical modeling offers one way to gain insight into the dynamics of microbial communities. A model commonly used to describe the interactions between organisms is the so-called ‘pairwise model’. Pairwise models can be useful to predict the dynamics of a community in which two species physically interact, such as a predator-prey community. However, it was unknown if this model was suitable to adequately predict the dynamics of microbial species in communities. Microbes often interact via chemicals that diffuse in the environment. For example, one microbe might provide food for another microbe or release toxins to kill it. However, a pairwise model does not consider food or toxins, but only how one microbe stimulates or inhibits the growth of another. Momeni et al. simulated different scenarios commonly found in microbial communities to test whether a pairwise model could capture how, for example, chemicals released by one bacterial species would either help others to grow or stop them from growing. The results showed that for many scenarios, pairwise models cannot qualitatively represent the dynamics of a microbial community. A next step will be to work on the limitations of current experimental technologies and mathematical models to improve the understanding of microbial communities. This knowledge could be used to develop new strategies for ecosystem engineering, such as for example making soils more fertile to improve crop yields, or tackling antibiotic resistance of bacteria.}
-      \field{day}{28}
       \field{issn}{2050-084X}
-      \field{journaltitle}{{eLife}}
-      \field{langid}{english}
+      \field{journaltitle}{eLife}
       \field{month}{3}
-      \field{title}{Lotka-Volterra pairwise modeling fails to capture diverse pairwise microbial interactions}
+      \field{title}{Lotka-{Volterra} pairwise modeling fails to capture diverse pairwise microbial interactions}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{6}
       \field{year}{2017}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{e25051}
       \range{pages}{-1}
@@ -519,6 +517,9 @@
            given={James\bibnamedelima P.},
            giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{aee56d172d9e69703a6d62e1296062ff}
       \strng{fullhash}{aee56d172d9e69703a6d62e1296062ff}
       \strng{authornamehash}{aee56d172d9e69703a6d62e1296062ff}
@@ -530,18 +531,15 @@
       \field{abstract}{Competition in ecology is often modeled in terms of direct, negative effects of one individual on another. An example is logistic growth, modeling the effects of intraspecific competition, while the Lotka-Volterra equations for competition extend this to systems of multiple species, with varying strengths of intra- and interspecific competition. These equations are a classic and well-used staple of quantitative ecology, providing a framework to understand species interactions, species coexistence, and community assembly. They can be derived from an assumption of random mixing of organisms, and an outcome of each interaction that removes one or more individuals. However, this framing is somewhat unsatisfactory, and ecologists may prefer to think of phenomenological equations for competition as deriving from competition for a set of resources required for growth, which in turn may undergo their own complex dynamics. While it is intuitive that these frameworks are connected, and the connection is well-understood near to equilibria, here, we ask the question: when can consumer dynamics alone become an exact description of a full system of consumers and resources? We identify that consumer-resource systems with this property must have some kind of redundancy in the original description, or equivalently there is one or more conservation laws for quantities that do not change with time. Such systems are known in mathematics as integrable systems. We suggest that integrability in consumer-resource dynamics can only arise in cases where each species in an assemblage requires a distinct and unique combination of resources, and even in these cases, it is not clear that the resulting dynamics will lead to Lotka-Volterra competition.}
       \field{issn}{1874-1738, 1874-1746}
       \field{journaltitle}{Theoretical Ecology}
-      \field{langid}{english}
       \field{month}{12}
       \field{number}{4}
-      \field{shortjournal}{Theor Ecol}
-      \field{shorttitle}{Whence Lotka-Volterra?}
-      \field{title}{Whence Lotka-Volterra?: Conservation laws and integrable systems in ecology}
+      \field{shorttitle}{Whence {Lotka}-{Volterra}?}
+      \field{title}{Whence {Lotka}-{Volterra}?: {Conservation} laws and integrable systems in ecology}
       \field{urlday}{8}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{11}
       \field{year}{2018}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{441\bibrangedash 452}
       \range{pages}{12}
@@ -558,10 +556,13 @@
     \entry{macarthur_species_1970}{article}{}
       \name{author}{1}{}{%
         {{hash=bed9bb26676e78f0daeb1e48c9abee1f}{%
-           family={{MacArthur}},
+           family={MacArthur},
            familyi={M\bibinitperiod},
            given={Robert},
            giveni={R\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
       }
       \strng{namehash}{bed9bb26676e78f0daeb1e48c9abee1f}
       \strng{fullhash}{bed9bb26676e78f0daeb1e48c9abee1f}
@@ -573,17 +574,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{00405809}
       \field{journaltitle}{Theoretical Population Biology}
-      \field{langid}{english}
       \field{month}{5}
       \field{number}{1}
-      \field{shortjournal}{Theoretical Population Biology}
       \field{title}{Species packing and competitive equilibrium for many species}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{1}
       \field{year}{1970}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{1\bibrangedash 11}
       \range{pages}{11}
@@ -610,6 +608,9 @@
            given={Nicholas},
            giveni={N\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{6b3754d0a5ec54ddd70810d6c594ca67}
       \strng{fullhash}{6b3754d0a5ec54ddd70810d6c594ca67}
       \strng{authornamehash}{6b3754d0a5ec54ddd70810d6c594ca67}
@@ -619,29 +620,22 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Personalized models of the gut microbiome are valuable for disease prevention and treatment. For this, one requires a mathematical model that predicts microbial community composition and the emergent behavior of microbial communities. We seek a modeling strategy that can capture emergent behavior when built from sets of universal individual interactions. Our investigation reveals that species-metabolite interaction modeling is better able to capture emergent behavior in community composition dynamics than direct species-species modeling.}
-      \field{day}{31}
-      \field{eprinttype}{arxiv}
       \field{issn}{1742-5689, 1742-5662}
       \field{journaltitle}{Journal of The Royal Society Interface}
-      \field{langid}{english}
       \field{month}{10}
+      \field{note}{arXiv: 1907.04436}
       \field{number}{159}
-      \field{shortjournal}{J. R. Soc. Interface}
       \field{title}{Metabolite mediated modeling of microbial community dynamics captures emergent behavior more effectively than species-species modeling}
       \field{urlday}{2}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{16}
       \field{year}{2019}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{20190423}
       \range{pages}{1}
       \verb{doi}
       \verb 10.1098/rsif.2019.0423
-      \endverb
-      \verb{eprint}
-      \verb 1907.04436
       \endverb
       \verb{file}
       \verb Brunner and Chia - 2019 - Metabolite mediated modeling of microbial communit.pdf:/Users/leobuchenelepfl/Zotero/storage/TMW899BC/Brunner and Chia - 2019 - Metabolite mediated modeling of microbial communit.pdf:application/pdf
@@ -674,6 +668,9 @@
            given={Christine},
            giveni={C\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{3cde91b4a46306c8bdd28ae1c02a938a}
       \strng{fullhash}{2ab1220823273fa76654c3c752ea969a}
       \strng{authornamehash}{3cde91b4a46306c8bdd28ae1c02a938a}
@@ -684,11 +681,9 @@
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{Classical deﬁnitions of syntrophy focus on a process, performed through metabolic interaction between dependent microbial partners, such as the degradation of complex organic compounds under anoxic conditions. However, examples from past and current scientiﬁc discoveries suggest that a new, simple but wider deﬁnition is necessary to cover all aspects of microbial syntrophy. We suggest the term ‘obligately mutualistic metabolism’, which still focuses on microbial metabolic cooperation but also includes an ecological aspect: the beneﬁt for both partners. By the combined metabolic activity of microorganisms, endergonic reactions can become exergonic through the efﬁcient removal of products and therefore enable a microbial community to survive with minimal energy resources. Here, we explain the principles of classical and non-classical syntrophy and illustrate the concepts with various examples. We present biochemical fundamentals that allow microorganism to survive under a range of environmental conditions and to drive important biogeochemical processes. Novel technologies have contributed to the understanding of syntrophic relationships in cultured and uncultured systems. Recent research highlights that obligately mutualistic metabolism is not limited to certain metabolic pathways nor to certain environments or microorganisms. This beneﬁcial microbial interaction is not restricted to the transfer of reducing agents such as hydrogen or formate, but can also involve the exchange of organic, sulfurous- and nitrogenous compounds or the removal of toxic compounds.}
       \field{issn}{1574-6976}
-      \field{journaltitle}{{FEMS} Microbiology Reviews}
-      \field{langid}{english}
+      \field{journaltitle}{FEMS Microbiology Reviews}
       \field{month}{5}
       \field{number}{3}
-      \field{shortjournal}{{FEMS} Microbiol Rev}
       \field{shorttitle}{Microbial syntrophy}
       \field{title}{Microbial syntrophy: interaction for the common good}
       \field{urlday}{2}
@@ -696,7 +691,6 @@
       \field{urlyear}{2020}
       \field{volume}{37}
       \field{year}{2013}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{384\bibrangedash 406}
       \range{pages}{23}
@@ -728,6 +722,9 @@
            given={Bernhard\bibnamedelima Ø},
            giveni={B\bibinitperiod\bibinitdelim Ø\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{eb5f2d33b4b6ec47499374abc65cb7cc}
       \strng{fullhash}{eb5f2d33b4b6ec47499374abc65cb7cc}
       \strng{authornamehash}{eb5f2d33b4b6ec47499374abc65cb7cc}
@@ -738,17 +735,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{1087-0156, 1546-1696}
       \field{journaltitle}{Nature Biotechnology}
-      \field{langid}{english}
       \field{month}{3}
       \field{number}{3}
-      \field{shortjournal}{Nat Biotechnol}
       \field{title}{What is flux balance analysis?}
       \field{urlday}{29}
       \field{urlmonth}{3}
       \field{urlyear}{2020}
       \field{volume}{28}
       \field{year}{2010}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{245\bibrangedash 248}
       \range{pages}{4}
@@ -802,6 +796,9 @@
            given={Tamir},
            giveni={T\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{76b0eb45280b7480d402ac1b7a0e78af}
       \strng{fullhash}{367ef7c83fedaf32c93f9e5b2ebb70e0}
       \strng{authornamehash}{76b0eb45280b7480d402ac1b7a0e78af}
@@ -813,20 +810,16 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Background Biological processes such as metabolism, signaling, and macromolecular synthesis can be modeled as large networks of biochemical reactions. Large and comprehensive networks, like Metabolic-Expression networks that explicitly accounts for the demands of macromolecular synthesis at single nucleotide resolution, are inherently multiscale because reaction rates can vary over many orders of magnitude. Naively using standard optimization systems to conduct ﬂux balance analysis can produce inaccurate or infeasible results. Results We describe lifting techniques that enable oﬀ-the-shelf optimization software to compute accurate solutions to the poorly scaled optimization problems arising from ﬂux balance analysis of multiscale biochemical reaction networks. We demonstrate the beneﬁts of lifting using the ﬁrst integrated reconstruction of metabolism and macromolecular synthesis for E. coli. Conclusion Lifting techniques enable accurate ﬂux balance analysis of multiscale networks using oﬀ-the-shelf optimization software. Although we describe these techniques in the context of ﬂux balance analysis, our methods can be used to handle a variety of optimization problems arising from analysis of multiscale network reconstructions.}
-      \field{day}{28}
       \field{issn}{1932-6203}
-      \field{journaltitle}{{PLoS} {ONE}}
-      \field{langid}{english}
+      \field{journaltitle}{PLoS ONE}
       \field{month}{9}
       \field{number}{9}
-      \field{shortjournal}{{PLoS} {ONE}}
-      \field{title}{Multiscale Modeling of Metabolism and Macromolecular Synthesis in E. coli and Its Application to the Evolution of Codon Usage}
+      \field{title}{Multiscale {Modeling} of {Metabolism} and {Macromolecular} {Synthesis} in {E}. coli and {Its} {Application} to the {Evolution} of {Codon} {Usage}}
       \field{urlday}{3}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{7}
       \field{year}{2012}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{e45635}
       \range{pages}{-1}
@@ -848,6 +841,9 @@
            given={T\bibnamedelima W},
            giveni={T\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{129572377fd38eeae84cffd412522500}
       \strng{fullhash}{129572377fd38eeae84cffd412522500}
       \strng{authornamehash}{129572377fd38eeae84cffd412522500}
@@ -858,17 +854,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{0066-4227, 1545-3251}
       \field{journaltitle}{Annual Review of Microbiology}
-      \field{langid}{english}
       \field{month}{10}
       \field{number}{1}
-      \field{shortjournal}{Annu. Rev. Microbiol.}
-      \field{title}{Continuous Culture of Microorganisms}
+      \field{title}{Continuous {Culture} of {Microorganisms}}
       \field{urlday}{29}
       \field{urlmonth}{3}
       \field{urlyear}{2020}
       \field{volume}{15}
       \field{year}{1961}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{27\bibrangedash 46}
       \range{pages}{20}
@@ -895,6 +888,9 @@
            given={Ugo},
            giveni={U\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{429041643207998cd41b4976d516eb94}
       \strng{fullhash}{429041643207998cd41b4976d516eb94}
       \strng{authornamehash}{429041643207998cd41b4976d516eb94}
@@ -905,17 +901,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{2041-1723}
       \field{journaltitle}{Nature Communications}
-      \field{langid}{english}
       \field{month}{4}
       \field{number}{1}
-      \field{shortjournal}{Nat Commun}
       \field{title}{Mutualism supports biodiversity when the direct competition is weak}
       \field{urlday}{8}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{8}
       \field{year}{2017}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{14326}
       \range{pages}{1}
@@ -942,6 +935,9 @@
            given={James\bibnamedelima P.},
            giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{25f5f646a41153be48d49e5e473ced6e}
       \strng{fullhash}{25f5f646a41153be48d49e5e473ced6e}
       \strng{authornamehash}{25f5f646a41153be48d49e5e473ced6e}
@@ -952,17 +948,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{2041-1723}
       \field{journaltitle}{Nature Communications}
-      \field{langid}{english}
       \field{month}{12}
       \field{number}{1}
-      \field{shortjournal}{Nat Commun}
       \field{title}{Stability criteria for complex microbial communities}
       \field{urlday}{17}
       \field{urlmonth}{2}
       \field{urlyear}{2020}
       \field{volume}{9}
       \field{year}{2018}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{2970}
       \range{pages}{1}
@@ -989,6 +982,9 @@
            given={Andrea},
            giveni={A\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \list{location}{1}{%
         {Cham}%
       }
@@ -1004,15 +1000,13 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-3-319-03025-8 978-3-319-03026-5}
-      \field{langid}{english}
       \field{series}{{UNITEXT}}
-      \field{title}{An Introduction to Mathematical Population Dynamics}
+      \field{title}{An {Introduction} to {Mathematical} {Population} {Dynamics}}
       \field{urlday}{10}
       \field{urlmonth}{3}
       \field{urlyear}{2020}
       \field{volume}{79}
       \field{year}{2014}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{doi}
       \verb 10.1007/978-3-319-03026-5
@@ -1057,6 +1051,9 @@
            given={Jordi},
            giveni={J\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{75de2a38c3715e256f02efb65dfafb7a}
       \strng{fullhash}{6dc008f65c0c21486b6076bcdc1b1437}
       \strng{authornamehash}{75de2a38c3715e256f02efb65dfafb7a}
@@ -1067,17 +1064,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{0028-0836, 1476-4687}
       \field{journaltitle}{Nature}
-      \field{langid}{english}
       \field{month}{4}
       \field{number}{7241}
-      \field{shortjournal}{Nature}
       \field{title}{The architecture of mutualistic networks minimizes competition and increases biodiversity}
       \field{urlday}{9}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{458}
       \field{year}{2009}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{1018\bibrangedash 1020}
       \range{pages}{3}
@@ -1116,6 +1110,9 @@
            given={Yamir},
            giveni={Y\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{7992a837870655a1ea6b67f430b47df2}
       \strng{fullhash}{7992a837870655a1ea6b67f430b47df2}
       \strng{authornamehash}{7992a837870655a1ea6b67f430b47df2}
@@ -1127,20 +1124,16 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Understanding the causes and effects of network structural features is a key task in deciphering complex systems. In this context, the property of network nestedness has aroused a fair amount of interest as regards ecological networks. Indeed, Bastolla et al. introduced a simple measure of network nestedness which opened the door to analytical understanding, allowing them to conclude that biodiversity is strongly enhanced in highly nested mutualistic networks. Here, we suggest a slightly refined version of such a measure of nestedness and study how it is influenced by the most basic structural properties of networks, such as degree distribution and degree-degree correlations (i.e. assortativity). We find that most of the empirically found nestedness stems from heterogeneity in the degree distribution. Once such an influence has been discounted – as a second factor – we find that nestedness is strongly correlated with disassortativity and hence – as random networks have been recently found to be naturally disassortative – they also tend to be naturally nested just as the result of chance.}
-      \field{day}{19}
       \field{issn}{1932-6203}
-      \field{journaltitle}{{PLoS} {ONE}}
-      \field{langid}{english}
+      \field{journaltitle}{PLoS ONE}
       \field{month}{9}
       \field{number}{9}
-      \field{shortjournal}{{PLoS} {ONE}}
-      \field{title}{Factors Determining Nestedness in Complex Networks}
+      \field{title}{Factors {Determining} {Nestedness} in {Complex} {Networks}}
       \field{urlday}{26}
       \field{urlmonth}{2}
       \field{urlyear}{2020}
       \field{volume}{8}
       \field{year}{2013}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{e74025}
       \range{pages}{-1}
@@ -1156,31 +1149,28 @@
     \endentry
     \entry{may_will_1972}{article}{}
       \name{author}{1}{}{%
-        {{hash=7839dca46168bf1aadb43a80fbb62c92}{%
-           family={{MAY}},
+        {{hash=2edbcd677d559bed95b45fb57fc4ad48}{%
+           family={MAY},
            familyi={M\bibinitperiod},
-           given={{ROBERT}\bibnamedelima M.},
+           given={ROBERT\bibnamedelima M.},
            giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
       }
-      \strng{namehash}{7839dca46168bf1aadb43a80fbb62c92}
-      \strng{fullhash}{7839dca46168bf1aadb43a80fbb62c92}
-      \strng{authornamehash}{7839dca46168bf1aadb43a80fbb62c92}
-      \strng{authorfullhash}{7839dca46168bf1aadb43a80fbb62c92}
+      \strng{namehash}{2edbcd677d559bed95b45fb57fc4ad48}
+      \strng{fullhash}{2edbcd677d559bed95b45fb57fc4ad48}
+      \strng{authornamehash}{2edbcd677d559bed95b45fb57fc4ad48}
+      \strng{authorfullhash}{2edbcd677d559bed95b45fb57fc4ad48}
       \field{sortinit}{2}
       \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Gardner and Ashby1 have suggested that large complex systems which are assembled (connected) at random may be expected to be stable up to a certain critical level of connectance, and then, as this increases, to suddenly become unstable. Their conclusions were based on the trend of computer studies of systems with 4, 7 and 10 variables.}
-      \field{day}{1}
       \field{issn}{1476-4687}
       \field{journaltitle}{Nature}
       \field{month}{8}
       \field{number}{5364}
-      \field{shortjournal}{Nature}
-      \field{title}{Will a Large Complex System be Stable?}
+      \field{title}{Will a {Large} {Complex} {System} be {Stable}?}
       \field{volume}{238}
       \field{year}{1972}
-      \field{dateera}{ce}
       \field{pages}{413\bibrangedash 414}
       \range{pages}{2}
       \verb{doi}
@@ -1206,6 +1196,9 @@
            given={Si},
            giveni={S\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{217b7ff6e9a720bda68e0a12a06cf105}
       \strng{fullhash}{217b7ff6e9a720bda68e0a12a06cf105}
       \strng{authornamehash}{217b7ff6e9a720bda68e0a12a06cf105}
@@ -1215,28 +1208,22 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Forty years ago, Robert May questioned a central belief in ecology by proving that sufﬁciently large or complex ecological networks have probability of persisting close to zero. To prove this point, he analyzed large networks in which species interact at random. However, in natural systems pairs of species have well-deﬁned interactions (e.g., predator-prey, mutualistic or competitive). Here we extend May’s results to these relationships and ﬁnd remarkable differences between predator-prey interactions, which increase stability, and mutualistic and competitive, which are destabilizing. We provide analytic stability criteria for all cases. These results have broad applicability in ecology. For example, we show that, surprisingly, the probability of stability for predator-prey networks is decreased when we impose realistic food web structure or we introduce a large preponderance of weak interactions. Similarly, stability is negatively impacted by nestedness in bipartite mutualistic networks.}
-      \field{eprinttype}{arxiv}
       \field{issn}{0028-0836, 1476-4687}
       \field{journaltitle}{Nature}
-      \field{langid}{english}
       \field{month}{3}
+      \field{note}{arXiv: 1105.2071}
       \field{number}{7388}
-      \field{shortjournal}{Nature}
-      \field{title}{Stability Criteria for Complex Ecosystems}
+      \field{title}{Stability {Criteria} for {Complex} {Ecosystems}}
       \field{urlday}{8}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{483}
       \field{year}{2012}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{205\bibrangedash 208}
       \range{pages}{4}
       \verb{doi}
       \verb 10.1038/nature10832
-      \endverb
-      \verb{eprint}
-      \verb 1105.2071
       \endverb
       \verb{file}
       \verb Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/IALU4JYE/Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:application/pdf
@@ -1279,6 +1266,9 @@
            given={Amos},
            giveni={A\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{227544e0c494d31321e8a5ac09a59016}
       \strng{fullhash}{848a5cef939f17a93c604df5b757697f}
       \strng{authornamehash}{227544e0c494d31321e8a5ac09a59016}
@@ -1289,17 +1279,14 @@
       \field{labeltitlesource}{title}
       \field{issn}{2041-1723}
       \field{journaltitle}{Nature Communications}
-      \field{langid}{english}
       \field{month}{11}
       \field{number}{1}
-      \field{shortjournal}{Nat Commun}
       \field{title}{Predicting the stability of large structured food webs}
       \field{urlday}{8}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{6}
       \field{year}{2015}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{7842}
       \range{pages}{1}
@@ -1329,6 +1316,9 @@
       \list{institution}{1}{%
         {Ecology}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{e80f47da1689a3e60fa2a835b8584fbb}
       \strng{fullhash}{e80f47da1689a3e60fa2a835b8584fbb}
       \strng{authornamehash}{e80f47da1689a3e60fa2a835b8584fbb}
@@ -1338,8 +1328,6 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This article is addressed to researchers and students in theoretical ecology, as an introduction to “disordered systems” approaches from statistical physics, and how they can help understand large ecological communities. We discuss the relevance of these approaches, and how they ﬁt within the broader landscape of models in community ecology. We focus on a remarkably simple technique, the cavity method, which allows to derive the equilibrium properties of Lotka-Volterra systems. We present its predictions, the new intuitions it suggests, and its technical underpinnings. We also discuss a number of new results concerning possible extensions, including diﬀerent functional responses and community structures.}
-      \field{day}{8}
-      \field{langid}{english}
       \field{month}{6}
       \field{title}{The cavity method for community ecology}
       \field{type}{preprint}
@@ -1347,7 +1335,6 @@
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{year}{2017}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \verb{doi}
       \verb 10.1101/147728
@@ -1372,6 +1359,9 @@
            given={S.\bibnamedelimi R.},
            giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{88212615cc2e42b37cdd1196039ece5a}
       \strng{fullhash}{88212615cc2e42b37cdd1196039ece5a}
       \strng{authornamehash}{88212615cc2e42b37cdd1196039ece5a}
@@ -1380,20 +1370,16 @@
       \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{day}{6}
       \field{issn}{0036-8075, 1095-9203}
       \field{journaltitle}{Science}
-      \field{langid}{english}
       \field{month}{7}
       \field{number}{5834}
-      \field{shortjournal}{Science}
-      \field{title}{Stability and Diversity of Ecosystems}
+      \field{title}{Stability and {Diversity} of {Ecosystems}}
       \field{urlday}{8}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{317}
       \field{year}{2007}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{58\bibrangedash 62}
       \range{pages}{5}
@@ -1425,6 +1411,9 @@
            given={Chiara},
            giveni={C\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{91c71254a369e4078a4eb7b686310bbb}
       \strng{fullhash}{91c71254a369e4078a4eb7b686310bbb}
       \strng{authornamehash}{91c71254a369e4078a4eb7b686310bbb}
@@ -1434,20 +1423,16 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Any further distribution of In this work we study the stability of the equilibria reached by ecosystems formed by a large number of this work must maintain attribution to the species. The model we focus on are Lotka–Volterra equations with symmetric random interactions.}
-      \field{day}{31}
       \field{issn}{1367-2630}
       \field{journaltitle}{New Journal of Physics}
-      \field{langid}{english}
       \field{month}{8}
       \field{number}{8}
-      \field{shortjournal}{New J. Phys.}
       \field{title}{Marginally stable equilibria in critical ecosystems}
       \field{urlday}{14}
       \field{urlmonth}{1}
       \field{urlyear}{2020}
       \field{volume}{20}
       \field{year}{2018}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{083051}
       \range{pages}{1}
@@ -1466,8 +1451,11 @@
         {{hash=cf067f41eebfa71d132aeeb7386f498c}{%
            family={Perron},
            familyi={P\bibinitperiod},
-           given={{OSCAR}},
+           given={OSCAR},
            giveni={O\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {de}%
       }
       \strng{namehash}{cf067f41eebfa71d132aeeb7386f498c}
       \strng{fullhash}{cf067f41eebfa71d132aeeb7386f498c}
@@ -1477,8 +1465,7 @@
       \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{langid}{german}
-      \field{title}{Zur Theorie der Matrices}
+      \field{title}{Zur {Theorie} der {Matrices}}
       \field{pages}{16}
       \range{pages}{1}
       \verb{file}
@@ -1493,6 +1480,9 @@
            given={Philip\bibnamedelima D.},
            giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{e6f70be57b75ffdda56f443c2b9e7e65}
       \strng{fullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
       \strng{authornamehash}{e6f70be57b75ffdda56f443c2b9e7e65}
@@ -1502,21 +1492,15 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper presents a method for expressing the determinant of an N × N complex block matrix in terms of its constituent blocks. The result allows one to reduce the determinant of a matrix with N 2 blocks to the product of the determinants of N distinct combinations of single blocks. This procedure proves useful in the analytic description of physical systems with multiple discrete variables, as it provides a systematic method for evaluating determinants which might otherwise be analytically intractable.}
-      \field{day}{15}
-      \field{eprinttype}{arxiv}
-      \field{journaltitle}{{arXiv}:1112.4379 [math]}
-      \field{langid}{english}
+      \field{journaltitle}{arXiv:1112.4379 [math]}
       \field{month}{12}
-      \field{title}{Calculating Determinants of Block Matrices}
+      \field{note}{arXiv: 1112.4379}
+      \field{title}{Calculating {Determinants} of {Block} {Matrices}}
       \field{urlday}{21}
       \field{urlmonth}{3}
       \field{urlyear}{2020}
       \field{year}{2011}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
-      \verb{eprint}
-      \verb 1112.4379
-      \endverb
       \verb{file}
       \verb Powell - 2011 - Calculating Determinants of Block Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/IBHJEKET/Powell - 2011 - Calculating Determinants of Block Matrices.pdf:application/pdf
       \endverb
@@ -1533,20 +1517,21 @@
            given={Sergej},
            giveni={S\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {de}%
+      }
       \strng{namehash}{6ba497dc57e5e9c6501f3c610a4d4f76}
       \strng{fullhash}{6ba497dc57e5e9c6501f3c610a4d4f76}
       \strng{authornamehash}{6ba497dc57e5e9c6501f3c610a4d4f76}
       \strng{authorfullhash}{6ba497dc57e5e9c6501f3c610a4d4f76}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Bulletin de l'Académie des Sciences de l'{URSS}. Classe des sciences mathématiques et na}
-      \field{langid}{german}
-      \field{title}{"Uber die Abgrenzung der Eigenwerte einer Matrix}
+      \field{journaltitle}{Bulletin de l'Académie des Sciences de l'URSS. Classe des sciences mathématiques et na}
+      \field{title}{"{Uber} die {Abgrenzung} der {Eigenwerte} einer {Matrix}}
       \field{volume}{6}
       \field{year}{1931}
-      \field{dateera}{ce}
       \field{pages}{749\bibrangedash 754}
       \range{pages}{6}
       \verb{file}
@@ -1583,6 +1568,9 @@
            given={Jean-Yves},
            giveni={J\bibinithyphendelim Y\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \list{location}{1}{%
         {Cham}%
       }
@@ -1595,22 +1583,20 @@
       \strng{authorfullhash}{d0d6c52cffbe38f91adb7894454bf665}
       \strng{editornamehash}{428631794113b74d16ac1f3a6f241136}
       \strng{editorfullhash}{428631794113b74d16ac1f3a6f241136}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
-      \field{booktitle}{Handbook of Metaheuristics}
+      \field{booktitle}{Handbook of {Metaheuristics}}
       \field{isbn}{978-3-319-91085-7 978-3-319-91086-4}
-      \field{langid}{english}
       \field{note}{Series Title: International Series in Operations Research \& Management Science}
-      \field{shorttitle}{Simulated Annealing}
-      \field{title}{Simulated Annealing: From Basics to Applications}
+      \field{shorttitle}{Simulated {Annealing}}
+      \field{title}{Simulated {Annealing}: {From} {Basics} to {Applications}}
       \field{urlday}{9}
       \field{urlmonth}{3}
       \field{urlyear}{2020}
       \field{volume}{272}
       \field{year}{2019}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{1\bibrangedash 35}
       \range{pages}{35}
@@ -1637,8 +1623,11 @@
            given={Heinz},
            giveni={H\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \list{location}{1}{%
-        {Hoboken, {NJ}}%
+        {Hoboken, NJ}%
       }
       \list{publisher}{1}{%
         {Wiley}%
@@ -1653,12 +1642,9 @@
       \field{labeltitlesource}{title}
       \field{edition}{Third edition}
       \field{isbn}{978-1-119-54119-6 978-1-119-54116-5}
-      \field{langid}{english}
-      \field{pagetotal}{1}
       \field{series}{Wiley series in probability and statistics}
       \field{title}{Matrix differential calculus with applications in statistics and econometrics}
       \field{year}{2019}
-      \field{dateera}{ce}
       \verb{file}
       \verb Magnus and Neudecker - 2019 - Matrix differential calculus with applications in .pdf:/Users/leobuchenelepfl/Zotero/storage/X3Y36S9A/Magnus and Neudecker - 2019 - Matrix differential calculus with applications in .pdf:application/pdf
       \endverb
@@ -1672,28 +1658,27 @@
            given={G.},
            giveni={G\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{fullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authornamehash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authorfullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{day}{29}
       \field{issn}{0036-8075, 1095-9203}
       \field{journaltitle}{Science}
-      \field{langid}{english}
       \field{month}{4}
       \field{number}{3409}
-      \field{shortjournal}{Science}
-      \field{title}{The Competitive Exclusion Principle}
+      \field{title}{The {Competitive} {Exclusion} {Principle}}
       \field{urlday}{1}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{volume}{131}
       \field{year}{1960}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
       \field{pages}{1292\bibrangedash 1297}
       \range{pages}{6}
@@ -1720,30 +1705,27 @@
            given={Yang-Yu},
            giveni={Y\bibinithyphendelim Y\bibinitperiod}}}%
       }
+      \list{language}{1}{%
+        {en}%
+      }
       \strng{namehash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{fullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authornamehash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authorfullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Explaining biodiversity in nature is a fundamental problem in ecology. An outstanding challenge is embodied in the so-called Competitive Exclusion Principle: two species competing for one limiting resource cannot coexist at constant population densities, or more generally, the number of consumer species in steady coexistence cannot exceed that of resources. The fact that competitive exclusion is rarely observed in natural ecosystems has not been fully understood. Here we show that by forming chasing triplets among the consumers and resources in the consumption process, the Competitive Exclusion Principle can be naturally violated. The modeling framework developed here is broadly applicable and can be used to explain the biodiversity of many consumer-resource ecosystems and hence deepens our understanding of biodiversity in nature.}
-      \field{day}{15}
-      \field{eprinttype}{arxiv}
-      \field{journaltitle}{{arXiv}:1805.06002 [physics, q-bio]}
-      \field{langid}{english}
+      \field{journaltitle}{arXiv:1805.06002 [physics, q-bio]}
       \field{month}{5}
-      \field{title}{Overcome Competitive Exclusion in Ecosystems}
+      \field{note}{arXiv: 1805.06002}
+      \field{title}{Overcome {Competitive} {Exclusion} in {Ecosystems}}
       \field{urlday}{1}
       \field{urlmonth}{4}
       \field{urlyear}{2020}
       \field{year}{2019}
-      \field{dateera}{ce}
       \field{urldateera}{ce}
-      \verb{eprint}
-      \verb 1805.06002
-      \endverb
       \verb{file}
       \verb Wang and Liu - 2019 - Overcome Competitive Exclusion in Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/HMEY27F4/Wang and Liu - 2019 - Overcome Competitive Exclusion in Ecosystems.pdf:application/pdf
       \endverb
@@ -1751,6 +1733,49 @@
       \verb http://arxiv.org/abs/1805.06002
       \endverb
       \keyw{Quantitative Biology - Populations and Evolution,Physics - Biological Physics}
+    \endentry
+    \entry{thome_inequalities_2016}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c669faec0330640dd8aedfbd0742b6ac}{%
+           family={Thome},
+           familyi={T\bibinitperiod},
+           given={Néstor},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{c669faec0330640dd8aedfbd0742b6ac}
+      \strng{fullhash}{c669faec0330640dd8aedfbd0742b6ac}
+      \strng{authornamehash}{c669faec0330640dd8aedfbd0742b6ac}
+      \strng{authorfullhash}{c669faec0330640dd8aedfbd0742b6ac}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper gives simple proofs of Sylvester ( = 2) and Frobenius ( = 3) inequalities. Moreover, a new suﬃcient condition for the equality of the Frobenius inequality is provided. In addition, an extension for {>} 3 matrices and an application to generalized inverses are provided.}
+      \field{issn}{0001-9054, 1420-8903}
+      \field{journaltitle}{Aequationes mathematicae}
+      \field{month}{10}
+      \field{number}{5}
+      \field{title}{Inequalities and equalities for l = 2 ({Sylvester}), l = 3 ({Frobenius}), and l {>} 3 matrices}
+      \field{urlday}{15}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{90}
+      \field{year}{2016}
+      \field{urldateera}{ce}
+      \field{pages}{951\bibrangedash 960}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/s00010-016-0412-4
+      \endverb
+      \verb{file}
+      \verb Thome - 2016 - Inequalities and equalities for ℓ = 2 (Sylvester),.pdf:/Users/leobuchenelepfl/Zotero/storage/RKDIM5DL/Thome - 2016 - Inequalities and equalities for ℓ = 2 (Sylvester),.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/s00010-016-0412-4
+      \endverb
     \endentry
   \endsortlist
 \endrefsection

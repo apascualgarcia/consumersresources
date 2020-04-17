@@ -652,3 +652,23 @@ std::vector<unsigned int> row_degrees(const nmatrix& M){
 std::vector<unsigned int> columns_degrees(const nmatrix& M){
   return row_degrees(transpose(M));
 }
+
+ntype assortativity(const nmatrix & mat){
+  std::vector<std::array<size_t ,2>> edges;
+  unsigned int Nrows=mat.size(), Ncolumns=mat[0].size();
+  ntype ass =0.;
+  for(size_t i=0; i < Nrows; ++i){
+    for(size_t j=0; j < Ncolumns; ++j){
+      if(mat[i][j]*mat[i][j]>ZERO){
+        edges.push_back(std::array<size_t,2>({i,j}));
+        std::cout << "(" <<i << ","<< j <<")" << std::endl;
+      }
+    }
+  }
+
+  for(size_t i=0; i < edges.size();++i){
+    
+  }
+
+  return ass;
+}

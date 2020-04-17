@@ -9,7 +9,7 @@ from scipy.optimize import curve_fit
 
 import copy
 
-filename = 'feasibility/feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+filename = 'feasibility/feasibility_NR50_NS25_100_points_full_rank_opt_consumption_mat_NR50_NS25'
 optimal_LRI_folder='optimal_LRI'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 
@@ -18,7 +18,7 @@ colors = [cmap(i/10) for i in range(len(alpha0))]
 
 # FIRST LOAD DATA
 # feasibility region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the feasibility of said point
-cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+# cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
 feasibility_region = cf.load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
@@ -68,13 +68,14 @@ for j in range(len(feasibility_region[0][0])):
         nestedness=data[0,2]
         connectance=data[0,3]
         feas_volume = cf.shrink_volume_for_one_matrix(data)
-        fitted_vol, popt, pcov=cf.fit_data(cf.exponential_function, alpha0, feas_volume)
-        crit_alpha0, error=cf.zero_from_fit(cf.exponential_function, popt, pcov)
-        local_decline.append(popt[1])
-        local_critical.append(crit_alpha0)
-        ax.plot(alpha0, fitted_vol, marker='None', linestyle='solid', linewidth=2, color=alpha_mode_colours[i])
+        fit_func = cf.linear_function
+        take_zero_points = True
+        fitted_alpha0, fitted_vol, estimated_alpha_crit, estimated_vol_zero_syntrophy, estimated_decay_rate=cf.fit_shrinkage_curve(alpha0, feas_volume, fit_func, take_zero_points)
+        local_critical.append(estimated_alpha_crit)
+        local_decline.append(estimated_decay_rate)
+        ax.plot(fitted_alpha0, fitted_vol, marker='None', linestyle='solid', linewidth=2, color=alpha_mode_colours[i])
         ax.plot(alpha0, feas_volume, label=label[i], markersize=10, linestyle='None', markeredgewidth=3, color=alpha_mode_colours[i])
-    ax.set_yscale('log')
+    ax.set_yscale('linear')
     ax.set_xlabel(r'$\alpha_0$')
     ax.set_ylabel(r'Vol$(\mathcal{F}^G_1(\alpha_0))$ (normalized)')
     ax.set_ylim(-0.02,0.55)
@@ -156,7 +157,7 @@ for k in range(len(feasibility_region)):
         ax.plot(connectance[indices],critical_alpha0[k][indices], label=r'$\eta\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
     ax.set_ylim(ylim)
     ax.set_xlabel(r'Connectance $\kappa$')
-    ax.set_ylabel(r'Critical feasible syntrophy $\alpha_0^F$')
+    ax.set_ylabel(r'Critical feasible syntrophy $\alpha_C^F$')
     ax.set_title(label[k])
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     fig.tight_layout()
@@ -171,7 +172,7 @@ for k in range(len(feasibility_region)):
         ax.plot(nestedness[sorted_indices],critical_alpha0[k][sorted_indices], label=r'$\kappa\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
     ax.set_ylim(ylim)
     ax.set_xlabel(r'Ecological overlap $\eta$')
-    ax.set_ylabel(r'Critical feasible syntrophy $\alpha_0^F$')
+    ax.set_ylabel(r'Critical feasible syntrophy $\alpha_C^F$')
     ax.legend(bbox_to_anchor=(1.0, 1.0))
     ax.set_title(label[k])
     fig.tight_layout()

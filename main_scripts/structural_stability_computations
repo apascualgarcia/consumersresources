@@ -1,4 +1,6 @@
 #!/bin/bash
 
 CORES=$1
-python3 additional_scripts/run_structural_stability_computations.py $CORES
+# config file folder, leave blank for default three folders
+FOLDER='test'
+python3 additional_scripts/run_structural_stability_computations.py $CORES $FOLDER

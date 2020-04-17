@@ -18,48 +18,50 @@ colors = [cmap(i/10) for i in range(len(alpha0))]
 
 # FIRST LOAD DATA
 # local_dynamical_stability region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the local_dynamical_stability of said point
-# cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+#cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
 local_dynamical_stability_region=cf.load_data_region(alpha_mode,alpha0, filename,optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
 # Plot common local_dynamical_stability volume
-# NR=int(local_dynamical_stability_region[0,0,0,0])
-# NS=int(local_dynamical_stability_region[0,0,0,1])
-# fig, axs, im, levels=cf.plot_common_region(local_dynamical_stability_region, alpha_mode, colors, label)
-# cbar=cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
-# cbar.set_label(r'$\alpha_0$')
-# fig.suptitle(r'$\mathcal{D}_1^{S_M}$ for $N_R='+str(NR)+'$, $N_S='+str(NS)+'$')
-# plt.show()
-#
-# print("Passing to plots of local dynamical stability for each matrix ")
-# # # now we produce a colour plot for the local dynamical stability region for all the matrices listed here
-# for j in range(len(local_dynamical_stability_region[0,0])):
-#     data = local_dynamical_stability_region[:,:,j]
-#     NR=data[0,0,0]
-#     NS=data[0,0,1]
-#     nestedness=data[0,0,2]
-#     connectance=data[0,0,3]
-#
-#     fig, axs, im, levels =cf.plot_levels(data, colors, label)
-#     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
-#     # first save figure without color bar or title
-#     fig.savefig('plots/local_dynamical_stability_wt_wc_region_'+save_name+'.pdf')
-#
-#     # add color bar to plot
-#     cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
-#     cbar.set_label(r'$\alpha_0$')
-#     fig.savefig('plots/local_dynamical_stability_wt_region_'+save_name+'.pdf')
-#
-#     # add suptitle to plot
-#     fig.suptitle(r'Fully dynamically stable region $\mathcal{D}^G_{L,1}$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
-#     fig.savefig('plots/local_dynamical_stability_region_'+save_name+'.pdf')
-#
-#     plt.close()
+NR=int(local_dynamical_stability_region[0,0,0,0])
+NS=int(local_dynamical_stability_region[0,0,0,1])
+fig, axs, im, levels=cf.plot_common_region(local_dynamical_stability_region, alpha_mode, colors, label)
+cbar=cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
+cbar.set_label(r'$\alpha_0$')
+fig.suptitle(r'$\mathcal{D}_1^{S_M}$ for $N_R='+str(NR)+'$, $N_S='+str(NS)+'$')
+#plt.show()
 
+print("Passing to plots of local dynamical stability for each matrix ")
+# # now we produce a colour plot for the local dynamical stability region for all the matrices listed here
+for j in range(len(local_dynamical_stability_region[0,0])):
+    data = local_dynamical_stability_region[:,:,j]
+    NR=data[0,0,0]
+    NS=data[0,0,1]
+    nestedness=data[0,0,2]
+    connectance=data[0,0,3]
+
+    fig, axs, im, levels =cf.plot_levels(data, colors, label)
+    save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
+    # first save figure without color bar or title
+    fig.savefig('plots/local_dynamical_stability_wt_wc_region_'+save_name+'.pdf')
+
+    # add color bar to plot
+    cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
+    cbar.set_label(r'$\alpha_0$')
+    fig.savefig('plots/local_dynamical_stability_wt_region_'+save_name+'.pdf')
+
+    # add suptitle to plot
+    fig.suptitle(r'Fully dynamically stable region $\mathcal{D}^G_{L,1}$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
+    fig.savefig('plots/local_dynamical_stability_region_'+save_name+'.pdf')
+
+    plt.close()
+
+decline=[]
 critical_alpha0 =[]
 for j in range(len(local_dynamical_stability_region[0][0])):
     fig, ax =  plt.subplots(1, 1)
     local_critical_alpha0=[]
+    local_decline=[]
     for i in range(len(local_dynamical_stability_region)):
         data=local_dynamical_stability_region[i,:,j]
         NR=data[0,0]
@@ -67,10 +69,14 @@ for j in range(len(local_dynamical_stability_region[0][0])):
         nestedness=data[0,2]
         connectance=data[0,3]
         lds_volume = cf.shrink_volume_for_one_matrix(data)
-        fitted_alpha0, fitted_dyn_volume, estimated_alpha_crit, estimated_vol_zero_syntrophy = cf.fit_shrinkage_curve(alpha0, lds_volume)
+        fit_function=cf.linear_function
+        take_zero_points=True
+        fitted_alpha0, fitted_dyn_volume, estimated_alpha_crit, estimated_vol_zero_syntrophy, est_decay_rate = cf.fit_shrinkage_curve(alpha0, lds_volume, fit_function, take_zero_points)
         ax.plot(fitted_alpha0, fitted_dyn_volume,color=alpha_mode_colours[i], marker='None', linestyle='solid')
         ax.plot(alpha0, lds_volume, label=label[i], color=alpha_mode_colours[i])
+        ax.set_yscale('linear')
         local_critical_alpha0.append(estimated_alpha_crit)
+        local_decline.append(est_decay_rate)
         #print(popt)
         #ax.plot(alpha0, fitted_vol, linestyle='-', marker='None')
     ax.set_xlabel(r'$\alpha_0$')
@@ -83,12 +89,15 @@ for j in range(len(local_dynamical_stability_region[0][0])):
     print("Saving fig to "+'plots/size_local_dynamical_stability_region_'+save_name+'.pdf')
     fig.savefig('plots/size_local_dynamical_stability_region_'+save_name+'.pdf')
     critical_alpha0.append(local_critical_alpha0)
+    decline.append(local_decline)
     plt.close()
     #plt.show()
 critical_alpha0=np.array(critical_alpha0)
+decline=np.array(decline)
 #
 # plot a slope curve vs nestedness and connectance
 critical_alpha0 = np.transpose(critical_alpha0)
+decline=np.transpose(decline)
 
 connectance = local_dynamical_stability_region[0,0][:,3]
 nestedness = local_dynamical_stability_region[0,0][:,2]

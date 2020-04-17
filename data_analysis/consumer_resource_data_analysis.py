@@ -314,23 +314,27 @@ def shrink_volume_for_one_matrix(data):
     return volume
 
 # scurve contains the data of the shrinkage curve
-def fit_shrinkage_curve(alpha0_,scurve_):
+def fit_shrinkage_curve(alpha0_,scurve_, fit_function_, take_zero_points_):
     # we do a linear fit removing the first point up ontil the first zero point
     end_index=len(scurve_)
     zero_indices = [j for j in range(len(scurve_)) if scurve_[j]==0.]
     start_index=1
     if(len(zero_indices)>0):
         end_index=np.min(zero_indices)
+    if take_zero_points_:
+        end_index=len(scurve_)
     if end_index>2:
-        fit_function=linear_function
-        fitted_curve, popt, perr = fit_data(fit_function, alpha0_[start_index:end_index], scurve_[start_index:end_index])
-
-        from scipy.stats import linregress
-        slope, intercept, r_value, p_value, stderr = linregress(alpha0_[start_index:end_index], scurve_[start_index:end_index])
-        print("p-value: ", p_value)
+        fitted_curve, popt, perr = fit_data(fit_function_, alpha0_[start_index:end_index], scurve_[start_index:end_index])
+        if fit_function_==linear_function:
+            from scipy.stats import linregress
+            slope, intercept, r_value, p_value, stderr = linregress(alpha0_[start_index:end_index], scurve_[start_index:end_index])
+            print("p-value: ", p_value)
+            estimated_decay_rate=-slope
+        if fit_function_==exponential_function:
+            estimated_decay_rate=popt[1]
         # we now get the estimated critical alpha0 and the estimated vol at alpha0=0
-        estimated_alpha_crit, err_alpha_crit=zero_from_fit(fit_function, popt, perr)
-        estimated_vol_zero_syntrophy = fit_function(0, *popt)
+        estimated_alpha_crit, err_alpha_crit=zero_from_fit(fit_function_, popt, perr)
+        estimated_vol_zero_syntrophy = fit_function_(0, *popt)
     else:
         estimated_vol_zero_syntrophy = scurve_[0]
         fitted_curve=scurve_[1:end_index]
@@ -338,13 +342,14 @@ def fit_shrinkage_curve(alpha0_,scurve_):
             a = (scurve_[0]-scurve_[1])/(alpha0_[0]-alpha0_[1])
             b = scurve_[0]-a*alpha0_[0]
             estimated_alpha_crit= -b/a
+            estimated_decay_rate=-a
         else:
-            estimated_alpha_crit=alpha0
+            estimated_alpha_crit=alpha0_[1]
+            estimated_decay_rate=-(scurve_[1]-scurve_[0])/(alpha0_[1]-alpha0_[0])
     remaining_points=[0 for j in range(end_index, len(scurve_))]
     fitted_curve = [estimated_vol_zero_syntrophy]+fitted_curve
     fitted_alpha0 = alpha0_[0:end_index]
-
-    return fitted_alpha0, fitted_curve, estimated_alpha_crit, estimated_vol_zero_syntrophy
+    return fitted_alpha0, fitted_curve, estimated_alpha_crit, estimated_vol_zero_syntrophy, estimated_decay_rate
 
 
 

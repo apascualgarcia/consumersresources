@@ -1,161 +1,104 @@
-import os
 import numpy as np
+from consumer_resource_data_analysis import alpha_mode, all_nestedness, all_connectance, alpha_mode_colours
+import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
-from matplotlib import rc
-from mpl_toolkits import mplot3d
-# rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
-# # for Palatino and other serif fonts use:
-# # rc('font',**{'family':'serif','serif':['Palatino']})
-# rc('text', usetex=False)
+from consumer_resource_data_analysis import label as alpha_label
 
-folder = './data_output'
-filename = 'Structural_stability_merged_copy'
-save_folder = './plots'
-save_name = 'critical_structural_perturbation_NR25_NS25'
-fs = 22
-error_bar_width = 1.
-cap_width = 1.5
-markeredgewidth = 3
-markersize = 10
-errorbar = 'no_errorbar'
-matrices_folder = 'optimal_matrices/consumption/Nr25_Nc25'
+folder='structural_stability'
+filename='data_all_structural_stability'
+syntrophy_mode=['common_max_syntrophy','own_max_syntrophy', 'no_syntrophy']
+syntrophy_label=['Common maximum syntrophy', 'Own individual syntrophy', 'No syntrophy']
+syntrophy_marker=['^', 'o', 's']
 
-not_all_conn = False
-target_conn = [0.08, 0.23, 0.33]
+file = folder+'/'+filename+'.out'
+mat_name=np.loadtxt(file, usecols=0, dtype='U')
+data=np.loadtxt(file, usecols=tuple([i for i in range(1,19)]))
+# str_stab dictionary is organized this way
+# str_stab[Nest][Conn][syntrophy mode][alpha mode]
+nest = []
+conn = []
+for i in range(len(mat_name)):
+    a = mat_name[i].split("_",7)
+    actual_nest = float(a[5][4:])
+    round_nest = cf.closest_element_in_list(actual_nest, all_nestedness)
+    actual_conn = float(a[6][4:-4])
+    round_conn = cf.closest_element_in_list(actual_conn, all_connectance)
+    nest.append(round_nest)
+    conn.append(round_conn)
+str_stab = {}
+# build structural stability dictionary
+for n in all_nestedness:
+    dnest = {}
+    for c in all_connectance:
+        dconn = {}
+        index=0
+        for syn in syntrophy_mode:
+            dsyn={}
+            for al in alpha_mode:
+                dalpha={}
+                if index < len(data[0]):
+                    for i in range(len(mat_name)):
+                        if nest[i]==n and conn[i]==c:
+                            dalpha['value']=data[i,index]
+                            dalpha['error']=data[i,index+1]
+                    index+=2
+                    dsyn[al]=dalpha
+                dconn[syn]=dsyn
+        dnest[c]=dconn
+    str_stab[n]=dnest
+fig_index=0
+for m in range(len(syntrophy_mode)):
+    for n in range(len(alpha_mode)):
+        syn = syntrophy_mode[m]
+        alpha = alpha_mode[n]
+        if not(syn=='no_syntrophy' and alpha!='fully_connected'):
+            title = syntrophy_label[m]+', '+alpha_label[n]
+            save_string=syn+'_'+alpha
+            fig = plt.figure(fig_index)
+            ax = fig.add_subplot(111)
+            for nest in all_nestedness:
+                data = [str_stab[nest][k][syn][alpha] for k in all_connectance]
+                to_plot = np.array([[all_connectance[i],data[i]['value'], data[i]['error']] for i in range(len(data)) if data[i]])
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
+            ax.set_ylabel(r'$\Delta_S^*$')
+            ax.set_xlabel(r'$\kappa_G$')
+            ax.set_title(title)
+            ax.legend(bbox_to_anchor=(1.0, 1.0))
+            fig.tight_layout()
+            fig.savefig('plots/critical_delta_str_stab_fixed_nest_'+save_string+'.pdf')
+            fig_index+=1
+            plt.close()
 
-not_all_nest = False
-target_nest = [0.1, 0.3, 0.5]
-
-actual_connectance = [0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
-
-def remove_strings_from_file(filename):
-    file = open(filename + '.out', "r")
-    metadata = []
-    for x in file:
-        name = x.replace(matrices_folder + '/RandTrix_Nr', '')
-        name = name.replace('_Nc', ' ')
-        name = name.replace('_Nest', ' ')
-        name = name.replace('_Conn', ' ')
-        name = name.replace('.txt', '')
-        metadata.append(name)
-    file.close()
-    f = open(filename + '_filtered.out', 'w')
-    for a in metadata:  # python will convert \n to os.linesep
-        f.write(a + '\n')
-    f.close()
-
-def nearest_el_in_list(x, liste):
-    result = liste[0]
-    for i in range(len(liste)):
-        if((x-liste[i])**2 < (x-result)**2):
-            result = liste[i]
-    return result
-
-
-
-filename = folder + '/' + filename
-remove_strings_from_file(filename)
-data = np.loadtxt(filename + '_filtered.out')
-metadata = data[:, :4]
-
-for j in range(len(data)):
-    # we round the nestedness to two decimal values
-    data[j,2] = round(data[j,2], 2)
-    # we filter the connectance such that it's rounded to the actual target value
-    data[j,3] = nearest_el_in_list(data[j,3], actual_connectance)
-
-# sorted_size[i] contains the different system sizes
-sorted_size = []
-# sorted_mprop[i] contains all matrices of size sorted_size[i]
-sorted_mprop = []
-
-for i in range(0, len(metadata)):
-    size_system = metadata[i, :2].tolist()
-    if size_system in sorted_size:
-        index = sorted_size.index(size_system)
-        sorted_mprop[index].append(data[i, 2:].tolist())
-    else:
-        sorted_size.append(size_system)
-        sorted_mprop.append([data[i, 2:].tolist()])
-sorted_mprop = np.array(sorted_mprop)
-sorted_size = np.array(sorted_size)
-print("Data sorted.")
-
-for i in range(len(sorted_size)):
-    [NR, NS] = sorted_size[i]
-    save_string = 'NR' + str(NR) + 'NS' + str(NS)
-    save_string1 = save_folder + '/'  +save_name+'_'+save_string + '_nest_fixed_conn'
-    save_string2 = save_folder + '/' + save_name+'_'+save_string + '_conn_fixed_nest'
-    data = sorted_mprop[i]
-
-    # lists the different connectances available
-    connectance = np.array(sorted(list(set(data[:, 1]))))
-    # lists the different nestednesses available
-    nestedness = np.array(sorted(list(set(data[:, 0]))))
-
-    target_connectance = connectance
-    if(not_all_conn):
-        target_connectance = target_conn
-    else:
-        save_string1+='_all_points'
-    target_nestedness = nestedness
-    if(not_all_nest):
-        target_nestedness = target_nest
-    else:
-        save_string2+='_all_points'
-
-    fig1 = plt.figure('Nestedness for fixed connectance')
-    ax1 = fig1.add_subplot(111)
-    for conn in target_connectance:
-        nest = np.array([data[i, 0]
-                         for i in range(len(data)) if data[i, 1] == conn])
-        dcrit = np.array([[data[i, 2], data[i,3]]
-                          for i in range(len(data)) if data[i, 1] == conn])
-        indices = np.argsort(nest)
-        sorted_dcrit = np.array([dcrit[i,0] for i in indices])
-        sorted_dcrit_error = np.array([dcrit[i,1] for i in indices])
-        sorted_nest = np.sort(nest)
-        ax1.errorbar(x=sorted_nest, y=sorted_dcrit, yerr=sorted_dcrit_error, fmt='+-', linestyle='dotted',
-                  label=r'$\kappa_G \approx$' + str(conn), markersize=markersize, markeredgewidth=markeredgewidth,
-                  elinewidth=error_bar_width, capsize=cap_width)
-    ax1.set_title(r'$N_R=$' + str(int(NR)) + r', $N_S=$' + str(int(NS)))
-    ax1.set_xlabel(r'Ecological overlap $\eta_G$', fontsize=fs)
-    ax1.set_ylabel(r'$\Delta_S^*(m, G, A)$', fontsize=fs)
-    ax1.legend(bbox_to_anchor=(1.0, 1.0))
-    fig1.tight_layout()
-    fig1.savefig(save_string1+'.pdf')
-
-    fig2 = plt.figure('Connectance for fixed nestedness')
-    ax2 = fig2.add_subplot(111)
-    for nest in target_nestedness:
-        conn = np.array([data[i, 1]
-                         for i in range(len(data)) if data[i, 0] == nest])
-        dcrit = np.array([[data[i, 2], data[i,3]]
-                          for i in range(len(data)) if data[i, 0] == nest])
-        indices = np.argsort(conn)
-        sorted_dcrit = np.array([dcrit[i,0] for i in indices])
-        sorted_dcrit_error = np.array([dcrit[i,1] for i in indices])
-        sorted_conn = np.sort(conn)
-        ax2.errorbar(x=sorted_conn, y=sorted_dcrit, yerr=sorted_dcrit_error, fmt='+-', linestyle='dotted',
-                  label=r'$\eta_G \approx$' + str(nest), markersize=markersize, markeredgewidth=markeredgewidth,
-                  elinewidth=error_bar_width, capsize=cap_width)
-    ax2.set_title(r'$N_R=$' + str(int(NR)) + r', $N_S=$' + str(int(NS)))
-    ax2.set_xlabel(r'Connectance $\kappa_G$', fontsize=fs)
-    ax2.set_ylabel(r'$\Delta^*_S(m, G, A)$', fontsize=fs)
-    ax2.legend(bbox_to_anchor=(1.0, 1.0))
-    fig2.tight_layout()
-    fig2.savefig(save_string2+'.pdf')
-
-    fig3 = plt.figure()
-    ax3 = fig3.add_subplot(111, projection='3d')
-    ax3.plot_trisurf(data[:, 0], data[:, 1], data[:, 2])
-    ax3.set_xlabel('Ecological overlap')
-    ax3.set_ylabel('Connectance')
-    ax3.set_zlabel(r'$\Delta^*_S(m, G, A)$')
-    ax3.view_init(azim=79, elev=29)
-    fig3.tight_layout()
-    fig3.savefig(save_folder + '/' + save_name+'_'+save_string +
-                 '_connectance_nestedness_3d.pdf')
-
-    plt.clf()
-print('Data plotted and saved.')
+            fig = plt.figure(fig_index)
+            ax = fig.add_subplot(111)
+            for conn in all_connectance:
+                data = [str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
+                to_plot = np.array([[all_nestedness[i],data[i]['value'], data[i]['error']] for i in range(len(data)) if data[i]])
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
+            ax.set_ylabel(r'$\Delta_S^*$')
+            ax.set_xlabel(r'$\eta_G$')
+            ax.set_title(title)
+            ax.legend(bbox_to_anchor=(1.0, 1.0))
+            fig.tight_layout()
+            fig.savefig('plots/critical_delta_str_stab_fixed_conn_'+save_string+'.pdf')
+            fig_index+=1
+            plt.close()
+for conn in all_connectance:
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    null=[str_stab[eta][conn]['no_syntrophy']['fully_connected'] for eta in all_nestedness]
+    title=r'$\kappa_G='+str(conn)+'$'
+    for m in range(len(syntrophy_mode)):
+        for n in range(len(alpha_mode)):
+            syn = syntrophy_mode[m]
+            alpha = alpha_mode[n]
+            if not(syn=='no_syntrophy' and alpha!='fully_connected'):
+                label = syntrophy_label[m]+', '+alpha_label[n]
+                data=[str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
+                to_plot = np.array([[all_nestedness[i],data[i]['value']-null[i]['value'], data[i]['error']+null[i]['value']] for i in range(len(data)) if data[i]])
+                ax.plot(to_plot[:,0], to_plot[:,1], label=label, color=alpha_mode_colours[n], marker=syntrophy_marker[m], markersize=6)
+    ax.set_ylabel(r'$\Delta_S(m,G,A)-\Delta_S(m, G, 0)$')
+    ax.set_xlabel(r'$\eta_G$')
+    ax.set_title(title)
+    fig.tight_layout()
+    plt.show()

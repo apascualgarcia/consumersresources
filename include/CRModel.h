@@ -38,6 +38,8 @@
 #include<list>
 #include<algorithm>
 #include<Eigen/Dense>
+#include<vector>
+#include<array>
 #include "Global_Constants.h"
 
 #endif

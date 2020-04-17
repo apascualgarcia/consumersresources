@@ -36,6 +36,8 @@ ntype connectance(const nmatrix&);
 /* here we take the nestedness as defined in Bastolla's 2013 paper */
 ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
+ntype assortativity(const nmatrix&);
+
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);
 

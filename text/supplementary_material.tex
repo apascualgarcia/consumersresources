@@ -1,6 +1,137 @@
 \documentclass[12pt]{report}
 \usepackage{consumer_resource_final}
 \begin{document}
+\subsection{Why do we solve it this way}\label{sec: explanation solve for d and m}
+
+\subsection{Algorithmic procedure}\label{sec : feasibility methods algorithmic procedure}
+We hereby detail the $\mathcal{A}$ procedure which from a set of metaparameters $m$ and a consumption-syntrophy network $(G,A)$ gives rise to a set of parameters $p$. It goes like this:
+\begin{enumerate}
+  \item We first draw randomly each $R^*_\nu$
+  and $S^*_i$ :
+  \begin{equation}
+     R^*_\nu = \mathcal{R} \ \forall \nu=1, \dots, N_R\text{ and }  S^*_i = \mathcal{S} \ \forall i=1, \dots, N_S,
+  \end{equation}
+  where $\mathcal{R}$ and $\mathcal{S}$ are random variables coming from a distribution of mean equal to the corresponding metaparameter and relative standard deviation\footnote{By relative standard deviation, we mean the standard deviation measured in units of the average value.} $\epsilon$. In our simulations, we chose uniform distributions :
+  \begin{equation}
+  \mathcal{R} \sim \text{Unif}(R_0, R_0 \epsilon) \text{ and } \mathcal{S} \sim \text{Unif}(S_0, S_0\epsilon).
+  \end{equation}
+  \item The efficiency matrix $\sigma_{i\nu}$ is then drawn similarly, from a distribution with average $\sigma_0$. In order to simplify the problem\footnote{Indeed, we observerd that in general introducing a non uniform $\sigma_0$ adds an additional not needed layer of complexity.}, we take a zero-variance like \citeauthor{butler_stability_2018} in \cite{butler_stability_2018}, \ie all species consume resources at the same global efficiency :
+  \begin{equation}
+    \sigma_{i\nu} = \sigma_0.
+  \end{equation}
+  \item We build the consumption matrix $\gamma_{i\nu}$. Its adjacency matrix $G$ is loaded through a user-provided file.
+  %$G$ is a binary matrix given by the user (in the \code{configuration.in} file) and is defined as the adjacency matrix of the consumption network (\ie it tells which species eats which resource). We then build $\gamma$ with the same network structure as $F$ (\ie both matrices have the same zero elements).
+  While $G$ gives the structure of $\gamma$, \ie if a given $\gamma_{i\nu}$ is zero or not, the actual values of $\gamma_{i\nu}$ need then to be determined. They are drawn from a uniform distribution of mean $\gamma_0$ and relative standard deviation $\epsilon$:
+  \begin{equation}
+    \gamma_{i\nu} = \text{Unif}(\gamma_0, \gamma_0\epsilon) G_{i\nu}.
+  \end{equation}
+  \item We draw the resources external feeding rates, similarly to the other parameters :
+  \begin{equation}
+  l_\mu = \text{Unif}(l_0, l_0\epsilon) \ \forall \mu=1, \dots, N_R.
+  \end{equation}
+  \item The last free parameters are the non-zero elements of the syntrophy matrix $\alpha_{\nu i}$, since the $d_i$ and $l_\mu$ are determined through the equations of evolution at equilibrium. %This is the tricky part of the algorithm because $\alpha$ has to follow three constraints, namely energy conservation/dissipation Eq.\eqref{eq : dissipation constraint} and positiveness of $d_i$ and $l_\mu$ [\textbf{insert reference to equation}]. The general strategy is to choose the metaparameters in a way that these constraints should \textit{almost always} be satisfied, \ie we pick metaparameters that follow the feasibility constraint Eq.\eqref{eq : overall feasibility constraint metaparameters}.
+  The adjacency matrix $A$ of $\alpha$ needs then to be specified. At the moment, it can be chosen in four different ways : fully connected, in a way that no resource eaten by a given species can be released by that same species (\ie no intraspecific syntrophy : $G_{i\mu}>0 \iff A_{\mu i}=0$), random structure with the same number of links as the consumption matrix and finally by a user provided matrix. After the adjacency matrix is loaded, we build $\alpha$ from a uniform distribution of mean $\alpha_0$ and relative standard deviation $\epsilon$:
+  \begin{equation}
+    \alpha_{\nu i} = \text{Unif}(\alpha_0, \alpha_0\epsilon) A_{\nu i} .
+  \end{equation}
+  %\item We build $\tau_{\nu i}$. It usually is equal to $\alpha_{\nu i}$ or 0.
+  \item With all of these parameters drawn, we can solve Eqs.\eqref{eq : feasibility positive d} for the species death rate $d_i$ and Eqs.\eqref{eq : feasibility positive m} for $m_\nu$. All the parameters of the model are now fully determined.
+  \item We check if the constraints Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation} on the parameters are fulfilled. If they are not, we go back to step 1. Otherwise, we can exit the algorithm, a feasible system has been built. We see here the advantage of having input metaparameters that will most likely give rise to a feasible parameter set. If we just give random metaparameters, we run the risk of getting stuck in an unpredictably long loop between steps 1 and 7. If however we are in a region where we know the metaparameters feasibility is high, a feasible system is found much faster.
+\end{enumerate}
+
+\subsection{When is zero part of the spectrum of $J^*$?}\label{sec : zero part of spectrum}
+We are interested in knowing when $\lambda=0$ is part of the spectrum of $J^*$. By definition, $\lambda=0$ is an eigenvalue if and only if it solves the master equation \eqref{eq: master equation eigenvalues jacobian}:
+\begin{equation}
+\det
+\begin{pmatrix}
+  -\Delta   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = 0 \label{eq: determinant marginally stable equilibria}
+\end{equation}
+Using the fact that $\Delta$ is invertible, we can make use of the equality\footnote{This uses a formula which is trivially analogous to one found in \cite{powell_calculating_2011}.}:
+\begin{equation}
+\det\begin{pmatrix}
+  -\Delta   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = \det(-\Delta)\det(\Beta\Delta^{-1}\Gamma).
+\end{equation}
+Eq.\eqref{eq: determinant marginally stable equilibria} then becomes:
+\begin{equation}
+\det(\Beta\Delta^{-1}\Gamma)=0
+\end{equation}
+which means that $\Beta \Delta^{-1}\Gamma$ is not full rank. Finally,
+\begin{equation}
+\boxed{
+0 \in \sigma(J^*) \iff \Beta \Delta^{-1}\Gamma \text{ is not full rank.}\label{eq : condition zero in spectrum of J}
+}
+\end{equation}
+But when is $\Beta \Delta^{-1}\Gamma$ not full rank? Sylvester rank inequality \cite{thome_inequalities_2016} states that:
+\begin{equation}
+\text{rank}(\Beta\Delta^{-1}\Gamma) \geq \text{rank}(\Beta)+\text{rank}(\Delta^{-1}\Gamma)
+-N_R.
+\end{equation}
+Similarly,
+\begin{equation}
+\text{rank}(\Delta^{-1}\Gamma) \geq \text{rank}(\Delta^{-1})+\text{rank}(\Gamma)-N_R=\text{rank}(\Gamma),
+\end{equation}
+where we used the fact that $\Delta^{-1}$ is invertible so $\text{rank}(\Delta^{-1})=N_R$.
+One of the standard rank properties is:
+\begin{equation}
+\text{rank}(\Delta^{-1}\Gamma) \leq \min\left\{\text{rank}(\Delta^{-1}), \text{rank}(\Gamma)\right\} \implies \text{rank}(\Delta^{-1}\Gamma) \leq \text{rank}(\Gamma).
+\end{equation}
+In the end this yields $\text{rank}(\Delta^{-1}\Gamma)=\text{rank}(\Gamma)$ and :
+\begin{equation}
+\text{rank}(\Beta\Delta^{-1}\Gamma) +N_R \geq \text{rank}(\Beta)+\text{rank}(\Gamma). \label{eq : lower bound Beta Delta Gamma}
+\end{equation}
+We can use this inequality to enunciate a lemma about the presence of zero in the spectrum of $J^*$.
+\lemma{If $N_R \leq N_S$ and $\Beta$ and $\Gamma$ are full rank, then $0 \notin \sigma(J^*)$.}
+\begin{proof}
+{We assume that $0$ is in the spectrum of $J^*$ and prove it leads to a contradiction. Because $0 \in \sigma(J^*)$, Eq.\eqref{eq : condition zero in spectrum of J} implies $\Beta\Delta^{-1}\Gamma$ is not full rank. Since the largest possible value for the rank of matrix is the minimum between its number of rows and columns, we have :
+\begin{equation}
+\text{rank}(\Beta\Delta^{-1}\Gamma)< \min(N_R, N_S) = N_R.
+\end{equation}
+This can be used as an upper bound for Eq.\eqref{eq : lower bound Beta Delta Gamma} :
+\begin{equation}
+2 N_R > \text{rank}(\Beta)+\text{rank}(\Gamma).
+\end{equation}
+However, we also know that $\Beta$ and $\Gamma$ are full rank, \ie
+\begin{equation}
+\text{rank}(\Beta)=\text{rank}(\Gamma)=N_R.
+\end{equation}
+Hence the previous inequality amounts to $N_R > N_R$, which is a contradiction. We conclude that the hypothesis $0 \in \sigma(J^*)$ is wrong.
+}
+\end{proof}
+
+\subsection{Weak LRI regime}\label{sec : weak LRI regime}
+\begin{theorem}
+Let $p$ be a parameter set with a jacobian at equilibrium $J^*$. If $0$ is not an eigenvalue of $J^*$ and the equations
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu,
+\end{equation}
+are verified, then the real eigenvalues of $J^*$ are negative.
+\end{theorem}
+\begin{proof}
+We assume
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}}  \ \forall \mu.
+\end{equation}
+Let $\lambda \in \mathbb{R}$, then the following will also trivially hold:
+\begin{equation}
+  \left(\Gamma\Beta \right)_{\mu\mu} -\lambda^2 < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu. \label{eq: low species bound 1}
+\end{equation}
+Dividing Eq.\eqref{eq: low species bound 1} by $\Delta_\mu$, we get:
+\begin{equation}
+\frac{1}{\Delta_\mu}\left[\left(\sum_i \Gamma_{\mu i} \Beta_{i \mu} \right)-{\lambda^2}\right] < - \sum_{\nu \neq \mu } \abs{\frac{\sum_i \Gamma_{\mu i}\Beta_{i\nu}}{\Delta_\mu}} \ \forall \mu.
+\end{equation}
+Looking at Eq.\eqref{eq: definition S component wise}, we see that this is equivalent to:
+\begin{equation}
+S_{\mu \mu} + \sum_{\nu \neq \mu} \abs{S_{\mu \nu}} < 0\ \forall \mu.
+\end{equation}
+Using Lemma \ref{lemma: lemma Gerschgorin circle}, we know that all the real eigenvalues of $S(\lambda)$ will have a negative real part.
+We can conclude with the statement of the theorem.
+\end{proof}
+
+
 \subsection{Effective system}
 Models which involve the dynamics of species only are in general better known than consumers-resources models [\textbf{insert reference}]. In particular, a huge body of literature exists on the study of Lotka-Volterra systems [\textbf{insert reference}]. We may profit from this knowledge by transforming the effect of the resources dynamics into an effective consumers-only system.
 
