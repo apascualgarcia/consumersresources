@@ -12,5 +12,5 @@ for mat in mat_list:
         a=mat.split("_",7)
         nest=a[5][4:]
         conn=a[6][4:-4]
-        return_string.append("{"+nest+';'+conn+"}")
+        return_string.append("{"+nest+','+conn+"}")
 print(return_string)
