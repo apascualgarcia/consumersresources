@@ -8,6 +8,7 @@
 #include<random>
 #include<string>
 #include<iostream>
+#include<Eigen/Dense>
 
 /* loads the food matrix and relabels columns and resources such that gamma is "most triangular" */
 foodmatrix load_food_matrix(const Metaparameters&);
@@ -25,6 +26,8 @@ ntype norm(const nvector&);
 ntype mean(const nmatrix &);
 ntype det(const nmatrix&);
 
+Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> convert_nmatrix_to_eigen_matrix(const nmatrix& mat);
+
 /* computes number of links in a matrix */
 unsigned int number_of_links(const nmatrix&);
 
@@ -37,6 +40,7 @@ ntype connectance(const nmatrix&);
 ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
 ntype assortativity(const nmatrix&);
+unsigned int rank(const nmatrix&);
 
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 void rescale_mean(nmatrix&, const ntype&);

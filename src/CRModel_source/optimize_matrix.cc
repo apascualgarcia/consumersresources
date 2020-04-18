@@ -412,3 +412,10 @@ ntype quadratic_form_nestedness(const nmatrix& gamma, const nmatrix& dummy, void
   ntype* target = (ntype*)(params);
   return abs(nestedness(gamma)-(*target));
 }
+ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy, void*params){
+  int max_rank = gamma.size();
+  if(gamma[0].size() < max_rank){
+    max_rank =gamma[0].size();
+  }
+  return quadratic_form_nestedness(gamma, dummy, params)+max_rank-rank(gamma);
+}

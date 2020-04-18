@@ -667,8 +667,27 @@ ntype assortativity(const nmatrix & mat){
   }
 
   for(size_t i=0; i < edges.size();++i){
-    
+
   }
 
   return ass;
+}
+
+Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> convert_nmatrix_to_eigen_matrix(const nmatrix& mat){
+  Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> eigen_mat;
+  unsigned int rows = mat.size(), columns=mat[0].size();
+  eigen_mat.resize(rows, columns);
+
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < columns; ++j){
+      eigen_mat(i,j)=mat[i][j];
+    }
+  }
+  return eigen_mat;
+}
+
+unsigned int rank(const nmatrix& mat){
+  Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> eigen_mat = convert_nmatrix_to_eigen_matrix(mat);
+  Eigen::FullPivLU<Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic>> lu(eigen_mat);
+  return lu.rank();
 }
