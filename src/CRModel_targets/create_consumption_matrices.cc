@@ -12,7 +12,6 @@ int main(int argc, char* argv[]){
 
     std::vector<std::array<ntype,2>> nest_conn={{0.15,0.0832}, {0.15,0.128}, {0.15,0.176}, {0.1,0.0832}, {0.25,0.0848}, {0.25,0.1312}, {0.2,0.0848}, {0.2,0.1312}, {0.35,0.0832}, {0.35,0.1264}, {0.35,0.1712}, {0.3,0.0848}, {0.3,0.1296}, {0.3,0.1824}, {0.45,0.08}, {0.45,0.1296}, {0.45,0.1744}, {0.45,0.2336}, {0.4,0.0752}, {0.4,0.128}, {0.4,0.176}, {0.4,0.2176}, {0.55,0.0848}, {0.55,0.1232}, {0.55,0.168}, {0.55,0.216}, {0.55,0.2784}, {0.5,0.0816}, {0.5,0.128}, {0.5,0.1776}, {0.5,0.2208}, {0.5,0.2736}, {0.6,0.0816}, {0.6,0.1344}, {0.6,0.1712}, {0.6,0.2304}, {0.6,0.2768}};
     MonteCarloSolver mcsolv;
-    mcsolv.T=5.0;
     mcsolv.max_steps=1000000;
     mcsolv.max_fails=1000;
     mcsolv.annealing_freq=1000;
@@ -21,6 +20,7 @@ int main(int argc, char* argv[]){
     mcsolv.cost_function=quadratic_form_nestedness_rank;
 
     for(auto el : nest_conn){
+      mcsolv.T=5.0;
       /* target nestedness is nest */
       ntype conn = el[1], nest=el[0];
       mcsolv.additional_params=&nest;
