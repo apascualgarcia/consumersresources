@@ -2,7 +2,7 @@ import numpy as np
 import os
 from consumer_resource_data_analysis import alpha_mode
 
-strstab_folder='structural_stability'
+strstab_folder='data_output'
 start_string='strstab'
 syntrophy_list=['common_max_syntrophy','own_max_syntrophy', 'no_syntrophy']
 save_output='data_all_structural_stability'

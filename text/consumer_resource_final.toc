@@ -30,15 +30,15 @@
 \contentsline {subsection}{\numberline {2.2.4}Low intra resources interaction (LRI) regime }{24}{subsection.2.2.4}
 \contentsline {subsubsection}{Reductio ad absurdum}{24}{section*.20}
 \contentsline {subsubsection}{Strong LRI regime}{25}{section*.21}
-\contentsline {subsubsection}{Weak LRI regime}{25}{section*.22}
-\contentsline {subsubsection}{Feasibility of the low intra resources interaction regime}{26}{section*.23}
-\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.24}
-\contentsline {subsection}{\numberline {2.2.5}Flux analysis - a way to get a sense of scales}{28}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Application: fully connected consumption and syntrophy networks}{29}{subsection.2.2.6}
-\contentsline {paragraph}{Standard deviation expansion}{29}{section*.25}
-\contentsline {paragraph}{Rewriting the jacobian at equilibrium}{30}{section*.27}
-\contentsline {subsubsection}{Standard deviation expansion at first order}{31}{section*.30}
-\contentsline {paragraph}{Zero variance case}{32}{section*.34}
+\contentsline {subsubsection}{Weak LRI regime}{26}{section*.22}
+\contentsline {subsubsection}{Intuitive interpretation of the LRI regimes}{26}{section*.23}
+\contentsline {subsubsection}{Feasibility of the LRI regimes}{26}{section*.24}
+\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.25}
+\contentsline {subsection}{\numberline {2.2.5}Application: fully connected consumption and syntrophy networks}{29}{subsection.2.2.5}
+\contentsline {paragraph}{Standard deviation expansion}{29}{section*.26}
+\contentsline {paragraph}{Rewriting the jacobian at equilibrium}{30}{section*.28}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{30}{section*.31}
+\contentsline {paragraph}{Zero variance case}{32}{section*.35}
 \contentsline {section}{\numberline {2.3}Structural stability}{34}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}Definitions}{34}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Numerical estimate of the critical structural perturbation}{35}{subsection.2.3.2}
@@ -46,9 +46,9 @@
 \contentsline {section}{\numberline {3.1}Feasibility}{37}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{37}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{41}{subsection.3.1.2}
-\contentsline {subsubsection}{The influence of matrix structure}{41}{section*.35}
-\contentsline {subsubsection}{Common fully feasible volume}{46}{section*.36}
-\contentsline {subsubsection}{The influence of the matrix dimensions}{49}{section*.37}
+\contentsline {subsubsection}{The influence of matrix structure}{41}{section*.36}
+\contentsline {subsubsection}{Common fully feasible volume}{46}{section*.37}
+\contentsline {subsubsection}{The influence of the matrix dimensions}{49}{section*.38}
 \contentsline {section}{\numberline {3.2}Dynamical stability}{53}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}LRI regime -- Outcome of the Monte Carlo algorithm}{53}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Fully dynamically stable region}{57}{subsection.3.2.2}
@@ -66,4 +66,4 @@
 \contentsline {subsection}{\numberline {4.2.3}When is zero part of the spectrum of $J^*$?}{76}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}Weak LRI regime}{77}{subsection.4.2.4}
 \contentsline {subsection}{\numberline {4.2.5}Effective system}{78}{subsection.4.2.5}
-\contentsline {subsubsection}{Perturbation analysis}{79}{section*.38}
+\contentsline {subsubsection}{Perturbation analysis}{79}{section*.39}

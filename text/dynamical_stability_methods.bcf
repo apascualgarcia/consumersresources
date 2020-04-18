@@ -2120,68 +2120,20 @@
     <bcf:datasource type="file" datatype="bibtex">sources.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">jogalekar_physicists_nodate</bcf:citekey>
-    <bcf:citekey order="2">schrodinger_what_1944</bcf:citekey>
-    <bcf:citekey order="3">schrodinger_what_1944</bcf:citekey>
-    <bcf:citekey order="4">chan_protein_1993</bcf:citekey>
-    <bcf:citekey order="5">fisher_transition_2014</bcf:citekey>
-    <bcf:citekey order="6">attanasi_information_2014</bcf:citekey>
-    <bcf:citekey order="7">ley_worlds_2008</bcf:citekey>
-    <bcf:citekey order="8">becerra-castro_wastewater_2015</bcf:citekey>
-    <bcf:citekey order="9">falkowski_biogeochemical_1998</bcf:citekey>
-    <bcf:citekey order="10">lotka_analytical_1920</bcf:citekey>
-    <bcf:citekey order="11">momeni_lotka-volterra_2017</bcf:citekey>
-    <bcf:citekey order="12">odwyer_whence_2018</bcf:citekey>
-    <bcf:citekey order="13">momeni_lotka-volterra_2017</bcf:citekey>
-    <bcf:citekey order="14">macarthur_species_1970</bcf:citekey>
-    <bcf:citekey order="15">brunner_metabolite_2019</bcf:citekey>
-    <bcf:citekey order="16">morris_microbial_2013</bcf:citekey>
-    <bcf:citekey order="17">orth_what_2010</bcf:citekey>
-    <bcf:citekey order="18">thiele_multiscale_2012</bcf:citekey>
-    <bcf:citekey order="19">morris_microbial_2013</bcf:citekey>
-    <bcf:citekey order="20">james_continuous_1961</bcf:citekey>
-    <bcf:citekey order="21">lotka_analytical_1920</bcf:citekey>
-    <bcf:citekey order="22">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="23">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="24">iannelli_introduction_2014</bcf:citekey>
-    <bcf:citekey order="25">bastolla_architecture_2009</bcf:citekey>
-    <bcf:citekey order="25">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="26">jonhson_factors_2013</bcf:citekey>
-    <bcf:citekey order="27">bastolla_architecture_2009</bcf:citekey>
-    <bcf:citekey order="28">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="29">may_will_1972</bcf:citekey>
-    <bcf:citekey order="30">allesina_stability_2012</bcf:citekey>
-    <bcf:citekey order="30">allesina_predicting_2015</bcf:citekey>
-    <bcf:citekey order="30">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="31">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="32">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="33">ives_stability_2007</bcf:citekey>
-    <bcf:citekey order="33">pascual-garcia_mutualism_2017</bcf:citekey>
-    <bcf:citekey order="34">biroli_marginally_2018</bcf:citekey>
-    <bcf:citekey order="35">perron_zur_nodate</bcf:citekey>
-    <bcf:citekey order="36">powell_calculating_2011</bcf:citekey>
-    <bcf:citekey order="37">gerschgorin_uber_1931</bcf:citekey>
-    <bcf:citekey order="38">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="39">gendreau_simulated_2019</bcf:citekey>
-    <bcf:citekey order="40">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="41">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="42">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="43">barbier_cavity_2017</bcf:citekey>
-    <bcf:citekey order="44">magnus_matrix_2019</bcf:citekey>
-    <bcf:citekey order="45">biroli_marginally_2018</bcf:citekey>
-    <bcf:citekey order="46">hardin_competitive_1960</bcf:citekey>
-    <bcf:citekey order="47">hardin_competitive_1960</bcf:citekey>
-    <bcf:citekey order="48">wang_overcome_2019</bcf:citekey>
-    <bcf:citekey order="49">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="50">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="51">powell_calculating_2011</bcf:citekey>
-    <bcf:citekey order="52">thome_inequalities_2016</bcf:citekey>
+    <bcf:citekey order="1">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="2">ives_stability_2007</bcf:citekey>
+    <bcf:citekey order="2">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="3">biroli_marginally_2018</bcf:citekey>
+    <bcf:citekey order="4">perron_zur_nodate</bcf:citekey>
+    <bcf:citekey order="5">powell_calculating_2011</bcf:citekey>
+    <bcf:citekey order="6">gerschgorin_uber_1931</bcf:citekey>
+    <bcf:citekey order="7">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="8">gendreau_simulated_2019</bcf:citekey>
+    <bcf:citekey order="9">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="10">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="11">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="12">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="13">barbier_cavity_2017</bcf:citekey>
+    <bcf:citekey order="14">magnus_matrix_2019</bcf:citekey>
   </bcf:section>
-  <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
-  <bcf:sorting>
-    <bcf:sort order="1">
-      <bcf:sortitem order="1">citeorder</bcf:sortitem>
-    </bcf:sort>
-  </bcf:sorting>
-  </bcf:sortlist>
 </bcf:controlfile>

@@ -3,15 +3,14 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
-As an application, we consider the very special case of the fully connected consumption and syntrophy networks. In this ``mean-field'' theory, every consumer consumes from and releases each resource, \ie
+As an application, we consider the very special case of the fully connected consumption and syntrophy networks. In this ``mean-field'' theory, every consumer consumes and releases each resource, \ie
 \begin{equation}
 G_{i\mu}=A_{\mu i}=1 \ \forall \mu=1, \dots, N_R \ \ \forall i=1, \dots, N_S.
 \end{equation}
-Our goal is to find the spectrum of systems with such matrices as their consumption and syntrophy networks.
-We follow the path explained by \citeauthor{barbier_cavity_2017} in \cite{barbier_cavity_2017} and perform a \important{standard deviation expansion}. They showed that the variance of the interaction matrix drives the strength of the interactions in their model \cite{barbier_cavity_2017}, so it is worth a try to follow their path.
-
+Our goal is to find the spectrum of systems with such consumption and syntrophy networks.
+\citeauthor{barbier_cavity_2017} showed that the variance of the interaction matrix plays a leading role in the dynamics of their model \cite{barbier_cavity_2017}. We follow an approach similar to theirs and perform a \important{standard deviation expansion}.
 \paragraph{Standard deviation expansion}
-The idea behind the standard deviation expansion (abbreviated SDE) is the following. Let $q_{i\mu}$ be an arbitrary matrix of size $N_S \times N_R$. Then the nice trick done in \cite{barbier_cavity_2017} is to write the elements of the $q$ matrix in terms of new variables $\tilde{q}_{i\mu}$:
+The idea behind the standard deviation expansion is the following. Let $q_{i\mu}$ be an arbitrary matrix of size $N_S \times N_R$. The nice trick done in \cite{barbier_cavity_2017} is to write the elements of the $q$ matrix in terms of new variables $\tilde{q}_{i\mu}$:
 \begin{equation}
 q_{i\mu} = \av{q} + \sigma_q \tilde{q}_{i\mu}. \label{eq : separation matrix average standard dev}
 \end{equation}
@@ -23,15 +22,15 @@ and $\sigma_q$ is the standard deviation of $q$, again element-wise:
 \begin{equation}
 \sigma_q \defined \sqrt{\av{q^2}-\av{q}^2} \text{ with } \av{q^2}\defined \frac{\sum_{\mu,i} q_{i\mu}^2}{N_S N_R}.
 \end{equation}
-The main advantage of this procedure is that we get a clear idea about the scales involved. A matrix element $q_{i\mu}$ is roughly the mean $\av{q}$ plus a deviation $\sigma_q$ multiplied by a factor of magnitude $sim$ 1. Indeed the $\tilde{q}_{i\mu}$ are not large since they follow the two equalities \cite{barbier_cavity_2017}:
+The main advantage of this procedure is that we get a clear idea about the scales involved. A matrix element $q_{i\mu}$ is roughly the mean $\av{q}$ plus a deviation $\sigma_q$ multiplied by a factor of magnitude $\sim$ 1. Indeed the $\tilde{q}_{i\mu}$ are not large since they follow the two equalities \cite{barbier_cavity_2017}:
 \begin{equation}
 \av{\tilde{q}} = 0 \text{ and } \av{\tilde{q}^2} = 1.
 \end{equation}
-We apply this framework to our problem by noticing that if the $q_{i\mu}$ are all random samples coming from the same distribution law $\mathfrak{Q}$, we can write the following approximation in the case $N_R, N_S \gg 1 $ :
+We apply this framework to our problem by noticing that if the $q_{i\mu}$ are all random samples coming from the same distribution law $\mathfrak{Q}$, we can write the following approximation in the case $N_R, N_S \gg 1 $:
 \begin{equation}
 \av{q} \approx \av{\mathfrak{Q}} \defined q_0.
 \end{equation}
-We can then rewrite the free parameters of our model\footnote{This works with $\gamma$ and $\alpha$ because $G$ and $A$ have a trivial topology. Otherwise we would have to take it into account and the computations would not be as easy.}:
+We can then rewrite the free parameters of our model\footnote{This works with $\gamma$ and $\alpha$ because $G$ and $A$ have a trivial topology. Otherwise we would have to take their structure into account and the computations would not be as easy.}:
 \begin{subequations}\label{eq : rewrite with metaparameters}
 \begin{empheq}[left=\empheqlbrace]{align}
 l_\nu & \approx l_0 + \sigma_l \tilde{l}_\nu \\
@@ -42,9 +41,9 @@ S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
 \sigma_{i\nu } & \approx \sigma_0 + \sigma_\sigma \tilde{\sigma}_{i\nu}
 \end{empheq}
 \end{subequations}
-	 The general idea is then to assume that the standard deviations are small and proceed to a first order Taylor expansion.
+	 The strategy is to assume that the standard deviations are small which allows us to proceed to a first order Taylor expansion.
 	 \paragraph{Rewriting the jacobian at equilibrium}
-	 The different blocks of the jacobian at equilibrium \eqref{eq : jacobian at equilibrium} can be written with the new variables :
+	 The different blocks of the jacobian at equilibrium \eqref{eq: jacobian at equilibrium} can be written with the new variables :
 	 \begin{empheq}[left=\empheqlbrace]{align}
 	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 + N_S \alpha_0 S_0 + \sigma_l \tilde{l}_\mu + \sigma_\alpha S_0 \sum_j \tilde{\alpha}_{\mu j} + \sigma_\alpha \sigma_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j}{R_0 + \sigma_R \tilde{r}_\mu} \\
 	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 + \alpha_0 + \sigma_\gamma R_0 \tilde{\gamma}_{j\mu} + \sigma_R \gamma_0 \tilde{r}_\mu + \sigma_\alpha \tilde{\alpha}_{\mu j} + \sigma_\gamma \sigma_R \tilde{\gamma}_{j\mu} \tilde{r}_\mu \\
@@ -65,11 +64,11 @@ S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
 
 
 	 \subsubsection{Standard deviation expansion at first order}
-	 We can then assume the relative standard deviations are small :
+	 We assume the relative standard deviations are small:
 	 \begin{equation}
 	 \epsilon_P \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
 	 \end{equation}
-	 The previous equations can be rewritten as :
+	 The previous equations can be rewritten as:
 	 \begin{empheq}[left=\empheqlbrace]{align}
 	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0+N_S\alpha_0 S_0}{R_0} - \epsilon_R \frac{l_0+N_S\alpha_0 S_0}{R_0} \tilde{r}_\mu + \epsilon_l \frac{l_0}{R_0} \tilde{l}_\mu + \epsilon_\alpha \frac{\alpha_0 S_0}{R_0} \sum_j \tilde{\alpha}_{\mu j} \\
 	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &=  -\gamma_0 R_0 + \alpha_0 - \epsilon_\gamma \gamma_0 R_0 \tilde{\gamma}_{j \mu} - \epsilon_R \gamma_0 R_0 \tilde{r}_\mu +\epsilon_\alpha \alpha_0 \tilde{\alpha}_{\mu j}\\
@@ -80,7 +79,7 @@ S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
 	 \begin{equation}
 	 \epsilon_P \approx \epsilon \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
 	 \end{equation}
-	 This allows us to rewrite the jacobian at equilibrium as :
+	 This allows us to rewrite the jacobian at equilibrium as:
 	 \begin{equation}
 	 J^* = J_0 + \epsilon \tilde{J},
 	 \end{equation}
@@ -110,33 +109,33 @@ S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
 	 \tilde{\Gamma}_{\mu i} & \defined \alpha_0 \tilde{\alpha}_{\mu i} - \gamma_0 R_0 \left(\tilde{\gamma}_{i\mu}+\tilde{r}_\mu\right) \\
 	 \tilde{B}_{i \mu} & \defined B_0 \left(\tilde{\sigma}_{i\mu}+\tilde{\gamma}_{i\mu}+\tilde{s}_i\right)
 	 \end{empheq}
-	Using Jacobi's formula \cite{magnus_matrix_2019}, the equation $\det\left(J^*-\lambda\right)=0$ can be rewritten as :
+	Using Jacobi's formula \cite{magnus_matrix_2019}, the equation $\det\left(J^*-\lambda \identity{N_R+N_S}\right)=0$ can be rewritten as:
 	\begin{equation}
 	\boxed{
-	\det(J_0-\lambda + \epsilon J^*)=\det(J_0-\lambda)+\epsilon \ \trace{\text{adj}(J_0-\lambda)\tilde{J}}=0.
+	\det(J_0-\lambda \identity{N_R+N_S} + \epsilon J^*)=\det(J_0-\lambda \identity{N_R+N_S})+\epsilon \ \trace{\text{adj}(J_0-\lambda \identity{N_R+N_S})\tilde{J}}=0.
 	}\label{eq : determinant variance first order}
 	\end{equation}
-	where $\text{adj}\left(\dots\right)$ is the adjugate operator (\ie which yields the transpose of the cofactor matrix). This equation is a complicated polynomial of degree $N_R+N_S$. As of now it does not seem to have an easily computable solution for $\epsilon > 0$. An explicit solution can however be computed when $\epsilon = 0$.
+	where $\text{adj}\left(\dots\right)$ is the adjugate operator (\ie which yields the transpose of the cofactor matrix). This equation is a complicated polynomial of degree $N_R+N_S$. We do not know how to find an easily computable solution for $\epsilon > 0$. An explicit solution can however be computed when $\epsilon = 0$.
 
 	\paragraph{Zero variance case}\label{sec : methods dynamical stability fully connected zero variance}
 	When $\epsilon=0$, Eq.\eqref{eq : determinant variance first order} becomes:
 	\begin{equation}
-	\det(J_0-\lambda)=\det\begin{pmatrix}
-	-\Delta_0-\lambda & \Gamma_0 \\
-	B_0 & -\lambda
+	\det(J_0-\lambda \identity{N_R+N_S})=\det\begin{pmatrix}
+	-\Delta_0-\lambda \identity{N_R} & \Gamma_0 \\
+	B_0 & -\lambda \identity{N_S}
 	\end{pmatrix}
 	=
 	0
 	\end{equation}
-	If we assume that $\lambda\neq 0$, using a reasoning similar to Section \ref{section : non marginal equilibria} we can write the previous equation as:
+	If we assume that $\lambda\neq 0$, using a reasoning similar to Section \ref{section: non marginal equilibria} we can write the previous equation as:
 	\begin{equation}
-	\det\left(\lambda^2+\Delta_0 \lambda - \Gamma_0 \Beta_0 \right)=0 \label{eq : determinant no variance}
+	\det\left(\lambda^2 \identity{N_R}+\Delta_0 \lambda - \Gamma_0 \Beta_0 \right)=0 \label{eq : determinant no variance}
 	\end{equation}
-	Component-wise, we have :
+	Component-wise, we have:
 	\begin{equation}
-	\left(\lambda^2+\Delta_0 \lambda - \Gamma_0 \Beta_0 \right)_{\mu\nu} = \left(\lambda^2+\Delta_0 \lambda\right)\delta_{\mu \nu} - \Gamma_0\Beta_0.
+	\left(\lambda^2 \identity{N_R}+\Delta_0 \lambda - \Gamma_0 \Beta_0 \right)_{\mu\nu} = \left(\lambda^2+\Delta_0 \lambda\right)\delta_{\mu \nu} - \Gamma_0\Beta_0.
 	\end{equation}
-	Using Eq.\eqref{eq : formula special determinant}, the non-zero solutions of Eq.\eqref{eq : determinant no variance} are immediately found:
+	Appendix \ref{app : special determinant computation} explains how to find the non-zero solutions of Eq.\eqref{eq : determinant no variance}. They are given by the roots of the polynomial:
 	\begin{equation}
 	\left(\lambda+\Delta_0\right)^{N_R-1}\left(\lambda^2+\Delta_0 \lambda -N_R \Gamma_0 \Beta_0\right)=0.
 	\end{equation}
@@ -156,7 +155,7 @@ S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
 	\end{equation}
 	\item if $\Gamma_0 > -\frac{\Delta_0^2}{4 N_R \Beta_0}$ :
 	\begin{equation}
-	\sigma(J_0)= \left\{0, \dots, 0, -\Delta_0, \dots, -\Delta_0, -\frac{\Delta_0}{2} \left(1\pm \sqrt{1+\frac{4N_R\Gamma_0\Beta_0}{\Delta_0^2}}\right)\right\}
+	\sigma(J_0)= \left\{0, \dots, 0, -\Delta_0, \dots, -\Delta_0, -\frac{\Delta_0}{2} \left(1\pm \sqrt{1+\frac{4N_R\Gamma_0\Beta_0}{\Delta_0^2}}\right)\right\} \label{eq : spectrum fully connected possibly negative}
 	\end{equation}
 	\end{itemize}
 	It then becomes clear that the system is dynamically unstable if and only if $\frac{4N_R\Gamma_0 \Beta_0}{\Delta_0^2} > 0 $. Because $N_R, \Beta_0 > 0$, we get the condition:
@@ -170,12 +169,14 @@ S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
 	\begin{equation}
 	\alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0)\gamma_0 R_0 \iff \Gamma_0 \lessapprox \left[\min(1-\sigma_0, \sigma_0)-1\right] \gamma_0 R_0 < 0,
 	\end{equation}
-	so we expect the fully connected case to be feasible and the non-zero eigenvalues to be negative.
-	We see that the non-zero part of the spectrum is essentially given by $\Delta_0$. However the sign of the parameter
-	$4N_R\Gamma_0\Beta_0+\Delta_0^2$ plays an essential role in the stability. Looking at its sign allows us to find possibly more locally dynamically stable zones of the metaparameters space $\mathcal{M}$. Indeed we expect to find more stable systems if
+	which means that the case $\Gamma_0 > 0$ is simply not feasible. So in the end the feasible fully connected case is marginally stable and its non-zero eigenvalues have a negative real part.
+
+	We see that all but one non-zero eigenvalues are given by $-\Delta_0$. However the last eigenvalue is determined by
+	$4N_R\Gamma_0\Beta_0+\Delta_0^2$. It gives us the ``deviation'' away from $-\Delta_0/2$ and hence also plays an essential role in the stability. Looking at its sign allows us to find possibly more locally dynamically stable zones of the metaparameters space $\mathcal{M}$. Indeed we expect to find more stable systems in the case of Eq.\eqref{eq : spectrum fully connected possibly negative} if $4 N_R \Gamma_0 \Beta_0 + \Delta_0 ^2$ is small, \ie
 	\begin{equation}
-	4 N_R \Gamma_0 \Beta_0 + \Delta_0 ^2 \ll 0 \iff 4N_R \sigma_0 \gamma_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{S_0}+2N_S\alpha_0  l_0 + N_S^2 \alpha_0^2 S_0 \ll 0. \label{eq : dynamical stability methods fully connected metaparameters}
+	4 N_R \Gamma_0 \Beta_0 + \Delta_0 ^2 \ll 1 \iff 4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2} \ll 1. \label{eq : dynamical stability methods fully connected metaparameters}
 	\end{equation}
+	This equation will be useful in order to predict which metaparameters will lead to dynamically stable systems (see Section \ref{sec: largest eigenvalue of the jacobian}).
 
 
 
