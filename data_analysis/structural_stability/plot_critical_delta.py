@@ -52,15 +52,20 @@ for m in range(len(syntrophy_mode)):
         syn = syntrophy_mode[m]
         alpha = alpha_mode[n]
         if not(syn=='no_syntrophy' and alpha!='fully_connected'):
-            title = syntrophy_label[m]+', '+alpha_label[n]
-            save_string=syn+'_'+alpha
+            title = syntrophy_label[m]
+            save_string=syn
+            ylabel=r'$\Delta_S^*(m, G, 0)$'
+            if syn!='no_syntrophy':
+                title+=', '+alpha_label[n]
+                save_string+='_'+alpha
+                ylabel=r'$\Delta_S^*(m, G, A)$'
             fig = plt.figure(fig_index)
             ax = fig.add_subplot(111)
             for nest in all_nestedness:
                 data = [str_stab[nest][k][syn][alpha] for k in all_connectance]
                 to_plot = np.array([[all_connectance[i],data[i]['value'], data[i]['error']] for i in range(len(data)) if data[i]])
                 ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
-            ax.set_ylabel(r'$\Delta_S^*$')
+            ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\kappa_G$')
             ax.set_title(title)
             ax.legend(bbox_to_anchor=(1.0, 1.0))
@@ -75,7 +80,7 @@ for m in range(len(syntrophy_mode)):
                 data = [str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
                 to_plot = np.array([[all_nestedness[i],data[i]['value'], data[i]['error']] for i in range(len(data)) if data[i]])
                 ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
-            ax.set_ylabel(r'$\Delta_S^*$')
+            ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\eta_G$')
             ax.set_title(title)
             ax.legend(bbox_to_anchor=(1.0, 1.0))
@@ -97,8 +102,9 @@ for conn in all_connectance:
                 data=[str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
                 to_plot = np.array([[all_nestedness[i],data[i]['value']-null[i]['value'], data[i]['error']+null[i]['value']] for i in range(len(data)) if data[i]])
                 ax.plot(to_plot[:,0], to_plot[:,1], label=label, color=alpha_mode_colours[n], marker=syntrophy_marker[m], markersize=6)
-    ax.set_ylabel(r'$\Delta_S(m,G,A)-\Delta_S(m, G, 0)$')
+    ax.set_ylabel(r'$\Delta_S^*(m,G,A)-\Delta_S^*(m, G, 0)$')
     ax.set_xlabel(r'$\eta_G$')
     ax.set_title(title)
     fig.tight_layout()
-    plt.show()
+    fig.savefig('plots/critical_delta_difference_from_null_case_Conn'+str(conn)+'.pdf')
+    plt.close()

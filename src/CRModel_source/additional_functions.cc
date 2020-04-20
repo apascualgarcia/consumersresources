@@ -691,3 +691,38 @@ unsigned int rank(const nmatrix& mat){
   Eigen::FullPivLU<Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic>> lu(eigen_mat);
   return lu.rank();
 }
+
+ntype mean_non_zero_elements(const nmatrix & mat){
+  ntype mean=0.;
+  ntype index=0;
+  for(size_t i=0; i < mat.size(); ++i){
+    for(size_t j=0; j < mat[i].size(); ++j){
+      if(mat[i][j]*mat[i][j]>ZERO){
+        mean+=mat[i][j];
+        index+=1;
+      }
+    }
+  }
+  if(index>=1.){
+    return mean/index;
+  }
+  return mean;
+}
+
+nmatrix operator*(const ntype& lambda, const nmatrix& mat){
+  nmatrix new_mat=nmatrix(mat.size(), nvector(mat[0].size(), 0.));
+  for(size_t i=0; i < new_mat.size();++i){
+    for(size_t j=0; j < new_mat[i].size(); ++j){
+      new_mat[i][j]=lambda*mat[i][j];
+    }
+  }
+  return new_mat;
+}
+
+nmatrix operator*(const nmatrix& mat, const ntype& lambda){
+  return lambda*mat;
+}
+
+nmatrix operator/(const nmatrix& mat, const ntype& lambda){
+  return (1./lambda)*mat;
+}

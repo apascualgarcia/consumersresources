@@ -1,13 +1,13 @@
 #!/bin/bash
 # This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
 # for every matrix listed (one graph per matrix list) and alpha_mode chosen
-MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+MATRIX_LIST="weird_jump"
 #ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
-ALPHA_MODE="random_structure"
-SAVENAME="local_dynamical_stability_NR25_NS25_100_points"
+ALPHA_MODE="fully_connected"
+SAVENAME="weird_jump_local_dynamical_stability_NR25_NS25_100_points"
 OPTIMAL_MATRIX_FOLDER="optimal_LRI"
 ADDITIONAL_MODIF=""
-ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
+ALPHA_VALS="0 0.0013 0.014"
 # for old version
 # VOL_NAME="common_feasibility_volume_NR25_NS25"
 

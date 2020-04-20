@@ -55,6 +55,9 @@ nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
 nmatrix operator*(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&);
+nmatrix operator*(const ntype&, const nmatrix&);
+nmatrix operator*(const nmatrix&, const ntype&);
+nmatrix operator/(const nmatrix&, const ntype&);
 
 nmatrix transpose(const nmatrix & m);
 
@@ -67,6 +70,8 @@ void print_rand_number();
 ntype mean(const nvector&);
 ntype standard_dev(const nvector&);
 ntype median(const nvector&);
+
+ntype mean_non_zero_elements(const nmatrix&);
 
 nvector linear_interval(const ntype& begin, const ntype& end, unsigned int Npoints);
 nvector log_interval(const ntype& begin, const ntype& end, unsigned int Npoints);

@@ -87,6 +87,7 @@ public:
   /* gives back the Beta and Gamma matrices from the jacobian at equilibrium */
   nmatrix get_Beta_matrix(unsigned int eq_number=0) const;
   nmatrix get_Gamma_matrix(unsigned int eq_number=0) const;
+  nvector get_Delta_vector(unsigned int eq_number=0) const;
 
   /* gives back binary biomass flux network */
   nmatrix get_biomass_flux_network() const;

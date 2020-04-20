@@ -3,7 +3,30 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
+
 \subsection{Estimating the critical structural perturbation}\label{sec: results structural stability procedure to estimate critical structural perturbation}
+
+
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-170pt, margin=60pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_fixed_nest_fully_connected}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_fixed_conn_fully_connected}.pdf}}
+\caption{}
+\end{figure}
+
+
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-170pt, margin=60pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_Conn0.18}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_Conn0.43}.pdf}}
+\caption{}
+\end{figure}
+
+
+
+
 \begin{figure}
 \includegraphics{{typical_probability_structural_stability_curve}.pdf}
 \caption{Typical probability of finding one extinction when structurally perturbing the system with a magnitude $\Delta_S$. The critical structural perturbation is easily estimated with a sigmoidal fit.}
@@ -12,10 +35,22 @@
 
 \begin{figure}
 \hspace{-0.1\linewidth}
-\captionsetup[subfigure]{captionskip=-190pt, margin=54pt}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_structural_perturbation_NR25_NS25_NR25.0NS25.0_nest_fixed_conn_all_points}.pdf}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_structural_perturbation_NR25_NS25_NR25.0NS25.0_conn_fixed_nest_all_points}.pdf}}
-\caption{Critical structural perturbation $\Delta_S^*(m,G,A)$ (a) as a function of ecological overlap with fixed connectance and (b) as a function of connectance for a fixed ecological overlap. The critical perturbations are not very high, of the order of one percent. A clear trend may be observed, which is coherent with what was seen in Figure \ref{fig: dynamical stability results critical dynamical syntrophy}: for a given connectance, communities with a large ecological overlap are structurally less stable. Finding a trend for how $\Delta_S^*$ varies as for a given ecological overlap as the connectance varies is harder because of the large errors.}
+\captionsetup[subfigure]{captionskip=-190pt, margin=46pt}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_str_stab_fixed_nest_no_syntrophy}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_str_stab_fixed_conn_no_syntrophy}.pdf}}
+\caption{Critical structural perturbation without syntrophy $\Delta_S^*(m,G,A=0)$ (a) as a function of ecological overlap with fixed connectance and (b) as a function of connectance for a fixed ecological overlap. We look at matrices with $N_R=50$ and $N_S=25$ at one of the points in the metaparameters space that are the most dynamically stable for all the matrices (see Fig.\ref{fig: dynamical stability results common lds volume NR=50 NS=25}), namely $(\gamma_0, S_0)=(0.75, 0.05)$. A clear trend may be observed, which is coherent with what was seen in Figure \ref{fig: dynamical stability results critical dynamical syntrophy}: for a given connectance, communities with a large ecological overlap are structurally less stable. Similarly, for a given ecological overlap, microbial communities with a consumption matrix with a larger connectance are more structurally stable.}
 \end{figure}
+
+
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-170pt, margin=60pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_difference_from_null_case_Conn0.18}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_difference_from_null_case_Conn0.43}.pdf}}
+\caption{Difference between the critical structural perturbation with and without syntrophy for different scenarios as a function of the ecological overlap for a given connectance (a) $\kappa_G=0.18$ and (b) $\kappa_G=0.33$. The different markers correspond to different $\alpha_0$ taken : triangle is ``common maximum syntrophy'', circle is ``own individual syntrophy'' and square is no syntrophy. The different colours correspond to different structures of $A$ : blue is fully connected, green is no intraspecific syntrophy, red is LRI matrix and black is random. At high connectance, the no intraspecific ``own individual syntrophy'' scenario is $\sim 10 \%$ more structurally stable than the ``no syntrophy'' case.}
+\end{figure}
+
+
+
 
 \end{document}

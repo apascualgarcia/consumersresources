@@ -23,7 +23,7 @@ local_dynamical_stability_region=cf.load_data_region(alpha_mode,alpha0, filename
 alpha0=np.array(alpha0)
 
 # then we plot the heat map of the dynamical stability probability
-index_matrix = 7
+index_matrix = 15
 index_alpha_mode = 0
 index_alpha0 = [0,1,9]
 
@@ -71,4 +71,5 @@ cbar.set_ticklabels(np.round(np.linspace(pmin, 1, 5), decimals=3))
 cbar.set_label(r'$\mathcal{D}_L\left(\gamma_0, S_0, G\right)$')
 title = r'$N_R='+str(NR)+', N_S='+str(NS)+', \eta_G='+str(round(nest,2))+', \kappa_G='+str(round(conn,2))+'$'
 fig.suptitle(title)
-fig.savefig('plots/local_dynamical_stability_patchiness.pdf')
+savename ='NR'+str(NR)+'_NS'+str(NS)+'_Nest'+str(nest)+'_Conn'+str(conn)
+fig.savefig('plots/probability_dynamical_stability_'+savename+'.pdf')

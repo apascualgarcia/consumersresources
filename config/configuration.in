@@ -1,10 +1,10 @@
 % Enter here the needed metaparameters to run the simulation :
-gamma0 = 0.2
+gamma0 = 0.75
 alpha0 = 0.0
 sigma0 = 0.25
 m0 = 0.
 R0 = 1.
-S0 = 0.2
+S0 = 0.05
 l0 = 1.
 epsilon = 0.1
 p = 1
@@ -13,7 +13,7 @@ NS = 25
 tf = 10000000.
 gamma_mode = random_val
 tau_mode = taualpha
-alpha_mode = optimal_matrix
+alpha_mode = fully_connected
 building_mode = use_l
 path_to_food_matrix = ./optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.15_Conn0.1808.txt
 path_to_syntrophy_matrix=optimal_matrices/syntrophy/optimal_LRI_Nr25_Nc25

@@ -819,6 +819,18 @@ nmatrix CRModel::get_Gamma_matrix(unsigned int n) const{
   return Gamma;
 }
 
+nvector CRModel::get_Delta_vector(unsigned int n) const{
+  Parameter_set* p=this->get_parameter_set();
+  nvector Delta(p->NR, 0.);
+  for(size_t mu=0; mu < p->NR; ++mu){
+    Delta[mu]=p->m[mu];
+    for(size_t j=0; j < p->NS; ++j){
+      Delta[mu]+=p->gamma[j][mu]*(this->get_consumers_equilibrium(n))[j];
+    }
+  }
+  return Delta;
+}
+
 nctype CRModel::largest_eigenvalue_at_equilibrium() const{
   ncvector eigvals = this->eigenvalues_at_equilibrium();
   return eigvals[eigvals.size()-1];
@@ -827,6 +839,7 @@ nctype CRModel::largest_eigenvalue_at_equilibrium() const{
 ntype CRModel::critical_radius() const{
   nmatrix Gamma=this->get_Gamma_matrix();
   nmatrix Beta=this->get_Beta_matrix();
+  nvector Delta=this->get_Delta_vector();
 
   ntype max_Gamma=0.;
   ntype max_Beta=0.;
@@ -842,7 +855,7 @@ ntype CRModel::critical_radius() const{
   }
 
   for(size_t mu=0; mu < this->metaparameters->NR; ++mu){
-    ntype local_Gamma=0.;
+    ntype local_Gamma=Delta[mu];
     for(size_t j=0; j < this->metaparameters->NS; ++j){
       local_Gamma+=abs(Gamma[mu][j]);
     }
