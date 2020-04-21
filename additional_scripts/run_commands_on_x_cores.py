@@ -16,5 +16,5 @@ for i in range(CORES):
     for j in range(len(commands_per_core[i])):
         core_command+="nohup "+commands_per_core[i][j]+' && '
     core_command=core_command[:-4]+' &'
-    print(core_command)
-    #os.system(core_command)
+    #print(core_command)
+    os.system(core_command)
