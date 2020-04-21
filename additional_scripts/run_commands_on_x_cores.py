@@ -14,7 +14,11 @@ commands_per_core = np.array_split(commands, CORES)
 for i in range(CORES):
     core_command = ''
     for j in range(len(commands_per_core[i])):
-        core_command+="nohup "+commands_per_core[i][j]+' && '
-    core_command=core_command[:-4]+' &'
-    #print(core_command)
+        split_files = commands_per_core[i][j].split(">")
+        command = split_files[0]
+        log_file = split_files[1][:-1]
+        err_file = split_files[2]
+        core_command+='nohup sh -c "'+command+'">'+log_file[1:]+"2>"+err_file+"; wait;"
+    core_command=core_command[:-7]+' &'
+    print(core_command)
     os.system(core_command)
