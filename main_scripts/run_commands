@@ -1,0 +1,5 @@
+#!/bin/bash
+commands_file=$1
+CORES=$2
+
+python3 additional_scripts/run_commands_on_x_cores.py $commands_file $CORES
