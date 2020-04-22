@@ -8,11 +8,11 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrix_list = load_food_matrix_list(metaparams.foodmatrixpath);
     std::string syntrophy_folder=metaparams.syntrophy_matrix_path;
-    std::vector<alphamode> alpha_modes = {fully_connected, no_release_when_eat, optimal_matrix,random_structure};
+    std::vector<alphamode> alpha_modes = {optimal_matrix};
     std::ofstream myfile=open_external_file_truncate(metaparams.save_path);
     myfile << "# alpha modes for";
     for(auto alpha : alpha_modes){
-      myfile <<alpha << ";";
+      myfile << " " << alpha << ";";
     }
     myfile << std::endl;
     for(auto mat: matrix_list){
