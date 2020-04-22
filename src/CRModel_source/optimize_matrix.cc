@@ -2,6 +2,10 @@
 
 
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
+  return optimal_syntrophy_from_consumption(gamma, coprophagy, mcs, connectance(gamma));
+}
+
+nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs, const ntype& target_conn){
   nmatrix unit_gamma(gamma.size(), nvector(gamma[0].size(), 0.));
   for(size_t i=0; i < gamma.size(); ++i){
     for(size_t mu=0; mu < gamma[0].size(); ++mu){
@@ -10,11 +14,11 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
       }
     }
   }
-  ntype connectance_in=connectance(unit_gamma);
-  nmatrix alpha = create_alpha(connectance_in, unit_gamma, coprophagy);
+  nmatrix alpha = create_alpha(target_conn, unit_gamma, coprophagy);
   apply_MC_algorithm(alpha, unit_gamma, coprophagy, mcs);
   return alpha;
 }
+
 ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* params){
   const nvector& u = *(nvector*)(params);
   return u*(alpha*gamma)*u;

@@ -726,3 +726,62 @@ nmatrix operator*(const nmatrix& mat, const ntype& lambda){
 nmatrix operator/(const nmatrix& mat, const ntype& lambda){
   return (1./lambda)*mat;
 }
+
+nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g){
+  nmatrix a=random_binary_matrix_with_connectance(g[0].size(), g.size(), connectance(g));
+  std::uniform_int_distribution<unsigned int> mu_distrib(0, g[0].size()-1);
+  std::uniform_int_distribution<unsigned int> i_distrib(0, g.size()-1);
+  while(is_there_coprophagy(a,g)){
+    for(size_t mu=0; mu < a.size(); ++mu){
+      for(size_t i=0; i < a[0].size(); ++i){
+        /* if there is coprophagy, we move the problematic links */
+        if(a[mu][i]*g[i][mu]>0){
+          unsigned int new_mu = mu_distrib(random_engine);
+          unsigned int new_i = i_distrib(random_engine);
+          while(g[new_i][new_mu]>0){
+            new_mu = mu_distrib(random_engine);
+            new_i = i_distrib(random_engine);
+          }
+          a[mu][i]=0;
+          a[new_mu][new_i]=1;
+        }
+      }
+    }
+  }
+  return a;
+}
+
+
+nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn){
+  nmatrix mat(rows, nvector(columns, 0.));
+  std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < columns;++j){
+      if(unif_distrib(random_engine)< conn){
+        mat[i][j]=1;
+      }
+    }
+  }
+
+  return mat;
+}
+
+
+nmatrix build_LRI_matrix(const nmatrix& g, const Metaparameters& m, const ntype& target_conn){
+
+  Metaparameters metaparams=m;
+  MonteCarloSolver mcsolv;
+  mcsolv.T=5.;
+  mcsolv.max_steps=1000000;
+  mcsolv.max_fails=1000;
+  mcsolv.annealing_freq=1000;
+  mcsolv.annealing_const=1.-1e-2;
+  mcsolv.display_stride=10000;
+  mcsolv.cost_function=quadratic_form_low_intra_resource_interaction;
+  mcsolv.additional_params=&metaparams;
+
+  metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
+  bool allow_coprophagy=true;
+  foodmatrix alpha = optimal_syntrophy_from_consumption(g, allow_coprophagy, mcsolv, target_conn);
+  return alpha;
+}

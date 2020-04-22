@@ -43,6 +43,13 @@ ntype assortativity(const nmatrix&);
 unsigned int rank(const nmatrix&);
 
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
+nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn);
+/* for a matrix g of size NS x NR, returns the NRxNS matrix with the same connectance as g and such that if g_{im}=1 then alpha_{mi}=0 */
+nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g);
+
+/* build LRI matrix with target connectance */
+nmatrix build_LRI_matrix(const nmatrix& g,const Metaparameters& m, const ntype& target_conn);
+
 void rescale_mean(nmatrix&, const ntype&);
 
 bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
