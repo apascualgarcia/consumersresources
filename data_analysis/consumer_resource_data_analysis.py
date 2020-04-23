@@ -195,8 +195,8 @@ def linear_function(x, a, b):
 def exponential_function(x, a, b, c):
     return a*np.exp(-b*x)-c
 
-def power_function(x, a, b, c):
-    return a*np.power(x,b)+c
+def power_function(x, a, b, c, d):
+    return a*np.power(x-d,b)+c
 
 def fit_data(function_to_use, xdata, ydata):
     Npoints = len(xdata)
@@ -204,7 +204,7 @@ def fit_data(function_to_use, xdata, ydata):
         bounds=((0, 0, 0), (np.inf, np.inf, np.inf))
         popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
     elif function_to_use==power_function:
-        bounds=((-np.inf, -np.inf, -np.inf), (np.inf, np.inf, np.inf))
+        bounds=((-np.inf, -np.inf, -np.inf, -np.inf), (np.inf, np.inf, np.inf, np.inf))
         popt, pcov = curve_fit(function_to_use, xdata, ydata, bounds=bounds, maxfev=9000000)
     elif function_to_use==linear_function:
         if Npoints>2:
@@ -232,8 +232,8 @@ def zero_from_fit(function_to_use, popt, pcov):
         rel_error = pcov[0]/popt[0]+pcov[1]/popt[1]+pcov[2]/popt[2]
         result = np.log(abs(popt[0])/abs(popt[2]))/abs(popt[1])
     elif function_to_use==power_function:
-        a,b,c = popt
-        result = np.power(-c/a, 1./b)
+        a,b,c,d = popt
+        result = np.power(-c/a, 1./b)+d
     error = abs(rel_error*result)
     return result, error
 
@@ -308,8 +308,11 @@ def shrink_volume_for_one_matrix(data):
 
     for i in range(Nalpha0):
         # find the fully feasible_indices for this matrix at this alpha0
-        full_feas_indices=[j for j in range(len(feasability[i])) if feasability[i,j]==1.]
-        volume.append(len(full_feas_indices)/Npoints)
+        local_volume=0.
+        for el in feasability[i]:
+            local_volume+=el
+        #full_feas_indices=[j for j in range(len(feasability[i])) if feasability[i,j]==1.]
+        volume.append(local_volume/Npoints)
 
     return volume
 
@@ -331,6 +334,9 @@ def fit_shrinkage_curve(alpha0_,scurve_, fit_function_, take_zero_points_):
             print("p-value: ", p_value)
             estimated_decay_rate=-slope
         if fit_function_==exponential_function:
+            estimated_decay_rate=popt[1]
+
+        if fit_function_==power_function:
             estimated_decay_rate=popt[1]
         # we now get the estimated critical alpha0 and the estimated vol at alpha0=0
         estimated_alpha_crit, err_alpha_crit=zero_from_fit(fit_function_, popt, perr)

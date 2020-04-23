@@ -23,12 +23,12 @@ local_dynamical_stability_region=cf.load_data_region(alpha_mode,alpha0, filename
 alpha0=np.array(alpha0)
 
 # then we plot the heat map of the dynamical stability probability
-index_matrix = 15
+index_matrix = 25
 index_alpha_mode = 0
 index_alpha0 = [0,1,9]
 
 
-pmin = 0.99
+pmin = 0.8
 levels = np.linspace(pmin, 1., 100)
 
 fig, axs = plt.subplots(1, 3, sharey=True, sharex=True, figsize=(10.5,4.5))

@@ -23,4 +23,3 @@ perturbation_equilibrium=1.0
 perturbation_parameters=0.1
 equilibrium_mode=one_extinct
 convergence_threshold=1e-8
-path_to_syntrophy_matrix=optimal_matrices/syntrophy/optimal_LRI_Nr50_Nc25
