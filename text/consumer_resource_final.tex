@@ -31,7 +31,7 @@
 %% ADDITIONAL PACKAGES
 \usepackage{chngcntr}
 \counterwithout{footnote}{chapter}
-
+\counterwithin{figure}{section}
 
 %\interfootnotelinepenalty=10000
 
@@ -59,6 +59,7 @@
   \newpage
   \section{Structural stability}
   \input{structural_stability_methods}
+  \FloatBarrier
   \chapter{Results}\label{chapter : results}
   \section{Feasibility}
   \input{feasibility_results}
@@ -68,9 +69,9 @@
   \input{dynamical_stability_results}
   \FloatBarrier
   \newpage
-  \section{Structural stability}
+  \section{Structural stability}\label{sec : results structural stability}
   \input{structural_stability_results}
-
+  \FloatBarrier
   % \chapter{Analytical approach}\label{chapter : analytical approach}
   % \section{Feasability}
   % \input{analytic_approach_feasability}
@@ -92,7 +93,12 @@
   \chapter{Appendices}
   \section{Demonstrations}
   \input{demonstrations}
+  \FloatBarrier
   \section{Supplementary material}
   \input{supplementary_material}
+  \FloatBarrier
+  \section{Discussion}
+  \input{discussion}
+  \FloatBarrier
   \printbibliography
 \end{document}

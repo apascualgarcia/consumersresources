@@ -833,6 +833,70 @@
       \verb https://dx.plos.org/10.1371/journal.pone.0045635
       \endverb
     \endentry
+    \entry{landi_complexity_2018}{article}{}
+      \name{author}{5}{}{%
+        {{hash=64a87b943234970862e8385f98ec194b}{%
+           family={Landi},
+           familyi={L\bibinitperiod},
+           given={Pietro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d06b3705bc765d60df8420e165a30a8f}{%
+           family={Minoarivelo},
+           familyi={M\bibinitperiod},
+           given={Henintsoa\bibnamedelima O.},
+           giveni={H\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=f32d08a03245a59d0ad5a857be8a5401}{%
+           family={Brännström},
+           familyi={B\bibinitperiod},
+           given={Åke},
+           giveni={Å\bibinitperiod}}}%
+        {{hash=9f323c4a82b5ef0b420aa4c54d1eab97}{%
+           family={Hui},
+           familyi={H\bibinitperiod},
+           given={Cang},
+           giveni={C\bibinitperiod}}}%
+        {{hash=874f15c525e51c2b786d5382c67156ea}{%
+           family={Dieckmann},
+           familyi={D\bibinitperiod},
+           given={Ulf},
+           giveni={U\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{8d78885ef197992a0602fc771ff758d6}
+      \strng{fullhash}{2d48bdba4c188371803285d4fc5b9be2}
+      \strng{authornamehash}{8d78885ef197992a0602fc771ff758d6}
+      \strng{authorfullhash}{2d48bdba4c188371803285d4fc5b9be2}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Our planet is changing at paces never observed before. Species extinction is happening at faster rates than ever, greatly exceeding the five mass extinctions in the fossil record. Nevertheless, our lives are strongly based on services provided by ecosystems, thus the responses to global change of our natural heritage are of immediate concern. Understanding the relationship between complexity and stability of ecosystems is of key importance for the maintenance of the balance of human growth and the conservation of all the natural services that ecosystems provide. Mathematical network models can be used to simplify the vast complexity of the real world, to formally describe and investigate ecological phenomena, and to understand ecosystems propensity of returning to its functioning regime after a stress or a perturbation. The use of ecological-network models to study the relationship between complexity and stability of natural ecosystems is the focus of this review. The concept of ecological networks and their characteristics are first introduced, followed by central and occasionally contrasting definitions of complexity and stability. The literature on the relationship between complexity and stability in different types of models and in real ecosystems is then reviewed, highlighting the theoretical debate and the lack of consensual agreement. The summary of the importance of this line of research for the successful management and conservation of biodiversity and ecosystem services concludes the review.}
+      \field{issn}{1438-3896, 1438-390X}
+      \field{journaltitle}{Population Ecology}
+      \field{month}{10}
+      \field{number}{4}
+      \field{shorttitle}{Complexity and stability of ecological networks}
+      \field{title}{Complexity and stability of ecological networks: a review of the theory}
+      \field{urlday}{23}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{60}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \field{pages}{319\bibrangedash 345}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1007/s10144-018-0628-3
+      \endverb
+      \verb{file}
+      \verb Landi et al. - 2018 - Complexity and stability of ecological networks a.pdf:/Users/leobuchenelepfl/Zotero/storage/RNUCLU7J/Landi et al. - 2018 - Complexity and stability of ecological networks a.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://doi.wiley.com/10.1007/s10144-018-0628-3
+      \endverb
+    \endentry
     \entry{james_continuous_1961}{article}{}
       \name{author}{1}{}{%
         {{hash=129572377fd38eeae84cffd412522500}{%
@@ -1149,18 +1213,18 @@
     \endentry
     \entry{may_will_1972}{article}{}
       \name{author}{1}{}{%
-        {{hash=2edbcd677d559bed95b45fb57fc4ad48}{%
-           family={MAY},
+        {{hash=e60c606952aa3fbdee09129782f0fb4e}{%
+           family={May},
            familyi={M\bibinitperiod},
-           given={ROBERT\bibnamedelima M.},
+           given={Robert\bibnamedelima M.},
            giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
       }
-      \strng{namehash}{2edbcd677d559bed95b45fb57fc4ad48}
-      \strng{fullhash}{2edbcd677d559bed95b45fb57fc4ad48}
-      \strng{authornamehash}{2edbcd677d559bed95b45fb57fc4ad48}
-      \strng{authorfullhash}{2edbcd677d559bed95b45fb57fc4ad48}
-      \field{sortinit}{2}
-      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \strng{namehash}{e60c606952aa3fbdee09129782f0fb4e}
+      \strng{fullhash}{e60c606952aa3fbdee09129782f0fb4e}
+      \strng{authornamehash}{e60c606952aa3fbdee09129782f0fb4e}
+      \strng{authorfullhash}{e60c606952aa3fbdee09129782f0fb4e}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Gardner and Ashby1 have suggested that large complex systems which are assembled (connected) at random may be expected to be stable up to a certain critical level of connectance, and then, as this increases, to suddenly become unstable. Their conclusions were based on the trend of computer studies of systems with 4, 7 and 10 variables.}
@@ -1448,19 +1512,19 @@
     \endentry
     \entry{perron_zur_nodate}{article}{}
       \name{author}{1}{}{%
-        {{hash=cf067f41eebfa71d132aeeb7386f498c}{%
+        {{hash=f4bfc6d1dc22fe1508dac5a30af909a0}{%
            family={Perron},
            familyi={P\bibinitperiod},
-           given={OSCAR},
+           given={Oscar},
            giveni={O\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {de}%
       }
-      \strng{namehash}{cf067f41eebfa71d132aeeb7386f498c}
-      \strng{fullhash}{cf067f41eebfa71d132aeeb7386f498c}
-      \strng{authornamehash}{cf067f41eebfa71d132aeeb7386f498c}
-      \strng{authorfullhash}{cf067f41eebfa71d132aeeb7386f498c}
+      \strng{namehash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \strng{fullhash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \strng{authornamehash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \strng{authorfullhash}{f4bfc6d1dc22fe1508dac5a30af909a0}
       \field{sortinit}{3}
       \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
@@ -1583,8 +1647,8 @@
       \strng{authorfullhash}{d0d6c52cffbe38f91adb7894454bf665}
       \strng{editornamehash}{428631794113b74d16ac1f3a6f241136}
       \strng{editorfullhash}{428631794113b74d16ac1f3a6f241136}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{booktitle}{Handbook of {Metaheuristics}}
@@ -1734,6 +1798,181 @@
       \endverb
       \keyw{Quantitative Biology - Populations and Evolution,Physics - Biological Physics}
     \endentry
+    \entry{rohr_structural_2014}{article}{}
+      \name{author}{3}{}{%
+        {{hash=88421562efe5d1c62d00933b54d3cf59}{%
+           family={Rohr},
+           familyi={R\bibinitperiod},
+           given={R.\bibnamedelimi P.},
+           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=20874df75c0c4f19fc5fbd4e19af9182}{%
+           family={Saavedra},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c19b9957e9071dd91b943295ac6cbd3e}{%
+           family={Bascompte},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{fullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{authornamehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{authorfullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{7}
+      \field{number}{6195}
+      \field{title}{On the structural stability of mutualistic systems}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{345}
+      \field{year}{2014}
+      \field{urldateera}{ce}
+      \field{pages}{1253497\bibrangedash 1253497}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1126/science.1253497
+      \endverb
+      \verb{file}
+      \verb Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:/Users/leobuchenelepfl/Zotero/storage/LHK43QAL/Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1253497
+      \endverb
+    \endentry
+    \entry{tikhonov_collective_2017}{article}{}
+      \name{author}{2}{}{%
+        {{hash=efefaef9260f320ba51c62404985e73d}{%
+           family={Tikhonov},
+           familyi={T\bibinitperiod},
+           given={Mikhail},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a2af921c7b89a1183ea93e464dc30a71}{%
+           family={Monasson},
+           familyi={M\bibinitperiod},
+           given={Remi},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{4dbd9011f3f746af04d07ec04492104a}
+      \strng{fullhash}{4dbd9011f3f746af04d07ec04492104a}
+      \strng{authornamehash}{4dbd9011f3f746af04d07ec04492104a}
+      \strng{authorfullhash}{4dbd9011f3f746af04d07ec04492104a}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0031-9007, 1079-7114}
+      \field{journaltitle}{Physical Review Letters}
+      \field{month}{1}
+      \field{number}{4}
+      \field{title}{Collective {Phase} in {Resource} {Competition} in a {Highly} {Diverse} {Ecosystem}}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{118}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \field{pages}{048103}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevLett.118.048103
+      \endverb
+      \verb{file}
+      \verb Tikhonov and Monasson - 2017 - Collective Phase in Resource Competition in a High.pdf:/Users/leobuchenelepfl/Zotero/storage/3RAM9VSH/Tikhonov and Monasson - 2017 - Collective Phase in Resource Competition in a High.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevLett.118.048103
+      \endverb
+    \endentry
+    \entry{marsland_available_2019}{article}{}
+      \name{author}{6}{}{%
+        {{hash=6c4403825bc6f1ec47d6e3f8669f7f9d}{%
+           family={Marsland},
+           familyi={M\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2f21e6d957a401d2978a4601714b2e95}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Wenping},
+           giveni={W\bibinitperiod}}}%
+        {{hash=6b760fcb2910f2dd15c087be9797dd5c}{%
+           family={Goldford},
+           familyi={G\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=85daa0e611239d7aa981d410b9cd65c0}{%
+           family={Sanchez},
+           familyi={S\bibinitperiod},
+           given={Alvaro},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ff6716ad150095041bde95d410581691}{%
+           family={Korolev},
+           familyi={K\bibinitperiod},
+           given={Kirill},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b934ab8a06f4ab846491dbac786745f9}{%
+           family={Mehta},
+           familyi={M\bibinitperiod},
+           given={Pankaj},
+           giveni={P\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=215aeb8b795241c71901fc035b32fc04}{%
+           family={Morozov},
+           familyi={M\bibinitperiod},
+           given={Alexandre\bibnamedelima V.},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{5b8989682f94041734b6df92eef0a2df}
+      \strng{fullhash}{f02b8ab97ab791eba86e1329d1690d84}
+      \strng{authornamehash}{5b8989682f94041734b6df92eef0a2df}
+      \strng{authorfullhash}{f02b8ab97ab791eba86e1329d1690d84}
+      \strng{editornamehash}{215aeb8b795241c71901fc035b32fc04}
+      \strng{editorfullhash}{215aeb8b795241c71901fc035b32fc04}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1553-7358}
+      \field{journaltitle}{PLOS Computational Biology}
+      \field{month}{2}
+      \field{number}{2}
+      \field{title}{Available energy fluxes drive a transition in the diversity, stability, and functional structure of microbial communities}
+      \field{urlday}{24}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{15}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \field{pages}{e1006793}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pcbi.1006793
+      \endverb
+      \verb{file}
+      \verb Marsland et al. - 2019 - Available energy fluxes drive a transition in the .pdf:/Users/leobuchenelepfl/Zotero/storage/HKPFH3II/Marsland et al. - 2019 - Available energy fluxes drive a transition in the .pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://dx.plos.org/10.1371/journal.pcbi.1006793
+      \endverb
+    \endentry
     \entry{thome_inequalities_2016}{article}{}
       \name{author}{1}{}{%
         {{hash=c669faec0330640dd8aedfbd0742b6ac}{%
@@ -1749,8 +1988,8 @@
       \strng{fullhash}{c669faec0330640dd8aedfbd0742b6ac}
       \strng{authornamehash}{c669faec0330640dd8aedfbd0742b6ac}
       \strng{authorfullhash}{c669faec0330640dd8aedfbd0742b6ac}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper gives simple proofs of Sylvester ( = 2) and Frobenius ( = 3) inequalities. Moreover, a new suﬃcient condition for the equality of the Frobenius inequality is provided. In addition, an extension for {>} 3 matrices and an application to generalized inverses are provided.}

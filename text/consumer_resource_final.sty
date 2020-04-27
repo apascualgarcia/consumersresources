@@ -23,10 +23,19 @@
 \RequirePackage[caption=false]{subfig}
 \RequirePackage{placeins}
 \RequirePackage{epigraph}
+\RequirePackage{wrapfig}
 \theoremstyle{theorem}
 \newtheorem{theorem}{Theorem}[]
 \newtheorem{lemma}{Lemma}[]
 
+\RequirePackage{titlesec}
+% \titleformat{\chapter}
+%   {\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+% \titlespacing*{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+\titleformat{\chapter}
+  {\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing*{\chapter}{0pt}{-50pt}{12pt}
 
 
 \hypersetup{colorlinks=false}

@@ -47,6 +47,7 @@ for n in all_nestedness:
         dnest[c]=dconn
     str_stab[n]=dnest
 fig_index=0
+# own critical delta curves
 for m in range(len(syntrophy_mode)):
     for n in range(len(alpha_mode)):
         syn = syntrophy_mode[m]
@@ -88,6 +89,52 @@ for m in range(len(syntrophy_mode)):
             fig.savefig('plots/critical_delta_str_stab_fixed_conn_'+save_string+'.pdf')
             fig_index+=1
             plt.close()
+# curves that are the difference with the no syntrophy case
+for m in range(len(syntrophy_mode)):
+    if syntrophy_mode[m] !='no_syntrophy':
+        for n in range(len(alpha_mode)):
+            syn = syntrophy_mode[m]
+            alpha = alpha_mode[n]
+            print(syn, alpha)
+            title = syntrophy_label[m]
+            save_string=syn
+            ylabel=r'$\Delta_S^*(m, G, 0)$'
+            if syn!='no_syntrophy':
+                title+=', '+alpha_label[n]
+                save_string+='_'+alpha
+                ylabel=r'$\Delta_S^*(m, G, A)$'
+            fig = plt.figure(fig_index)
+            ax = fig.add_subplot(111)
+            for nest in all_nestedness:
+                data = [str_stab[nest][k][syn][alpha] for k in all_connectance]
+                shift= [str_stab[nest][k]['no_syntrophy']['fully_connected'] for k in all_connectance]
+                to_plot = np.array([[all_connectance[i],data[i]['value']-shift[i]['value'], data[i]['error']+shift[i]['error']] for i in range(len(data)) if data[i]])
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
+            ax.set_ylabel(ylabel)
+            ax.set_xlabel(r'$\kappa_G$')
+            ax.set_title(title)
+            ax.legend(bbox_to_anchor=(1.0, 1.0))
+            fig.tight_layout()
+            fig.savefig('plots/critical_delta_deviation_from_no_syntrophy_str_stab_fixed_nest_'+save_string+'.pdf')
+            fig_index+=1
+            plt.close()
+
+            fig = plt.figure(fig_index)
+            ax = fig.add_subplot(111)
+            for conn in all_connectance:
+                data = [str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
+                shift = [str_stab[eta][conn]['no_syntrophy']['fully_connected'] for eta in all_nestedness]
+                to_plot = np.array([[all_nestedness[i],data[i]['value']-shift[i]['value'], data[i]['error']+shift[i]['error']] for i in range(len(data)) if data[i]])
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
+            ax.set_ylabel(ylabel)
+            ax.set_xlabel(r'$\eta_G$')
+            ax.set_title(title)
+            ax.legend(bbox_to_anchor=(1.0, 1.0))
+            fig.tight_layout()
+            fig.savefig('plots/critical_delta_deviation_from_no_syntrophy_str_stab_fixed_conn_'+save_string+'.pdf')
+            fig_index+=1
+            plt.close()
+
 for conn in all_connectance:
     fig = plt.figure()
     ax = fig.add_subplot(111)

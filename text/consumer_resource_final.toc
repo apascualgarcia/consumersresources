@@ -3,67 +3,71 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
 \contentsline {section}{\numberline {1.1}Consumer Resource Models in microbial ecology}{5}{section.1.1}
-\contentsline {section}{\numberline {1.2}Establishing the model and goals}{6}{section.1.2}
+\contentsline {section}{\numberline {1.2}Establishing the model and goals}{5}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}Equilibria of the model}{7}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {1.2.2}Attack strategy and important notions}{7}{subsection.1.2.2}
-\contentsline {subsubsection}{Metaparameters and matrix properties}{7}{section*.4}
-\contentsline {subsubsection}{Losing complexity -- how to gain it back}{9}{section*.7}
+\contentsline {subsubsection}{Metaparameters and matrix properties}{7}{subsection.1.2.2}
+\contentsline {subsubsection}{Losing complexity -- how to gain it back}{9}{equation.1.2.11}
 \contentsline {chapter}{\numberline {2}Methods}{11}{chapter.2}
 \contentsline {section}{\numberline {2.1}Feasibility}{11}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Basic concepts}{11}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}The feasibility region}{13}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Estimating the fully feasible region $\mathcal {F}^{G,A}_1$}{14}{subsection.2.1.3}
-\contentsline {subsubsection}{Biomass conservation}{14}{section*.9}
-\contentsline {subsubsection}{Biological interpretation of the parameters}{15}{section*.10}
-\contentsline {subsubsection}{Combining both conditions}{16}{section*.11}
+\contentsline {subsubsection}{Biomass conservation}{14}{subsection.2.1.3}
+\contentsline {subsubsection}{Biological interpretation of the parameters}{15}{equation.2.1.19}
+\contentsline {subsubsection}{Combining both conditions}{15}{equation.2.1.24}
 \contentsline {section}{\numberline {2.2}Dynamical stability}{17}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Definitions}{17}{subsection.2.2.1}
-\contentsline {subsubsection}{Local dynamical stability}{17}{section*.12}
-\contentsline {subsubsection}{The locally dynamically stable volume $\mathcal {D}^{G,A}_{L,x}$}{18}{section*.13}
-\contentsline {subsubsection}{Global dynamical stability}{19}{section*.14}
+\contentsline {subsubsection}{Local dynamical stability}{17}{subsection.2.2.1}
+\contentsline {subsubsection}{The locally dynamically stable volume $\mathcal {D}^{G,A}_{L,x}$}{18}{equation.2.2.34}
+\contentsline {subsubsection}{Global dynamical stability}{19}{equation.2.2.41}
 \contentsline {subsection}{\numberline {2.2.2}The quest for a full solution}{20}{subsection.2.2.2}
-\contentsline {subsubsection}{How to determine local dynamical stability}{20}{section*.16}
-\contentsline {subsubsection}{The master equation for local dynamical stability}{20}{section*.17}
-\contentsline {subsubsection}{Simplifying the master equation}{21}{section*.18}
+\contentsline {subsubsection}{How to determine local dynamical stability}{20}{subsection.2.2.2}
+\contentsline {subsubsection}{The master equation for local dynamical stability}{20}{equation.2.2.45}
+\contentsline {subsubsection}{Simplifying the master equation}{21}{equation.2.2.47}
 \contentsline {subsection}{\numberline {2.2.3}Bounds on the eigenvalues}{21}{subsection.2.2.3}
-\contentsline {subsubsection}{Gerschgorin circle theorem}{22}{section*.19}
+\contentsline {subsubsection}{Gerschgorin circle theorem}{21}{subsection.2.2.3}
 \contentsline {subsection}{\numberline {2.2.4}Low intra resources interaction (LRI) regime }{24}{subsection.2.2.4}
-\contentsline {subsubsection}{Reductio ad absurdum}{24}{section*.20}
-\contentsline {subsubsection}{Strong LRI regime}{25}{section*.21}
-\contentsline {subsubsection}{Weak LRI regime}{26}{section*.22}
-\contentsline {subsubsection}{Intuitive interpretation of the LRI regimes}{26}{section*.23}
-\contentsline {subsubsection}{Feasibility of the LRI regimes}{26}{section*.24}
-\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{section*.25}
+\contentsline {subsubsection}{Reductio ad absurdum}{24}{subsection.2.2.4}
+\contentsline {subsubsection}{Strong LRI regime}{24}{equation.2.2.75}
+\contentsline {subsubsection}{Weak LRI regime}{25}{equation.2.2.82}
+\contentsline {subsubsection}{Intuitive interpretation of the LRI regimes}{26}{equation.2.2.83}
+\contentsline {subsubsection}{Feasibility of the LRI regimes}{26}{equation.2.2.83}
+\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{27}{equation.2.2.91}
 \contentsline {subsection}{\numberline {2.2.5}Application: fully connected consumption and syntrophy networks}{29}{subsection.2.2.5}
-\contentsline {paragraph}{Standard deviation expansion}{29}{section*.26}
-\contentsline {paragraph}{Rewriting the jacobian at equilibrium}{30}{section*.28}
-\contentsline {subsubsection}{Standard deviation expansion at first order}{30}{section*.31}
-\contentsline {paragraph}{Zero variance case}{32}{section*.35}
-\contentsline {section}{\numberline {2.3}Structural stability}{34}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Definitions}{34}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Numerical estimate of the critical structural perturbation}{35}{subsection.2.3.2}
-\contentsline {chapter}{\numberline {3}Results}{37}{chapter.3}
-\contentsline {section}{\numberline {3.1}Feasibility}{37}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{37}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{41}{subsection.3.1.2}
-\contentsline {subsubsection}{The influence of matrix structure}{41}{section*.36}
-\contentsline {subsubsection}{Common fully feasible volume}{46}{section*.37}
-\contentsline {subsubsection}{The influence of the matrix dimensions}{49}{section*.38}
-\contentsline {section}{\numberline {3.2}Dynamical stability}{53}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}LRI regime -- Outcome of the Monte Carlo algorithm}{53}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Fully dynamically stable region}{57}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Largest eigenvalue of the jacobian}{63}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}The influence of the matrix dimension}{66}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Structural stability}{70}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Estimating the critical structural perturbation}{70}{subsection.3.3.1}
-\contentsline {chapter}{\numberline {4}Appendices}{75}{chapter.4}
-\contentsline {section}{\numberline {4.1}Demonstrations}{75}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Special determinant computation}{75}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}The optimal $S_0$ for locally dynamically stable systems}{76}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Supplementary material}{77}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Why do we solve it this way}{77}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Algorithmic procedure}{77}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}When is zero part of the spectrum of $J^*$?}{78}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Weak LRI regime}{79}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}Effective system}{80}{subsection.4.2.5}
-\contentsline {subsubsection}{Perturbation analysis}{81}{section*.39}
+\contentsline {paragraph}{Standard deviation expansion}{29}{equation.2.2.94}
+\contentsline {paragraph}{Rewriting the jacobian at equilibrium}{30}{AMS.8}
+\contentsline {subsubsection}{Standard deviation expansion at first order}{30}{AMS.10}
+\contentsline {paragraph}{Zero variance case}{31}{equation.2.2.122}
+\contentsline {section}{\numberline {2.3}Structural stability}{33}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Definitions}{33}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Numerical estimate of the critical structural perturbation}{34}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}Results}{35}{chapter.3}
+\contentsline {section}{\numberline {3.1}Feasibility}{35}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}The feasibility volume $\mathcal {V}^{G,A}_x$}{35}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Evolution of the feasible volume with syntrophy}{36}{subsection.3.1.2}
+\contentsline {subsubsection}{The influence of matrix structure}{37}{equation.3.1.2}
+\contentsline {subsubsection}{Common fully feasible volume}{38}{equation.3.1.3}
+\contentsline {subsubsection}{The influence of the matrix dimensions}{38}{equation.3.1.3}
+\contentsline {section}{\numberline {3.2}Dynamical stability}{49}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}LRI regime -- Outcome of the Monte Carlo algorithm}{49}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Fully dynamically stable region}{49}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Largest eigenvalue of the jacobian}{51}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}The influence of the matrix dimension}{51}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Structural stability}{65}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Domain of analysis}{65}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Critical dynamical syntrophies}{66}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Critical structural perturbation}{67}{subsection.3.3.3}
+\contentsline {chapter}{\numberline {4}Appendices}{73}{chapter.4}
+\contentsline {section}{\numberline {4.1}Demonstrations}{73}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Special determinant computation}{73}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}The optimal $S_0$ for locally dynamically stable systems}{74}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Supplementary material}{74}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Why do we solve it this way}{74}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Algorithmic procedure}{74}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}When is zero part of the spectrum of $J^*$?}{75}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Weak LRI regime}{77}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Effective system}{77}{subsection.4.2.5}
+\contentsline {subsubsection}{Perturbation analysis}{78}{equation.4.2.43}
+\contentsline {subsection}{\numberline {4.2.6}Estimate the critical structural perturbation $\Delta _S^*$}{80}{subsection.4.2.6}
+\contentsline {section}{\numberline {4.3}Discussion}{81}{section.4.3}
