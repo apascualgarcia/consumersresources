@@ -656,6 +656,8 @@ INPUT ./figures/Results/structural_stability/critical_delta_difference_from_null
 INPUT ./figures/Results/structural_stability/critical_delta_difference_from_null_case_Conn0.43.pdf
 INPUT ./figures/Results/structural_stability/critical_delta_difference_from_null_case_Conn0.43.pdf
 INPUT ./figures/Results/structural_stability/critical_delta_difference_from_null_case_Conn0.43.pdf
+INPUT discussion.tex
+INPUT discussion.tex
 INPUT demonstrations.tex
 INPUT demonstrations.tex
 INPUT supplementary_material.tex
@@ -663,8 +665,6 @@ INPUT supplementary_material.tex
 INPUT ./figures/Results/structural_stability/typical_probability_structural_stability_curve.pdf
 INPUT ./figures/Results/structural_stability/typical_probability_structural_stability_curve.pdf
 INPUT ./figures/Results/structural_stability/typical_probability_structural_stability_curve.pdf
-INPUT discussion.tex
-INPUT discussion.tex
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/bitstrea/charter/bchrc8t.tfm
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/vf/bitstrea/charter/bchrc8t.vf
 INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/bitstrea/charter/bchr8r.tfm

@@ -10,7 +10,7 @@ alpha_mode_colours+=['orange', 'pink', 'grey']
 folder='structural_stability'
 filename='data_all_structural_stability'
 syntrophy_mode=['common_max_syntrophy','own_max_syntrophy', 'no_syntrophy']
-syntrophy_label=['Common maximum syntrophy', 'Own individual syntrophy', 'No syntrophy']
+syntrophy_label=[r'$\alpha_0=$min$\{\alpha_C^D\}$', r'$\alpha_0=\alpha_C^D(\gamma_0, S_0, G, A)$', r'$\alpha_0=0$']
 syntrophy_marker=['^', 'o', 's']
 
 file = folder+'/'+filename+'.out'
@@ -105,19 +105,15 @@ for m in range(len(syntrophy_mode)):
         for n in range(len(alpha_mode)):
             syn = syntrophy_mode[m]
             alpha = alpha_mode[n]
-            title = syntrophy_label[m]
-            save_string=syn
-            ylabel=r'$\Delta_S^*(m, G, 0)$'
-            if syn!='no_syntrophy':
-                title+=', '+alpha_label[n]
-                save_string+='_'+alpha
-                ylabel=r'$\Delta_S^*(m, G, A)$'
+            title = syntrophy_label[m]+', '+alpha_label[n]
+            save_string=syn+'_'+alpha
+            ylabel=r'$\Delta_S^*(m, G, A)/\Delta_S^*(m, G, 0)-1$'
             fig = plt.figure(fig_index)
             ax = fig.add_subplot(111)
             for nest in all_nestedness:
                 data = [str_stab[nest][k][syn][alpha] for k in all_connectance]
                 shift= [str_stab[nest][k]['no_syntrophy']['fully_connected'] for k in all_connectance]
-                to_plot = np.array([[all_connectance[i],data[i]['value']-shift[i]['value'], data[i]['error']+shift[i]['error']] for i in range(len(data)) if data[i]])
+                to_plot = np.array([[all_connectance[i],data[i]['value']/shift[i]['value']-1, data[i]['value']/shift[i]['value']*(data[i]['error']/data[i]['value']+shift[i]['error']/shift[i]['value'])] for i in range(len(data)) if data[i]])
                 ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
             ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\kappa_G$')
@@ -133,7 +129,7 @@ for m in range(len(syntrophy_mode)):
             for conn in all_connectance:
                 data = [str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
                 shift = [str_stab[eta][conn]['no_syntrophy']['fully_connected'] for eta in all_nestedness]
-                to_plot = np.array([[all_nestedness[i],data[i]['value']-shift[i]['value'], data[i]['error']+shift[i]['error']] for i in range(len(data)) if data[i]])
+                to_plot = np.array([[all_nestedness[i],data[i]['value']/shift[i]['value']-1, data[i]['value']/shift[i]['value']*(data[i]['error']/data[i]['value']+shift[i]['error']/shift[i]['value'])] for i in range(len(data)) if data[i]])
                 ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
             ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\eta_G$')

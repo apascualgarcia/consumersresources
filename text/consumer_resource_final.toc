@@ -58,16 +58,16 @@
 \contentsline {subsection}{\numberline {3.3.1}Domain of analysis}{65}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Critical dynamical syntrophies}{66}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Critical structural perturbation}{67}{subsection.3.3.3}
-\contentsline {chapter}{\numberline {4}Appendices}{73}{chapter.4}
-\contentsline {section}{\numberline {4.1}Demonstrations}{73}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Special determinant computation}{73}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}The optimal $S_0$ for locally dynamically stable systems}{74}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Supplementary material}{74}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Why do we solve it this way}{74}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Algorithmic procedure}{74}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}When is zero part of the spectrum of $J^*$?}{75}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Weak LRI regime}{77}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}Effective system}{77}{subsection.4.2.5}
-\contentsline {subsubsection}{Perturbation analysis}{78}{equation.4.2.43}
-\contentsline {subsection}{\numberline {4.2.6}Estimate the critical structural perturbation $\Delta _S^*$}{80}{subsection.4.2.6}
-\contentsline {section}{\numberline {4.3}Discussion}{81}{section.4.3}
+\contentsline {chapter}{\numberline {4}Discussion}{73}{chapter.4}
+\contentsline {chapter}{\numberline {5}Appendices}{75}{chapter.5}
+\contentsline {section}{\numberline {5.1}Demonstrations}{75}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Special determinant computation}{75}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}The optimal $S_0$ for locally dynamically stable systems}{76}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}Supplementary material}{76}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Why do we solve it this way}{76}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Algorithmic procedure}{76}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}When is zero part of the spectrum of $J^*$?}{77}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Weak LRI regime}{79}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}Effective system}{79}{subsection.5.2.5}
+\contentsline {subsubsection}{Perturbation analysis}{80}{equation.5.2.43}
+\contentsline {subsection}{\numberline {5.2.6}Estimate the critical structural perturbation $\Delta _S^*$}{82}{subsection.5.2.6}
