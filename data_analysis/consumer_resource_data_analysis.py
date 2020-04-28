@@ -12,7 +12,7 @@ mpl.rcParams['lines.markeredgewidth']=3
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
 alpha_mode_colours=['blue', 'green', 'red', 'black']
-label=['fully connected', 'no intraspecific syntrophy', 'LRI regime', 'random structure']
+label=['FC', 'NIS', 'LRI', 'RS']
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]

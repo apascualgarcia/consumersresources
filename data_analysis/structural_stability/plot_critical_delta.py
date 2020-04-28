@@ -4,6 +4,9 @@ import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
 from consumer_resource_data_analysis import label as alpha_label
 
+alpha_mode+=['RNISC', 'LNISC', 'NISCC']
+alpha_label+=['RNISC', 'LNISC', 'NISCC']
+alpha_mode_colours+=['orange', 'pink', 'grey']
 folder='structural_stability'
 filename='data_all_structural_stability'
 syntrophy_mode=['common_max_syntrophy','own_max_syntrophy', 'no_syntrophy']
@@ -12,7 +15,10 @@ syntrophy_marker=['^', 'o', 's']
 
 file = folder+'/'+filename+'.out'
 mat_name=np.loadtxt(file, usecols=0, dtype='U')
-data=np.loadtxt(file, usecols=tuple([i for i in range(1,19)]))
+data=np.loadtxt(file, usecols=tuple([i for i in range(1,2*(len(alpha_mode)*(len(syntrophy_mode)-1)+1)+1)]))
+
+
+#### DATA LOADING ######
 # str_stab dictionary is organized this way
 # str_stab[Nest][Conn][syntrophy mode][alpha mode]
 nest = []
@@ -47,6 +53,9 @@ for n in all_nestedness:
         dnest[c]=dconn
     str_stab[n]=dnest
 fig_index=0
+
+#print(str_stab[0.45][0.43]['own_max_syntrophy']['no_release_when_eat'])
+#### FIGURES DRAWING ########
 # own critical delta curves
 for m in range(len(syntrophy_mode)):
     for n in range(len(alpha_mode)):
@@ -89,13 +98,13 @@ for m in range(len(syntrophy_mode)):
             fig.savefig('plots/critical_delta_str_stab_fixed_conn_'+save_string+'.pdf')
             fig_index+=1
             plt.close()
+print('Finished drawing own critical delta curves')
 # curves that are the difference with the no syntrophy case
 for m in range(len(syntrophy_mode)):
     if syntrophy_mode[m] !='no_syntrophy':
         for n in range(len(alpha_mode)):
             syn = syntrophy_mode[m]
             alpha = alpha_mode[n]
-            print(syn, alpha)
             title = syntrophy_label[m]
             save_string=syn
             ylabel=r'$\Delta_S^*(m, G, 0)$'
@@ -134,6 +143,7 @@ for m in range(len(syntrophy_mode)):
             fig.savefig('plots/critical_delta_deviation_from_no_syntrophy_str_stab_fixed_conn_'+save_string+'.pdf')
             fig_index+=1
             plt.close()
+print("Finished drawing deviations from no syntrophy case")
 
 for conn in all_connectance:
     fig = plt.figure()
@@ -144,7 +154,7 @@ for conn in all_connectance:
         for n in range(len(alpha_mode)):
             syn = syntrophy_mode[m]
             alpha = alpha_mode[n]
-            if not(syn=='no_syntrophy' and alpha!='fully_connected'):
+            if not(syn=='no_syntrophy'):
                 label = syntrophy_label[m]+', '+alpha_label[n]
                 data=[str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
                 to_plot = np.array([[all_nestedness[i],data[i]['value']-null[i]['value'], data[i]['error']+null[i]['value']] for i in range(len(data)) if data[i]])

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  25 APR 2020 20:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  27 APR 2020 15:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3789,28 +3789,28 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [67]
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_nest
-_fully_connected.pdf, id=2453, 462.52798pt x 346.89601pt>
+_FC.pdf, id=2453, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed
-_nest_fully_connected.pdf Graphic file (type pdf)
+_nest_FC.pdf Graphic file (type pdf)
 
 <use ./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_
-nest_fully_connected.pdf>
+nest_FC.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_dynami
-cal_syntrophy_fixed_nest_fully_connected.pdf used on input line 47.
+cal_syntrophy_fixed_nest_FC.pdf used on input line 48.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_conn
-_fully_connected.pdf, id=2454, 462.52798pt x 346.89601pt>
+_FC.pdf, id=2454, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed
-_conn_fully_connected.pdf Graphic file (type pdf)
+_conn_FC.pdf Graphic file (type pdf)
 
 <use ./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_
-conn_fully_connected.pdf>
+conn_FC.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_dynami
-cal_syntrophy_fixed_conn_fully_connected.pdf used on input line 48.
+cal_syntrophy_fixed_conn_FC.pdf used on input line 49.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 46--49
+Overfull \hbox (49.738pt too wide) in paragraph at lines 47--50
 []  [][][][] 
  []
 
@@ -3823,7 +3823,7 @@ File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0
 <use ./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0.
 18.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_dynami
-cal_syntrophy_Conn0.18.pdf used on input line 54.
+cal_syntrophy_Conn0.18.pdf used on input line 55.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0.43.p
@@ -3834,10 +3834,10 @@ File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0
 <use ./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0.
 43.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_dynami
-cal_syntrophy_Conn0.43.pdf used on input line 55.
+cal_syntrophy_Conn0.43.pdf used on input line 56.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 53--56
+Overfull \hbox (49.738pt too wide) in paragraph at lines 54--57
 []  [][][][] 
  []
 
@@ -3850,7 +3850,7 @@ _no_syntrophy.pdf Graphic file (type pdf)
 <use ./figures/Results/structural_stability/critical_delta_str_stab_fixed_nest_
 no_syntrophy.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
-str_stab_fixed_nest_no_syntrophy.pdf used on input line 61.
+str_stab_fixed_nest_no_syntrophy.pdf used on input line 62.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_delta_str_stab_fixed_conn_no_s
@@ -3861,37 +3861,103 @@ _no_syntrophy.pdf Graphic file (type pdf)
 <use ./figures/Results/structural_stability/critical_delta_str_stab_fixed_conn_
 no_syntrophy.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
-str_stab_fixed_conn_no_syntrophy.pdf used on input line 62.
+str_stab_fixed_conn_no_syntrophy.pdf used on input line 63.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 59--63
+Overfull \hbox (49.738pt too wide) in paragraph at lines 60--64
+[]  [][][][] 
+ []
+
+
+<./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
+phy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf, id=2463, 462.52798pt x 346
+.89601pt>
+File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
+yntrophy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf Graphic file (type pdf
+)
+
+<use ./figures/Results/structural_stability/critical_delta_deviation_from_no_sy
+ntrophy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
+deviation_from_no_syntrophy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf use
+d on input line 69.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
+phy_str_stab_fixed_nest_common_max_syntrophy_fully_connected.pdf, id=2464, 462.
+52798pt x 346.89601pt>
+File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
+yntrophy_str_stab_fixed_nest_common_max_syntrophy_fully_connected.pdf Graphic f
+ile (type pdf)
+
+<use ./figures/Results/structural_stability/critical_delta_deviation_from_no_sy
+ntrophy_str_stab_fixed_nest_common_max_syntrophy_fully_connected.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
+deviation_from_no_syntrophy_str_stab_fixed_nest_common_max_syntrophy_fully_conn
+ected.pdf used on input line 70.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 68--71
+[]  [][][][] 
+ []
+
+
+<./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
+phy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf, id=2467, 462
+.52798pt x 346.89601pt>
+File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
+yntrophy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf Graphic 
+file (type pdf)
+
+<use ./figures/Results/structural_stability/critical_delta_deviation_from_no_sy
+ntrophy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
+deviation_from_no_syntrophy_str_stab_fixed_nest_own_max_syntrophy_no_release_wh
+en_eat.pdf used on input line 78.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
+phy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf, id=2468, 462
+.52798pt x 346.89601pt>
+File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
+yntrophy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf Graphic 
+file (type pdf)
+
+<use ./figures/Results/structural_stability/critical_delta_deviation_from_no_sy
+ntrophy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
+deviation_from_no_syntrophy_str_stab_fixed_conn_own_max_syntrophy_no_release_wh
+en_eat.pdf used on input line 79.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 77--80
 []  [][][][] 
  []
 
 
 <./figures/Results/structural_stability/critical_delta_difference_from_null_cas
-e_Conn0.18.pdf, id=2463, 462.52798pt x 346.89601pt>
+e_Conn0.18.pdf, id=2469, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_difference_from_nul
 l_case_Conn0.18.pdf Graphic file (type pdf)
 
 <use ./figures/Results/structural_stability/critical_delta_difference_from_null
 _case_Conn0.18.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
-difference_from_null_case_Conn0.18.pdf used on input line 68.
+difference_from_null_case_Conn0.18.pdf used on input line 87.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_delta_difference_from_null_cas
-e_Conn0.43.pdf, id=2464, 462.52798pt x 346.89601pt>
+e_Conn0.43.pdf, id=2470, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_difference_from_nul
 l_case_Conn0.43.pdf Graphic file (type pdf)
 
 <use ./figures/Results/structural_stability/critical_delta_difference_from_null
 _case_Conn0.43.pdf>
 Package pdftex.def Info: ./figures/Results/structural_stability/critical_delta_
-difference_from_null_case_Conn0.43.pdf used on input line 69.
+difference_from_null_case_Conn0.43.pdf used on input line 88.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 67--70
+Overfull \hbox (49.738pt too wide) in paragraph at lines 86--89
 []  [][][][] 
  []
 
@@ -3910,12 +3976,12 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [69 <./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_
-nest_fully_connected.pdf> <./figures/Results/structural_stability/critical_dyna
-mical_syntrophy_fixed_conn_fully_connected.pdf
+nest_FC.pdf> <./figures/Results/structural_stability/critical_dynamical_syntrop
+hy_fixed_conn_FC.pdf
 
 pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
-dynamical_syntrophy_fixed_conn_fully_connected.pdf): PDF inclusion: multiple pd
-fs with page group included in a single page
+dynamical_syntrophy_fixed_conn_FC.pdf): PDF inclusion: multiple pdfs with page 
+group included in a single page
 > <./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0.18
 .pdf
 
@@ -3949,13 +4015,29 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[71 <./figures/Results/structural_stability/critical_delta_difference_from_null
-_case_Conn0.18.pdf> <./figures/Results/structural_stability/critical_delta_diff
-erence_from_null_case_Conn0.43.pdf
+[71 <./figures/Results/structural_stability/critical_delta_deviation_from_no_sy
+ntrophy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf> <./figures/Results/str
+uctural_stability/critical_delta_deviation_from_no_syntrophy_str_stab_fixed_nes
+t_common_max_syntrophy_fully_connected.pdf
 
 pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
-delta_difference_from_null_case_Conn0.43.pdf): PDF inclusion: multiple pdfs wit
-h page group included in a single page
+delta_deviation_from_no_syntrophy_str_stab_fixed_nest_common_max_syntrophy_full
+y_connected.pdf): PDF inclusion: multiple pdfs with page group included in a si
+ngle page
+> <./figures/Results/structural_stability/critical_delta_deviation_from_no_synt
+rophy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
+delta_deviation_from_no_syntrophy_str_stab_fixed_nest_own_max_syntrophy_no_rele
+ase_when_eat.pdf): PDF inclusion: multiple pdfs with page group included in a s
+ingle page
+> <./figures/Results/structural_stability/critical_delta_deviation_from_no_synt
+rophy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
+delta_deviation_from_no_syntrophy_str_stab_fixed_conn_own_max_syntrophy_no_rele
+ase_when_eat.pdf): PDF inclusion: multiple pdfs with page group included in a s
+ingle page
 >]
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -3963,11 +4045,18 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[72
+[72 <./figures/Results/structural_stability/critical_delta_difference_from_null
+_case_Conn0.18.pdf> <./figures/Results/structural_stability/critical_delta_diff
+erence_from_null_case_Conn0.43.pdf
+
+pdfTeX warning: pdflatex (file ./figures/Results/structural_stability/critical_
+delta_difference_from_null_case_Conn0.43.pdf): PDF inclusion: multiple pdfs wit
+h page group included in a single page
+>]
+Chapter 4.
+(./demonstrations.tex [73
 
 ]
-Chapter 4.
-(./demonstrations.tex [73]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 91.
@@ -4075,7 +4164,7 @@ in-ter-val $\U/matha/m/n/12 r\OT1/cmr/m/n/12 ^^A[]\OML/cmm/m/it/12 ; \OT1/cmr/m
 
 
 <./figures/Results/structural_stability/typical_probability_structural_stabilit
-y_curve.pdf, id=2817, 462.52798pt x 346.89601pt>
+y_curve.pdf, id=2953, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/typical_probability_structural_sta
 bility_curve.pdf Graphic file (type pdf)
 
@@ -4146,10 +4235,10 @@ Package logreq Info: Writing requests to 'consumer_resource_final.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 104.
  ) 
 Here is how much of TeX's memory you used:
- 28751 strings out of 493013
- 558214 string characters out of 6133344
- 973613 words of memory out of 5000000
- 31209 multiletter control sequences out of 15000+600000
+ 28779 strings out of 493013
+ 561038 string characters out of 6133344
+ 974029 words of memory out of 5000000
+ 31227 multiletter control sequences out of 15000+600000
  87119 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,14n,98p,10413b,2682s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -4190,10 +4279,10 @@ ive/2016/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb></usr/local/te
 xlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/loca
 l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on consumer_resource_final.pdf (85 pages, 1365110 bytes).
+Output written on consumer_resource_final.pdf (85 pages, 1394797 bytes).
 PDF statistics:
- 3137 PDF objects out of 3580 (max. 8388607)
- 2705 compressed objects within 28 object streams
- 568 named destinations out of 1000 (max. 500000)
- 713 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3273 PDF objects out of 3580 (max. 8388607)
+ 2790 compressed objects within 28 object streams
+ 574 named destinations out of 1000 (max. 500000)
+ 733 words of extra memory for PDF output out of 10000 (max. 10000000)
 
