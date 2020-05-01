@@ -51,7 +51,9 @@
     sortcites]{biblatex}
 \addbibresource{sources.bib}
 
+\RequirePackage{caption}
 \captionsetup{font=it, size=small}
+
 \captionsetup[subfigure]{labelformat = parens,singlelinecheck=off}
 \captionsetup[subfigure]{captionskip = -165pt, margin = 35pt}
 
@@ -59,6 +61,8 @@
 \newcommand{\abs}[1]{\left|{#1}\right|}
 \newcommand{\define}[1]{\textit{#1}}
 \newcommand{\important}[1]{\textit{#1}}
+
+\newcommand{\vol}[1]{\text{Vol}\left(#1\right)}
 
 \DeclareMathOperator{\Tr}{Tr}
 
