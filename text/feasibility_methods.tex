@@ -66,7 +66,7 @@ Hence we define the \define{parameters set feasibility function} $\mathfrak{F} :
 However as explained in the introduction we will usually not work with a parameter set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameter set $m \in \mathcal{M}$ and a consumption-syntrophy network $(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ instead. We can  define a corresponding
 \define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with binary matrices $B=(G, A)$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameter set :
 \begin{equation}\boxed{
-\mathcal{F}(m, B)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, B)\right)=1\right\}
+\mathcal{F}(m, B)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, B)\right)=1\right\} \label{eq : feasibility methods feasibility metaparameters function}
 }
 \end{equation}
 %We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it is easier to handle metaparameters.
@@ -99,20 +99,20 @@ Formally, we can define for a consumption matrix $G$ coupled with a syntrophy ad
 \begin{equation}
 \mathcal{F}^{G,A}_x \defined \left\{m \in \mathcal{M} : \mathcal{F}\left(m, (G,A)\right)\geq x \right\}. \label{eq : x feasible volume}
 \end{equation}
-It is clear that $\mathcal{F}^{G,A}_0 = \mathcal{M}$ $\forall G$ and $\text{Vol}\left(\mathcal{F}^{G,A}_{x}\right) \leq \text{Vol}\left(\mathcal{F}^{G,A}_{y}\right)$ $\forall x > y, G$ . We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \important{common feasibility} region $\mathcal{F}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
+It is clear that $\mathcal{F}^{G,A}_0 = \mathcal{M}$ $\forall G$ and $\text{Vol}\left(\mathcal{F}^{G,A}_{x}\right) \leq \text{Vol}\left(\mathcal{F}^{G,A}_{y}\right)$ $\forall x > y, G$. We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \important{common feasibility} region $\mathcal{F}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
 \begin{equation}
 \mathcal{F}^S_x \defined \intersection{(G,A) \in S} \mathcal{F}^{G,A}_x.
 \end{equation}
 We also define for a matrix set $S$, its critical feasibility $f^*(S)$, which is the largest feasibility we can get while still having a non-zero common volume :
 \begin{equation}
-f^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \text{Vol}\left(\mathcal{F}^S_x\right) > 0 \right\}.
+f^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \text{Vol}\left(\mathcal{F}^S_x\right) > 0 \right\}. \label{eq : feasibility methods critical common feasibility}
 \end{equation}
 For actual computations, we will choose a matrix set $S_M$, stick to it during the whole thesis, and work in its critical feasibility region $\mathcal{F}^*$, defined as :
 \begin{equation}\boxed{
-\mathcal{F}^* \defined \mathcal{F}^{S_M}_{f^*(S_M)}.
+\mathcal{F}^* \defined \mathcal{F}^{S_M}_{f^*(S_M)}. \label{eq : feasibility methods critical common feasibility region}
 }
 \end{equation}
-Our hope is that we may find a fully feasible common region, \ie $f^*(S)=1$.
+Our hope is that we may find a fully feasible common region, \ie $f^*(S)=1$. 
 
 \subsection{Estimating the fully feasible region $\mathcal{F}^{G,A}_1$}
 Now that we defined the $x$-feasible volume of a given couple consumption-syntrophy network $(G,A)$ in Eq.\eqref{eq : x feasible volume}, we would like to know what regions of the metaparameters space lead to fully feasible systems. We imposed two conditions that characterise the set of feasible parameters: Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation}. We use them as a start to get corresponding metaparameters equations that describe $\mathcal{F}^{G,A}_1$.

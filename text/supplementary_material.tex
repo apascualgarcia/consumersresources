@@ -2,7 +2,7 @@
 \usepackage{consumer_resource_final}
 \begin{document}
 \subsection{Why do we solve it this way}\label{sec: explanation solve for d and m}
-
+\textbf{TO DO : write this}
 \subsection{Algorithmic procedure}\label{sec : feasibility methods algorithmic procedure}
 We hereby detail the $\mathcal{A}$ procedure which from a set of metaparameters $m$ and a consumption-syntrophy network $(G,A)$ gives rise to a set of parameters $p$. It goes like this:
 \begin{enumerate}
@@ -228,6 +228,33 @@ We see that we without surprise we find again the $\Beta, \Gamma $ and $\Delta$ 
 \end{equation}
 
 This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.
+\subsection{Measuring the feasibility and local dynamical stability volumes}\label{app: how to measure volume}
+In the main text, we study how the sizes of both the fully feasible and the fully locally dynamically stable regions, respectively $\mathcal{F}_1^{G,A}(\alpha_0)$ and $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$, change as a function of $G$, $A$ and $\alpha_0$. It is important to explain in what way (and why in \textit{that} way) these are computed. We define the \important{volume} of $\mathcal{F}^{G,A}_1(\alpha_0)$, or \define{feasibility volume}, as:
+\begin{equation}
+\vol{\mathcal{F}^{G,A}_1(\alpha_0)}\defined \frac{\iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0 \ \mathcal{F}\left(m, G, A\right)}{\iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0} = \iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0 \ \mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right). \label{eq : app definition fully feasible volume of G, A}
+\end{equation}
+The \important{volume} of $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$, or \define{(local) dynamical stability volume} is similarly defined:
+\begin{equation}
+\vol{\mathcal{D}_{L,1}^{G,A}(\alpha_0)}\defined \iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0 \ \mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right).
+\end{equation}
+The feasibility and dynamical stability volumes do not \textit{stricto sensu} measure the area occupied by the fully feasible and fully dynamically stable regions, respectively. In the case of the feasibility volume, it is documented in the main text that the zone where $\mathcal{F}(m, G,A)$ is different from $1$ or $0$ is very small so measuring the volume this way does not provide a significant difference to naively counting the number of points for which the feasibility function is \textit{exactly} 1.
+
+However, in the case of the dynamical stability volume, this approach would provide unsatisfactory results. Indeed, $\mathcal{D}_{L}(m, G, A)$ is a function that may be very patchy \textbf{TO DO: insert ref to picture of $D_L$ as a function of alpha0}: many points are not fully dynamically stable but rather \important{almost} fully dynamically stable, in the sense that there are many $m$ such that $\mathcal{D}_{L}(m, G, A)$ is extremely close to but not exactly equal to 1. Because of this, counting exactly the points where $\mathcal{D}_{L}(m, G, A)=1$ is very prone to noise, in the sense that it depends a lot on the precision at which $\mathcal{D}_L(m,G,A)$ is evaluated. We know that a lot of points are only \textit{almost} fully dynamically stable; if we increase the number of simulations to evaluate $\mathcal{D}_{L}(m, G, A)$, who can tell if the points that were previously identified as fully dynamically stable would be now only almost fully dynamically stable and hence not counted in the volume anymore?
+
+Because of such considerations taking into account every point but pondering it by its value of the feasibility/dynamical stability function not only provides a measure close to the idea of measuring the ``full volume'' but also provides smoother and more robust results.
+
+Following that line of thought, we also define the \important{common feasibility volume}, which is a measure of the common fully feasible region $\mathcal{F}_1^{S_M}(\alpha_0)$ of a matrix set $S_M$ at a given syntrophic interaction strength $\alpha_0$:
+\begin{equation}
+\vol{\mathcal{F}_1^{S_M}} \defined \iint_{(\gamma_0, S_0) \in [0,1]^2} d\gamma_0 \ dS_0 \min_{(G,A)\in S_M} \left\{\mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right)\right\}.
+\end{equation}
+In a completely analogous manner, the \important{common (local) dynamical stability volume} of a matrix set $S_M$ is given by:
+\begin{equation}
+\vol{\mathcal{D}_{L,1}^{S_M}} \defined \iint_{(\gamma_0, S_0) \in [0,1]^2} d\gamma_0 \ dS_0 \min_{(G,A)\in S_M} \left\{\mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)\right\}.
+\end{equation}
+In practice, the integrals appearing in the above formulas are approximated numerically. The unit square $(\gamma_0, S_0) \in [0,1]^2$ is discretized in a set $\left\{(\gamma_0^i, S_0^{i})\text{ with } i=1, \dots, N_\text{points}\right\}$ which are then summed up with their according weights, \eg for Equation \eqref{eq : app definition fully feasible volume of G, A}:
+\begin{equation}
+\vol{\mathcal{F}_1^{G,A}(\alpha_0)} \approx \frac{\sum_{i=1}^{N_\text{points}}\mathcal{F}\left((\gamma_0^{i}, S_0^{i}), \alpha_0, G, A\right)}{N_\text{points}}.
+\end{equation}
 
 \subsection{Estimate the critical structural perturbation $\Delta_S^*$}\label{app: results structural stability procedure to estimate critical structural perturbation}
 As explained in Methods \ref{sec : structural stability methods numerical estimate critical perturbation}, $\Delta_S^*(m, G, A)$ solves the equation:
