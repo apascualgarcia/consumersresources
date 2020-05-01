@@ -7,12 +7,12 @@ import copy
 import sys
 np.set_printoptions(threshold=sys.maxsize)
 mpl.rcParams['lines.linewidth']=2.5
-mpl.rcParams['lines.markersize']=10
+mpl.rcParams['lines.markersize']=12
 mpl.rcParams['lines.markeredgewidth']=3
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
 alpha_mode_colours=['blue', 'green', 'red', 'black']
-label=['fully connected', 'no intraspecific syntrophy', 'LRI regime', 'random structure']
+label=['FC', 'NIS', 'LRI', 'RS']
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
@@ -22,6 +22,38 @@ nestedness_label=r'Ecological overlap $\eta_G$'
 connectance_label=r'Connectance $\kappa_G$'
 
 N_alphamodes=len(alpha_mode)
+
+
+# tells the common full volume for a given alphamode and alpha0
+# it is computed by adding every point in the region pondered by its smallest
+# quantity among all the matrices
+def common_full_volume(region_, alpha_mode_index, alpha0_index):
+    quantity_=region_[alpha_mode_index, alpha0_index, :, 6::3]
+    gamma0_=region_[alpha_mode_index,alpha0_index,:,4::3]
+    S0_=region_[alpha_mode_index,alpha0_index,:,5::3]
+
+    Nmatrices_=len(region_[alpha_mode_index,alpha0_index])
+    Npoints_=len(quantity_[0])
+
+    volume_=0.
+    for i_ in range(Npoints_):
+        volume_ += min(quantity_[:, i_])
+
+    return volume_/Npoints_
+
+def common_full_volume_as_function_of_alpha0(region_, alpha_mode_index, alpha0_):
+    to_plot=[]
+    for k_ in range(len(alpha0_)):
+        to_plot+=[common_full_volume(region_, alpha_mode_index, k_)]
+    return to_plot
+
+def plot_common_full_volume_shrinkage(ax_,region_, alpha_mode_index, alpha0_):
+    to_plot=[]
+    for k_ in range(len(alpha0_)):
+        to_plot+=[common_full_volume(region_, alpha_mode_index, k_)]
+    ax_.plot(alpha0_, to_plot)
+    return
+
 
 # region contains all data for each alphamode, alpha0 and network
 def plot_common_region(region, alpha_mode_, colors_, labels_):
@@ -321,7 +353,7 @@ def fit_shrinkage_curve(alpha0_,scurve_, fit_function_, take_zero_points_):
     # we do a linear fit removing the first point up ontil the first zero point
     end_index=len(scurve_)
     zero_indices = [j for j in range(len(scurve_)) if scurve_[j]==0.]
-    start_index=1
+    start_index=0
     if(len(zero_indices)>0):
         end_index=np.min(zero_indices)
     if take_zero_points_:
@@ -334,7 +366,7 @@ def fit_shrinkage_curve(alpha0_,scurve_, fit_function_, take_zero_points_):
             print("p-value: ", p_value)
             estimated_decay_rate=-slope
         if fit_function_==exponential_function:
-            estimated_decay_rate=popt[1]
+            estimated_decay_rate=(popt[1], perr[1])
 
         if fit_function_==power_function:
             estimated_decay_rate=popt[1]
@@ -353,8 +385,10 @@ def fit_shrinkage_curve(alpha0_,scurve_, fit_function_, take_zero_points_):
             estimated_alpha_crit=alpha0_[1]
             estimated_decay_rate=-(scurve_[1]-scurve_[0])/(alpha0_[1]-alpha0_[0])
     remaining_points=[0 for j in range(end_index, len(scurve_))]
-    fitted_curve = [estimated_vol_zero_syntrophy]+fitted_curve
-    fitted_alpha0 = alpha0_[0:end_index]
+    if start_index==1:
+        fitted_curve = [estimated_vol_zero_syntrophy]+fitted_curve
+    fitted_alpha0 = alpha0_[start_index:end_index]
+    print(fitted_alpha0, fitted_curve)
     return fitted_alpha0, fitted_curve, estimated_alpha_crit, estimated_vol_zero_syntrophy, estimated_decay_rate
 
 

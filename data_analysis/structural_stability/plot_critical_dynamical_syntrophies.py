@@ -1,11 +1,17 @@
 import numpy as np
-from consumer_resource_data_analysis import alpha_mode, all_nestedness, all_connectance, alpha_mode_colours
+from consumer_resource_data_analysis import all_nestedness, all_connectance, alpha_mode_colours
 import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
-from consumer_resource_data_analysis import label as alpha_label
 
 folder='structural_stability'
-filename='critical_dynamical_syntrophies_NR50_NS25_backup'
+filename='critical_dynamical_syntrophies_NR50_NS25'
+
+alpha_mode=['FC', 'NIS', 'LRI', 'RS']
+additional_alpha_mode=['RNISC', 'LNISC', 'NISCC']
+
+alpha_label=['FC', 'NIS', 'LRI', 'RS']+['RNISC', 'LNISC', 'NISCC']
+alpha_mode_colours+=['orange', 'pink', 'grey']
+
 
 file = folder+'/'+filename+'.out'
 mat_name=np.loadtxt(file, usecols=0, dtype='U')
@@ -23,6 +29,7 @@ for i in range(len(mat_name)):
     nest.append(round_nest)
     conn.append(round_conn)
 crit_syn = {}
+
 # build structural stability dictionary
 for n in all_nestedness:
     dnest = {}
@@ -39,6 +46,34 @@ for n in all_nestedness:
             dconn[al]=dalpha
         dnest[c]=dconn
     crit_syn[n]=dnest
+
+# add additional alpha modes
+for al in additional_alpha_mode:
+    new_data=folder+'/'+filename+'_'+al+'.out'
+    new_matrices=np.loadtxt(new_data, usecols=0, dtype='U')
+
+    nest=[]
+    conn=[]
+
+    for i in range(len(new_matrices)):
+        a = new_matrices[i].split("_",7)
+        actual_nest = float(a[5][4:])
+        round_nest = cf.closest_element_in_list(actual_nest, all_nestedness)
+        actual_conn = float(a[6][4:-4])
+        round_conn = cf.closest_element_in_list(actual_conn, all_connectance)
+        nest.append(round_nest)
+        conn.append(round_conn)
+
+    local_crit_syn=np.loadtxt(new_data, usecols=1)
+    for n in all_nestedness:
+        for c in all_connectance:
+            crit_syn[n][c][al]={}
+            for i in range(len(new_matrices)):
+                if nest[i]==n and conn[i]==c:
+                    crit_syn[n][c][al]['value']=local_crit_syn[i]
+
+alpha_mode+=additional_alpha_mode
+
 for k in range(len(alpha_mode)):
     alpha = alpha_mode[k]
     fig = plt.figure()
@@ -84,7 +119,7 @@ for conn in all_connectance:
     ax.set_xlabel(r'$\eta_G$')
     ax.set_ylabel(ylabel)
     ax.set_title(title)
-    ax.legend()
+    ax.legend(bbox_to_anchor=(1.,1.))
     fig.tight_layout()
     fig.savefig('plots/critical_dynamical_syntrophy_Conn'+str(conn)+'.pdf')
     plt.close()

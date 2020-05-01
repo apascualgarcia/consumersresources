@@ -1714,6 +1714,254 @@
       \endverb
       \keyw{Differential calculus,Econometrics,Matrices,Statistics}
     \endentry
+    \entry{allesina_stabilitycomplexity_2015}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
+           family={Allesina},
+           familyi={A\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Si},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{fullhash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{authornamehash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{authorfullhash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Since the work of Robert May in 1972, the local asymptotic stability of large ecological systems has been a focus of theoretical ecology. Here we review May's work in the light of random matrix theor...}
+      \field{issn}{1438-390X}
+      \field{journaltitle}{Population Ecology}
+      \field{month}{1}
+      \field{note}{Publisher: John Wiley \& Sons, Ltd}
+      \field{number}{1}
+      \field{shorttitle}{The stability–complexity relationship at age 40}
+      \field{title}{The stability–complexity relationship at age 40: a random matrix perspective}
+      \field{urlday}{17}
+      \field{urlmonth}{3}
+      \field{urlyear}{2020}
+      \field{volume}{57}
+      \field{year}{2015}
+      \field{urldateera}{ce}
+      \field{pages}{63\bibrangedash 75}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1007/s10144-014-0471-0
+      \endverb
+      \verb{file}
+      \verb Snapshot:/Users/leobuchenelepfl/Zotero/storage/ASKHAK3Q/s10144-014-0471-0.html:text/html
+      \endverb
+      \verb{url}
+      \verb https://esj-journals.onlinelibrary.wiley.com/doi/10.1007/s10144-014-0471-0
+      \endverb
+    \endentry
+    \entry{rohr_structural_2014}{article}{}
+      \name{author}{3}{}{%
+        {{hash=88421562efe5d1c62d00933b54d3cf59}{%
+           family={Rohr},
+           familyi={R\bibinitperiod},
+           given={R.\bibnamedelimi P.},
+           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=20874df75c0c4f19fc5fbd4e19af9182}{%
+           family={Saavedra},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c19b9957e9071dd91b943295ac6cbd3e}{%
+           family={Bascompte},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{fullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{authornamehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{authorfullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{7}
+      \field{number}{6195}
+      \field{title}{On the structural stability of mutualistic systems}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{345}
+      \field{year}{2014}
+      \field{urldateera}{ce}
+      \field{pages}{1253497\bibrangedash 1253497}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1126/science.1253497
+      \endverb
+      \verb{file}
+      \verb Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:/Users/leobuchenelepfl/Zotero/storage/LHK43QAL/Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1253497
+      \endverb
+    \endentry
+    \entry{bascompte_nested_2003}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c19b9957e9071dd91b943295ac6cbd3e}{%
+           family={Bascompte},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=03890ee36dba0705b83f45073dc24fc8}{%
+           family={Jordano},
+           familyi={J\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=fc28047a4b5f4221cd5f29cdcc9d8f84}{%
+           family={Melian},
+           familyi={M\bibinitperiod},
+           given={C.\bibnamedelimi J.},
+           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=26dc63c1e8fe56efc32d48eeebba0124}{%
+           family={Olesen},
+           familyi={O\bibinitperiod},
+           given={J.\bibnamedelimi M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{a6b11f66ac593540fbb6dd81138fbfed}
+      \strng{fullhash}{8ad9383232f276feb61b5b93692c592c}
+      \strng{authornamehash}{a6b11f66ac593540fbb6dd81138fbfed}
+      \strng{authorfullhash}{8ad9383232f276feb61b5b93692c592c}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0027-8424, 1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{month}{8}
+      \field{number}{16}
+      \field{title}{The nested assembly of plant-animal mutualistic networks}
+      \field{urlday}{9}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{100}
+      \field{year}{2003}
+      \field{urldateera}{ce}
+      \field{pages}{9383\bibrangedash 9387}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1073/pnas.1633576100
+      \endverb
+      \verb{file}
+      \verb Bascompte et al. - 2003 - The nested assembly of plant-animal mutualistic ne.pdf:/Users/leobuchenelepfl/Zotero/storage/XGHAFB3P/Bascompte et al. - 2003 - The nested assembly of plant-animal mutualistic ne.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pnas.org/cgi/doi/10.1073/pnas.1633576100
+      \endverb
+    \endentry
+    \entry{bonsall_life_2004}{article}{}
+      \name{author}{1}{}{%
+        {{hash=aa151473403a9b86e293c5036a3dc511}{%
+           family={Bonsall},
+           familyi={B\bibinitperiod},
+           given={M.\bibnamedelimi B.},
+           giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{aa151473403a9b86e293c5036a3dc511}
+      \strng{fullhash}{aa151473403a9b86e293c5036a3dc511}
+      \strng{authornamehash}{aa151473403a9b86e293c5036a3dc511}
+      \strng{authorfullhash}{aa151473403a9b86e293c5036a3dc511}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{10}
+      \field{number}{5693}
+      \field{title}{Life {History} {Trade}-{Offs} {Assemble} {Ecological} {Guilds}}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{306}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \field{pages}{111\bibrangedash 114}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1126/science.1100680
+      \endverb
+      \verb{file}
+      \verb Bonsall - 2004 - Life History Trade-Offs Assemble Ecological Guilds.pdf:/Users/leobuchenelepfl/Zotero/storage/RX5ZM7Q2/Bonsall - 2004 - Life History Trade-Offs Assemble Ecological Guilds.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://www.sciencemag.org/lookup/doi/10.1126/science.1100680
+      \endverb
+    \endentry
+    \entry{thebault_stability_2010}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6838bd56bad7494b5ab8ad92409951a3}{%
+           family={Thebault},
+           familyi={T\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=92bd745786b7b2e6ad43a598cef7915e}{%
+           family={Fontaine},
+           familyi={F\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{fullhash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{authornamehash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{authorfullhash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{8}
+      \field{number}{5993}
+      \field{title}{Stability of {Ecological} {Communities} and the {Architecture} of {Mutualistic} and {Trophic} {Networks}}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{329}
+      \field{year}{2010}
+      \field{urldateera}{ce}
+      \field{pages}{853\bibrangedash 856}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1126/science.1188321
+      \endverb
+      \verb{file}
+      \verb Thebault and Fontaine - 2010 - Stability of Ecological Communities and the Archit.pdf:/Users/leobuchenelepfl/Zotero/storage/RFWJYAVG/Thebault and Fontaine - 2010 - Stability of Ecological Communities and the Archit.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://www.sciencemag.org/lookup/doi/10.1126/science.1188321
+      \endverb
+    \endentry
     \entry{hardin_competitive_1960}{article}{}
       \name{author}{1}{}{%
         {{hash=c0637dd8953e16aae9f8a3ca9fb6bf94}{%
@@ -1729,8 +1977,8 @@
       \strng{fullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authornamehash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authorfullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0036-8075, 1095-9203}
@@ -1776,8 +2024,8 @@
       \strng{fullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authornamehash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authorfullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Explaining biodiversity in nature is a fundamental problem in ecology. An outstanding challenge is embodied in the so-called Competitive Exclusion Principle: two species competing for one limiting resource cannot coexist at constant population densities, or more generally, the number of consumer species in steady coexistence cannot exceed that of resources. The fact that competitive exclusion is rarely observed in natural ecosystems has not been fully understood. Here we show that by forming chasing triplets among the consumers and resources in the consumption process, the Competitive Exclusion Principle can be naturally violated. The modeling framework developed here is broadly applicable and can be used to explain the biodiversity of many consumer-resource ecosystems and hence deepens our understanding of biodiversity in nature.}
@@ -1797,58 +2045,6 @@
       \verb http://arxiv.org/abs/1805.06002
       \endverb
       \keyw{Quantitative Biology - Populations and Evolution,Physics - Biological Physics}
-    \endentry
-    \entry{rohr_structural_2014}{article}{}
-      \name{author}{3}{}{%
-        {{hash=88421562efe5d1c62d00933b54d3cf59}{%
-           family={Rohr},
-           familyi={R\bibinitperiod},
-           given={R.\bibnamedelimi P.},
-           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
-        {{hash=20874df75c0c4f19fc5fbd4e19af9182}{%
-           family={Saavedra},
-           familyi={S\bibinitperiod},
-           given={S.},
-           giveni={S\bibinitperiod}}}%
-        {{hash=c19b9957e9071dd91b943295ac6cbd3e}{%
-           family={Bascompte},
-           familyi={B\bibinitperiod},
-           given={J.},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \strng{fullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \strng{authornamehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \strng{authorfullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{0036-8075, 1095-9203}
-      \field{journaltitle}{Science}
-      \field{month}{7}
-      \field{number}{6195}
-      \field{title}{On the structural stability of mutualistic systems}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{345}
-      \field{year}{2014}
-      \field{urldateera}{ce}
-      \field{pages}{1253497\bibrangedash 1253497}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1126/science.1253497
-      \endverb
-      \verb{file}
-      \verb Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:/Users/leobuchenelepfl/Zotero/storage/LHK43QAL/Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1253497
-      \endverb
     \endentry
     \entry{tikhonov_collective_2017}{article}{}
       \name{author}{2}{}{%
