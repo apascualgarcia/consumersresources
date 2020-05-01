@@ -1,0 +1,16 @@
+This file highlights the progress made in the different parts of the manuscript 
+
+			Léo		Alberto
+Introduction		Need rewrite	
+Methods:
+	Feasibility	Finished	
+	Local dyn st.	Finished
+	Struct. st.	Finished
+Results:	
+	Feasibility	Need rewrite
+	Local dyn st.	Need rewrite
+	Struct. st.	Need rewrite
+Discussion		Not started
+Appendices:
+	Demonstrations	Need proofread
+	Suppl. Material Need proofread
