@@ -6,16 +6,12 @@ import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from scipy.optimize import curve_fit
 from matplotlib.colors import LogNorm
-
+from consumer_resource_data_analysis import alpha_mode, alpha_mode_colours,label, alpha0, all_nestedness, all_connectance
 import copy
 
-alpha_mode=['random_structure', 'no_release_when_eat', 'optimal_matrix']
-label=['fully connected', 'no intraspecific syntrophy', 'optimal LRI']
-filename = 'largest_eigenvalue/largest_eigenvalue_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
-alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
-all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
-all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
-Npoints = 900
+filename = 'largest_eigenvalue/largest_eigenvalue_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+Npoints = 10000
+square_size=8
 
 
 cmap = plt.cm.get_cmap('jet_r')
@@ -40,56 +36,56 @@ nestedness = np.real(largest_eigenvalue_region[0,0][:,2])
 alpha0=np.array(alpha0)
 
 # plot largest eigenvalue plot at no syntrophy for all matrices
-# for k in range(len(largest_eigenvalue_region[0,0])):
-#     for j in range(len(largest_eigenvalue_region[0])):
-#         data = np.ma.masked_invalid(largest_eigenvalue_region[:,j,k])
-#         if(not(data[:,6::3].mask.all())):
-#             fig, axs = plt.subplots(1, 3, sharey=True, sharex=True, figsize=(10.5,4.5))
-#             max_ev=-1000
-#             min_ev=1000
-#             # first find the largest and smallest eigenvalues for the three regimes
-#             for i in range(len(largest_eigenvalue_region)):
-#                 largest_ev=data[i,6::3]
-#                 if(np.min(np.real(largest_ev)) < min_ev):
-#                     min_ev = np.min(np.real(largest_ev))
-#                 if(np.max(np.real(largest_ev)) > max_ev):
-#                     max_ev = np.max(np.real(largest_ev))
-#
-#             for i in range(len(largest_eigenvalue_region)):
-#                 gamma0=np.real(data[i,4::3])
-#                 S0=np.real(data[i,5::3])
-#                 NR=np.real(data[i,0])
-#                 NS=np.real(data[i,1])
-#                 nestedness=np.real(data[i,2])
-#                 connectance=np.real(data[i,3])
-#                 largest_ev=data[i,6::3]
-#
-#
-#                 axs[i].set_aspect('equal')
-#                 im=axs[i].scatter(gamma0, S0, c=np.real(largest_ev), s=25, marker='s', vmin=min_ev, vmax=max_ev, cmap='jet')
-#                 axs[i].set_xlabel(r'$\gamma_0$')
-#                 axs[i].set_xticks([0, 0.5, 1])
-#                 axs[i].set_xticklabels([0, 0.5, 1])
-#                 axs[i].set_title(label[i])
-#
-#                 axs[i].set_xlim(0.,1.)
-#                 axs[i].set_ylim(0.,1.)
-#             axs[0].set_ylabel(r'$S_0$')
-#             axs[0].set_yticks([0, 0.5, 1])
-#             axs[0].set_yticklabels([0, 0.5, 1])
-#             save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)+'_alpha0='+str(alpha0[j])
-#             fig.subplots_adjust(bottom=0.2, top=0.95)
-#             fig.savefig('plots/largest_eigenvalue_wt_wc_'+save_name+'.pdf')
-#             cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
-#             cbar=fig.colorbar(im, cax=cbar_ax, orientation='horizontal', format='%.1e')
-#             cbar.set_label(r'$\langle$Re$(\lambda_1)\rangle$')
-#             fig.savefig('plots/largest_eigenvalue_wt_'+save_name+'.pdf')
-#             title = r'Re$(\lambda_1)$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))\
-#                         +', \eta='+str(nestedness)+'$'
-#             title +=r' at $\alpha_0='+str(alpha0[j])+'$'
-#             fig.suptitle(title)
-#             fig.savefig('plots/largest_eigenvalue_'+save_name+'.pdf')
-#             plt.close()
+for k in range(len(largest_eigenvalue_region[0,0])):
+    for j in range(len(largest_eigenvalue_region[0])):
+        data = np.ma.masked_invalid(largest_eigenvalue_region[:,j,k])
+        if(not(data[:,6::3].mask.all())):
+            fig, axs = plt.subplots(1, len(largest_eigenvalue_region), sharey=True, sharex=True, figsize=(3.5*len(largest_eigenvalue_region),4.5))
+            max_ev=-1000
+            min_ev=1000
+            # first find the largest and smallest eigenvalues for the three regimes
+            for i in range(len(largest_eigenvalue_region)):
+                largest_ev=data[i,6::3]
+                if(np.min(np.real(largest_ev)) < min_ev):
+                    min_ev = np.min(np.real(largest_ev))
+                if(np.max(np.real(largest_ev)) > max_ev):
+                    max_ev = np.max(np.real(largest_ev))
+
+            for i in range(len(largest_eigenvalue_region)):
+                gamma0=np.real(data[i,4::3])
+                S0=np.real(data[i,5::3])
+                NR=np.real(data[i,0])
+                NS=np.real(data[i,1])
+                nestedness=np.real(data[i,2])
+                connectance=np.real(data[i,3])
+                largest_ev=data[i,6::3]
+
+
+                axs[i].set_aspect('equal')
+                im=axs[i].scatter(gamma0, S0, c=np.real(largest_ev), s=square_size, marker='s', vmin=min_ev, vmax=max_ev, cmap='jet')
+                axs[i].set_xlabel(r'$\gamma_0$')
+                axs[i].set_xticks([0, 0.5, 1])
+                axs[i].set_xticklabels([0, 0.5, 1])
+                axs[i].set_title(label[i])
+
+                axs[i].set_xlim(0.,1.)
+                axs[i].set_ylim(0.,1.)
+            axs[0].set_ylabel(r'$S_0$')
+            axs[0].set_yticks([0, 0.5, 1])
+            axs[0].set_yticklabels([0, 0.5, 1])
+            save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)+'_alpha0='+str(alpha0[j])
+            fig.subplots_adjust(bottom=0.2, top=0.95)
+            fig.savefig('plots/largest_eigenvalue_wt_wc_'+save_name+'.pdf')
+            cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
+            cbar=fig.colorbar(im, cax=cbar_ax, orientation='horizontal', format='%.1e')
+            cbar.set_label(r'$\langle$Re$(\lambda_1)\rangle$')
+            fig.savefig('plots/largest_eigenvalue_wt_'+save_name+'.pdf')
+            title = r'Re$(\lambda_1)$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa_G='+str(round(connectance,2))\
+                        +', \eta_G='+str(nestedness)+'$'
+            title +=r' at $\alpha_0='+str(alpha0[j])+'$'
+            fig.suptitle(title)
+            fig.savefig('plots/largest_eigenvalue_'+save_name+'.pdf')
+            plt.close()
 
 critical_alpha0 = []
 for j in range(len(largest_eigenvalue_region[0,0])):

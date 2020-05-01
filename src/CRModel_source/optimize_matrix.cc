@@ -423,3 +423,8 @@ ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy,
   }
   return quadratic_form_nestedness(gamma, dummy, params)+max_rank-rank(gamma);
 }
+
+ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  std::vector<unsigned int> A_row_degrees=row_degrees(alpha);
+  return quadratic_form_low_intra_resource_interaction(alpha, gamma, params)+maximum(A_row_degrees);
+}

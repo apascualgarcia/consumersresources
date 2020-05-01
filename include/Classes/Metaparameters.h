@@ -73,6 +73,7 @@ struct Metaparameters{
 
   /* loads the points given in the path */
   nmatrix load_volume() const;
+
 };
 
 
