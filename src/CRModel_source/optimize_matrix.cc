@@ -145,15 +145,39 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
   unsigned int fails=0;
   bool changed=false;
   bool reached_zero=false;
+  bool max_steps_reached=false;
+  nvector last_changed_elements, average_cost_function;
+  /* idea of this variable, if the cost function hasn't decreased over that number of steps, we stop the simulations */
+  unsigned int Naverage=100000;
+  bool av_cost_function_converging=false;
   while(!stop){
     changed=choose_next_matrix(alpha, gamma, coprophagy, steps, fails, mcs);
     reached_zero=(mcs.cost_function(alpha,gamma, mcs.additional_params)<1e-15);
+
+
     if(changed){
       fails=0;
+      last_changed_elements.push_back(mcs.cost_function(alpha,gamma, mcs.additional_params));
     }else{
       fails+=1;
     }
 
+    if(last_changed_elements.size() > Naverage){
+      last_changed_elements.erase(last_changed_elements.begin());
+    }
+
+    if(last_changed_elements.size() == Naverage && steps%Naverage==0){
+      average_cost_function.push_back(mean(last_changed_elements));
+    }
+
+
+    /* if the average cost hasn't decreased significantly, we stop the simulation */
+    unsigned int size_cf = average_cost_function.size();
+    if(size_cf > 2){
+      av_cost_function_converging = !(average_cost_function[size_cf-1] < 0.99*average_cost_function[size_cf-2]);
+    }else{
+      av_cost_function_converging=false;
+    }
     /* when the move has not been accepted too many times, increase temp */
     if(fails>=mcs.max_fails){
       mcs.T/=mcs.annealing_const;
@@ -164,18 +188,28 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       mcs.T*=mcs.annealing_const;
     }
 
-    if(steps>=mcs.max_steps){
-      stop=true;
-    }
-    if(steps%mcs.display_stride==0 || reached_zero){
+    max_steps_reached = (steps>=mcs.max_steps);
+
+    stop = max_steps_reached || reached_zero || av_cost_function_converging;
+
+    if(steps%mcs.display_stride==0 || stop){
       std::cout << "\t Step " << steps;
       std::cout << ", T=" << mcs.T;
       std::cout <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
       std::cout << ", nestedness=" << nestedness(alpha);
       std::cout << ", connectance=" << connectance(alpha);
+      if(stop){
+        std::cout << std::endl << "-------" << std::endl << "STOPPING THE ALGORITHM ";
+      }
       if(reached_zero){
-        std::cout << " -> reached zero on the cost function, ending the algorithm now." << std::endl;
-        return;
+        std::cout << " -> reached zero on the cost function." << std::endl;
+      }
+      if(max_steps_reached){
+        std::cout << " -> max number of steps reached." << std::endl;
+      }
+
+      if(av_cost_function_converging){
+        std::cout << " -> cost function only fluctuating around its average value." << std::endl;
       }
      // std::cout << ", matrix = " << std::endl;
       //display_food_matrix(std::cout, alpha);
@@ -422,4 +456,9 @@ ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy,
     max_rank =gamma[0].size();
   }
   return quadratic_form_nestedness(gamma, dummy, params)+max_rank-rank(gamma);
+}
+
+ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  Metaparameters* m= (Metaparameters*)(params);
+  return m->accurate_quadratic_form_LRI(alpha, gamma);
 }

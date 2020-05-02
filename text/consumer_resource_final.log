@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  1 MAY 2020 14:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  1 MAY 2020 18:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2918,7 +2918,7 @@ pdfTeX warning: pdflatex (file ./figures/Results/feasibility/decay_rate_25_vs_5
 0_connectance_optimal_matrix.pdf): PDF inclusion: multiple pdfs with page group
  included in a single page
 >] (./dynamical_stability_results.tex
-Overfull \hbox (0.29982pt too wide) in paragraph at lines 55--56
+Overfull \hbox (0.29982pt too wide) in paragraph at lines 58--59
 []\T1/bch/m/n/12 The sum of the di-ag-o-nal el-e-ments of $\OML/cmm/m/it/12 AG$
  \T1/bch/m/n/12 is min-i-mized. Be-cause $\U/matha/m/n/12 p\OML/cmm/m/it/12 AG\
 U/matha/m/n/12 q[] ^^P [][] \OML/cmm/m/it/12 A[]G[]$
@@ -2942,19 +2942,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 [51]
 
 LaTeX Warning: Reference `sec: methods dynamical stability' on page 52 undefine
-d on input line 85.
-
-
-LaTeX Warning: Reference `eq: dynamical stability methods fully connected metap
-arameters' on page 52 undefined on input line 95.
-
-
-LaTeX Warning: Reference `sec: methods dynamical stability fully connected zero
- variance' on page 52 undefined on input line 95.
-
-
-LaTeX Warning: Reference `eq: fully feasible volume' on page 52 undefined on in
-put line 102.
+d on input line 88.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2965,97 +2953,115 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 [52]
 
 LaTeX Warning: Reference `eq: dynamical stability methods fully connected metap
-arameters' on page 53 undefined on input line 107.
+arameters' on page 53 undefined on input line 98.
 
 
+LaTeX Warning: Reference `sec: methods dynamical stability fully connected zero
+ variance' on page 53 undefined on input line 98.
+
+
+LaTeX Warning: Reference `eq: fully feasible volume' on page 53 undefined on in
+put line 105.
+
+
+LaTeX Warning: Reference `eq: dynamical stability methods fully connected metap
+arameters' on page 53 undefined on input line 110.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[53]
 <./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pdf, id
-=1686, 462.52798pt x 346.89601pt>
+=1707, 462.52798pt x 346.89601pt>
 File: ./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pd
 f Graphic file (type pdf)
 
 <use ./figures/Results/local_dynamical_stability/typical_optimal_LRI_matrix.pdf
 >
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/typical_op
-timal_LRI_matrix.pdf used on input line 113.
+timal_LRI_matrix.pdf used on input line 116.
 (pdftex.def)             Requested size: 462.52684pt x 346.89516pt.
 
 <./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf, id=1
-689, 461.08258pt x 594.05943pt>
+710, 461.08258pt x 594.05943pt>
 File: ./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf 
 Graphic file (type pdf)
 
 <use ./figures/Results/local_dynamical_stability/optimal_LRI_requirements.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/optimal_LR
-I_requirements.pdf used on input line 118.
+I_requirements.pdf used on input line 121.
 (pdftex.def)             Requested size: 316.26006pt x 407.4812pt.
 
-Underfull \hbox (badness 2384) in paragraph at lines 121--121
+Underfull \hbox (badness 2384) in paragraph at lines 124--124
 \T1/bch/m/it/10.95 di-ag-o-nal of $\OML/cmm/m/it/10.95 AG$ \T1/bch/m/it/10.95 i
 s roughly
  []
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 121--121
+Underfull \hbox (badness 1371) in paragraph at lines 124--124
 \OT1/cmr/m/n/10.95 0$\T1/bch/m/it/10.95 . Both re-la-tions are bet-
  []
 
 
 <./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_neste
-dness.pdf, id=1692, 462.52798pt x 346.89601pt>
+dness.pdf, id=1713, 462.52798pt x 346.89601pt>
 File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_
 nestedness.pdf Graphic file (type pdf)
 
 <use ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_NS25_with_n
 estedness.pdf>
 Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
-rix_NR25_NS25_with_nestedness.pdf used on input line 127.
+rix_NR25_NS25_with_nestedness.pdf used on input line 130.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/matrix_structure/structure_alpha_matrix_NR25_N25_with_connec
-tance.pdf, id=1693, 462.52798pt x 346.89601pt>
+tance.pdf, id=1714, 462.52798pt x 346.89601pt>
 File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_N25_with_c
 onnectance.pdf Graphic file (type pdf)
 
 <use ./figures/Results/matrix_structure/structure_alpha_matrix_NR25_N25_with_co
 nnectance.pdf>
 Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
-rix_NR25_N25_with_connectance.pdf used on input line 128.
+rix_NR25_N25_with_connectance.pdf used on input line 131.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 126--129
+Overfull \hbox (49.738pt too wide) in paragraph at lines 129--132
 []  [][][][] 
  []
 
 
 <./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_neste
-dness.pdf, id=1694, 462.52798pt x 346.89601pt>
+dness.pdf, id=1715, 462.52798pt x 346.89601pt>
 File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_
 nestedness.pdf Graphic file (type pdf)
 
 <use ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_NS25_with_n
 estedness.pdf>
 Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
-rix_NR50_NS25_with_nestedness.pdf used on input line 131.
+rix_NR50_NS25_with_nestedness.pdf used on input line 134.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_connec
-tance.pdf, id=1695, 462.52798pt x 346.89601pt>
+tance.pdf, id=1716, 462.52798pt x 346.89601pt>
 File: ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_c
 onnectance.pdf Graphic file (type pdf)
 
 <use ./figures/Results/matrix_structure/structure_alpha_matrix_NR50_N25_with_co
 nnectance.pdf>
 Package pdftex.def Info: ./figures/Results/matrix_structure/structure_alpha_mat
-rix_NR50_N25_with_connectance.pdf used on input line 132.
+rix_NR50_N25_with_connectance.pdf used on input line 135.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 130--133
+Overfull \hbox (49.738pt too wide) in paragraph at lines 133--136
 []  [][][][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/probability_dynamical_stability_NR
-25_NS25_Nest0.5_Conn0.416_low_colorbar.pdf, id=1696, 758.835pt x 325.215pt>
+25_NS25_Nest0.5_Conn0.416_low_colorbar.pdf, id=1717, 758.835pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/probability_dynamical_stabili
 ty_NR25_NS25_Nest0.5_Conn0.416_low_colorbar.pdf Graphic file (type pdf)
 
@@ -3063,16 +3069,16 @@ ty_NR25_NS25_Nest0.5_Conn0.416_low_colorbar.pdf Graphic file (type pdf)
 y_NR25_NS25_Nest0.5_Conn0.416_low_colorbar.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/probabilit
 y_dynamical_stability_NR25_NS25_Nest0.5_Conn0.416_low_colorbar.pdf used on inpu
-t line 139.
+t line 142.
 (pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
 
-Overfull \hbox (49.7308pt too wide) in paragraph at lines 138--140
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 141--143
 []  [][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/probability_dynamical_stability_NR
-25_NS25_Nest0.5_Conn0.416_wo_title_high_colorbar.pdf, id=1697, 758.835pt x 325.
+25_NS25_Nest0.5_Conn0.416_wo_title_high_colorbar.pdf, id=1718, 758.835pt x 325.
 215pt>
 File: ./figures/Results/local_dynamical_stability/probability_dynamical_stabili
 ty_NR25_NS25_Nest0.5_Conn0.416_wo_title_high_colorbar.pdf Graphic file (type pd
@@ -3082,16 +3088,16 @@ f)
 y_NR25_NS25_Nest0.5_Conn0.416_wo_title_high_colorbar.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/probabilit
 y_dynamical_stability_NR25_NS25_Nest0.5_Conn0.416_wo_title_high_colorbar.pdf us
-ed on input line 143.
+ed on input line 146.
 (pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
 
-Overfull \hbox (49.7308pt too wide) in paragraph at lines 142--144
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 145--147
 []  [][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_wc_re
-gion_NR25_NS25_Nest0.35_Conn0.2208.pdf, id=1698, 1011.78pt x 325.215pt>
+gion_NR25_NS25_Nest0.35_Conn0.2208.pdf, id=1719, 1011.78pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_
 wc_region_NR25_NS25_Nest0.35_Conn0.2208.pdf Graphic file (type pdf)
 
@@ -3099,16 +3105,16 @@ wc_region_NR25_NS25_Nest0.35_Conn0.2208.pdf Graphic file (type pdf)
 c_region_NR25_NS25_Nest0.35_Conn0.2208.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
 mical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.2208.pdf used on input li
-ne 150.
-(pdftex.def)             Requested size: 566.43604pt x 182.06953pt.
+ne 153.
+(pdftex.def)             Requested size: 613.64204pt x 197.24448pt.
 
-Overfull \hbox (49.7308pt too wide) in paragraph at lines 149--151
+Overfull \hbox (73.341pt too wide) in paragraph at lines 152--154
 []  [][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_wc_re
-gion_NR25_NS25_Nest0.35_Conn0.3216.pdf, id=1699, 1011.78pt x 325.215pt>
+gion_NR25_NS25_Nest0.35_Conn0.3216.pdf, id=1720, 1011.78pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_
 wc_region_NR25_NS25_Nest0.35_Conn0.3216.pdf Graphic file (type pdf)
 
@@ -3116,16 +3122,16 @@ wc_region_NR25_NS25_Nest0.35_Conn0.3216.pdf Graphic file (type pdf)
 c_region_NR25_NS25_Nest0.35_Conn0.3216.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
 mical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.3216.pdf used on input li
-ne 154.
-(pdftex.def)             Requested size: 566.43604pt x 182.06953pt.
+ne 157.
+(pdftex.def)             Requested size: 613.64204pt x 197.24448pt.
 
-Overfull \hbox (49.7308pt too wide) in paragraph at lines 153--155
+Overfull \hbox (73.341pt too wide) in paragraph at lines 156--158
 []  [][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_regio
-n_NR25_NS25_Nest0.35_Conn0.272.pdf, id=1700, 1011.78pt x 325.215pt>
+n_NR25_NS25_Nest0.35_Conn0.272.pdf, id=1721, 1011.78pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_wt_
 region_NR25_NS25_Nest0.35_Conn0.272.pdf Graphic file (type pdf)
 
@@ -3133,39 +3139,23 @@ region_NR25_NS25_Nest0.35_Conn0.272.pdf Graphic file (type pdf)
 egion_NR25_NS25_Nest0.35_Conn0.272.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
 mical_stability_wt_region_NR25_NS25_Nest0.35_Conn0.272.pdf used on input line 1
-58.
-(pdftex.def)             Requested size: 566.43604pt x 182.06953pt.
+61.
+(pdftex.def)             Requested size: 613.64204pt x 197.24448pt.
 
-Overfull \hbox (49.7308pt too wide) in paragraph at lines 157--159
+Overfull \hbox (73.341pt too wide) in paragraph at lines 160--162
 []  [][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_Nest0
-.1_Conn0.1296.pdf, id=1701, 758.835pt x 325.215pt>
+.1_Conn0.1296.pdf, id=1722, 758.835pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_
 Nest0.1_Conn0.1296.pdf Graphic file (type pdf)
 
 <use ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_N
 est0.1_Conn0.1296.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/feasibilit
-y_vs_lds_NR25_NS25_Nest0.1_Conn0.1296.pdf used on input line 167.
-(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
-
-Overfull \hbox (49.7308pt too wide) in paragraph at lines 166--168
-[]  [][] 
- []
-
-
-<./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_Nest0
-.6_Conn0.3168.pdf, id=1702, 758.835pt x 325.215pt>
-File: ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_
-Nest0.6_Conn0.3168.pdf Graphic file (type pdf)
-
-<use ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_N
-est0.6_Conn0.3168.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/feasibilit
-y_vs_lds_NR25_NS25_Nest0.6_Conn0.3168.pdf used on input line 170.
+y_vs_lds_NR25_NS25_Nest0.1_Conn0.1296.pdf used on input line 170.
 (pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
 
 Overfull \hbox (49.7308pt too wide) in paragraph at lines 169--171
@@ -3173,19 +3163,35 @@ Overfull \hbox (49.7308pt too wide) in paragraph at lines 169--171
  []
 
 
+<./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_Nest0
+.6_Conn0.3168.pdf, id=1723, 758.835pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_
+Nest0.6_Conn0.3168.pdf Graphic file (type pdf)
+
+<use ./figures/Results/local_dynamical_stability/feasibility_vs_lds_NR25_NS25_N
+est0.6_Conn0.3168.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/feasibilit
+y_vs_lds_NR25_NS25_Nest0.6_Conn0.3168.pdf used on input line 173.
+(pdftex.def)             Requested size: 566.43604pt x 242.76434pt.
+
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 172--174
+[]  [][] 
+ []
+
+
 <./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_Nest0.
-5_Conn0.416.pdf, id=1703, 462.52798pt x 346.89601pt>
+5_Conn0.416.pdf, id=1724, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_N
 est0.5_Conn0.416.pdf Graphic file (type pdf)
 
 <use ./figures/Results/largest_eigenvalue/size_of_dynamical_volume_NR25_NS25_Ne
 st0.5_Conn0.416.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/size_of_dynamical
-_volume_NR25_NS25_Nest0.5_Conn0.416.pdf used on input line 176.
+_volume_NR25_NS25_Nest0.5_Conn0.416.pdf used on input line 179.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
-ha0_fixed_connectance_random_structure.pdf, id=1706, 462.52798pt x 346.89601pt>
+ha0_fixed_connectance_random_structure.pdf, id=1727, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
 l_alpha0_fixed_connectance_random_structure.pdf Graphic file (type pdf)
 
@@ -3193,11 +3199,11 @@ l_alpha0_fixed_connectance_random_structure.pdf Graphic file (type pdf)
 _alpha0_fixed_connectance_random_structure.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
 e_NR25_NS25_critical_alpha0_fixed_connectance_random_structure.pdf used on inpu
-t line 184.
+t line 187.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
-ha0_fixed_nestedness_random_structure.pdf, id=1707, 462.52798pt x 346.89601pt>
+ha0_fixed_nestedness_random_structure.pdf, id=1728, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
 l_alpha0_fixed_nestedness_random_structure.pdf Graphic file (type pdf)
 
@@ -3205,16 +3211,16 @@ l_alpha0_fixed_nestedness_random_structure.pdf Graphic file (type pdf)
 _alpha0_fixed_nestedness_random_structure.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
 e_NR25_NS25_critical_alpha0_fixed_nestedness_random_structure.pdf used on input
- line 185.
+ line 188.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 183--186
+Overfull \hbox (49.738pt too wide) in paragraph at lines 186--189
 []  [][][][] 
  []
 
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
-ha0_fixed_connectance_no_release_when_eat.pdf, id=1708, 462.52798pt x 346.89601
+ha0_fixed_connectance_no_release_when_eat.pdf, id=1729, 462.52798pt x 346.89601
 pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
 l_alpha0_fixed_connectance_no_release_when_eat.pdf Graphic file (type pdf)
@@ -3223,11 +3229,11 @@ l_alpha0_fixed_connectance_no_release_when_eat.pdf Graphic file (type pdf)
 _alpha0_fixed_connectance_no_release_when_eat.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
 e_NR25_NS25_critical_alpha0_fixed_connectance_no_release_when_eat.pdf used on i
-nput line 189.
+nput line 192.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
-ha0_fixed_nestedness_no_release_when_eat.pdf, id=1709, 462.52798pt x 346.89601p
+ha0_fixed_nestedness_no_release_when_eat.pdf, id=1730, 462.52798pt x 346.89601p
 t>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
 l_alpha0_fixed_nestedness_no_release_when_eat.pdf Graphic file (type pdf)
@@ -3236,16 +3242,16 @@ l_alpha0_fixed_nestedness_no_release_when_eat.pdf Graphic file (type pdf)
 _alpha0_fixed_nestedness_no_release_when_eat.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
 e_NR25_NS25_critical_alpha0_fixed_nestedness_no_release_when_eat.pdf used on in
-put line 190.
+put line 193.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 188--191
+Overfull \hbox (49.738pt too wide) in paragraph at lines 191--194
 []  [][][][] 
  []
 
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
-ha0_fixed_connectance_optimal_matrix.pdf, id=1710, 462.52798pt x 346.89601pt>
+ha0_fixed_connectance_optimal_matrix.pdf, id=1731, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
 l_alpha0_fixed_connectance_optimal_matrix.pdf Graphic file (type pdf)
 
@@ -3253,11 +3259,11 @@ l_alpha0_fixed_connectance_optimal_matrix.pdf Graphic file (type pdf)
 _alpha0_fixed_connectance_optimal_matrix.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
 e_NR25_NS25_critical_alpha0_fixed_connectance_optimal_matrix.pdf used on input 
-line 194.
+line 197.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critical_alp
-ha0_fixed_nestedness_optimal_matrix.pdf, id=1711, 462.52798pt x 346.89601pt>
+ha0_fixed_nestedness_optimal_matrix.pdf, id=1732, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_NR25_NS25_critica
 l_alpha0_fixed_nestedness_optimal_matrix.pdf Graphic file (type pdf)
 
@@ -3265,125 +3271,94 @@ l_alpha0_fixed_nestedness_optimal_matrix.pdf Graphic file (type pdf)
 _alpha0_fixed_nestedness_optimal_matrix.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
 e_NR25_NS25_critical_alpha0_fixed_nestedness_optimal_matrix.pdf used on input l
-ine 195.
+ine 198.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 193--197
+Overfull \hbox (49.738pt too wide) in paragraph at lines 196--200
 []  [][][][] 
  []
 
 
-LaTeX Warning: Float too large for page by 1.7739pt on input line 198.
+LaTeX Warning: Float too large for page by 1.7739pt on input line 201.
 
 
-<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
-olume_NR25_NS25_varying_syntrophy_random_structure.pdf, id=1712, 462.52798pt x 
-346.89601pt>
-File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
-ity_volume_NR25_NS25_varying_syntrophy_random_structure.pdf Graphic file (type 
-pdf)
+<./figures/Results/local_dynamical_stability/common_dynamical_stability_region_
+NR25_NS25.pdf, id=1733, 1011.78pt x 325.215pt>
+File: ./figures/Results/local_dynamical_stability/common_dynamical_stability_re
+gion_NR25_NS25.pdf Graphic file (type pdf)
 
-<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR25_NS25_varying_syntrophy_random_structure.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
-al_dynamical_stability_volume_NR25_NS25_varying_syntrophy_random_structure.pdf 
-used on input line 203.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+<use ./figures/Results/local_dynamical_stability/common_dynamical_stability_reg
+ion_NR25_NS25.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_dyn
+amical_stability_region_NR25_NS25.pdf used on input line 206.
+(pdftex.def)             Requested size: 566.43604pt x 182.06953pt.
 
-<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
-olume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf, id=1713, 462.52798pt
- x 346.89601pt>
-File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
-ity_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf Graphic file (ty
-pe pdf)
-
-<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
-al_dynamical_stability_volume_NR25_NS25_varying_syntrophy_no_release_when_eat.p
-df used on input line 204.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
-
-Overfull \hbox (49.738pt too wide) in paragraph at lines 202--205
-[]  [][][][] 
+Overfull \hbox (49.7308pt too wide) in paragraph at lines 205--207
+[]  [] 
  []
 
-
-<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
-olume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf, id=1714, 462.52798pt x 34
-6.89601pt>
-File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
-ity_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf Graphic file (type pd
-f)
-
-<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
-al_dynamical_stability_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf us
-ed on input line 207.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1_C
-onn0.1296_alpha0=0.0.pdf, id=1715, 758.835pt x 325.215pt>
+onn0.1296_alpha0=0.0.pdf, id=1734, 1011.78pt x 325.215pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest
 0.1_Conn0.1296_alpha0=0.0.pdf Graphic file (type pdf)
 
 <use ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
 .1_Conn0.1296_alpha0=0.0.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
-e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0.pdf used on input line 214.
-(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0.pdf used on input line 213.
+(pdftex.def)             Requested size: 472.03123pt x 151.72461pt.
 
-Overfull \hbox (2.532pt too wide) in paragraph at lines 213--215
+Overfull \hbox (2.532pt too wide) in paragraph at lines 212--214
 []  [][] 
  []
 
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1_C
-onn0.1296_alpha0=0.0039.pdf, id=1716, 758.835pt x 325.215pt>
+onn0.1296_alpha0=0.0039.pdf, id=1735, 1011.78pt x 325.215pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest
 0.1_Conn0.1296_alpha0=0.0039.pdf Graphic file (type pdf)
 
 <use ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
 .1_Conn0.1296_alpha0=0.0039.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
-e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0039.pdf used on input line 218.
-(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0039.pdf used on input line 217.
+(pdftex.def)             Requested size: 472.03123pt x 151.72461pt.
 
-Overfull \hbox (2.532pt too wide) in paragraph at lines 217--219
+Overfull \hbox (2.532pt too wide) in paragraph at lines 216--218
 []  [][] 
  []
 
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0.1_C
-onn0.1296_alpha0=0.0078.pdf, id=1717, 758.835pt x 325.215pt>
+onn0.1296_alpha0=0.0078.pdf, id=1736, 1011.78pt x 325.215pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest
 0.1_Conn0.1296_alpha0=0.0078.pdf Graphic file (type pdf)
 
 <use ./figures/Results/largest_eigenvalue/largest_eigenvalue_wt_NR25_NS25_Nest0
 .1_Conn0.1296_alpha0=0.0078.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
-e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0078.pdf used on input line 222.
-(pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
+e_wt_NR25_NS25_Nest0.1_Conn0.1296_alpha0=0.0078.pdf used on input line 221.
+(pdftex.def)             Requested size: 472.03123pt x 151.72461pt.
 
-Overfull \hbox (2.532pt too wide) in paragraph at lines 221--223
+Overfull \hbox (2.532pt too wide) in paragraph at lines 220--222
 []  [][] 
  []
 
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_NR25
-_NS25_Nest0.3_Conn0.2272.pdf, id=1718, 462.52798pt x 346.89601pt>
+_NS25_Nest0.3_Conn0.2272.pdf, id=1737, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy
 _NR25_NS25_Nest0.3_Conn0.2272.pdf Graphic file (type pdf)
 
 <use ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_
 NR25_NS25_Nest0.3_Conn0.2272.pdf>
 Package pdftex.def Info: ./figures/Results/largest_eigenvalue/largest_eigenvalu
-e_varying_syntrophy_NR25_NS25_Nest0.3_Conn0.2272.pdf used on input line 229.
+e_varying_syntrophy_NR25_NS25_Nest0.3_Conn0.2272.pdf used on input line 228.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/local_dynamical_stability/size_local_dynamical_stability_reg
-ion_NR25_NS25_Nest0.3_Conn0.2272.pdf, id=1719, 462.52798pt x 346.89601pt>
+ion_NR25_NS25_Nest0.3_Conn0.2272.pdf, id=1738, 462.52798pt x 346.89601pt>
 File: ./figures/Results/local_dynamical_stability/size_local_dynamical_stabilit
 y_region_NR25_NS25_Nest0.3_Conn0.2272.pdf Graphic file (type pdf)
 
@@ -3391,16 +3366,16 @@ y_region_NR25_NS25_Nest0.3_Conn0.2272.pdf Graphic file (type pdf)
 _region_NR25_NS25_Nest0.3_Conn0.2272.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/size_local
 _dynamical_stability_region_NR25_NS25_Nest0.3_Conn0.2272.pdf used on input line
- 230.
+ 229.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
-Overfull \hbox (49.738pt too wide) in paragraph at lines 227--231
+Overfull \hbox (49.738pt too wide) in paragraph at lines 226--230
 []  [][][][] 
  []
 
 
 <./figures/Results/local_dynamical_stability/local_dynamical_stability_region_N
-R25_NS25_Nest0.45_Conn0.3168.pdf, id=1720, 1011.78pt x 325.215pt>
+R25_NS25_Nest0.45_Conn0.3168.pdf, id=1739, 1011.78pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_reg
 ion_NR25_NS25_Nest0.45_Conn0.3168.pdf Graphic file (type pdf)
 
@@ -3409,10 +3384,15 @@ on_NR25_NS25_Nest0.45_Conn0.3168.pdf>
 Package pdftex.def Info: ./figures/Results/local_dynamical_stability/local_dyna
 mical_stability_region_NR25_NS25_Nest0.45_Conn0.3168.pdf used on input line 235
 .
-(pdftex.def)             Requested size: 472.03123pt x 151.72461pt.
+(pdftex.def)             Requested size: 613.64204pt x 197.24448pt.
+
+Overfull \hbox (73.341pt too wide) in paragraph at lines 234--236
+[]  [][] 
+ []
+
 
 <./figures/Results/local_dynamical_stability/local_dynamical_stability_region_N
-R50_NS25_Nest0.45_Conn0.3328.pdf, id=1721, 758.835pt x 325.215pt>
+R50_NS25_Nest0.45_Conn0.3328.pdf, id=1740, 758.835pt x 325.215pt>
 File: ./figures/Results/local_dynamical_stability/local_dynamical_stability_reg
 ion_NR50_NS25_Nest0.45_Conn0.3328.pdf Graphic file (type pdf)
 
@@ -3424,7 +3404,7 @@ mical_stability_region_NR50_NS25_Nest0.45_Conn0.3328.pdf used on input line 237
 (pdftex.def)             Requested size: 472.03123pt x 202.30113pt.
 
 <./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy_NR50
-_NS25_Nest0.3_Conn0.2296.pdf, id=1722, 462.52798pt x 346.89601pt>
+_NS25_Nest0.3_Conn0.2296.pdf, id=1741, 462.52798pt x 346.89601pt>
 File: ./figures/Results/largest_eigenvalue/largest_eigenvalue_varying_syntrophy
 _NR50_NS25_Nest0.3_Conn0.2296.pdf Graphic file (type pdf)
 
@@ -3435,7 +3415,7 @@ e_varying_syntrophy_NR50_NS25_Nest0.3_Conn0.2296.pdf used on input line 243.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/local_dynamical_stability/size_local_dynamical_stability_reg
-ion_NR50_NS25_Nest0.3_Conn0.2296.pdf, id=1723, 462.52798pt x 346.89601pt>
+ion_NR50_NS25_Nest0.3_Conn0.2296.pdf, id=1742, 462.52798pt x 346.89601pt>
 File: ./figures/Results/local_dynamical_stability/size_local_dynamical_stabilit
 y_region_NR50_NS25_Nest0.3_Conn0.2296.pdf Graphic file (type pdf)
 
@@ -3451,60 +3431,9 @@ Overfull \hbox (49.738pt too wide) in paragraph at lines 241--245
  []
 
 
-<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
-olume_NR50_NS25_varying_syntrophy_random_structure.pdf, id=1730, 462.52798pt x 
-346.89601pt>
-File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
-ity_volume_NR50_NS25_varying_syntrophy_random_structure.pdf Graphic file (type 
-pdf)
-
-<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR50_NS25_varying_syntrophy_random_structure.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
-al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_random_structure.pdf 
-used on input line 268.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
-
-<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
-olume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf, id=1731, 462.52798pt
- x 346.89601pt>
-File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
-ity_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf Graphic file (ty
-pe pdf)
-
-<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
-al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.p
-df used on input line 269.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
-
-Overfull \hbox (49.738pt too wide) in paragraph at lines 267--270
-[]  [][][][] 
- []
+Underfull \vbox (badness 2790) has occurred while \output is active []
 
 
-<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
-olume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf, id=1732, 462.52798pt x 34
-6.89601pt>
-File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
-ity_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf Graphic file (type pd
-f)
-
-<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf>
-Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
-al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf us
-ed on input line 272.
-(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
-)
-
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[53]
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -3596,6 +3525,53 @@ pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/feas
 ibility_vs_lds_NR25_NS25_Nest0.6_Conn0.3168.pdf): PDF inclusion: multiple pdfs 
 with page group included in a single page
 >]
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR50_NS25_varying_syntrophy_random_structure.pdf, id=2021, 462.52798pt x 
+346.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR50_NS25_varying_syntrophy_random_structure.pdf Graphic file (type 
+pdf)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_random_structure.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_random_structure.pdf 
+used on input line 268.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf, id=2022, 462.52798pt
+ x 346.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf Graphic file (ty
+pe pdf)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_no_release_when_eat.p
+df used on input line 269.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+
+Overfull \hbox (49.738pt too wide) in paragraph at lines 267--270
+[]  [][][][] 
+ []
+
+
+<./figures/Results/local_dynamical_stability/common_local_dynamical_stability_v
+olume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf, id=2023, 462.52798pt x 34
+6.89601pt>
+File: ./figures/Results/local_dynamical_stability/common_local_dynamical_stabil
+ity_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf Graphic file (type pd
+f)
+
+<use ./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
+ty_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf>
+Package pdftex.def Info: ./figures/Results/local_dynamical_stability/common_loc
+al_dynamical_stability_volume_NR50_NS25_varying_syntrophy_optimal_matrix.pdf us
+ed on input line 272.
+(pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
+)
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -3649,22 +3625,8 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[62 <./figures/Results/local_dynamical_stability/common_local_dynamical_stabili
-ty_volume_NR25_NS25_varying_syntrophy_random_structure.pdf> <./figures/Results/
-local_dynamical_stability/common_local_dynamical_stability_volume_NR25_NS25_var
-ying_syntrophy_no_release_when_eat.pdf
-
-pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
-on_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_no_release_when
-_eat.pdf): PDF inclusion: multiple pdfs with page group included in a single pa
-ge
-> <./figures/Results/local_dynamical_stability/common_local_dynamical_stability
-_volume_NR25_NS25_varying_syntrophy_optimal_matrix.pdf
-
-pdfTeX warning: pdflatex (file ./figures/Results/local_dynamical_stability/comm
-on_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_optimal_matrix.
-pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
+[62 <./figures/Results/local_dynamical_stability/common_dynamical_stability_reg
+ion_NR25_NS25.pdf>]
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -3779,7 +3741,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [70]
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_nest
-_FC.pdf, id=2621, 462.52798pt x 346.89601pt>
+_FC.pdf, id=2596, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed
 _nest_FC.pdf Graphic file (type pdf)
 
@@ -3790,7 +3752,7 @@ cal_syntrophy_fixed_nest_FC.pdf used on input line 48.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed_conn
-_FC.pdf, id=2622, 462.52798pt x 346.89601pt>
+_FC.pdf, id=2597, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_fixed
 _conn_FC.pdf Graphic file (type pdf)
 
@@ -3806,7 +3768,7 @@ Overfull \hbox (49.738pt too wide) in paragraph at lines 47--50
 
 
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0.18.p
-df, id=2623, 462.52798pt x 346.89601pt>
+df, id=2598, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0
 .18.pdf Graphic file (type pdf)
 
@@ -3817,7 +3779,7 @@ cal_syntrophy_Conn0.18.pdf used on input line 55.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0.43.p
-df, id=2624, 462.52798pt x 346.89601pt>
+df, id=2599, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_dynamical_syntrophy_Conn0
 .43.pdf Graphic file (type pdf)
 
@@ -3833,7 +3795,7 @@ Overfull \hbox (49.738pt too wide) in paragraph at lines 54--57
 
 
 <./figures/Results/structural_stability/critical_delta_str_stab_fixed_nest_no_s
-yntrophy.pdf, id=2625, 462.52798pt x 346.89601pt>
+yntrophy.pdf, id=2600, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_str_stab_fixed_nest
 _no_syntrophy.pdf Graphic file (type pdf)
 
@@ -3844,7 +3806,7 @@ str_stab_fixed_nest_no_syntrophy.pdf used on input line 62.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_delta_str_stab_fixed_conn_no_s
-yntrophy.pdf, id=2626, 462.52798pt x 346.89601pt>
+yntrophy.pdf, id=2601, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_str_stab_fixed_conn
 _no_syntrophy.pdf Graphic file (type pdf)
 
@@ -3860,7 +3822,7 @@ Overfull \hbox (49.738pt too wide) in paragraph at lines 60--64
 
 
 <./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
-phy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf, id=2631, 462.52798pt x 346
+phy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf, id=2606, 462.52798pt x 346
 .89601pt>
 File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
 yntrophy_str_stab_fixed_conn_own_max_syntrophy_NISCC.pdf Graphic file (type pdf
@@ -3874,7 +3836,7 @@ d on input line 69.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
-phy_str_stab_fixed_nest_common_max_syntrophy_fully_connected.pdf, id=2632, 462.
+phy_str_stab_fixed_nest_common_max_syntrophy_fully_connected.pdf, id=2607, 462.
 52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
 yntrophy_str_stab_fixed_nest_common_max_syntrophy_fully_connected.pdf Graphic f
@@ -3893,7 +3855,7 @@ Overfull \hbox (49.738pt too wide) in paragraph at lines 68--71
 
 
 <./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
-phy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf, id=2635, 462
+phy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf, id=2610, 462
 .52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
 yntrophy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat.pdf Graphic 
@@ -3907,7 +3869,7 @@ en_eat.pdf used on input line 78.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_delta_deviation_from_no_syntro
-phy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf, id=2636, 462
+phy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf, id=2611, 462
 .52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_deviation_from_no_s
 yntrophy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat.pdf Graphic 
@@ -3926,7 +3888,7 @@ Overfull \hbox (49.738pt too wide) in paragraph at lines 77--80
 
 
 <./figures/Results/structural_stability/critical_delta_difference_from_null_cas
-e_Conn0.18.pdf, id=2637, 462.52798pt x 346.89601pt>
+e_Conn0.18.pdf, id=2612, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_difference_from_nul
 l_case_Conn0.18.pdf Graphic file (type pdf)
 
@@ -3937,7 +3899,7 @@ difference_from_null_case_Conn0.18.pdf used on input line 87.
 (pdftex.def)             Requested size: 283.22162pt x 212.4267pt.
 
 <./figures/Results/structural_stability/critical_delta_difference_from_null_cas
-e_Conn0.43.pdf, id=2638, 462.52798pt x 346.89601pt>
+e_Conn0.43.pdf, id=2613, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/critical_delta_difference_from_nul
 l_case_Conn0.43.pdf Graphic file (type pdf)
 
@@ -4181,7 +4143,7 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [85]
 <./figures/Results/structural_stability/typical_probability_structural_stabilit
-y_curve.pdf, id=3141, 462.52798pt x 346.89601pt>
+y_curve.pdf, id=3116, 462.52798pt x 346.89601pt>
 File: ./figures/Results/structural_stability/typical_probability_structural_sta
 bility_curve.pdf Graphic file (type pdf)
 
@@ -4246,13 +4208,13 @@ Package logreq Info: Writing requests to 'consumer_resource_final.run.xml'.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
  ) 
 Here is how much of TeX's memory you used:
- 29285 strings out of 493013
- 572057 string characters out of 6133344
- 982712 words of memory out of 5000000
- 31693 multiletter control sequences out of 15000+600000
+ 29287 strings out of 493013
+ 571046 string characters out of 6133344
+ 978992 words of memory out of 5000000
+ 31695 multiletter control sequences out of 15000+600000
  95440 words of font info for 153 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,14n,98p,10413b,2707s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,14n,98p,10413b,2685s stack positions out of 5000i,500n,10000p,200000b,80000s
  </Users/leobuchenelepfl/Library/texlive/2016/texmf-var/fonts/pk/ljfour/publi
 c/bbm/bbm10.600pk>{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/
 cm-super-t1.enc} </Users/leobuchenelepfl/Library/texlive/2016/texmf-var/fonts/p
@@ -4290,10 +4252,10 @@ texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/lo
 cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/
 local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on consumer_resource_final.pdf (90 pages, 3364015 bytes).
+Output written on consumer_resource_final.pdf (90 pages, 4169148 bytes).
 PDF statistics:
- 3462 PDF objects out of 3580 (max. 8388607)
- 2950 compressed objects within 30 object streams
- 603 named destinations out of 1000 (max. 500000)
- 759 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3442 PDF objects out of 3580 (max. 8388607)
+ 2930 compressed objects within 30 object streams
+ 605 named destinations out of 1000 (max. 500000)
+ 749 words of extra memory for PDF output out of 10000 (max. 10000000)
 

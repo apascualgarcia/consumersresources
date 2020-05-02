@@ -2046,6 +2046,123 @@
       \endverb
       \keyw{Quantitative Biology - Populations and Evolution,Physics - Biological Physics}
     \endentry
+    \entry{bunin_ecological_2017}{article}{}
+      \name{author}{1}{}{%
+        {{hash=435bc84c1deb3ece4bb9da041218028c}{%
+           family={Bunin},
+           familyi={B\bibinitperiod},
+           given={Guy},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{435bc84c1deb3ece4bb9da041218028c}
+      \strng{fullhash}{435bc84c1deb3ece4bb9da041218028c}
+      \strng{authornamehash}{435bc84c1deb3ece4bb9da041218028c}
+      \strng{authorfullhash}{435bc84c1deb3ece4bb9da041218028c}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2470-0045, 2470-0053}
+      \field{journaltitle}{Physical Review E}
+      \field{month}{4}
+      \field{number}{4}
+      \field{title}{Ecological communities with {Lotka}-{Volterra} dynamics}
+      \field{urlday}{15}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{95}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \field{pages}{042414}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevE.95.042414
+      \endverb
+      \verb{file}
+      \verb Bunin - 2017 - Ecological communities with Lotka-Volterra dynamic.pdf:/Users/leobuchenelepfl/Zotero/storage/7P2PQRFH/Bunin - 2017 - Ecological communities with Lotka-Volterra dynamic.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://link.aps.org/doi/10.1103/PhysRevE.95.042414
+      \endverb
+    \endentry
+    \entry{takeuchi_global_1996}{book}{}
+      \name{author}{1}{}{%
+        {{hash=2607d3603d8a05f3901f3d41ea9f2ce8}{%
+           family={Takeuchi},
+           familyi={T\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{location}{1}{%
+        {Singapore ; River Edge, NJ}%
+      }
+      \list{publisher}{1}{%
+        {World Scientific}%
+      }
+      \strng{namehash}{2607d3603d8a05f3901f3d41ea9f2ce8}
+      \strng{fullhash}{2607d3603d8a05f3901f3d41ea9f2ce8}
+      \strng{authornamehash}{2607d3603d8a05f3901f3d41ea9f2ce8}
+      \strng{authorfullhash}{2607d3603d8a05f3901f3d41ea9f2ce8}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-981-02-2471-4}
+      \field{title}{Global dynamical properties of {Lotka}-{Volterra} systems}
+      \field{year}{1996}
+      \verb{file}
+      \verb Takeuchi - 1996 - Global dynamical properties of Lotka-Volterra syst.pdf:/Users/leobuchenelepfl/Zotero/storage/4CFPINMR/Takeuchi - 1996 - Global dynamical properties of Lotka-Volterra syst.pdf:application/pdf
+      \endverb
+      \keyw{Lotka-Volterra equations,Mathematical models,Population biology,Population forecasting}
+    \endentry
+    \entry{chesson_macarthurs_1990}{article}{}
+      \name{author}{1}{}{%
+        {{hash=db6b43699dc16ed26ca5592cbdebda43}{%
+           family={Chesson},
+           familyi={C\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{db6b43699dc16ed26ca5592cbdebda43}
+      \strng{fullhash}{db6b43699dc16ed26ca5592cbdebda43}
+      \strng{authornamehash}{db6b43699dc16ed26ca5592cbdebda43}
+      \strng{authorfullhash}{db6b43699dc16ed26ca5592cbdebda43}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00405809}
+      \field{journaltitle}{Theoretical Population Biology}
+      \field{month}{2}
+      \field{number}{1}
+      \field{title}{{MacArthur}'s consumer-resource model}
+      \field{urlday}{30}
+      \field{urlmonth}{3}
+      \field{urlyear}{2020}
+      \field{volume}{37}
+      \field{year}{1990}
+      \field{urldateera}{ce}
+      \field{pages}{26\bibrangedash 38}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/0040-5809(90)90025-Q
+      \endverb
+      \verb{file}
+      \verb Chesson - 1990 - MacArthur's consumer-resource model.pdf:/Users/leobuchenelepfl/Zotero/storage/4C45FZ2I/Chesson - 1990 - MacArthur's consumer-resource model.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/004058099090025Q
+      \endverb
+    \endentry
     \entry{tikhonov_collective_2017}{article}{}
       \name{author}{2}{}{%
         {{hash=efefaef9260f320ba51c62404985e73d}{%
@@ -2066,8 +2183,8 @@
       \strng{fullhash}{4dbd9011f3f746af04d07ec04492104a}
       \strng{authornamehash}{4dbd9011f3f746af04d07ec04492104a}
       \strng{authorfullhash}{4dbd9011f3f746af04d07ec04492104a}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0031-9007, 1079-7114}
@@ -2142,8 +2259,8 @@
       \strng{authorfullhash}{f02b8ab97ab791eba86e1329d1690d84}
       \strng{editornamehash}{215aeb8b795241c71901fc035b32fc04}
       \strng{editorfullhash}{215aeb8b795241c71901fc035b32fc04}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{1553-7358}
@@ -2184,8 +2301,8 @@
       \strng{fullhash}{c669faec0330640dd8aedfbd0742b6ac}
       \strng{authornamehash}{c669faec0330640dd8aedfbd0742b6ac}
       \strng{authorfullhash}{c669faec0330640dd8aedfbd0742b6ac}
-      \field{sortinit}{6}
-      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{sortinit}{7}
+      \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper gives simple proofs of Sylvester ( = 2) and Frobenius ( = 3) inequalities. Moreover, a new suﬃcient condition for the equality of the Frobenius inequality is provided. In addition, an extension for {>} 3 matrices and an application to generalized inverses are provided.}

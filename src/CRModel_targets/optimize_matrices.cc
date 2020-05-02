@@ -13,7 +13,8 @@ int main(int argc, char* argv[]){
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
-    mcsolv.cost_function=quadratic_form_low_intra_resource_interaction;
+    mcsolv.cost_function=quadratic_form_LRI_with_critical_radius;
+;
     mcsolv.additional_params=&metaparams;
 
     /* set alpha0 to its maximal possible value */

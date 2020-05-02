@@ -51,9 +51,9 @@
 \contentsline {subsubsection}{The influence of the matrix dimensions}{40}{equation.3.1.5}
 \contentsline {section}{\numberline {3.2}Dynamical stability}{50}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}LRI regime -- Outcome of the MCMC algorithm}{50}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Typical dynamical stability}{50}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Typical dynamical stability}{51}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Fully dynamically stable region}{51}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Largest eigenvalue of the jacobian}{52}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.4}Largest eigenvalue of the jacobian}{53}{subsection.3.2.4}
 \contentsline {subsection}{\numberline {3.2.5}The influence of the matrix dimension}{53}{subsection.3.2.5}
 \contentsline {section}{\numberline {3.3}Structural stability}{68}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Domain of analysis}{68}{subsection.3.3.1}
