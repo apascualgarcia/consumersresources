@@ -73,6 +73,11 @@ struct Metaparameters{
 
   /* loads the points given in the path */
   nmatrix load_volume() const;
+
+  /* attempt at building a more accurate LRI quadratic form */
+  ntype accurate_quadratic_form_LRI(const nmatrix& A, const nmatrix& G) const;
+
+
 };
 
 

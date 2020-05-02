@@ -30,6 +30,7 @@ fig, axs, im, levels=cf.plot_common_region(local_dynamical_stability_region, alp
 cbar=cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
 cbar.set_label(r'$\alpha_0$')
 fig.suptitle(r'$\mathcal{D}_1^{'+matrix_set+'}$ for $N_R='+str(NR)+'$, $N_S='+str(NS)+'$')
+fig.savefig('plots/common_dynamical_stability_region_NR'+str(NR)+'_NS'+str(NS)+'.pdf')
 #plt.show()
 
 print("Passing to plots of local dynamical stability for each matrix ")
@@ -52,7 +53,7 @@ for j in range(len(local_dynamical_stability_region[0,0])):
     fig.savefig('plots/local_dynamical_stability_wt_region_'+save_name+'.pdf')
 
     # add suptitle to plot
-    fig.suptitle(r'Fully dynamically stable region $\mathcal{D}^G_{L,1}$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
+    fig.suptitle(r'Fully dynamically stable region $\mathcal{D}^{G,A}_{L,1}\left(\alpha_0\right)$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
     fig.savefig('plots/local_dynamical_stability_region_'+save_name+'.pdf')
 
     plt.close()

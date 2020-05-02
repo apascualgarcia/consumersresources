@@ -292,6 +292,43 @@ ntype Metaparameters::quadratic_form_low_intra_resource_interaction(const nmatri
   return to_minimize;
 }
 
+ntype Metaparameters::accurate_quadratic_form_LRI(const nmatrix& A, const nmatrix& G) const{
+  /* our energy is made of many things to minimize */
+  ntype to_minimize=0.;
+  nmatrix O=A*G, C=transpose(G)*G;
+
+  std::vector<unsigned int> G_row_deg = row_degrees(G);
+  std::vector<unsigned int> G_col_deg = columns_degrees(G);
+  std::vector<unsigned int> A_row_deg = row_degrees(A);
+  /* first step is to estimate Rc */
+  ntype Rc=A_row_deg[0]*this->alpha0*(1+this->S0/this->R0)+G_col_deg[0]*this->gamma0*this->R0;
+  for(size_t mu=1; mu < this->NR; ++mu){
+    ntype local = A_row_deg[mu]*this->alpha0*(1+this->S0/this->R0)+G_col_deg[mu]*this->gamma0*this->R0;
+    if(local > Rc){
+      Rc = local;
+    }
+  }
+  ntype potential_Rc = maximum(G_row_deg)*this->sigma0*this->gamma0*this->S0;
+  if(potential_Rc > Rc){
+    Rc = potential_Rc;
+  }
+
+  std::vector<unsigned int> OmCrdeg=row_degrees(nmatrix(O-C));
+  nvector elements_by_row;
+  for(size_t mu=0; mu < this->NR; ++mu){
+    nvector max_col_el;
+    for(size_t nu=0; nu < this->NR; ++nu){
+      max_col_el.push_back(abs(this->alpha0*O[mu][nu]-this->gamma0*this->R0*C[mu][nu]));
+    }
+    ntype local = this->alpha0*O[mu][mu]-this->gamma0*this->R0*C[mu][mu]+OmCrdeg[mu]*maximum(max_col_el);
+    elements_by_row.push_back(local);
+  }
+
+  to_minimize = maximum(elements_by_row)+Rc*Rc/(this->sigma0*this->gamma0*this->S0);
+
+  return to_minimize;
+}
+
 nmatrix Metaparameters::common_feasible_volume(unsigned int Npoints) const{
   /* Npoints^2 x 2 matrix */
   nmatrix feasible_volume;

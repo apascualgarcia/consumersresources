@@ -48,7 +48,10 @@
 % \end{tabular}
 % \caption{Metaparameters used for the simulations.} \label{eq: table metaparameters used}
 % \end{table}
-\textbf{TO DO: put small introduction here}
+We discovered in the previous section that we expect microbial communities where a large syntrophic interaction is observed to have a large consumption rate $\gamma_0$ and a small abundance of consumers at equilibrium $S_0$. It is time to work with feasible systems and investigate their dynamics. We now spend our energy on studying the local dynamical stability of feasible microbial communities. In short, we want to know what happens to them when their populations (of both resources and microbes) at equilibrium are perturbed. The question of the stability of ecosystems has always been and still remains of prime importance for ecologists and constitutes a whole scientific field. Many results have been derived, for linear systems \cite{may_will_1972}, Lotka-Volterra systems \cite{bunin_ecological_2017, takeuchi_global_1996}, mutualistic systems \cite{pascual-garcia_mutualism_2017} or MacArthur's consumer-resource model \cite{chesson_macarthurs_1990}. An important trend, which we will check with our results, is that highly connected ecological networks\footnote{This was demonstrated explicitly for mutualistic systems by \citeauthor{pascual-garcia_mutualism_2017} in \cite{pascual-garcia_mutualism_2017}.} seem to be more robust to perturbations\textbf{This was proven for structural stability, is it also true for dynamical stability?}.
+
+In the next section we first discuss about the MCMC algorithm (Methods \ref{section: methods LRI MC solver}) designed to shape more dynamically stable systems. We then move on to study the dynamical stability of microbial communities by examining the shape of their fully dynamically stable regions, looking in what case feasibility implies dynamical stability and checking how the largest eigenvalue changes with the shape of the consumption-syntrophy network. Finally we will investigate what happens when the number of resources in the community is changed.
+
 \subsection{LRI regime -- Outcome of the MCMC algorithm}
 Methods \ref{section: methods LRI MC solver} explains how we designed an algorithm whose goal is to find, for a given consumption matrix $G$, the syntrophy matrix $A$ that should bring us closer to the satisfaction of Eq.\eqref{eq: strong LRI regime}, which we know is a dynamically stable regime. The shape of the $A$-matrix that is the outcome of the algorithm minimizes the energy $E(G,A)$ (Eq.\ref{eq: dynamical stability methods LRI MC solver energy definition}). Namely, $A$ should have the following properties:
 \begin{itemize}
@@ -74,7 +77,7 @@ The same way we studied the fully feasible volume $\mathcal{F}_{1}^{G,A}(\alpha_
 \end{equation}
  Intuitively, $\mathcal{D}^{G,A}_{L,1}\left(\alpha_0\right)$ corresponds to the set of all $(\gamma_0, S_0)$ such that $\mathcal{A}\left((\gamma_0, S_0, \alpha_0), G, A\right)$ is a feasible, locally dynamically stable parameters set with probability 1. Since we require $\mathcal{A}\left((\gamma_0, S_0, \alpha_0), G, A\right)$ to be feasible, it is clear that $\mathcal{D}^{G,A}_{L,1}\left(\alpha_0\right)$ is indeed a subset of $\mathcal{F}^{G,A}_1\left(\alpha_0\right)$.
 
-As explained above, $\mathcal{D}_{L,1}^{G,A}\left(\alpha_0\right)$ is geometrically more complex than $\mathcal{F}_{1}^{G,A}\left(\alpha_0\right)$ (Figure \ref{fig: dynamical stability results local dynamical stability region for different matrices})
+As explained above, $\mathcal{D}_{L,1}^{G,A}\left(\alpha_0\right)$ is geometrically more complex than $\mathcal{F}_{1}^{G,A}\left(\alpha_0\right)$ (Figure \ref{fig: dynamical stability results local dynamical stability region for different matrices}) because of the \important{almost} fully dynamically stable points\footnote{One may argue then that we should also consider the {almost} fully dynamically stable points in the analysis. That position is intellectually appealing but would require to either work in a completely different framework or choose a ``stability threshold'' which separates almost fully feasible points from the others. The arbitrariness of said threshold (should we take into account points above $\mathcal{D}_L=0.99$? Or above $\mathcal{D}_L=0.98$? What about $0.995$?) would make such a point of view hard to hold.}
 %(which is after all not suprising, the question of dynamical feasibility is harder than the one of feasibility!)
 . It may sometimes have holes, even without syntrophy, and sometimes not, even for matrices that are topologically very close. Compare for instance Fig.\ref{fig: lds region results Nest 0.35 Conn 0.2208} with Fig.\ref{fig: lds region results Nest 0.35 Conn 0.272}, these two networks have the same ecological overlap, but even though their connectance is very similar, their fully locally dynamically stable regions have a very different shape: one of them can sustain only a tiny bit of syntrophy before becoming dynamically unstable (Fig.\ref{fig: lds region results Nest 0.35 Conn 0.2208}) while the second can endure basically any feasible syntrophic interaction (Fig.\ref{fig: lds region results Nest 0.35 Conn 0.272}). A general trend is hence harder to find but it seems that points with a larger $\gamma_0$ are in general more dynamically stable (more on this below).
 
@@ -144,18 +147,18 @@ Even though more syntrophy can be sustained, it seems that the volume of $\mathc
 \caption{Typical color plot local dynamical stability metaparameters function $\mathcal{D}_L$. for microbial communities with $\eta_G=0.5$ and $\kappa_G=0.42$. The color bar indicates the value of $\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right)$ with $A$ fully connected. The plane is divided in two zones, one where $\mathcal{D}_L = 0$ and another where $\mathcal{D}_L\approx 1$ (the red and blue regions, respectively, in (a)). Upon further notice (b), it turns out the $\mathcal{D}_L \approx 1$ region is very patchy: we observe many $(\gamma_0, S_0, \alpha_0)$ configurations for which $\mathcal{D}_L$ is very close but not exactly equal to $1$. These points are \textit{almost} fully dynamically stable.} \label{fig : dynamical stability results typical dynamical stability function}
 \end{figure}
 \begin{figure}
-\captionsetup[subfigure]{captionskip = -185pt, margin = 52pt}
-\vspace{-96pt}
-\hspace{-0.1\linewidth}
-\subfloat[\label{fig: lds region results Nest 0.35 Conn 0.2208}]{\includegraphics[width=1.2\linewidth]{{local_dynamical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.2208}.pdf}}
+\captionsetup[subfigure]{captionskip = -180pt, margin = 52pt}
+%\vspace{-96pt}
+\hspace{-0.15\linewidth}
+\subfloat[\label{fig: lds region results Nest 0.35 Conn 0.2208}]{\includegraphics[width=1.3\linewidth]{{local_dynamical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.2208}.pdf}}
 
-\vspace{-68pt}
-\hspace{-0.1\linewidth}
-\subfloat[]{\includegraphics[width=1.2\linewidth]{{local_dynamical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.3216}.pdf}}
+\vspace{-44pt}
+\hspace{-0.15\linewidth}
+\subfloat[]{\includegraphics[width=1.3\linewidth]{{local_dynamical_stability_wt_wc_region_NR25_NS25_Nest0.35_Conn0.3216}.pdf}}
 
-\vspace{-68pt}
-\hspace{-0.1\linewidth}
-\subfloat[\label{fig: lds region results Nest 0.35 Conn 0.272}]{\includegraphics[width=1.2\linewidth]{{local_dynamical_stability_wt_region_NR25_NS25_Nest0.35_Conn0.272}.pdf}}
+\vspace{-44pt}
+\hspace{-0.15\linewidth}
+\subfloat[\label{fig: lds region results Nest 0.35 Conn 0.272}]{\includegraphics[width=1.3\linewidth]{{local_dynamical_stability_wt_region_NR25_NS25_Nest0.35_Conn0.272}.pdf}}
 
 \caption{Locally fully dynamically stable region $\mathcal{D}_{L,1}^{G,A}$ as a function of syntrophy for different matrices $G$. The white zone corresponds to points that are never fully locally dynamically stable. The colour of a given point tells until which syntrophy that point is fully locally dynamically stable, \eg
 a green point is fully locally dynamically stable for $0 \leq \alpha_0 \leq \num{6.5e-3}$. Row (a) corresponds to $G$ with $\eta_G = 0.35$ and $\kappa_G = 0.23$, (b) has $\eta_G=0.35$ and $\kappa_G=0.33$ and (c) $\eta_G=0.35$ and $\kappa_G=0.27$. Even at fixed ecological overlap, different connectances of $G$ give rise to completely different systems in terms of local dynamical stability.}\label{fig: dynamical stability results local dynamical stability region for different matrices}
@@ -200,11 +203,7 @@ a green point is fully locally dynamically stable for $0 \leq \alpha_0 \leq \num
 \begin{figure}
 \vspace{-84pt}
 \hspace{-0.1\linewidth}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{common_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_random_structure}.pdf}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{common_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_no_release_when_eat}.pdf}}
-
-\centering
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{common_local_dynamical_stability_volume_NR25_NS25_varying_syntrophy_optimal_matrix}.pdf}}
+\includegraphics[width=1.2\linewidth]{{common_dynamical_stability_region_NR25_NS25}.pdf}
 \caption{Common full local dynamical stability volume for different $A$ structures: (a) fully connected, (b) no intraspecific syntrophy and (c) LRI algorithm. The points coloured in dark red give rise to locally dynamically stable systems with probability 1 for \important{all the matrices considered}. Very few spots verify this property when there is no syntrophic interaction, and no point gives rise to a fully dynamically stable system for $\alpha_0 = \num{1.3e-3}$. This is independent of the structure of $A$ that we chose. The white points never give rise to fully dynamically stable systems.}\label{fig: dynamical stability results common fully dynamically stable volume}
 \end{figure}
 
@@ -232,7 +231,8 @@ a green point is fully locally dynamically stable for $0 \leq \alpha_0 \leq \num
 \end{figure}
 
 \begin{figure}
-\subfloat[]{\includegraphics[width=\linewidth]{{local_dynamical_stability_region_NR25_NS25_Nest0.45_Conn0.3168}.pdf}}
+\hspace{-0.15\linewidth}
+\subfloat[]{\includegraphics[width=1.3\linewidth]{{local_dynamical_stability_region_NR25_NS25_Nest0.45_Conn0.3168}.pdf}}
 
 \subfloat[]{\includegraphics[width=\linewidth]{{local_dynamical_stability_region_NR50_NS25_Nest0.45_Conn0.3328}.pdf}}
 \caption{Fully dynamically stable region $\mathcal{D}^{G,A}_{L,1}$ with the three different structures of $A$ considered: fully connected (left), no intraspecific syntrophy (middle) and LRI matrix (right). The two matrices have the same ecological overlap and connectance, only the number of resources changes. (a) $G$ has $N_R=25$, $N_S=25$ and $\kappa_G=0.32$ and $\eta_G=0.45$. (b) $G$ has $N_R=50$, $N_S=25$ and $\kappa_G=0.33$ and $\eta_G=0.45$. The fact that more points can sustain an increased syntrophy is a trend for most of the matrices of the set. \textbf{still check this: the others are more less the same or a tad less}.} \label{fig: dynamical stability results typical lds region NR=50 NS=25}

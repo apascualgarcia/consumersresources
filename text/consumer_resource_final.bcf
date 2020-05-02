@@ -2180,21 +2180,28 @@
     <bcf:citekey order="50">hardin_competitive_1960</bcf:citekey>
     <bcf:citekey order="51">hardin_competitive_1960</bcf:citekey>
     <bcf:citekey order="52">wang_overcome_2019</bcf:citekey>
-    <bcf:citekey order="53">bastolla_architecture_2009</bcf:citekey>
-    <bcf:citekey order="54">bastolla_architecture_2009</bcf:citekey>
-    <bcf:citekey order="55">rohr_structural_2014</bcf:citekey>
-    <bcf:citekey order="56">rohr_structural_2014</bcf:citekey>
-    <bcf:citekey order="57">rohr_structural_2014</bcf:citekey>
-    <bcf:citekey order="58">tikhonov_collective_2017</bcf:citekey>
-    <bcf:citekey order="58">marsland_available_2019</bcf:citekey>
-    <bcf:citekey order="59">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="60">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="61">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="62">biroli_marginally_2018</bcf:citekey>
-    <bcf:citekey order="63">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="64">butler_stability_2018</bcf:citekey>
-    <bcf:citekey order="65">powell_calculating_2011</bcf:citekey>
-    <bcf:citekey order="66">thome_inequalities_2016</bcf:citekey>
+    <bcf:citekey order="53">may_will_1972</bcf:citekey>
+    <bcf:citekey order="54">bunin_ecological_2017</bcf:citekey>
+    <bcf:citekey order="54">takeuchi_global_1996</bcf:citekey>
+    <bcf:citekey order="55">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="56">chesson_macarthurs_1990</bcf:citekey>
+    <bcf:citekey order="57">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="58">pascual-garcia_mutualism_2017</bcf:citekey>
+    <bcf:citekey order="59">bastolla_architecture_2009</bcf:citekey>
+    <bcf:citekey order="60">bastolla_architecture_2009</bcf:citekey>
+    <bcf:citekey order="61">rohr_structural_2014</bcf:citekey>
+    <bcf:citekey order="62">rohr_structural_2014</bcf:citekey>
+    <bcf:citekey order="63">rohr_structural_2014</bcf:citekey>
+    <bcf:citekey order="64">tikhonov_collective_2017</bcf:citekey>
+    <bcf:citekey order="64">marsland_available_2019</bcf:citekey>
+    <bcf:citekey order="65">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="66">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="67">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="68">biroli_marginally_2018</bcf:citekey>
+    <bcf:citekey order="69">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="70">butler_stability_2018</bcf:citekey>
+    <bcf:citekey order="71">powell_calculating_2011</bcf:citekey>
+    <bcf:citekey order="72">thome_inequalities_2016</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none/global/" type="entry" sortscheme="none" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
