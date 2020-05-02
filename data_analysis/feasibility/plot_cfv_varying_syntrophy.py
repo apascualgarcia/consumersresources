@@ -10,8 +10,8 @@ from matplotlib.figure import figaspect
 
 import copy
 
-filename = 'feasibility/feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI'
+filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 
 cmap = plt.cm.get_cmap('jet_r')
@@ -19,7 +19,7 @@ colors = [cmap(i/10) for i in range(len(alpha0))]
 
 # FIRST LOAD DATA
 #feasibility region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the feasibility of said point
-#cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
 feasibility_region = cf.load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
