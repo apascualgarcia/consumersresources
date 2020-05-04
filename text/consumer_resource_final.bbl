@@ -2329,6 +2329,38 @@
       \verb http://link.springer.com/10.1007/s00010-016-0412-4
       \endverb
     \endentry
+    \entry{kolmogorov_foundations_1960}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=372fb5333dd2c776ff8f7a7339f91b46}{%
+           family={Kolmogorov},
+           familyi={K\bibinitperiod},
+           given={Andrey\bibnamedelima N.},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Chelsea Pub Co}%
+      }
+      \strng{namehash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{fullhash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{authornamehash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{authorfullhash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \field{sortinit}{7}
+      \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Foundations of the {Theory} of {Probability}}
+      \field{urlday}{3}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{1960}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb Foundations of the Theory of Probability by A. N. Kolmogorov.pdf:/Users/leobuchenelepfl/Zotero/storage/XNWERH5U/Foundations of the Theory of Probability by A. N. Kolmogorov.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://cml.rhul.ac.uk/resources/fop/Theory%20of%20Probability%20(small).pdf
+      \endverb
+    \endentry
   \endsortlist
 \endrefsection
 \endinput

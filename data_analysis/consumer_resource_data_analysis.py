@@ -23,6 +23,76 @@ connectance_label=r'Connectance $\kappa_G$'
 
 N_alphamodes=len(alpha_mode)
 
+# careful, only returns the real proba, ie the possible
+def proba_dyna_if_feas(f_region_, d_region_, alpha_mode_index_, alpha0_index_, mat_index_):
+    feasible_=f_region_[alpha_mode_index_, alpha0_index_, mat_index_, 6::3]
+    dyn_stab_=d_region_[alpha_mode_index_, alpha0_index_, mat_index_, 6::3]
+
+    equal_points=0
+    feasible_points=0
+
+    arr_to_return_ = []
+    for i in range(len(feasible_)):
+        if feasible_[i] > 0:
+            feasible_points+=1
+            arr_to_return_.append(dyn_stab_[i]/feasible_[i])
+            if(dyn_stab_[i]==feasible_[i]):
+                equal_points+=1
+    # if feasible_points>0:
+    #     print('A percentage ', equal_points/feasible_points, ' are 100 percent dynamically stable if feasible')
+
+    return np.array(arr_to_return_)
+
+# computes the volume (weigthed) of dynamical if feasible
+def vol_dyna_if_feas(f_region_, d_region, alpha_mode_index_, alpha0_index_, mat_index_):
+    to_return_ = 0
+    weight=proba_dyna_if_feas(f_region_, d_region, alpha_mode_index_, alpha0_index_, mat_index_)
+    length_=len(weight)
+    if length_==0:
+        return np.nan
+    else:
+        return np.mean(weight)
+
+# gives you the average gamma0 (among all matrices), for the wanted alpha mode and alpha index
+def average_coordinate_all_matrices(region_, alpha_mode_index, alpha0_index, coordinate_index):
+    region_wanted=region_[alpha_mode_index, alpha0_index]
+    Nmatrices=len(region_wanted)
+    av_gamma0_=[]
+
+    for i in range(Nmatrices):
+        to_add = average_coordinate(region_wanted[i], coordinate_index)
+        if(to_add > 0):
+            av_gamma0_.append(to_add)
+    print('Only', len(av_gamma0_), 'matrices had a non-zero volume')
+    print(av_gamma0_)
+    return np.mean(av_gamma0_)
+
+# gives you the average coordinate (0 for gamma0, 1 for S0) as defined in the script, data is the data for one matrix
+# at a given alpha mode and alpha0
+def average_coordinate(data, i):
+    quantity=data[6::3]
+    gamma0=data[4+i::3]
+    to_return_=0.
+    Npoints=len(quantity)
+    to_divide=np.sum(quantity)
+    is_there_no_one=True
+    for i in range(Npoints):
+        if(quantity[i]>0):
+            to_return_+=quantity[i]*gamma0[i]
+        if(quantity[i]==1):
+            is_there_no_one=False
+    if(to_divide>0):
+        to_return_/=to_divide
+    # if(is_there_no_one):
+    #     print("There is no fully dynamically stable point for that regime")
+    return to_return_
+
+def average_gamma0_all_matrices(region_, alpha_mode_index, alpha0_index):
+    return average_coordinate_all_matrices(region_, alpha_mode_index, alpha0_index, 0)
+
+def average_S0_all_matrices(region_, alpha_mode_index, alpha0_index):
+    return average_coordinate_all_matrices(region_, alpha_mode_index, alpha0_index, 1)
+
 
 # tells the common full volume for a given alphamode and alpha0
 # it is computed by adding every point in the region pondered by its smallest
@@ -126,7 +196,7 @@ def load_data_region(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_):
             local_vector.append(local_data)
         region.append(local_vector)
     region=np.array(region)
-    print('Dimensions of tableau : ', len(region), 'x', len(region[0]),'x',len(region[0,0]))
+    print('Dimensions of tableau : ', len(region), 'x', len(region[0]),'x',len(region[0,0]),'x', len(region[0,0,0]))
     return region
 # returns the local dynamical stability levels (first index is alpha_mode, second is point)
 # data has lds[alpha_mode][alpha0]Çpoint

@@ -9,8 +9,8 @@ from scipy.optimize import curve_fit
 
 import copy
 
-filename = 'local_dynamical_stability/local_dynamical_stability_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI'
+filename = 'local_dynamical_stability/leo_file_local_dynamical_stability_NR50_NS25_50_points_full_rank_opt_consumption_mat_NR50_NS25'
+optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 matrix_set='S_{25}'
 
@@ -19,7 +19,7 @@ colors = [cmap(i/10) for i in range(len(alpha0))]
 
 # FIRST LOAD DATA
 # local_dynamical_stability region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the local_dynamical_stability of said point
-#cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
 local_dynamical_stability_region=cf.load_data_region(alpha_mode,alpha0, filename,optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
@@ -68,8 +68,8 @@ for j in range(len(local_dynamical_stability_region[0][0])):
         data=local_dynamical_stability_region[i,:,j]
         NR=data[0,0]
         NS=data[0,1]
-        nestedness=data[0,2]
-        connectance=data[0,3]
+        nestedness=cf.closest_element_in_list(data[0,2], all_nestedness)
+        connectance=cf.closest_element_in_list(data[0,3], all_connectance)
         lds_volume = cf.shrink_volume_for_one_matrix(data)
         fit_function=cf.exponential_function
         take_zero_points=False
@@ -143,7 +143,8 @@ for k in range(len(local_dynamical_stability_region)):
     ax = fig.add_subplot(111)
     for nest in all_nestedness:
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        ax.plot(connectance[indices],decline[k][indices], label=r'$\eta_G\approx'+str(nest)+'$')
+        sorted_indices=[indices[a] for a in np.argsort(connectance[indices])]
+        ax.plot(connectance[sorted_indices],decline[k][sorted_indices], label=r'$\eta_G\approx'+str(nest)+'$')
     ax.set_xlabel(connectance_label)
     ax.set_ylabel(r'$d_D(G,A)$')
     ax.set_title(label[k])
@@ -167,5 +168,39 @@ for k in range(len(local_dynamical_stability_region)):
 
     fig.tight_layout()
     print("Saving fig to "+'plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_fixed_connectance_'+label[k]+'.pdf')
-    fig.savefig('plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_syntrophy_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    fig.savefig('plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    plt.close()
+
+# same plots but deviation from FC case
+for k in range(len(local_dynamical_stability_region)):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for nest in all_nestedness:
+        indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
+        sorted_indices=[indices[a] for a in np.argsort(connectance[indices])]
+        ax.plot(connectance[sorted_indices],1-decline[k][sorted_indices]/decline[0][sorted_indices], label=r'$\eta_G\approx'+str(nest)+'$')
+    ax.set_xlabel(connectance_label)
+    ax.set_ylabel(r'$1-d_D(G,A)/d_D(G,$FC$)$')
+    ax.set_title(label[k])
+    ax.legend(bbox_to_anchor=(1.0, 1.0))
+    fig.tight_layout()
+    print("Saving fig to "+'plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_away_from_FC_fixed_nestedness_'+label[k]+'.pdf')
+    fig.savefig('plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_away_from_FC_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+    plt.close()
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for conn in all_connectance:
+        indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
+        sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
+        ax.plot(nestedness[sorted_indices],1-decline[k][sorted_indices]/decline[0][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$')
+    ax.set_xlabel(nestedness_label)
+    ax.set_ylabel(r'$1-d_D(G,A)/d_D(G,$FC$)$')
+
+    ax.set_title(label[k])
+    ax.legend(bbox_to_anchor=(1.0, 1.0))
+
+    fig.tight_layout()
+    print("Saving fig to "+'plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_away_from_FC_fixed_connectance_'+label[k]+'.pdf')
+    fig.savefig('plots/local_dynamical_stability_NR'+str(int(NR))+'_NS'+str(int(NS))+'_dyn_stability_decay_rate_away_from_FC_syntrophy_fixed_connectance_'+alpha_mode[k]+'.pdf')
     plt.close()
