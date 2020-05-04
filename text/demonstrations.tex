@@ -89,9 +89,13 @@ Inserting this in Eq.\eqref{app: eq: laplace expansion} yields:
 }\label{eq: formula special determinant}
 \end{equation}
 \subsection{The optimal $S_0$ for locally dynamically stable systems} \label{sec: appendix how to handle S0}
-How $S_0$ should be adjusted is a bit tricky because it is present in two terms that do not have the same behaviour: $l_0^2/S_0$ and $N_S^2 \alpha_0^2 S_0$. So we need to compute the minimum value the sum of these two terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is given by
+How $S_0$ should be adjusted is a bit tricky because it is present in three terms that do not have the same behaviour: one term is linear in $S_0$ with a negative coefficient, another is linear with a positive coefficient and another is quadratic (also with a positive coefficient). So we need to compute the minimum value the sum of these three terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is implicitly given by the condition:
 \begin{equation}
-\frac{d}{dS_0} \left[\frac{l_0^2}{S_0}+N_S^2\alpha_0^2 S_0\right]_{S_0=S_0^*}=0 \iff S_0^* = \frac{l_0}{N_S \alpha_0}.
+\frac{d}{dS_0} \left[4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2}\right]_{S_0=S_0^*}=0.
 \end{equation}
-One checks really easily that this point is indeed a minimum. So if $S_0 > S_0^*$ it should be decreased, and otherwise increased.
+The enthusiastic reader sees that this is equivalent to:
+\begin{equation}
+S_0^* = \frac{R_0^2}{N_S^2 \alpha_0^2}\left(2N_R\sigma_0 \gamma_0\left(\gamma_0R_0-\alpha_0\right)-\frac{N_S \alpha_0 l_0}{R_0^2}\right).
+\end{equation}
+One checks really easily that this point is indeed a minimum in $S_0$. So if $S_0 > S_0^*$ it should be decreased, and otherwise increased. For $\alpha_0 \rightarrow 0$, $S_0^* \rightarrow \infty$, and for $\alpha_0 \rightarrow \infty$, $S_0^* \rightarrow 0^-$, which means we expect to find the most dynamically stable points at large $S_0$ for low syntrophy and at low $S_0$ for large syntrophy.
 \end{document}

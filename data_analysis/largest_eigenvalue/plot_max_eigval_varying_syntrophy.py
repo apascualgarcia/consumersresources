@@ -9,9 +9,12 @@ from matplotlib.colors import LogNorm
 from consumer_resource_data_analysis import alpha_mode, alpha_mode_colours,label, alpha0, all_nestedness, all_connectance
 import copy
 
-filename = 'largest_eigenvalue/largest_eigenvalue_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+filename = 'largest_eigenvalue/all_mat_largest_eigenvalue_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
 Npoints = 10000
 square_size=8
+
+optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
+consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 
 
 cmap = plt.cm.get_cmap('jet_r')
@@ -19,17 +22,18 @@ colors = [cmap(i/10) for i in range(len(alpha0))]
 
 # largest_eigenvalue region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the largest_eigenvalue of said point
 largest_eigenvalue_region = []
+cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
 for al_mo in alpha_mode:
     local_vector=[]
     for a in alpha0:
-        file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)
-        cf.remove_strings_from_file('optimal_matrices/consumption/Nr25_Nc25', file)
-        file = filename+'_'+al_mo+'_optimal_LRI_alpha0='+str(a)+'_filtered.out'
+        file = filename+'_'+al_mo+'_'+optimal_LRI_folder+'_alpha0='+str(a)+'_filtered.out'
         local_data=np.loadtxt(file, dtype=complex)
+        print('Loading file', file, 'which contains the data of ', len(local_data), 'matrices')
         local_vector.append(local_data)
     largest_eigenvalue_region.append(local_vector)
-
 largest_eigenvalue_region = np.array(largest_eigenvalue_region)
+print('Dimensions of tableau : ', len(largest_eigenvalue_region), 'x', len(largest_eigenvalue_region[0]),'x',len(largest_eigenvalue_region[0,0]))
+
 connectance = np.real(largest_eigenvalue_region[0,0][:,3])
 nestedness = np.real(largest_eigenvalue_region[0,0][:,2])
 

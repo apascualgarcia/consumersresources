@@ -10,9 +10,10 @@ from matplotlib.figure import figaspect
 
 import copy
 
-filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
-consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
+alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
+filename = 'feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
+optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
+consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
 
 cmap = plt.cm.get_cmap('jet_r')
 colors = [cmap(i/10) for i in range(len(alpha0))]
@@ -33,27 +34,27 @@ fig.suptitle(r'$\mathcal{F}_1^{S_{25}}(\alpha_0)$ for $N_R='+str(NR)+'$, $N_S='+
 fig.savefig('plots/common_feasibility_region_NR'+str(NR)+'_NS'+str(NS)+'.pdf')
 
 # plot feasibility levels for all matrices
-# for j in range(len(feasibility_region[0,0])):
-#     data = feasibility_region[:,:,j]
-#     NR = data[0,0,0]
-#     NS = data[0,0,1]
-#     nestedness = data[0,0,2]
-#     connectance = data[0,0,3]
-#
-#     fig, axs, im, levels = cf.plot_levels(data, colors, label)
-#     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
-#     # first save figure without color bar or title
-#     fig.savefig('plots/feasibility_region_wt_wc_'+save_name+'.pdf')
-#
-#     # add colorbar to plot
-#     cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
-#     cbar.set_label(r'$\alpha_0$')
-#     fig.savefig('plots/feasibility_region_wt_'+save_name+'.pdf')
-#
-#     # add suptitle to plot
-#     fig.suptitle(r'Fully feasible region $\mathcal{F}^{G,A}_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
-#     fig.savefig('plots/feasibility_region_'+save_name+'.pdf')
-#     plt.close()
+for j in range(len(feasibility_region[0,0])):
+    data = feasibility_region[:,:,j]
+    NR = data[0,0,0]
+    NS = data[0,0,1]
+    nestedness = data[0,0,2]
+    connectance = data[0,0,3]
+
+    fig, axs, im, levels = cf.plot_levels(data, colors, label)
+    save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
+    # first save figure without color bar or title
+    fig.savefig('plots/feasibility_region_wt_wc_'+save_name+'.pdf')
+
+    # add colorbar to plot
+    cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
+    cbar.set_label(r'$\alpha_0$')
+    fig.savefig('plots/feasibility_region_wt_'+save_name+'.pdf')
+
+    # add suptitle to plot
+    fig.suptitle(r'Fully feasible region $\mathcal{F}^{G,A}_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
+    fig.savefig('plots/feasibility_region_'+save_name+'.pdf')
+    plt.close()
 
 
 decline =[]
@@ -71,7 +72,7 @@ for j in range(len(feasibility_region[0][0])):
         feas_volume = cf.shrink_volume_for_one_matrix(data)
         fit_func = cf.exponential_function
         take_zero_points = True
-        fitted_alpha0, fitted_vol, estimated_alpha_crit, estimated_vol_zero_syntrophy, estimated_decay_rate=cf.fit_shrinkage_curve(alpha0, feas_volume, fit_func, take_zero_points)
+        fitted_alpha0, fitted_vol, estimated_alpha_crit, estimated_vol_zero_syntrophy, (estimated_decay_rate, err)=cf.fit_shrinkage_curve(alpha0, feas_volume, fit_func, take_zero_points)
         local_critical.append(estimated_alpha_crit)
         local_decline.append(estimated_decay_rate)
         ax.plot(fitted_alpha0, fitted_vol, marker='None', linestyle='solid', linewidth=2, color=alpha_mode_colours[i])
@@ -119,36 +120,36 @@ ylim = (0, np.max(decline)*1.1)
 
 
 
-# for k in range(len(feasibility_region)):
-#     fig = plt.figure()
-#     ax = fig.add_subplot(111)
-#     for nest in all_nestedness:
-#         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-#         ax.plot(connectance[indices],decline[k][indices], label=r'$\eta_G\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
-#     ax.set_ylim(ylim)
-#     ax.set_xlabel(r'Connectance $\kappa_G$')
-#     ax.set_ylabel(r'Feasibility decay rate $d_F(G,A)$')
-#     ax.set_title(label[k])
-#     ax.legend(bbox_to_anchor=(1.0, 1.0))
-#     fig.tight_layout()
-#
-#     fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_nestedness_'+alpha_mode[k]+'.pdf')
-#     plt.close()
-#
-#     fig = plt.figure()
-#     ax = fig.add_subplot(111)
-#     for conn in all_connectance:
-#         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
-#         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-#         ax.plot(nestedness[sorted_indices],decline[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
-#     ax.set_ylim(ylim)
-#     ax.set_xlabel(r'Ecological overlap $\eta_G$')
-#     ax.set_ylabel(r'Feasibility decay rate $d_F(G,A)$')
-#     ax.legend(bbox_to_anchor=(1.0, 1.0))
-#     ax.set_title(label[k])
-#     fig.tight_layout()
-#     fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_connectance_'+alpha_mode[k]+'.pdf')
-#     plt.close()
+for k in range(len(feasibility_region)):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for nest in all_nestedness:
+        indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
+        ax.plot(connectance[indices],decline[k][indices], label=r'$\eta_G\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+    ax.set_ylim(ylim)
+    ax.set_xlabel(r'Connectance $\kappa_G$')
+    ax.set_ylabel(r'Feasibility decay rate $d_F(G,A)$')
+    ax.set_title(label[k])
+    ax.legend(bbox_to_anchor=(1.0, 1.0))
+    fig.tight_layout()
+
+    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+    plt.close()
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for conn in all_connectance:
+        indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
+        sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
+        ax.plot(nestedness[sorted_indices],decline[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+    ax.set_ylim(ylim)
+    ax.set_xlabel(r'Ecological overlap $\eta_G$')
+    ax.set_ylabel(r'Feasibility decay rate $d_F(G,A)$')
+    ax.legend(bbox_to_anchor=(1.0, 1.0))
+    ax.set_title(label[k])
+    fig.tight_layout()
+    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_fixed_connectance_'+alpha_mode[k]+'.pdf')
+    plt.close()
 
 
 # deviations away from decay rate FC

@@ -256,6 +256,42 @@ In practice, the integrals appearing in the above formulas are approximated nume
 \vol{\mathcal{F}_1^{G,A}(\alpha_0)} \approx \frac{\sum_{i=1}^{N_\text{points}}\mathcal{F}\left((\gamma_0^{i}, S_0^{i}), \alpha_0, G, A\right)}{N_\text{points}}.
 \end{equation}
 
+\subsection{Center of dynamical stability}\label{app : center of gravity local dynamical stability}
+The general idea behind the center of dynamical stability $(\av{\gamma_0}_D(\alpha_0), \av{S_0}_D(\alpha_0))$ is to show that as syntrophy increases, only systems with a large $\gamma_0$ and a small $S_0$ remain dynamically stable (and hence feasible). For the case of feasibility, that was an easy task, one only needs to look at a heat map of $\mathcal{F}^{S_{25}}_1(\alpha_0)$ (Fig.\ref{fig: results feasibility cfv variation with syntrophy}) and see that only such zones remain fully feasible as syntrophy grows. However, as explained in the main text, that figure can not be replicated for the case of dynamical stability. Because of the almost fully dynamically stable points, the fully dynamically stable region $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$ of each $(G,A) \in S_{25}$ is very fragmented such that the common fully dynamically stable region $\mathcal{D}_{L,1}^{S_{25}}(\alpha_0)$ vanishes for $\alpha_0 > 0$ (Fig.\ref{fig: dynamical stability results common fully dynamically stable volume}). But even though $\mathcal{D}_{L,1}^{S_{25}}(\alpha_0)$ quickly vanishes, it does not mean that there are no dynamically stable $(\gamma_0, S_0)$, on the opposite (Fig.\ref{fig: dynamical stability results local dynamical stability region for different matrices})! This is the reason we need another measure to show how syntrophy changes the location of the dynamically stable points.
+
+Intuitively, we would like something that tells us basically where \important{on average} the most dynamically stable $(\gamma_0, S_0)$ are. This is very close to the physical idea of the center of gravity, which tells you where most of the mass of an object lies. In consequence we define the \define{center of dynamical stability} $(\av{\gamma_0}_D(\alpha_0), \av{S_0}_D(\alpha_0))$ with the same formulae, namely:
+\begin{equation}
+\av{\gamma_0}_D(\alpha_0) \defined \frac{1}{N_{\hat{0}}^{S_{25}}}\sum_{(G,A) \in S_{25}} \frac{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)}  \gamma_0 \ \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)} \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right) }
+\end{equation}
+and
+\begin{equation}
+\av{S_0}_D(\alpha_0) \defined \frac{1}{N_{\hat{0}}^{S_{25}}}\sum_{(G,A) \in S_{25}} \frac{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)}  S_0 \ \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)} \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right) }
+\end{equation}
+where $\mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)$ is the set of points where the dynamical stability function has mass (\ie does not vanish):
+\begin{equation}
+\mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right) = \left\{(\gamma_0, S_0):\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right) > 0\right\}
+\end{equation}
+and $N_{\hat{0}}^{S_{25}}$ simply denotes the number of consumption-syntrophy networks $(G,A) \in S_{25}$, which have non-zero points, \ie for which $\mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)$ is not empty.
+
+\subsection{Probability of dynamical stability when feasibility is ensured}\label{app : probability of being dynamically stable when feasible}
+We here define the \define{probability of being dynamically stable when feasible} $\text{Prob}\left(\mathcal{D}_L | \mathcal{F}\right)(G,A, \alpha_0)$ for a network $(G,A)$ and a syntrophy $\alpha_0$. First consider a single point $(\gamma_0, S_0, \alpha_0)$. We use conditional probability theory \cite{kolmogorov_foundations_1960} to get the probability $\text{Prob}(\mathcal{D}_L | \mathcal{F})$ that $(\gamma_0, S_0, \alpha_0)$ is dynamically stable if it feasible:
+\begin{equation}
+\text{Prob}(\mathcal{D}_L | \mathcal{F})(G, A, \gamma_0, S_0, \alpha_0) \defined \frac{\text{Prob}(\mathcal{D}_L \intersection{} \mathcal{F})(G, A, \gamma_0, S_0, \alpha_0)}{\text{Prob}(\mathcal{F})(G, A, \gamma_0, S_0, \alpha_0)}, \label{eq : app conditional probability}
+\end{equation}
+where $\text{Prob}\left(\mathcal{D}_L \intersection{} \mathcal{F}\right)$, resp. $\text{Prob}\left(\mathcal{F}\right)$ are the probabilites that $(\gamma_0, S_0, \alpha_0)$ are dynamically stable and feasible, resp. feasible. Since we required feasibility in the definition of dynamical stability, we have $\text{Prob}\left(\mathcal{D}_L \intersection{} \mathcal{F}\right)=\text{Prob}\left(\mathcal{D}_L\right)$. Using Eqs.\eqref{eq : feasibility methods feasibility metaparameters function} and \eqref{eq : dyn stab methods dynamical stability function}, one gets from Eq.\eqref{eq : app conditional probability}:
+\begin{equation}
+\text{Prob}(\mathcal{D}_L | \mathcal{F})(G, A, \gamma_0, S_0, \alpha_0) = \frac{\text{Prob}(\mathcal{D}_L)(G, A, \gamma_0, S_0, \alpha_0)}{\text{Prob}(\mathcal{F})(G, A, \gamma_0, S_0, \alpha_0)} = \frac{\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right)}.
+\end{equation}
+Finally the probability of being dynamically stable when feasible is taken as the average over the feasible points $(\gamma_0, S_0)$ of the previous quantity:
+\begin{equation}
+\text{Prob}\left(\mathcal{D}_L | \mathcal{F}\right)(G, A, \alpha_0) \defined \frac{\iint_{(\gamma_0, S_0) \in \mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)}d\gamma_0 \ dS_0 \ \frac{\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right)}}{\iint_{(\gamma_0, S_0) \in \mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)}d\gamma_0 \ dS_0 }
+\end{equation}
+where $\mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)$ is simply the set of not unfeasible points:
+\begin{equation}
+\mathcal{F}^{G,A}_{\hat{0}}(\alpha_0) \defined \left\{(\gamma_0, S_0) : \mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right) > 0\right\}.
+\end{equation}
+Note that in practice we do not take into account points outside of the unit square $[0,1]^2$ for obvious numerical considerations.
+
 \subsection{Estimate the critical structural perturbation $\Delta_S^*$}\label{app: results structural stability procedure to estimate critical structural perturbation}
 As explained in Methods \ref{sec : structural stability methods numerical estimate critical perturbation}, $\Delta_S^*(m, G, A)$ solves the equation:
 \begin{equation}
