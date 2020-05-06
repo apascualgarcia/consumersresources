@@ -123,21 +123,25 @@ a light blue point is fully feasible for $0 \leq \alpha_0 \leq \num{9.1e-3}$. Th
 
 \begin{figure}
 \vspace{-84pt}
-\captionsetup[subfigure]{captionskip=-190pt, margin=48pt}
+\captionsetup[subfigure]{captionskip=-202pt, margin=45pt}
 \hspace{-0.1\linewidth}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{decay_rate_25_vs_50_nestedness_random_structure}.pdf}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{decay_rate_25_vs_50_connectance_random_structure}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_fully_connected}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestedness_fully_connected}.pdf}}
+
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_no_release_when_eat}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestedness_no_release_when_eat}.pdf}}
+
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_optimal_matrix}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestedness_optimal_matrix}.pdf}}
 
 \vspace{-12pt}
 \hspace{-0.1\linewidth}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{decay_rate_25_vs_50_nestedness_no_release_when_eat}.pdf}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{decay_rate_25_vs_50_connectance_no_release_when_eat}.pdf}}
+% \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectancerandom_structure}.pdf}}
+% \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestednessrandom_structure}.pdf}}
 
-\vspace{-12pt}
-\hspace{-0.1\linewidth}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{decay_rate_25_vs_50_nestedness_optimal_matrix}.pdf}}
-\subfloat[]{\includegraphics[width=0.6\linewidth]{{decay_rate_25_vs_50_connectance_optimal_matrix}.pdf}}
-\caption{Comparison of the feasibility decay rates obtained for matrices with same ecological and connectance, at $N_R=25$ and $N_R=50$. The color of the points indicates their ecological overlap (left) or connectance (right). The straight line represents equal $d_F(N_R=50)$ and $d_F(N_R=25)$.  Different structures for the syntrophy matrix $A$ are considered: (a) fully connected, (b) no intraspecific syntrophy and (c) LRI matrix. No clear tendency on what effect increasing resources will have can be drawn.}
+\caption{Ratio of the feasibility decay rates at $N_R=25$ and at $N_R=50$ as a function of the consumption matrix properties. A $y$-axis larger than $1$ means $d_F(N_R=25)$ is larger than $d_F(N_R=50)$, which means the system endures the addition of syntrophic interaction better at $N_R=50$. We considered the four usual $A$ scenarios (a)-(b) FC, (c)-(d) NIS, (e)-(f) LRI and (g)-(h) RS. Increasing the number of resources in the system does not allow microbial communities to be ``more feasible'' as syntrophy increases: on average $d_F$ is unchanged by doubling the number of resources. A detailed on how the consumption matrix properties, at least connectance and ecological overlap, or the $A$-scenario precisely modify the improvement is difficult to draw from this data.\textbf{TO DO: put also the one for random structure}}
 \label{fig: feasibility results feasibility decay rate NR=50 NS=25}
 \end{figure}
 \end{document}
