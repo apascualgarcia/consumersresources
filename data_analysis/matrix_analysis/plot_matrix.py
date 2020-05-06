@@ -2,19 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import ConnectionPatch
 
-folder='data_output'
-file='optimal_LRI_for_NR25_NS25'
-Nest=['0.599869',  '0.104794']
-Conn=['0.316800',  '0.129600']
+# folder='data_output'
+# file='optimal_LRI_for_NR25_NS25'
+# Nest=['0.599869',  '0.104794']
+# Conn=['0.316800',  '0.129600']
 Gamma_matrix=['optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168.txt',
               'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.1296.txt']
+Alpha_matrix=['optimal_matrices/syntrophy/optimal_LRI_Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168_optimal_alpha.txt',
+              'optimal_matrices/syntrophy/optimal_LRI_Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.1296_optimal_alpha.txt']
+
 mat_g = []
 mat_a = []
 for i in range(2):
     mat_g.append(np.loadtxt(Gamma_matrix[i]))
-    filename = file+'_Nest'+Nest[i]+'_Conn'+Conn[i]
-    file_to_load=folder+'/'+filename+'.out'
-    mat_a.append(np.loadtxt(file_to_load))
+    mat_a.append(np.loadtxt(Alpha_matrix[i]))
 
 fig, axs= plt.subplots(2,2)
 for i in range(2):
@@ -35,7 +36,7 @@ for i in range(2):
     axs[i,0].add_artist(con)
 fig.subplots_adjust(hspace=0.01)
 fig.tight_layout()
-#fig.savefig('plots/typical_optimal_LRI_matrix.pdf')
+fig.savefig('plots/typical_optimal_LRI_matrix.pdf')
 plt.close()
 
 

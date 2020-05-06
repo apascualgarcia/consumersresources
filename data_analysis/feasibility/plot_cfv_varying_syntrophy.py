@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import consumer_resource_data_analysis as cf
-from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours
+from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours, nest_colours, conn_colours
 import os
 import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -11,9 +11,9 @@ from matplotlib.figure import figaspect
 import copy
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
-filename = 'feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
-optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
-consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
+filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
+consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 
 cmap = plt.cm.get_cmap('jet_r')
 colors = [cmap(i/10) for i in range(len(alpha0))]
@@ -123,9 +123,10 @@ ylim = (0, np.max(decline)*1.1)
 for k in range(len(feasibility_region)):
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        ax.plot(connectance[indices],decline[k][indices], label=r'$\eta_G\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+        ax.plot(connectance[indices],decline[k][indices], label=r'$\eta_G\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3, color=nest_colours[j])
     ax.set_ylim(ylim)
     ax.set_xlabel(r'Connectance $\kappa_G$')
     ax.set_ylabel(r'Feasibility decay rate $d_F(G,A)$')
@@ -138,10 +139,11 @@ for k in range(len(feasibility_region)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-        ax.plot(nestedness[sorted_indices],decline[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+        ax.plot(nestedness[sorted_indices],decline[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3, color=conn_colours[j])
     ax.set_ylim(ylim)
     ax.set_xlabel(r'Ecological overlap $\eta_G$')
     ax.set_ylabel(r'Feasibility decay rate $d_F(G,A)$')
@@ -157,9 +159,10 @@ for k in range(len(feasibility_region)):
     ratio=1.
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        ax.plot(connectance[indices],-decline[k][indices]/decline[0][indices]+1, label=r'$\eta_G\approx'+str(nest)+'$',linewidth=2.5, markeredgewidth=3)
+        ax.plot(connectance[indices],-decline[k][indices]/decline[0][indices]+1, label=r'$\eta_G\approx'+str(nest)+'$',linewidth=2.5, markeredgewidth=3, color=nest_colours[j])
     ax.set_xlabel(r'Connectance $\kappa_G$')
     ax.set_ylabel(r'$1-d_F(G,A)/d_F(G, $FC$)$')
     lgd=ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
@@ -171,10 +174,11 @@ for k in range(len(feasibility_region)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-        ax.plot(nestedness[sorted_indices],-decline[k][sorted_indices]/decline[0][sorted_indices]+1, label=r'$\kappa_G\approx'+str(conn)+'$', linewidth=2.5, markeredgewidth=3)
+        ax.plot(nestedness[sorted_indices],-decline[k][sorted_indices]/decline[0][sorted_indices]+1, label=r'$\kappa_G\approx'+str(conn)+'$', linewidth=2.5, markeredgewidth=3, color=conn_colours[j])
     ax.set_xlabel(r'Ecological overlap $\eta_G$')
     ax.set_ylabel(r'$1-d_F(G,A)/d_F(G, $FC$)$')
     ax.set_aspect(1.0/ax.get_data_ratio()*ratio)
@@ -191,9 +195,10 @@ ylim = (np.min(critical_alpha0)*0.9, np.max(critical_alpha0)*1.1)
 for k in range(len(feasibility_region)):
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        ax.plot(connectance[indices],critical_alpha0[k][indices], label=r'$\eta\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+        ax.plot(connectance[indices],critical_alpha0[k][indices], label=r'$\eta\approx'+str(nest)+'$',markersize=10, linewidth=2.5, markeredgewidth=3, color=nest_colours[j])
     ax.set_ylim(ylim)
     ax.set_xlabel(r'Connectance $\kappa_G$')
     ax.set_ylabel(r'Critical feasible syntrophy $\alpha_C^F(G,A)$')
@@ -205,10 +210,11 @@ for k in range(len(feasibility_region)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-        ax.plot(nestedness[sorted_indices],critical_alpha0[k][sorted_indices], label=r'$\kappa\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+        ax.plot(nestedness[sorted_indices],critical_alpha0[k][sorted_indices], label=r'$\kappa\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3, color=conn_colours[j])
     ax.set_ylim(ylim)
     ax.set_xlabel(r'Ecological overlap $\eta_G$')
     ax.set_ylabel(r'Critical feasible syntrophy $\alpha_C^F(G,A)$')

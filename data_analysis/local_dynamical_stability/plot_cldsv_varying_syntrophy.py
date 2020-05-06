@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import consumer_resource_data_analysis as cf
-from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance, alpha_mode_colours, nestedness_label, connectance_label
+from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance, alpha_mode_colours, nestedness_label, connectance_label, nest_colours, conn_colours
 import os
 import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -9,8 +9,8 @@ from scipy.optimize import curve_fit
 
 import copy
 
-filename = 'local_dynamical_stability/leo_file_local_dynamical_stability_NR50_NS25_50_points_full_rank_opt_consumption_mat_NR50_NS25'
-optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
+filename = 'local_dynamical_stability/all_mat_local_dynamical_stability_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 matrix_set='S_{25}'
 
@@ -103,15 +103,23 @@ decline=np.transpose(decline)
 
 connectance = local_dynamical_stability_region[0,0][:,3]
 nestedness = local_dynamical_stability_region[0,0][:,2]
+NR = local_dynamical_stability_region[0,0][0,0]
+NS = local_dynamical_stability_region[0,0][0,1]
+
+for k in range(len(alpha_mode)):
+    to_save = [[NR, NS, nestedness[i], connectance[i], decline[k][i]] for i in range(len(decline[k]))]
+    np.savetxt(filename+'_decay_rate_'+alpha_mode[k]+'.out', np.array(to_save))
+
 
 print("Passing to plots of fit")
 
 for k in range(len(local_dynamical_stability_region)):
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        ax.plot(connectance[indices],critical_alpha0[k][indices], label=r'$\eta_G\approx'+str(nest)+'$')
+        ax.plot(connectance[indices],critical_alpha0[k][indices], label=r'$\eta_G\approx'+str(nest)+'$', color=nest_colours[j])
     ax.set_xlabel(connectance_label)
     ax.set_ylabel(r'$\alpha_C^D(G,A)$')
     ax.set_title(label[k])
@@ -123,7 +131,8 @@ for k in range(len(local_dynamical_stability_region)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
         ax.plot(nestedness[sorted_indices],critical_alpha0[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$')
@@ -141,10 +150,11 @@ for k in range(len(local_dynamical_stability_region)):
 for k in range(len(local_dynamical_stability_region)):
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
         sorted_indices=[indices[a] for a in np.argsort(connectance[indices])]
-        ax.plot(connectance[sorted_indices],decline[k][sorted_indices], label=r'$\eta_G\approx'+str(nest)+'$')
+        ax.plot(connectance[sorted_indices],decline[k][sorted_indices], label=r'$\eta_G\approx'+str(nest)+'$',color=nest_colours[j])
     ax.set_xlabel(connectance_label)
     ax.set_ylabel(r'$d_D(G,A)$')
     ax.set_title(label[k])
@@ -156,10 +166,11 @@ for k in range(len(local_dynamical_stability_region)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-        ax.plot(nestedness[sorted_indices],decline[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$')
+        ax.plot(nestedness[sorted_indices],decline[k][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$',color=nest_colours[j])
     ax.set_xlabel(nestedness_label)
     ax.set_ylabel(r'$d_D(G,A)$')
 
@@ -175,10 +186,11 @@ for k in range(len(local_dynamical_stability_region)):
 for k in range(len(local_dynamical_stability_region)):
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
         sorted_indices=[indices[a] for a in np.argsort(connectance[indices])]
-        ax.plot(connectance[sorted_indices],1-decline[k][sorted_indices]/decline[0][sorted_indices], label=r'$\eta_G\approx'+str(nest)+'$')
+        ax.plot(connectance[sorted_indices],1-decline[k][sorted_indices]/decline[0][sorted_indices], label=r'$\eta_G\approx'+str(nest)+'$',color=nest_colours[j])
     ax.set_xlabel(connectance_label)
     ax.set_ylabel(r'$1-d_D(G,A)/d_D(G,$FC$)$')
     ax.set_title(label[k])
@@ -190,10 +202,11 @@ for k in range(len(local_dynamical_stability_region)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
         sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-        ax.plot(nestedness[sorted_indices],1-decline[k][sorted_indices]/decline[0][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$')
+        ax.plot(nestedness[sorted_indices],1-decline[k][sorted_indices]/decline[0][sorted_indices], label=r'$\kappa_G\approx'+str(conn)+'$', color=conn_colours[j])
     ax.set_xlabel(nestedness_label)
     ax.set_ylabel(r'$1-d_D(G,A)/d_D(G,$FC$)$')
 

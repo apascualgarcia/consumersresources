@@ -20,6 +20,8 @@ min_gamma0, max_gamma0=0.01, 1
 min_S0, max_S0=0.01, 1
 nestedness_label=r'Ecological overlap $\eta_G$'
 connectance_label=r'Connectance $\kappa_G$'
+nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
+conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 
 N_alphamodes=len(alpha_mode)
 

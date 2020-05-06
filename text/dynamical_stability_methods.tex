@@ -3,6 +3,7 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
+\textbf{TO DO: change RC and write that it is expected to grow as the connectance of A grows, how does the proba(dyn | feas) make sense since I only consider points that are fully feasible (maybe put somewhere in appendix something like "in practice we only chose points such that F=1 for the study of D")?}
 As stated in the introduction, %we are interested in the
 our ultimate goal is to study equilibria points of the set of coupled differential equations \eqref{eq: differential eq for resources and species}. In particular we want to know how \important{stable} a given equilibrium is. However there is no consensual definition of stability: what does it mean exactly that a system is stable under a given perturbation? How is a perturbation even defined? %These questions have many different possible answers.
 Throughout this thesis different notions of stability will be tackled: the first is \important{dynamical stability}.
@@ -355,7 +356,7 @@ S_{\mu \nu} = \frac{1}{\Delta_\mu}\left[\left(\sum_i \Gamma_{\mu i}\Beta_{i \nu}
 The strategy is to assume we are in an unstable regime,\ie there exists at least one $\lambda \in \sigma(J^*)$ with $\real{\lambda}\geq 0$ that satisfies Eq.\eqref{eq: master equation non marginal} and such that $\real{\lambda} > 0$. By Eq.\eqref{eq: eigenvalue problem S}, $\lambda$ is also an eigenvalue of $S(\lambda)$. If we find conditions under which the real part of the spectrum of $S(\lambda)$ is entirely negative, we will know that $\real{\lambda} \leq 0$. As this is a contradiction to the hypothesis that the regime is unstable, we must conclude that the regime is stable\footnote{Indeed, Eq.\eqref{eq: master equation non marginal} assumes already that either $\real{\lambda_1} >0$ or $\real{\lambda_1} < 0$.}.
 
 Hence, the general idea is to find regimes where we know that the spectrum of $S$, written as $\sigma(S)$, will be entirely negative for a positive $\lambda$. Thanks to the help of the two following theorems, we found such a regime, called \define{low intra-resource interaction} or LRI.
-\subsubsection{Strong LRI regime}
+\subsubsection{Strong LRI regime}\label{sec : strong LRI regime methods}
 \begin{theorem}\label{theorem: strong LRI regime}
 Let $p$ be a parameter set with a jacobian at equilibrium $J^*$. If $0$ is not an eigenvalue of $J^*$ and the equations
 \begin{equation}
