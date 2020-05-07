@@ -28,8 +28,7 @@ In the light of recent developments in the microbiology literature \cite{morris_
 % What is a chemostat and why?
 % Why not flux balance?
 
-\section{Establishing the model and goals}
-
+\section{General framework}
 We write down a CRM which describes the coupled evolution of the biomass of $N_S$ different species   and their $N_R$ resources in a chemostat\footnote{In a chemostat, new nutrients are continuously added, while at the same time microorganisms and resources are removed in order to keep the culture volume constant \cite{james_continuous_1961}.}. Resources are labelled $\mu=1, \dots, N_R$ and consumers $i=1, \dots, N_S$. The coupled time evolution of their respective abundances $\{R_\mu, S_i\}$ is given by:
 \begin{subequations}\label{eq: differential eq for resources and species}
 \begin{empheq}[box=\fbox]{align}
@@ -37,11 +36,13 @@ We write down a CRM which describes the coupled evolution of the biomass of $N_S
 \frac{dS_i}{dt} &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R_\nu S_i- d_i S_i - \sum_\nu \alpha_{\nu i} S_i \label{eq: differential eq for species}
 \end{empheq}
 \end{subequations}
-The set of quantities $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ has no explicit dynamics and is taken as constant. On the other hand, $\{R_\mu, S_i\}$ may dynamically evolve and will be refered to as \define{dynamical variables}. Note that there are in this model a lot of different symbols that may be easy to confuse. We will at least try to keep the following conventions:
+The set of quantities $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ has no explicit dynamics and is taken as constant. On the other hand, $\{R_\mu, S_i\}$ may dynamically evolve and will be refered to as \define{dynamical variables}. Note that there are in this model a lot of different symbols that link different quantities and may be easy to confuse. We will at least try to keep the following conventions:
 \begin{itemize}
-  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ has abundance $R_\mu$). Quantities related to species have subscripts in latin alphabet (\eg the species $i$ has abundance $S_i$). Finally, quantities related to both have both indices.
-  \item Vectors (\ie quantities with one index) are written with the latin alphabet (\eg the resource $\mu$ has death rate $m_\mu$).
-  \item Matrices (\ie quantities with two indices, usually relating resources and species) are written with the greek alphabet (\eg $\gamma_{i\mu}$ is the rate at which species $i$ consumes resource $\mu$).
+  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ has abundance $R_\mu$).
+  \item Quantities related to species have subscripts in latin alphabet (\eg the species $i$ has abundance $S_i$).
+  \item Finally, quantities related to both have both indices.
+%   \item Vectors (\ie quantities with one index) are written with the latin alphabet (\eg the resource $\mu$ has death rate $m_\mu$).
+%   \item Matrices (\ie quantities with two indices, usually relating resources and species) are written with the greek alphabet (\eg $\gamma_{i\mu}$ is the rate at which species $i$ consumes resource $\mu$).
 \end{itemize}
 Our model takes numerous phenomena into account and it may be helpful to take the time to explain the different terms of each differential equation. The temporal evolution of the biomass $R_\mu$ of a resource $\mu$ is essentially driven by the following processes:
 \begin{itemize}
@@ -71,8 +72,229 @@ of our model if they are fixed points of it, that means if the following equatio
 %As said above, our main goal is to study the stability of such equilibria. Before explaining what we mean by this, we focus first on simplifying the problem as much as we can.
 %Note that we consider $R^*_\mu$ and $S^*_i$ as parameters of the model.
 
+\section{Feasibility}
+Since its very inception \cite{may_will_1972}, the study of ecological interactions has been and still is tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is we assume a feasible equilibrium point, where some matrix of the model (\eg the species-interaction matrix or the jacobian) is approximated as random, and then study the dynamical or structural stability of said feasible point.
+
+That framework is not satisfying for the study we would like to conduct, because it does not take time to study whether random parameters make sense in the first place.
+Indeed, before studying whether a microbial community can sustain perturbations, we need to know if said community actually \important{exists}. Biological systems, like any other natural systems, are constrained by laws, whether they arise from physical or biological considerations. For instance, it would not make sense to consider microbial communities that \eg violate the laws of thermodynamics. In the following section, we explain how such considerations can help determining the answer to the \important{feasibility} question:
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+\itshape
+Can microbial communities arising from a random set of parameters make sense on a physical and biological level?
+If not, what are the conditions that should be imposed and how are these translated mathematically?
+\end{minipage}}
+\end{centering}
+\subsection{Basic concepts}\label{sec : methods feasibility basic concepts}
+As explained above, we want to impose conditions such that we only study systems that are compatible with biological and physical laws. Choosing such restrictions is a crucial task : we want to be as close to nature as possible but we also need to stay simple enough such that the model remains mathematically tractable. Our %-- somewhat arbitrary but still very justified ---
+choice is the following :
+ % Indeed for our model to make sense,
+  any system deemed as feasible must have ``biological'' model parameters and conserve biomass.
+
+Asking for the model parameters to be ``biological'' means we want them to carry their intended biological interpretation. This means \eg that any syntrophic interaction has to be non-negative $\alpha_{\mu i} \geq 0 $ otherwise it cannot be interpreted as a syntrophic interaction, because the mutual effect must be positive. More generally, the values of the parameters will be restricted.
+%this is equivalent to requiring that all the model parameters are non-negative:
+% \begin{equation}
+%  p \geq 0 \ \forall p \in \mathcal{P}.
+% \end{equation}
+% In our study, this equation will be slightly restricted since
+Namely, we are looking for positive-valued equilibria. %, so we require $R^*_\mu, S^*_i > 0$ specifically for these two parameters.
+Also, we require that every consumer can allocate some of each resource it consumes to growth\footnote{It would not make sense to say that species $i$ eats resource $\mu$ with efficiency $0$, since this is equivalent to species $i$ not eating resource $\mu$, and this is already encoded in the network structure.}: zero efficiencies are forbidden. Finally every resource external feeding rate should be non-zero in order to avoid resource depletion and every resource and consumer must eventually die out in the absence of interaction. Taking into account the sign conventions in the model, these considerations result in:
+\begin{equation}
+\boxed{
+R^*_\mu, S^*_i, \sigma_{i\mu}, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i} \geq 0.
+}
+\label{eq : feasibility positive parameters}
+\end{equation}
+That condition already greatly restricts the choice of parameters $p\in \mathcal{P}$. However, additional complexity arises from the relationships parameters have to follow by definition. Indeed, the $3 N_R +2 N_S + 3 N_R N_S $ parameters are constrained by the $N_R + N_S $ equations \eqref{eq: equilibrium resources and species}. So if we choose $2 N_R + N_S + 3 N_R N_S$ parameters, the remaining $N_R + N_S$ are instantly determined. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for reasons explained in Appendix \ref{sec: explanation solve for d and m}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \important{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eqs.\eqref{eq : feasibility positive parameters} can be combined with Eqs.\ref{eq: equilibrium resources and species} into:
+\begin{subequations}\label{eq : feasibility positive d and m}
+\begin{empheq}[left=\empheqlbrace]{align}
+d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R^*_\nu - \alpha_{\nu i} \right) > 0 \ \forall i=1, \dots, N_S \label{eq : feasibility positive d}\\
+m_\mu &= \frac{l_\mu - \sum_j \left(\gamma_{j\mu}R^*_\mu-\alpha_{\mu j}\right)S^*_j}{R^*_\mu} > 0 \ \forall \mu = 1, \dots, N_R \label{eq : feasibility positive m}
+\end{empheq}
+\end{subequations}
+In addition to these constraints, any feasible system should conserve biomass \important{at equilibrium}\footnote{This weak condition should hold only at equilibrium: we allow transition periods where biomass may not be conserved.}: no species should be able to produce more biomass than it physically uptakes. More specifically, a consumer $i$ attains, from resources consumption, a total biomass of $\sum_\nu \gamma_{i\nu}R^*_\nu S^*_i$.
+From this available biomass, only $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu S^*_i$ is devoted to growth. Out of the remaining $\sum_\nu (1-\sigma_{i\nu})\gamma_{i\nu}R^*_\nu S^*_i$, a part $\sum_\nu \alpha_{\nu i} S^*_i$ is given back to the resources as a syntrophic interaction. We simply impose that the syntrophic interaction is smaller than or equal to the available remaining biomass:
+\begin{equation}\label{eq : feasability biomass conservation}
+ \sum_\nu (1-\sigma_{i\nu})\gamma_{i\nu}R^*_\nu  \geq \sum_\nu \alpha_{\nu i} \quad \forall i=1, \dots, N_S.
+\end{equation}
+From now on, we will say that \textbf{a parameter set $p$ is \define{feasible} if it satisfies Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation}}.
+This is completely deterministic, in the sense that for a given parameters set $p \in \mathcal{P}$ one can without a doubt say whether it is feasible or not.
+Hence we define the \define{parameters set feasibility function} $\mathfrak{F} : P \rightarrow \{ 0, 1 \}$, which takes a parameter set as an input and tells you whether this parameter set is feasible or not:
+\begin{equation}
+\mathfrak{F}(p)=
+\begin{cases}
+1 \text{ if }p \text{ is feasible,} \\
+0 \text{ else.}
+\end{cases}
+\end{equation}
+However as explained in the introduction we will usually not work with a parameter set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameter set $m \in \mathcal{M}$ and a consumption-syntrophy network $(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ instead. We can  define a corresponding
+\define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with binary matrices $B=(G, A)$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameter set:
+\begin{equation}\boxed{
+\mathcal{F}(m, B)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, B)\right)=1\right\} \label{eq : feasibility methods feasibility metaparameters function}
+}
+\end{equation}
+%We will in general work with $\mathcal{F}$ rather than $\mathfrak{F}$ because it is easier to handle metaparameters.
+In practice $\mathcal{F}(m, B)$ is estimated numerically by calculating the fraction of feasible systems out of $N$ parameters sets generated from $(m,B)$:
+\begin{equation}
+\mathcal{F}(m, B) = \lim_{N\rightarrow \infty} \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \approx \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \text{ for } N \gg 1.
+\end{equation}
+
+
+\section{Dynamical stability}
+As stated in the introduction, %we are interested in the
+our ultimate goal is to study equilibria points of the set of coupled differential equations \eqref{eq: differential eq for resources and species}. In particular we want to know how \important{stable} a given equilibrium is. However there is no consensual definition of stability: what does it mean exactly that a system is stable under a given perturbation? How is a perturbation even defined? %These questions have many different possible answers.
+Throughout this thesis different notions of stability will be tackled: the first is \important{dynamical stability}.
+The main idea behind dynamical stability is simple. We want to answer the following question:
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+\itshape
+Given an equilibrium point $\{ R^*_\mu, S^*_i\}$, does the system go back to a positive-valued equilibrium when the consumers and resources abundances are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a positive-valued equilibrium?
+\end{minipage}}
+\end{centering}
+\subsection{Definitions}
+\subsubsection{Local dynamical stability}
+We first introduce \define{local dynamical stability}. A system is said to be \important{locally dynamically stable} if it goes back to \important{its initial equilibrium point} $\{ R^*_\mu, S^*_i \} $ after $R^*_\mu$ and $S^*_i$ have been perturbed by an infinitesimal amount $\left\{ \Delta R_\mu(t_0), \Delta S_i(t_0) \right\}$ at time $t_0$.
+
+More precisely, consider a system which is at equilibrium at time before $t=t_0$. Right after $t=t_0$, we perturb the equilibria abundances $\left\{R_\mu^*, S_i^*\right\}$ by an infinitesimal amount $\left\{ \Delta R_\mu(t_0), \Delta S_i(t_0) \right\}$.
+We want to know how the perturbations away from equilibrium, written $\left\{ \Delta R_\mu(t), \Delta S_i(t) \right\}$, and defined as
+\begin{equation}
+\Delta R_\mu(t)\defined R_\mu(t)-R_\mu^* \text{ and } \Delta S_i(t) = S_i(t)-S_i^*.
+\end{equation}
+will evolve qualitatively. Namely, will they go to zero or increase indefinitely as $t$ increases? Perturbation analysis tells us \textbf{insert ref} that the quantity which drives the evolution of $\{ \Delta R_\mu(t), \Delta S_i(t)\}$
+is the \define{jacobian matrix of the system at equilibrium} $J^*$, given by :
+\begin{equation}
+J^* \defined J(t_0),
+\end{equation}
+where $J(t)$ is the \define{jacobian} of the system \ie the jacobian matrix of its temporal evolution \eqref{eq: differential eq for resources and species} evaluated at time $t$. $J(t)$ has a block matrix structure which is given by:
+\begin{equation}
+  J(t) \defined
+\begin{pmatrix}
+  \partiald{\dot{R_\mu}}{R_\nu}& \partiald{\dot{R_\mu}}{S_j} \\
+  \partiald{\dot{S_i}}{R_\nu} & \partiald{\dot{S_i}}{S_j}
+\end{pmatrix}
+=
+\begin{pmatrix}
+  \left(-m_\mu-\sum_j \gamma_{j\mu}S_j(t)\right)\delta_{\mu\nu} & -\gamma_{j\mu}R_\mu(t)+\alpha_{\mu j} \\
+  \sigma_{i\nu}\gamma_{i\nu}S_i(t) &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu(t)-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
+\end{pmatrix}, \label{eq: definition of jacobian}
+\end{equation}
+where $\delta$ is the ubiquitously occurring Kronecker delta symbol defined as:
+\begin{equation}
+\delta_{ij} =
+\begin{cases}
+1 \text{ if }i=j, \\
+0 \text{ else.}
+\end{cases}
+\end{equation}
+% Using the fact that we are only interested in equilibria where every resource is positive and Eq.\eqref{eq: equilibrium species}, this can be rewritten as:
+% \begin{equation}
+%  J = \begin{pmatrix}
+%    \frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\delta_{\mu\nu} & -\gamma_{j\mu}R_\mu+\alpha_{\mu j} \\
+%    \sigma_{i\nu}\gamma_{i\nu}S_i &\left(\sum_{\nu} \sigma_{i\nu}\gamma_{i\nu}R_\nu-d_i-\sum_\nu \alpha_{\nu i}\right)\delta_{ij}
+%  \end{pmatrix}, \label{eq: definition of jacobian alternative}
+% \end{equation}
+$J^*$ is then precisely $J$  with $\{R_\mu, S_i\}$ taken at the considered equilibrium point $\{R_\mu^*, S_i^*\}$, which simplifies its structure. Indeed,
+since we are interested only in positive valued equilibria (\ie $S^*_i > 0 \ \forall i$), then Eq.\eqref{eq: equilibrium species} is equivalent to:
+\begin{equation}
+  \sum_\nu \sigma_{i\nu} \gamma_{i\nu}R^*_\nu -d_i - \sum_\nu \alpha_{\nu i} = 0,
+\end{equation}
+which means that the lower right block of the jacobian in Eq.\eqref{eq: definition of jacobian} will be zero. Hence at equilibrium the jacobian $J^*$ will have the following block form:
+\begin{equation}
+\boxed{
+  J^* = \begin{pmatrix}
+  -\Delta & \Gamma \\
+  \Beta & 0
+\end{pmatrix}
+}, \label{eq: jacobian at equilibrium}
+\end{equation}
+where
+\begin{itemize}
+  \item $\Delta_{\mu\nu} = \text{diag}(m_\mu+\sum_j \gamma_{j\mu} S^*_j) = \text{diag}\left(\frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\right)$ is a positive $N_R \times N_R$ diagonal matrix,
+  \item $\Gamma_{\mu j} = -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j}$ is a $N_R \times N_S$ matrix which does not have entries with a definite sign.
+  \item $\Beta_{i\nu} = \sigma_{i\nu} \gamma_{i\nu} S^*_i$ is a $N_S \times N_R$ matrix with positive entries.
+\end{itemize}
+For reasons explained later in the manuscript, we say that a given equilibrium is \define{locally dynamically stable} if the largest real part of the eigenvalues of $J^*$ is negative.
+
+
+\subsubsection{Global dynamical stability}
+If we establish that a system is locally dynamically stable, we know that it will come back to the same equilibrium after an infinitesimal perturbation of the resources and consumers abundances. The next natural question is:
+
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+\itshape \important{How much} can these equilibria points be perturbed before the system goes to a point where either at least a species has gone extinct or reaches another positive valued equilibrium $\{ \tilde{R}^*_\mu, \tilde{S}^*_i\}$ or simply does not reach a new dynamical equilibrium?
+\end{minipage}}
+\end{centering}
+
+
+\noindent One way of studying this \cite{pascual-garcia_mutualism_2017} is to simply take an equilibrium point $\{ R^*_\mu, S^*_i\}$ and perturb the abundance of the species and resources at that point by a fixed number $\Delta_D \in \left[0, 1\right]$ which allows us to quantify the perturbation:
+\begin{empheq}[left=\empheqlbrace]{align}
+  R^*_\mu \rightarrow R_\mu(t_0) \equiv  R^*_\mu \left(1+\Delta_D \nu_\mu\right), \\
+  S^*_i \rightarrow S_\mu(t_0) \equiv S^*_i \left(1+\Delta_D \nu_i \right),
+\end{empheq}
+where the $\nu_{\mu, i}$ are random numbers drawn from a uniform distribution between -1 and +1 and $t_0$ is the time where the previously at equilibrium system is perturbed.
+The system with the initial values $\{R(t_0), S(t_0)\}$ can then be time evolved from $t=t_0$ until it reaches an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ which may be different from the equilibrium $\{R^*, S^*\}$ initially considered.
+This procedure is essentially a generalized version of local dynamical stability, since we allow the perturbation $\Delta_D$ to be non-infinitesimal. The question we will ask is precisely how big $\Delta_D$ can get.
+
+
+A certain number of quantities, that all depend on the perturbation $\Delta_D$, can then be measured to quantify the dynamical stability of the system:
+\begin{itemize}
+  \item The resilience $t_R$: the time scale over which the system reaches its new equilibrium.
+  \item The number of extinctions $E$: the number of species or resources which died during the time it took the system to reach its new equilibrium.
+  \item The angle $\alpha$ between two equilibria: this quantifies how close the old and new equilibria are. $\alpha$ is defined through its standard scalar product formula:
+  \begin{equation}
+  \cos(\alpha) \equiv \frac{\sum_\mu R^*_\mu \tilde{R}^*_\mu + \sum_j S^*_j\tilde{S}^*_j}{\sqrt{\sum_\mu \left(R^*_\mu\right)^2 + \sum_i \left(S^*_i\right)^2}\sqrt{\sum_\mu \left(\tilde{R}^*_\mu\right)^2 + \sum_i \left(\tilde{S}^*_i\right)^2}}.
+  \end{equation}
+\end{itemize}
+These quantities have either been already introduced in previous papers or are natural extensions of standard quantities \cite{ives_stability_2007,pascual-garcia_mutualism_2017}. They allow us to quantify the robustness of a given equilibrium.
+
+\section{Structural stability}
+When studying dynamical stability, we investigate what happens when the equilibria abundances $\{R^*_\mu, S^*_i\}$ of a given equilibrium point are perturbed. The question of \define{structural stability} looks also at the behaviour of a given system when perturbed away from equilibrium. However, structural stability focuses on the perturbations of the parameters of the model \ie  $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$. Namely we will try to answer the following question :
+
+\begin{centering}
+\fbox{\begin{minipage}{\linewidth}
+\itshape
+Given an equilibrium point, does the system go back to a positive-valued equilibrium when some of the model parameters are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a positive-valued equilibrium?
+\end{minipage}}
+\end{centering}
+
+\subsection{Definitions}
+Studying how a system responds to the perturbation of all parameters $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$ is a quite difficult problem. So we will try to simplify it by perturbing \important{only one} parameter. We make the somewhat arbitrary choice of perturbing the external feeding rate $l_\mu$, since it is essentially the only parameter one can control experimentally [\textbf{is this true?}]. More precisely, consider $\Delta_S \in [0,1]$. We say that a given system $p \in \mathcal{P}$ is \define{structurally stable} under the perturbation $\Delta_S$, if under the transformation
+\begin{equation}
+l_\mu \rightarrow \hat{l}_\mu \defined l_\mu\left( 1+\Delta_S \nu_\mu \right) \label{eq : ss methods l perturbation}
+\end{equation}
+the transformed set of parameters $\left\{ \hat{l}_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i \right\}$ gives rise under time evolution to a positive valued-equilibrium $\left\{\hat{R}^*_\mu, \hat{S}^*_i\right\}$. In the equation above, $\nu_\mu$ is a random variable drawn from a uniform distribution of support $[-1, 1]$. In words, we start with an initial parameters set at an equilibrium point, which is constant under time evolution, and see how much we can change the resources external feeding rate until some consumers start to die out as the new system is time-evolved.
+
+Similarly to what was done for feasibility and dynamical stability, we can define the \define{parameters set structural stability function} $\mathfrak{S} : [0,1] \times \mathcal{P} \rightarrow \left\{0,1\right\}$ in the following way $\forall \Delta_S \in [0,1], p \in \mathcal{P}$:
+\begin{equation}
+\mathfrak{S}(\Delta_S, p)=
+\begin{cases}
+1 \text{ if }p \text{ is structurally stable under the perturbation }\Delta_S, \\
+0 \text{ otherwise.}
+\end{cases}
+\end{equation}
+For a fixed $p$, we expect $\mathfrak{S}(\Delta_S, p)$ to behave as a step function of $\Delta_S$ : we may only perturb the parameters so much before they suddenly become structurally unstable.
+
+The corresponding metaparameters set function, the \define{metaparameters set structural stability function} $\mathcal{S}$
+can also be defined as the function which, given a set of metaparameters and a consumption-syntrophy couple of binary matrices, tells you how probable it is that you draw a system structurally stable under a perturbation $\Delta_S$. Mathematically, $\mathcal{S} : [0,1] \times \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ is defined $\forall \Delta_S \in [0,1], m \in \mathcal{M}, B=(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ :
+\begin{equation}
+\boxed{
+\mathcal{S}(\Delta_S, m, B)= \text{Probability}\left\{\mathfrak{S}(\Delta_S, \mathcal{A}(m, B))=1\right\}
+}
+\end{equation}
+Because we expect a step-like drop of $\mathfrak{S}$ as $\Delta_S$ increases, we expect also a somewhat sharp drop from $\mathcal{S} \approx 1$ to $\mathcal{S} \approx 0$. To quantify this, one can define the \define{critical structural perturbation} $\Delta_S^*(m,G,A)$ of a consumption-syntrophy network couple implicitly as :
+\begin{equation}
+\mathcal{S}(\Delta_S^*(m, G, A), m, G,A)=0.5
+\end{equation}
+Methods \ref{sec : structural stability methods numerical estimate critical perturbation} below explains how $\Delta_S^*(m, G,A)$ can be estimated numerically.
+
+
+
+\section{Tactics used to simplify the problem}
 \subsection{Attack strategy and important notions}
-Before jumping right into the matter, it is important to explain how we will study this system of differential equations. Mainly two different but complimenteray approaches will be used: analytical and numerical. Note that the $\sim$ 5'000 lines of code we wrote from scratch and that we use to get the results of Section \ref{chapter : results} are available at the address \url{https://gitlab.ethz.ch/palberto/consumersresources.git}.
+Before jumping right into the matter, it is important to explain how we will study this system of differential equations. Mainly two different but complimenteray approaches will be used: analytical and numerical. Note that the %$\sim$ 5'000
+lines of code we wrote from scratch and that we use to get the results of Section \ref{chapter : results} are available at the address \url{https://gitlab.ethz.ch/palberto/consumersresources.git}.
 
 \subsubsection{Metaparameters and matrix properties}\label{sec : intro metaparameters and matrix properties}
 Studying the equilibria of our CRM will lead us to establish and study several relations involving the different \define{parameters} of the problem. Namely, these are: $l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i, R^*_\mu$ and $S^*_i$ $\forall i=1, \dots, N_S; \mu=1, \dots, N_R$.
@@ -153,4 +375,9 @@ So, how do we bridge the gap between what we work with analytically, \ie a set o
 \mathcal{A}: \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow \mathcal{P}
 \end{equation}
 which brings us from the collapsed space to the parameter space\footnote{Note that since the collapsed space is lower dimensional than the parameters space, $\mathcal{A}$ is not the inverse of $\mathcal{C}$.}. Numerically, from a set of metaparameters $m \in \mathcal{M}$ and binary matrices $B=(G, A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$, we produce a (or several) set(s) of parameters $p = \mathcal{A}(m, B) \in \mathcal{P}$ and study properties of it. Section \ref{sec : feasibility methods algorithmic procedure} details how $\mathcal{A}$ is constructed.
+
+\section{Goals of the Thesis}
+
+
+
 \end{document}

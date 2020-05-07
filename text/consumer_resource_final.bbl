@@ -939,6 +939,205 @@
       \verb http://www.annualreviews.org/doi/10.1146/annurev.mi.15.100161.000331
       \endverb
     \endentry
+    \entry{may_will_1972}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e60c606952aa3fbdee09129782f0fb4e}{%
+           family={May},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima M.},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{e60c606952aa3fbdee09129782f0fb4e}
+      \strng{fullhash}{e60c606952aa3fbdee09129782f0fb4e}
+      \strng{authornamehash}{e60c606952aa3fbdee09129782f0fb4e}
+      \strng{authorfullhash}{e60c606952aa3fbdee09129782f0fb4e}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Gardner and Ashby1 have suggested that large complex systems which are assembled (connected) at random may be expected to be stable up to a certain critical level of connectance, and then, as this increases, to suddenly become unstable. Their conclusions were based on the trend of computer studies of systems with 4, 7 and 10 variables.}
+      \field{issn}{1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{8}
+      \field{number}{5364}
+      \field{title}{Will a {Large} {Complex} {System} be {Stable}?}
+      \field{volume}{238}
+      \field{year}{1972}
+      \field{pages}{413\bibrangedash 414}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1038/238413a0
+      \endverb
+      \verb{file}
+      \verb Full Text:/Users/leobuchenelepfl/Zotero/storage/396KWD85/MAY - 1972 - Will a Large Complex System be Stable.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/238413a0
+      \endverb
+    \endentry
+    \entry{allesina_stability_2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
+           family={Allesina},
+           familyi={A\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Si},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{fullhash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{authornamehash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \strng{authorfullhash}{217b7ff6e9a720bda68e0a12a06cf105}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Forty years ago, Robert May questioned a central belief in ecology by proving that sufﬁciently large or complex ecological networks have probability of persisting close to zero. To prove this point, he analyzed large networks in which species interact at random. However, in natural systems pairs of species have well-deﬁned interactions (e.g., predator-prey, mutualistic or competitive). Here we extend May’s results to these relationships and ﬁnd remarkable differences between predator-prey interactions, which increase stability, and mutualistic and competitive, which are destabilizing. We provide analytic stability criteria for all cases. These results have broad applicability in ecology. For example, we show that, surprisingly, the probability of stability for predator-prey networks is decreased when we impose realistic food web structure or we introduce a large preponderance of weak interactions. Similarly, stability is negatively impacted by nestedness in bipartite mutualistic networks.}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{3}
+      \field{note}{arXiv: 1105.2071}
+      \field{number}{7388}
+      \field{title}{Stability {Criteria} for {Complex} {Ecosystems}}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{483}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \field{pages}{205\bibrangedash 208}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1038/nature10832
+      \endverb
+      \verb{file}
+      \verb Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/IALU4JYE/Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1105.2071
+      \endverb
+      \keyw{Quantitative Biology - Populations and Evolution}
+    \endentry
+    \entry{allesina_predicting_2015}{article}{}
+      \name{author}{6}{}{%
+        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
+           family={Allesina},
+           familyi={A\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3064f9d6b3abcc38b08984f4eda68610}{%
+           family={Grilli},
+           familyi={G\bibinitperiod},
+           given={Jacopo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=95265fff5586e8e16d7ac99edc581f2e}{%
+           family={Barabás},
+           familyi={B\bibinitperiod},
+           given={György},
+           giveni={G\bibinitperiod}}}%
+        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Si},
+           giveni={S\bibinitperiod}}}%
+        {{hash=778769d404e18a06a71dac73dbb20edc}{%
+           family={Aljadeff},
+           familyi={A\bibinitperiod},
+           given={Johnatan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cc482a45ac9ec277907a2a62353259b3}{%
+           family={Maritan},
+           familyi={M\bibinitperiod},
+           given={Amos},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{227544e0c494d31321e8a5ac09a59016}
+      \strng{fullhash}{848a5cef939f17a93c604df5b757697f}
+      \strng{authornamehash}{227544e0c494d31321e8a5ac09a59016}
+      \strng{authorfullhash}{848a5cef939f17a93c604df5b757697f}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2041-1723}
+      \field{journaltitle}{Nature Communications}
+      \field{month}{11}
+      \field{number}{1}
+      \field{title}{Predicting the stability of large structured food webs}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{6}
+      \field{year}{2015}
+      \field{urldateera}{ce}
+      \field{pages}{7842}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/ncomms8842
+      \endverb
+      \verb{file}
+      \verb Allesina et al. - 2015 - Predicting the stability of large structured food .pdf:/Users/leobuchenelepfl/Zotero/storage/U4STJYJ5/Allesina et al. - 2015 - Predicting the stability of large structured food .pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/ncomms8842
+      \endverb
+    \endentry
+    \entry{barbier_cavity_2017}{report}{}
+      \name{author}{2}{}{%
+        {{hash=d58c93cb281fe2131f690a3a18d547ab}{%
+           family={Barbier},
+           familyi={B\bibinitperiod},
+           given={Matthieu},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7566147210744dc74263e189e3221c2e}{%
+           family={Arnoldi},
+           familyi={A\bibinitperiod},
+           given={Jean-François},
+           giveni={J\bibinithyphendelim F\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Ecology}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{e80f47da1689a3e60fa2a835b8584fbb}
+      \strng{fullhash}{e80f47da1689a3e60fa2a835b8584fbb}
+      \strng{authornamehash}{e80f47da1689a3e60fa2a835b8584fbb}
+      \strng{authorfullhash}{e80f47da1689a3e60fa2a835b8584fbb}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article is addressed to researchers and students in theoretical ecology, as an introduction to “disordered systems” approaches from statistical physics, and how they can help understand large ecological communities. We discuss the relevance of these approaches, and how they ﬁt within the broader landscape of models in community ecology. We focus on a remarkably simple technique, the cavity method, which allows to derive the equilibrium properties of Lotka-Volterra systems. We present its predictions, the new intuitions it suggests, and its technical underpinnings. We also discuss a number of new results concerning possible extensions, including diﬀerent functional responses and community structures.}
+      \field{month}{6}
+      \field{title}{The cavity method for community ecology}
+      \field{type}{preprint}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.1101/147728
+      \endverb
+      \verb{file}
+      \verb Barbier and Arnoldi - 2017 - The cavity method for community ecology.pdf:/Users/leobuchenelepfl/Zotero/storage/6WMBHAF8/Barbier and Arnoldi - 2017 - The cavity method for community ecology.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://biorxiv.org/lookup/doi/10.1101/147728
+      \endverb
+    \endentry
     \entry{pascual-garcia_mutualism_2017}{article}{}
       \name{author}{2}{}{%
         {{hash=2eff1c0a6cc6cc7f56a551031dd93109}{%
@@ -984,6 +1183,53 @@
       \endverb
       \verb{url}
       \verb http://www.nature.com/articles/ncomms14326
+      \endverb
+    \endentry
+    \entry{ives_stability_2007}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a13f6128fc3277b00281091b0fda56f1}{%
+           family={Ives},
+           familyi={I\bibinitperiod},
+           given={A.\bibnamedelimi R.},
+           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=42bb7503a4ab32e710fd82fcff91b5bd}{%
+           family={Carpenter},
+           familyi={C\bibinitperiod},
+           given={S.\bibnamedelimi R.},
+           giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{88212615cc2e42b37cdd1196039ece5a}
+      \strng{fullhash}{88212615cc2e42b37cdd1196039ece5a}
+      \strng{authornamehash}{88212615cc2e42b37cdd1196039ece5a}
+      \strng{authorfullhash}{88212615cc2e42b37cdd1196039ece5a}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{7}
+      \field{number}{5834}
+      \field{title}{Stability and {Diversity} of {Ecosystems}}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{317}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \field{pages}{58\bibrangedash 62}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1126/science.1133258
+      \endverb
+      \verb{file}
+      \verb Ives and Carpenter - 2007 - Stability and Diversity of Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/7DRMEF4N/Ives and Carpenter - 2007 - Stability and Diversity of Ecosystems.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1133258
       \endverb
     \endentry
     \entry{butler_stability_2018}{article}{}
@@ -1122,8 +1368,8 @@
       \strng{fullhash}{6dc008f65c0c21486b6076bcdc1b1437}
       \strng{authornamehash}{75de2a38c3715e256f02efb65dfafb7a}
       \strng{authorfullhash}{6dc008f65c0c21486b6076bcdc1b1437}
-      \field{sortinit}{2}
-      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0028-0836, 1476-4687}
@@ -1183,8 +1429,8 @@
       \strng{authorfullhash}{7992a837870655a1ea6b67f430b47df2}
       \strng{editornamehash}{fd7704b9919bacabcce647fd178fd1e6}
       \strng{editorfullhash}{fd7704b9919bacabcce647fd178fd1e6}
-      \field{sortinit}{2}
-      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Understanding the causes and effects of network structural features is a key task in deciphering complex systems. In this context, the property of network nestedness has aroused a fair amount of interest as regards ecological networks. Indeed, Bastolla et al. introduced a simple measure of network nestedness which opened the door to analytical understanding, allowing them to conclude that biodiversity is strongly enhanced in highly nested mutualistic networks. Here, we suggest a slightly refined version of such a measure of nestedness and study how it is influenced by the most basic structural properties of networks, such as degree distribution and degree-degree correlations (i.e. assortativity). We find that most of the empirically found nestedness stems from heterogeneity in the degree distribution. Once such an influence has been discounted – as a second factor – we find that nestedness is strongly correlated with disassortativity and hence – as random networks have been recently found to be naturally disassortative – they also tend to be naturally nested just as the result of chance.}
@@ -1209,252 +1455,6 @@
       \endverb
       \verb{url}
       \verb https://dx.plos.org/10.1371/journal.pone.0074025
-      \endverb
-    \endentry
-    \entry{may_will_1972}{article}{}
-      \name{author}{1}{}{%
-        {{hash=e60c606952aa3fbdee09129782f0fb4e}{%
-           family={May},
-           familyi={M\bibinitperiod},
-           given={Robert\bibnamedelima M.},
-           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
-      }
-      \strng{namehash}{e60c606952aa3fbdee09129782f0fb4e}
-      \strng{fullhash}{e60c606952aa3fbdee09129782f0fb4e}
-      \strng{authornamehash}{e60c606952aa3fbdee09129782f0fb4e}
-      \strng{authorfullhash}{e60c606952aa3fbdee09129782f0fb4e}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Gardner and Ashby1 have suggested that large complex systems which are assembled (connected) at random may be expected to be stable up to a certain critical level of connectance, and then, as this increases, to suddenly become unstable. Their conclusions were based on the trend of computer studies of systems with 4, 7 and 10 variables.}
-      \field{issn}{1476-4687}
-      \field{journaltitle}{Nature}
-      \field{month}{8}
-      \field{number}{5364}
-      \field{title}{Will a {Large} {Complex} {System} be {Stable}?}
-      \field{volume}{238}
-      \field{year}{1972}
-      \field{pages}{413\bibrangedash 414}
-      \range{pages}{2}
-      \verb{doi}
-      \verb 10.1038/238413a0
-      \endverb
-      \verb{file}
-      \verb Full Text:/Users/leobuchenelepfl/Zotero/storage/396KWD85/MAY - 1972 - Will a Large Complex System be Stable.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.1038/238413a0
-      \endverb
-    \endentry
-    \entry{allesina_stability_2012}{article}{}
-      \name{author}{2}{}{%
-        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
-           family={Allesina},
-           familyi={A\bibinitperiod},
-           given={Stefano},
-           giveni={S\bibinitperiod}}}%
-        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
-           family={Tang},
-           familyi={T\bibinitperiod},
-           given={Si},
-           giveni={S\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{217b7ff6e9a720bda68e0a12a06cf105}
-      \strng{fullhash}{217b7ff6e9a720bda68e0a12a06cf105}
-      \strng{authornamehash}{217b7ff6e9a720bda68e0a12a06cf105}
-      \strng{authorfullhash}{217b7ff6e9a720bda68e0a12a06cf105}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Forty years ago, Robert May questioned a central belief in ecology by proving that sufﬁciently large or complex ecological networks have probability of persisting close to zero. To prove this point, he analyzed large networks in which species interact at random. However, in natural systems pairs of species have well-deﬁned interactions (e.g., predator-prey, mutualistic or competitive). Here we extend May’s results to these relationships and ﬁnd remarkable differences between predator-prey interactions, which increase stability, and mutualistic and competitive, which are destabilizing. We provide analytic stability criteria for all cases. These results have broad applicability in ecology. For example, we show that, surprisingly, the probability of stability for predator-prey networks is decreased when we impose realistic food web structure or we introduce a large preponderance of weak interactions. Similarly, stability is negatively impacted by nestedness in bipartite mutualistic networks.}
-      \field{issn}{0028-0836, 1476-4687}
-      \field{journaltitle}{Nature}
-      \field{month}{3}
-      \field{note}{arXiv: 1105.2071}
-      \field{number}{7388}
-      \field{title}{Stability {Criteria} for {Complex} {Ecosystems}}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{483}
-      \field{year}{2012}
-      \field{urldateera}{ce}
-      \field{pages}{205\bibrangedash 208}
-      \range{pages}{4}
-      \verb{doi}
-      \verb 10.1038/nature10832
-      \endverb
-      \verb{file}
-      \verb Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/IALU4JYE/Allesina and Tang - 2012 - Stability Criteria for Complex Ecosystems.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://arxiv.org/abs/1105.2071
-      \endverb
-      \keyw{Quantitative Biology - Populations and Evolution}
-    \endentry
-    \entry{allesina_predicting_2015}{article}{}
-      \name{author}{6}{}{%
-        {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
-           family={Allesina},
-           familyi={A\bibinitperiod},
-           given={Stefano},
-           giveni={S\bibinitperiod}}}%
-        {{hash=3064f9d6b3abcc38b08984f4eda68610}{%
-           family={Grilli},
-           familyi={G\bibinitperiod},
-           given={Jacopo},
-           giveni={J\bibinitperiod}}}%
-        {{hash=95265fff5586e8e16d7ac99edc581f2e}{%
-           family={Barabás},
-           familyi={B\bibinitperiod},
-           given={György},
-           giveni={G\bibinitperiod}}}%
-        {{hash=219d35cdeab44a189e8fdc209139f42e}{%
-           family={Tang},
-           familyi={T\bibinitperiod},
-           given={Si},
-           giveni={S\bibinitperiod}}}%
-        {{hash=778769d404e18a06a71dac73dbb20edc}{%
-           family={Aljadeff},
-           familyi={A\bibinitperiod},
-           given={Johnatan},
-           giveni={J\bibinitperiod}}}%
-        {{hash=cc482a45ac9ec277907a2a62353259b3}{%
-           family={Maritan},
-           familyi={M\bibinitperiod},
-           given={Amos},
-           giveni={A\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{227544e0c494d31321e8a5ac09a59016}
-      \strng{fullhash}{848a5cef939f17a93c604df5b757697f}
-      \strng{authornamehash}{227544e0c494d31321e8a5ac09a59016}
-      \strng{authorfullhash}{848a5cef939f17a93c604df5b757697f}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{2041-1723}
-      \field{journaltitle}{Nature Communications}
-      \field{month}{11}
-      \field{number}{1}
-      \field{title}{Predicting the stability of large structured food webs}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{6}
-      \field{year}{2015}
-      \field{urldateera}{ce}
-      \field{pages}{7842}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1038/ncomms8842
-      \endverb
-      \verb{file}
-      \verb Allesina et al. - 2015 - Predicting the stability of large structured food .pdf:/Users/leobuchenelepfl/Zotero/storage/U4STJYJ5/Allesina et al. - 2015 - Predicting the stability of large structured food .pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://www.nature.com/articles/ncomms8842
-      \endverb
-    \endentry
-    \entry{barbier_cavity_2017}{report}{}
-      \name{author}{2}{}{%
-        {{hash=d58c93cb281fe2131f690a3a18d547ab}{%
-           family={Barbier},
-           familyi={B\bibinitperiod},
-           given={Matthieu},
-           giveni={M\bibinitperiod}}}%
-        {{hash=7566147210744dc74263e189e3221c2e}{%
-           family={Arnoldi},
-           familyi={A\bibinitperiod},
-           given={Jean-François},
-           giveni={J\bibinithyphendelim F\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {Ecology}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{e80f47da1689a3e60fa2a835b8584fbb}
-      \strng{fullhash}{e80f47da1689a3e60fa2a835b8584fbb}
-      \strng{authornamehash}{e80f47da1689a3e60fa2a835b8584fbb}
-      \strng{authorfullhash}{e80f47da1689a3e60fa2a835b8584fbb}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This article is addressed to researchers and students in theoretical ecology, as an introduction to “disordered systems” approaches from statistical physics, and how they can help understand large ecological communities. We discuss the relevance of these approaches, and how they ﬁt within the broader landscape of models in community ecology. We focus on a remarkably simple technique, the cavity method, which allows to derive the equilibrium properties of Lotka-Volterra systems. We present its predictions, the new intuitions it suggests, and its technical underpinnings. We also discuss a number of new results concerning possible extensions, including diﬀerent functional responses and community structures.}
-      \field{month}{6}
-      \field{title}{The cavity method for community ecology}
-      \field{type}{preprint}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{year}{2017}
-      \field{urldateera}{ce}
-      \verb{doi}
-      \verb 10.1101/147728
-      \endverb
-      \verb{file}
-      \verb Barbier and Arnoldi - 2017 - The cavity method for community ecology.pdf:/Users/leobuchenelepfl/Zotero/storage/6WMBHAF8/Barbier and Arnoldi - 2017 - The cavity method for community ecology.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://biorxiv.org/lookup/doi/10.1101/147728
-      \endverb
-    \endentry
-    \entry{ives_stability_2007}{article}{}
-      \name{author}{2}{}{%
-        {{hash=a13f6128fc3277b00281091b0fda56f1}{%
-           family={Ives},
-           familyi={I\bibinitperiod},
-           given={A.\bibnamedelimi R.},
-           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
-        {{hash=42bb7503a4ab32e710fd82fcff91b5bd}{%
-           family={Carpenter},
-           familyi={C\bibinitperiod},
-           given={S.\bibnamedelimi R.},
-           giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{88212615cc2e42b37cdd1196039ece5a}
-      \strng{fullhash}{88212615cc2e42b37cdd1196039ece5a}
-      \strng{authornamehash}{88212615cc2e42b37cdd1196039ece5a}
-      \strng{authorfullhash}{88212615cc2e42b37cdd1196039ece5a}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{0036-8075, 1095-9203}
-      \field{journaltitle}{Science}
-      \field{month}{7}
-      \field{number}{5834}
-      \field{title}{Stability and {Diversity} of {Ecosystems}}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{317}
-      \field{year}{2007}
-      \field{urldateera}{ce}
-      \field{pages}{58\bibrangedash 62}
-      \range{pages}{5}
-      \verb{doi}
-      \verb 10.1126/science.1133258
-      \endverb
-      \verb{file}
-      \verb Ives and Carpenter - 2007 - Stability and Diversity of Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/7DRMEF4N/Ives and Carpenter - 2007 - Stability and Diversity of Ecosystems.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1133258
       \endverb
     \endentry
     \entry{biroli_marginally_2018}{article}{}
@@ -1535,43 +1535,6 @@
       \verb{file}
       \verb PRRONin - Zur Theorie der Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/ZZDN8M7E/PRRONin - Zur Theorie der Matrices.pdf:application/pdf
       \endverb
-    \endentry
-    \entry{powell_calculating_2011}{article}{}
-      \name{author}{1}{}{%
-        {{hash=e6f70be57b75ffdda56f443c2b9e7e65}{%
-           family={Powell},
-           familyi={P\bibinitperiod},
-           given={Philip\bibnamedelima D.},
-           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{e6f70be57b75ffdda56f443c2b9e7e65}
-      \strng{fullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
-      \strng{authornamehash}{e6f70be57b75ffdda56f443c2b9e7e65}
-      \strng{authorfullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{This paper presents a method for expressing the determinant of an N × N complex block matrix in terms of its constituent blocks. The result allows one to reduce the determinant of a matrix with N 2 blocks to the product of the determinants of N distinct combinations of single blocks. This procedure proves useful in the analytic description of physical systems with multiple discrete variables, as it provides a systematic method for evaluating determinants which might otherwise be analytically intractable.}
-      \field{journaltitle}{arXiv:1112.4379 [math]}
-      \field{month}{12}
-      \field{note}{arXiv: 1112.4379}
-      \field{title}{Calculating {Determinants} of {Block} {Matrices}}
-      \field{urlday}{21}
-      \field{urlmonth}{3}
-      \field{urlyear}{2020}
-      \field{year}{2011}
-      \field{urldateera}{ce}
-      \verb{file}
-      \verb Powell - 2011 - Calculating Determinants of Block Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/IBHJEKET/Powell - 2011 - Calculating Determinants of Block Matrices.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://arxiv.org/abs/1112.4379
-      \endverb
-      \keyw{15A15 (Primary) 15A09 (Secondary),Mathematics - Numerical Analysis,Mathematics - Rings and Algebras}
     \endentry
     \entry{gerschgorin_uber_1931}{article}{}
       \name{author}{1}{}{%
@@ -1673,46 +1636,6 @@
       \verb{url}
       \verb http://link.springer.com/10.1007/978-3-319-91086-4_1
       \endverb
-    \endentry
-    \entry{magnus_matrix_2019}{book}{}
-      \name{author}{2}{}{%
-        {{hash=9c82570d015c4a2918727b23c0d37bed}{%
-           family={Magnus},
-           familyi={M\bibinitperiod},
-           given={Jan\bibnamedelima R.},
-           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
-        {{hash=a9d06dda94fd9c361123a5d531f50dd7}{%
-           family={Neudecker},
-           familyi={N\bibinitperiod},
-           given={Heinz},
-           giveni={H\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \list{location}{1}{%
-        {Hoboken, NJ}%
-      }
-      \list{publisher}{1}{%
-        {Wiley}%
-      }
-      \strng{namehash}{7fb8fa203b719b36709486ce7edc576f}
-      \strng{fullhash}{7fb8fa203b719b36709486ce7edc576f}
-      \strng{authornamehash}{7fb8fa203b719b36709486ce7edc576f}
-      \strng{authorfullhash}{7fb8fa203b719b36709486ce7edc576f}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{edition}{Third edition}
-      \field{isbn}{978-1-119-54119-6 978-1-119-54116-5}
-      \field{series}{Wiley series in probability and statistics}
-      \field{title}{Matrix differential calculus with applications in statistics and econometrics}
-      \field{year}{2019}
-      \verb{file}
-      \verb Magnus and Neudecker - 2019 - Matrix differential calculus with applications in .pdf:/Users/leobuchenelepfl/Zotero/storage/X3Y36S9A/Magnus and Neudecker - 2019 - Matrix differential calculus with applications in .pdf:application/pdf
-      \endverb
-      \keyw{Differential calculus,Econometrics,Matrices,Statistics}
     \endentry
     \entry{allesina_stabilitycomplexity_2015}{article}{}
       \name{author}{2}{}{%
@@ -1977,8 +1900,8 @@
       \strng{fullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authornamehash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authorfullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0036-8075, 1095-9203}
@@ -2024,8 +1947,8 @@
       \strng{fullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authornamehash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authorfullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Explaining biodiversity in nature is a fundamental problem in ecology. An outstanding challenge is embodied in the so-called Competitive Exclusion Principle: two species competing for one limiting resource cannot coexist at constant population densities, or more generally, the number of consumer species in steady coexistence cannot exceed that of resources. The fact that competitive exclusion is rarely observed in natural ecosystems has not been fully understood. Here we show that by forming chasing triplets among the consumers and resources in the consumption process, the Competitive Exclusion Principle can be naturally violated. The modeling framework developed here is broadly applicable and can be used to explain the biodiversity of many consumer-resource ecosystems and hence deepens our understanding of biodiversity in nature.}
@@ -2163,6 +2086,43 @@
       \verb https://linkinghub.elsevier.com/retrieve/pii/004058099090025Q
       \endverb
     \endentry
+    \entry{powell_calculating_2011}{article}{}
+      \name{author}{1}{}{%
+        {{hash=e6f70be57b75ffdda56f443c2b9e7e65}{%
+           family={Powell},
+           familyi={P\bibinitperiod},
+           given={Philip\bibnamedelima D.},
+           giveni={P\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \strng{fullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \strng{authornamehash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \strng{authorfullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents a method for expressing the determinant of an N × N complex block matrix in terms of its constituent blocks. The result allows one to reduce the determinant of a matrix with N 2 blocks to the product of the determinants of N distinct combinations of single blocks. This procedure proves useful in the analytic description of physical systems with multiple discrete variables, as it provides a systematic method for evaluating determinants which might otherwise be analytically intractable.}
+      \field{journaltitle}{arXiv:1112.4379 [math]}
+      \field{month}{12}
+      \field{note}{arXiv: 1112.4379}
+      \field{title}{Calculating {Determinants} of {Block} {Matrices}}
+      \field{urlday}{21}
+      \field{urlmonth}{3}
+      \field{urlyear}{2020}
+      \field{year}{2011}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb Powell - 2011 - Calculating Determinants of Block Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/IBHJEKET/Powell - 2011 - Calculating Determinants of Block Matrices.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1112.4379
+      \endverb
+      \keyw{15A15 (Primary) 15A09 (Secondary),Mathematics - Numerical Analysis,Mathematics - Rings and Algebras}
+    \endentry
     \entry{tikhonov_collective_2017}{article}{}
       \name{author}{2}{}{%
         {{hash=efefaef9260f320ba51c62404985e73d}{%
@@ -2286,6 +2246,38 @@
       \verb http://dx.plos.org/10.1371/journal.pcbi.1006793
       \endverb
     \endentry
+    \entry{kolmogorov_foundations_1960}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=372fb5333dd2c776ff8f7a7339f91b46}{%
+           family={Kolmogorov},
+           familyi={K\bibinitperiod},
+           given={Andrey\bibnamedelima N.},
+           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Chelsea Pub Co}%
+      }
+      \strng{namehash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{fullhash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{authornamehash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{authorfullhash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Foundations of the {Theory} of {Probability}}
+      \field{urlday}{3}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{year}{1960}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb Foundations of the Theory of Probability by A. N. Kolmogorov.pdf:/Users/leobuchenelepfl/Zotero/storage/XNWERH5U/Foundations of the Theory of Probability by A. N. Kolmogorov.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://cml.rhul.ac.uk/resources/fop/Theory%20of%20Probability%20(small).pdf
+      \endverb
+    \endentry
     \entry{thome_inequalities_2016}{article}{}
       \name{author}{1}{}{%
         {{hash=c669faec0330640dd8aedfbd0742b6ac}{%
@@ -2329,37 +2321,45 @@
       \verb http://link.springer.com/10.1007/s00010-016-0412-4
       \endverb
     \endentry
-    \entry{kolmogorov_foundations_1960}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=372fb5333dd2c776ff8f7a7339f91b46}{%
-           family={Kolmogorov},
-           familyi={K\bibinitperiod},
-           given={Andrey\bibnamedelima N.},
-           giveni={A\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+    \entry{magnus_matrix_2019}{book}{}
+      \name{author}{2}{}{%
+        {{hash=9c82570d015c4a2918727b23c0d37bed}{%
+           family={Magnus},
+           familyi={M\bibinitperiod},
+           given={Jan\bibnamedelima R.},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=a9d06dda94fd9c361123a5d531f50dd7}{%
+           family={Neudecker},
+           familyi={N\bibinitperiod},
+           given={Heinz},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{location}{1}{%
+        {Hoboken, NJ}%
       }
       \list{publisher}{1}{%
-        {Chelsea Pub Co}%
+        {Wiley}%
       }
-      \strng{namehash}{372fb5333dd2c776ff8f7a7339f91b46}
-      \strng{fullhash}{372fb5333dd2c776ff8f7a7339f91b46}
-      \strng{authornamehash}{372fb5333dd2c776ff8f7a7339f91b46}
-      \strng{authorfullhash}{372fb5333dd2c776ff8f7a7339f91b46}
+      \strng{namehash}{7fb8fa203b719b36709486ce7edc576f}
+      \strng{fullhash}{7fb8fa203b719b36709486ce7edc576f}
+      \strng{authornamehash}{7fb8fa203b719b36709486ce7edc576f}
+      \strng{authorfullhash}{7fb8fa203b719b36709486ce7edc576f}
       \field{sortinit}{7}
       \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Foundations of the {Theory} of {Probability}}
-      \field{urlday}{3}
-      \field{urlmonth}{5}
-      \field{urlyear}{2020}
-      \field{year}{1960}
-      \field{urldateera}{ce}
+      \field{edition}{Third edition}
+      \field{isbn}{978-1-119-54119-6 978-1-119-54116-5}
+      \field{series}{Wiley series in probability and statistics}
+      \field{title}{Matrix differential calculus with applications in statistics and econometrics}
+      \field{year}{2019}
       \verb{file}
-      \verb Foundations of the Theory of Probability by A. N. Kolmogorov.pdf:/Users/leobuchenelepfl/Zotero/storage/XNWERH5U/Foundations of the Theory of Probability by A. N. Kolmogorov.pdf:application/pdf
+      \verb Magnus and Neudecker - 2019 - Matrix differential calculus with applications in .pdf:/Users/leobuchenelepfl/Zotero/storage/X3Y36S9A/Magnus and Neudecker - 2019 - Matrix differential calculus with applications in .pdf:application/pdf
       \endverb
-      \verb{url}
-      \verb https://cml.rhul.ac.uk/resources/fop/Theory%20of%20Probability%20(small).pdf
-      \endverb
+      \keyw{Differential calculus,Econometrics,Matrices,Statistics}
     \endentry
   \endsortlist
 \endrefsection
