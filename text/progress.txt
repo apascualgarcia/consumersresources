@@ -1,14 +1,14 @@
 This file highlights the progress made in the different parts of the manuscript 
 
-			Léo		Alberto
-Introduction		Need rewrite	
+			Léo		Alberto1	Alberto2
+Introduction		Need rewrite	Finished
 Methods:
-	Feasibility	Finished	
-	Local dyn st.	Finished
-	Struct. st.	Finished
+	Feasibility	Finished	Finished
+	Local dyn st.	Finished	Finished
+	Struct. st.	Finished	Finished
 Results:	
-	Feasibility	Need rewrite
-	Local dyn st.	Need rewrite
+	Feasibility	Need rewrite	Finished
+	Local dyn st.	Need rewrite	VerySleepyDone
 	Struct. st.	Need rewrite
 Discussion		Not started
 Appendices:
