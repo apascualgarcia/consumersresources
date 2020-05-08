@@ -833,68 +833,222 @@
       \verb https://dx.plos.org/10.1371/journal.pone.0045635
       \endverb
     \endentry
-    \entry{landi_complexity_2018}{article}{}
-      \name{author}{5}{}{%
-        {{hash=64a87b943234970862e8385f98ec194b}{%
-           family={Landi},
-           familyi={L\bibinitperiod},
-           given={Pietro},
-           giveni={P\bibinitperiod}}}%
-        {{hash=d06b3705bc765d60df8420e165a30a8f}{%
-           family={Minoarivelo},
-           familyi={M\bibinitperiod},
-           given={Henintsoa\bibnamedelima O.},
-           giveni={H\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
-        {{hash=f32d08a03245a59d0ad5a857be8a5401}{%
-           family={Brännström},
+    \entry{bastolla_architecture_2009}{article}{}
+      \name{author}{6}{}{%
+        {{hash=1dead4af4f1f332e182d428df19c7fd4}{%
+           family={Bastolla},
            familyi={B\bibinitperiod},
-           given={Åke},
-           giveni={Å\bibinitperiod}}}%
-        {{hash=9f323c4a82b5ef0b420aa4c54d1eab97}{%
-           family={Hui},
-           familyi={H\bibinitperiod},
-           given={Cang},
-           giveni={C\bibinitperiod}}}%
-        {{hash=874f15c525e51c2b786d5382c67156ea}{%
-           family={Dieckmann},
-           familyi={D\bibinitperiod},
-           given={Ulf},
+           given={Ugo},
            giveni={U\bibinitperiod}}}%
+        {{hash=30168ba8b9630697d83625cb9923df5b}{%
+           family={Fortuna},
+           familyi={F\bibinitperiod},
+           given={Miguel\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=2eff1c0a6cc6cc7f56a551031dd93109}{%
+           family={Pascual-García},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Alberto},
+           giveni={A\bibinitperiod}}}%
+        {{hash=61fee61e3f009c8cd4f3ec7c971ee7ed}{%
+           family={Ferrera},
+           familyi={F\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+        {{hash=29b20d5d77de0e14da1bd2840c5cbd50}{%
+           family={Luque},
+           familyi={L\bibinitperiod},
+           given={Bartolo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b71c47fff97792c37706210243e23ae5}{%
+           family={Bascompte},
+           familyi={B\bibinitperiod},
+           given={Jordi},
+           giveni={J\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {en}%
       }
-      \strng{namehash}{8d78885ef197992a0602fc771ff758d6}
-      \strng{fullhash}{2d48bdba4c188371803285d4fc5b9be2}
-      \strng{authornamehash}{8d78885ef197992a0602fc771ff758d6}
-      \strng{authorfullhash}{2d48bdba4c188371803285d4fc5b9be2}
+      \strng{namehash}{75de2a38c3715e256f02efb65dfafb7a}
+      \strng{fullhash}{6dc008f65c0c21486b6076bcdc1b1437}
+      \strng{authornamehash}{75de2a38c3715e256f02efb65dfafb7a}
+      \strng{authorfullhash}{6dc008f65c0c21486b6076bcdc1b1437}
       \field{sortinit}{2}
       \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{abstract}{Our planet is changing at paces never observed before. Species extinction is happening at faster rates than ever, greatly exceeding the five mass extinctions in the fossil record. Nevertheless, our lives are strongly based on services provided by ecosystems, thus the responses to global change of our natural heritage are of immediate concern. Understanding the relationship between complexity and stability of ecosystems is of key importance for the maintenance of the balance of human growth and the conservation of all the natural services that ecosystems provide. Mathematical network models can be used to simplify the vast complexity of the real world, to formally describe and investigate ecological phenomena, and to understand ecosystems propensity of returning to its functioning regime after a stress or a perturbation. The use of ecological-network models to study the relationship between complexity and stability of natural ecosystems is the focus of this review. The concept of ecological networks and their characteristics are first introduced, followed by central and occasionally contrasting definitions of complexity and stability. The literature on the relationship between complexity and stability in different types of models and in real ecosystems is then reviewed, highlighting the theoretical debate and the lack of consensual agreement. The summary of the importance of this line of research for the successful management and conservation of biodiversity and ecosystem services concludes the review.}
-      \field{issn}{1438-3896, 1438-390X}
-      \field{journaltitle}{Population Ecology}
-      \field{month}{10}
-      \field{number}{4}
-      \field{shorttitle}{Complexity and stability of ecological networks}
-      \field{title}{Complexity and stability of ecological networks: a review of the theory}
-      \field{urlday}{23}
-      \field{urlmonth}{4}
+      \field{labeltitlesource}{title}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{4}
+      \field{number}{7241}
+      \field{title}{The architecture of mutualistic networks minimizes competition and increases biodiversity}
+      \field{urlday}{9}
+      \field{urlmonth}{1}
       \field{urlyear}{2020}
-      \field{volume}{60}
-      \field{year}{2018}
+      \field{volume}{458}
+      \field{year}{2009}
       \field{urldateera}{ce}
-      \field{pages}{319\bibrangedash 345}
-      \range{pages}{27}
+      \field{pages}{1018\bibrangedash 1020}
+      \range{pages}{3}
       \verb{doi}
-      \verb 10.1007/s10144-018-0628-3
+      \verb 10.1038/nature07950
       \endverb
       \verb{file}
-      \verb Landi et al. - 2018 - Complexity and stability of ecological networks a.pdf:/Users/leobuchenelepfl/Zotero/storage/RNUCLU7J/Landi et al. - 2018 - Complexity and stability of ecological networks a.pdf:application/pdf
+      \verb Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:/Users/leobuchenelepfl/Zotero/storage/V9IVBN69/Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:application/pdf;Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:/Users/leobuchenelepfl/Zotero/storage/BE73MJCT/Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:application/pdf
       \endverb
       \verb{url}
-      \verb http://doi.wiley.com/10.1007/s10144-018-0628-3
+      \verb http://www.nature.com/articles/nature07950
+      \endverb
+    \endentry
+    \entry{rohr_structural_2014}{article}{}
+      \name{author}{3}{}{%
+        {{hash=88421562efe5d1c62d00933b54d3cf59}{%
+           family={Rohr},
+           familyi={R\bibinitperiod},
+           given={R.\bibnamedelimi P.},
+           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=20874df75c0c4f19fc5fbd4e19af9182}{%
+           family={Saavedra},
+           familyi={S\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c19b9957e9071dd91b943295ac6cbd3e}{%
+           family={Bascompte},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{fullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{authornamehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \strng{authorfullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{7}
+      \field{number}{6195}
+      \field{title}{On the structural stability of mutualistic systems}
+      \field{urlday}{8}
+      \field{urlmonth}{1}
+      \field{urlyear}{2020}
+      \field{volume}{345}
+      \field{year}{2014}
+      \field{urldateera}{ce}
+      \field{pages}{1253497\bibrangedash 1253497}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1126/science.1253497
+      \endverb
+      \verb{file}
+      \verb Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:/Users/leobuchenelepfl/Zotero/storage/LHK43QAL/Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1253497
+      \endverb
+    \endentry
+    \entry{thebault_stability_2010}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6838bd56bad7494b5ab8ad92409951a3}{%
+           family={Thebault},
+           familyi={T\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=92bd745786b7b2e6ad43a598cef7915e}{%
+           family={Fontaine},
+           familyi={F\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{fullhash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{authornamehash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{authorfullhash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0036-8075, 1095-9203}
+      \field{journaltitle}{Science}
+      \field{month}{8}
+      \field{number}{5993}
+      \field{title}{Stability of {Ecological} {Communities} and the {Architecture} of {Mutualistic} and {Trophic} {Networks}}
+      \field{urlday}{30}
+      \field{urlmonth}{4}
+      \field{urlyear}{2020}
+      \field{volume}{329}
+      \field{year}{2010}
+      \field{urldateera}{ce}
+      \field{pages}{853\bibrangedash 856}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1126/science.1188321
+      \endverb
+      \verb{file}
+      \verb Thebault and Fontaine - 2010 - Stability of Ecological Communities and the Archit.pdf:/Users/leobuchenelepfl/Zotero/storage/RFWJYAVG/Thebault and Fontaine - 2010 - Stability of Ecological Communities and the Archit.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb https://www.sciencemag.org/lookup/doi/10.1126/science.1188321
+      \endverb
+    \endentry
+    \entry{james_disentangling_2012}{article}{}
+      \name{author}{3}{}{%
+        {{hash=f087b2a1877a2ebb597400db463336ab}{%
+           family={James},
+           familyi={J\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ff28efa1dd4905ed40e32241afad1c53}{%
+           family={Pitchford},
+           familyi={P\bibinitperiod},
+           given={Jonathan\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=811859fbe7bef02247b0044b7080ed51}{%
+           family={Plank},
+           familyi={P\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{85acbf81c75f38a5669bd9ef415554a0}
+      \strng{fullhash}{85acbf81c75f38a5669bd9ef415554a0}
+      \strng{authornamehash}{85acbf81c75f38a5669bd9ef415554a0}
+      \strng{authorfullhash}{85acbf81c75f38a5669bd9ef415554a0}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0028-0836, 1476-4687}
+      \field{journaltitle}{Nature}
+      \field{month}{7}
+      \field{number}{7406}
+      \field{title}{Disentangling nestedness from models of ecological complexity}
+      \field{urlday}{8}
+      \field{urlmonth}{5}
+      \field{urlyear}{2020}
+      \field{volume}{487}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \field{pages}{227\bibrangedash 230}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1038/nature11214
+      \endverb
+      \verb{file}
+      \verb James et al. - 2012 - Disentangling nestedness from models of ecological.pdf:/Users/leobuchenelepfl/Zotero/storage/Z52Z9SLN/James et al. - 2012 - Disentangling nestedness from models of ecological.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://www.nature.com/articles/nature11214
       \endverb
     \endentry
     \entry{james_continuous_1961}{article}{}
@@ -1185,51 +1339,30 @@
       \verb http://www.nature.com/articles/ncomms14326
       \endverb
     \endentry
-    \entry{ives_stability_2007}{article}{}
-      \name{author}{2}{}{%
-        {{hash=a13f6128fc3277b00281091b0fda56f1}{%
-           family={Ives},
-           familyi={I\bibinitperiod},
-           given={A.\bibnamedelimi R.},
-           giveni={A\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
-        {{hash=42bb7503a4ab32e710fd82fcff91b5bd}{%
-           family={Carpenter},
-           familyi={C\bibinitperiod},
-           given={S.\bibnamedelimi R.},
-           giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+    \entry{goh_global_nodate}{article}{}
+      \name{author}{1}{}{%
+        {{hash=808abcf73ef07d0b726d81a7adfbb60f}{%
+           family={GoH},
+           familyi={G\bibinitperiod},
+           given={B\bibnamedelima S},
+           giveni={B\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {en}%
       }
-      \strng{namehash}{88212615cc2e42b37cdd1196039ece5a}
-      \strng{fullhash}{88212615cc2e42b37cdd1196039ece5a}
-      \strng{authornamehash}{88212615cc2e42b37cdd1196039ece5a}
-      \strng{authorfullhash}{88212615cc2e42b37cdd1196039ece5a}
+      \strng{namehash}{808abcf73ef07d0b726d81a7adfbb60f}
+      \strng{fullhash}{808abcf73ef07d0b726d81a7adfbb60f}
+      \strng{authornamehash}{808abcf73ef07d0b726d81a7adfbb60f}
+      \strng{authorfullhash}{808abcf73ef07d0b726d81a7adfbb60f}
       \field{sortinit}{2}
       \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0036-8075, 1095-9203}
-      \field{journaltitle}{Science}
-      \field{month}{7}
-      \field{number}{5834}
-      \field{title}{Stability and {Diversity} of {Ecosystems}}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{317}
-      \field{year}{2007}
-      \field{urldateera}{ce}
-      \field{pages}{58\bibrangedash 62}
-      \range{pages}{5}
-      \verb{doi}
-      \verb 10.1126/science.1133258
-      \endverb
+      \field{title}{Global {Stability} in {Many}-{Species} {Systems}}
+      \field{pages}{10}
+      \range{pages}{1}
       \verb{file}
-      \verb Ives and Carpenter - 2007 - Stability and Diversity of Ecosystems.pdf:/Users/leobuchenelepfl/Zotero/storage/7DRMEF4N/Ives and Carpenter - 2007 - Stability and Diversity of Ecosystems.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1133258
+      \verb GoH - Global Stability in Many-Species Systems.pdf:/Users/leobuchenelepfl/Zotero/storage/2Q7MWK7U/GoH - Global Stability in Many-Species Systems.pdf:application/pdf
       \endverb
     \endentry
     \entry{butler_stability_2018}{article}{}
@@ -1252,8 +1385,8 @@
       \strng{fullhash}{25f5f646a41153be48d49e5e473ced6e}
       \strng{authornamehash}{25f5f646a41153be48d49e5e473ced6e}
       \strng{authorfullhash}{25f5f646a41153be48d49e5e473ced6e}
-      \field{sortinit}{2}
-      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{2041-1723}
@@ -1305,8 +1438,8 @@
       \strng{fullhash}{dc3023ddfd051d1d7ed704cc19391f51}
       \strng{authornamehash}{dc3023ddfd051d1d7ed704cc19391f51}
       \strng{authorfullhash}{dc3023ddfd051d1d7ed704cc19391f51}
-      \field{sortinit}{2}
-      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{978-3-319-03025-8 978-3-319-03026-5}
@@ -1326,73 +1459,6 @@
       \endverb
       \verb{url}
       \verb http://link.springer.com/10.1007/978-3-319-03026-5
-      \endverb
-    \endentry
-    \entry{bastolla_architecture_2009}{article}{}
-      \name{author}{6}{}{%
-        {{hash=1dead4af4f1f332e182d428df19c7fd4}{%
-           family={Bastolla},
-           familyi={B\bibinitperiod},
-           given={Ugo},
-           giveni={U\bibinitperiod}}}%
-        {{hash=30168ba8b9630697d83625cb9923df5b}{%
-           family={Fortuna},
-           familyi={F\bibinitperiod},
-           given={Miguel\bibnamedelima A.},
-           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-        {{hash=2eff1c0a6cc6cc7f56a551031dd93109}{%
-           family={Pascual-García},
-           familyi={P\bibinithyphendelim G\bibinitperiod},
-           given={Alberto},
-           giveni={A\bibinitperiod}}}%
-        {{hash=61fee61e3f009c8cd4f3ec7c971ee7ed}{%
-           family={Ferrera},
-           familyi={F\bibinitperiod},
-           given={Antonio},
-           giveni={A\bibinitperiod}}}%
-        {{hash=29b20d5d77de0e14da1bd2840c5cbd50}{%
-           family={Luque},
-           familyi={L\bibinitperiod},
-           given={Bartolo},
-           giveni={B\bibinitperiod}}}%
-        {{hash=b71c47fff97792c37706210243e23ae5}{%
-           family={Bascompte},
-           familyi={B\bibinitperiod},
-           given={Jordi},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{75de2a38c3715e256f02efb65dfafb7a}
-      \strng{fullhash}{6dc008f65c0c21486b6076bcdc1b1437}
-      \strng{authornamehash}{75de2a38c3715e256f02efb65dfafb7a}
-      \strng{authorfullhash}{6dc008f65c0c21486b6076bcdc1b1437}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{0028-0836, 1476-4687}
-      \field{journaltitle}{Nature}
-      \field{month}{4}
-      \field{number}{7241}
-      \field{title}{The architecture of mutualistic networks minimizes competition and increases biodiversity}
-      \field{urlday}{9}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{458}
-      \field{year}{2009}
-      \field{urldateera}{ce}
-      \field{pages}{1018\bibrangedash 1020}
-      \range{pages}{3}
-      \verb{doi}
-      \verb 10.1038/nature07950
-      \endverb
-      \verb{file}
-      \verb Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:/Users/leobuchenelepfl/Zotero/storage/V9IVBN69/Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:application/pdf;Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:/Users/leobuchenelepfl/Zotero/storage/BE73MJCT/Bastolla et al. - 2009 - The architecture of mutualistic networks minimizes.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://www.nature.com/articles/nature07950
       \endverb
     \endentry
     \entry{jonhson_factors_2013}{article}{}
@@ -1457,186 +1523,6 @@
       \verb https://dx.plos.org/10.1371/journal.pone.0074025
       \endverb
     \endentry
-    \entry{biroli_marginally_2018}{article}{}
-      \name{author}{3}{}{%
-        {{hash=a37018f0369a0addf9e4b95c2a5af5d2}{%
-           family={Biroli},
-           familyi={B\bibinitperiod},
-           given={Giulio},
-           giveni={G\bibinitperiod}}}%
-        {{hash=435bc84c1deb3ece4bb9da041218028c}{%
-           family={Bunin},
-           familyi={B\bibinitperiod},
-           given={Guy},
-           giveni={G\bibinitperiod}}}%
-        {{hash=29c54fb9d19a63209661bd94ae9ed736}{%
-           family={Cammarota},
-           familyi={C\bibinitperiod},
-           given={Chiara},
-           giveni={C\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{91c71254a369e4078a4eb7b686310bbb}
-      \strng{fullhash}{91c71254a369e4078a4eb7b686310bbb}
-      \strng{authornamehash}{91c71254a369e4078a4eb7b686310bbb}
-      \strng{authorfullhash}{91c71254a369e4078a4eb7b686310bbb}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Any further distribution of In this work we study the stability of the equilibria reached by ecosystems formed by a large number of this work must maintain attribution to the species. The model we focus on are Lotka–Volterra equations with symmetric random interactions.}
-      \field{issn}{1367-2630}
-      \field{journaltitle}{New Journal of Physics}
-      \field{month}{8}
-      \field{number}{8}
-      \field{title}{Marginally stable equilibria in critical ecosystems}
-      \field{urlday}{14}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{20}
-      \field{year}{2018}
-      \field{urldateera}{ce}
-      \field{pages}{083051}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1088/1367-2630/aada58
-      \endverb
-      \verb{file}
-      \verb Biroli et al. - 2018 - Marginally stable equilibria in critical ecosystem.pdf:/Users/leobuchenelepfl/Zotero/storage/V686NHNP/Biroli et al. - 2018 - Marginally stable equilibria in critical ecosystem.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://stacks.iop.org/1367-2630/20/i=8/a=083051?key=crossref.eb2ea792ef1892155c3ce3f806e602f3
-      \endverb
-    \endentry
-    \entry{perron_zur_nodate}{article}{}
-      \name{author}{1}{}{%
-        {{hash=f4bfc6d1dc22fe1508dac5a30af909a0}{%
-           family={Perron},
-           familyi={P\bibinitperiod},
-           given={Oscar},
-           giveni={O\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {de}%
-      }
-      \strng{namehash}{f4bfc6d1dc22fe1508dac5a30af909a0}
-      \strng{fullhash}{f4bfc6d1dc22fe1508dac5a30af909a0}
-      \strng{authornamehash}{f4bfc6d1dc22fe1508dac5a30af909a0}
-      \strng{authorfullhash}{f4bfc6d1dc22fe1508dac5a30af909a0}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{Zur {Theorie} der {Matrices}}
-      \field{pages}{16}
-      \range{pages}{1}
-      \verb{file}
-      \verb PRRONin - Zur Theorie der Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/ZZDN8M7E/PRRONin - Zur Theorie der Matrices.pdf:application/pdf
-      \endverb
-    \endentry
-    \entry{gerschgorin_uber_1931}{article}{}
-      \name{author}{1}{}{%
-        {{hash=6ba497dc57e5e9c6501f3c610a4d4f76}{%
-           family={Gerschgorin},
-           familyi={G\bibinitperiod},
-           given={Sergej},
-           giveni={S\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {de}%
-      }
-      \strng{namehash}{6ba497dc57e5e9c6501f3c610a4d4f76}
-      \strng{fullhash}{6ba497dc57e5e9c6501f3c610a4d4f76}
-      \strng{authornamehash}{6ba497dc57e5e9c6501f3c610a4d4f76}
-      \strng{authorfullhash}{6ba497dc57e5e9c6501f3c610a4d4f76}
-      \field{sortinit}{3}
-      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Bulletin de l'Académie des Sciences de l'URSS. Classe des sciences mathématiques et na}
-      \field{title}{"{Uber} die {Abgrenzung} der {Eigenwerte} einer {Matrix}}
-      \field{volume}{6}
-      \field{year}{1931}
-      \field{pages}{749\bibrangedash 754}
-      \range{pages}{6}
-      \verb{file}
-      \verb Uber die Abgrenzung der Eigenwerte einer Matrix.pdf:/Users/leobuchenelepfl/Zotero/storage/T3N2XLBP/Uber die Abgrenzung der Eigenwerte einer Matrix.pdf:application/pdf
-      \endverb
-    \endentry
-    \entry{gendreau_simulated_2019}{incollection}{}
-      \name{author}{3}{}{%
-        {{hash=724f19394ff905be4ed7b245765f1656}{%
-           family={Delahaye},
-           familyi={D\bibinitperiod},
-           given={Daniel},
-           giveni={D\bibinitperiod}}}%
-        {{hash=e6d1900f733514d5c9b670410ae08c3f}{%
-           family={Chaimatanan},
-           familyi={C\bibinitperiod},
-           given={Supatcha},
-           giveni={S\bibinitperiod}}}%
-        {{hash=0aa4f8579303710b71430ead48cc5909}{%
-           family={Mongeau},
-           familyi={M\bibinitperiod},
-           given={Marcel},
-           giveni={M\bibinitperiod}}}%
-      }
-      \name{editor}{2}{}{%
-        {{hash=d4ebdd3fdc985c36f68c8295c5664c74}{%
-           family={Gendreau},
-           familyi={G\bibinitperiod},
-           given={Michel},
-           giveni={M\bibinitperiod}}}%
-        {{hash=156d517208f70e145503aa8b5ec9849b}{%
-           family={Potvin},
-           familyi={P\bibinitperiod},
-           given={Jean-Yves},
-           giveni={J\bibinithyphendelim Y\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \list{location}{1}{%
-        {Cham}%
-      }
-      \list{publisher}{1}{%
-        {Springer International Publishing}%
-      }
-      \strng{namehash}{d0d6c52cffbe38f91adb7894454bf665}
-      \strng{fullhash}{d0d6c52cffbe38f91adb7894454bf665}
-      \strng{authornamehash}{d0d6c52cffbe38f91adb7894454bf665}
-      \strng{authorfullhash}{d0d6c52cffbe38f91adb7894454bf665}
-      \strng{editornamehash}{428631794113b74d16ac1f3a6f241136}
-      \strng{editorfullhash}{428631794113b74d16ac1f3a6f241136}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{booktitle}{Handbook of {Metaheuristics}}
-      \field{isbn}{978-3-319-91085-7 978-3-319-91086-4}
-      \field{note}{Series Title: International Series in Operations Research \& Management Science}
-      \field{shorttitle}{Simulated {Annealing}}
-      \field{title}{Simulated {Annealing}: {From} {Basics} to {Applications}}
-      \field{urlday}{9}
-      \field{urlmonth}{3}
-      \field{urlyear}{2020}
-      \field{volume}{272}
-      \field{year}{2019}
-      \field{urldateera}{ce}
-      \field{pages}{1\bibrangedash 35}
-      \range{pages}{35}
-      \verb{doi}
-      \verb 10.1007/978-3-319-91086-4_1
-      \endverb
-      \verb{file}
-      \verb Delahaye et al. - 2019 - Simulated Annealing From Basics to Applications.pdf:/Users/leobuchenelepfl/Zotero/storage/NICWSFLQ/Delahaye et al. - 2019 - Simulated Annealing From Basics to Applications.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://link.springer.com/10.1007/978-3-319-91086-4_1
-      \endverb
-    \endentry
     \entry{allesina_stabilitycomplexity_2015}{article}{}
       \name{author}{2}{}{%
         {{hash=3b4c526ad3828396cf670adc9f4f608d}{%
@@ -1657,8 +1543,8 @@
       \strng{fullhash}{217b7ff6e9a720bda68e0a12a06cf105}
       \strng{authornamehash}{217b7ff6e9a720bda68e0a12a06cf105}
       \strng{authorfullhash}{217b7ff6e9a720bda68e0a12a06cf105}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{shorttitle}
       \field{abstract}{Since the work of Robert May in 1972, the local asymptotic stability of large ecological systems has been a focus of theoretical ecology. Here we review May's work in the light of random matrix theor...}
@@ -1685,58 +1571,6 @@
       \endverb
       \verb{url}
       \verb https://esj-journals.onlinelibrary.wiley.com/doi/10.1007/s10144-014-0471-0
-      \endverb
-    \endentry
-    \entry{rohr_structural_2014}{article}{}
-      \name{author}{3}{}{%
-        {{hash=88421562efe5d1c62d00933b54d3cf59}{%
-           family={Rohr},
-           familyi={R\bibinitperiod},
-           given={R.\bibnamedelimi P.},
-           giveni={R\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
-        {{hash=20874df75c0c4f19fc5fbd4e19af9182}{%
-           family={Saavedra},
-           familyi={S\bibinitperiod},
-           given={S.},
-           giveni={S\bibinitperiod}}}%
-        {{hash=c19b9957e9071dd91b943295ac6cbd3e}{%
-           family={Bascompte},
-           familyi={B\bibinitperiod},
-           given={J.},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \strng{fullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \strng{authornamehash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \strng{authorfullhash}{cc6f079d45b2fc8a7b7450b65f5b359a}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{0036-8075, 1095-9203}
-      \field{journaltitle}{Science}
-      \field{month}{7}
-      \field{number}{6195}
-      \field{title}{On the structural stability of mutualistic systems}
-      \field{urlday}{8}
-      \field{urlmonth}{1}
-      \field{urlyear}{2020}
-      \field{volume}{345}
-      \field{year}{2014}
-      \field{urldateera}{ce}
-      \field{pages}{1253497\bibrangedash 1253497}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.1126/science.1253497
-      \endverb
-      \verb{file}
-      \verb Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:/Users/leobuchenelepfl/Zotero/storage/LHK43QAL/Rohr et al. - 2014 - On the structural stability of mutualistic systems.pdf:application/pdf
-      \endverb
-      \verb{url}
-      \verb http://www.sciencemag.org/cgi/doi/10.1126/science.1253497
       \endverb
     \endentry
     \entry{bascompte_nested_2003}{article}{}
@@ -1838,51 +1672,184 @@
       \verb https://www.sciencemag.org/lookup/doi/10.1126/science.1100680
       \endverb
     \endentry
-    \entry{thebault_stability_2010}{article}{}
-      \name{author}{2}{}{%
-        {{hash=6838bd56bad7494b5ab8ad92409951a3}{%
-           family={Thebault},
-           familyi={T\bibinitperiod},
-           given={E.},
-           giveni={E\bibinitperiod}}}%
-        {{hash=92bd745786b7b2e6ad43a598cef7915e}{%
-           family={Fontaine},
-           familyi={F\bibinitperiod},
-           given={C.},
+    \entry{biroli_marginally_2018}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a37018f0369a0addf9e4b95c2a5af5d2}{%
+           family={Biroli},
+           familyi={B\bibinitperiod},
+           given={Giulio},
+           giveni={G\bibinitperiod}}}%
+        {{hash=435bc84c1deb3ece4bb9da041218028c}{%
+           family={Bunin},
+           familyi={B\bibinitperiod},
+           given={Guy},
+           giveni={G\bibinitperiod}}}%
+        {{hash=29c54fb9d19a63209661bd94ae9ed736}{%
+           family={Cammarota},
+           familyi={C\bibinitperiod},
+           given={Chiara},
            giveni={C\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {en}%
       }
-      \strng{namehash}{fdd0bfbe2f2d6006856674126b5998a4}
-      \strng{fullhash}{fdd0bfbe2f2d6006856674126b5998a4}
-      \strng{authornamehash}{fdd0bfbe2f2d6006856674126b5998a4}
-      \strng{authorfullhash}{fdd0bfbe2f2d6006856674126b5998a4}
+      \strng{namehash}{91c71254a369e4078a4eb7b686310bbb}
+      \strng{fullhash}{91c71254a369e4078a4eb7b686310bbb}
+      \strng{authornamehash}{91c71254a369e4078a4eb7b686310bbb}
+      \strng{authorfullhash}{91c71254a369e4078a4eb7b686310bbb}
       \field{sortinit}{4}
       \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issn}{0036-8075, 1095-9203}
-      \field{journaltitle}{Science}
+      \field{abstract}{Any further distribution of In this work we study the stability of the equilibria reached by ecosystems formed by a large number of this work must maintain attribution to the species. The model we focus on are Lotka–Volterra equations with symmetric random interactions.}
+      \field{issn}{1367-2630}
+      \field{journaltitle}{New Journal of Physics}
       \field{month}{8}
-      \field{number}{5993}
-      \field{title}{Stability of {Ecological} {Communities} and the {Architecture} of {Mutualistic} and {Trophic} {Networks}}
-      \field{urlday}{30}
-      \field{urlmonth}{4}
+      \field{number}{8}
+      \field{title}{Marginally stable equilibria in critical ecosystems}
+      \field{urlday}{14}
+      \field{urlmonth}{1}
       \field{urlyear}{2020}
-      \field{volume}{329}
-      \field{year}{2010}
+      \field{volume}{20}
+      \field{year}{2018}
       \field{urldateera}{ce}
-      \field{pages}{853\bibrangedash 856}
-      \range{pages}{4}
+      \field{pages}{083051}
+      \range{pages}{1}
       \verb{doi}
-      \verb 10.1126/science.1188321
+      \verb 10.1088/1367-2630/aada58
       \endverb
       \verb{file}
-      \verb Thebault and Fontaine - 2010 - Stability of Ecological Communities and the Archit.pdf:/Users/leobuchenelepfl/Zotero/storage/RFWJYAVG/Thebault and Fontaine - 2010 - Stability of Ecological Communities and the Archit.pdf:application/pdf
+      \verb Biroli et al. - 2018 - Marginally stable equilibria in critical ecosystem.pdf:/Users/leobuchenelepfl/Zotero/storage/V686NHNP/Biroli et al. - 2018 - Marginally stable equilibria in critical ecosystem.pdf:application/pdf
       \endverb
       \verb{url}
-      \verb https://www.sciencemag.org/lookup/doi/10.1126/science.1188321
+      \verb http://stacks.iop.org/1367-2630/20/i=8/a=083051?key=crossref.eb2ea792ef1892155c3ce3f806e602f3
+      \endverb
+    \endentry
+    \entry{perron_zur_nodate}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f4bfc6d1dc22fe1508dac5a30af909a0}{%
+           family={Perron},
+           familyi={P\bibinitperiod},
+           given={Oscar},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {de}%
+      }
+      \strng{namehash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \strng{fullhash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \strng{authornamehash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \strng{authorfullhash}{f4bfc6d1dc22fe1508dac5a30af909a0}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Zur {Theorie} der {Matrices}}
+      \field{pages}{16}
+      \range{pages}{1}
+      \verb{file}
+      \verb PRRONin - Zur Theorie der Matrices.pdf:/Users/leobuchenelepfl/Zotero/storage/ZZDN8M7E/PRRONin - Zur Theorie der Matrices.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{gerschgorin_uber_1931}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6ba497dc57e5e9c6501f3c610a4d4f76}{%
+           family={Gerschgorin},
+           familyi={G\bibinitperiod},
+           given={Sergej},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {de}%
+      }
+      \strng{namehash}{6ba497dc57e5e9c6501f3c610a4d4f76}
+      \strng{fullhash}{6ba497dc57e5e9c6501f3c610a4d4f76}
+      \strng{authornamehash}{6ba497dc57e5e9c6501f3c610a4d4f76}
+      \strng{authorfullhash}{6ba497dc57e5e9c6501f3c610a4d4f76}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bulletin de l'Académie des Sciences de l'URSS. Classe des sciences mathématiques et na}
+      \field{title}{"{Uber} die {Abgrenzung} der {Eigenwerte} einer {Matrix}}
+      \field{volume}{6}
+      \field{year}{1931}
+      \field{pages}{749\bibrangedash 754}
+      \range{pages}{6}
+      \verb{file}
+      \verb Uber die Abgrenzung der Eigenwerte einer Matrix.pdf:/Users/leobuchenelepfl/Zotero/storage/T3N2XLBP/Uber die Abgrenzung der Eigenwerte einer Matrix.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{gendreau_simulated_2019}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=724f19394ff905be4ed7b245765f1656}{%
+           family={Delahaye},
+           familyi={D\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e6d1900f733514d5c9b670410ae08c3f}{%
+           family={Chaimatanan},
+           familyi={C\bibinitperiod},
+           given={Supatcha},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0aa4f8579303710b71430ead48cc5909}{%
+           family={Mongeau},
+           familyi={M\bibinitperiod},
+           given={Marcel},
+           giveni={M\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=d4ebdd3fdc985c36f68c8295c5664c74}{%
+           family={Gendreau},
+           familyi={G\bibinitperiod},
+           given={Michel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=156d517208f70e145503aa8b5ec9849b}{%
+           family={Potvin},
+           familyi={P\bibinitperiod},
+           given={Jean-Yves},
+           giveni={J\bibinithyphendelim Y\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer International Publishing}%
+      }
+      \strng{namehash}{d0d6c52cffbe38f91adb7894454bf665}
+      \strng{fullhash}{d0d6c52cffbe38f91adb7894454bf665}
+      \strng{authornamehash}{d0d6c52cffbe38f91adb7894454bf665}
+      \strng{authorfullhash}{d0d6c52cffbe38f91adb7894454bf665}
+      \strng{editornamehash}{428631794113b74d16ac1f3a6f241136}
+      \strng{editorfullhash}{428631794113b74d16ac1f3a6f241136}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{booktitle}{Handbook of {Metaheuristics}}
+      \field{isbn}{978-3-319-91085-7 978-3-319-91086-4}
+      \field{note}{Series Title: International Series in Operations Research \& Management Science}
+      \field{shorttitle}{Simulated {Annealing}}
+      \field{title}{Simulated {Annealing}: {From} {Basics} to {Applications}}
+      \field{urlday}{9}
+      \field{urlmonth}{3}
+      \field{urlyear}{2020}
+      \field{volume}{272}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \field{pages}{1\bibrangedash 35}
+      \range{pages}{35}
+      \verb{doi}
+      \verb 10.1007/978-3-319-91086-4_1
+      \endverb
+      \verb{file}
+      \verb Delahaye et al. - 2019 - Simulated Annealing From Basics to Applications.pdf:/Users/leobuchenelepfl/Zotero/storage/NICWSFLQ/Delahaye et al. - 2019 - Simulated Annealing From Basics to Applications.pdf:application/pdf
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/978-3-319-91086-4_1
       \endverb
     \endentry
     \entry{hardin_competitive_1960}{article}{}
@@ -1900,8 +1867,8 @@
       \strng{fullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authornamehash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
       \strng{authorfullhash}{c0637dd8953e16aae9f8a3ca9fb6bf94}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{issn}{0036-8075, 1095-9203}
@@ -1947,8 +1914,8 @@
       \strng{fullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authornamehash}{5ebbc971dd0d1447fc2cde80f50adc1b}
       \strng{authorfullhash}{5ebbc971dd0d1447fc2cde80f50adc1b}
-      \field{sortinit}{4}
-      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Explaining biodiversity in nature is a fundamental problem in ecology. An outstanding challenge is embodied in the so-called Competitive Exclusion Principle: two species competing for one limiting resource cannot coexist at constant population densities, or more generally, the number of consumer species in steady coexistence cannot exceed that of resources. The fact that competitive exclusion is rarely observed in natural ecosystems has not been fully understood. Here we show that by forming chasing triplets among the consumers and resources in the consumption process, the Competitive Exclusion Principle can be naturally violated. The modeling framework developed here is broadly applicable and can be used to explain the biodiversity of many consumer-resource ecosystems and hence deepens our understanding of biodiversity in nature.}
@@ -2101,8 +2068,8 @@
       \strng{fullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
       \strng{authornamehash}{e6f70be57b75ffdda56f443c2b9e7e65}
       \strng{authorfullhash}{e6f70be57b75ffdda56f443c2b9e7e65}
-      \field{sortinit}{5}
-      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This paper presents a method for expressing the determinant of an N × N complex block matrix in terms of its constituent blocks. The result allows one to reduce the determinant of a matrix with N 2 blocks to the product of the determinants of N distinct combinations of single blocks. This procedure proves useful in the analytic description of physical systems with multiple discrete variables, as it provides a systematic method for evaluating determinants which might otherwise be analytically intractable.}
@@ -2261,8 +2228,8 @@
       \strng{fullhash}{372fb5333dd2c776ff8f7a7339f91b46}
       \strng{authornamehash}{372fb5333dd2c776ff8f7a7339f91b46}
       \strng{authorfullhash}{372fb5333dd2c776ff8f7a7339f91b46}
-      \field{sortinit}{6}
-      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{sortinit}{7}
+      \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Foundations of the {Theory} of {Probability}}

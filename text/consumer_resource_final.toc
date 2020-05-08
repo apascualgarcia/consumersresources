@@ -3,43 +3,45 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
 \contentsline {section}{\numberline {1.1}Consumer Resource Models in microbial ecology}{5}{section.1.1}
-\contentsline {section}{\numberline {1.2}General framework}{5}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Equilibria of the model}{7}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.2}General framework}{6}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Description of the model}{6}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}General strategy}{7}{subsection.1.2.2}
 \contentsline {section}{\numberline {1.3}Feasibility}{7}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Basic concepts}{7}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.1}Basic concepts}{8}{subsection.1.3.1}
 \contentsline {section}{\numberline {1.4}Dynamical stability}{9}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Definitions}{9}{subsection.1.4.1}
-\contentsline {subsubsection}{Local dynamical stability}{9}{subsection.1.4.1}
-\contentsline {subsubsection}{Global dynamical stability}{11}{equation.1.4.14}
-\contentsline {section}{\numberline {1.5}Structural stability}{11}{section.1.5}
+\contentsline {subsection}{\numberline {1.4.1}Definitions}{10}{subsection.1.4.1}
+\contentsline {subsubsection}{Local dynamical stability}{10}{subsection.1.4.1}
+\contentsline {subsubsection}{Evaluating the size of the basin of attraction}{11}{equation.1.4.14}
+\contentsline {subsubsection}{Global dynamical stability}{11}{AMS.5}
+\contentsline {section}{\numberline {1.5}Structural stability}{12}{section.1.5}
 \contentsline {subsection}{\numberline {1.5.1}Definitions}{12}{subsection.1.5.1}
 \contentsline {section}{\numberline {1.6}Tactics used to simplify the problem}{13}{section.1.6}
-\contentsline {subsection}{\numberline {1.6.1}Attack strategy and important notions}{13}{subsection.1.6.1}
-\contentsline {subsubsection}{Metaparameters and matrix properties}{13}{subsection.1.6.1}
-\contentsline {subsubsection}{Losing complexity -- how to gain it back}{15}{equation.1.6.30}
+\contentsline {subsection}{\numberline {1.6.1}Metaparameters}{13}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2}Matrix properties}{14}{subsection.1.6.2}
+\contentsline {subsection}{\numberline {1.6.3}Losing complexity -- how to gain it back}{15}{subsection.1.6.3}
 \contentsline {section}{\numberline {1.7}Goals of the Thesis}{15}{section.1.7}
 \contentsline {chapter}{\numberline {2}Methods}{17}{chapter.2}
-\contentsline {section}{\numberline {2.1}Feasibility}{17}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}The feasibility region}{17}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Building feasible systems}{18}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}Syntrophy scenarios}{19}{subsection.2.1.3}
-\contentsline {section}{\numberline {2.2}Dynamical stability}{21}{section.2.2}
-\contentsline {subsubsection}{The locally dynamically stable region $\mathcal {D}^{G,A}_{L,x}$}{21}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}How to determine local dynamical stability}{22}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}The master equation for local dynamical stability}{22}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Bounds on the eigenvalues}{22}{subsection.2.2.3}
-\contentsline {subsubsection}{Gerschgorin circle theorem}{22}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Low intra resources interaction (LRI) regime }{23}{subsection.2.2.4}
-\contentsline {subsubsection}{Reductio ad absurdum}{23}{subsection.2.2.4}
-\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{23}{subsection.2.2.4}
-\contentsline {section}{\numberline {2.3}Structural stability}{25}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Numerical estimate of the critical structural perturbation}{25}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Estimate the critical structural perturbation $\Delta _S^*$}{25}{subsection.2.3.2}
+\contentsline {section}{\numberline {2.1}Syntrophy scenarios}{17}{section.2.1}
+\contentsline {section}{\numberline {2.2}Feasibility}{18}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}The feasibility region}{18}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Building feasible systems}{19}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Dynamical stability}{21}{section.2.3}
+\contentsline {subsubsection}{The locally dynamically stable region $\mathcal {D}^{G,A}_{L,x}$}{21}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}How to determine local dynamical stability}{22}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}The master equation for local dynamical stability}{22}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Bounds on the eigenvalues}{22}{subsection.2.3.3}
+\contentsline {subsubsection}{Gerschgorin circle theorem}{22}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Low intra resources interaction (LRI) regime }{23}{subsection.2.3.4}
+\contentsline {subsubsection}{Reductio ad absurdum}{23}{subsection.2.3.4}
+\contentsline {subsubsection}{Monte Carlo algorithm for the optimal syntrophy matrix}{23}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Structural stability}{25}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Numerical estimate of the critical structural perturbation}{25}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Estimate the critical structural perturbation $\Delta _S^*$}{25}{subsection.2.4.2}
 \contentsline {chapter}{\numberline {3}Results}{27}{chapter.3}
 \contentsline {section}{\numberline {3.1}Feasibility}{27}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Estimating the fully feasible region $\mathcal {F}^{G,A}_1$}{27}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}The feasibility region in the absence of syntrophy}{28}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Impact of syntrophy on the feasible region}{30}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.3}Impact of syntrophy on the feasible region}{29}{subsection.3.1.3}
 \contentsline {subsubsection}{The influence of matrix topology}{30}{equation.3.1.6}
 \contentsline {subsubsection}{Common fully feasible volume}{31}{equation.3.1.7}
 \contentsline {subsubsection}{The influence of the matrix dimensions}{32}{equation.3.1.8}
@@ -95,4 +97,5 @@
 \contentsline {paragraph}{Zero variance case}{95}{equation.5.2.120}
 \contentsline {subsection}{\numberline {5.2.7}The optimal $S_0$ for locally dynamically stable systems}{97}{subsection.5.2.7}
 \contentsline {subsection}{\numberline {5.2.8}Structural stability}{97}{subsection.5.2.8}
-\contentsline {chapter}{Bibliography}{99}{subsection.5.2.8}
+\contentsline {section}{\numberline {5.3}\ignorespaces Declaration of originality}{98}{section.5.3}
+\contentsline {chapter}{Bibliography}{99}{section.5.3}
