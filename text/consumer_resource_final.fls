@@ -758,6 +758,9 @@ INPUT feasibility/feasibility_supp_results.tex
 INPUT feasibility/feasibility_supp_results.tex
 INPUT dyn_stab/dyn_stab_supp_results.tex
 INPUT dyn_stab/dyn_stab_supp_results.tex
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/bbm/bbm12.tfm
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/vf/bitstrea/charter/bchri8t.vf
+INPUT /usr/local/texlive/2016/texmf-dist/fonts/tfm/bitstrea/charter/bchri8r.tfm
 INPUT struct_stab/struct_stab_supp_results.tex
 INPUT struct_stab/struct_stab_supp_results.tex
 INPUT declaration-originality-modified-signed.pdf
