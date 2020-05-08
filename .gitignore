@@ -15,6 +15,9 @@ old_*
 !largest_eigenvalue/*.out
 !structural_stability/*.out
 !text/figures/*
+!text/feasibility/*
+!text/dyn_stab/*
+!text/struct_stab/*
 text/*
 !text/*.pdf
 !text/*.tex

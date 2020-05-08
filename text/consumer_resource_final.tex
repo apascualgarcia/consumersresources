@@ -14,14 +14,21 @@
 
 %% SET UP IMAGES
 \usepackage{graphicx}
-\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}{./figures/Results/largest_eigenvalue/}{./figures/Results/matrix_structure/}{./figures/Results/structural_stability/}}
+\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}{./figures/Results/largest_eigenvalue/}{./figures/Results/matrix_structure/}{./figures/Results/structural_stability/}{./figures/}{./}}
 
 %% SET UP HEADERS AND FOOTERS
 \usepackage{fancyhdr}
 \fancyhf[HLE,HRO]{\leftmark}
 \fancyhf[HRE,HLO]{\rightmark}
 \fancyhf[FLE,FRO]{\thepage}
-\fancyhf[FRE, FLO]{\footnotesize\textit{Syntrophic interaction in microbial communities}}
+\fancyhf[FRE, FLO]{\footnotesize\textit{Impact of syntrophy on microbial communities}}
+
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyfoot[FLE, FRO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}}
+
 \pagestyle{fancy}
 % remove normal page number
 \cfoot{}
@@ -37,71 +44,42 @@
 
 
 \begin{document}
-  \title{Syntrophic interaction in microbial communities}
-  \author{L\'eo Buchenel}
-  \date{\today}
-  \maketitle
-  \thispagestyle{empty}
-  \vspace*{\fill}
-  \epigraph{\itshape It's not what you get out of life that counts. Break your mirrors! In our society that is so self-absorbed, begin to look less at yourself and more at each other. You'll get more satisfaction from having improved your neighborhood, your town, your state, your country, and your fellow human beings than you'll ever get from your muscles, your figure, your automobile, your house, or your credit rating. You'll get more from being a peacemaker than a warrior.}{R. Sargent Shriver, quoted by Arnold Schwarzenegger}
-  \vspace*{\fill}
+  \input{title_pages}
   \tableofcontents
   \chapter{Introduction}
   \input{introduction}
 
   \chapter{Methods}\label{chap : methods}
   \section{Feasibility}\label{sec : methods feasibility}
-  \input{feasibility_methods}
+  \input{feasibility/feasibility_methods}
   \FloatBarrier
   \newpage
   \section{Dynamical stability}\label{sec : methods dynamical stability}
-  \input{dynamical_stability_methods}
+  \input{dyn_stab/dynamical_stability_methods}
   \FloatBarrier
   \newpage
   \section{Structural stability}
-  \input{structural_stability_methods}
+  \input{struct_stab/structural_stability_methods}
   \FloatBarrier
+
   \chapter{Results}\label{chapter : results}
   \input{introduction_results}
   \section{Feasibility}
-  \input{feasibility_results}
+  \input{feasibility/feasibility_results}
   \FloatBarrier
   \newpage
   \section{Dynamical stability}
-  \input{dynamical_stability_results}
+  \input{dyn_stab/dynamical_stability_results}
   \FloatBarrier
   \newpage
   \section{Structural stability}\label{sec : results structural stability}
-  \input{structural_stability_results}
+  \input{struct_stab/structural_stability_results}
   \FloatBarrier
-  % \chapter{Analytical approach}\label{chapter : analytical approach}
-  % \section{Feasability}
-  % \input{analytic_approach_feasability}
-  % \section{Dynamical stability}
-  % \input{analytic_approach_dynamical_stability}
-  % \section{Structural stability}
-  % \input{analytic_approach_structural_stability}
-  %
-  %
-  % \chapter{Numerical analysis}\label{chapter : numerical analysis}
-  % \section{Feasability}
-  % \input{numerical_analysis_feasability}
-  % \section{Dynamical stability}
-  % \input{numerical_analysis_dynamical_stability}
-  % \section{Structural stability}
-  % \input{numerical_analysis_structural_stability}
-
-%  \input{old_results}
   \chapter{Discussion}
   \input{discussion}
   \FloatBarrier
   \chapter{Appendices}
-  \section{Demonstrations}
-  \input{demonstrations}
-  \FloatBarrier
-  \section{Supplementary material}
-  \input{supplementary_material}
-  \FloatBarrier
+  \input{appendices}
   \addcontentsline{toc}{chapter}{Bibliography}
   \printbibliography
 \end{document}
