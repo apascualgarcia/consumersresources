@@ -100,7 +100,7 @@ This gives us an estimation of how big the eigenvalues can get: we know that all
 The next step is to estimate $R_C$ in terms of metaparameters, so that we can get a qualitative insight on how the eigenvalues change when the metaparameters are changed. Section \ref{sec : estimate critical radius parameters} shows that after a few computations, one finds:
 \begin{multline}
 R_C \approx \max\left\{ \max_i\left(\deg(G,i)\right) \sigma_0 \gamma_0 S_0 \right., \\
- \left.\max_\mu\left\{\left(\deg(A, \mu)+\deg(G, \mu)\right)\abs{\alpha_0-\gamma_0 R_0}+\frac{l_0+\deg(A,\mu)\alpha_0 S_0}{R_0}\right\}\right\}. \label{eq: estimate R_C metaparameters}
+ \left. \max_\mu\left\{\deg(G,\mu) \gamma_0 R_0 + \deg(A,\mu)\left(1+\frac{\alpha_0S_0}{R_0}\right)+\frac{l_0}{R_0}\right\}\right\}. \label{eq: estimate R_C metaparameters}
 \end{multline}
 Note that $R_C$ depends not only on all metaparameters but also on the structure of both $A$ and $G$. In particular, $R_C$ increases when the largest degrees of $A$ or $G$ increase.
 % The main factor that will determine $R_C$ (and hence the largest magnitude of any eigenvalue) is the structure of the food consumption matrix.
