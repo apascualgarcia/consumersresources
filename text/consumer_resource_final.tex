@@ -22,7 +22,7 @@
 \fancyhf[HRE,HLO]{\rightmark}
 \fancyhf[FLE,FRO]{\thepage}
 \fancyhf[FRE, FLO]{\footnotesize\textit{Impact of syntrophy on microbial communities}}
-
+\setlength{\headheight}{15pt}
 
 \fancypagestyle{plain}{%
 \fancyhf{}
@@ -50,8 +50,10 @@
   \input{introduction}
 
   \chapter{Methods}\label{chap : methods}
-  \section{Syntrophy scenarios}
+  \section{Domain of study}\label{sec : domain of study}
   \input{syntrophy_scenarios}
+  \FloatBarrier
+  \newpage
   \section{Feasibility}\label{sec : methods feasibility}
   \input{feasibility/feasibility_methods}
   \FloatBarrier
@@ -77,9 +79,11 @@
   \section{Structural stability}\label{sec : results structural stability}
   \input{struct_stab/structural_stability_results}
   \FloatBarrier
+
   \chapter{Discussion}
   \input{discussion}
   \FloatBarrier
+
   \chapter{Appendices}
   \input{appendices}
   \addcontentsline{toc}{chapter}{Bibliography}

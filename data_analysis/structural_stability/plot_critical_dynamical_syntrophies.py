@@ -1,7 +1,8 @@
 import numpy as np
-from consumer_resource_data_analysis import all_nestedness, all_connectance, alpha_mode_colours
+from consumer_resource_data_analysis import all_nestedness, all_connectance, alpha_mode_colours, nest_colours, conn_colours
 import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
+from consumer_resource_data_analysis import label as alpha_label
 
 folder='structural_stability'
 filename='critical_dynamical_syntrophies_NR50_NS25'
@@ -9,7 +10,7 @@ filename='critical_dynamical_syntrophies_NR50_NS25'
 alpha_mode=['FC', 'NIS', 'LRI', 'RS']
 additional_alpha_mode=['RNISC', 'LNISC', 'NISCC']
 
-alpha_label=['FC', 'NIS', 'LRI', 'RS']+['RNISC', 'LNISC', 'NISCC']
+alpha_label+=[r'LRI-NIS', r'RS-NIS',r'RS-R']
 alpha_mode_colours+=['orange', 'pink', 'grey']
 
 
@@ -80,10 +81,11 @@ for k in range(len(alpha_mode)):
     ax = fig.add_subplot(111)
     title=alpha_label[k]
     ylabel=r'$\alpha_C^D(\gamma_0=0.75, S_0=0.05)$'
-    for nest in all_nestedness:
+    for j in range(len(all_nestedness)):
+        nest=all_nestedness[j]
         data = [crit_syn[nest][k][alpha] for k in all_connectance]
         to_plot = np.array([[all_connectance[i],data[i]['value']] for i in range(len(data)) if data[i]])
-        ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
+        ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$', color=nest_colours[j])
     ax.set_xlabel(r'$\kappa_G$')
     ax.set_ylabel(ylabel)
     ax.legend(bbox_to_anchor=(1.,1.))
@@ -95,10 +97,11 @@ for k in range(len(alpha_mode)):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    for conn in all_connectance:
+    for j in range(len(all_connectance)):
+        conn=all_connectance[j]
         data = [crit_syn[eta][conn][alpha] for eta in all_nestedness]
         to_plot = np.array([[all_nestedness[i],data[i]['value']] for i in range(len(data)) if data[i]])
-        ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
+        ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$', color=conn_colours[j])
     ax.set_xlabel(r'$\eta_G$')
     ax.set_ylabel(ylabel)
     ax.legend(bbox_to_anchor=(1.,1.))

@@ -4,10 +4,10 @@ import consumer_resource_data_analysis as cf
 from scipy.stats import linregress
 from consumer_resource_data_analysis import alpha_mode, all_nestedness, all_connectance, label, nest_colours, conn_colours
 
-type='feasibility'
-dF_50_filename='feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
-dF_25_filename='feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-ylabel=r'$d_F(N_R=25)/d_F(N_R=50)$'
+# type='feasibility'
+# dF_50_filename='feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
+# dF_25_filename='feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+# ylabel=r'$d_F(N_R=25)/d_F(N_R=50)$'
 
 type='local_dynamical_stability'
 dF_50_filename='local_dynamical_stability/local_dynamical_stability_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
@@ -15,7 +15,7 @@ dF_25_filename='local_dynamical_stability/all_mat_local_dynamical_stability_NR25
 ylabel=r'$d_D(N_R=25)/d_D(N_R=50)$'
 
 
-alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
+# alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
 
 df_50 = []
 df_25 = []

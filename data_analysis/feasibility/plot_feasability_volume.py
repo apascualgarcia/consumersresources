@@ -8,7 +8,7 @@ import copy
 import matplotlib.tri as tr
 from scipy.optimize import curve_fit
 from matplotlib import rcParams
-from consumer_resource_data_analysis import all_nestedness, all_connectance, closest_element_in_list
+from consumer_resource_data_analysis import all_nestedness, all_connectance, closest_element_in_list, conn_colours, nest_colours
 
 
 np.set_printoptions(threshold=sys.maxsize)
@@ -177,13 +177,14 @@ rcParams.update({'font.size': 22})
 fig3 = plt.figure(3)
 ax3 = fig3.add_subplot(111)
 nestedness_list=sorted(list(set(nestedness)))
-for nest in all_nestedness:
+for j in range(len(all_nestedness)):
+    nest=all_nestedness[j]
     ind_to_plot=[i for i in range(len(exp_coeff)) if closest_element_in_list(nestedness[i], all_nestedness)==nest]
     new_index=np.argsort(connectance[ind_to_plot])
     ind_to_plot=[ind_to_plot[k] for k in new_index]
     dev = [deviations_from_theory[i] for i in ind_to_plot]
     conn = [connectance[i] for i in ind_to_plot]
-    ax3.plot(conn, dev, linestyle='dashed', label=r'$\eta_G='+str(nest)+'$', markersize=7, markeredgewidth=6, marker='o')
+    ax3.plot(conn, dev, linestyle='dashed', label=r'$\eta_G='+str(nest)+'$', markersize=7, markeredgewidth=6, marker='o', color=nest_colours[j])
 ax3.set_xlabel(r'$\kappa_G$')
 ax3.set_ylabel(r'$\Delta_K$')
 ax3.legend(bbox_to_anchor=(1.0, 1.0), fontsize=17)
@@ -191,13 +192,14 @@ ax3.legend(bbox_to_anchor=(1.0, 1.0), fontsize=17)
 fig4 = plt.figure(4)
 ax4 = fig4.add_subplot(111)
 connectance_list=sorted(list(set(connectance)))
-for conn in all_connectance:
+for j in range(len(all_connectance)):
+    conn=all_connectance[j]
     ind_to_plot=[i for i in range(len(exp_coeff)) if closest_element_in_list(connectance[i], all_connectance)==conn]
     new_index=np.argsort(nestedness[ind_to_plot])
     ind_to_plot=[ind_to_plot[k] for k in new_index]
     dev = [deviations_from_theory[i] for i in ind_to_plot]
     nest = [nestedness[i] for i in ind_to_plot]
-    ax4.plot(nest, dev, linestyle='dashed',label=r'$\kappa_G='+str(conn)+'$', markersize=7, markeredgewidth=6, marker='o')
+    ax4.plot(nest, dev, linestyle='dashed',label=r'$\kappa_G='+str(conn)+'$', markersize=7, markeredgewidth=6, marker='o', color=conn_colours[j])
 ax4.set_xlabel(r'$\eta_G$')
 ax4.set_ylabel(r'$\Delta_K$')
 ax4.legend(bbox_to_anchor=(1.0, 1.0),fontsize=17)
