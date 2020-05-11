@@ -1,0 +1,116 @@
+\documentclass[12pt, titlepage]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+
+\begin{document}
+
+We deal here with the last question of this Thesis, which is the one of \important{structural stability}. We follow the path opened by \citeauthor{bastolla_architecture_2009} in the Supplementary Material of \cite{bastolla_architecture_2009} and later explored by  \citeauthor{rohr_structural_2014} in \cite{rohr_structural_2014}. The latter defined the question of structural stability as \textit{``asking how large is the range of parameter values that are compatible with the stable coexistence of all species''} \cite{rohr_structural_2014}. Their analysis was done in the context of the study of plants-pollinators networks.
+For microbial communities, apart from incipient considerations found in  \cite{tikhonov_collective_2017,marsland_available_2019}, only \citeauthor{butler_stability_2018} fully considered that question \cite{butler_stability_2018} and even found a sufficient condition for structural stability of their model under some special assumptions\footnote{The model they consider in \cite{butler_stability_2018} differs slightly from ours (\eg resources are not removed from the system $m_\mu=0$) and the sufficient condition they found assumes fully specialist consumers \ie $N_R=N_S$ and $\gamma=\gamma_0 \identity{N_S}$.}.
+
+%In the following pages, we investigate how the \important{critical structural perturbation} $\Delta_S^*(m, G, A)$, which measures for a given set of metaparameters $m$ and a consumption-syntrophy network $(G,A)$ leading to dynamically stable systems how much the external resources feeding rate $l_0$ may be altered without starting to observe microbial extinctions, changes as a function of the syntrophy $\alpha_0$ and the structure of both $G$ and $A$.
+In the following, we study a quantity called critical structural perturbation, which allows to investigate how much the rate of supply of external resources $l_\mu$ can be perturbed until extinctions are observed in the community. That measure is computed for systems which we know are feasible and dynamically stable for a given set of metaparameters $m$.
+We aim to find what topologies $(G,A)$ and metaparameters $(\gamma_0, S_0, \alpha_0)$ lead to systems that can sustain the largest perturbations.
+\subsection{Domain of analysis}
+Section \ref{sec : structural stability methods numerical estimate critical perturbation} explains the numerical algorithm we designed to determine $\Delta_S^*(m, G, A)$. Although this algorithm always converges, it is computationally demanding: it typically takes on the order of $\sim 1$ hour to provide its result. This means we cannot analyze in detail the whole fully dynamically stable domain $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$ studied earlier and we need to focus on specific points.
+
+As explained before, in order to assess the structural stability of a given parameter set $p$, we require that $p$ is locally dynamically stable. Hence we need to work with metaparameters $m$ that are in a highly dynamically stable region. %Furthermore, in order for comparisons to make sense, $m=(\gamma_0, S_0, \alpha_0)$ should be in a highly dynamically stable region \important{for every consumption-network}, which is why we choose to study points $m=(\gamma_0, S_0, \alpha_0) \in \mathcal{D}_{L,1}^{G,A}(\alpha_0)$.
+To make different systems comparable, we need to choose $m$ in a region that is very dynamically stable \important{for all consumption-networks}, \eg the common fully dynamically stable domain. However, we cannot pick any random point of that domain.
+%This gets however a bit tricky: as $\alpha_0$ increases, the shape of $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$ changes!
+Indeed we saw above that the value of $\alpha_0$ changes the shape of said domain. Because our goal is to study the impact of $\alpha_0$ only, while keeping other metaparameters fixed,
+%Since we would like to study how modifying \important{the syntrophy only} while letting the other parameters fixed impacts the system,
+we need to choose $(\gamma_0, S_0)$ such that they are indeed highly dynamically stable
+%$(\gamma_0, S_0, \alpha_0) \in \mathcal{D}_{L,1}^{G,A}(\alpha_0)$
+for all values of $\alpha_0$ and all consumption networks we consider. The idea is of course to take $\alpha_0$ as large as possible.
+
+We saw above that the structure of the dynamically stable domains was complicated for the case $N_R=N_S=25$ (see \eg the common fully dynamically stable region on Figure \ref{fig: dynamical stability results common fully dynamically stable volume}). In fact, doubling the number of resources led to a smoother profile of dynamical stability for all networks as shows for instance Figure \ref{fig: dynamical stability results common lds volume NR=50 NS=25}. Overall a larger syntrophy could be attained without losing dynamical stability for any of the networks. These considerations make us focus our analysis on systems with dimensions $N_R=50$ and $N_S=25$, \ie on matrices from the set $S_{50}$.
+% Figure \ref{fig: dynamical stability results common fully dynamically stable volume} shows that for the case $N_R=N_S=25$, the largest syntrophy for which $\mathcal{D}_{L,1}^{S_M}(\alpha_0)$ is not empty is smaller than \num{1.3e-3}, which is only a tenth of the largest common syntrophy $\sim 0.01$ (Eq.\ref{eq : results feasibility largest alpha0})! Since the case $N_R=N_S=25$ \important{a priori} will not provide significant results, we turn to matrices with $N_R > N_S$, which according to literature leads to more stable systems \cite{biroli_marginally_2018}. Indeed Figure \ref{fig: dynamical stability results common lds volume NR=50 NS=25} shows that for $N_R=50$ and $N_S=25$, $\mathcal{D}_{L,1}^{S_M}(\alpha_0)$ is not empty until at least $\alpha_0 \approx \num{3.9e-3}$. This indicates that such systems will be more dynamically stable, which is why we choose to work with the set of matrices $S_{50}$ instead of $S_{25}$ \textbf{see if name is okay}.
+Looking at Figure \ref{fig: dynamical stability results common lds volume NR=50 NS=25}, we see that points with $\gamma_0 \gtrapprox 0.7$ can sustain the largest syntrophy while remaining fully dynamically stable for all matrices. In consequence we choose $(\gamma_0, S_0)=(0.75, 0.05)$ and keep these fixed until the end of this section.
+
+Now that we chose $\gamma_0, S_0, N_R$ and $N_S$ such that we can work with a fairly high syntrophy, we still need to decide for which values of $\alpha_0$ we compute $\Delta_S^*(m, G, A)$. For a fixed $\gamma_0, S_0, G$ and $A$, we define the \define{critical dynamical syntrophy} $\alpha_C^D(\gamma_0, S_0, G, A)$ as:
+\begin{equation}
+ \alpha_C^D(\gamma_0, S_0, G, A)\defined \max_{\alpha_0}\left\{\alpha_0 : \mathcal{D}_{L,1}\left((\gamma_0, S_0, \alpha_0), G, A\right)=1\right\}.
+\end{equation}
+In words, $\alpha_C^D(\gamma_0, S_0)$ is the largest syntrophy for which we are sure that a system built with the procedure $\mathcal{A}$ is locally dynamically stable. As is explained in the next section, $\alpha_C^D(\gamma_0, S_0)$ depends heavily on both the structure of $G$ and $A$ and it definitely cannot be approximated as the same for all matrices considered. Since we want to get noticeable effects on $\Delta_S^*(m, G, A)$, we will compute it for each network at its individual critical syntrophy. To add  another point of comparison, we will also compute it for each at the lowest critical syntrophy found, which is the largest syntrophy which leads to fully dynamically stable systems for all networks. Finally, we will compare these two $\Delta_S^*$ with the one obtained when there is no syntrophy, \ie $\alpha_0=0$, which will act as a null model.
+
+\subsection{Critical dynamical syntrophies}\label{sec: results structural stability critical dynamical syntrophies}
+Figure \ref{fig: critical dynamical syntrophy fully connected syntrophy} shows how $\alpha_C^D(\gamma_0, S_0, G, A)$ evolves for the case of $A$ fully connected as a function of connectance $\kappa_G$ and ecological overlap $\eta_G$ of the consumption matrix.
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-189pt, margin=50pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_fixed_nest_FC}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_fixed_conn_FC}.pdf}}
+\caption{Critical dynamical syntrophy $\alpha_C^D$ for all the consumption matrices $G$ in the set $S_{50}$ (fully connected syntrophy matrix) (a) as a function of the connectance of $G$ for fixed ecological overlap and (b) as a function of the ecological overlap of $G$ for fixed connectance. For a fixed ecological overlap, systems with a  larger connectance can attain larger syntrophies. For a fixed connectance, a small ecological overlap is needed to get a large critical dynamical syntrophy.}\label{fig: critical dynamical syntrophy fully connected syntrophy}
+\end{figure}
+We observe a clear trend, in accordance with prior results: at fixed ecological overlap, networks with a larger connectance can attain more syntrophy while remaining dynamically stable and at fixed connectance, networks with a larger ecological overlap become unstable faster as syntrophy increases. Apart from the four $A$ structures considered since the beginning of this Thesis (FC, NIS, LRI, RS), we include three additional $A$-topologies:
+\begin{itemize}
+\item Restricted Random Structure matrix (RS-R); $A$ is random, except that no intraspecific syntrophy is allowed. Its connectance is taken as the connectance of $G$. This is more or less a  ``lower connectance version'' of the NIS scenario.
+
+\item LRI matrix with NIS Connectance (LRI-NIS); $A$ is the outcome of the LRI MCMC procedure described in Methods \ref{section: methods LRI MC solver}, except that in contrast to the LRI scenario where $\kappa_A=\kappa_G$, the connectance of $A$ is taken as the one of $A$ in the NIS scenario.
+
+\item Random Structure with NIS Connectance (RS-NIS); $A$ has a completely random structure. Its connectance is chosen as the connectance of $A$ in the NIS regime.
+\end{itemize}
+Figure \ref{fig : ss results critical dynamical syntrophy different A same conn} shows how $\alpha_C^D$ changes as a function of the topology of $A$. \textbf{TO DO: if time put table of these regimes in Methods}
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-203pt, margin=45pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_Conn0.18}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_dynamical_syntrophy_Conn0.43}.pdf}}
+\caption{Critical dynamical syntrophy $\alpha_C^D(\gamma_0=0.75, S_0=0.05, G, A)$ as a function of the ecological overlap of the consumption matrix $G$ for fixed connectance (a) $\kappa_G=0.18$ and (b) $\kappa_G=0.43$. The different lines symbolize the different structures of the syntrophy matrix $A$: FC, NIS, LRI, RS but also R-RS, LRI-NIS, and RS-NIS (which are explained in the main text). A higher critical dynamical syntrophy is achieved when $A$ has a random structure. \textbf{because lower connectance??}}\label{fig : ss results critical dynamical syntrophy different A same conn}
+\end{figure}
+The RS-R and RS outperforms the other scenarios for every consumption matrix considered. Both the FC and NIS cases have $\kappa_A$ larger than the RS scenario, which hints that systems where many syntrophic interactions take place (\ie $A$ has a large connectance) can sustain an overall smaller maximal syntrophic strength. The main difference between the LRI and the RS-R/RS regimes, since their respective syntrophy matrix have the same connectance, is their \important{syntrophic overlap}, \ie the nestedness of $A$, as is shown by Figure \ref{fig: dynamical stability results nestedness LRI outcome}. Although RS-R and RS both have the same connectance and an approximately similar syntrophic overlap, the main difference is that RS-R does not allow intraspecific syntrophy. In the end it seems like dynamical stability is favoured by the following three factors: low connectance of $A$, low syntrophic overlap of $A$ and prohibition of intraspecific syntrophy. Microbial communities where consumers do not release too many resources -- and if they do, in separate niches -- can achieve a larger average syntrophy than others while remaining dynamically stable.
+% For a consumption-syntrophy network $(G,A)$ and metaparameters $m$, one can define the \important{critical structural perturbation} $\Delta_S^*(m, G, A)$ (see Methods \ref{sec : structural stability methods numerical estimate critical perturbation}). $\Delta_S^*(m, G, A)$ $\Delta_S^*(m, G, A)$ can be computed easily by solving the equation $P_E(\Delta_S^*(m, G, A), m, G, A)=0.5$ : at the critical structural perturbation, the chance of observing at least one microbial extinction is $0.5$ (see Appendix \ref{app: results structural stability procedure to estimate critical structural perturbation}).
+
+\subsection{Critical structural perturbation}
+Now that we calculated the critical dynamical syntrophies of each consumption-syntrophy network, we compare their critical structural perturbation $\Delta_S^*(m, G, A)$. As a ``null model'', we first compute $\Delta_S^*$ when there is no syntrophy at play. Figure \ref{fig: ss results critical delta no syntrophy} shows that structural stability confirms the trend hithertho observed: for a given ecological overlap $\eta_G$, $\Delta_S^*$ increases as the connectance $\kappa_G$ increases and for a given $\kappa_G$, $\Delta_S^*$ decreases as $\eta_G$ increases.
+\begin{figure}
+\hspace{-0.1\linewidth}
+\captionsetup[subfigure]{captionskip=-190pt, margin=46pt}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_str_stab_fixed_nest_no_syntrophy}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_str_stab_fixed_conn_no_syntrophy}.pdf}}
+\caption{Critical structural perturbation without syntrophy $\Delta_S^*(m,G,A=0)$ (a) as a function of ecological overlap with fixed connectance and (b) as a function of connectance for a fixed ecological overlap. We look at matrices with $N_R=50$ and $N_S=25$ at one of the points in the metaparameters space that are the most dynamically stable for all the matrices (see Fig.\ref{fig: dynamical stability results common lds volume NR=50 NS=25}), namely $(\gamma_0, S_0)=(0.75, 0.05)$. A clear trend may be observed, which is coherent with trends hithertho observed: for a given connectance, communities with a large ecological overlap are structurally less stable. Similarly, for a given ecological overlap, microbial communities with a consumption matrix with a larger connectance are more structurally stable.}\label{fig: ss results critical delta no syntrophy}
+\end{figure}
+In short, microbial communities where microbes consume a lot of different resources but do not share them resist best to environmental perturbations. These results coincide well with intuition.
+%Indeed imagine a community where each microbe eats only very few resources (low $\kappa_G$).
+
+We now focus on what happens when the system is syntrophic, \ie $\alpha_0 > 0$. Figure \ref{fig: ss results critical delta deviation from no syntrophy} shows that surprisingly for the FC, LRI and RS cases, we observe no significant deviation away from the ``no syntrophy'' case. Whether $\Delta_S^*(m, G, A)$ is computed at each individual $\alpha_C^D$ or at $\min\{\alpha_C^D\}$, it seems like syntrophy does not influence much the structural stability of the system, at least not in a clearly decidable way.\footnote{Some effect is sometimes indeed observed but the errors are so large compared to the magnitude of the effect that this very well could be noise.}
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-187pt, margin=55pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_deviation_from_no_syntrophy_str_stab_fixed_conn_own_max_syntrophy_NISCC}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_deviation_from_no_syntrophy_str_stab_fixed_nest_common_max_syntrophy_fully_connected}.pdf}}
+\caption{Typical deviation away from the ``no syntrophy'' scenario. For all structures of the syntrophy matrix considered, apart from NIS (see Fig.\ref{fig: ss results own synt NIS critical delta deviation from no syntrophy}), adding a large syntrophy, be it the ``common'' or ``individual'' maximum, does not significantly increase the structural stability of the microbial community.}
+\label{fig: ss results critical delta deviation from no syntrophy}
+\end{figure}
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-190pt, margin=60pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_deviation_from_no_syntrophy_str_stab_fixed_nest_own_max_syntrophy_no_release_when_eat}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_deviation_from_no_syntrophy_str_stab_fixed_conn_own_max_syntrophy_no_release_when_eat}.pdf}}
+\caption{Deviation from the ``no syntrophy'' case for the syntrophy matrix $A$ with a NIS structure. $\alpha_0$ is taken at the critical dynamical syntrophy $\alpha_C^D$ for each system. At the largest possible syntrophy,  }
+\label{fig: ss results own synt NIS critical delta deviation from no syntrophy}
+\end{figure}
+The only scenario where a clear effect is observable is for $\Delta_S^*$ computed at the critical dynamical syntrophy in the NIS regime. Here lies an interesting fact. On one hand, we obtain the largest critical dynamical syntrophy when $A$ has a random structure, so in a sense a larger dynamical stability. On the other hand, that $A$ structure does not allow the system to reach a larger structural stability, even when evaluated at its critical dynamical syntrophy. To attain the largest structural stability, $A$ must be in the NIS scenario, where the critical dynamical syntrophy is lower. We observe a trade-off in the structure of the syntrophy matrix: increasing the syntrophy while remaining dynamically stable implies staying at the same structural stability. On the opposite the $A$-configuration that the syntrophy increases structural stability (NIS) does not allow to reach the largest possible syntrophic strength.
+\textbf{TO DO : Benefit gets higher as connectance increases}
+
+
+\begin{figure}
+\captionsetup[subfigure]{captionskip=-202pt, margin=32pt}
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_difference_from_null_case_Conn0.18_own_max_syntrophy}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_difference_from_null_case_Conn0.43_own_max_syntrophy}.pdf}}
+
+\hspace{-0.1\linewidth}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_difference_from_null_case_Conn0.18_common_max_syntrophy}.pdf}}
+\subfloat[]{\includegraphics[width=0.6\linewidth]{{critical_delta_difference_from_null_case_Conn0.43_common_max_syntrophy}.pdf}}
+
+
+\caption{Difference between the critical structural perturbation with and without syntrophy for different scenarios as a function of the ecological overlap for a given connectance (a)-(c) $\kappa_G=0.18$ and (b)-(d) $\kappa_G=0.43$. For (a)-(b) $\alpha_0$ is taken at the critical dynamical syntrophy (which depends on the network), for (c)-(d) at the common maximum syntrophy. The different colours correspond to the different structures of $A$ considered. The only significant increase is observed at high connectance, where the ``own individual syntrophy'' NIS scenario is $\sim 10 \%$ more structurally stable than the ``no syntrophy'' case. \textbf{TO DO: insert that figure somehow in the text}}\label{fig: ss results critical delta deviation from no syntrophy fixed conn varying nest}
+\end{figure}
+
+
+
+
+
+
+
+\end{document}

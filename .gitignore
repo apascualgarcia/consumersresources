@@ -22,6 +22,6 @@ text/*
 !text/*.sty
 
 !text/figures
-!text/feasibility/*.tex
-!text/dyn_stab/*.tex
-!text/struct_stab/*
+!text/feasibility
+!text/dyn_stab
+!text/struct_stab
