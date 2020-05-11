@@ -4,24 +4,28 @@
 
 \begin{document}
 
-\section{Consumer Resource
+\section[CRMs in microbial ecology]{Consumer-Resource
  Models in microbial ecology}
 % Why biology?
 %   - Biology always has been a field of interest for physicists and mathematicians , namely because some problems in biology are very apt to the formalism of physics (talk not only about biophysics but also about model flock of birds with fluid dynamics equations and how statistical physics is used in ecology community: PT between neutral and niche)
 
-Biology and Physics have always been tightly intertwined. Especially the years following the end of World War II saw many famous physicists getting interested in the blooming field of Biology \cite{jogalekar_physicists_nodate}, Leo Szilard or Erwin Schroedinger and his \citetitle{schrodinger_what_1944} \cite{schrodinger_what_1944} among others. That exodus is no surprise, many biological phenomena at different scales are well modelled with Physics weaponry: from the use of Statistical Physics to solve protein folding problems \cite{chan_protein_1993} and find phase transitions in ecological communities \cite{fisher_transition_2014} to the application of Hamiltonian dynamics to describe the movement of starling flocks \cite{attanasi_information_2014}.
+Biology and Physics are tightly intertwined. Especially the years following the end of World War II saw many famous physicists getting interested in the blooming field of Biology \cite{jogalekar_physicists_nodate}, Leo Szilard or Erwin Schroedinger and his \citetitle{schrodinger_what_1944} \cite{schrodinger_what_1944} among others. That exodus is no surprise, many biological phenomena at different scales are well modelled with Physics weaponry: from the use of Statistical Physics to solve protein folding problems \cite{chan_protein_1993} and find phase transitions in ecological communities \cite{fisher_transition_2014} to the application of Hamiltonian dynamics to describe the movement of starling flocks \cite{attanasi_information_2014}.
 
 % Why microbes?
 %   - microbial communities are useful: due to complex interactions (microorganisms tightly shaped to humans), substantial impact on human health and ecosystem functioning in natural environments (cite verterbrate gut paper for health and water paper + ocean paper for environment)
 
-However, Physics has not solved every problem yet: the study of microbial communities remains one of the biggest and most interesting challenges of contemporal microbiology. Indeed microbes and their complex interactions have a substantial, non trivial and very large impact on humans and their environment in various ways: we only start to understand the role of microbiological interactions in verterbrates' guts \cite{ley_worlds_2008}, or how they shape our soils \cite{becerra-castro_wastewater_2015} and oceans \cite{falkowski_biogeochemical_1998}.
-% Why consumer resources models?
-
-Population dynamics in ecological communities are often approximated by variations of the Lotka-Volterra model \cite{lotka_analytical_1920}. This approach works well when the mediators of the competitive interaction between species reach a steady state fast enough such that their own dynamics can be eliminated \cite{momeni_lotka-volterra_2017}. However, such an assumption is not always true and one must in general always ask themselves whether it may be applied \cite{odwyer_whence_2018}. For microbial communities, previous literature shows that the population dynamics are not always well captured by a Lotka-Volterra model \cite{momeni_lotka-volterra_2017}, which explains the need of a more mechanistic approach, where the dynamics of both the microbes and their resources are explicitly modelled. Robert MacArthur is one of the first ecologists to establish and study such a \important{Consumer Resource Model} (CRM) \cite{macarthur_species_1970}, launching a field still active today \cite{brunner_metabolite_2019}.
+However, many problems are not solved yet: the study of microbial communities remains one of the biggest and most interesting challenges of contemporal microbiology. Indeed microbes and their complex interactions have a substantial, non trivial and very large impact on humans and their environment in various ways: we only start to understand the role of microbiological interactions in vertebrates' guts \cite{ley_worlds_2008}, or how they shape our soils \cite{becerra-castro_wastewater_2015} and oceans \cite{falkowski_biogeochemical_1998}.
 % Why syntrophic interaction?
 %   - basically because those effects come from the metabolic activity of the MCs, and a big part of it is syntrophy,
 
-In the light of recent developments in the microbiology literature \cite{morris_microbial_2013}, we propose here a CRM\footnote{One could argue that Flux Balance Analysis (FBA) \cite{orth_what_2010} would be well suited for such a study. We ruled it out because it is known to scale badly \cite{thiele_multiscale_2012} with system size and we do not want to be hindered by this limitation.} which explicitly takes into account syntrophy. This mechanism, which is largely observed in microbial communities \cite{morris_microbial_2013}, by definition occurs when microbes release, through a metabolic process, byproducts that are consumed by some members of the microbial community. That effect is mutualistic at the community level: on one hand microbes release metabolites for others, which is costly, but on the other they receive additional resources from others. In the field of theoretical ecology, the role of mutualistic interactions on the stability of communities has been very debated. For instance \citeauthor{bastolla_architecture_2009} argue that mutualism increases the persistence -- \ie the capacity to resist to perturbations -- of plants-pollinators networks. Although other studies agree with that result \cite{rohr_structural_2014, thebault_stability_2010}, it is still disputed by recent literature \cite{james_disentangling_2012}. The role of this Thesis is to determine the impact that syntrophy can have on microbial communities under chemostat conditions. Namely, how it changes not only the mere existence of such communities but also their stability towards different types of perturbations.
+Until recently \cite{morris_microbial_2013}, microbial ecologists focused their attention on competition and predation and overlooked the role of syntrophy as a factor in the shaping of microbial communities. Syntrophy, which is largely observed in microbial communities \cite{morris_microbial_2013}, by definition occurs when microbes release, through a metabolic process, byproducts that are consumed by some members of the microbial community. That mechanism is mutualistic at the community level: on one hand microbes release metabolites for others, which is costly, but on the other they receive additional resources from others. Similarly to microbial ecologists, only recently have theoretical ecologists focused on mutualistic systems like plants-pollinators networks \cite{bastolla_architecture_2009, rohr_structural_2014}, and the role of mutualistic interactions on the stability of communities is still very debated. For instance \citeauthor{bastolla_architecture_2009} argue that mutualism increases the persistence -- \ie the capacity to resist to perturbations -- of plants-pollinators networks. Although other studies agree with that result \cite{rohr_structural_2014, thebault_stability_2010}, the impact of mutualistic interactions on the stability of communities is still disputed by recent literature \cite{james_disentangling_2012}.
+
+Grasping how syntrophy affects the stability of microbial communities is a step further towards the comprehension of the biological principles that govern these ubiquitous communities. Understanding such principles would allow us to control these communities which could lead to technological breakthroughs such as personalized medicine \cite{kashyap_microbiome_2017}. To develop a general understanding of microbial communities, we need a model that works well for a large range of number of microbial species. This rules out Flux Balance Analysis (FBA) \cite{orth_what_2010}, which is known to scale badly with the system size \cite{thiele_multiscale_2012}. Because microbial communities are very diverse, we also need a model over which we can have a large analytical\footnote{Of course, another advantage of having a good analytical grasp is that it allows us to extract the governing principles in a much easier way.} control such that we can understand the effect of each parameter separately.  This naturally leads us to population dynamics models.
+
+Population dynamics in ecological communities are often approximated by variations of the Lotka-Volterra model \cite{lotka_analytical_1920}. This approach works well when the mediators of the competitive interaction between species, \ie the resources, reach a steady state fast enough such that their own dynamics can be eliminated \cite{momeni_lotka-volterra_2017}. However, such an assumption is not always true and one must in general always ask themselves whether it may be applied \cite{odwyer_whence_2018}. For microbial communities, previous literature shows that the population dynamics are not always well captured by a Lotka-Volterra model \cite{momeni_lotka-volterra_2017}, which explains the need of a more mechanistic approach, where the dynamics of both the microbes and their resources are explicitly modelled. Robert MacArthur is one of the first ecologists to establish and study such a \important{Consumer-Resource Model} (CRM) \cite{macarthur_species_1970}, launching a field still active today \cite{brunner_metabolite_2019}.
+
+We propose in this Thesis a CRM of microbial communities that explicitly models syntrophic interactions. We will focus on such microbial communities under chemostat conditions because, \textit{inter alia}, these are very easy to set up experimentally.
+The general aim of our study is to determine and quantify how syntrophy impacts the feasibility and the stability of microbial communities.
 % In short, we want to know what happens when consumers are also allowed to release resources. The stability of an ecosystem, and how it is linked to its complexity, has always been of interest for ecologists \cite{landi_complexity_2018}. \textbf{continuer ici}
 
 % What are the assumptions of our model?
@@ -29,7 +33,7 @@ In the light of recent developments in the microbiology literature \cite{morris_
 % Syntrophic interactions have already been studied in flux balance models (find citations) but these scale badly so take chemostat
 % What is a chemostat and why?
 % Why not flux balance?
-
+\newpage
 \section{General framework}
 Before explaining the general strategy that will be followed in this Thesis, we briefly describe the model we will study.
 \subsection{Description of the model}
@@ -63,7 +67,7 @@ On the other hand, biomass of species $S_i$ changes because of the following pro
 \end{itemize}
 The aim of the project is to study equilibria points of this model and their stability. In particular, we are interested in how syntrophy changes the robustness of the equilibria.
 
-\subsection{General strategy}
+\subsection{General strategy}\label{sec : general strategy}
 In general, we are interested in the existence and stability of fixed points (or \important{equilibria}) of Eq.\eqref{eq: differential eq for resources and species}. More precisely, an \define{equilibrium} is defined as abundances\footnote{For the sake of brevity, we will sometimes drop the $\mu$ and $j$ subscripts and simply write $\{R^*, S^*\}$.} $\{R^*_\mu, S^*_j\}$ that are fixed points of the model, \ie for which the LHS of Eq.\eqref{eq: differential eq for resources and species} is zero:
 \begin{subequations}\label{eq: equilibrium resources and species}
 \begin{empheq}[left=\empheqlbrace]{align}
@@ -71,15 +75,20 @@ In general, we are interested in the existence and stability of fixed points (or
  0 &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R^*_\nu S^*_i- d_i S^*_i - \sum_\nu \alpha_{\nu i} S^*_i. \label{eq: equilibrium species}
 \end{empheq}
 \end{subequations}
-The procedure we will follow is split in three stages, each of them is detailed in its dedicated own section below. We will first address the question the \important{feasibility} of our model, which tells us in what conditions equilibria of Eq.\eqref{eq: differential eq for resources and species} exist. We will then focus on its \important{dynamical stability}, which answers the question on how the system responds when the equilibrium points $\{R^*, S^*\}$ are perturbed. Finally, we will study how microbial communities described by Eq.\eqref{eq: differential eq for resources and species} respond when they are confronted to environmental perturbations, \ie the issue of their \important{structural stability}. \textbf{TO DO : add diagram here}
+The procedure we will follow (Fig.\ref{fig: sketch_procedure}) is split in three stages, each of them is detailed in its dedicated own section below. We will first address the question the \important{feasibility} of our model, which tells us in what conditions equilibria of Eq.\eqref{eq: differential eq for resources and species} exist. We will then focus on its \important{dynamical stability}, which answers the question on how the system responds when the equilibrium points $\{R^*, S^*\}$ are perturbed. Finally, we will study how microbial communities described by Eq.\eqref{eq: differential eq for resources and species} respond when they are confronted to environmental perturbations, \ie the issue of their \important{structural stability}.
 %As said above, our main goal is to study the stability of such equilibria. Before explaining what we mean by this, we focus first on simplifying the problem as much as we can.
 %Note that we consider $R^*_\mu$ and $S^*_i$ as parameters of the model.
-
+\begin{figure}[h!]
+\centering
+\fbox{\includegraphics[width=0.7\linewidth]{{sketch_procedure}.pdf}}
+\caption{General procedure we will follow to study systems describing microbial communities.}\label{fig: sketch_procedure}
+\end{figure}
+\newpage
 \section{Feasibility}
-Since its very inception \cite{may_will_1972}, the study of ecological interactions has been and still is tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is we assume a feasible equilibrium point, where some matrix of the model (\eg the species-interaction matrix or the jacobian) is approximated as random, and then study the dynamical or structural stability of said feasible point.
+The study of ecological interactions has been since its very inception \cite{may_will_1972}, and still is today, tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is to study an equilibrium point which we assume is feasible. Some matrix of the model (\eg the species-interaction matrix or the Jacobian) is approximated as random, and the dynamical or structural stability of said equilibrium point is investigated.
 
 That framework is not satisfying for the study we would like to conduct, because it does not take time to study whether random parameters make sense in the first place.
-Indeed, before studying whether a microbial community can sustain perturbations, we need to know if said community actually \important{exists}. Biological systems, like any other natural systems, are constrained by laws, whether they arise from physical or biological considerations. For instance, it would not make sense to consider microbial communities that \eg violate the laws of thermodynamics. In the following section, we explain how such considerations can help determining the answer to the \important{feasibility} question:
+Indeed, before studying whether a microbial community can sustain perturbations, we need to know if said community actually \important{exists}. Biological systems, like any other natural systems, are constrained by laws, whether they arise from physical or biological considerations. For instance, it would not make sense to consider microbial communities that \eg violate the laws of thermodynamics. In the following Section, we explain how such considerations can help determining the answer to the \important{feasibility} question:
 
 \begin{centering}
 \fbox{\begin{minipage}{\linewidth}
@@ -88,9 +97,9 @@ Can microbial communities arising from a random set of parameters make sense on 
 If not, what are the conditions that should be imposed and how are these translated mathematically?
 \end{minipage}}
 \end{centering}
-\subsection{Basic concepts}\label{sec : methods feasibility basic concepts}
-As explained above, we want to impose conditions such that we only study systems that are compatible with biological and physical laws. Choosing such restrictions is a crucial task : we want to be as close to nature as possible but we also need to stay simple enough such that the model remains mathematically tractable. Our %-- somewhat arbitrary but still very justified ---
-choice is the following :
+\subsection{Respecting physical laws}\label{sec : methods feasibility basic concepts}
+As explained above, we want to impose conditions such that we only study systems that are compatible with biological and physical laws. Choosing such restrictions is a crucial task: we want to be as close to nature as possible but we also need to stay simple enough such that the model remains mathematically tractable. Our %-- somewhat arbitrary but still very justified ---
+choice is the following:
  % Indeed for our model to make sense,
   any system deemed as feasible must have ``biological'' model parameters and conserve biomass.
 
@@ -103,16 +112,16 @@ Asking for the model parameters to be ``biological'' means we want them to carry
 Namely, we are looking for positive-valued equilibria. %, so we require $R^*_\mu, S^*_i > 0$ specifically for these two parameters.
 Also, we require that every consumer can allocate some of each resource it consumes to growth\footnote{It would not make sense to say that species $i$ eats resource $\mu$ with efficiency $0$, since this is equivalent to species $i$ not eating resource $\mu$, and this is already encoded in the network structure.}: zero efficiencies are forbidden. Finally every resource external feeding rate should be non-zero in order to avoid resource depletion and every resource and consumer must eventually die out in the absence of interaction. Taking into account the sign conventions in the model, these considerations result in:
 \begin{equation}
-\boxed{
-R^*_\mu, S^*_i, \sigma_{i\mu}, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i} \geq 0.
+{
+R^*_\mu, S^*_i, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}, \alpha_{\mu i} \geq 0.
 }
 \label{eq : feasibility positive parameters}
 \end{equation}
-That condition already greatly restricts the choice of parameters $p\in \mathcal{P}$. However, additional complexity arises from the relationships parameters have to follow by definition. Indeed, the $3 N_R +2 N_S + 3 N_R N_S $ parameters are constrained by the $N_R + N_S $ equations \eqref{eq: equilibrium resources and species}. So if we choose $2 N_R + N_S + 3 N_R N_S$ parameters, the remaining $N_R + N_S$ are instantly determined. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for reasons explained in Appendix \ref{sec: explanation solve for d and m}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \important{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eqs.\eqref{eq : feasibility positive parameters} can be combined with Eqs.\ref{eq: equilibrium resources and species} into:
+That condition already greatly restricts the choice of parameters $p\in \mathcal{P}$. However, additional complexity arises from the relationships parameters have to follow by definition. Indeed, the $3 N_R +2 N_S + 3 N_R N_S $ parameters are constrained by the $N_R + N_S $ equations \eqref{eq: equilibrium resources and species}. So if we choose $2 N_R + N_S + 3 N_R N_S$ parameters, the remaining $N_R + N_S$ are instantly determined. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for technical reasons explained in Section \ref{sec: explanation solve for d and m}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \important{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eqs.\eqref{eq : feasibility positive parameters} can be combined with Eqs.\ref{eq: equilibrium resources and species} into:
 \begin{subequations}\label{eq : feasibility positive d and m}
 \begin{empheq}[left=\empheqlbrace]{align}
-d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R^*_\nu - \alpha_{\nu i} \right) > 0 \ \forall i=1, \dots, N_S \label{eq : feasibility positive d}\\
-m_\mu &= \frac{l_\mu - \sum_j \left(\gamma_{j\mu}R^*_\mu-\alpha_{\mu j}\right)S^*_j}{R^*_\mu} > 0 \ \forall \mu = 1, \dots, N_R \label{eq : feasibility positive m}
+d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R^*_\nu - \alpha_{\nu i} \right) > 0 \quad \forall i=1, \dots, N_S. \label{eq : feasibility positive d}\\
+m_\mu &= \frac{l_\mu - \sum_j \left(\gamma_{j\mu}R^*_\mu-\alpha_{\mu j}\right)S^*_j}{R^*_\mu} > 0 \quad \forall \mu = 1, \dots, N_R. \label{eq : feasibility positive m}
 \end{empheq}
 \end{subequations}
 In addition to these constraints, any feasible system should conserve biomass \important{at equilibrium}\footnote{This weak condition should hold only at equilibrium: we allow transition periods where biomass may not be conserved.}: no species should be able to produce more biomass than it physically uptakes. More specifically, a consumer $i$ attains, from resources consumption, a total biomass of $\sum_\nu \gamma_{i\nu}R^*_\nu S^*_i$.
@@ -122,7 +131,7 @@ From this available biomass, only $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu S^
 \end{equation}
 From now on, we will say that \textbf{a parameter set $p$ is \define{feasible} if it satisfies Eqs.\eqref{eq : feasibility positive d and m} and \eqref{eq : feasability biomass conservation}}.
 This is completely deterministic, in the sense that for a given parameters set $p \in \mathcal{P}$ one can without a doubt say whether it is feasible or not.
-Hence we define the \define{parameters set feasibility function} $\mathfrak{F} : P \rightarrow \{ 0, 1 \}$, which takes a parameter set as an input and tells you whether this parameter set is feasible or not:
+Hence we define the \define{parameters set feasibility function} $\mathfrak{F} : P \rightarrow \{ 0, 1 \}$, which takes a parameters set as an input and tells you whether this parameter set is feasible or not:
 \begin{equation}
 \mathfrak{F}(p)=
 \begin{cases}
@@ -130,9 +139,9 @@ Hence we define the \define{parameters set feasibility function} $\mathfrak{F} :
 0 \text{ else.}
 \end{cases}
 \end{equation}
-However as explained in the introduction we will usually not work with a parameter set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameter set $m \in \mathcal{M}$ and a consumption-syntrophy network $(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ instead. We can  define a corresponding
-\define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with binary matrices $B=(G, A)$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameter set:
-\begin{equation}\boxed{
+However, as explained in Section \ref{sec: tactics used to simplify the problem}, we will usually not work with a parameters set $p \in \mathcal{P}$ directly -- because there are too many variables to keep track of -- but with a metaparameters set $m \in \mathcal{M}$ and a consumption-syntrophy network $(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ instead. We can  define a corresponding
+\define{metaparameters set feasibility function} $\mathcal{F} : \mathcal{M} \rightarrow [0, 1] \times \mathcal{B}_{N_R \times N_S}$ which is the probability that a given set of metaparameters $m \in \mathcal{M}$ coupled with binary matrices $B=(G, A)$ gives rise -- through the algorithmic procedure $\mathcal{A}$ -- to a feasible parameters set:
+\begin{equation}{
 \mathcal{F}(m, B)=\text{Probability}\left\{\mathfrak{F}\left(\mathcal{A}(m, B)\right)=1\right\} \label{eq : feasibility methods feasibility metaparameters function}
 }
 \end{equation}
@@ -142,34 +151,57 @@ In practice $\mathcal{F}(m, B)$ is estimated numerically by calculating the frac
 \mathcal{F}(m, B) = \lim_{N\rightarrow \infty} \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \approx \sum_{i=1}^N \frac{\mathfrak{F}(\mathcal{A}(m,B))}{N} \text{ for } N \gg 1.
 \end{equation}
 
+\subsection{Feasibility region}\label{sec : methods feasibility volume}
+We would like to study feasibility in a mathematically coherent way, and in that purpose we need to define mathematical objects that describe best what we are trying to measure. To quantify feasibility in the metaparameters space, we define for a consumption matrix $G$ and a syntrophy adjacency matrix $A$ the \define{$x$-feasible region} $\mathcal{F}^{G,A}_x$ of the metaparameters space $\mathcal{M}$ that will lead to at least a ratio $x$ of feasible systems \ie :
+\begin{equation}
+\mathcal{F}^{G,A}_x \defined \left\{m \in \mathcal{M} : \mathcal{F}\left(m, (G,A)\right)\geq x \right\}. \label{eq : x feasible volume}
+\end{equation}
+It is clear that the whole space of metaparameters is at least $0$-feasible: $\mathcal{F}^{G,A}_0 = \mathcal{M}$ $\forall G$ and that the size of $\mathcal{F}^{G,A}_{x}$ should be smaller than the one of $\mathcal{F}^{G,A}_{y}$ if $ x > y, \ \forall (G, A)$. We can similarly define for a set $S = \left\{ (G_1,A_1) , (G_2, A_2), \dots, (G_N, A_N)\right\}$ of $N$ couples of matrices their \define{common feasibility} region $\mathcal{F}^S_x$, which is the region of the metaparameters space where feasibility is at least $x$ for every couple in the set:
+\begin{equation}
+\mathcal{F}^S_x \defined \intersection{(G,A) \in S} \mathcal{F}^{G,A}_x.
+\end{equation}
+We also define for a matrix set $S$, its critical feasibility $f^*(S)$, which is the largest feasibility we can get while still having a non-zero common volume\footnote{What we exactly mean by ``volume'' is explained in Section \ref{app: how to measure volume}.}:
+\begin{equation}
+f^*(S) \defined \max_{x \in \left[0,1\right]}\left\{ x : \text{Vol}\left(\mathcal{F}^S_x\right) > 0 \right\}. \label{eq : feasibility methods critical common feasibility}
+\end{equation}
+% For actual computations, we will choose a matrix set $S_M$, stick to it during the whole thesis, and work in its critical feasibility region $\mathcal{F}^*$, defined as :
+% \begin{equation}{
+% \mathcal{F}^* \defined \mathcal{F}^{S_M}_{f^*(S_M)}. \label{eq : feasibility methods critical common feasibility region}
+% }
+% \end{equation}
+% Our hope is that we may find a fully feasible common region, \ie $f^*(S)=1$.
+%
 
+\newpage
 \section{Dynamical stability}
-As stated in the introduction, %we are interested in the
+Once we establish which systems are feasible, we may be interested in their reaction to perturbations, \ie their stability. That question has always been of prime importance for ecologists and constitutes a whole scientific field. Many results have been derived, for linear systems \cite{may_will_1972}, Lotka-Volterra systems \cite{bunin_ecological_2017, takeuchi_global_1996}, mutualistic systems \cite{pascual-garcia_mutualism_2017} or MacArthur's consumer-resource model \cite{chesson_macarthurs_1990}. %An important trend, which we will check with our results, is if highly connected ecological networks\footnote{This was demonstrated explicitly for mutualistic systems by \citeauthor{pascual-garcia_mutualism_2017} in \cite{pascual-garcia_mutualism_2017}.} seem to be more robust to perturbations\textbf{This was proven for structural stability, is it also true for dynamical stability?}.
+As stated above, %we are interested in the
 our ultimate goal is to study equilibria points of the set of coupled differential equations \eqref{eq: differential eq for resources and species}. In particular we want to know how \important{stable} a given equilibrium is. However there is no consensual definition of stability: what does it mean exactly that a system is stable under a given perturbation? How is a perturbation even defined? %These questions have many different possible answers.
-Throughout this thesis different notions of stability will be tackled: the first is \important{dynamical stability}.
+Throughout this Thesis different notions of stability will be tackled: the first is \important{dynamical stability}.
 The main idea behind dynamical stability is simple. We want to answer the following question:
 
 \begin{centering}
 \fbox{\begin{minipage}{\linewidth}
 \itshape
-Given an equilibrium point $\{ R^*_\mu, S^*_i\}$, does the system go back to a positive-valued equilibrium when the consumers and resources abundances are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a positive-valued equilibrium?
+Given a feasible equilibrium point $\{ R^*_\mu, S^*_i\}$, does the system go back to the same positive-valued equilibrium when the consumers and resources abundances are changed? If yes, how much can they be changed?% before the system evolves in such a way that it does not reach a positive-valued equilibrium?
 \end{minipage}}
 \end{centering}
-\subsection{Definitions}
-\subsubsection{Local dynamical stability}
-We first introduce \define{local dynamical stability}. A system is said to be \important{locally dynamically stable} if it goes back to \important{its initial equilibrium point} $\{ R^*_\mu, S^*_i \} $ after $R^*_\mu$ and $S^*_i$ have been perturbed by an infinitesimal amount $\left\{ \Delta R_\mu(t_0), \Delta S_i(t_0) \right\}$ at time $t_0$.
+\subsection{Local dynamical stability}
+
+
+We first introduce \define{local dynamical stability}\footnote{For the sake of brevity, instead of ``local dynamical stability'', we sometimes abbreviate and write ``lds''.}. A system is said to be \define{locally dynamically stable} if it goes back to \important{its initial equilibrium point} $\{ R^*_\mu, S^*_i \} $ after $R^*_\mu$ and $S^*_i$ have been perturbed by an infinitesimal amount $\left\{ \Delta R_\mu(t_0), \Delta S_i(t_0) \right\}$ at time $t_0$.
 
 More precisely, consider a system which is at equilibrium at time before $t=t_0$. Right after $t=t_0$, we perturb the equilibria abundances $\left\{R_\mu^*, S_i^*\right\}$ by an infinitesimal amount $\left\{ \Delta R_\mu(t_0), \Delta S_i(t_0) \right\}$.
 We want to know how the perturbations away from equilibrium, written $\left\{ \Delta R_\mu(t), \Delta S_i(t) \right\}$, and defined as
 \begin{equation}
 \Delta R_\mu(t)\defined R_\mu(t)-R_\mu^* \text{ and } \Delta S_i(t) = S_i(t)-S_i^*.
 \end{equation}
-will evolve qualitatively. Namely, will they go to zero or increase indefinitely as $t$ increases? Perturbation analysis tells us \textbf{insert ref} that the quantity which drives the evolution of $\{ \Delta R_\mu(t), \Delta S_i(t)\}$
-is the \define{jacobian matrix of the system at equilibrium} $J^*$, given by :
+will evolve qualitatively. Namely, will they go to zero or increase indefinitely as $t$ increases? Perturbation analysis tells us \cite{strogatz_nonlinear_1994} that the quantity which drives the evolution of $\{ \Delta R_\mu(t), \Delta S_i(t)\}$
+is the \define{Jacobian matrix of the system at equilibrium} $J^*$, given by :
 \begin{equation}
 J^* \defined J(t_0),
 \end{equation}
-where $J(t)$ is the \define{jacobian} of the system \ie the jacobian matrix of its temporal evolution \eqref{eq: differential eq for resources and species} evaluated at time $t$. $J(t)$ has a block matrix structure which is given by:
+where $J(t)$ is the \define{Jacobian} of the system \ie the jacobian matrix of its temporal evolution \eqref{eq: differential eq for resources and species} evaluated at time $t$. $J(t)$ has a block matrix structure which is given by:
 \begin{equation}
   J(t) \defined
 \begin{pmatrix}
@@ -202,36 +234,92 @@ since we are interested only in positive valued equilibria (\ie $S^*_i > 0 \ \fo
 \begin{equation}
   \sum_\nu \sigma_{i\nu} \gamma_{i\nu}R^*_\nu -d_i - \sum_\nu \alpha_{\nu i} = 0,
 \end{equation}
-which means that the lower right block of the jacobian in Eq.\eqref{eq: definition of jacobian} will be zero. Hence at equilibrium the jacobian $J^*$ will have the following block form:
+which means that the lower right block of the Jacobian in Eq.\eqref{eq: definition of jacobian} will be zero. Hence at equilibrium the Jacobian $J^*$ will have the following block form:
 \begin{equation}
-\boxed{
+{
   J^* = \begin{pmatrix}
-  -\Delta & \Gamma \\
+  -D & \Gamma \\
   \Beta & 0
 \end{pmatrix}
 }, \label{eq: jacobian at equilibrium}
 \end{equation}
 where
 \begin{itemize}
-  \item $\Delta_{\mu\nu} = \text{diag}(m_\mu+\sum_j \gamma_{j\mu} S^*_j) = \text{diag}\left(\frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\right)$ is a positive $N_R \times N_R$ diagonal matrix,
+  \item $D_{\mu\nu} = \text{diag}(m_\mu+\sum_j \gamma_{j\mu} S^*_j) = \text{diag}\left(\frac{l_\mu + \sum_j \alpha_{\mu j}S_j^*}{R^*_\mu}\right)$ is a positive $N_R \times N_R$ diagonal matrix,
   \item $\Gamma_{\mu j} = -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j}$ is a $N_R \times N_S$ matrix which does not have entries with a definite sign.
   \item $\Beta_{i\nu} = \sigma_{i\nu} \gamma_{i\nu} S^*_i$ is a $N_S \times N_R$ matrix with positive entries.
 \end{itemize}
-For reasons explained later in the manuscript\textbf{TO DO: change this}, we say that a given equilibrium is \define{locally dynamically stable} if the largest real part of the eigenvalues of $J^*$ is negative.
+For reasons explained below, we say that a given equilibrium is \define{locally dynamically stable} if the largest real part of the eigenvalues of $J^*$ is negative.
+
+% \subsection{The quest for a full solution}
+% The question of global dynamical stability is mathematically tedious, so we focus on local dynamical stability.
+% We aim to find the spectrum of the jacobian at equilibrium, which will tell us whether the system is locally dynamically stable or not.
+
+\subsection{How to determine local dynamical stability}\label{sec : how to determine local dynamical stability}
+We stated above that the sign of the largest real part of all the eigenvalues of $J^*$ determines the local dynamical stability.
+More precisely, we are interested in the real part of $\lambda_1$, which is defined by the following property:
+\begin{equation}
+{\forall \lambda \in \sigma(J^*), \ \real{\lambda} \leq \real{\lambda_1}},
+\end{equation}
+where $\sigma(J^*)$ is the set of eigenvalues of $J^*$, called the \define{spectrum} of $J^*$. Perturbation analysis tells us that the sign of the real part of $\lambda_1$ governs the local stability of the system at equilibrium \cite{strogatz_nonlinear_1994}. There are three cases:
+\begin{itemize}
+\item $\real{\lambda_1} < 0$: any perturbation on the abundances is exponentially supressed. The system is stable.
+\item $\real{\lambda_1} > 0$: any perturbation on the abundances is exponentially amplified. The system is unstable.
+\item $\real{\lambda_1}=0$: a second order perturbation analysis is required to assess the system's local dynamical stability. We call such systems \textit{marginally stable} \cite{biroli_marginally_2018}.
+\end{itemize}
+
+\subsection{The locally dynamically stable region \texorpdfstring{$\mathcal{D}^{G,A}_{L,x}$}{DLx}} \label{sec: dynamical stability methods locally dynamically stable region}
+Similarly to what was conducted in Section \ref{sec : methods feasibility volume}, one can define the \define{parameters set local dynamical stability function} $\mathfrak{D}_L: \mathcal{P} \rightarrow \{
+0,1\}$, which tells us whether a given set of parameters $p \in \mathcal{P}$ is locally dynamically stable or not:
+\begin{equation}
+\mathfrak{D}_L(p)\defined\begin{cases}
+1 \text{ if } p \text{ is locally dynamically stable,} \\
+0 \text{ else.}
+\end{cases}
+\end{equation}
+We require that $p$ is feasible in order to be locally dynamically stable:
+\begin{equation}
+\mathfrak{D}_L(p)=1 \implies \mathfrak{F}(p)=1. \label{eq: locally dynamically stable implies feasible}
+\end{equation}
+We also define the \define{metaparameters set local dynamical stability function} $\mathcal{D}_L: \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ which tells us, given a set of metaparamters $m \in \mathcal{M}$ and a consumption-syntrophy network $B=(G,A)$ the chance that the procedure $\mathcal{A}(m,B)$ gives a locally dynamically stable set of parameters:
+\begin{equation}
+{\mathcal{D}_L(m, B)\defined\text{Probability}\left\{\mathfrak{D}_L(\mathcal{A}(m, B))=1\right\}}. \label{eq : dyn stab methods dynamical stability function}
+\end{equation}
+We also define the $x$ locally dynamically stable region $\mathcal{D}_{L,x}^{G,A}$ by the region of the metaparameters space that gives rise to a percentage of at least $x$ dynamically stable systems:
+\begin{equation}
+\mathcal{D}_{L,x}^{G,A} \defined \left\{m \in \mathcal{M}: \mathcal{D}_L(m, (G,A)) \geq x \right\}
+\end{equation}
+For the same reasons as for the case of feasibility, $\mathcal{D}_{L,0}^{G,A}=\mathcal{M}$, and $\mathcal{D}_{L,x}^{G,A}$ should have a smaller size than $\mathcal{D}_{L,y}^{G,A}$ $\forall x \geq y$. More importantly, Eq.\eqref{eq: locally dynamically stable implies feasible} implies:
+\begin{equation}
+\mathcal{D}_{L,x}^{G,A} \subset \mathcal{F}_x^{G,A}.
+\end{equation}
+We can also define for a set of $N$ couples of matrices $S=\left\{(G_1, A_1) \dots, (G_N, A_N)\right\}$ their common $x$ lds-region $\mathcal{D}_{L,x}^S$:
+\begin{equation}
+\mathcal{D}_{L,x}^S \defined \intersection{(G,A) \in S} \mathcal{D}_{L,x}^{G,A}.
+\end{equation}
+For such a set $S$ we define also its critical local dynamical stability $d_L^*(S)$ which is the largest local dynamical stability we can achieve while still having a non-zero common volume:
+\begin{equation}
+d_L^*(S) = \max_{x \in [0,1]}\left\{x: \text{Vol}(\mathcal{D}_{L,x}) > 0\right\}.
+\end{equation}
+% Finally the critical common local dynamical stability volume $\mathcal{D}^S_{L}$ is the common lds-region at the critical local dynamical stability:
+% \begin{equation}
+% \mathcal{D}^*_L \defined \mathcal{D}_{L, d_L^*(S)}^S.
+% \end{equation}
+% The hope is that we can work most of the time with systems that have $d_L^*(S)=1$.
 
 
-\subsubsection{Evaluating the size of the basin of attraction}
-If we establish that a system is locally dynamically stable, we know that it will come back to the same equilibrium after an infinitesimal perturbation of the resources and consumers abundances. The next natural question is:
+\subsection{Evaluating the size of the basin of attraction}
+If we establish that a system is locally dynamically stable, we know that it will come back to the same equilibrium after a sufficiently small perturbation of the resources and consumers abundances. The next natural question is:
 
 
 \begin{centering}
 \fbox{\begin{minipage}{\linewidth}
-\itshape \important{How much} can these equilibria points be perturbed before the system goes to a point where either at least a species has gone extinct or reaches another positive valued equilibrium $\{ \tilde{R}^*_\mu, \tilde{S}^*_i\}$ or simply does not reach a new dynamical equilibrium?
+\itshape \important{How much} can these equilibria points be perturbed before the system goes to a point where either at least a species has gone extinct or it reaches another positive valued equilibrium $\{ \tilde{R}^*_\mu, \tilde{S}^*_i\}$ or it simply does not reach a new dynamical equilibrium?
 \end{minipage}}
 \end{centering}
 
 
-\noindent One way of studying this \cite{pascual-garcia_mutualism_2017} is to simply take an equilibrium point $\{ R^*_\mu, S^*_i\}$ and perturb the abundance of the species and resources at that point by a fixed number %$\Delta_D \in \left[0, 1\right]$
+\noindent One way of studying this \cite{pascual-garcia_mutualism_2017} is to simply take an equilibrium point $\{ R^*_\mu, S^*_i\}$ and perturb the abundance of the species and resources at that point by a fixed number $\Delta_D$ % \in \left[0, 1\right]$
 which allows us to quantify the perturbation:
 \begin{empheq}[left=\empheqlbrace]{align}
   R^*_\mu \rightarrow R_\mu(t_0) \equiv  R^*_\mu \left(1+\Delta_D \nu_\mu\right), \\
@@ -241,9 +329,9 @@ where the $\nu_{\mu, i}$ are random numbers drawn from a uniform distribution be
 The system with the initial values $\{R(t_0), S(t_0)\}$ can then be time evolved from $t=t_0$ until it reaches an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ which may be different from the equilibrium $\{R^*, S^*\}$ initially considered.
 This procedure is essentially a generalized version of local dynamical stability, since we allow the perturbation $\Delta_D$ to be non-infinitesimal.
 
-\subsubsection{Global dynamical stability}
+\subsection{Global dynamical stability}
 
-Systems which can be arbitrarily perturbed, \ie for which $\Delta_D$ may be arbitrarily large\footnote{Of course with the caveat that the perturbed abundances are positive.} are said to be \define{globally stable}. The only way a model can be proved globally stable is if we find a Lyapunov function (see \eg \cite{goh_global_nodate}) for it. In many cases, this cannot be done and one has to test it numerically with the procedure described above. However, since we cannot numerically try \important{all} possible perturbations, global stability can never be proved that way.
+Systems which can be arbitrarily perturbed, \ie for which $\Delta_D$ may be arbitrarily large\footnote{Of course with the caveat that the perturbed abundances are positive.}, are said to be \define{globally stable}. The only way we can prove a system is globally stable is by finding a Lyapunov function (see \eg \cite{goh_global_nodate}) for it. In many cases, this cannot be done and one has to explore the basin of attraction numerically with the procedure described above. However, since we cannot numerically try \important{all} possible perturbations, global stability can never be proved that way.
 
 
 
@@ -258,25 +346,26 @@ Systems which can be arbitrarily perturbed, \ie for which $\Delta_D$ may be arbi
 %   \end{equation}
 % \end{itemize}
 % These quantities have either been already introduced in previous papers or are natural extensions of standard quantities \cite{ives_stability_2007,pascual-garcia_mutualism_2017}. They allow us to quantify the robustness of a given equilibrium.
-
-\section{Structural stability}
+\newpage
+\section{Structural stability}\label{sec : structural stability intro}
 When studying dynamical stability, we investigate what happens when the equilibria abundances $\{R^*_\mu, S^*_i\}$ of a given equilibrium point are perturbed. The question of \define{structural stability} looks also at the behaviour of a given system when perturbed away from equilibrium. However, structural stability focuses on the perturbations of the parameters of the model \ie  $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$. Namely we will try to answer the following question :
 
 \begin{centering}
 \fbox{\begin{minipage}{\linewidth}
 \itshape
-Given an equilibrium point, does the system go back to a positive-valued equilibrium when some of the model parameters are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a positive-valued equilibrium?
+Given a feasible and dynamically stable parameters set, does the microbial community go back to a feasible and dynamically stable parameters set when some of the model parameters are changed? If yes, how much can they be changed before the system evolves in such a way that it does not reach a feasible and dynamically stable point of the parameters space?
 \end{minipage}}
 \end{centering}
 
-\subsection{Definitions}
-Studying how a system responds to the perturbation of all parameters $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$ is a quite difficult problem. So we will try to simplify it by perturbing \important{only one} parameter. We make the somewhat arbitrary choice of perturbing the external feeding rate $l_\mu$, since it is essentially the only parameter one can control experimentally [\textbf{is this true?}]. More precisely, consider $\Delta_S \in [0,1]$. We say that a given system $p \in \mathcal{P}$ is \define{structurally stable} under the perturbation $\Delta_S$, if under the transformation
+ \noindent Studying how a system responds to the perturbation of the parameters $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i\}$ is a quite difficult and not necessarily appropriate problem. Indeed, in general in this Thesis we do not consider timescales where mutations could happen which means that there is no manifest reason $\gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}$ or $d_i$ could change. On the contrary, we are interested in environmental perturbations, which occur on far shorter timescales and correspond to a change of $l_\mu$ or $m_\mu$. Because $m_\mu$ is harder to control experimentally, we will focus on perturbations of the external feeding rate $l_\mu$. %So we will try to simplify it by perturbing \important{only one} parameter. We make the somewhat arbitrary choice of perturbing the external feeding rate $l_\mu$, since it is essentially the only parameter one can control experimentally [\textbf{is this true?}].
+More precisely, consider $\Delta_S \in [0,1]$. We say that a given system $p \in \mathcal{P}$ is \define{structurally stable} under the perturbation $\Delta_S$, if under the transformation
 \begin{equation}
 l_\mu \rightarrow \hat{l}_\mu \defined l_\mu\left( 1+\Delta_S \nu_\mu \right) \label{eq : ss methods l perturbation}
 \end{equation}
 the transformed set of parameters $\left\{ \hat{l}_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu},d_i \right\}$ gives rise under time evolution to a positive valued-equilibrium $\left\{\hat{R}^*_\mu, \hat{S}^*_i\right\}$. In the equation above, $\nu_\mu$ is a random variable drawn from a uniform distribution of support $[-1, 1]$. In words, we start with an initial parameters set at an equilibrium point, which is constant under time evolution, and see how much we can change the resources external feeding rate until some consumers start to die out as the new system is time-evolved.
 
-Similarly to what was done for feasibility and dynamical stability, we can define the \define{parameters set structural stability function} $\mathfrak{S} : [0,1] \times \mathcal{P} \rightarrow \left\{0,1\right\}$ in the following way $\forall \Delta_S \in [0,1], p \in \mathcal{P}$:
+Similarly to what was done for feasibility and dynamical stability, we can define the \define{parameters set structural stability function} $\mathfrak{S} :
+ [0,1] \times \mathcal{P} \rightarrow \left\{0,1\right\}$ in the following way for $\Delta_S \in [0,1], p \in \mathcal{P}$:
 \begin{equation}
 \mathfrak{S}(\Delta_S, p)=
 \begin{cases}
@@ -284,58 +373,56 @@ Similarly to what was done for feasibility and dynamical stability, we can defin
 0 \text{ otherwise.}
 \end{cases}
 \end{equation}
-For a fixed $p$, we expect $\mathfrak{S}(\Delta_S, p)$ to behave as a step function of $\Delta_S$ : we may only perturb the parameters so much before they suddenly become structurally unstable.
+For a fixed $p$, we expect $\mathfrak{S}(\Delta_S, p)$ to behave as a step function of $\Delta_S$: we may only perturb the parameters so much before they suddenly become structurally unstable.
 
 The corresponding metaparameters set function, the \define{metaparameters set structural stability function} $\mathcal{S}$
-can also be defined as the function which, given a set of metaparameters and a consumption-syntrophy couple of binary matrices, tells you how probable it is that you draw a system structurally stable under a perturbation $\Delta_S$. Mathematically, $\mathcal{S} : [0,1] \times \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ is defined $\forall \Delta_S \in [0,1], m \in \mathcal{M}, B=(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$ :
+can also be defined as the function which, given a set of metaparameters and a consumption-syntrophy couple of binary matrices, tells you how probable it is that you draw a system structurally stable under a perturbation $\Delta_S$. Mathematically, $\mathcal{S} : [0,1] \times \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ is defined $\forall \Delta_S \in [0,1], m \in \mathcal{M}, B=(G,A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$:
 \begin{equation}
-\boxed{
+{
 \mathcal{S}(\Delta_S, m, B)= \text{Probability}\left\{\mathfrak{S}(\Delta_S, \mathcal{A}(m, B))=1\right\}
 }
 \end{equation}
-Because we expect a step-like drop of $\mathfrak{S}$ as $\Delta_S$ increases, we expect also a somewhat sharp drop from $\mathcal{S} \approx 1$ to $\mathcal{S} \approx 0$. To quantify this, one can define the \define{critical structural perturbation} $\Delta_S^*(m,G,A)$ of a consumption-syntrophy network couple implicitly as :
+Because we expect a step-like drop of $\mathfrak{S}$ as $\Delta_S$ increases, we expect also a somewhat sharp drop from $\mathcal{S} \approx 1$ to $\mathcal{S} \approx 0$ (see Section \ref{sec : structural stability methods numerical estimate critical perturbation}). To quantify this, one can define the \define{critical structural perturbation} $\Delta_S^*(m,G,A)$ of a consumption-syntrophy network implicitly as :
 \begin{equation}
 \mathcal{S}(\Delta_S^*(m, G, A), m, G,A)=0.5
 \end{equation}
-Methods \ref{sec : structural stability methods numerical estimate critical perturbation} below explains how $\Delta_S^*(m, G,A)$ can be estimated numerically.
+Section \ref{sec : structural stability methods numerical estimate critical perturbation} below explains how $\Delta_S^*(m, G,A)$ can be estimated numerically.
 
 
-
-\section{Tactics used to simplify the problem}
-Before jumping right into the matter, it is important to explain how we will study this system of differential equations. Mainly two different but complimenteray approaches will be used: analytical and numerical. Note that the %$\sim$ 5'000
+\newpage
+\section{Tactics used to simplify the problem}\label{sec: tactics used to simplify the problem}
+Before jumping right into the matter, it is important to explain how we will study our model. Mainly two different but complimentary approaches will be used: analytical and numerical. Note that the %$\sim$ 5'000
 lines of code we wrote from scratch and that we use to get the results of Section \ref{chapter : results} are available at the address \url{https://gitlab.ethz.ch/palberto/consumersresources.git}.
 
 \subsection{Metaparameters}\label{sec : intro metaparameters and matrix properties}
 Studying the equilibria of our CRM will lead us to establish and study several relations involving the different \define{parameters} of the problem. Namely, these are: $l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i, R^*_\mu$ and $S^*_i$ $\forall i=1, \dots, N_S; \mu=1, \dots, N_R$.
 We define the \define{parameters space} $\mathcal{P}$ as the space that contains all the parameters:
 \begin{equation}
-\mathcal{P} \defined \left\{ p: p = (l_\mu,  m_\mu,d_i,  \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, R^*_\mu, S^*_i) \right\}
+\mathcal{P} \defined \left\{ p: p = (l_\mu,  m_\mu,d_i,  \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, R^*_\mu, S^*_i) \right\}.
 \end{equation}
 Without taking into account the constraints on these parameters, there are $3N_R+2N_S+3N_RN_S$ free parameters, so $\mathcal{P} \simeq \mathbb{R}_+^{3 N_R+2 N_S + 3 N_R N_S}$.
-Our goal is to study microbial communities with a large number of consumers and resources, typically $N_R, N_S \approx 25, 50, 100, \dots$ \ie $\mathcal{P} \simeq \mathbb{R}^{\sim 2000}$. It is clear that a precise study on each one of the $2000$ elements is way too tenuous of a job. Another, simpler, approach is needed.
-
-We decide to look at the problem from a statistical point of view, \ie we write a matrix $q_{i\mu}$ as \cite{pascual-garcia_mutualism_2017}:
+Our goal is to study microbial communities with a large number of consumers and resources, typically $N_R, N_S \approx 25, 50, 100, \dots$ \ie $\mathcal{P} \simeq \mathbb{R}^{\sim 2000}$. It is clear that %a precise study on each one of the $2000$ elements is way too tenuous of a job.
+an exhaustive exploration is unfeasible. Another, simpler, approach is needed.
+%We decide to look at the problem from a statistical point of view, \ie we write a matrix $q_{i\mu}$ as \cite{pascual-garcia_mutualism_2017}:
+Following previous work \cite{pascual-garcia_mutualism_2017}, we simplify the problem by considering that each variable $q_{i\mu}$ may be written in the following way:
  \begin{equation}
  q_{i\mu} = \mathfrak{Q} Q_{i\mu}
  \end{equation}
 where $\mathfrak{Q}$ is a random variable of mean $Q_0$ and standard deviation $\sigma_Q$. $Q_{i\mu}$ is a binary matrix that, if interpreted as an adjacency matrix, tells about the network structure of the quantity $q_{i\mu}$.
-
-\noindent We apply this way of thinking to the parameters of our problem, namely we write:
-\begin{subequations}
-\begin{empheq}[left=\empheqlbrace]{align}
-l_\mu &= \mathfrak{L} \\
-m_\mu &= \mathfrak{M} \\
-\gamma_{i\mu} &= \mathfrak{G} G_{i\mu} \\
-\alpha_{\mu i} &= \mathfrak{A} A_{\mu i} \\
-\sigma_{i\mu} &= \mathfrak{S} \\
-d_i &= \mathfrak{D} \\
-R^*_\mu &= \mathfrak{R} \\
-S^*_i &= \mathfrak{S}
-\end{empheq}
-\end{subequations}
-Note that we do not add any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero. In particular, we require positive-valued equilibria \cite{butler_stability_2018}.
-
-In order to make computations analytically tractable, we require the standard deviation on the parameters involved in the problem to be small, \ie not larger than typically $10\%$. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$. We call $Q_0$ a \define{metaparameter}. While studying things analytically we will hence often come back to the following approximation:
+% \noindent We apply this way of thinking to the parameters of our problem, namely we write:
+% \begin{subequations}
+% \begin{empheq}[left=\empheqlbrace]{align}
+% l_\mu &= \mathfrak{L} \\
+% m_\mu &= \mathfrak{M} \\
+% \gamma_{i\mu} &= \mathfrak{G} G_{i\mu} \\
+% \alpha_{\mu i} &= \mathfrak{A} A_{\mu i} \\
+% \sigma_{i\mu} &= \mathfrak{S} \\
+% d_i &= \mathfrak{D} \\
+% R^*_\mu &= \mathfrak{R} \\
+% S^*_i &= \mathfrak{S}
+% \end{empheq}
+% \end{subequations}
+In order to make computations analytically tractable, we require the standard deviation on the parameters involved in the problem to be small compated to the mean, \ie not larger than typically $10\%$. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$. We call $Q_0$ a \define{metaparameter}. While studying things analytically we will hence often come back to the following approximation\footnote{Note that we do not add any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero. In particular, we require positive-valued equilibria \cite{butler_stability_2018}.}:
 \begin{subequations}\label{eq: metaparameters approximations}
 \begin{empheq}[left=\empheqlbrace]{align}
 l_\mu &\approx l_0 \\
@@ -352,20 +439,27 @@ This simplification is mathematically equivalent to collapsing the parameter spa
 \begin{equation}
 \mathcal{M} \defined \left\{ m: m=(l_0, m_0, d_0, \gamma_0, \alpha_0, \sigma_0, R_0, S_0)\right\}
 \end{equation}
-and $\mathcal{B}_{N\times M}$ is the set of binary matrices of dimensions $N \times M$. To summarize, we simply designed a \important{collapsing procedure} $\mathcal{C}: \mathcal{P} \rightarrow \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S}$ in order to simplify our problem.
+and $\mathcal{B}_{N\times M}$ is the set of binary matrices of dimensions $N \times M$. To summarize, we simply designed a \important{collapsing procedure} $\mathcal{C}: \mathcal{P} \rightarrow \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S}$ in order to simplify our problem and find analytical solutions.
+
+Of course, collapsing a very high dimensional space to a low-dimensional space makes us lose information. Losing some information -- and hence complexity -- is desired when doing analytical computations but it is not when we want to produce precise and detailed numerical results: we need to bridge the gap between what we work with analytically, \ie a set of metaparameters and binary matrices, to precise values of quantities defined in our model Eq.\eqref{eq: differential eq for resources and species} that we will measure computationally. This is done by defining an algorithmic procedure $\mathcal{A}$ (detailed in Section \ref{sec : feasibility methods algorithmic procedure}):
+\begin{equation}
+\mathcal{A}: \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow \mathcal{P}
+\end{equation}
+which brings us from the collapsed space to the parameter space\footnote{Note that since the collapsed space is lower dimensional than the parameters space, $\mathcal{A}$ is not the inverse of $\mathcal{C}$.}. Numerically, from a set of metaparameters $m \in \mathcal{M}$ and binary matrices $B=(G, A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$, we produce a (or several) set(s) of parameters $p = \mathcal{A}(m, B) \in \mathcal{P}$ and study properties of it.
 
 \subsection{Matrix properties}
-Mathematically, when we do analytical computations, we mostly work in the collapsed space $\mathcal{C}(\mathcal{P})$ because it reduces the number of parameters from $3N_R+2N_S+3N_RN_S$ (continous) to $8$ (continous) + $3N_RN_S$ (binary). For $N_R, N_S$ large, that is still too many degrees of freedom. To make the problem even simpler, instead of looking at each entry of the binary matrices $G$ and $A$ individually, we will consider only some globally defined quantities of these matrices. Although the conclusions they draw is sometimes controversed, recent studies of ecological systems have shown that both connectance \cite{thebault_stability_2010, james_disentangling_2012} and nestedness \cite{bastolla_architecture_2009, rohr_structural_2014, pascual-garcia_mutualism_2017} of the matrices of the system play a special role in the dynamics of the system. These two metrics are defined the following way for a matrix $M_{ij}$:
+Mathematically, when we do analytical computations, we mostly work in the collapsed space $\mathcal{C}(\mathcal{P})$ because it reduces the number of parameters from $3N_R+2N_S+3N_RN_S$ (continous) to $8$ (continous) + $2N_RN_S$ (binary). For $N_R$ and $ N_S$ large, the $2N_R N_S$ degrees of freedom that come from the consumption network $G$ and the syntrophy network $A$ are still too many to track individually. To simplify the problem even further, instead of looking at each entry of the binary matrices $G$ and $A$ individually, we will consider only some globally defined quantities of these matrices. Although the conclusions that recent studies of ecological systems draw is sometimes controversed, they have shown that both connectance \cite{thebault_stability_2010, james_disentangling_2012} and nestedness \cite{bastolla_architecture_2009, rohr_structural_2014, pascual-garcia_mutualism_2017} of the matrices of the system play a special role in the dynamics of the system. These two metrics are defined the following way for a matrix $M_{ij}$:
 %For a matrix $M_{ij}$ the metrics interesting to us are most of all:
 \begin{itemize}
-\item \textbf{Connectance}: this measure, simply defined as the ratio of non-zero links in a matrix, is central in the study of plants-and-animals systems \cite{pascual-garcia_mutualism_2017}. It is formally defined for a matrix $q_{ij}$  of size $N\times M$ as:
+\item \textbf{Connectance}: this measure, simply defined as the ratio of non-zero links in a matrix %, is central in the study of plants-and-animals systems \cite{pascual-garcia_mutualism_2017}. It
+is formally defined for a matrix $q_{ij}$  of size $N\times M$ as:
 \begin{equation}
-\kappa(q)\defined \frac{\sum_{ij} Q_{ij}}{NM}
+\kappa(q)\defined \frac{\sum_{ij} Q_{ij}}{NM},
 \end{equation}
 where $Q$ is the (binary) network adjacency matrix of $q$.
 
 
-\item \textbf{Nestedness}\footnote{For the matrix consumption $G$, we will call it especially the ``ecological overlap''.}: this measures how ``nested'' the system is, \ie if there are clusters grouped together\footnote{In typical Lotka-Volterra models, where only species-species interactions are considered, \eg \cite{iannelli_introduction_2014}, measuring the nestedness of the $\gamma$ consumption matrix would be in the same spirit as counting how many niches there are in the community.}. It is known \cite{bastolla_architecture_2009, pascual-garcia_mutualism_2017} that nestedness can play a profound role in the dynamics of ecological communities. Although it is somewhat controversed \cite{jonhson_factors_2013}, we will keep the definition of the nestedness $\eta(M)$ of a binary matrix $M$ as it was used in \cite{bastolla_architecture_2009}:
+\item \textbf{Nestedness}: for the matrix consumption $G$, we will call it especially the ``ecological overlap''. That quantity measures how ``nested'' the system is, \ie if there are clusters grouped together\footnote{In typical Lotka-Volterra models, where only species-species interactions are considered, \eg \cite{iannelli_introduction_2014}, measuring the nestedness of the $\gamma$ consumption matrix would be in the same spirit as counting how many niches there are in the community.}. It is known \cite{bastolla_architecture_2009, pascual-garcia_mutualism_2017} that nestedness can play a profound role in the dynamics of ecological communities. Although it is somewhat controversed \cite{jonhson_factors_2013}, we will keep the definition of the nestedness $\eta(M)$ of a binary matrix $M$ as it was used in \cite{bastolla_architecture_2009}:
 \begin{equation}
 \eta(M)\defined \frac{\sum_{i<j} n_{ij}}{\sum_{i < j} \min(n_i, n_j)}
 \end{equation}
@@ -378,18 +472,18 @@ and $n_{ij}$ is the overlap matrix defined as
 n_{ij}\defined \sum_k M_{ik}M_{jk}.
 \end{equation}
 \end{itemize}
+Most of the quantities we measure will be studied through these two metrics.
 
-\subsection{Losing complexity -- how to gain it back}
-As explained above, the idea is to simplify the study of a system with a large number of parameters to a system with a manageable number of so-called ``metaparameters''. Of course, collapsing a very high dimensional space to a low-dimensional space makes us lose information. Losing some information -- and hence complexity -- is desired when doing analytical computations but it is not when we want to produce precise and detailed numerical results.
-
-So, how do we bridge the gap between what we work with analytically, \ie a set of metaparameters and binary matrices, to precise measurements of quantities defined in our model Eq.\eqref{eq: differential eq for resources and species}? The answer is simple: we define a function
-\begin{equation}
-\mathcal{A}: \mathcal{M} \times \mathcal{B}_{N_S\times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow \mathcal{P}
-\end{equation}
-which brings us from the collapsed space to the parameter space\footnote{Note that since the collapsed space is lower dimensional than the parameters space, $\mathcal{A}$ is not the inverse of $\mathcal{C}$.}. Numerically, from a set of metaparameters $m \in \mathcal{M}$ and binary matrices $B=(G, A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$, we produce a (or several) set(s) of parameters $p = \mathcal{A}(m, B) \in \mathcal{P}$ and study properties of it. Section \ref{sec : feasibility methods algorithmic procedure} details how $\mathcal{A}$ is constructed.
-
+% \textbf{TO DO: what to do with this paragraph?}
+% After establishing in the previous chapter the framework and methods we will use, we now work on getting results that are both biologically relevant and interpretable. We keep the same structure as Chapter \ref{chap : methods} and will focus first on the crucial but sometimes overlooked\footnote{The ``traditional'' approach over the course of years (see \eg \cite{may_will_1972}) to the study of ecological communities has been to study local dynamical stability through the means of random matrix theory. The idea is to study how the statistical properties of the Jacobian matrix at equilibrium $J^*$ influence stability, with the assumption that $J^*$ is a random matrix. Only recently\textbf{TO DO : Is this true?} have discussions arised \cite{allesina_stabilitycomplexity_2015, rohr_structural_2014} about in what limit, if any, that assumption is a good representation of Nature, especially since we discovered ecological communities are shaped by dynamics which may lead to non particular, non-random, structures \cite{bascompte_nested_2003, bastolla_architecture_2009, bonsall_life_2004, thebault_stability_2010}.} question of \important{feasibility}, which aims to determine what regimes of parameters and metaparameters give rise to microbial communities that could exist in Nature. We will then move on to study how microbial communities resist to perturbations, \ie how stable they are. Two types of perturbations will be considered. Determining how communities react to perturbations of the resources and microbial species abundances will lead us to consider their \important{local dynamical stability}. Finally, we will study how they react to environmental perturbations, \ie we will quantify their \important{structural stability}.
+\newpage
 \section{Goals of the Thesis}
-After establishing in the previous chapter the framework and methods we will use, we now work on getting results that are both biologically relevant and interpretable. We keep the same structure as Chapter \ref{chap : methods} and will focus first on the crucial but sometimes overlooked\footnote{The ``traditional'' approach over the course of years (see \eg \cite{may_will_1972}) to the study of ecological communities has been to study local dynamical stability through the means of random matrix theory. The idea is to study how the statistical properties of the jacobian matrix at equilibrium $J^*$ influence stability, with the assumption that $J^*$ is a random matrix. Only recently\textbf{Is this true?} have discussions arised \cite{allesina_stabilitycomplexity_2015, rohr_structural_2014} about in what limit, if any, that assumption is a good representation of Nature, especially since we discovered ecological communities are shaped by dynamics which may lead to non particular, non-random, structures \cite{bascompte_nested_2003, bastolla_architecture_2009, bonsall_life_2004, thebault_stability_2010}.} question of \important{feasibility}, which aims to determine what regimes of parameters and metaparameters give rise to microbial communities that could exist in Nature. We will then move on to study how microbial communities resist to perturbations, \ie how stable they are. Two types of perturbations will be considered. Determining how communities react to perturbations of the resources and microbial species abundances will lead us to consider their \important{local dynamical stability}. Finally, we will study how they react to environmental perturbations, \ie we will quantify their \important{structural stability}.
+The previous paragraphs defined many different notions which are so rich that each of them constitutes a whole body of work by itself. This means we need to focus on the specific problems we will address throughout this Thesis.
+
+%First of all, we need to choose the specific consumption-syntrophy networks and metaparameters we will study. Section \ref{sec : domain of study} explains in details how we generated and chose them.
+As explained in Section \ref{sec : general strategy} we will focus first on feasibility. The goal will be to find a mathematical expression for the feasibility region of each consumption-syntrophy network we will consider, which will allow us to explore numerically how syntrophy impacts the feasibility of each microbial community, in a certain range of metaparameters (that will be determined in Section \ref{sec : domain of study}) and with metrics that will hopefully accurately describe what we will observe. We will then move on to local dynamical stability. Similarly to feasibility, our goal will be to mathematically characterize the dynamical stability region and find a regime of parameters that is locally dynamically stable. We aim to study how the largest eigenvalue of the Jacobian depends on both the metaparameters and the shape of the consumption and syntrophy matrices. For the sake of brevity and by lack of time, any consideration on the basin of attraction of dynamical stability will be dropped. Finally, because of the knowledge we will have acquired on the dynamical stability of the model, we will be able to move to highly dynamically stable points of the metaparameters space and study how syntrophy changes their structural stability. Although most of the time we will work with microbial communities which have the same number of resources and consumers, we will measure some indicators that will allow us to gain hindsight on how the quantities we will study depend on the number of resources and consumers.
+
+
 
 
 

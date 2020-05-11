@@ -1,11 +1,11 @@
 import numpy as np
-from consumer_resource_data_analysis import alpha_mode, all_nestedness, all_connectance, alpha_mode_colours
+from consumer_resource_data_analysis import alpha_mode, all_nestedness, all_connectance, alpha_mode_colours, conn_colours, nest_colours
 import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
 from consumer_resource_data_analysis import label as alpha_label
 
 alpha_mode+=['RNISC', 'LNISC', 'NISCC']
-alpha_label+=['RNISC', 'LNISC', 'NISCC']
+alpha_label+=[r'LRI-NIS', r'RS-NIS',r'RS-R']
 alpha_mode_colours+=['orange', 'pink', 'grey']
 folder='structural_stability'
 filename='data_all_structural_stability'
@@ -71,10 +71,11 @@ for m in range(len(syntrophy_mode)):
                 ylabel=r'$\Delta_S^*(m, G, A)$'
             fig = plt.figure(fig_index)
             ax = fig.add_subplot(111)
-            for nest in all_nestedness:
+            for j in range(len(all_nestedness)):
+                nest=all_nestedness[j]
                 data = [str_stab[nest][k][syn][alpha] for k in all_connectance]
                 to_plot = np.array([[all_connectance[i],data[i]['value'], data[i]['error']] for i in range(len(data)) if data[i]])
-                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$', color=nest_colours[j])
             ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\kappa_G$')
             ax.set_title(title)
@@ -86,10 +87,11 @@ for m in range(len(syntrophy_mode)):
 
             fig = plt.figure(fig_index)
             ax = fig.add_subplot(111)
-            for conn in all_connectance:
+            for j in range(len(all_connectance)):
+                conn=all_connectance[j]
                 data = [str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
                 to_plot = np.array([[all_nestedness[i],data[i]['value'], data[i]['error']] for i in range(len(data)) if data[i]])
-                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$', color=conn_colours[j])
             ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\eta_G$')
             ax.set_title(title)
@@ -110,11 +112,12 @@ for m in range(len(syntrophy_mode)):
             ylabel=r'$\Delta_S^*(m, G, A)/\Delta_S^*(m, G, 0)-1$'
             fig = plt.figure(fig_index)
             ax = fig.add_subplot(111)
-            for nest in all_nestedness:
+            for j in range(len(all_nestedness)):
+                nest=all_nestedness[j]
                 data = [str_stab[nest][k][syn][alpha] for k in all_connectance]
                 shift= [str_stab[nest][k]['no_syntrophy']['fully_connected'] for k in all_connectance]
                 to_plot = np.array([[all_connectance[i],data[i]['value']/shift[i]['value']-1, data[i]['value']/shift[i]['value']*(data[i]['error']/data[i]['value']+shift[i]['error']/shift[i]['value'])] for i in range(len(data)) if data[i]])
-                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$')
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\eta_G\approx'+str(nest)+'$', color=nest_colours[j])
             ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\kappa_G$')
             ax.set_title(title)
@@ -126,11 +129,12 @@ for m in range(len(syntrophy_mode)):
 
             fig = plt.figure(fig_index)
             ax = fig.add_subplot(111)
-            for conn in all_connectance:
+            for j in range(len(all_connectance)):
+                conn=all_connectance[j]
                 data = [str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
                 shift = [str_stab[eta][conn]['no_syntrophy']['fully_connected'] for eta in all_nestedness]
                 to_plot = np.array([[all_nestedness[i],data[i]['value']/shift[i]['value']-1, data[i]['value']/shift[i]['value']*(data[i]['error']/data[i]['value']+shift[i]['error']/shift[i]['value'])] for i in range(len(data)) if data[i]])
-                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$')
+                ax.plot(to_plot[:,0], to_plot[:,1], label=r'$\kappa_G\approx'+str(conn)+'$', color=conn_colours[j])
             ax.set_ylabel(ylabel)
             ax.set_xlabel(r'$\eta_G$')
             ax.set_title(title)
@@ -142,22 +146,22 @@ for m in range(len(syntrophy_mode)):
 print("Finished drawing deviations from no syntrophy case")
 
 for conn in all_connectance:
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
     null=[str_stab[eta][conn]['no_syntrophy']['fully_connected'] for eta in all_nestedness]
-    title=r'$\kappa_G='+str(conn)+'$'
     for m in range(len(syntrophy_mode)):
-        for n in range(len(alpha_mode)):
-            syn = syntrophy_mode[m]
-            alpha = alpha_mode[n]
-            if not(syn=='no_syntrophy'):
-                label = syntrophy_label[m]+', '+alpha_label[n]
+        syn = syntrophy_mode[m]
+        if not(syn=='no_syntrophy'):
+            title=r'$\kappa_G='+str(conn)+'$, '+syntrophy_label[m]
+            fig = plt.figure()
+            ax = fig.add_subplot(111)
+            for n in range(len(alpha_mode)):
+                alpha = alpha_mode[n]
                 data=[str_stab[eta][conn][syn][alpha] for eta in all_nestedness]
-                to_plot = np.array([[all_nestedness[i],data[i]['value']-null[i]['value'], data[i]['error']+null[i]['value']] for i in range(len(data)) if data[i]])
-                ax.plot(to_plot[:,0], to_plot[:,1], label=label, color=alpha_mode_colours[n], marker=syntrophy_marker[m], markersize=6)
-    ax.set_ylabel(r'$\Delta_S^*(m,G,A)-\Delta_S^*(m, G, 0)$')
-    ax.set_xlabel(r'$\eta_G$')
-    ax.set_title(title)
-    fig.tight_layout()
-    fig.savefig('plots/critical_delta_difference_from_null_case_Conn'+str(conn)+'.pdf')
-    plt.close()
+                to_plot = np.array([[all_nestedness[i],data[i]['value']/null[i]['value']-1, data[i]['error']+null[i]['value']] for i in range(len(data)) if data[i]])
+                ax.plot(to_plot[:,0], to_plot[:,1], label=alpha_label[n], color=alpha_mode_colours[n], marker=syntrophy_marker[m], markersize=6)
+            ax.set_ylabel(r'$\Delta_S^*(m,G,A)/\Delta_S^*(m, G, 0)-1$')
+            ax.set_xlabel(r'$\eta_G$')
+            ax.set_title(title)
+            ax.legend(bbox_to_anchor=(1., 1.))
+            fig.tight_layout()
+            fig.savefig('plots/critical_delta_difference_from_null_case_Conn'+str(conn)+'_'+syntrophy_mode[m]+'.pdf')
+            plt.close()

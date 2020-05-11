@@ -10,10 +10,10 @@ from matplotlib.figure import figaspect
 
 import copy
 
-alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix']
 filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
 optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
+matrix_set='S_{25}'
 
 cmap = plt.cm.get_cmap('jet_r')
 colors = [cmap(i/10) for i in range(len(alpha0))]
@@ -24,13 +24,13 @@ cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_mat
 feasibility_region = cf.load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
-# Plot common feasibility volume
+#Plot common feasibility volume
 NR=int(feasibility_region[0,0,0,0])
 NS=int(feasibility_region[0,0,0,1])
 fig, axs, im, levels = cf.plot_common_region(feasibility_region, alpha_mode, colors, label)
 cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
 cbar.set_label(r'$\alpha_0$')
-fig.suptitle(r'$\mathcal{F}_1^{S_{25}}(\alpha_0)$ for $N_R='+str(NR)+'$, $N_S='+str(NS)+'$')
+fig.suptitle(r'$\mathcal{F}_1^{'+matrix_set+'}$ for $N_R='+str(NR)+'$, $N_S='+str(NS)+'$')
 fig.savefig('plots/common_feasibility_region_NR'+str(NR)+'_NS'+str(NS)+'.pdf')
 
 # plot feasibility levels for all matrices
