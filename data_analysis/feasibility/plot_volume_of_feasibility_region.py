@@ -11,9 +11,11 @@ from scipy.optimize import curve_fit
 from matplotlib import rcParams
 from consumer_resource_data_analysis import alpha_mode, label, alpha_mode_colours, alpha0
 
-filename = 'feasibility/feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI'
-
+filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
+consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
+matrix_set='S_{25}'
+ylabel=r'Vol$\left(\mathcal{F}_1^{S_{25}}(\alpha_0)\right)$'
 feasibility_region = cf.load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
@@ -32,7 +34,7 @@ for i in range(len(alpha_mode)):
     ax.plot(alpha0, volume, label=label[i], color=alpha_mode_colours[i])
 ax.set_xlabel(r'$\alpha_0$')
 ax.set_yscale('log')
-ax.set_ylabel(r'Vol$\left(\mathcal{F}_1^{S_{25}}(\alpha_0)\right)$')
+ax.set_ylabel(ylabel)
 ax.legend()
 fig.tight_layout()
 fig.savefig('plots/common_feasibility_volume_NR'+str(NR)+'_NS'+str(NS)+'.pdf')
