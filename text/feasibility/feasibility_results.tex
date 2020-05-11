@@ -3,9 +3,10 @@
 \graphicspath{{./figures/Results/feasibility}}
 
 \begin{document}
-\textbf{TO DO : explain why high gamma0 and low S0 make sense biologically, say that for high kappa and small eta, "syntrophy impacts the existence least"}
-As explained in Section \ref{sec : methods feasibility}, before addressing the question of the stability of a system, be it dynamical or structural, it is important to study whether that system is \important{feasible}. In short we must answer the question: ``does it make sense to talk about this system? What are the restrictions on the parameters of a microbial community in order for it to exist?''.
- Section \ref{sec : methods feasibility basic concepts} provides a mathematical definition of \important{feasibility}. Intuitively, we say that in order to be feasible, a microbial community should respect two conditions: biomass must be conserved and its parameters must have a direct biological interpretation. Section \ref{sec : methods feasibility volume} defines $\forall x \in [0,1]$ the $x$-feasibility region $\mathcal{F}^{G,A}_x \subset \mathcal{M}$ of the consumption-syntrophy network $(G, A) \in \mathcal{B}_{N_S \times N_R} \times  \mathcal{B}_{N_R \times N_S}$. The idea behind that concept is that every metaparameter set $m \in \mathcal{M}$ contained in the $x$-feasibility region $\mathcal{F}^{G,A}_x$ gives rise to a percentage $x$ of feasible systems. Knowing where the different $x-$feasibility regions are located allows us to predict relationships between the different parameters of microbial communities. In particular, we would like to know which metaparameters $(\gamma_0, S_0, \alpha_0)$ yield through the algorithmic procedure $\mathcal{A}$ a hundred percent of the time a feasible parameters set. In short, we are interested in $\mathcal{F}^{G,A}_1$. A direct study of every triplet $(\gamma_0, S_0, \alpha_0)$ is difficult so we take a more ``implicit'' path in which we  determine, for different values of $\alpha_0$, what values $(\gamma_0, S_0)$ are compatible with full feasibility, \ie $m=(\gamma_0, S_0, \alpha_0)$ is in $\mathcal{F}^{G,A}_1$.
+As explained in Section \ref{sec : intro feasibility}, before addressing the question of the stability of a system, be it dynamical or structural, it is important to study whether that system is \important{feasible}. In short we must answer the question: ``does it make sense to talk about this system? What are the restrictions on the parameters of a microbial community in order for it to exist?''.
+ %Section \ref{sec : methods feasibility basic concepts} provides a mathematical definition of \important{feasibility}. Intuitively, we say that in order to be feasible, a microbial community should respect two conditions: biomass must be conserved and its parameters must have a direct biological interpretation. Section \ref{sec : methods feasibility volume} defines $\forall x \in [0,1]$ the $x$-feasibility region $\mathcal{F}^{G,A}_x \subset \mathcal{M}$ of the consumption-syntrophy network $(G, A) \in \mathcal{B}_{N_S \times N_R} \times  \mathcal{B}_{N_R \times N_S}$. The idea behind that concept is that every metaparameter set $m \in \mathcal{M}$ contained in the $x$-feasibility region $\mathcal{F}^{G,A}_x$ gives rise to a percentage $x$ of feasible systems. Knowing where the different $x-$feasibility regions are located allows us to predict relationships between the different parameters of microbial communities. In particular, we would like to know which metaparameters $(\gamma_0, S_0, \alpha_0)$ yield through the algorithmic procedure $\mathcal{A}$ a hundred percent of the time a feasible parameters set.
+ %In short, we are interested in $\mathcal{F}^{G,A}_1$. A direct study of every triplet $(\gamma_0, S_0, \alpha_0)$ is difficult so we take a more ``implicit'' path in which we  determine, for different values of $\alpha_0$, what values $(\gamma_0, S_0)$ are compatible with full feasibility, \ie $m=(\gamma_0, S_0, \alpha_0)$ is in $\mathcal{F}^{G,A}_1$.
+ In the following section we provide an analytical estimate of the fully feasible region $\mathcal{F}^{G,A}_1$ and study numerically the impact of syntrophy on feasibility.
 
  \subsection{Estimating the fully feasible region \texorpdfstring{$\mathcal{F}^{G,A}_1$}{Fg1}}
  %Now that we defined the $x$-feasible volume of a given couple consumption-syntrophy network $(G,A)$ in Eq.\eqref{eq : x feasible volume},
@@ -38,7 +39,8 @@ Section \ref{sec : estimating fully feasible region metaparameters} explains how
 \min \left(1-\sigma_0, \sigma_0 \right) \min_\nu \left\{ \frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\}
 }\label{eq : fully feasible volume}
 \end{equation}
-\textbf{TO DO: comment here a bit}
+The biological implications of that equation are discussed below.
+
 \subsection{The feasibility region in the absence of syntrophy}\label{sec : feasibility without syntrophy}
 
 We start with the ``null'' case and study feasibility in the absence of syntrophy. A first order approximation of the fully feasible volume $\mathcal{F}^{G,A}_1$ is given by Eq.\eqref{eq : fully feasible volume}.
@@ -68,7 +70,7 @@ That relation provides a lot of biological insight about how the different metap
 \end{itemize}
 %Overall we see that feasibility increases when the \important{consumption flow} $\simeq \gamma_0 S_0 \deg(G,\nu) $ is low $\forall \nu$.
 Equation \eqref{eq: fully feasible volume no syntrophy} can be confronted to simulations.
-The first step is to note that for all the matrices in the set we chose \textbf{TO DO: give a name to the matrix set}, there exists a fully feasible zone, \ie $\mathcal{F}^{G, 0}_1(\alpha_0=0) \neq \emptyset$ $ \forall G$. There exists an overlap between all these regions $\mathcal{F}_1^{S_{25}}(0) \defined \intersection{G \in G_{25}} \mathcal{F}^{G,0}_1 \neq \emptyset$, such that the critical feasibility $f^*(S)=1$ (see Eq.\eqref{eq : feasibility methods critical common feasibility}) \textbf{TO DO: add figure of this?}.
+The first step is to note that for all the matrices in the set $G_{25}$ (see Section \ref{sec : set of matrices}), there exists a fully feasible zone, \ie $\mathcal{F}^{G, 0}_1(\alpha_0=0) \neq \emptyset$ $ \forall G$. There exists an overlap between all these regions $\mathcal{F}_1^{S_{25}}(0) \defined \intersection{G \in G_{25}} \mathcal{F}^{G,0}_1 \neq \emptyset$, such that the critical feasibility $f^*(S)=1$ (see Eq.\eqref{eq : feasibility methods critical common feasibility}).
 
 Figure \ref{fig: typical feasibility region} shows the typical proportion of feasible systems without syntrophy %$\mathcal{F}\left((\gamma_0, S_0, 0), G, 0\right)$ and $R_0=l_0=1$, $\sigma_0=0.25$ (see Methods \ref{sec : methods feasibility volume}),
 for two consumption matrices $G_1$ and $G_2$ in the set $G_{25}$.
@@ -90,27 +92,29 @@ However, the numerical estimate does not always match the theoretical value that
 \subfloat[\label{fig: deviation away from theory feasibility fixed nestedness}]{\includegraphics[width=0.49\linewidth]{feasibility_away_from_theory_fixed_nestedness}}
 \captionsetup[subfigure]{captionskip = -175pt, margin = 45pt}
 \subfloat[\label{fig: deviation away from theory feasibility fixed connectance}]{\includegraphics[width=0.49\linewidth]{feasibility_away_from_theory_fixed_connectance}}
-\caption{Relative error in the determination of the boundary of $\mathcal{F}^{G,0}_1$ (a) varying connectance at fixed ecological overlap and (b) varying ecological overlap at fixed connectance. The theoretical prediction tends to overestimate the measured value. The larger the ecological overlap or connectance, the better the estimate.}\label{fig: deviation away from theory feasibility}
+\caption{Relative error in the determination of the boundary of $\mathcal{F}^{G,0}_1$. The curious reader may easily show that this is also the relative error on the area of $\mathcal{F}^{G,0}_1$. (a) varying connectance at fixed ecological overlap and (b) varying ecological overlap at fixed connectance. The theoretical prediction tends to overestimate the measured value. The larger the ecological overlap or connectance, the better the estimate.}\label{fig: deviation away from theory feasibility}
 \end{figure}
 
 
-We can similarly measure the common fully feasible volume in the absence of syntrophy $\mathcal{F}_1^{G_{25}}(0)$ (depicted in Fig.\ref{fig: common feasible volume no syntrophy}), which according to Eq.\eqref{eq: fully feasible volume no syntrophy} is inversely proportional to the largest maximal row degree of the matrix set. For the set $S_{25}$, this yields in theory: $S_0 = 0.053 \gamma_0^{-1}$. A fit on the points at the edge yields the critical boundary $S_0 = (0.042 \pm 10^{-8})\gamma_0^{-1}$, which is $\sim 21 \%$ away from the theoretical prediction. The discrepancy is probably due to the difference between the way we estimate the boundary numerically and analytically. \textbf{TO DO: compute enclosed area for the error instead}
+We can similarly measure the common fully feasible volume in the absence of syntrophy $\mathcal{F}_1^{G_{25}}(0)$ (depicted in Fig.\ref{fig: common feasible volume no syntrophy}), which according to Eq.\eqref{eq: fully feasible volume no syntrophy} is inversely proportional to the largest maximal row degree of the matrix set. For the set $S_{25}$, this yields in theory: $S_0 = 0.053 \gamma_0^{-1}$. A fit on the points at the edge yields the critical boundary $S_0 = (0.042 \pm 10^{-8})\gamma_0^{-1}$, which is $\sim 21 \%$ away from the theoretical prediction. The discrepancy is probably due to the difference between the way we estimate the boundary numerically and analytically.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.6\linewidth]{common_feasibility_volume_no_syntrophy}
-\caption{Plot of the common feasibility region. The blue area indicates the common feasibility volume, computed numerically, while the dashed line shows the analytical prediction. Although the match is not as good as before, the relative error is only of the order of $20 \%$ \textbf{TO DO: compute difference in area}. The red part is the area where not all matrices are fully feasible.}
+\caption{Plot of the common feasibility region. The blue area indicates the common feasibility volume, computed numerically, while the dashed line shows the analytical prediction. Although the match is not as good as before, the relative error is only of the order of $20 \%$. The red part is the area where not all matrices are fully feasible.}
 \label{fig: common feasible volume no syntrophy}
 \end{figure}
 
+\FloatBarrier
+\clearpage
 \subsection{Impact of syntrophy on the feasible region}\label{sec: impact of syntrophy on feasible region}
 
 Above we computed feasible volumes when there is no syntrophy \ie $\mathcal{F}^{G,0}_1$. Because there was no syntrophy, we did not need to specify what the structure of $A$ was. The next naturally arising question is then: what happens to the feasible region of a community with a given consumption matrix $G$ when we add a syntrophic interaction, \ie a syntrophic network $A$ of average interaction strength $\alpha_0$? More precisely, how does the shape of $\mathcal{F}^{G,A}_1$ change as a function of $A$ and $\alpha_0$?
 
 A layer of complexity arises on top of the problem discussed above%. When we computed $\mathcal{V}^G_1(\alpha_0=0)$, we only had to take into account the structure of $G$, since there was no syntrophy. Now, we have an additional complexity because
-: apart from the structure of the consumption matrix $G$, we now have to think about both the topology of $A$ and $\alpha_0$. As explained in Section \ref{sec : domain of study}, performing a detailed study of the topology of $A$ would lead to a combinatorially unfeasible exploration, so we focus on the four $A$ cases enunciated above: ``fully connected'' (FC), ``no intraspecific syntrophy'' (NIS), ``LRI matrix'' (LRI), and ``random structure'' (RS). Concerning the question of $\alpha_0$, we would like to be ``fair'' among all networks and study syntrophy strengths that are feasible for all the consumption-syntrophy networks considered $(G,A) \in S_{25}$.
+: apart from the structure of the consumption matrix $G$, we now have to think about both the topology of $A$ and $\alpha_0$. As explained in Section \ref{sec : domain of study}, performing a detailed numerical study of the topology of $A$ would lead to a combinatorially unfeasible exploration, so we focus on the four $A$ cases enunciated above: ``fully connected'' (FC), ``no intraspecific syntrophy'' (NIS), ``LRI matrix'' (LRI), and ``random structure'' (RS). Concerning the question of $\alpha_0$, we would like to be ``fair'' among all networks and study syntrophy strengths that are feasible for all the consumption-syntrophy networks considered $(G,A) \in S_{25}$.
   The largest syntrophy compatible with full feasibility for all the networks considered, which we will refer to as \important{the largest common fully feasible syntrophy} $\alpha_C^F$ is the value of $\alpha_0$ such that $\mathcal{F}^{G,A}_1 \neq \emptyset $ $\forall (G,A) \in S_{25}$. It can be estimated with the help of Eq.\eqref{eq : fully feasible volume}:
   \begin{equation}
-  \alpha_0 \lessapprox \frac{\min(1-\sigma_0, \sigma_0)\gamma_0 R_0}{\max_{(G,A)\in S}\left\{\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\}\right\}} \approx 0.01 \gamma_0 \leq 0.01. \label{eq : results feasibility largest alpha0}
+  \alpha_0 \lessapprox \frac{\min(1-\sigma_0, \sigma_0)R_0}{\max_{(G,A) \gamma_0 \in S}\left\{\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\}\right\}} \gamma_0 \approx 0.01 \gamma_0 \leq 0.01. \label{eq : results feasibility largest alpha0}
   \end{equation}
   We will hence investigate the impact of $\alpha_0$ evaluated at ten different values from $0$ to $0.015$. %We first consider the effect of syntrophic interaction on each consumption network $G$ then on the common fully feasible volume.
   Since we do not change $\alpha_0$ in a continuous way but instead focus on different ``$\alpha_0$-slices'' of $\mathcal{F}^{G,A}_1$, the object of our attention is the set of $(\gamma_0, S_0)$ such that $(\gamma_0, S_0, \alpha_0) \in \mathcal{F}^{G,A}_1$. We will refer to it as $\mathcal{F}^{G,A}_1(\alpha_0)$:
@@ -134,29 +138,27 @@ A layer of complexity arises on top of the problem discussed above%. When we com
   \hspace{-0.2\linewidth}
   \subfloat[]{\includegraphics[width=1.4\linewidth]{{feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808}.pdf}}
 
-  \caption{Fully feasible region in the $(\gamma_0,S_0) \in [0,1] \times [0,1]$ unit square as a function of syntrophy for different consumption matrices $G$: (a)
-  $\eta_G=0.6$, $\kappa_G=0.32$, (b) $\eta_G=0.35$, $\kappa_G=0.22$ and (c) $\eta_G=0.15$, $\kappa_G=0.18$.
+  \caption{Fully feasible region in the $(\gamma_0,S_0) \in [0,1]^2$ unit square as a function of syntrophy for different consumption matrices $G$: (a)
+  $\eta_G=0.6$, $\kappa_G=0.33$, (b) $\eta_G=0.35$, $\kappa_G=0.23$ and (c) $\eta_G=0.15$, $\kappa_G=0.18$.
   The white zone corresponds to points that are never fully feasible. The colour of a given point tells until which syntrophy that point is fully feasible, \eg
-  a light blue point is fully feasible for $0 \leq \alpha_0 \leq \num{9.1e-3}$. The size of the feasibility regions depend heavily on the topology of the matrix, which makes the problem far from trivial.}\label{fig: feasibility results fully feasible volume different consumption matrices}
+  a light blue point is fully feasible for $0 \leq \alpha_0 \leq \num{9.1e-3}$. The size of the feasibility regions depends heavily on the topology of the matrix, which makes the problem far from trivial.}\label{fig: feasibility results fully feasible volume different consumption matrices}
   \end{figure}
-  The way in which $\mathcal{F}^{G,A}_1(\alpha_0)$ changes as a function of $A$ is a more difficult question. \textbf{TO DO: explain that this will be studied later : put reference to new figure (how do df and alpha0 change from the null case)?}
-
+  %The way in which $\mathcal{F}^{G,A}_1(\alpha_0)$ changes as a function of $A$ is a more difficult question. \textbf{TO DO: explain that this will be studied later : put reference to new figure (how do df and alpha0 change from the null case)?}
   We observe a general trend among all matrices: as syntrophy increases, the fully feasible region in the unit square shrinks towards high $\gamma_0$. This can be explained with the LHS of Eq.\eqref{eq : fully feasible volume} which provides a lower bound to $\gamma_0$ when $\alpha_0 > 0$:
   \begin{equation}
-  \frac{\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\}}{\min(1-\sigma_0, \sigma_0) R_0} \alpha_0
-  \lessapprox \gamma_0.
+  \gamma_0 \gtrapprox \frac{\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\}}{\min(1-\sigma_0, \sigma_0) R_0} \alpha_0.
   \end{equation}
-  As for the case of $S_0$, it has still an upper bound provided by the RHS of Eq.\eqref{eq : fully feasible volume} which goes as something close to\footnote{Mathematically the difficulty is that we cannot split the two terms of the RHS of \ref{eq: upper bound S0 syntrophy}. If we assume deg$(A,\nu)$ is small, then $S_0 \lessapprox \sim \gamma_0^{-1}$.} $\gamma_0^{-1}$:
+  The abundance of consumers $S_0$ has still an upper bound provided by the RHS of Eq.\eqref{eq : fully feasible volume} which goes as something close to\footnote{Mathematically the difficulty is that we cannot split the two terms of the RHS of \eqref{eq: upper bound S0 syntrophy}. If we assume deg$(A,\nu)$ is small, then $S_0 \lessapprox \sim \gamma_0^{-1}$.} $\gamma_0^{-1}$:
   \begin{equation}
  \gamma_0 R_0
   \lessapprox
    \min_\nu \left\{ \frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\}.\label{eq: upper bound S0 syntrophy}
   \end{equation}
   %Note that taking into account $\alpha_0 >0$ does not put a lower bound on $S_0$, such that at a fixed $\gamma_0$, every $S_0$ from $0$ to the upper boundary critical curve $\sim \gamma_0^{-1}$ discussed before remains a fully feasible point.
-  So in general, as syntrophy increases, systems with a high consumption rate and a low consumers abundance at equilibrium will remain feasible, while other simply will not exist. This makes sense intuitively:\textbf{TO DO: put explanation here}
+  So in general, as syntrophy increases, systems with a high consumption rate and a low consumers abundance at equilibrium will remain feasible, while other simply will not exist. %This makes sense intuitively:\textbf{TO DO: put explanation here}
 
-  Because of that shift to the right,  $\mathcal{F}^{G,A}_1(\alpha_0)$ shrinks in size\footnote{Note that when we talk about the size of $\mathcal{F}^{G,A}_1(\alpha_0)$, it is understood relatively to the $(\gamma_0, S_0)\in [0,1]^2$ unit square. \textbf{TO DO: say more clearly that the zone moves to the right as well}}: as syntrophy is increased, the set of possible consumption rate and average consumers abundance is more restricted.
-  Figure \ref{fig: feasibility results typical shrinkage of feasible volume} shows that typically the feasibility volume $\text{Vol}\left(\mathcal{F}_1^{G,A}(\alpha_0)\right)$, formally defined in Appendix \ref{app: how to measure volume}, decays in an exponential-like fashion as $\alpha_0$ increases.
+  Because of that shift to the right,  $\mathcal{F}^{G,A}_1(\alpha_0)$ shrinks in size\footnote{Note that when we talk about the size of $\mathcal{F}^{G,A}_1(\alpha_0)$, it is understood relatively to the $(\gamma_0, S_0)\in [0,1]^2$ unit square. In fact we expect that new points also appear to the right of the $\gamma_0=1$ axis as can be seen by inspecting Eq.\eqref{eq : fully feasible volume}. However, because the larger the $\gamma_0$, the smaller the range of feasible $S_0$, this newly added feasible area should vanish quickly as $\gamma_0$ increases.}: as syntrophy is increased, the set of possible consumption rates and average consumers abundances is more restricted.
+  Figure \ref{fig: feasibility results typical shrinkage of feasible volume} shows that typically the feasibility volume $\text{Vol}\left(\mathcal{F}_1^{G,A}(\alpha_0)\right)$, formally defined in Section \ref{app: how to measure volume}, decays in an exponential-like fashion as $\alpha_0$ increases.
   \begin{figure}
   \centering
   \includegraphics[width=0.6\linewidth]{{size_feasibility_region_NR25_NS25_Nest0.25_Conn0.2336}.pdf}
@@ -168,7 +170,8 @@ A layer of complexity arises on top of the problem discussed above%. When we com
   \begin{equation}
 \text{Vol}\left(\mathcal{F}_1^{G,A}(\alpha_0)\right) \approx c_1 \exp{\left(-d_F \alpha_0\right)} - c_2. \label{eq: feasibility results fit feasible volume}
   \end{equation}
-  The value of $d_F(G,A)$ tells us how fast the feasible volume shrinks for a given consumption-syntrophy couple $(G,A)$. In that sense $d_F(G,A)$ provides a measure of how good $(G,A)$ can sustain an increase in syntrophy\footnote{One could also desire to define a \define{critical feasible syntrophy} as the smallest syntrophy that gives a zero fully feasible volume. This would be a very interesting quantity to study and could be easily found as the root of the RHS of Eq.\eqref{eq: feasibility results fit feasible volume}. We tried doing this, because the errors on $d_F$ and on the two other fitting coefficients are already quite large (see the caption of Fig.\ref{fig: feasibility results feasibility decay rate vs matrix structure}), the errors on the critical feasible syntrophy we obtained were way too large, making our results essentially meaningless.}. If $d_F$ is low then the system can bear an increase of syntrophy and stay feasible. On the opposite, if $d_F$ is high, if syntrophy is increased too much, the microbial community will have to fundamentally change (\eg move to a $(G,A)$ configuration with a lower $d_F$) or it will become unfeasible, \ie at least one species will get extinct.
+  The value of $d_F(G,A)$ tells us how fast the feasible volume shrinks for a given consumption-syntrophy couple $(G,A)$. In that sense $d_F(G,A)$ provides a measure of how good $(G,A)$ can sustain an increase in syntrophy. %\footnote{One could also desire to define a \define{critical feasible syntrophy} as the smallest syntrophy that gives a zero fully feasible volume. This would be a very interesting quantity to study and could be easily found as the root of the RHS of Eq.\eqref{eq: feasibility results fit feasible volume}. We tried doing this, because the errors on $d_F$ and on the two other fitting coefficients are already quite large (see the caption of Fig.\ref{fig: feasibility results feasibility decay rate vs matrix structure}), the errors on the critical feasible syntrophy we obtained were way too large, making our results essentially meaningless.}.
+  If $d_F$ is low then the system can bear an increase of syntrophy and stay feasible. On the opposite, if $d_F$ is high, if syntrophy is increased too much, the microbial community will have to fundamentally change (\eg move to a $(G,A)$ configuration with a lower $d_F$) or it will become unfeasible, \ie at least one species will get extinct.
 
   Figure \ref{fig: feasibility results decay rate FC case} shows how $d_F(G,A)$ changes as a function of the structure of $G$, for $A$ fully connected, and Figure \ref{fig: feasibility results feasibility decay rate vs matrix structure} shows how $d_F$ changes when the structure of $A$ changes.
   \begin{figure}
@@ -196,11 +199,12 @@ A layer of complexity arises on top of the problem discussed above%. When we com
   \subfloat[]{\includegraphics[width=0.53\linewidth]{{feasibility_NR25_NS25_feasibility_decay_rate_dev_away_from_FC_fixed_nestedness_random_structure}.pdf}}
   \subfloat[]{\includegraphics[width=0.53\linewidth]{{feasibility_NR25_NS25_feasibility_decay_rate_dev_away_from_FC_fixed_connectance_random_structure}.pdf}}
   \vspace{-6pt}
-  \caption{Relative difference of the feasibility decay rate for the considered $A$ scenario compared to the FC null case (Fig.\ref{fig: feasibility results decay rate FC case}) for $N_R=25$ and $N_S=25$. Plots on the first column (a)-(c)-(e) show how that quantity changes with connectance for a given ecological overlap, while plot on the second column (b)-(d)-(f) show how it evolves when ecological overlap is changed and connectance is kept fixed. Different structures of the $A$ matrix are considered: (a)-(b) NIS, (c)-(d) LRI (e)-(f) RS. A positive $y$-coordinate means that for the feasibility decay rate of the current syntrophy scenario is smaller than for the FC case, \ie the system sustains syntrophy better with the considered $A$-structure compared to fully connected. Apart from a few marginal exceptions, the FC scenario is always outperformed by the other scenarios, especially the random structure (RS) case.}\label{fig: feasibility results feasibility decay rate vs matrix structure}
+  \caption{Relative difference of the feasibility decay rate for the considered $A$ scenario compared to the FC null case (Fig.\ref{fig: feasibility results decay rate FC case}) for $N_R=25$ and $N_S=25$. Plots on the first column (a)-(c)-(e) show how that quantity changes with connectance for a given ecological overlap, while plot on the second column (b)-(d)-(f) show how it evolves when ecological overlap is changed and connectance is kept fixed. Different structures of the $A$ matrix are considered: (a)-(b) NIS, (c)-(d) LRI (e)-(f) RS. A positive $y$-coordinate means that for the feasibility decay rate of the current syntrophy scenario is smaller than for the FC case, \ie the system sustains syntrophy better with the considered $A$-structure compared to fully connected. The FC scenario is always outperformed by the other scenarios, especially the random structure (RS) case.}\label{fig: feasibility results feasibility decay rate vs matrix structure}
   \end{figure}
-  \textbf{TO DO: correct the interpretation here}
-  Interestingly, the structure of $A$ does not provide any real difference, except for $G$ with $\eta_G=0.15$ and $\kappa_G=0.18$. For that specific matrix, the LRI scenario for $A$ reduced by a factor of three the decay rate, compared to the fully connected case. That result is only true for this specific matrix and does not hold for the others, where $d_F(G,A)$ seems to almost not depend on $A$. Furthermore a very strong trend can be observed, for all consumption matrices and all structures of $A$: for a given connectance $\kappa_G$, $d_F$ is increased if the ecological overlap $\eta_G$ is increased and for a given ecological overlap, $d_F$ decreases if the connectance is increased.
-  In biological terms, systems where there is a small ecological overlap but a lot of links in the food consumption network will be favoured. Microbial communities where consumers on average eat from a lot of different resources (\ie each their own) can sustain a larger syntrophic interaction than others.
+  %Interestingly, the structure of $A$ does not provide any real difference, except for $G$ with $\eta_G=0.15$ and $\kappa_G=0.18$. For that specific matrix, the LRI scenario for $A$ reduced by a factor of three the decay rate, compared to the fully connected case. That result is only true for this specific matrix and does not hold for the others, where $d_F(G,A)$ seems to almost not depend on $A$.
+  A very strong trend can be observed as a function of the consumption matrices%and all structures of $A$
+  : for a given connectance $\kappa_G$, $d_F$ is increased if the ecological overlap $\eta_G$ is increased and for a given ecological overlap, $d_F$ decreases if the connectance is increased.
+  In biological terms, systems where there is a small ecological overlap (\ie small competition) but a lot of links in the food consumption network will be favoured. Microbial communities where consumers on average eat from a lot of different resources (\ie each their own) can sustain a larger syntrophic interaction than others. The shape of the syntrophy matrix changes the feasibility decay rate in a non-trivial way. An NIS structure significantly (we observe up to a $50\%$ percent difference) decreases $d_F$; the improvement is better for larger $\kappa_G$ and lower $\eta_G$. The LRI scenario has a suprising effect: for low $\kappa_G$, $d_F$ is significantly lowered (almost by $100\%$ in the best case) but for $\kappa_G > 0.23$, there is no improvement. Finally the RS scenario offers the best improvement: $d_F$ is improved by at least $50\%$ for all networks. Note that the underlying trend is very regular: for a fixed connectance $\kappa_G$, the improvement is almost $100\%$ at low ecological overlap. As $\eta_G$ increases, the improvement decreases until it saturates and stays constant. The saturation value is larger when $\kappa_G$ is smaller. The regularity of such results suggests an underlying analytical explanation that has yet to be derived.
 
   %Such a fit also allows to find the \define{critical feasible syntrophy $\alpha_0^F(G,A)$}, which we define as the smallest syntrophy for which the fully feasible volume is zero. Indeed, one finds $\alpha_0^F$ by looking at the intercept of Eq.\eqref{eq: feasibility results fit feasible volume} with the $x$-axis:
   % \begin{equation}
@@ -213,9 +217,9 @@ A layer of complexity arises on top of the problem discussed above%. When we com
 \mathcal{F}_1^{S_{25}}(\alpha_0) \defined \left\{(\gamma_0, S_0) : (\gamma_0, S_0, \alpha_0) \in \mathcal{F}_1^{S_{25}}\right\}.
 \end{equation}
  Figure \ref{fig: results feasibility cfv variation with syntrophy} shows the evolution of $\mathcal{F}_1^{S_{25}}(\alpha_0)$ as syntrophy increases. %Once again, the structure of $A$ does not seem to play a significant role in the shape of $\mathcal{F}_1^{S_{25}}(\alpha_0)$. Note that $\text{Vol}\left(\mathcal{F}_1^{S_{25}}\left(\alpha_0=\num{9.1e-3}\right)\right)=0$ but at $\alpha_0=\num{7.8e-3}$ the common feasible region is still non-zero. So the largest common fully feasible syntrophy $\alpha_C^F(S_{25})$ established in Eq.\eqref{eq : results feasibility largest alpha0} as $\sim 0.01$, lies between \num{7.8e-3} and \num{9.1e-3}, which shows that the order of magnitude is theoretically correctly estimated.
- In accordance to what was observed individually for each matrix before, the RS scenario allows for a larger syntrophy: at a given $\alpha_0$, there are more feasible $(\gamma_0, S_0)$ points if $A$ has a random structure. The three other scenarios do not offer a significant difference and at $\alpha_0=\num{9.1e-3}$ there are no more $(\gamma_0, S_0)$ that are fully feasible for all matrices. This means that the largest common fully feasible syntrophy respects $\num{7.8e-3}<\alpha_C^F(S_{25}) \leq \num{9.1e-3}$ for those three scenarios, which puts the estimate $\alpha_C^F \approx 0.01$ of Eq.\eqref{eq : results feasibility largest alpha0} not far from the numerical bounds.
+ In accordance to what was observed individually for each matrix before, the RS scenario allows for a larger syntrophy: at a given $\alpha_0$, there are more feasible $(\gamma_0, S_0)$ points if $A$ has a random structure. The three other scenarios do not offer a significant difference and at $\alpha_0=\num{9.1e-3}$ there are no more $(\gamma_0, S_0)$ that are fully feasible for all matrices. This means that the largest common fully feasible syntrophy respects $\num{7.8e-3}<\alpha_C^F \leq \num{9.1e-3}$ for those three scenarios, which puts the estimate $\alpha_C^F \approx 0.01$ of Eq.\eqref{eq : results feasibility largest alpha0} not far from the numerical bounds.
 
-Without surprise, $\text{Vol}\left(\mathcal{F}_1^{S_{25}}(\alpha_0)\right)$ also decays in an exponential-like fashion (Figure \ref{fig: feasibility results volume of cfr depending on syntrophy}).
+Without surprise, $\text{Vol}\left(\mathcal{F}_1^{S_{25}}(\alpha_0)\right)$ also decays in an exponential-like fashion as is shown by Figure \ref{fig: feasibility results volume of cfr depending on syntrophy}.
 \begin{figure}[h!]
 % \captionsetup[subfigure]{captionskip = -185pt, margin = 195pt}
 %
@@ -233,37 +237,35 @@ Without surprise, $\text{Vol}\left(\mathcal{F}_1^{S_{25}}(\alpha_0)\right)$ also
 \begin{figure}
 \centering
 \includegraphics[width=0.65\linewidth]{common_feasibility_volume_NR25_NS25}
-\caption{Volume of the common feasibility region $\mathcal{F}^{S_{25}}_1(\alpha_0)$ as a function of syntrophic interaction strength $\alpha_0$ (plotted on logarithmic scale). While the FC, NIS and LRI cases offer similar results, the RS scenario outperforms all of them. An exponential fit (Eq.\ref{eq: feasibility results fit feasible volume}) allows to measure a global $d_F$ for each of the four scenarios. The global decay feasibility rate of the RS scenario is 2.5 times smaller than the others.}\label{fig: feasibility results volume of cfr depending on syntrophy}
+\caption{Volume of the common feasibility region $\mathcal{F}^{S_{25}}_1(\alpha_0)$ as a function of syntrophic interaction strength $\alpha_0$ (plotted on logarithmic scale). While the FC, NIS and LRI cases offer similar results, the RS scenario outperforms all of them. An exponential fit (Eq.\ref{eq: feasibility results fit feasible volume}) allows to measure a global $d_F$ for each of the four scenarios. The global decay feasibility rate of the RS scenario is 3 times smaller than the others.}\label{fig: feasibility results volume of cfr depending on syntrophy}
 \end{figure} %with a rate $d_F(S_M)=\num[scientific-notation=false]{480(50)}$ per unit of syntrophy which is a bit larger than the largest $d_F(G,A)$ observed in Fig.\ref{fig: feasibility results feasibility decay rate vs matrix structure}.
-An exponential fit allows to find the feasibility decay rates of each scenario: for the FC case, $d_F=\num[scientific-notation=false]{302(18)}$ (in units of syntrophy $\alpha_0$); for NIS, $d_F=\num[scientific-notation=false]{297(17)}$; for LRI, $d_F=\num[scientific-notation=false]{291(17)}$ and finally for RS, $d_F=\num[scientific-notation=false]{115(30)}$. The FC, NIS and LRI scenarios of $A$ do not produce a significant difference in feasibility. However a random $A$-matrix (RS scenario) allows for a 2.5 times smaller feasibility decay rate and hence at a given syntrophy $\alpha_0$, for many more pairs of common feasible $(\gamma_0, S_0)$.
+An exponential fit\footnote{We take as error the standard deviation produced by the \code{scipy} routine we used.} allows to find the feasibility decay rates of each scenario: for the FC case, $d_F=\num[scientific-notation=false]{480(42)}$ (in units of syntrophy $\alpha_0$); for NIS, $d_F=\num[scientific-notation=false]{463(43)}$; for LRI, $d_F=\num[scientific-notation=false]{450(42)}$ and finally for RS, $d_F=\num[scientific-notation=false]{139(33)}$. The FC, NIS and LRI scenarios of $A$ do not produce a significant difference in feasibility. However a random $A$-matrix (RS scenario) allows for a 3 times smaller feasibility decay rate and hence at a given syntrophy $\alpha_0$, for many more pairs of common feasible $(\gamma_0, S_0)$.
 Again we observe the same shift of $\mathcal{F}_1^{S_{25}}$ towards points with a high $\gamma_0$ and consequently a small $S_0$. Overall, independently of the consumption-syntrophy network structure, microbial communities which have a low abundance and high uptake rates can sustain a larger syntrophy than others. Among these, the ones which have a random syntrophy network are the most ``compatible'' with even larger syntrophic interaction.
 
 
-
+\FloatBarrier
 \subsubsection{The influence of the matrix dimensions}
 We focused above on microbial communities with the same number of consumers and resources: $N_R=N_S=25$. But such systems lie at what has been referred to in the literature as May's stability bound \cite{biroli_marginally_2018}, which is defined as an ecological community where the number of resources is equal to the number of species. According to the competitive exclusion principle\footnote{The heavily debated and often misunderstood \cite{hardin_competitive_1960} \important{competitive exclusion principle}, also known as Gause's principle, states that ``Complete competitors cannot coexist'' \cite{hardin_competitive_1960}, or more generally that ``the number of consumer species in steady coexistence cannot exceed that of resources'' \cite{wang_overcome_2019}.}, an ecological system which has as many resources as consumers is the limiting case where coexistence, \ie feasibility in the terms used here, starts to exist. In a way, the study conducted before can be seen as a borderline case and it can be very fruitful to investigate the behaviour of systems where the number of resources has been increased to $N_R=50$.
 
-Figure \ref{fig: feasibility results typical feasible volumes NR=50 NS=25} is the $N_R=50$ equivalent to Figure \ref{fig: feasibility results fully feasible volume different consumption matrices}.
-\begin{figure}
-\captionsetup[subfigure]{margin=40pt}
-\vspace{-120pt}
-\hspace{-0.15\linewidth}
-\subfloat[\label{fig: feasibility results feasibility region eta 0.6 kappa 0.3}]{\includegraphics[width=1.3\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.6_Conn0.3344}.pdf}}
+% Figure \ref{fig: feasibility results typical feasible volumes NR=50 NS=25} is the $N_R=50$ equivalent to Figure \ref{fig: feasibility results fully feasible volume different consumption matrices}.
+% \begin{figure}
+% \captionsetup[subfigure]{margin=40pt}
+% \hspace{-0.15\linewidth}
+% \subfloat[\label{fig: feasibility results feasibility region eta 0.6 kappa 0.3}]{\includegraphics[width=1.3\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.6_Conn0.3344}.pdf}}
+%
+% \vspace{-55pt}
+% \hspace{-0.15\linewidth}
+% \subfloat[]{\includegraphics[width=1.3\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.35_Conn0.2296}.pdf}}
+%
+% \vspace{-55pt}
+% \hspace{-0.15\linewidth}
+% \subfloat[\label{fig: feasibility results feasibility region eta 0.15 kappa 0.12}]{\includegraphics[width=1.3\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.15_Conn0.12}.pdf}}
+% \vspace{-12pt}
+% \caption{Surface colour plot of the fully feasible region $\mathcal{F}_1^{G,A}\left(\alpha_0\right)$ as a function of the syntrophy $\alpha_0$ for the case $N_R=50$, with different structures of $A$: fully connected (left column), no intraspecific syntrophy (middle) and LRI matrix (right). The rows correspond to different choices of the consumption matrix $G$: (a) $\eta_G=0.6$ and $\kappa_G=0.33$, (b) $\eta_G=0.35$ and $\kappa_G=0.23$, (c) $\eta_G=0.15$ and $\kappa_G=0.13$. These are matrices with similar properties than  Fig.\ref{fig: feasibility results fully feasible volume different consumption matrices}, except that the number of resources is here doubled. This affects $\mathcal{F}_1^{G,A}\left(\alpha_0\right)$ quite drastically.}\label{fig: feasibility results typical feasible volumes NR=50 NS=25}
+% \end{figure}
+% We observe that increasing $N_R$ in general increases . For instance, for $G$ with $\eta_G=0.6$ and $\kappa_G=0.32$, adding more resources increases the maximal syntrophy bearable by the system (Fig.\ref{fig: feasibility results feasibility region eta 0.6 kappa 0.3} compared to Fig.\ref{fig: feasibility results feasibility region eta 0.6 kappa 0.3 NR=25}). On the contrary, for $G$ with $\eta_G=0.15$ and $\kappa_G=0.12$, it decreases it from \num{1.4e-2} to \num{7.8e-3}.
 
-\vspace{-55pt}
-\hspace{-0.15\linewidth}
-\subfloat[]{\includegraphics[width=1.3\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.35_Conn0.2296}.pdf}}
-
-\vspace{-55pt}
-\hspace{-0.15\linewidth}
-\subfloat[\label{fig: feasibility results feasibility region eta 0.15 kappa 0.12}]{\includegraphics[width=1.3\linewidth]{{feasibility_region_wt_NR50_NS25_Nest0.15_Conn0.12}.pdf}}
-\vspace{-12pt}
-\caption{Surface colour plot of the fully feasible region $\mathcal{F}_1^{G,A}\left(\alpha_0\right)$ as a function of the syntrophy $\alpha_0$ for the case $N_R=50$, with different structures of $A$: fully connected (left column), no intraspecific syntrophy (middle) and LRI matrix (right). The rows correspond to different choices of the consumption matrix $G$: (a) $\eta_G=0.6$ and $\kappa_G=0.33$, (b) $\eta_G=0.35$ and $\kappa_G=0.23$, (c) $\eta_G=0.15$ and $\kappa_G=0.12$. These are matrices with similar properties than  Fig.\ref{fig: feasibility results fully feasible volume different consumption matrices}, except that the number of resources is here doubled. This affects $\mathcal{F}_1^{G,A}\left(\alpha_0\right)$ quite drastically.}\label{fig: feasibility results typical feasible volumes NR=50 NS=25}
-\vspace{-60pt}
-\end{figure}
-We observe that increasing $N_R$ has a non-trivial effect on feasibility, and that effect differs for each consumption-syntrophy network. For instance, for $G$ with $\eta_G=0.6$ and $\kappa_G=0.32$, adding more resources increases the maximal syntrophy bearable by the system (Fig.\ref{fig: feasibility results feasibility region eta 0.6 kappa 0.3} compared to Fig.\ref{fig: feasibility results feasibility region eta 0.6 kappa 0.3 NR=25}). On the contrary, for $G$ with $\eta_G=0.15$ and $\kappa_G=0.12$, it decreases it from \num{1.4e-2} to \num{7.8e-3}.
-
-Figure \ref{fig: feasibility results common feasibility region NR=50 NS=25} shows the common feasibility region $F_1^{S_{50}}$ of the $N_R=50$ matrix set.
+Figure \ref{fig: feasibility results common feasibility region NR=50 NS=25} shows the common feasibility region $\mathcal{F}_1^{S_{50}}$ of the $N_R=50$ matrix set $S_{50}$, which is to be compared with the common feasibility region for $N_R=25$ (Fig.\ref{fig: results feasibility cfv variation with syntrophy}). It seems that, independently of the structure of the $A$-matrix, a lesser common maximal syntrophy can be attained when the number of resources is doubled.
 \begin{figure}[h!]
 % \captionsetup[subfigure]{captionskip = -185pt, margin = 195pt}
 %
@@ -275,26 +277,30 @@ Figure \ref{fig: feasibility results common feasibility region NR=50 NS=25} show
 % \subfloat[]{\includegraphics[width=0.6\linewidth]{common_feasibility_volume_NR50_NS25_varying_syntrophy_optimal_matrix}}
 \hspace{-0.2\linewidth}
 \includegraphics[width=1.4\linewidth]{{common_feasibility_region_NR50_NS25}.pdf}
-\caption{Common feasibility region $\mathcal{F}_1^{S_M}\left(\alpha_0\right)$ for $N_R=50$ and $N_S=25$, to compare with \ref{fig: results feasibility cfv variation with syntrophy}. We considered different structures of the syntrophy matrix: (a) fully connected, (b) intraspecific syntrophy restricted and (c) LRI matrix. As the number of resources increases, the feasibility volume for a given $\alpha_0$ decreases.}\label{fig: feasibility results common feasibility region NR=50 NS=25}
+\caption{Common feasibility region $\mathcal{F}_1^{S_{50}}\left(\alpha_0\right)$ for $N_R=50$ and $N_S=25$, to compare with \ref{fig: results feasibility cfv variation with syntrophy}. We considered four different structures of the syntrophy matrix: FC, NIS, LRI and RS. As the number of resources increases, the feasibility volume for a given $\alpha_0$ decreases.}\label{fig: feasibility results common feasibility region NR=50 NS=25}
 \end{figure}
-We see that, compared with the $N_R=25$ case (Fig.\ref{fig: results feasibility cfv variation with syntrophy}), an overall lesser syntrophy can be achieved: the largest common fully feasible syntrophy is reduced \textbf{TO DO: put prediction here}. Finally Figure \ref{fig: feasibility results feasibility decay rate NR=50 NS=25} shows that indeed it is really hard to predict the effect that increasing the number of resources will have on a specific consumption-syntrophy network.
+% We see that, compared with the $N_R=25$ case (Fig.\ref{fig: results feasibility cfv variation with syntrophy}), an overall lesser syntrophy can be achieved: the largest common fully feasible syntrophy is reduced \textbf{TO DO: put prediction here}. Finally Figure \ref{fig: feasibility results feasibility decay rate NR=50 NS=25} shows that indeed it is really hard to predict the effect that increasing the number of resources will have on a specific consumption-syntrophy network.
+
+\noindent This might be the indication that changing $N_R$ modifies feasibility in a non-trivial way: the fact that the common feasibility region is different implies that the feasibility regions $\mathcal{F}_1^{G,A}$ change for all networks $(G,A)$ when $N_R=50$.
+To quantify the effect on each individual consumption-syntrophy network, we may compute the decay feasibility rate and compare it to its counterpart when $N_R=25$. Figure \ref{fig: feasibility results feasibility decay rate NR=50 NS=25} shows that there is no clear pattern on how $d_F$ evolves when the number of resources is changed. Overall, the average ratio of the decay rates among the networks is equal to $\sim 1$: one could say that doubling the resources has on average no effect. Keep in mind that this conclusion should be carefully dealt with: although the matrices generated indeed do have the same connectance and ecological overlap, they may be different according to a measure that we have not monitored but which could be relevant biologically. This would mean that comparing the networks at $N_R=50$ and $N_R=25$ may not be fair. In the end, the parameter that controls how feasibility changes when the number of resources is modified is still unknown.
+
 \begin{figure}
 \captionsetup[subfigure]{captionskip=-202pt, margin=45pt}
 \hspace{-0.1\linewidth}
 \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_fully_connected}.pdf}}
 \subfloat[]{\includegraphics[width=0.6\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestedness_fully_connected}.pdf}}
-\caption{Ratio of the feasibility decay rates at $N_R=25$ and at $N_R=50$ as a function of the consumption matrix properties. A $y$-axis larger than $1$ means $d_F(N_R=25)$ is larger than $d_F(N_R=50)$, which means the system endures the addition of syntrophic interaction better at $N_R=50$. We considered the four usual $A$ scenarios (a)-(b) FC, (c)-(d) NIS, (e)-(f) LRI and (g)-(h) RS. Increasing the number of resources in the system does not allow microbial communities to be ``more feasible'' as syntrophy increases: on average $d_F$ is unchanged by doubling the number of resources. A detailed on how the consumption matrix properties, at least connectance and ecological overlap, or the $A$-scenario precisely modify the improvement is difficult to draw from this data.\textbf{TO DO: put also the one for random structure}}
+
+
+\caption{Ratio of the feasibility decay rates at $N_R=25$ and at $N_R=50$ as a function of the consumption matrix properties. A $y$-axis larger than $1$ means $d_F(N_R=25)$ is larger than $d_F(N_R=50)$, which means the system endures the addition of syntrophic interaction better at $N_R=50$. We considered the four usual $A$ scenarios (a)-(b) FC, and on the page below, (c)-(d) NIS, (e)-(f) LRI and (g)-(h) RS. Increasing the number of resources in the system does not allow microbial communities to be ``more feasible'' as syntrophy increases: on average $d_F$ is unchanged by doubling the number of resources. A detailed on how the consumption matrix properties, at least connectance and ecological overlap, or the $A$-scenario precisely modify the improvement is difficult to draw from this data.}
 \label{fig: feasibility results feasibility decay rate NR=50 NS=25}
 \end{figure}
 \begin{figure}
 \ContinuedFloat
 \captionsetup[subfigure]{captionskip=-202pt, margin=45pt}
-\vspace{-50pt}
+
 \hspace{-0.08\linewidth}
 \subfloat[]{\includegraphics[width=0.58\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_no_release_when_eat}.pdf}}
 \subfloat[]{\includegraphics[width=0.58\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestedness_no_release_when_eat}.pdf}}
-
-
 
 \hspace{-0.08\linewidth}
 \subfloat[]{\includegraphics[width=0.58\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_optimal_matrix}.pdf}}
@@ -304,9 +310,8 @@ We see that, compared with the $N_R=25$ case (Fig.\ref{fig: results feasibility 
 \hspace{-0.08\linewidth}
  \subfloat[]{\includegraphics[width=0.58\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_connectance_random_structure}.pdf}}
  \subfloat[]{\includegraphics[width=0.58\linewidth]{{feasibility_decay_rate_50_vs_25_fixed_nestedness_random_structure}.pdf}}
-\caption{Continuation of Figure above.}
+\caption{Continuation of the Figure above.}
 \end{figure}
-Indeed $d_F$, which we use to measure how big of a syntrophy a consumption-syntrophy network $(G,A)$ can bear, does not have a clear pattern, at least not under the matrix metrics we chose to measure. It is a sign that this question needs a further and deeper investigation. \textbf{TO DO: rework last paragraph and more importantly put figure of dF(NR=50)/dF(NR=25) as a function of eta and kappa, take into account Alberto's remarks}
 \FloatBarrier
 %\input{feasibility/feasibility_results_figures}
 

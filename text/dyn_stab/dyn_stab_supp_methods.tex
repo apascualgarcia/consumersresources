@@ -3,100 +3,6 @@
 \usepackage{consumer_resource_final}
 
 \begin{document}
-\subsubsection{Effective system}
-\normalfont
-Models which involve the dynamics of species only are in general better known than consumers-resources models. In particular, a huge body of literature exists on the study of Lotka-Volterra systems \cite{lotka_analytical_1920, takeuchi_global_1996}. We may profit from this knowledge by transforming the effect of the resources dynamics into an effective consumers-only Lotka-Volterra system.
-
-This can be done by assuming that the resources reach an equilibrium way faster than the consumers.
-Mathematically, that is equivalent to
-\begin{equation}
-  \frac{dR_\mu}{dt} \approx 0, \\ \forall \mu.
-\end{equation}
-Using Eq.\eqref{eq: differential eq for resources}, we get an explicit value for the resources:
-\begin{equation}
-  R_\mu \approx \frac{l_\mu+\sum_j \alpha_{\mu j}S_j}{m_\mu + \sum_k \gamma_{k\mu}S_k}.
-\end{equation}
-This expression can be used in Eq.\eqref{eq: differential eq for species} to get an effective system which describes the dynamics of the $N_S$ consumers:
-\begin{equation}
-  \frac{dS_i}{dt} = \left(\sum_\nu \left(\frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k} - \alpha_{\nu i}\right) -d_i + \sum_{\nu j} \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}S_j \right) S_i.
-\end{equation}
-This can be rewritten in a more compact way:
-\begin{equation}
-  \frac{dS_i}{dt} = p_i(S) S_i + \sum_j M_{ij}(S)S_i S_j \label{eq: effective equations of evolution}
-\end{equation}
-with
-\begin{equation}
-    p_i(S) = -\left(d_i+\sum_{\nu}\alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k}\text{ and } M_{ij}(S)=\sum_{\nu}\frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}.
-\end{equation}
-If we assume the species $S_k$ are not too far away from their equilibrium values\footnote{Note that this is very rarely true, especially in the context of the study of structural stability, where entire species sometimes die out.}, \ie
-\begin{equation}
-S_k \approx S^*_k \ \forall k,
-\end{equation}
-then using Eq.\eqref{eq : feasibility positive m} we can simplify $p_i$. Indeed,
-\begin{equation}
-m_\nu + \sum_k \gamma_{k\nu} S_k \approx m_\nu + \sum_k \gamma_{k\nu}S^*_k = \frac{l_\nu + \sum_k \alpha_{\nu k}S^*_k}{R^*_\nu} \label{eq: equality fluxes resource}
-\end{equation}
-Hence, the explicit dynamical dependence on $S$ can be removed from $p_i$ and $M_{ij}$:
-\begin{equation}
-p_i(S) \approx p_i \equiv - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu R^*_\nu}{l_\nu + \sum_k \alpha_{\nu k}S^*_k},
-\end{equation} and
-\begin{equation}
-M_{ij}(S) \approx M_{ij} \equiv \sum_\nu \frac{\sigma_{i\nu} \gamma_{i\nu} R^*_\nu \alpha_{\nu j}}{l_\nu + \sum_k{\alpha_{\nu k} S^*_k}}.
-\end{equation}
-\subsubsection{Perturbation analysis}
-We study a system that we put close to an equilibrium $S^*$, \ie
-\begin{equation}
-S=S^*+\Delta S, \\ \text{with } \Delta S \ll 1.
-\end{equation}
-Written this way, the effective equations of motion Eq.\eqref{eq: effective equations of evolution} are equivalent to:
-\begin{equation}
-\frac{d\Delta S_i}{dt} = p_i(S^*+\Delta S)\left(S^*_i + \Delta S_i\right)+\sum_j M_{ij}(S^*+\Delta S)\left(S^*_i +\Delta S_i\right)\left(S^*_j +\Delta S_j\right).
-\end{equation}
-Since the deviations from equilibrium $\Delta S_i \ll 1$, we can forget the terms in higher power than quadratic:
-\begin{equation}
-\frac{d\Delta S_i}{dt} = \tilde{p}_i \Delta S_i + \sum_j E_{ij} \Delta S_j + \bigO(\Delta S^2),\label{eq: effective equ evol at O(D2)}
-\end{equation}
-with
-\begin{equation}
-\tilde{p}_i \equiv p_i(S^*) + \sum_k M_{ik}(S^*)S_k^*, \label{eq: tilde p effective system}
-\end{equation}
-and
-\begin{equation}
-E_{ij} \equiv \left(\partiald{p_i}{S_j}\evaluatedat{S^*}+M_{ij}(S^*)+\sum_k \partiald{M_{ik}}{S_j}\evaluatedat{S^*}S^*_k\right)S^*_i.
-\end{equation}
-After some computations, we can get $\tilde{p}_i$ and $E_{ij}$ in terms of the initial parameters. Indeed,
-\begin{equation}
-p_i(S^*)= -\left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}
-\end{equation}
-and
-\begin{equation}
-M_{ik}(S^*) = \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}.
-\end{equation}
-Hence, using Eq.\eqref{eq: tilde p effective system}:
-\begin{equation}
-\tilde{p}_i = - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}\left(l_\nu+\sum_{j}\alpha_{\nu j} S^*_j\right).
-\end{equation}
-This can be simplified using Eq.\eqref{eq: equality fluxes resource} and Eq.\eqref{eq: equilibrium species}:
-\begin{equation}
-\tilde{p}_i=-d_i +\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu = \sum_\nu \alpha_{\nu i}.
-\end{equation}
-With a similar computation, one finds
-\begin{equation}
-E_{ij}=\sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right).
-\end{equation}
-Finally, Eq.\eqref{eq: effective equ evol at O(D2)} can be recast in
-\begin{equation}
-\frac{d\Delta S_i}{dt} = \sum_j (J_E)_{ij} \Delta S_j,
-\end{equation}
-where the effective $N_S\times N_S$ jacobian matrix $J_E$ is defined by:
-\begin{equation}
-(J_E)_{ij}=\sum_\nu \left[\frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right)+\alpha_{\nu i}\delta_{ij}\right].
-\end{equation}
-We see that we without surprise we find again the $\Beta, \Gamma $ and $D$ matrices coming from the jacobian at equilibrium:
-\begin{equation}
-\left(J_E\right)_{ij}=\sum_\nu \left[\frac{\Beta_{i\nu}\Gamma_{\nu j}}{D_\nu}+\alpha_{\nu i} \delta_{ij}\right]
-\end{equation}
-This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.
 
 \subsubsection{Measuring the feasibility and local dynamical stability volumes}\label{app: how to measure volume}
 In the main text, we study how the sizes of both the fully feasible and the fully locally dynamically stable regions, respectively $\mathcal{F}_1^{G,A}(\alpha_0)$ and $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$, change as a function of $G$, $A$ and $\alpha_0$. It is important to explain in what way (and why in \textit{that} way) these are computed. We define the \important{volume} of $\mathcal{F}^{G,A}_1(\alpha_0)$, or \define{feasibility volume}, as:
@@ -109,7 +15,7 @@ The \important{volume} of $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$, or \define{(local
 \end{equation}
 The feasibility and dynamical stability volumes do not \textit{stricto sensu} measure the area occupied by the fully feasible and fully dynamically stable regions, respectively. In the case of the feasibility volume, it is documented in the main text that the zone where $\mathcal{F}(m, G,A)$ is different from $1$ or $0$ is very small so measuring the volume this way does not provide a significant difference to naively counting the number of points for which the feasibility function is \textit{exactly} 1.
 
-However, in the case of the dynamical stability volume, this approach would provide unsatisfactory results. Indeed, $\mathcal{D}_{L}(m, G, A)$ is a function that may be very patchy \textbf{TO DO: insert ref to picture of $D_L$ as a function of alpha0}: many points are not fully dynamically stable but rather \important{almost} fully dynamically stable, in the sense that there are many $m$ such that $\mathcal{D}_{L}(m, G, A)$ is extremely close to but not exactly equal to 1. Because of this, counting exactly the points where $\mathcal{D}_{L}(m, G, A)=1$ is very prone to noise, in the sense that it depends a lot on the precision at which $\mathcal{D}_L(m,G,A)$ is evaluated. We know that a lot of points are only \textit{almost} fully dynamically stable; if we increase the number of simulations to evaluate $\mathcal{D}_{L}(m, G, A)$, who can tell if the points that were previously identified as fully dynamically stable would be now only almost fully dynamically stable and hence not counted in the volume anymore?
+However, in the case of the dynamical stability volume, this approach would provide unsatisfactory results. Indeed, $\mathcal{D}_{L}(m, G, A)$ is a function that may be very patchy (see Figure \ref{fig : dynamical stability results typical dynamical stability function}): many points are not fully dynamically stable but rather \important{almost} fully dynamically stable, in the sense that there are many $m$ such that $\mathcal{D}_{L}(m, G, A)$ is extremely close to but not exactly equal to 1. Because of this, counting exactly the points where $\mathcal{D}_{L}(m, G, A)=1$ is very prone to noise, in the sense that it depends a lot on the precision at which $\mathcal{D}_L(m,G,A)$ is evaluated. We know that a lot of points are only \textit{almost} fully dynamically stable; if we increase the number of simulations to evaluate $\mathcal{D}_{L}(m, G, A)$, who can tell if the points that were previously identified as fully dynamically stable would be now only almost fully dynamically stable and hence not counted in the volume anymore?
 
 Because of such considerations taking into account every point but pondering it by its value of the feasibility/dynamical stability function not only provides a measure close to the idea of measuring the ``full volume'' but also provides smoother and more robust results.
 

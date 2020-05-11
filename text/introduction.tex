@@ -84,7 +84,7 @@ The procedure we will follow (Fig.\ref{fig: sketch_procedure}) is split in three
 \caption{General procedure we will follow to study systems describing microbial communities.}\label{fig: sketch_procedure}
 \end{figure}
 \newpage
-\section{Feasibility}
+\section{Feasibility}\label{sec : intro feasibility}
 The study of ecological interactions has been since its very inception \cite{may_will_1972}, and still is today, tightly close to the one of random matrices \cite{allesina_stability_2012, allesina_predicting_2015, barbier_cavity_2017}. Usually, the procedure is to study an equilibrium point which we assume is feasible. Some matrix of the model (\eg the species-interaction matrix or the Jacobian) is approximated as random, and the dynamical or structural stability of said equilibrium point is investigated.
 
 That framework is not satisfying for the study we would like to conduct, because it does not take time to study whether random parameters make sense in the first place.
@@ -117,7 +117,7 @@ R^*_\mu, S^*_i, l_\mu, d_i, m_\mu, \sigma_{i\mu} > 0 \text { and } \gamma_{i\mu}
 }
 \label{eq : feasibility positive parameters}
 \end{equation}
-That condition already greatly restricts the choice of parameters $p\in \mathcal{P}$. However, additional complexity arises from the relationships parameters have to follow by definition. Indeed, the $3 N_R +2 N_S + 3 N_R N_S $ parameters are constrained by the $N_R + N_S $ equations \eqref{eq: equilibrium resources and species}. So if we choose $2 N_R + N_S + 3 N_R N_S$ parameters, the remaining $N_R + N_S$ are instantly determined. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for technical reasons explained in Section \ref{sec: explanation solve for d and m}, we will solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \important{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eqs.\eqref{eq : feasibility positive parameters} can be combined with Eqs.\ref{eq: equilibrium resources and species} into:
+That condition already greatly restricts the choice of parameters $p\in \mathcal{P}$. However, additional complexity arises from the relationships parameters have to follow by definition. Indeed, the $3 N_R +2 N_S + 3 N_R N_S $ parameters are constrained by the $N_R + N_S $ equations \eqref{eq: equilibrium resources and species}. So if we choose $2 N_R + N_S + 3 N_R N_S$ parameters, the remaining $N_R + N_S$ are instantly determined. Traditionally, we would solve for $R^*$ and $S^*$ and choose the rest of the parameters, but for mathematical reasons, it is easier to solve for the consumers death rates $d_i$ and the resources diffusion rate $m_\mu$. This means that if we \important{choose} non-negative $\gamma, \alpha, \sigma, \tau, l, R^*$ and $S^*$, Eqs.\eqref{eq : feasibility positive parameters} can be combined with Eqs.\ref{eq: equilibrium resources and species} into:
 \begin{subequations}\label{eq : feasibility positive d and m}
 \begin{empheq}[left=\empheqlbrace]{align}
 d_i &= \sum_\nu \left( \sigma_{i\nu} \gamma_{i\nu} R^*_\nu - \alpha_{\nu i} \right) > 0 \quad \forall i=1, \dots, N_S. \label{eq : feasibility positive d}\\
