@@ -1,0 +1,143 @@
+\documentclass[12pt, titlepage]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+
+\begin{document}
+\subsection{The master equation for local dynamical stability}\label{sec : establish master equation for dynamical stability}
+In order to get $\real{\lambda_1}$, which is the quantity that governs local dynamical stability (see Section \ref{sec : how to determine local dynamical stability}), we have to get the full spectrum of $J^*$, denoted $\sigma(J^*)$, since a straight forward application of easier standard techniques like the Perron-Frobenius theorem \cite{perron_zur_nodate} does not work. The eigenvalues of $J^*$ are obtained through the eigenvalue problem:
+\begin{equation}
+\det\left(J^* - \lambda \right) = 0.
+\end{equation}
+More explicitly, using Eq.\eqref{eq: jacobian at equilibrium}, we state the \important{master equation for local dynamical stability}:
+\begin{equation}
+\boxed{
+\det
+\begin{pmatrix}
+ -D - \lambda  & \Gamma \\
+ \Beta & 0-\lambda
+\end{pmatrix} = 0
+}
+\end{equation}
+% Before proceeding any further, we eliminate systems where local dynamical stability cannot be decided with the first order perturbation analysis that we are conducting, \ie marginally stable equilibria.
+That equation is not trivially solved, which is why we seek regimes where it could be made simpler.
+% \subsubsection{Marginally stable equilbria}
+% We want to avoid the case $\real{\lambda_1}=0$, because it does not let us assess the system's stability without a further complicated mathematical analysis. To make things easier, we will in analytical computations\footnote{For numerical computations we will get rid of marginally stable systems individually, meaning we may have some systems where $0 \in \sigma(J^*)$.} get rid of all systems where 0 is part of the spectrum. Even though this is a harsh condition, we know that for such systems, local dynamical stability can be decided by the computations we conduct. $\lambda=0$ is part of the spectrum if and only if it solves the master equation \eqref{eq: master equation eigenvalues jacobian}:
+% \begin{equation}
+% \det
+% \begin{pmatrix}
+%   -\Delta   & \Gamma \\
+%   \Beta & 0
+% \end{pmatrix} = 0 \label{eq: determinant marginally stable equilibria}
+% \end{equation}
+% Using the fact that $\Delta$ is invertible, we can make use of the equality\footnote{This uses a formula which is trivially analogous to one found in \cite{powell_calculating_2011}.}:
+% \begin{equation}
+% \det\begin{pmatrix}
+%   -\Delta   & \Gamma \\
+%   \Beta & 0
+% \end{pmatrix} = \det(-\Delta)\det(\Beta\Delta^{-1}\Gamma).
+% \end{equation}
+% Eq.\eqref{eq: determinant marginally stable equilibria} then becomes:
+% \begin{equation}
+% \det(\Beta\Delta^{-1}\Gamma)=0
+% \end{equation}
+% which means that $\Beta \Delta^{-1}\Gamma$ is not full rank. We can hence state the following
+
+
+\subsection{Bounds on the eigenvalues: Gerschgorin circle theorem}\label{sec : gerschgorin circle theorem}
+% Before studying Equation \eqref{eq: master equation non marginal}, we would like to know more about the spectrum of $J^*$. The most critical question is knowing \important{where} we expect the eigenvalues of $J^*$ to lie on the complex plane.
+% \subsubsection{Gerschgorin circle theorem}
+Gerschgorin circle theorem \cite{gerschgorin_uber_1931}
+%allows us to get a better idea of the location of the eigenvalues in the complex plane. It
+states that every eigenvalue of a $N\times N$ square matrix $A$
+is located in one of the $N$ discs $\tilde{D}_i$ defined by:
+\begin{equation}
+\tilde{D}_i\defined \left\{z \in \mathbb{C}: \abs{z-A_{ii}} \leq \sum_{j\neq i} \abs{A_{ij}} \right\}. \label{eq: definition discs Gerschgorin}
+\end{equation}
+In a more mathematical language:
+\begin{equation}
+\sigma(A) \subset \union_{i=1}^N \tilde{D}_i, \label{eq: circle theorem}
+\end{equation}
+where $\sigma(A)$ is the spectrum of $A$. Intuitively, the circle theorem tells us that the eigenvalues of a matrix deviate from the diagonal elements by a value bounded by the sum of the off-diagonal elements.
+It is easy to see that if all the discs $\tilde{D}_i$ are located to the left of the imaginary axis (\ie the discs contain only numbers with a negative real part), then the eigenvalues of $A$ are all negative.
+% \subsection{Low intra resources interaction (LRI) regime }
+% Now that we have a bound on how big the eigenvalues can be, we need strategies to find regimes where we \important{know} $\real{\lambda_1} < 0 $, \ie local dynamical stability is guaranteed. We inspire ourselves from the general idea of the mathematical proofs of \cite{butler_stability_2018}.
+\subsection{Reductio ad absurdum} \label{subsubsec: reductio ad absurdum}
+The strategy we use to solve Eq.\eqref{eq: eigenvalue problem S} is inspired by \cite{butler_stability_2018}. The strategy is to assume we are in an unstable regime, \ie there exists at least one $\lambda \in \sigma(J^*)$ with $\real{\lambda}\geq 0$ that satisfies Eq.\eqref{eq: master equation non marginal} and such that $\real{\lambda} > 0$. By Eq.\eqref{eq: eigenvalue problem S}, $\lambda$ is also an eigenvalue of $S(\lambda)$. If we find conditions under which the real part of the spectrum of $S(\lambda)$ is entirely negative, we will know that $\real{\lambda} \leq 0$. As this is a contradiction to the hypothesis that the regime is unstable, we must conclude that the regime is stable\footnote{Indeed, Eq.\eqref{eq: master equation non marginal} assumes already that either $\real{\lambda_1} >0$ or $\real{\lambda_1} < 0$.}.
+
+Hence, the general idea is to find regimes where we know that the spectrum of $S$%, written as $\sigma(S)$,
+will be entirely negative for a positive $\lambda$. Thanks to the help of the two following theorems, we found such a regime, called \define{low intra-resource interaction} or LRI.
+
+
+\subsection{Monte Carlo algorithm for the optimal matrix} \label{section: methods LRI MC solver}
+We explain how to write a Metropolis-Hastings Markov Chain Monte Carlo (MCMC) method which for an input matrix $M_I$ gives as an output the optimal matrix $M_O$ which minimizes the energy $E(M_I, M_O)$. The procedure follows a traditional Metropolis algorithm:
+\begin{enumerate}
+\item Create a random binary $M_O$. Its connectance is chosen as the one of the consumption matrix $G$.
+\item Do the following for a given number of steps:
+\begin{itemize}
+\item Choose a random row or, every other iteration, a column.
+\item In that row/column, try to swap a zero and a one while preserving the ``releasers'': if a species releases some resource, it has to keep releasing something (the resource can change though). The ``releasees'' are preserved as well: if a resource is being released by some species, it has to keep being released (but it does not have to be by the same species).
+% REMARK : why do we impose such conditions?
+\item The swap is accepted, \ie $M_O$ is modified, if the energy difference $\Delta E$ is negative or if a random number drawn uniformly between zero and one is smaller than $e^{-\Delta E/T}$ where $T$ is the current temperature. More on $\Delta E$ and $T$ below.
+\end{itemize}
+\item Return $M_O$.
+\end{enumerate}
+A couple comments on this algorithm can be made:
+\begin{itemize}
+\item The algorithm preserves the connectance of $M_O$ but not its nestedness. The question of what connectance to choose is open, but we choose $\kappa(M_O)=\kappa(M_I)$ as a first approach, \ie input and output matrices have the same connectance.
+\item The temperature $T$ changes dynamically during the simulation. It is obtained in a way close to the spirit of simulated annealing techniques \cite{gendreau_simulated_2019}: the temperature $T$ is multiplied by a factor $\lambda=0.99$ at a fixed frequency (for instance every 1000 steps). We add the requirement that if new moves are rejected during too many consecutive steps, we multiply the temperature by $1/\lambda$.
+\item The energy difference $\Delta E$ between the new proposed $M_O'$ and the old $M_O$ is computed by assigning an energy $E$ to both $M_O'$ and $M_O$ and subtracting them:
+\begin{equation}
+\Delta E \defined E(M_I, M_O')-E(M_I, M_O).
+\end{equation}
+%The choice of the energy function $E$ is crucial. By design, this MCMC algorithm will find the specific $M_O$ which minimizes $E(M_I, M_O)$.
+\end{itemize}
+That algorithm is used not only to generate the $G$ consumption matrices (Section \ref{sec : set of matrices}), in that case $E$ only depends on the output $G$ so the input matrix does not matter, but also to find the optimal ``LRI'' matrix. In that situation, $E$ depends both on the input consumption matrix $G$ and the output syntrophy matrix $A$ and is given by Eq.\eqref{eq: dynamical stability methods LRI MC solver energy definition}.
+
+
+
+% \paragraph{LRI state for an identity food consumption matrix}
+% We would like to know which systems can be in an LRI regime. Consider here the case of $N_R=N_S$ and every species consumes exactly one resource, to each its own. This means the food consumption adjacency matrix is precisely the identity matrix:
+% \begin{equation}
+% G_{i\mu} = \delta_{i\mu}.
+% \end{equation}
+% We can then compute explicitly the $\Gamma\Beta$ matrix:
+% \begin{equation}
+% \left(\Gamma \Beta\right)_{\mu \nu} = \sum_i \left(\alpha_{\mu i}- \gamma_{i\mu}R_\mu^*\right) \sigma_{i\nu}\gamma_{i\nu}S_i^*=\delta_{\mu\nu}\left(\alpha_{\mu\nu}-\gamma_{\nu\mu}R_\mu^*\right)\sigma_{\mu\nu}\gamma_{\mu\nu}S_\nu^*.
+% \end{equation}
+% Also,
+% \begin{equation}
+% \sum_\nu \abs{B_{i\nu}} = \sum_\nu \sigma_{i\nu}\gamma_{i\nu} S_i^* = \sigma_{\nu\nu}\gamma_{\nu\nu}S^*_\nu,
+% \end{equation}
+% and
+% \begin{equation}
+% \sum_j \abs{\Gamma_{\mu j}}= \abs{\Gamma_{\mu\mu}}=\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu,
+% \end{equation}
+% such that
+% \begin{equation}
+% R_C = \max\left(\max_\mu\left\{\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}, \max_\mu \left\{\abs{\alpha_{\mu\mu}-\gamma_{\mu\mu}R^*_\mu}\sigma_{\mu\mu}\gamma_{\mu\mu}S^*_\mu\right\}\right).
+% \end{equation}
+% Then we have clearly:
+% \begin{empheq}{align}
+% (\Gamma\Beta)_{\mu\mu} = \left(\alpha_{\mu\mu}-\gamma_{\mu\mu}R_\mu^*\right)\sigma_{\mu\mu}\gamma_{\mu\mu}S_\mu^*
+% \end{empheq}
+
+% \subsection{Flux analysis - a way to get a sense of scales}
+% A natural scale free order parameter that at first sight controls the behaviour of the system is the ratio of the syntrophy and consumption fluxes.
+%
+% The rate of consumption (or \textit{consumption flux}) of species $i$ is given by $\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R_\nu S_i$. Hence the total consumption flux $C_{\text{tot}}$ is given by:
+% \begin{equation}
+% C_{\text{tot}} = \sum_{i, \nu} \sigma_{i\nu} \gamma_{i\nu}R_\nu S_i.
+% \end{equation}
+% We can similarly define the total syntrophy flux of the system $S_{\text{tot}}$:
+% \begin{equation}
+% S_{\text{tot}} = \sum_{i, \nu} \alpha_{\nu i} S_i.
+% \end{equation}
+% A natural order parameter $O$ is then
+% \begin{equation}
+% O \equiv \frac{S_{\text{tot}}}{C_{\text{tot}}} = \frac{\sum_{i, \nu} \alpha_{\nu i} S_i}{\sum_{i,\nu}\sigma_{i\nu} \gamma_{i\nu}R_\nu S_i} \approx \frac{N_S N_R \alpha_0 S_0}{\sigma_0 R_0 S_0 N_S N_R \gamma_0} = \frac{\alpha_0}{\sigma_0 R_0 \gamma_0}.
+% \end{equation}
+
+
+
+
+\end{document}

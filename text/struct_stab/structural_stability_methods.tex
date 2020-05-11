@@ -1,0 +1,61 @@
+\documentclass[12pt, titlepage]{report}
+\usepackage{consumer_resource_final}
+\graphicspath{{./figures/}}
+
+\begin{document}
+% For a given consumption-syntrophy network couple, we may finally define the $(\Delta_S,x)$-structurally stable region $\mathcal{S}^{G,A}_{\Delta_S, x}$ of the metaparameter space $\mathcal{M}$ :
+% \begin{equation}
+% \mathcal{S}^{G,A}_{\Delta_S, x} \defined \left\{ m \in \mathcal{M} : \mathcal{S}(\Delta_S, m, G, A)=x \right\}
+% \end{equation}
+% which is the set of all points in the metaparameters space that have a probability $x$ of being stable under a perturbation $\Delta_S$.
+
+
+\subsection{Numerical estimate of the critical structural perturbation}\label{sec : structural stability methods numerical estimate critical perturbation}
+As explained in Section \ref{sec : structural stability intro}, the critical structural perturbation of a set of metaparameters $m$ and a consumption-syntrophy network $(G,A)$ is the point where we shift from structural stability to instability. In that sense, $\Delta_S^*(m, G, A)$ is a measure of how good $(m, G, A)$ respond to structural perturbation and can be interpreted geometrically as the radius of a sphere of ``tolerance'' around the metaparameters $m$. It turns out that $\Delta_S^*$ can be estimated numerically quite easily.
+
+Indeed, to decide whether a system is structurally stable or not, one can simply perturb the parameters of the system, let it time-evolve until it reaches a new equilibrium and count how many of the original consumers are still present at the new equilibrium. By repeating this procedure many times one gets a good estimate of the \define{probability of observing an extinction} $P_E(\Delta_S, m, G, A)$
+after a structural perturbation $\Delta_S$ and it is clear that
+\begin{equation}
+\mathcal{S}(\Delta_S, m, G, A)=1-P_E(\Delta_S, m, G, A).
+\end{equation}
+So $\Delta_S^*(m, G, A)$ can be found by computing $P_E(\Delta_S, m, G, A)$ over the $\Delta_S$-range $[0,1]$ and finding at which point it is equal to 0.5:
+% In practice, a general solver involving methods from the C++ \code{GSL} library was implemented in order to get a good estimate on $\Delta_S^*(m, G, A)$ (see Appendix \ref{app: results structural stability procedure to estimate critical structural perturbation}).
+%As explained in Methods \ref{sec : structural stability methods numerical estimate critical perturbation}, $\Delta_S^*(m, G, A)$ solves the equation:
+\begin{equation}
+P_E\left(\Delta_S^*(m, G, A), m, G, A\right) = 0.5. \label{eq : structural delta definition}
+\end{equation}
+Section \ref{sec : structural stability intro} explains that we choose that specific value of $0.5$ because we expect $\mathcal{S}$ (and hence $P_E$) to have a typical sigmoidal shape which would go from 1 to 0 (or from 0 to 1 for $P_E$) in a very abrupt way as a function of $\Delta_S$. Figure \ref{fig : typical probability observing an extinction} shows that the expected behaviour is indeed observed: the transition between $P_E=0$ and $P_E=1$ is sharp compared to the size of the interval $[0,1]$ where $\Delta_S^*$ lies and the rest of the curve saturates at either 0 or 1.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\linewidth]{{typical_probability_structural_stability_curve}.pdf}
+\caption{Typical probability of finding one extinction when structurally perturbing the system with a magnitude $\Delta_S$. The critical structural perturbation is easily estimated with a sigmoidal fit.}\label{fig : typical probability observing an extinction}
+\end{figure}
+We exploit that property to write an algorithm that solves Eq.\eqref{eq : structural delta definition}. It works in the following way:
+\begin{enumerate}
+\item Through the help of a standard solver from the \code{GSL} library, find a ``high'' $\Delta_H$ for which $P_E(\Delta_H)$ is very close to 1 but smaller, typically $P_E(\Delta_H) \approx 0.99$. Then find a ``low'' $\Delta_L < \Delta_H$, very close to $0$ but larger.
+\item Compute $P_E(\Delta_S)$ for $N_{\text{points}}$ points $\Delta_S$ homogeneously spread in the interval $[\Delta_L, \Delta_H]$.
+\item Because the $P_E(\Delta_S)$ computed at the previous step typically form a sigmoidal shape, fit these points with a sigmoidal function $S_f(\Delta_S)$. We choose:
+\begin{equation}
+S_f(\Delta_S) \defined \frac{1}{1+e^{-C_1(\Delta_S-C_2)}}, \label{eq : choice of fitting structural perturbation}
+\end{equation}
+where the constants $C_1, C_2$ precisely are estimated through the fitting procedure.
+\item $\Delta_S^*(m, G, A)$ is obtained by solving analytically $S_f(\Delta_S^*)=0.5$. For the choice of Eq.\eqref{eq : choice of fitting structural perturbation}, this is trivial : $\Delta_S^* = C_2$. Indeed $S_f(C_2)=1/(1+1)=0.5$. We take the error on $C_2$ obtained through the standard fitting routine from the \code{GSL} library as the ``error'' on $\Delta_S^*$.
+\end{enumerate}
+Finally, it is worth mentioning that $P_E(\Delta_S, m, G, A)$, which again is the probability to observe \important{at least} one extinction when structurally perturbing a parameters set $\mathcal{A}(m,G,A)$ by $\Delta_S$, is estimated numerically through the following procedure:
+\begin{enumerate}
+\item Create a parameters set $\mathcal{A}(m, G, A)$.
+\item Structurally perturb it by an amount $\Delta_S$.
+\item Time evolve the parameters set until an equilibrium is reached. Compute $p_E \in \left\{0;1\right\}$, which is $0$ if no extinction has been observed, and $1$ if at least one extinction occurred.
+\item Repeat steps 1--3 $N_{\text{sys}}$ times. $P_E(\Delta_S)$ is the average value of $p_E$.
+\end{enumerate}
+For the figures of Results \ref{sec : results structural stability}, we used $N_\text{points}=125$ and $N_\text{sys}=50$. We observed (although did not have the time to quantify it properly) that increasing $N_\text{points}$ reduces the error on $\Delta_S^*$ faster than increasing $N_\text{sys}$.
+
+
+
+% Very similarly to dynamical stability, where the abundances of the resources and species are changed, one can perturb the parameters of a model at an equilibrium point. Namely the idea of \textit{structural stability} is the following : one takes a given equilibrium point  $\{R^*, S^*\}$ and changes some or all the parameters of the model. We will focus here on perturbing the external feeding rate of the resources\footnote{This choice may seem a bit arbitrary at first hand. It stems from the idea that we wanted to keep things simple and hence decided to change only one parameter of the model. We chose the external feeding rate of the resources because it simply is the easiest one to control in an actual experimental setup.} :
+% \begin{equation}
+% l_\mu \rightarrow \tilde{l}_\mu \equiv l_\mu \left(1+\Delta_S\right).
+% \end{equation}
+% The system is then time evolved under the equations of evolution \eqref{eq : differential eq for resources and species}, except that $l_\mu \rightarrow \tilde{l}_\mu$, until an equilibrium $\{\tilde{R}^{*}, \tilde{S}^{*}\}$ is reached. The same metrics as before can be used to quantify the structural stability.
+
+\end{document}

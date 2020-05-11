@@ -1,0 +1,396 @@
+\documentclass[12pt, titlepage, twoside, openright]{report}
+
+\usepackage{consumer_resource_final}
+
+\begin{document}
+\subsubsection{Proof of Lemma \ref{lemma: lemma Gerschgorin circle}}
+We prove Lemma \ref{lemma: lemma Gerschgorin circle} below.
+\begin{proof}
+Let $\lambda \in \sigma(A)$. By the circle theorem, there exists $k \in \left\{1,\dots, N\right\}$ such that :
+\begin{equation}
+\abs{\lambda-A_{kk}} \leq \sum_{j\neq k} \abs{A_{kj}}.
+\end{equation}
+We now use the complex identity:
+\begin{equation}
+\abs{\lambda-A_{kk}} \geq \real{\lambda-A_{kk}} = \real{\lambda}-\real{A_{kk}}.
+\end{equation}
+Equation \eqref{eq: alternative version circle theorem} implies:
+\begin{equation}
+\sum_{j\neq k}\abs{A_{kj}} < - \real{A_{kk}}.
+\end{equation}
+Combining the two previous inequalities yields:
+\begin{equation}
+\real{\lambda}-\real{A_{kk}} \leq \abs{\lambda-A_{kk}} \leq \sum_{j\neq k} \abs{A_{kj}} < -\real{A_{kk}}.
+\end{equation}
+Comparing the RHS and LHS of this inequality yields:
+\begin{equation}
+\real{\lambda} < 0.
+\end{equation}
+\end{proof}
+
+\subsubsection{Finding the critical radius}\label{sec : find critical radius}
+\noindent The Gerschgorin circle theorem allows us to get a precious bound on the modulus of each eigenvalue and hence on the one that decides the dynamics of the system $\lambda_1$. Indeed we know that all eigenvalues of $J^*$ will be located in one of the $N_R + N_S$ discs of $J^*$. These are the ``resources'' discs:
+\begin{equation}
+\tilde{D}^R_\mu  \defined \left\{ z \in \mathbb{C}: \abs{z+D_\mu} \leq \sum_j \abs{\Gamma_{\mu j}} \right\}  \ \forall \mu = 1, \dots, N_R,
+\end{equation}
+and the ``consumers'' discs:
+\begin{equation}
+\tilde{D}^C_i \defined \left\{ z \in \mathbb{C}: \abs{z} \leq \sum_\nu \abs{B_{i\nu}}\right\} \ \forall i=1, \dots, N_S.
+\end{equation}
+According to the circle theorem Eq.\eqref{eq: circle theorem}, all eigenvalues will be in the union of these circles, \ie there exists $\forall \lambda \in \sigma\left(J^*\right)$ at least one $\mu^*$ or  one $i^*$ such that:
+\begin{equation}
+\abs{\lambda} \leq \sum_\nu \abs{B_{i^*\nu}} \label{eq: bound lambda consumers}
+\end{equation}
+or
+\begin{equation}
+\abs{\lambda+D_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}} \label{eq: bound lambda 1 resources}
+\end{equation}
+The triangle inequality implies:
+\begin{equation}
+\abs{\lambda} \leq \abs{\lambda+D_{\mu^*}}+\abs{-D_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}} + \abs{-D_{\mu^*}} = \sum_j \abs{\Gamma_{\mu^* j}} + D_{\mu^*}.\label{eq: bound lambda resources better}
+\end{equation}
+The only way both Eq.\eqref{eq: bound lambda consumers} and \eqref{eq: bound lambda resources better} are satisfied for all eigenvalues, and especially the one with the highest real part $\lambda_1$ is if they are bound by the maximum of both RHS of these equations
+
+\subsection{Estimation of the critical radius in terms of metaparameters}\label{sec : estimate critical radius parameters}
+Using techniques very similar to previous computations, we estimate:
+\begin{equation}
+\sum_j \abs{\Gamma_{\mu j}}+D_\mu = \sum_j \abs{\alpha_{\mu j}-\gamma_{j\mu}R^*_\mu}+\frac{l_\mu+\sum_j\alpha_{\mu j} S^*_j}{R^*_\mu} \approx \deg(\Gamma, \mu)\abs{\alpha_0 - \gamma_0 R_0}+\frac{l_0+\deg(A,\mu)\alpha_0 S_0}{R_0}.
+\end{equation}
+It is difficult to simplify $\deg(\Gamma, \mu) \approx \deg(A-G^T, \mu)$. If we assume that $A$ and $G$ have a low connectance then $\deg(A, \mu), \deg(G^T, \mu) \ll N_S$ and we may use the very loose approximation
+\begin{equation}
+\deg(A-G^T, \mu) \approx \deg(A, \mu)+\deg(G, \mu).
+\end{equation}
+In that regime we then have:
+\begin{equation}
+\max_\mu\left\{\sum_j \abs{\Gamma_{\mu j}}+D_\mu\right\} \approx \max_\mu\left\{\left(\deg(A, \mu)+\deg(G, \mu)\right)\abs{\alpha_0-\gamma_0 R_0}+\frac{l_0+\deg(A,\mu)\alpha_0 S_0}{R_0}\right\}.
+\end{equation}
+Similarly we find
+\begin{equation}
+\sum_\nu \abs{B_{i\nu}} \approx \deg(G, i) \sigma_0 \gamma_0 S_0,
+\end{equation}
+
+\subsection{When is zero part of the spectrum of \texorpdfstring{$J^*$}{jstar}?}\label{sec : zero part of spectrum}
+We are interested in knowing when $\lambda=0$ is part of the spectrum of $J^*$. By definition, $\lambda=0$ is an eigenvalue if and only if it solves the master equation \eqref{eq: master equation eigenvalues jacobian}:
+\begin{equation}
+\det
+\begin{pmatrix}
+  -D   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = 0 \label{eq: determinant marginally stable equilibria}
+\end{equation}
+Using the fact that $D$ is invertible, we can make use of the equality\footnote{This uses a formula which is trivially analogous to one found in \cite{powell_calculating_2011}.}:
+\begin{equation}
+\det\begin{pmatrix}
+  -D   & \Gamma \\
+  \Beta & 0
+\end{pmatrix} = \det(-D)\det(\Beta D^{-1}\Gamma).
+\end{equation}
+Eq.\eqref{eq: determinant marginally stable equilibria} then becomes:
+\begin{equation}
+\det(\Beta D^{-1}\Gamma)=0
+\end{equation}
+which means that $\Beta D^{-1}\Gamma$ is not full rank. Finally,
+\begin{equation}
+\boxed{
+0 \in \sigma(J^*) \iff \Beta D^{-1}\Gamma \text{ is not full rank.}\label{eq : condition zero in spectrum of J}
+}
+\end{equation}
+But when is $\Beta D^{-1}\Gamma$ not full rank? Sylvester rank inequality \cite{thome_inequalities_2016} states that:
+\begin{equation}
+\text{rank}(\Beta D^{-1}\Gamma) \geq \text{rank}(\Beta)+\text{rank}(D^{-1}\Gamma)
+-N_R.
+\end{equation}
+Similarly,
+\begin{equation}
+\text{rank}(D^{-1}\Gamma) \geq \text{rank}(D^{-1})+\text{rank}(\Gamma)-N_R=\text{rank}(\Gamma),
+\end{equation}
+where we used the fact that $D^{-1}$ is invertible so $\text{rank}(D^{-1})=N_R$.
+One of the standard rank properties is:
+\begin{equation}
+\text{rank}(D^{-1}\Gamma) \leq \min\left\{\text{rank}(D^{-1}), \text{rank}(\Gamma)\right\} \implies \text{rank}(D^{-1}\Gamma) \leq \text{rank}(\Gamma).
+\end{equation}
+In the end this yields $\text{rank}(D^{-1}\Gamma)=\text{rank}(\Gamma)$ and :
+\begin{equation}
+\text{rank}(\Beta D^{-1}\Gamma) +N_R \geq \text{rank}(\Beta)+\text{rank}(\Gamma). \label{eq : lower bound Beta Delta Gamma}
+\end{equation}
+We can use this inequality to enunciate a lemma about the presence of zero in the spectrum of $J^*$.
+\lemma{If $N_R \leq N_S$ and $\Beta$ and $\Gamma$ are full rank, then $0 \notin \sigma(J^*)$.}
+\begin{proof}
+{We assume that $0$ is in the spectrum of $J^*$ and prove it leads to a contradiction. Because $0 \in \sigma(J^*)$, Eq.\eqref{eq : condition zero in spectrum of J} implies $\Beta D^{-1}\Gamma$ is not full rank. Since the largest possible value for the rank of matrix is the minimum between its number of rows and columns, we have :
+\begin{equation}
+\text{rank}(\Beta D^{-1}\Gamma)< \min(N_R, N_S) = N_R.
+\end{equation}
+This can be used as an upper bound for Eq.\eqref{eq : lower bound Beta Delta Gamma} :
+\begin{equation}
+2 N_R > \text{rank}(\Beta)+\text{rank}(\Gamma).
+\end{equation}
+However, we also know that $\Beta$ and $\Gamma$ are full rank, \ie
+\begin{equation}
+\text{rank}(\Beta)=\text{rank}(\Gamma)=N_R.
+\end{equation}
+Hence the previous inequality amounts to $N_R > N_R$, which is a contradiction. We conclude that the hypothesis $0 \in \sigma(J^*)$ is wrong.
+}
+\end{proof}
+
+\normalfont
+\subsubsection{Weak LRI regime}\label{sec : weak LRI regime}
+We prove Theorem \ref{theorem: weak LRI regime}.
+\begin{proof}
+We assume
+\begin{equation}
+\left(\Gamma \Beta\right)_{\mu\mu} < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}}  \ \forall \mu.
+\end{equation}
+Let $\lambda \in \mathbb{R}$, then the following will also trivially hold:
+\begin{equation}
+  \left(\Gamma\Beta \right)_{\mu\mu} -\lambda^2 < - \sum_{\nu \neq \mu } \abs{\left(\Gamma \Beta\right)_{\mu \nu}} \ \forall \mu. \label{eq: low species bound 1}
+\end{equation}
+Dividing Eq.\eqref{eq: low species bound 1} by $D_\mu$, we get:
+\begin{equation}
+\frac{1}{D_\mu}\left[\left(\sum_i \Gamma_{\mu i} \Beta_{i \mu} \right)-{\lambda^2}\right] < - \sum_{\nu \neq \mu } \abs{\frac{\sum_i \Gamma_{\mu i}\Beta_{i\nu}}{D_\mu}} \ \forall \mu.
+\end{equation}
+Looking at Eq.\eqref{eq: definition S component wise}, we see that this is equivalent to:
+\begin{equation}
+S_{\mu \mu} + \sum_{\nu \neq \mu} \abs{S_{\mu \nu}} < 0\ \forall \mu.
+\end{equation}
+Using Lemma \ref{lemma: lemma Gerschgorin circle}, we know that all the real eigenvalues of $S(\lambda)$ will have a negative real part.
+We can conclude with the statement of the theorem.
+\end{proof}
+
+\normalfont
+\subsection{Special determinant computation}\label{app : special determinant computation}
+We want to know when the determinant of the following $N$-dimensional square matrix is zero:
+\begin{equation}
+A_N = \begin{pmatrix}
+a & b & b  \\
+b & \ddots & b  \\
+b & b & a
+\end{pmatrix}, \ie \ A_{ij} = b+(a-b)\delta_{ij}.
+\end{equation}
+The equation we want to solve is:
+\begin{equation}
+\det\left(A_N\right)=0. \label{app: eq: det A_N 0}
+\end{equation}
+Note that, using Gaussian elimination, Eq.\eqref{app: eq: det A_N 0} can be transformed in:
+\begin{equation}
+\det\begin{pmatrix}
+a & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}=0
+\end{equation}
+Using Laplace's expansion, this can be written as:
+\begin{equation}
+ a \det\begin{pmatrix}
+a-b & 0 & \dots & 0 \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}+(a-b)
+\det\begin{pmatrix}
+b & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}=0 \label{app: eq: laplace expansion}
+\end{equation}
+Since the first term of the previous equation is a lower triangular matrix, its determinant is easily found:
+\begin{equation}
+a \det\begin{pmatrix}
+a-b & 0 & \dots & 0 \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix} = a\left(a-b\right)^{n-1}.
+\end{equation}
+Finding an explicit equation for the left term is a bit more involving. Let us define the general $n$ square matrix $F_n(a,b)$:
+\begin{equation}
+F_n(a,b) = \begin{pmatrix}
+b & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}.
+\end{equation}
+With a Laplace expansion one gets:
+\begin{equation}
+\det\left(F_n(a,b)\right)= b
+\det\begin{pmatrix}
+a-b & 0 & 0 \\
+b-a & \ddots & 0 \\
+0 & b-a & a-b
+\end{pmatrix}+(a-b)\det\begin{pmatrix}
+b & b & \dots & b \\
+b-a & a-b & 0 & 0 \\
+0 & \ddots & \ddots & 0 \\
+0 & 0 & b-a & a-b
+\end{pmatrix}.
+\end{equation}
+This means:
+\begin{equation}
+\det(F_n(a,b))=b(a-b)^{n-1}+(a-b)\det(F_{n-1}(a,b)).
+\end{equation}
+It is easy to check that the solution to the previous equation is:
+\begin{equation}
+\det(F_n(a,b))=\left[(n-1)b+\det\left(F_1(a,b)\right)\right](a-b)^{n-1}.
+\end{equation}
+Since $\det\left(F_1(a,b)\right)=1$, we get:
+\begin{equation}
+\det\left(F_n(a,b)\right)=n(a-b)^{n-1}b
+\end{equation}
+Inserting this in Eq.\eqref{app: eq: laplace expansion} yields:
+\begin{equation}
+\boxed{
+\det(A_N)=0 \iff (a-b)^{N-1}\left[a+(N-1)b\right]=0.
+}\label{eq: formula special determinant}
+\end{equation}
+
+
+\subsection{Approximation of the full spectrum }\label{sec: approximate full spectrum}
+We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we follow a standard deviation expansion, explained in Section \ref{sec : standard deviation expansion}.
+	 \paragraph{Rewriting the jacobian at equilibrium}
+	 The different blocks of the jacobian at equilibrium \eqref{eq: jacobian at equilibrium} can be written with the new variables :
+	 \begin{empheq}[left=\empheqlbrace]{align}
+	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 + N_S \alpha_0 S_0 + \sigma_l \tilde{l}_\mu + \sigma_\alpha S_0 \sum_j \tilde{\alpha}_{\mu j} + \sigma_\alpha \sigma_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j}{R_0 + \sigma_R \tilde{r}_\mu} \\
+	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 + \alpha_0 + \sigma_\gamma R_0 \tilde{\gamma}_{j\mu} + \sigma_R \gamma_0 \tilde{r}_\mu + \sigma_\alpha \tilde{\alpha}_{\mu j} + \sigma_\gamma \sigma_R \tilde{\gamma}_{j\mu} \tilde{r}_\mu \\
+	 \sigma_{i\nu}\gamma_{i\nu}S^*_i &= \sigma_0 \gamma_0 S_0 + \sigma_\sigma \gamma_0 S_0 \tilde{\sigma}_{i\nu} + \sigma_{\gamma} \sigma_0 S_0 \tilde{\gamma}_{i\nu}+\sigma_S \sigma_0 \gamma_0 \tilde{s}_i + \sigma_\sigma \sigma_\gamma S_0 \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu} \nonumber \\
+	  & \ \ \ + \sigma_\sigma \sigma_S \gamma_0 \tilde{\sigma}_{i\nu} \tilde{s}_i + \sigma_\gamma \sigma_S \sigma_0 \tilde{\gamma}_{i\nu}\tilde{s}_i + \sigma_{\sigma} \sigma_{\gamma} \sigma_{S} \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu}\tilde{s}_i
+	 \end{empheq}
+	 It's easier to work with relative standard deviations, \ie we rewrite for all parameters :
+	 \begin{equation}
+	 \sigma_P \equiv \epsilon_P \av{P}, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
+	 \end{equation}
+	 The previous relations then become :
+	 \begin{empheq}[left=\empheqlbrace]{align}
+	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 \left(1+\epsilon_l \tilde{l}_\mu\right)+ \alpha_0 S_0 \left( N_S +\epsilon_\alpha \sum_j \tilde{\alpha}_{\mu j} + \epsilon_\alpha \epsilon_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j \right) }{R_0 \left(1+\epsilon_R\tilde{r}_\mu\right)} \\
+	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 \left(1+\epsilon_\gamma \tilde{\gamma}_{j\mu} + \epsilon_R  \tilde{r}_\mu + \epsilon_\gamma \epsilon_R  \tilde{\gamma}_{j\mu} \tilde{r}_\mu\right) + \alpha_0 \left(1+\epsilon_\alpha \tilde{\alpha}_{\mu j}  \right) \\
+	 \sigma_{i\nu}\gamma_{i\nu}S^*_i &= \sigma_0 \gamma_0 S_0 \left( 1 + \epsilon_\sigma \tilde{\sigma}_{i\nu} + \epsilon_{\gamma}  \tilde{\gamma}_{i\nu}+\epsilon_S  \tilde{s}_i + \epsilon_\sigma \epsilon_\gamma  \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu}  +\epsilon_\sigma \epsilon_S  \tilde{\sigma}_{i\nu} \tilde{s}_i  \right. \nonumber \\
+	  & \ \ \  \left. + \epsilon_\gamma \epsilon_S  \tilde{\gamma}_{i\nu}\tilde{s}_i+ \epsilon_{\sigma} \epsilon_{\gamma} \epsilon_{S}  \tilde{\sigma}_{i\nu}\tilde{\gamma}_{i\nu}\tilde{s}_i \right)
+	 \end{empheq}
+
+
+	 \subsubsection{Standard deviation expansion at first order}
+	 We assume the relative standard deviations are small:
+	 \begin{equation}
+	 \epsilon_P \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
+	 \end{equation}
+	 The previous equations can be rewritten as:
+	 \begin{empheq}[left=\empheqlbrace]{align}
+	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0+N_S\alpha_0 S_0}{R_0} - \epsilon_R \frac{l_0+N_S\alpha_0 S_0}{R_0} \tilde{r}_\mu + \epsilon_l \frac{l_0}{R_0} \tilde{l}_\mu + \epsilon_\alpha \frac{\alpha_0 S_0}{R_0} \sum_j \tilde{\alpha}_{\mu j} \\
+	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &=  -\gamma_0 R_0 + \alpha_0 - \epsilon_\gamma \gamma_0 R_0 \tilde{\gamma}_{j \mu} - \epsilon_R \gamma_0 R_0 \tilde{r}_\mu +\epsilon_\alpha \alpha_0 \tilde{\alpha}_{\mu j}\\
+	 \sigma_{i\nu}\gamma_{i\nu}S^*_i &=\sigma_0 \gamma_0 S_0 \left( 1 + \epsilon_\sigma \tilde{\sigma}_{i\nu} + \epsilon_{\gamma}  \tilde{\gamma}_{i\nu}+\epsilon_S  \tilde{s}_i \right)
+	 \end{empheq}
+	 where we neglect all terms of order $\bigO(\epsilon^2)$.
+	 We now assume furthermore that the relative standard deviations of every parameter in the model more or less have the same value which again is assumed small, \ie we set :
+	 \begin{equation}
+	 \epsilon_P \approx \epsilon \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
+	 \end{equation}
+	 This allows us to rewrite the jacobian at equilibrium as:
+	 \begin{equation}
+	 J^* = J_0 + \epsilon \tilde{J},
+	 \end{equation}
+	 with
+	 \begin{equation}
+	 J_0 = \begin{pmatrix}
+	 -D_0 & \Gamma_0  \\
+	 B_0 & 0
+	 \end{pmatrix}
+	 \end{equation}
+	 where
+	 \begin{empheq}{align}
+	 (D_0)_{\mu \nu} &\defined D_0 \delta_{\mu \nu } = \frac{l_0 + N_S \alpha_0 S_0}{R_0} \delta_{\mu \nu} \\
+	 (\Gamma_0)_{\mu i} & \defined \Gamma_0 = -\gamma_0 R_0 + \alpha_0 \\
+	 (\Beta_0)_{i \nu} & \defined \Beta_0 = \sigma_0 \gamma_0 S_0
+	 \end{empheq}
+	 and
+	 \begin{equation}
+	 \tilde{J} = \begin{pmatrix}
+	 \tilde{D} & \tilde{\Gamma} \\
+	 \tilde{\Beta} & 0
+	 \end{pmatrix}
+	 \end{equation}
+	 with
+	 \begin{empheq}{align}
+	 \tilde{D}_{\mu \nu} & \defined \left(-D_0 \tilde{r}_\mu + \frac{l_0}{R_0}\tilde{l}_\mu+ \frac{\alpha_0 S_0}{R_0} \sum_j \tilde{\alpha}_{\mu j}\right)\delta_{\mu \nu} \\
+	 \tilde{\Gamma}_{\mu i} & \defined \alpha_0 \tilde{\alpha}_{\mu i} - \gamma_0 R_0 \left(\tilde{\gamma}_{i\mu}+\tilde{r}_\mu\right) \\
+	 \tilde{B}_{i \mu} & \defined B_0 \left(\tilde{\sigma}_{i\mu}+\tilde{\gamma}_{i\mu}+\tilde{s}_i\right)
+	 \end{empheq}
+	Using Jacobi's formula \cite{magnus_matrix_2019}, the equation $\det\left(J^*-\lambda \identity{N_R+N_S}\right)=0$ can be rewritten as:
+	\begin{equation}
+	\boxed{
+	\det(J_0-\lambda \identity{N_R+N_S} + \epsilon J^*)=\det(J_0-\lambda \identity{N_R+N_S})+\epsilon \ \trace{\text{adj}(J_0-\lambda \identity{N_R+N_S})\tilde{J}}=0.
+	}\label{eq : determinant variance first order}
+	\end{equation}
+	where $\text{adj}\left(\dots\right)$ is the adjugate operator (\ie which yields the transpose of the cofactor matrix). This equation is a complicated polynomial of degree $N_R+N_S$. We do not know how to find an easily computable solution for $\epsilon > 0$. An explicit solution can however be computed when $\epsilon = 0$.
+
+  \paragraph{Zero variance case}\label{sec : methods dynamical stability fully connected zero variance}
+  When $\epsilon=0$, Eq.\eqref{eq : determinant variance first order} becomes:
+  \begin{equation}
+  \det(J_0-\lambda \identity{N_R+N_S})=\det\begin{pmatrix}
+  -D_0-\lambda \identity{N_R} & \Gamma_0 \\
+  B_0 & -\lambda \identity{N_S}
+  \end{pmatrix}
+  =
+  0
+  \end{equation}
+  If we assume that $\lambda\neq 0$, using a reasoning similar to Section \ref{section: non marginal equilibria} we can write the previous equation as:
+  \begin{equation}
+  \det\left(\lambda^2 \identity{N_R}+D_0 \lambda - \Gamma_0 \Beta_0 \right)=0 \label{eq : determinant no variance}
+  \end{equation}
+  Component-wise, we have:
+  \begin{equation}
+  \left(\lambda^2 \identity{N_R}+D_0 \lambda - \Gamma_0 \Beta_0 \right)_{\mu\nu} = \left(\lambda^2+D_0 \lambda\right)\delta_{\mu \nu} - \Gamma_0\Beta_0.
+  \end{equation}
+  Appendix \ref{app : special determinant computation} explains how to find the non-zero solutions of Eq.\eqref{eq : determinant no variance}. They are given by the roots of the polynomial:
+  \begin{equation}
+  \left(\lambda+D_0\right)^{N_R-1}\left(\lambda^2+D_0 \lambda -N_R \Gamma_0 \Beta_0\right)=0.
+  \end{equation}
+  That equation gives us $N_R-1+2=N_R+1$ non-zero eigenvalues, which means that there are $N_S-1$ zero eigenvalues. The two eigenvalues different from $-D_0$ or $0$ are the roots of the second degree polynomial:
+  \begin{equation}
+  \lambda^2 + D_0 \lambda- N_R \Gamma_0 \Beta_0 =0.
+  \end{equation}
+  In the end, the spectrum is given by:
+  \begin{itemize}
+  \item if $\Gamma_0 < -\frac{D_0^2}{4 N_R \Beta_0}$ :
+  \begin{equation}
+  \sigma(J_0)= \left\{0, \dots, 0, -D_0, \dots, -D_0, -\frac{D_0}{2} \left(1\pm i \sqrt{-\left(1+\frac{4N_R\Gamma_0\Beta_0}{D_0^2}\right)}\right)\right\}
+  \end{equation}
+  \item if $\Gamma_0 = -\frac{D_0^2}{4 N_R \Beta_0}$ :
+  \begin{equation}
+  \sigma(J_0)= \left\{0, \dots, 0, -D_0, \dots, -D_0, -\frac{D_0}{2}, -\frac{D_0}{2}\right\}
+  \end{equation}
+  \item if $\Gamma_0 > -\frac{D_0^2}{4 N_R \Beta_0}$ :
+  \begin{equation}
+  \sigma(J_0)= \left\{0, \dots, 0, -D_0, \dots, -D_0, -\frac{D_0}{2} \left(1\pm \sqrt{1+\frac{4N_R\Gamma_0\Beta_0}{D_0^2}}\right)\right\} \label{eq : spectrum fully connected possibly negative}
+  \end{equation}
+  \end{itemize}
+  It then becomes clear that the system is dynamically unstable if and only if $\frac{4N_R\Gamma_0 \Beta_0}{D_0^2} > 0 $. Because $N_R, \Beta_0 > 0$, we get the condition:
+  \begin{equation}
+  \boxed{
+  \text{The non-variance system is dynamically unstable} \iff \Gamma_0 > 0.
+  }
+  \end{equation}
+  If $\Gamma_0 \leq 0$, the fully connected system will be marginally stable.
+  Note that the RHS of the feasibility condition Eq.\eqref{eq : fully feasible volume} is equivalent in the fully connected case to :
+  \begin{equation}
+  \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0)\gamma_0 R_0 \iff \Gamma_0 \lessapprox \left[\min(1-\sigma_0, \sigma_0)-1\right] \gamma_0 R_0 < 0,
+  \end{equation}
+  which means that the case $\Gamma_0 > 0$ is simply not feasible. So in the end the feasible fully connected case is marginally stable and its non-zero eigenvalues have a negative real part.
+
+  We see that all but one non-zero eigenvalues are given by $-D_0$. However the last eigenvalue is determined by
+  $4N_R\Gamma_0\Beta_0+D_0^2$. It gives us the ``deviation'' away from $-D_0/2$ and hence also plays an essential role in the stability. Looking at its sign allows us to find possibly more locally dynamically stable zones of the metaparameters space $\mathcal{M}$. Indeed we expect to find more stable systems in the case of Eq.\eqref{eq : spectrum fully connected possibly negative} if $4 N_R \Gamma_0 \Beta_0 + D_0 ^2$ is small, \ie
+  \begin{equation}
+  4 N_R \Gamma_0 \Beta_0 + D_0 ^2 \ll 1 \iff 4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2} \ll 1.
+  \end{equation}
+
+  \subsection{The optimal \texorpdfstring{$S_0$}{S0} for locally dynamically stable systems} \label{sec: appendix how to handle S0}
+  How $S_0$ should be adjusted is a bit tricky because it is present in three terms that do not have the same behaviour: one term is linear in $S_0$ with a negative coefficient, another is linear with a positive coefficient and another is quadratic (also with a positive coefficient). So we need to compute the minimum value the sum of these three terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is implicitly given by the condition:
+  \begin{equation}
+  \frac{d}{dS_0} \left[4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2}\right]_{S_0=S_0^*}=0.
+  \end{equation}
+  The enthusiastic reader sees that this is equivalent to:
+  \begin{equation}
+  S_0^* = \frac{R_0^2}{N_S^2 \alpha_0^2}\left(2N_R\sigma_0 \gamma_0\left(\gamma_0R_0-\alpha_0\right)-\frac{N_S \alpha_0 l_0}{R_0^2}\right).
+  \end{equation}
+  One checks really easily that this point is indeed a minimum in $S_0$. So if $S_0 > S_0^*$ it should be decreased, and otherwise increased. For $\alpha_0 \rightarrow 0$, $S_0^* \rightarrow \infty$, and for $\alpha_0 \rightarrow \infty$, $S_0^* \rightarrow 0^-$, which means we expect to find the most dynamically stable points at large $S_0$ for low syntrophy and at low $S_0$ for large syntrophy. 
+\end{document}

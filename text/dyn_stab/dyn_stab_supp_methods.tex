@@ -1,0 +1,206 @@
+\documentclass[12pt, titlepage, twoside, openright]{report}
+
+\usepackage{consumer_resource_final}
+
+\begin{document}
+\subsubsection{Effective system}
+\normalfont
+Models which involve the dynamics of species only are in general better known than consumers-resources models. In particular, a huge body of literature exists on the study of Lotka-Volterra systems \cite{lotka_analytical_1920, takeuchi_global_1996}. We may profit from this knowledge by transforming the effect of the resources dynamics into an effective consumers-only Lotka-Volterra system.
+
+This can be done by assuming that the resources reach an equilibrium way faster than the consumers.
+Mathematically, that is equivalent to
+\begin{equation}
+  \frac{dR_\mu}{dt} \approx 0, \\ \forall \mu.
+\end{equation}
+Using Eq.\eqref{eq: differential eq for resources}, we get an explicit value for the resources:
+\begin{equation}
+  R_\mu \approx \frac{l_\mu+\sum_j \alpha_{\mu j}S_j}{m_\mu + \sum_k \gamma_{k\mu}S_k}.
+\end{equation}
+This expression can be used in Eq.\eqref{eq: differential eq for species} to get an effective system which describes the dynamics of the $N_S$ consumers:
+\begin{equation}
+  \frac{dS_i}{dt} = \left(\sum_\nu \left(\frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k} - \alpha_{\nu i}\right) -d_i + \sum_{\nu j} \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}S_j \right) S_i.
+\end{equation}
+This can be rewritten in a more compact way:
+\begin{equation}
+  \frac{dS_i}{dt} = p_i(S) S_i + \sum_j M_{ij}(S)S_i S_j \label{eq: effective equations of evolution}
+\end{equation}
+with
+\begin{equation}
+    p_i(S) = -\left(d_i+\sum_{\nu}\alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu+\sum_k \gamma_{k\nu}S_k}\text{ and } M_{ij}(S)=\sum_{\nu}\frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu+\sum_{k}\gamma_{k\nu}S_k}.
+\end{equation}
+If we assume the species $S_k$ are not too far away from their equilibrium values\footnote{Note that this is very rarely true, especially in the context of the study of structural stability, where entire species sometimes die out.}, \ie
+\begin{equation}
+S_k \approx S^*_k \ \forall k,
+\end{equation}
+then using Eq.\eqref{eq : feasibility positive m} we can simplify $p_i$. Indeed,
+\begin{equation}
+m_\nu + \sum_k \gamma_{k\nu} S_k \approx m_\nu + \sum_k \gamma_{k\nu}S^*_k = \frac{l_\nu + \sum_k \alpha_{\nu k}S^*_k}{R^*_\nu} \label{eq: equality fluxes resource}
+\end{equation}
+Hence, the explicit dynamical dependence on $S$ can be removed from $p_i$ and $M_{ij}$:
+\begin{equation}
+p_i(S) \approx p_i \equiv - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu R^*_\nu}{l_\nu + \sum_k \alpha_{\nu k}S^*_k},
+\end{equation} and
+\begin{equation}
+M_{ij}(S) \approx M_{ij} \equiv \sum_\nu \frac{\sigma_{i\nu} \gamma_{i\nu} R^*_\nu \alpha_{\nu j}}{l_\nu + \sum_k{\alpha_{\nu k} S^*_k}}.
+\end{equation}
+\subsubsection{Perturbation analysis}
+We study a system that we put close to an equilibrium $S^*$, \ie
+\begin{equation}
+S=S^*+\Delta S, \\ \text{with } \Delta S \ll 1.
+\end{equation}
+Written this way, the effective equations of motion Eq.\eqref{eq: effective equations of evolution} are equivalent to:
+\begin{equation}
+\frac{d\Delta S_i}{dt} = p_i(S^*+\Delta S)\left(S^*_i + \Delta S_i\right)+\sum_j M_{ij}(S^*+\Delta S)\left(S^*_i +\Delta S_i\right)\left(S^*_j +\Delta S_j\right).
+\end{equation}
+Since the deviations from equilibrium $\Delta S_i \ll 1$, we can forget the terms in higher power than quadratic:
+\begin{equation}
+\frac{d\Delta S_i}{dt} = \tilde{p}_i \Delta S_i + \sum_j E_{ij} \Delta S_j + \bigO(\Delta S^2),\label{eq: effective equ evol at O(D2)}
+\end{equation}
+with
+\begin{equation}
+\tilde{p}_i \equiv p_i(S^*) + \sum_k M_{ik}(S^*)S_k^*, \label{eq: tilde p effective system}
+\end{equation}
+and
+\begin{equation}
+E_{ij} \equiv \left(\partiald{p_i}{S_j}\evaluatedat{S^*}+M_{ij}(S^*)+\sum_k \partiald{M_{ik}}{S_j}\evaluatedat{S^*}S^*_k\right)S^*_i.
+\end{equation}
+After some computations, we can get $\tilde{p}_i$ and $E_{ij}$ in terms of the initial parameters. Indeed,
+\begin{equation}
+p_i(S^*)= -\left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}l_\nu}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}
+\end{equation}
+and
+\begin{equation}
+M_{ik}(S^*) = \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}\alpha_{\nu j}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}.
+\end{equation}
+Hence, using Eq.\eqref{eq: tilde p effective system}:
+\begin{equation}
+\tilde{p}_i = - \left(d_i + \sum_\nu \alpha_{\nu i}\right) + \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}}{m_\nu + \sum_k \gamma_{k\nu}S^*_k}\left(l_\nu+\sum_{j}\alpha_{\nu j} S^*_j\right).
+\end{equation}
+This can be simplified using Eq.\eqref{eq: equality fluxes resource} and Eq.\eqref{eq: equilibrium species}:
+\begin{equation}
+\tilde{p}_i=-d_i +\sum_\nu \sigma_{i\nu}\gamma_{i\nu}R^*_\nu = \sum_\nu \alpha_{\nu i}.
+\end{equation}
+With a similar computation, one finds
+\begin{equation}
+E_{ij}=\sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right).
+\end{equation}
+Finally, Eq.\eqref{eq: effective equ evol at O(D2)} can be recast in
+\begin{equation}
+\frac{d\Delta S_i}{dt} = \sum_j (J_E)_{ij} \Delta S_j,
+\end{equation}
+where the effective $N_S\times N_S$ jacobian matrix $J_E$ is defined by:
+\begin{equation}
+(J_E)_{ij}=\sum_\nu \left[\frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right)+\alpha_{\nu i}\delta_{ij}\right].
+\end{equation}
+We see that we without surprise we find again the $\Beta, \Gamma $ and $D$ matrices coming from the jacobian at equilibrium:
+\begin{equation}
+\left(J_E\right)_{ij}=\sum_\nu \left[\frac{\Beta_{i\nu}\Gamma_{\nu j}}{D_\nu}+\alpha_{\nu i} \delta_{ij}\right]
+\end{equation}
+This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.
+
+\subsubsection{Measuring the feasibility and local dynamical stability volumes}\label{app: how to measure volume}
+In the main text, we study how the sizes of both the fully feasible and the fully locally dynamically stable regions, respectively $\mathcal{F}_1^{G,A}(\alpha_0)$ and $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$, change as a function of $G$, $A$ and $\alpha_0$. It is important to explain in what way (and why in \textit{that} way) these are computed. We define the \important{volume} of $\mathcal{F}^{G,A}_1(\alpha_0)$, or \define{feasibility volume}, as:
+\begin{equation}
+\vol{\mathcal{F}^{G,A}_1(\alpha_0)}\defined \frac{\iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0 \ \mathcal{F}\left(m, G, A\right)}{\iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0} = \iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0 \ \mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right). \label{eq : app definition fully feasible volume of G, A}
+\end{equation}
+The \important{volume} of $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$, or \define{(local) dynamical stability volume} is similarly defined:
+\begin{equation}
+\vol{\mathcal{D}_{L,1}^{G,A}(\alpha_0)}\defined \iint_{(\gamma_0, S_0)\in[0,1]^2} d\gamma_0 \ dS_0 \ \mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right).
+\end{equation}
+The feasibility and dynamical stability volumes do not \textit{stricto sensu} measure the area occupied by the fully feasible and fully dynamically stable regions, respectively. In the case of the feasibility volume, it is documented in the main text that the zone where $\mathcal{F}(m, G,A)$ is different from $1$ or $0$ is very small so measuring the volume this way does not provide a significant difference to naively counting the number of points for which the feasibility function is \textit{exactly} 1.
+
+However, in the case of the dynamical stability volume, this approach would provide unsatisfactory results. Indeed, $\mathcal{D}_{L}(m, G, A)$ is a function that may be very patchy \textbf{TO DO: insert ref to picture of $D_L$ as a function of alpha0}: many points are not fully dynamically stable but rather \important{almost} fully dynamically stable, in the sense that there are many $m$ such that $\mathcal{D}_{L}(m, G, A)$ is extremely close to but not exactly equal to 1. Because of this, counting exactly the points where $\mathcal{D}_{L}(m, G, A)=1$ is very prone to noise, in the sense that it depends a lot on the precision at which $\mathcal{D}_L(m,G,A)$ is evaluated. We know that a lot of points are only \textit{almost} fully dynamically stable; if we increase the number of simulations to evaluate $\mathcal{D}_{L}(m, G, A)$, who can tell if the points that were previously identified as fully dynamically stable would be now only almost fully dynamically stable and hence not counted in the volume anymore?
+
+Because of such considerations taking into account every point but pondering it by its value of the feasibility/dynamical stability function not only provides a measure close to the idea of measuring the ``full volume'' but also provides smoother and more robust results.
+
+Following that line of thought, we also define the \important{common feasibility volume}, which is a measure of the common fully feasible region $\mathcal{F}_1^{S_M}(\alpha_0)$ of a matrix set $S_M$ at a given syntrophic interaction strength $\alpha_0$:
+\begin{equation}
+\vol{\mathcal{F}_1^{S_M}} \defined \iint_{(\gamma_0, S_0) \in [0,1]^2} d\gamma_0 \ dS_0 \min_{(G,A)\in S_M} \left\{\mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right)\right\}.
+\end{equation}
+In a completely analogous manner, the \important{common (local) dynamical stability volume} of a matrix set $S_M$ is given by:
+\begin{equation}
+\vol{\mathcal{D}_{L,1}^{S_M}} \defined \iint_{(\gamma_0, S_0) \in [0,1]^2} d\gamma_0 \ dS_0 \min_{(G,A)\in S_M} \left\{\mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)\right\}.
+\end{equation}
+In practice, the integrals appearing in the above formulas are approximated numerically. The unit square $(\gamma_0, S_0) \in [0,1]^2$ is discretized in a set $\left\{(\gamma_0^i, S_0^{i})\text{ with } i=1, \dots, N_\text{points}\right\}$ which are then summed up with their according weights, \eg for Equation \eqref{eq : app definition fully feasible volume of G, A}:
+\begin{equation}
+\vol{\mathcal{F}_1^{G,A}(\alpha_0)} \approx \frac{\sum_{i=1}^{N_\text{points}}\mathcal{F}\left((\gamma_0^{i}, S_0^{i}), \alpha_0, G, A\right)}{N_\text{points}}.
+\end{equation}
+
+\subsubsection{Center of dynamical stability}\label{app : center of gravity local dynamical stability}
+The general idea behind the center of dynamical stability $(\av{\gamma_0}_D(\alpha_0), \av{S_0}_D(\alpha_0))$ is to show that as syntrophy increases, only systems with a large $\gamma_0$ and a small $S_0$ remain dynamically stable (and hence feasible). For the case of feasibility, that was an easy task, one only needs to look at a heat map of $\mathcal{F}^{S_{25}}_1(\alpha_0)$ (Fig.\ref{fig: results feasibility cfv variation with syntrophy}) and see that only such zones remain fully feasible as syntrophy grows. However, as explained in the main text, that figure can not be replicated for the case of dynamical stability. Because of the almost fully dynamically stable points, the fully dynamically stable region $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$ of each $(G,A) \in S_{25}$ is very fragmented such that the common fully dynamically stable region $\mathcal{D}_{L,1}^{S_{25}}(\alpha_0)$ vanishes for $\alpha_0 > 0$ (Fig.\ref{fig: dynamical stability results common fully dynamically stable volume}). But even though $\mathcal{D}_{L,1}^{S_{25}}(\alpha_0)$ quickly vanishes, it does not mean that there are no dynamically stable $(\gamma_0, S_0)$, on the opposite (Fig.\ref{fig: dynamical stability results local dynamical stability region for different matrices})! This is the reason we need another measure to show how syntrophy changes the location of the dynamically stable points.
+
+Intuitively, we would like something that tells us basically where \important{on average} the most dynamically stable $(\gamma_0, S_0)$ are. This is very close to the physical idea of the center of gravity, which tells you where most of the mass of an object lies. In consequence we define the \define{center of dynamical stability} $(\av{\gamma_0}_D(\alpha_0), \av{S_0}_D(\alpha_0))$ with the same formulae, namely:
+\begin{equation}
+\av{\gamma_0}_D(\alpha_0) \defined \frac{1}{N_{\hat{0}}^{S_{25}}}\sum_{(G,A) \in S_{25}} \frac{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)}  \gamma_0 \ \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)} \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right) }
+\end{equation}
+and
+\begin{equation}
+\av{S_0}_D(\alpha_0) \defined \frac{1}{N_{\hat{0}}^{S_{25}}}\sum_{(G,A) \in S_{25}} \frac{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)}  S_0 \ \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\iint_{(\gamma_0, S_0) \in \mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)} \mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right) }
+\end{equation}
+where $\mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)$ is the set of points where the dynamical stability function has mass (\ie does not vanish):
+\begin{equation}
+\mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right) = \left\{(\gamma_0, S_0):\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right) > 0\right\}
+\end{equation}
+and $N_{\hat{0}}^{S_{25}}$ simply denotes the number of consumption-syntrophy networks $(G,A) \in S_{25}$, which have non-zero points, \ie for which $\mathcal{D}_{L, \hat{0}}^{G,A}\left(\alpha_0\right)$ is not empty.
+
+\subsubsection{Probability of dynamical stability when feasibility is ensured}\label{app : probability of being dynamically stable when feasible}
+We here define the \define{probability of being dynamically stable when feasible} $\text{Prob}\left(\mathcal{D}_L | \mathcal{F}\right)(G,A, \alpha_0)$ for a network $(G,A)$ and a syntrophy $\alpha_0$. First consider a single point $(\gamma_0, S_0, \alpha_0)$. We use conditional probability theory \cite{kolmogorov_foundations_1960} to get the probability $\text{Prob}(\mathcal{D}_L | \mathcal{F})$ that $(\gamma_0, S_0, \alpha_0)$ is dynamically stable if it feasible:
+\begin{equation}
+\text{Prob}(\mathcal{D}_L | \mathcal{F})(G, A, \gamma_0, S_0, \alpha_0) \defined \frac{\text{Prob}(\mathcal{D}_L \intersection{} \mathcal{F})(G, A, \gamma_0, S_0, \alpha_0)}{\text{Prob}(\mathcal{F})(G, A, \gamma_0, S_0, \alpha_0)}, \label{eq : app conditional probability}
+\end{equation}
+where $\text{Prob}\left(\mathcal{D}_L \intersection{} \mathcal{F}\right)$, resp. $\text{Prob}\left(\mathcal{F}\right)$ are the probabilites that $(\gamma_0, S_0, \alpha_0)$ are dynamically stable and feasible, resp. feasible. Since we required feasibility in the definition of dynamical stability, we have $\text{Prob}\left(\mathcal{D}_L \intersection{} \mathcal{F}\right)=\text{Prob}\left(\mathcal{D}_L\right)$. Using Eqs.\eqref{eq : feasibility methods feasibility metaparameters function} and \eqref{eq : dyn stab methods dynamical stability function}, one gets from Eq.\eqref{eq : app conditional probability}:
+\begin{equation}
+\text{Prob}(\mathcal{D}_L | \mathcal{F})(G, A, \gamma_0, S_0, \alpha_0) = \frac{\text{Prob}(\mathcal{D}_L)(G, A, \gamma_0, S_0, \alpha_0)}{\text{Prob}(\mathcal{F})(G, A, \gamma_0, S_0, \alpha_0)} = \frac{\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right)}.
+\end{equation}
+Finally the probability of being dynamically stable when feasible is taken as the average over the feasible points $(\gamma_0, S_0)$ of the previous quantity:
+\begin{equation}
+\text{Prob}\left(\mathcal{D}_L | \mathcal{F}\right)(G, A, \alpha_0) \defined \frac{\iint_{(\gamma_0, S_0) \in \mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)}d\gamma_0 \ dS_0 \ \frac{\mathcal{D}_L\left((\gamma_0, S_0, \alpha_0), G, A\right)}{\mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right)}}{\iint_{(\gamma_0, S_0) \in \mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)}d\gamma_0 \ dS_0 }
+\end{equation}
+where $\mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)$ is simply the set of not unfeasible points:
+\begin{equation}
+\mathcal{F}^{G,A}_{\hat{0}}(\alpha_0) \defined \left\{(\gamma_0, S_0) : \mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right) > 0\right\}.
+\end{equation}
+Note that in practice we do not take into account points outside of the unit square $[0,1]^2$ for obvious numerical considerations.
+
+As an application, we consider the very special case of the fully connected consumption and syntrophy networks. In this ``mean-field'' theory, every consumer consumes and releases each resource, \ie
+\begin{equation}
+G_{i\mu}=A_{\mu i}=1 \ \forall \mu=1, \dots, N_R \ \ \forall i=1, \dots, N_S.
+\end{equation}
+Our goal is to find the spectrum of systems with such consumption and syntrophy networks.
+\citeauthor{barbier_cavity_2017} showed that the variance of the interaction matrix plays a leading role in the dynamics of their model \cite{barbier_cavity_2017}. We follow an approach similar to theirs and perform a \important{standard deviation expansion}.
+
+\subsubsection{Standard deviation expansion}\label{sec : standard deviation expansion}
+The idea behind the standard deviation expansion is the following. Let $q_{i\mu}$ be an arbitrary matrix of size $N_S \times N_R$. The nice trick done in \cite{barbier_cavity_2017} is to write the elements of the $q$ matrix in terms of new variables $\tilde{q}_{i\mu}$:
+\begin{equation}
+q_{i\mu} = \av{q} + \sigma_q \tilde{q}_{i\mu}. \label{eq : separation matrix average standard dev}
+\end{equation}
+In that expression, $\av{q}$ is the average of $q$, element-wise
+\begin{equation}
+\av{q}\defined \frac{\sum_{\mu,i} q_{i\mu}}{N_S N_R},
+\end{equation}
+and $\sigma_q$ is the standard deviation of $q$, again element-wise:
+\begin{equation}
+\sigma_q \defined \sqrt{\av{q^2}-\av{q}^2} \text{ with } \av{q^2}\defined \frac{\sum_{\mu,i} q_{i\mu}^2}{N_S N_R}.
+\end{equation}
+The main advantage of this procedure is that we get a clear idea about the scales involved. A matrix element $q_{i\mu}$ is roughly the mean $\av{q}$ plus a deviation $\sigma_q$ multiplied by a factor of magnitude $\sim$ 1. Indeed the $\tilde{q}_{i\mu}$ are not large since they follow the two equalities \cite{barbier_cavity_2017}:
+\begin{equation}
+\av{\tilde{q}} = 0 \text{ and } \av{\tilde{q}^2} = 1.
+\end{equation}
+We apply this framework to our problem by noticing that if the $q_{i\mu}$ are all random samples coming from the same distribution law $\mathfrak{Q}$, we can write the following approximation in the case $N_R, N_S \gg 1 $:
+\begin{equation}
+\av{q} \approx \av{\mathfrak{Q}} \defined q_0.
+\end{equation}
+We can then rewrite the free parameters of our model\footnote{This works with $\gamma$ and $\alpha$ because $G$ and $A$ have a trivial topology. Otherwise we would have to take their structure into account and the computations would not be as easy.}:
+\begin{subequations}\label{eq : rewrite with metaparameters}
+\begin{empheq}[left=\empheqlbrace]{align}
+l_\nu & \approx l_0 + \sigma_l \tilde{l}_\nu \\
+R^*_\nu & \approx R_0 + \sigma_R \tilde{r}_\nu \\
+S^*_i & \approx S_0 + \sigma_S \tilde{s}_i \\
+\gamma_{i\nu} & \approx \gamma_0 + \sigma_\gamma  \tilde{g}_{i\nu} \\
+\alpha_{\nu i} & \approx \alpha_0 + \sigma_\alpha \tilde{\alpha}_{\nu i} \\
+\sigma_{i\nu } & \approx \sigma_0 + \sigma_\sigma \tilde{\sigma}_{i\nu}
+\end{empheq}
+\end{subequations}
+	 The strategy is to assume that the standard deviations are small which allows us to proceed to a first order Taylor expansion.
+
+\end{document}

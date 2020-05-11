@@ -1,0 +1,96 @@
+\documentclass[12pt, titlepage, twoside, openright]{report}
+
+\usepackage{consumer_resource_final}
+
+\begin{document}
+\subsubsection{Estimating the fully feasible region}\label{sec : estimating fully feasible region metaparameters}
+\paragraph{Biomass conservation}
+As stated in the main text, we require that biomass is conserved in our model. This is equivalent to fulfilling Eq.\eqref{eq : feasability biomass conservation}, which we rewrite here:
+\begin{equation}
+\sum_\nu \left(1-\sigma_{i\nu}\right)\gamma_{i\nu}R^*_\nu \geq \sum_\nu \alpha_{\nu i} \ \forall i=1,\dots, N_S.
+\end{equation}
+%% The idea is to neglect the variance of every quantity involved \ie we use the approximation
+%% \begin{equation}
+%% \gamma_{i\mu} \approx \gamma_0 G_{i\mu}, \ \alpha_{\mu i}\approx \alpha_0 A_{\mu i}, \ \sigma_{i\nu} = \sigma_0 \text{ and }R^*_\nu \approx R_0.
+%% \end{equation}
+%% This means the RHS of Eq.\eqref{eq : feasability biomass conservation} is roughly given by
+Eqs.\eqref{eq: metaparameters approximations} can be used to estimate the RHS of this equation:
+\begin{equation}
+\sum_\nu \alpha_{\nu i} \approx \deg(A, i) \alpha_0,
+\end{equation}
+where $\deg(A,i)$ is the degree of the $i$-th column of the $\alpha$ matrix :
+\begin{equation}
+\deg(A, i) = \sum_\nu A_{\nu i}.
+\end{equation}
+Similarly,
+\begin{equation}
+\sum_\nu \left(1-\sigma_{i\nu}\right)\gamma_{i\nu} R^*_\nu \approx (1-\sigma_0)R_0\sum_{\nu}\gamma_{i\nu} \approx \deg(G, i)(1-\sigma_0)R_0\gamma_0,
+\end{equation}
+Energy conservation Eq.\eqref{eq : feasability biomass conservation} is then equivalent to
+\begin{equation}
+\deg(A,i) \alpha_0 \lessapprox \deg(G,i) (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S
+\end{equation}
+Since $\deg(G,i) > 0 $, we have\footnote{Indeed, $\deg(G,i)$ is the number of resources species $i$ eats. We of course ask every consumer to at least consume something, otherwise they would not be part of the microbial community.}:
+\begin{equation}
+\frac{\deg(A,i)}{\deg(G,i)} \alpha_0 \lessapprox (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S
+\end{equation}
+This is fulfilled if :
+\begin{equation}\label{eq: feasability energy conservation}
+\boxed{
+\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox (1-\sigma_0)R_0 \gamma_0
+}.
+\end{equation}
+  Systems where the ratio $\frac{\# \text{resources released to}}{\# \text{resources consumed}}$ is small for each species allow for a larger individual syntrophy interaction (which is very intuitive).
+\paragraph{Biological interpretation of the parameters}
+Additionally, the consumers death rates $d_i$ have to be positive. This implied Eq.\eqref{eq : feasibility positive d}, which may be recast as :
+\begin{equation}
+\sum_\mu \sigma_{i\mu}\gamma_{i\mu}R^*_\mu > \sum_\mu \alpha_{\mu i}
+\end{equation}
+Using a reasoning similar to above, we get a corresponding metaparameters inequality:
+\begin{equation} \label{eq : feasability positivity d}
+\boxed{
+\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox \sigma_0R_0 \gamma_0
+}.
+\end{equation}
+Also, the resources diffusion rates $m_\nu$ need to be positive:
+\begin{equation}
+l_\nu + \sum_j \alpha_{\nu j} S^*_j > \sum_j \gamma_{j\nu}R^*_\nu S^*_j \ \forall \nu=1,\dots,N_R
+\end{equation}
+Which is equivalent to
+\begin{equation}
+l_0 + \deg(A, \nu) \alpha_0 S_0 \gtrapprox \deg(G,\nu) \gamma_0 R_0 S_0 \ \forall \nu
+\end{equation}
+Since $\deg(G,\nu)>0$, we\footnote{Similarly to a previous footnote, we require that every resource $\nu$ is eaten by at least one consumer, \ie $\deg(G,\nu)>0$, otherwise it does not belong to the community.} can divide the above equations by $\deg(G,\nu)>0$ and then recast these $N_R$ equations into a single condition:
+\begin{equation} \label{eq : feasability positivity m}
+\boxed{
+\min_\nu\left\{\frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\} \gtrapprox \gamma_0 R_0
+}
+\end{equation}
+This says that systems where the ratio $\frac{\#\text{number of species that release to me}}{\#\text{number of species that consume me}}$ is large for every resource are more feasible. The strategy should be then to have $\gamma$'s that have large $\deg(G,\nu)$ (\ie resources are consumed by many species) and large $\deg(G,i)$ (\ie species consume a lot of species), and the other way around for $\alpha$ (not sure about this for the last one).
+
+\subsubsection{Combining both conditions}
+The two upper bounds Eqs.\eqref{eq: feasability energy conservation}-\eqref{eq : feasability positivity d} on $\alpha_0$ can be combined in a single inequality :
+\begin{equation} \label{eq : largest feasible alpha0 with structure}
+\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
+\end{equation}
+Note that when $\alpha_0 > 0$, we will trivially require that the syntrophy matrix is not empty, \ie there exists at least an $i$ for which $\deg(A,i) \geq 1$. Also, the largest value $\deg(G,i)$ can get (for any $i$) is $N_R$. Hence,
+\begin{equation}
+\max_i\left\{ \frac{\deg(A,i)}{\deg(G,i)} \right\} \geq \frac{1}{N_R},
+\end{equation}
+and we can find the largest allowed theoretical non-zero $\alpha_0$ :
+\begin{equation}
+\boxed{
+\alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 N_R. \label{eq : largest feasible alpha0}
+}
+\end{equation}
+Finally, Eq.\eqref{eq : feasability positivity m} and \eqref{eq : largest feasible alpha0 with structure} can be combined into a single one, which characterises the fully feasible region $\mathcal{F}^{G,A}_1$:
+\begin{equation}
+\boxed{
+\max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0
+\lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
+\lessapprox
+\min \left(1-\sigma_0, \sigma_0 \right) \min_\nu \left\{ \frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\}
+}
+\end{equation}
+
+\end{document}
