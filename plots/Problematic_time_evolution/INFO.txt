@@ -1,1 +1,0 @@
-all of these done with convergence threshold=1e-8
