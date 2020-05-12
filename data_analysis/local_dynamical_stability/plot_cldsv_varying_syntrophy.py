@@ -14,6 +14,12 @@ optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
 matrix_set='S_{50}'
 
+filename = 'local_dynamical_stability/all_mat_local_dynamical_stability_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
+consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
+matrix_set='S_{25}'
+
+
 cmap = plt.cm.get_cmap('jet_r')
 colors = [cmap(i/10) for i in range(len(alpha0))]
 
@@ -78,12 +84,13 @@ for j in range(len(local_dynamical_stability_region[0][0])):
         print(err_decay_rate)
         ax.plot(fitted_alpha0, fitted_dyn_volume,color=alpha_mode_colours[i], marker='None', linestyle='solid')
         ax.plot(alpha0, lds_volume, label=label[i], color=alpha_mode_colours[i])
-        ax.set_yscale('linear')
+        #ax.set_yscale('linear')
         local_critical_alpha0.append(estimated_alpha_crit)
         local_decline.append(est_decay_rate)
         err_decline.append(err_decay_rate)
         #print(popt)
         #ax.plot(alpha0, fitted_vol, linestyle='-', marker='None')
+    ax.set_yscale('log')
     ax.set_xlabel(r'$\alpha_0$')
     ax.set_ylabel(r'Vol$\left(\mathcal{D}^{G,A}_{L,1}(\alpha_0)\right)$')
     ax.legend()

@@ -28,19 +28,19 @@ Similarly,
 \end{equation}
 Energy conservation Eq.\eqref{eq : feasability biomass conservation} is then equivalent to
 \begin{equation}
-\deg(A,i) \alpha_0 \lessapprox \deg(G,i) (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S
+\deg(A,i) \alpha_0 \lessapprox \deg(G,i) (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S.
 \end{equation}
 Since $\deg(G,i) > 0 $, we have\footnote{Indeed, $\deg(G,i)$ is the number of resources species $i$ eats. We of course ask every consumer to at least consume something, otherwise they would not be part of the microbial community.}:
 \begin{equation}
-\frac{\deg(A,i)}{\deg(G,i)} \alpha_0 \lessapprox (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S
+\frac{\deg(A,i)}{\deg(G,i)} \alpha_0 \lessapprox (1-\sigma_0)R_0\gamma_0 \ \forall i=1,...,N_S.
 \end{equation}
 This is fulfilled if :
 \begin{equation}\label{eq: feasability energy conservation}
-\boxed{
+{
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox (1-\sigma_0)R_0 \gamma_0
 }.
 \end{equation}
-  Systems where the ratio $\frac{\# \text{resources released to}}{\# \text{resources consumed}}$ is small for each species allow for a larger individual syntrophy interaction (which is very intuitive).
+  %Systems where the ratio $\frac{\# \text{resources released to}}{\# \text{resources consumed}}$ is small for each species allow for a larger individual syntrophy interaction (which is very intuitive).
 \paragraph{Biological interpretation of the parameters}
 Additionally, the consumers death rates $d_i$ have to be positive. This implied Eq.\eqref{eq : feasibility positive d}, which may be recast as :
 \begin{equation}
@@ -48,25 +48,23 @@ Additionally, the consumers death rates $d_i$ have to be positive. This implied 
 \end{equation}
 Using a reasoning similar to above, we get a corresponding metaparameters inequality:
 \begin{equation} \label{eq : feasability positivity d}
-\boxed{
+{
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0 \lessapprox \sigma_0R_0 \gamma_0
 }.
 \end{equation}
 Also, the resources diffusion rates $m_\nu$ need to be positive:
 \begin{equation}
-l_\nu + \sum_j \alpha_{\nu j} S^*_j > \sum_j \gamma_{j\nu}R^*_\nu S^*_j \ \forall \nu=1,\dots,N_R
+l_\nu + \sum_j \alpha_{\nu j} S^*_j > \sum_j \gamma_{j\nu}R^*_\nu S^*_j \ \forall \nu=1,\dots,N_R,
 \end{equation}
-Which is equivalent to
+which is equivalent to
 \begin{equation}
-l_0 + \deg(A, \nu) \alpha_0 S_0 \gtrapprox \deg(G,\nu) \gamma_0 R_0 S_0 \ \forall \nu
+l_0 + \deg(A, \nu) \alpha_0 S_0 \gtrapprox \deg(G,\nu) \gamma_0 R_0 S_0 \quad \forall \nu.
 \end{equation}
-Since $\deg(G,\nu)>0$, we\footnote{Similarly to a previous footnote, we require that every resource $\nu$ is eaten by at least one consumer, \ie $\deg(G,\nu)>0$, otherwise it does not belong to the community.} can divide the above equations by $\deg(G,\nu)>0$ and then recast these $N_R$ equations into a single condition:
+Since $\deg(G,\nu)>0$, we can divide the above equations\footnote{Similarly to a previous footnote, we require that every resource $\nu$ is eaten by at least one consumer, \ie $\deg(G,\nu)>0$, otherwise it does not belong to the community.} by $\deg(G,\nu)>0$ and then recast these $N_R$ equations into a single condition:
 \begin{equation} \label{eq : feasability positivity m}
-\boxed{
-\min_\nu\left\{\frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\} \gtrapprox \gamma_0 R_0
-}
+\min_\nu\left\{\frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\} \gtrapprox \gamma_0 R_0.
 \end{equation}
-This says that systems where the ratio $\frac{\#\text{number of species that release to me}}{\#\text{number of species that consume me}}$ is large for every resource are more feasible. The strategy should be then to have $\gamma$'s that have large $\deg(G,\nu)$ (\ie resources are consumed by many species) and large $\deg(G,i)$ (\ie species consume a lot of species), and the other way around for $\alpha$ (not sure about this for the last one).
+%This says that systems where the ratio $\frac{\#\text{number of species that release to me}}{\#\text{number of species that consume me}}$ is large for every resource are more feasible. The strategy should be then to have $\gamma$'s that have large $\deg(G,\nu)$ (\ie resources are consumed by many species) and large $\deg(G,i)$ (\ie species consume a lot of species), and the other way around for $\alpha$ (not sure about this for the last one).
 
 \subsubsection{Combining both conditions}
 The two upper bounds Eqs.\eqref{eq: feasability energy conservation}-\eqref{eq : feasability positivity d} on $\alpha_0$ can be combined in a single inequality :
@@ -79,18 +77,18 @@ Note that when $\alpha_0 > 0$, we will trivially require that the syntrophy matr
 \end{equation}
 and we can find the largest allowed theoretical non-zero $\alpha_0$ :
 \begin{equation}
-\boxed{
+{
 \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 N_R. \label{eq : largest feasible alpha0}
-}
+}.
 \end{equation}
 Finally, Eq.\eqref{eq : feasability positivity m} and \eqref{eq : largest feasible alpha0 with structure} can be combined into a single one, which characterizes the fully feasible region $\mathcal{F}^{G,A}_1$:
 \begin{equation}
-\boxed{
+{
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0
 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0
 \lessapprox
 \min \left(1-\sigma_0, \sigma_0 \right) \min_\nu \left\{ \frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\}
-}
+}.
 \end{equation}
 
 \end{document}
