@@ -83,7 +83,7 @@ and we can find the largest allowed theoretical non-zero $\alpha_0$ :
 \alpha_0 \lessapprox \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 N_R. \label{eq : largest feasible alpha0}
 }
 \end{equation}
-Finally, Eq.\eqref{eq : feasability positivity m} and \eqref{eq : largest feasible alpha0 with structure} can be combined into a single one, which characterizes the fully feasible region $\mathcal{F}^{G,A}_1$:
+Finally, Eq.\eqref{eq : feasability positivity m} and \eqref{eq : largest feasible alpha0 with structure} can be combined into a single one, which characterises the fully feasible region $\mathcal{F}^{G,A}_1$:
 \begin{equation}
 \boxed{
 \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0
