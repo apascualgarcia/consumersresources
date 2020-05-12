@@ -9,12 +9,12 @@
 % Why biology?
 %   - Biology always has been a field of interest for physicists and mathematicians , namely because some problems in biology are very apt to the formalism of physics (talk not only about biophysics but also about model flock of birds with fluid dynamics equations and how statistical physics is used in ecology community: PT between neutral and niche)
 
-Biology and Physics are tightly intertwined. Especially the years following the end of World War II saw many famous physicists getting interested in the blooming field of Biology \cite{jogalekar_physicists_nodate}, Leo Szilard or Erwin Schroedinger and his \citetitle{schrodinger_what_1944} \cite{schrodinger_what_1944} among others. That exodus is no surprise, many biological phenomena at different scales are well modelled with Physics weaponry: from the use of Statistical Physics to solve protein folding problems \cite{chan_protein_1993} and find phase transitions in ecological communities \cite{fisher_transition_2014} to the application of Hamiltonian dynamics to describe the movement of starling flocks \cite{attanasi_information_2014}.
+Biology and Physics are tightly intertwined. Especially the years following the end of World War II saw many famous physicists getting interested in the blooming field of Biology \cite{jogalekar_physicists_nodate}, Leo Szilard or Erwin Schr\¨odinger and his \citetitle{schrodinger_what_1944} \cite{schrodinger_what_1944} among others. That exodus is no surprise, many biological phenomena at different scales are well modelled with Physics weaponry: from the use of Statistical Physics to solve protein folding problems \cite{chan_protein_1993} and find phase transitions in ecological communities \cite{fisher_transition_2014} to the application of Hamiltonian dynamics to describe the movement of starling flocks \cite{attanasi_information_2014}.
 
 % Why microbes?
 %   - microbial communities are useful: due to complex interactions (microorganisms tightly shaped to humans), substantial impact on human health and ecosystem functioning in natural environments (cite verterbrate gut paper for health and water paper + ocean paper for environment)
 
-However, many problems are not solved yet: the study of microbial communities remains one of the biggest and most interesting challenges of contemporal microbiology. Indeed microbes and their complex interactions have a substantial, non trivial and very large impact on humans and their environment in various ways: we only start to understand the role of microbiological interactions in vertebrates' guts \cite{ley_worlds_2008}, or how they shape our soils \cite{becerra-castro_wastewater_2015} and oceans \cite{falkowski_biogeochemical_1998}.
+However, many problems are not solved yet: the study of microbial communities remains one of the biggest and most interesting challenges of contemporary microbiology. Indeed microbes and their complex interactions have a substantial, non trivial and very large impact on humans and their environment in various ways: we only start to understand the role of microbiological interactions in vertebrates' guts \cite{ley_worlds_2008}, or how they shape our soils \cite{becerra-castro_wastewater_2015} and oceans \cite{falkowski_biogeochemical_1998}.
 % Why syntrophic interaction?
 %   - basically because those effects come from the metabolic activity of the MCs, and a big part of it is syntrophy,
 
@@ -44,10 +44,10 @@ We write down a CRM which describes the coupled evolution of the biomass of $N_S
 \frac{dS_i}{dt} &= \sum_\nu \sigma_{i\nu} \gamma_{i\nu} R_\nu S_i- d_i S_i - \sum_\nu \alpha_{\nu i} S_i \label{eq: differential eq for species}
 \end{empheq}
 \end{subequations}
-The set of quantities $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ has no explicit dynamics and is taken as constant. On the other hand, $\{R_\mu, S_i\}$ may dynamically evolve and will be refered to as \define{dynamical variables}. Note that there are in this model a lot of different symbols that link different quantities and may be easy to confuse. We will at least try to keep the following conventions:
+The set of quantities $\{l_\mu, m_\mu, \gamma_{i\mu}, \alpha_{\mu i}, \sigma_{i\mu}, d_i\}$ has no explicit dynamics and is taken as constant. On the other hand, $\{R_\mu, S_i\}$ may dynamically evolve and will be referred to as \define{dynamical variables}. Note that there are in this model a lot of different symbols that link different quantities and may be easy to confuse. We will at least try to keep the following conventions:
 \begin{itemize}
-  \item Quantities related to resources have subscripts in greek alphabet (\eg the resource $\mu$ has abundance $R_\mu$).
-  \item Quantities related to species have subscripts in latin alphabet (\eg the species $i$ has abundance $S_i$).
+  \item Quantities related to resources have subscripts in Greek alphabet (\eg the resource $\mu$ has abundance $R_\mu$).
+  \item Quantities related to species have subscripts in Latin alphabet (\eg the species $i$ has abundance $S_i$).
   \item Finally, quantities related to both have both indices.
 %   \item Vectors (\ie quantities with one index) are written with the latin alphabet (\eg the resource $\mu$ has death rate $m_\mu$).
 %   \item Matrices (\ie quantities with two indices, usually relating resources and species) are written with the greek alphabet (\eg $\gamma_{i\mu}$ is the rate at which species $i$ consumes resource $\mu$).
@@ -201,7 +201,7 @@ is the \define{Jacobian matrix of the system at equilibrium} $J^*$, given by :
 \begin{equation}
 J^* \defined J(t_0),
 \end{equation}
-where $J(t)$ is the \define{Jacobian} of the system \ie the jacobian matrix of its temporal evolution \eqref{eq: differential eq for resources and species} evaluated at time $t$. $J(t)$ has a block matrix structure which is given by:
+where $J(t)$ is the \define{Jacobian} of the system \ie the Jacobian matrix of its temporal evolution \eqref{eq: differential eq for resources and species} evaluated at time $t$. $J(t)$ has a block matrix structure which is given by:
 \begin{equation}
   J(t) \defined
 \begin{pmatrix}
@@ -263,7 +263,7 @@ More precisely, we are interested in the real part of $\lambda_1$, which is defi
 \end{equation}
 where $\sigma(J^*)$ is the set of eigenvalues of $J^*$, called the \define{spectrum} of $J^*$. Perturbation analysis tells us that the sign of the real part of $\lambda_1$ governs the local stability of the system at equilibrium \cite{strogatz_nonlinear_1994}. There are three cases:
 \begin{itemize}
-\item $\real{\lambda_1} < 0$: any perturbation on the abundances is exponentially supressed. The system is stable.
+\item $\real{\lambda_1} < 0$: any perturbation on the abundances is exponentially suppressed. The system is stable.
 \item $\real{\lambda_1} > 0$: any perturbation on the abundances is exponentially amplified. The system is unstable.
 \item $\real{\lambda_1}=0$: a second order perturbation analysis is required to assess the system's local dynamical stability. We call such systems \textit{marginally stable} \cite{biroli_marginally_2018}.
 \end{itemize}
@@ -281,7 +281,7 @@ We require that $p$ is feasible in order to be locally dynamically stable:
 \begin{equation}
 \mathfrak{D}_L(p)=1 \implies \mathfrak{F}(p)=1. \label{eq: locally dynamically stable implies feasible}
 \end{equation}
-We also define the \define{metaparameters set local dynamical stability function} $\mathcal{D}_L: \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ which tells us, given a set of metaparamters $m \in \mathcal{M}$ and a consumption-syntrophy network $B=(G,A)$ the chance that the procedure $\mathcal{A}(m,B)$ gives a locally dynamically stable set of parameters:
+We also define the \define{metaparameters set local dynamical stability function} $\mathcal{D}_L: \mathcal{M} \times \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S} \rightarrow [0,1]$ which tells us, given a set of metaparameters $m \in \mathcal{M}$ and a consumption-syntrophy network $B=(G,A)$ the chance that the procedure $\mathcal{A}(m,B)$ gives a locally dynamically stable set of parameters:
 \begin{equation}
 {\mathcal{D}_L(m, B)\defined\text{Probability}\left\{\mathfrak{D}_L(\mathcal{A}(m, B))=1\right\}}. \label{eq : dyn stab methods dynamical stability function}
 \end{equation}
@@ -422,7 +422,7 @@ where $\mathfrak{Q}$ is a random variable of mean $Q_0$ and standard deviation $
 % S^*_i &= \mathfrak{S}
 % \end{empheq}
 % \end{subequations}
-In order to make computations analytically tractable, we require the standard deviation on the parameters involved in the problem to be small compated to the mean, \ie not larger than typically $10\%$. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$. We call $Q_0$ a \define{metaparameter}. While studying things analytically we will hence often come back to the following approximation\footnote{Note that we do not add any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero. In particular, we require positive-valued equilibria \cite{butler_stability_2018}.}:
+In order to make computations analytically tractable, we require the standard deviation on the parameters involved in the problem to be small compared to the mean, \ie not larger than typically $10\%$. In that regime, every random variable $\mathcal{Q}$ is well approximated by its average value $Q_0$. We call $Q_0$ a \define{metaparameter}. While studying things analytically we will hence often come back to the following approximation\footnote{Note that we do not add any explicit topological structure on $l_\mu, m_\mu, d_i, R^*_\mu, S^*_i$ and $\sigma_{i\mu}$ because we require these to always be larger than zero. In particular, we require positive-valued equilibria \cite{butler_stability_2018}.}:
 \begin{subequations}\label{eq: metaparameters approximations}
 \begin{empheq}[left=\empheqlbrace]{align}
 l_\mu &\approx l_0 \\
@@ -448,7 +448,7 @@ Of course, collapsing a very high dimensional space to a low-dimensional space m
 which brings us from the collapsed space to the parameter space\footnote{Note that since the collapsed space is lower dimensional than the parameters space, $\mathcal{A}$ is not the inverse of $\mathcal{C}$.}. Numerically, from a set of metaparameters $m \in \mathcal{M}$ and binary matrices $B=(G, A) \in \mathcal{B}_{N_S \times N_R} \times \mathcal{B}_{N_R \times N_S}$, we produce a (or several) set(s) of parameters $p = \mathcal{A}(m, B) \in \mathcal{P}$ and study properties of it.
 
 \subsection{Matrix properties}
-Mathematically, when we do analytical computations, we mostly work in the collapsed space $\mathcal{C}(\mathcal{P})$ because it reduces the number of parameters from $3N_R+2N_S+3N_RN_S$ (continous) to $8$ (continous) + $2N_RN_S$ (binary). For $N_R$ and $ N_S$ large, the $2N_R N_S$ degrees of freedom that come from the consumption network $G$ and the syntrophy network $A$ are still too many to track individually. To simplify the problem even further, instead of looking at each entry of the binary matrices $G$ and $A$ individually, we will consider only some globally defined quantities of these matrices. Although the conclusions that recent studies of ecological systems draw is sometimes controversed, they have shown that both connectance \cite{thebault_stability_2010, james_disentangling_2012} and nestedness \cite{bastolla_architecture_2009, rohr_structural_2014, pascual-garcia_mutualism_2017} of the matrices of the system play a special role in the dynamics of the system. These two metrics are defined the following way for a matrix $M_{ij}$:
+Mathematically, when we do analytical computations, we mostly work in the collapsed space $\mathcal{C}(\mathcal{P})$ because it reduces the number of parameters from $3N_R+2N_S+3N_RN_S$ (continuous) to $8$ (continuous) + $2N_RN_S$ (binary). For $N_R$ and $ N_S$ large, the $2N_R N_S$ degrees of freedom that come from the consumption network $G$ and the syntrophy network $A$ are still too many to track individually. To simplify the problem even further, instead of looking at each entry of the binary matrices $G$ and $A$ individually, we will consider only some globally defined quantities of these matrices. Although the conclusions that recent studies of ecological systems draw is sometimes controversial, they have shown that both connectance \cite{thebault_stability_2010, james_disentangling_2012} and nestedness \cite{bastolla_architecture_2009, rohr_structural_2014, pascual-garcia_mutualism_2017} of the matrices of the system play a special role in the dynamics of the system. These two metrics are defined the following way for a matrix $M_{ij}$:
 %For a matrix $M_{ij}$ the metrics interesting to us are most of all:
 \begin{itemize}
 \item \textbf{Connectance}: this measure, simply defined as the ratio of non-zero links in a matrix %, is central in the study of plants-and-animals systems \cite{pascual-garcia_mutualism_2017}. It
@@ -459,7 +459,7 @@ is formally defined for a matrix $q_{ij}$  of size $N\times M$ as:
 where $Q$ is the (binary) network adjacency matrix of $q$.
 
 
-\item \textbf{Nestedness}: for the matrix consumption $G$, we will call it especially the ``ecological overlap''. That quantity measures how ``nested'' the system is, \ie if there are clusters grouped together\footnote{In typical Lotka-Volterra models, where only species-species interactions are considered, \eg \cite{iannelli_introduction_2014}, measuring the nestedness of the $\gamma$ consumption matrix would be in the same spirit as counting how many niches there are in the community.}. It is known \cite{bastolla_architecture_2009, pascual-garcia_mutualism_2017} that nestedness can play a profound role in the dynamics of ecological communities. Although it is somewhat controversed \cite{jonhson_factors_2013}, we will keep the definition of the nestedness $\eta(M)$ of a binary matrix $M$ as it was used in \cite{bastolla_architecture_2009}:
+\item \textbf{Nestedness}: for the matrix consumption $G$, we will call it especially the ``ecological overlap''. That quantity measures how ``nested'' the system is, \ie if there are clusters grouped together\footnote{In typical Lotka-Volterra models, where only species-species interactions are considered, \eg \cite{iannelli_introduction_2014}, measuring the nestedness of the $\gamma$ consumption matrix would be in the same spirit as counting how many niches there are in the community.}. It is known \cite{bastolla_architecture_2009, pascual-garcia_mutualism_2017} that nestedness can play a profound role in the dynamics of ecological communities. Although it is somewhat controversial \cite{jonhson_factors_2013}, we will keep the definition of the nestedness $\eta(M)$ of a binary matrix $M$ as it was used in \cite{bastolla_architecture_2009}:
 \begin{equation}
 \eta(M)\defined \frac{\sum_{i<j} n_{ij}}{\sum_{i < j} \min(n_i, n_j)}
 \end{equation}
