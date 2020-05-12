@@ -27,11 +27,11 @@ In a completely analogous manner, the \important{common (local) dynamical stabil
 \begin{equation}
 \vol{\mathcal{D}_{L,1}^{S_M}} \defined \iint_{(\gamma_0, S_0) \in [0,1]^2} d\gamma_0 \ dS_0 \min_{(G,A)\in S_M} \left\{\mathcal{D}_{L}\left((\gamma_0, S_0, \alpha_0), G, A\right)\right\}.
 \end{equation}
-In practice, the integrals appearing in the above formulas are approximated numerically. The unit square $(\gamma_0, S_0) \in [0,1]^2$ is discretized in a set $\left\{(\gamma_0^i, S_0^{i})\text{ with } i=1, \dots, N_\text{points}\right\}$ which are then summed up with their according weights, \eg for Equation \eqref{eq : app definition fully feasible volume of G, A}:
+In practice, the integrals appearing in the above formulas are approximated numerically. The unit square $(\gamma_0, S_0) \in [0,1]^2$ is discretized in a set $\left\{(\gamma_0^i, S_0^{i})\text{ with } i=1, \dots, N_\text{totpoints}\right\}$ which are then summed up with their according weights, \eg for Equation \eqref{eq : app definition fully feasible volume of G, A}:
 \begin{equation}
-\vol{\mathcal{F}_1^{G,A}(\alpha_0)} \approx \frac{\sum_{i=1}^{N_\text{points}}\mathcal{F}\left((\gamma_0^{i}, S_0^{i}), \alpha_0, G, A\right)}{N_\text{points}}.
+\vol{\mathcal{F}_1^{G,A}(\alpha_0)} \approx \frac{\sum_{i=1}^{N_\text{points}}\mathcal{F}\left((\gamma_0^{i}, S_0^{i}), \alpha_0, G, A\right)}{N_\text{totpoints}}.
 \end{equation}
-
+Typically, as said above in Section \ref{sec: choice of metaparameters}, $N_\text{totpoints}=100^2$ when studying matrices with $N_R=25$ and $N_\text{totpoints}=30^2$ when studying matrices with $N_R=50$.
 \subsubsection{Center of dynamical stability}\label{app : center of gravity local dynamical stability}
 The general idea behind the center of dynamical stability $(\av{\gamma_0}_D(\alpha_0), \av{S_0}_D(\alpha_0))$ is to show that as syntrophy increases, only systems with a large $\gamma_0$ and a small $S_0$ remain dynamically stable (and hence feasible). For the case of feasibility, that was an easy task, one only needs to look at a heat map of $\mathcal{F}^{S_{25}}_1(\alpha_0)$ (Fig.\ref{fig: results feasibility cfv variation with syntrophy}) and see that only such zones remain fully feasible as syntrophy grows. However, as explained in the main text, that figure can not be replicated for the case of dynamical stability. Because of the almost fully dynamically stable points, the fully dynamically stable region $\mathcal{D}_{L,1}^{G,A}(\alpha_0)$ of each $(G,A) \in S_{25}$ is very fragmented such that the common fully dynamically stable region $\mathcal{D}_{L,1}^{S_{25}}(\alpha_0)$ vanishes for $\alpha_0 > 0$ (Fig.\ref{fig: dynamical stability results common fully dynamically stable volume}). But even though $\mathcal{D}_{L,1}^{S_{25}}(\alpha_0)$ quickly vanishes, it does not mean that there are no dynamically stable $(\gamma_0, S_0)$, on the opposite (Fig.\ref{fig: dynamical stability results local dynamical stability region for different matrices})! This is the reason we need another measure to show how syntrophy changes the location of the dynamically stable points.
 
@@ -66,14 +66,7 @@ where $\mathcal{F}^{G,A}_{\hat{0}}(\alpha_0)$ is simply the set of not unfeasibl
 \begin{equation}
 \mathcal{F}^{G,A}_{\hat{0}}(\alpha_0) \defined \left\{(\gamma_0, S_0) : \mathcal{F}\left((\gamma_0, S_0, \alpha_0), G, A\right) > 0\right\}.
 \end{equation}
-Note that in practice we do not take into account points outside of the unit square $[0,1]^2$ for obvious numerical considerations.
-
-As an application, we consider the very special case of the fully connected consumption and syntrophy networks. In this ``mean-field'' theory, every consumer consumes and releases each resource, \ie
-\begin{equation}
-G_{i\mu}=A_{\mu i}=1 \ \forall \mu=1, \dots, N_R \ \ \forall i=1, \dots, N_S.
-\end{equation}
-Our goal is to find the spectrum of systems with such consumption and syntrophy networks.
-\citeauthor{barbier_cavity_2017} showed that the variance of the interaction matrix plays a leading role in the dynamics of their model \cite{barbier_cavity_2017}. We follow an approach similar to theirs and perform a \important{standard deviation expansion}.
+%Note that in practice we do not take into account points outside of the unit square $[0,1]^2$ for obvious numerical considerations.
 
 \subsubsection{Standard deviation expansion}\label{sec : standard deviation expansion}
 The idea behind the standard deviation expansion is the following. Let $q_{i\mu}$ be an arbitrary matrix of size $N_S \times N_R$. The nice trick done in \cite{barbier_cavity_2017} is to write the elements of the $q$ matrix in terms of new variables $\tilde{q}_{i\mu}$:

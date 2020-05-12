@@ -91,11 +91,36 @@ where the effective $N_S\times N_S$ jacobian matrix $J_E$ is defined by:
 \begin{equation}
 (J_E)_{ij}=\sum_\nu \left[\frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{m_\nu+\sum_k \gamma_{k\nu}S^*_k} \left(\alpha_{\nu j}-\gamma_{j\nu}R^*_\nu\right)+\alpha_{\nu i}\delta_{ij}\right].
 \end{equation}
-We see that we without surprise we find again the $\Beta, \Gamma $ and $D$ matrices coming from the jacobian at equilibrium:
+We see that we without surprise we find the $\Beta, \Gamma $ and $D$ matrices coming from the Jacobian at equilibrium:
 \begin{equation}
 \left(J_E\right)_{ij}=\sum_\nu \left[\frac{\Beta_{i\nu}\Gamma_{\nu j}}{D_\nu}+\alpha_{\nu i} \delta_{ij}\right]
 \end{equation}
 This matrix determines the stability of the equilibrium. Namely if the largest eigenvalue of $J_E$ is positive, the equilibrium is unstable. If it is negative, the equilibrium is stable. If it is zero, the equilibrium is marginal.
+
+
+\subsubsection{Finding the critical radius}\label{sec : find critical radius}
+\noindent The Gerschgorin circle theorem allows us to get a precious bound on the modulus of each eigenvalue and hence on the one that decides the dynamics of the system $\lambda_1$. Indeed we know that all eigenvalues of $J^*$ will be located in one of the $N_R + N_S$ discs of $J^*$. These are the ``resources'' discs:
+\begin{equation}
+\tilde{D}^R_\mu  \defined \left\{ z \in \mathbb{C}: \abs{z+D_\mu} \leq \sum_j \abs{\Gamma_{\mu j}} \right\}  \ \forall \mu = 1, \dots, N_R,
+\end{equation}
+and the ``consumers'' discs:
+\begin{equation}
+\tilde{D}^C_i \defined \left\{ z \in \mathbb{C}: \abs{z} \leq \sum_\nu \abs{B_{i\nu}}\right\} \ \forall i=1, \dots, N_S.
+\end{equation}
+According to the circle theorem Eq.\eqref{eq: circle theorem}, all eigenvalues will be in the union of these circles, \ie there exists $\forall \lambda \in \sigma\left(J^*\right)$ at least one $\mu^*$ or  one $i^*$ such that:
+\begin{equation}
+\abs{\lambda} \leq \sum_\nu \abs{B_{i^*\nu}} \label{eq: bound lambda consumers}
+\end{equation}
+or
+\begin{equation}
+\abs{\lambda+D_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}}. \label{eq: bound lambda 1 resources}
+\end{equation}
+The triangle inequality implies:
+\begin{equation}
+\abs{\lambda} \leq \abs{\lambda+D_{\mu^*}}+\abs{-D_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}} + \abs{-D_{\mu^*}} = \sum_j \abs{\Gamma_{\mu^* j}} + D_{\mu^*}.\label{eq: bound lambda resources better}
+\end{equation}
+The only way both Eq.\eqref{eq: bound lambda consumers} and \eqref{eq: bound lambda resources better} are satisfied for all eigenvalues, and especially the one with the highest real part $\lambda_1$ is if they are bound by the maximum of both RHS of these equations.
+
 \subsubsection{Proof of Lemma \ref{lemma: lemma Gerschgorin circle}}\label{sec : proof of lemma circle}
 We prove Lemma \ref{lemma: lemma Gerschgorin circle} below.
 \begin{proof}
@@ -121,30 +146,7 @@ Comparing the RHS and LHS of this inequality yields:
 \end{equation}
 \end{proof}
 
-\subsubsection{Finding the critical radius}\label{sec : find critical radius}
-\noindent The Gerschgorin circle theorem allows us to get a precious bound on the modulus of each eigenvalue and hence on the one that decides the dynamics of the system $\lambda_1$. Indeed we know that all eigenvalues of $J^*$ will be located in one of the $N_R + N_S$ discs of $J^*$. These are the ``resources'' discs:
-\begin{equation}
-\tilde{D}^R_\mu  \defined \left\{ z \in \mathbb{C}: \abs{z+D_\mu} \leq \sum_j \abs{\Gamma_{\mu j}} \right\}  \ \forall \mu = 1, \dots, N_R,
-\end{equation}
-and the ``consumers'' discs:
-\begin{equation}
-\tilde{D}^C_i \defined \left\{ z \in \mathbb{C}: \abs{z} \leq \sum_\nu \abs{B_{i\nu}}\right\} \ \forall i=1, \dots, N_S.
-\end{equation}
-According to the circle theorem Eq.\eqref{eq: circle theorem}, all eigenvalues will be in the union of these circles, \ie there exists $\forall \lambda \in \sigma\left(J^*\right)$ at least one $\mu^*$ or  one $i^*$ such that:
-\begin{equation}
-\abs{\lambda} \leq \sum_\nu \abs{B_{i^*\nu}} \label{eq: bound lambda consumers}
-\end{equation}
-or
-\begin{equation}
-\abs{\lambda+D_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}} \label{eq: bound lambda 1 resources}
-\end{equation}
-The triangle inequality implies:
-\begin{equation}
-\abs{\lambda} \leq \abs{\lambda+D_{\mu^*}}+\abs{-D_{\mu^*}} \leq \sum_j \abs{\Gamma_{\mu^* j}} + \abs{-D_{\mu^*}} = \sum_j \abs{\Gamma_{\mu^* j}} + D_{\mu^*}.\label{eq: bound lambda resources better}
-\end{equation}
-The only way both Eq.\eqref{eq: bound lambda consumers} and \eqref{eq: bound lambda resources better} are satisfied for all eigenvalues, and especially the one with the highest real part $\lambda_1$ is if they are bound by the maximum of both RHS of these equations
-
-\subsection{Estimation of the critical radius in terms of metaparameters}\label{sec : estimate critical radius parameters}
+\subsubsection{Estimation of the critical radius in terms of metaparameters}\label{sec : estimate critical radius parameters}
 The following expression needs to be approximated:
 \begin{equation}
 \sum_j \abs{\Gamma_{\mu j}}+D_\mu = \sum_j \abs{\alpha_{\mu j}-\gamma_{j\mu}R^*_\mu}+\frac{l_\mu+\sum_j\alpha_{\mu j} S^*_j}{R^*_\mu}.
@@ -175,7 +177,7 @@ R_C \approx \max\left\{ \max_i\left(\deg(G,i)\right) \sigma_0 \gamma_0 S_0 \righ
  \left.\max_\mu\left\{\deg(G,\mu) \gamma_0 R_0 + \deg(A,\mu)\left(1+\frac{\alpha_0S_0}{R_0}\right)+\frac{l_0}{R_0}\right\}\right\}.
 \end{multline}
 
-\subsection{When is zero part of the spectrum of \texorpdfstring{$J^*$}{jstar}?}\label{sec : zero part of spectrum}
+\subsubsection{When is zero part of the spectrum of \texorpdfstring{$J^*$}{jstar}?}\label{sec : zero part of spectrum}
 We are interested in knowing when $\lambda=0$ is part of the spectrum of $J^*$. By definition, $\lambda=0$ is an eigenvalue if and only if it solves the master equation \eqref{eq: master equation eigenvalues jacobian}:
 \begin{equation}
 \det
@@ -197,11 +199,11 @@ Eq.\eqref{eq: determinant marginally stable equilibria} then becomes:
 \end{equation}
 which means that $\Beta D^{-1}\Gamma$ is not full rank. Finally,
 \begin{equation}
-\boxed{
+{
 0 \in \sigma(J^*) \iff \Beta D^{-1}\Gamma \text{ is not full rank.}\label{eq : condition zero in spectrum of J}
 }
 \end{equation}
-But when is $\Beta D^{-1}\Gamma$ not full rank? Sylvester rank inequality \cite{thome_inequalities_2016} states that:
+But when is $\Beta D^{-1}\Gamma$ not full rank? The Sylvester rank inequality \cite{thome_inequalities_2016} states that:
 \begin{equation}
 \text{rank}(\Beta D^{-1}\Gamma) \geq \text{rank}(\Beta)+\text{rank}(D^{-1}\Gamma)
 -N_R.
@@ -263,99 +265,18 @@ We can conclude with the statement of the theorem.
 \end{proof}
 
 \normalfont
-\subsection{Special determinant computation}\label{app : special determinant computation}
-We want to know when the determinant of the following $N$-dimensional square matrix is zero:
-\begin{equation}
-A_N = \begin{pmatrix}
-a & b & b  \\
-b & \ddots & b  \\
-b & b & a
-\end{pmatrix}, \ie \ A_{ij} = b+(a-b)\delta_{ij}.
-\end{equation}
-The equation we want to solve is:
-\begin{equation}
-\det\left(A_N\right)=0. \label{app: eq: det A_N 0}
-\end{equation}
-Note that, using Gaussian elimination, Eq.\eqref{app: eq: det A_N 0} can be transformed in:
-\begin{equation}
-\det\begin{pmatrix}
-a & b & \dots & b \\
-b-a & a-b & 0 & 0 \\
-0 & \ddots & \ddots & 0 \\
-0 & 0 & b-a & a-b
-\end{pmatrix}=0
-\end{equation}
-Using Laplace's expansion, this can be written as:
-\begin{equation}
- a \det\begin{pmatrix}
-a-b & 0 & \dots & 0 \\
-b-a & a-b & 0 & 0 \\
-0 & \ddots & \ddots & 0 \\
-0 & 0 & b-a & a-b
-\end{pmatrix}+(a-b)
-\det\begin{pmatrix}
-b & b & \dots & b \\
-b-a & a-b & 0 & 0 \\
-0 & \ddots & \ddots & 0 \\
-0 & 0 & b-a & a-b
-\end{pmatrix}=0 \label{app: eq: laplace expansion}
-\end{equation}
-Since the first term of the previous equation is a lower triangular matrix, its determinant is easily found:
-\begin{equation}
-a \det\begin{pmatrix}
-a-b & 0 & \dots & 0 \\
-b-a & a-b & 0 & 0 \\
-0 & \ddots & \ddots & 0 \\
-0 & 0 & b-a & a-b
-\end{pmatrix} = a\left(a-b\right)^{n-1}.
-\end{equation}
-Finding an explicit equation for the left term is a bit more involving. Let us define the general $n$ square matrix $F_n(a,b)$:
-\begin{equation}
-F_n(a,b) = \begin{pmatrix}
-b & b & \dots & b \\
-b-a & a-b & 0 & 0 \\
-0 & \ddots & \ddots & 0 \\
-0 & 0 & b-a & a-b
-\end{pmatrix}.
-\end{equation}
-With a Laplace expansion one gets:
-\begin{equation}
-\det\left(F_n(a,b)\right)= b
-\det\begin{pmatrix}
-a-b & 0 & 0 \\
-b-a & \ddots & 0 \\
-0 & b-a & a-b
-\end{pmatrix}+(a-b)\det\begin{pmatrix}
-b & b & \dots & b \\
-b-a & a-b & 0 & 0 \\
-0 & \ddots & \ddots & 0 \\
-0 & 0 & b-a & a-b
-\end{pmatrix}.
-\end{equation}
-This means:
-\begin{equation}
-\det(F_n(a,b))=b(a-b)^{n-1}+(a-b)\det(F_{n-1}(a,b)).
-\end{equation}
-It is easy to check that the solution to the previous equation is:
-\begin{equation}
-\det(F_n(a,b))=\left[(n-1)b+\det\left(F_1(a,b)\right)\right](a-b)^{n-1}.
-\end{equation}
-Since $\det\left(F_1(a,b)\right)=1$, we get:
-\begin{equation}
-\det\left(F_n(a,b)\right)=n(a-b)^{n-1}b
-\end{equation}
-Inserting this in Eq.\eqref{app: eq: laplace expansion} yields:
-\begin{equation}
-\boxed{
-\det(A_N)=0 \iff (a-b)^{N-1}\left[a+(N-1)b\right]=0.
-}\label{eq: formula special determinant}
-\end{equation}
 
+\subsubsection{Approximation of the full spectrum }\label{sec: approximate full spectrum}
+As an application to find explicit solutions for the spectrum of the Jacobian, we consider the very special case of the fully connected consumption and syntrophy networks. In this ``mean-field'' theory, every consumer consumes and releases each resource, \ie
+\begin{equation}
+G_{i\mu}=A_{\mu i}=1 \ \forall \mu=1, \dots, N_R \ \ \forall i=1, \dots, N_S.
+\end{equation}
+Our goal is to find the spectrum of systems with such consumption and syntrophy networks.
+\citeauthor{barbier_cavity_2017} showed that the variance of the interaction matrix plays a leading role in the dynamics of their model \cite{barbier_cavity_2017}. We follow an approach similar to theirs and perform a \important{standard deviation expansion}, explained in Section \ref{sec : standard deviation expansion}.
 
-\subsection{Approximation of the full spectrum }\label{sec: approximate full spectrum}
-We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we follow a standard deviation expansion, explained in Section \ref{sec : standard deviation expansion}.
+%We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we follow a standard deviation expansion, explained in Section \ref{sec : standard deviation expansion}.
 	 \paragraph{Rewriting the jacobian at equilibrium}
-	 The different blocks of the jacobian at equilibrium \eqref{eq: jacobian at equilibrium} can be written with the new variables :
+	 The different blocks of the jacobian at equilibrium \eqref{eq: jacobian at equilibrium} can be written with the new variables obtained in Section \ref{sec : standard deviation expansion}.:
 	 \begin{empheq}[left=\empheqlbrace]{align}
 	 \frac{l_\mu + \sum_j \alpha_{\mu j} S^*_j}{R^*_\mu} &= \frac{l_0 + N_S \alpha_0 S_0 + \sigma_l \tilde{l}_\mu + \sigma_\alpha S_0 \sum_j \tilde{\alpha}_{\mu j} + \sigma_\alpha \sigma_S \sum_j \tilde{\alpha}_{\mu j} \tilde{s}_j}{R_0 + \sigma_R \tilde{r}_\mu} \\
 	 -\gamma_{j\mu}R^*_\mu + \alpha_{\mu j} &= -\gamma_0 R_0 + \alpha_0 + \sigma_\gamma R_0 \tilde{\gamma}_{j\mu} + \sigma_R \gamma_0 \tilde{r}_\mu + \sigma_\alpha \tilde{\alpha}_{\mu j} + \sigma_\gamma \sigma_R \tilde{\gamma}_{j\mu} \tilde{r}_\mu \\
@@ -375,7 +296,8 @@ We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we 
 	 \end{empheq}
 
 
-	 \subsubsection{Standard deviation expansion at first order}
+
+	 \paragraph{Standard deviation expansion at first order}
 	 We assume the relative standard deviations are small:
 	 \begin{equation}
 	 \epsilon_P \ll 1, \ \forall P \in\{l_\nu, R^*_\nu, S^*_i, \gamma_{i\nu}, \alpha_{\nu i}, \sigma_{i\nu}\}.
@@ -423,7 +345,7 @@ We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we 
 	 \end{empheq}
 	Using Jacobi's formula \cite{magnus_matrix_2019}, the equation $\det\left(J^*-\lambda \identity{N_R+N_S}\right)=0$ can be rewritten as:
 	\begin{equation}
-	\boxed{
+	{
 	\det(J_0-\lambda \identity{N_R+N_S} + \epsilon J^*)=\det(J_0-\lambda \identity{N_R+N_S})+\epsilon \ \trace{\text{adj}(J_0-\lambda \identity{N_R+N_S})\tilde{J}}=0.
 	}\label{eq : determinant variance first order}
 	\end{equation}
@@ -447,7 +369,7 @@ We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we 
   \begin{equation}
   \left(\lambda^2 \identity{N_R}+D_0 \lambda - \Gamma_0 \Beta_0 \right)_{\mu\nu} = \left(\lambda^2+D_0 \lambda\right)\delta_{\mu \nu} - \Gamma_0\Beta_0.
   \end{equation}
-  Appendix \ref{app : special determinant computation} explains how to find the non-zero solutions of Eq.\eqref{eq : determinant no variance}. They are given by the roots of the polynomial:
+  Section \ref{app : special determinant computation} explains how to find the non-zero solutions of Eq.\eqref{eq : determinant no variance}. They are given by the roots of the polynomial:
   \begin{equation}
   \left(\lambda+D_0\right)^{N_R-1}\left(\lambda^2+D_0 \lambda -N_R \Gamma_0 \Beta_0\right)=0.
   \end{equation}
@@ -472,7 +394,7 @@ We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we 
   \end{itemize}
   It then becomes clear that the system is dynamically unstable if and only if $\frac{4N_R\Gamma_0 \Beta_0}{D_0^2} > 0 $. Because $N_R, \Beta_0 > 0$, we get the condition:
   \begin{equation}
-  \boxed{
+  {
   \text{The non-variance system is dynamically unstable} \iff \Gamma_0 > 0.
   }
   \end{equation}
@@ -486,11 +408,99 @@ We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we 
   We see that all but one non-zero eigenvalues are given by $-D_0$. However the last eigenvalue is determined by
   $4N_R\Gamma_0\Beta_0+D_0^2$. It gives us the ``deviation'' away from $-D_0/2$ and hence also plays an essential role in the stability. Looking at its sign allows us to find possibly more locally dynamically stable zones of the metaparameters space $\mathcal{M}$. Indeed we expect to find more stable systems in the case of Eq.\eqref{eq : spectrum fully connected possibly negative} if $4 N_R \Gamma_0 \Beta_0 + D_0 ^2$ is small, \ie
   \begin{equation}
-  4 N_R \Gamma_0 \Beta_0 + D_0 ^2 \ll 1 \iff 4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2} \ll 1.
+  4 N_R \Gamma_0 \Beta_0 + D_0 ^2 \ll 1 \iff 4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2} \ll 1. \label{eq : change of stab eigenvalue akaksfk}
   \end{equation}
 
-  \subsection{The optimal \texorpdfstring{$S_0$}{S0} for locally dynamically stable systems} \label{sec: appendix how to handle S0}
-  How $S_0$ should be adjusted is a bit tricky because it is present in three terms that do not have the same behaviour: one term is linear in $S_0$ with a negative coefficient, another is linear with a positive coefficient and another is quadratic (also with a positive coefficient). So we need to compute the minimum value the sum of these three terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is implicitly given by the condition:
+  \subsubsection{Special determinant computation}\label{app : special determinant computation}
+  We want to know when the determinant of the following $N$-dimensional square matrix is zero:
+  \begin{equation}
+  A_N = \begin{pmatrix}
+  a & b & b  \\
+  b & \ddots & b  \\
+  b & b & a
+  \end{pmatrix}, \ie \ A_{ij} = b+(a-b)\delta_{ij}.
+  \end{equation}
+  The equation we want to solve is:
+  \begin{equation}
+  \det\left(A_N\right)=0. \label{app: eq: det A_N 0}
+  \end{equation}
+  Note that, using Gaussian elimination, Eq.\eqref{app: eq: det A_N 0} can be transformed in:
+  \begin{equation}
+  \det\begin{pmatrix}
+  a & b & \dots & b \\
+  b-a & a-b & 0 & 0 \\
+  0 & \ddots & \ddots & 0 \\
+  0 & 0 & b-a & a-b
+  \end{pmatrix}=0
+  \end{equation}
+  Using Laplace's expansion, this can be written as:
+  \begin{equation}
+   a \det\begin{pmatrix}
+  a-b & 0 & \dots & 0 \\
+  b-a & a-b & 0 & 0 \\
+  0 & \ddots & \ddots & 0 \\
+  0 & 0 & b-a & a-b
+  \end{pmatrix}+(a-b)
+  \det\begin{pmatrix}
+  b & b & \dots & b \\
+  b-a & a-b & 0 & 0 \\
+  0 & \ddots & \ddots & 0 \\
+  0 & 0 & b-a & a-b
+  \end{pmatrix}=0 \label{app: eq: laplace expansion}
+  \end{equation}
+  Since the first term of the previous equation is a lower triangular matrix, its determinant is easily found:
+  \begin{equation}
+  a \det\begin{pmatrix}
+  a-b & 0 & \dots & 0 \\
+  b-a & a-b & 0 & 0 \\
+  0 & \ddots & \ddots & 0 \\
+  0 & 0 & b-a & a-b
+  \end{pmatrix} = a\left(a-b\right)^{n-1}.
+  \end{equation}
+  Finding an explicit equation for the left term is a bit more involving. Let us define the general $n$ square matrix $F_n(a,b)$:
+  \begin{equation}
+  F_n(a,b) = \begin{pmatrix}
+  b & b & \dots & b \\
+  b-a & a-b & 0 & 0 \\
+  0 & \ddots & \ddots & 0 \\
+  0 & 0 & b-a & a-b
+  \end{pmatrix}.
+  \end{equation}
+  With a Laplace expansion one gets:
+  \begin{equation}
+  \det\left(F_n(a,b)\right)= b
+  \det\begin{pmatrix}
+  a-b & 0 & 0 \\
+  b-a & \ddots & 0 \\
+  0 & b-a & a-b
+  \end{pmatrix}+(a-b)\det\begin{pmatrix}
+  b & b & \dots & b \\
+  b-a & a-b & 0 & 0 \\
+  0 & \ddots & \ddots & 0 \\
+  0 & 0 & b-a & a-b
+  \end{pmatrix}.
+  \end{equation}
+  This means:
+  \begin{equation}
+  \det(F_n(a,b))=b(a-b)^{n-1}+(a-b)\det(F_{n-1}(a,b)).
+  \end{equation}
+  It is easy to check that the solution to the previous equation is:
+  \begin{equation}
+  \det(F_n(a,b))=\left[(n-1)b+\det\left(F_1(a,b)\right)\right](a-b)^{n-1}.
+  \end{equation}
+  Since $\det\left(F_1(a,b)\right)=1$, we get:
+  \begin{equation}
+  \det\left(F_n(a,b)\right)=n(a-b)^{n-1}b
+  \end{equation}
+  Inserting this in Eq.\eqref{app: eq: laplace expansion} yields:
+  \begin{equation}
+  {
+  \det(A_N)=0 \iff (a-b)^{N-1}\left[a+(N-1)b\right]=0.
+  }\label{eq: formula special determinant}
+  \end{equation}
+
+  \subsubsection{The optimal \texorpdfstring{$S_0$}{S0} for locally dynamically stable systems} \label{sec: appendix how to handle S0}
+  How $S_0$ should be adjusted to increase the largest eigenvalue (Eq.\ref{eq : change of stab eigenvalue akaksfk}) is a bit tricky because it is present in three terms that do not have the same behaviour: one term is linear in $S_0$ with a negative coefficient, another is linear with a positive coefficient and another is quadratic (also with a positive coefficient). So we need to compute the minimum value the sum of these three terms is and take $S_0$ as the minimum we found. The consumers equilibrium abundance $S_0^*$ that yields the minimum value is implicitly given by the condition:
   \begin{equation}
   \frac{d}{dS_0} \left[4N_R \sigma_0 \gamma_0 S_0  (\alpha_0 - \gamma_0 R_0) +\frac{l_0^2}{R_0^2}+\frac{2N_S\alpha_0 S_0 l_0}{R_0^2} + \frac{N_S^2 \alpha_0^2 S_0^2}{R_0^2}\right]_{S_0=S_0^*}=0.
   \end{equation}
@@ -499,4 +509,8 @@ We seek an approximation of the spectrum of the Jacobian $J^*$. To this end, we 
   S_0^* = \frac{R_0^2}{N_S^2 \alpha_0^2}\left(2N_R\sigma_0 \gamma_0\left(\gamma_0R_0-\alpha_0\right)-\frac{N_S \alpha_0 l_0}{R_0^2}\right).
   \end{equation}
   One checks really easily that this point is indeed a minimum in $S_0$. So if $S_0 > S_0^*$ it should be decreased, and otherwise increased. For $\alpha_0 \rightarrow 0$, $S_0^* \rightarrow \infty$, and for $\alpha_0 \rightarrow \infty$, $S_0^* \rightarrow 0^-$, which means we expect to find the most dynamically stable points at large $S_0$ for low syntrophy and at low $S_0$ for large syntrophy.
+
+
+
+
 \end{document}

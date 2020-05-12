@@ -3,14 +3,14 @@
 \graphicspath{{./figures/}}
 
 \begin{document}
-\subsection{The master equation for local dynamical stability}\label{sec : establish master equation for dynamical stability}
+\subsection{Master equation for local dynamical stability}\label{sec : establish master equation for dynamical stability}
 In order to get $\real{\lambda_1}$, which is the quantity that governs local dynamical stability (see Section \ref{sec : how to determine local dynamical stability}), we have to get the full spectrum of $J^*$, denoted $\sigma(J^*)$, since a straightforward application of easier standard techniques like the Perron-Frobenius theorem \cite{perron_zur_1907} does not work. The eigenvalues of $J^*$ are obtained through the eigenvalue problem:
 \begin{equation}
 \det\left(J^* - \lambda \right) = 0.
 \end{equation}
 More explicitly, using Eq.\eqref{eq: jacobian at equilibrium}, we state the \important{master equation for local dynamical stability}:
 \begin{equation}
-\boxed{
+{
 \det
 \begin{pmatrix}
  -D - \lambda  & \Gamma \\
@@ -63,19 +63,19 @@ It is easy to see that if all the discs $\tilde{D}_i$ are located to the left of
 % Now that we have a bound on how big the eigenvalues can be, we need strategies to find regimes where we \important{know} $\real{\lambda_1} < 0 $, \ie local dynamical stability is guaranteed. We inspire ourselves from the general idea of the mathematical proofs of \cite{butler_stability_2018}.
 \subsection{Reductio ad absurdum} \label{subsubsec: reductio ad absurdum}
 The strategy we use to solve Eq.\eqref{eq: eigenvalue problem S} is inspired by \cite{butler_stability_2018}. The strategy is to assume we are in an unstable regime, \ie there exists at least one $\lambda \in \sigma(J^*)$ with $\real{\lambda}\geq 0$ that satisfies Eq.\eqref{eq: master equation non marginal} and such that $\real{\lambda} > 0$. By Eq.\eqref{eq: eigenvalue problem S}, $\lambda$ is also an eigenvalue of $S(\lambda)$. If we find conditions under which the real part of the spectrum of $S(\lambda)$ is entirely negative, we will know that $\real{\lambda} \leq 0$. As this is a contradiction to the hypothesis that the regime is unstable, we must conclude that the regime is stable\footnote{Indeed, Eq.\eqref{eq: master equation non marginal} assumes already that either $\real{\lambda_1} >0$ or $\real{\lambda_1} < 0$.}.
+Hence, the general idea is to find regimes where we know that the spectrum of $S$ %, written as $\sigma(S)$,
+will be entirely negative for a positive $\lambda$. %Thanks to the help of the two following theorems, we found such a regime, called \define{low intra-resource interaction} or LRI.
 
-Hence, the general idea is to find regimes where we know that the spectrum of $S$%, written as $\sigma(S)$,
-will be entirely negative for a positive $\lambda$. Thanks to the help of the two following theorems, we found such a regime, called \define{low intra-resource interaction} or LRI.
 
-
-\subsection{Monte Carlo algorithm for the optimal matrix} \label{section: methods LRI MC solver}
+\subsection{Monte Carlo algorithm for the optimal matrix} \label{section: methods general MC solver}
 We explain how to write a Metropolis-Hastings Markov Chain Monte Carlo (MCMC) method which for an input matrix $M_I$ gives as an output the optimal matrix $M_O$ which minimizes the energy $E(M_I, M_O)$. The procedure follows a traditional Metropolis algorithm:
 \begin{enumerate}
-\item Create a random binary $M_O$. Its connectance is chosen as the one of the consumption matrix $G$.
+\item Create a random binary $M_O$. Its connectance is chosen as the one of the input matrix $M_I$.
 \item Do the following for a given number of steps:
 \begin{itemize}
 \item Choose a random row or, every other iteration, a column.
-\item In that row/column, try to swap a zero and a one while preserving the ``releasers'': if a species releases some resource, it has to keep releasing something (the resource can change though). The ``releasees'' are preserved as well: if a resource is being released by some species, it has to keep being released (but it does not have to be by the same species).
+\item In that row/column, try to swap a zero and a one while preserving the %``releasers'': if a species releases some resource, it has to keep releasing something (the resource can change though). The ``releasees'' are preserved as well: if a resource is being released by some species, it has to keep being released (but it does not have to be by the same species).
+non-zero degrees of the columns and rows of $M_O$ (a column/row that initially had some non-zero elements cannot end up empty after that step).
 % REMARK : why do we impose such conditions?
 \item The swap is accepted, \ie $M_O$ is modified, if the energy difference $\Delta E$ is negative or if a random number drawn uniformly between zero and one is smaller than $e^{-\Delta E/T}$ where $T$ is the current temperature. More on $\Delta E$ and $T$ below.
 \end{itemize}
