@@ -1,16 +1,19 @@
 #!/bin/bash
 # This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
 # for every matrix listed (one graph per matrix list) and alpha_mode chosen
-MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
-#ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
-ALPHA_MODE="random_structure"
-SAVENAME="largest_eigenvalue_NR50_NS25"
-OPTIMAL_MATRIX_FOLDER="optimal_LRI_Nr50_Nc25"
-ADDITIONAL_MODIF="verbose-level=1 NR=50 NS=25"
+#MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
+#ALPHA_MODE="random_structure"
+SAVENAME="other_LRI_largest_eigenvalue_NR25_NS25"
+#SAVENAME="largest_eigenvalue_NR50_NS25"
+OPTIMAL_MATRIX_FOLDER="optimal_LRI_corrected_NR25_NS25"
+ADDITIONAL_MODIF=""
+#ADDITIONAL_MODIF="verbose-level=1 NR=50 NS=25"
 ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 # for old version
 # VOL_NAME="common_feasibility_volume_NR25_NS25"
-COMMAND_FILE="feasibility_dynamical_stability_computations.txt"
+COMMAND_FILE="feasibility_dynamical_stability_computations_modified_LRI.txt"
 
 for a in $ALPHA_MODE
 do
@@ -40,8 +43,8 @@ do
       LOG_NAME="logs/${CURRENT_NAME}.log"
       ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
       # execute command
-      nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-      # echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}
+      #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
+      echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}
       # write command to log
       now="["$(date)"]"
       echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
