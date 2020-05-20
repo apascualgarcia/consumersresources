@@ -28,3 +28,4 @@ alpha0=0
 alpha_mode=optimal_matrix
 path_to_food_matrix=.
 path_to_save_file=.
+type_of_structural_perturbation=0

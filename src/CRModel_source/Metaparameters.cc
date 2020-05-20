@@ -43,6 +43,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->convergence_threshold = configFile.get<ntype>("convergence_threshold");
   this->building_mode = string_to_building_mode(configFile.get<std::string>("building_mode"));
   this->volume_of_interest_path=configFile.get<std::string>("path_to_volume");
+  this->struct_pert_type=configFile.get<unsigned int>("type_of_structural_perturbation");
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
