@@ -15,7 +15,7 @@ int main(int argc, char * argv[]){
     ntype min_S0=0.01, max_S0=1.;
 
     unsigned int Nsimuls=200;
-    unsigned int Npoints=30;
+    unsigned int Npoints=100;
 
     nvector gamma0_interval=linear_interval(min_gamma0, max_gamma0, Npoints);
     nvector S0_interval=linear_interval(min_S0, max_S0, Npoints);

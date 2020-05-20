@@ -25,7 +25,7 @@ const unsigned int COMPUTE_CRITICAL_DELTA_POLY_INTERVAL_LENGTH=10;
 
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_FIRST_RUN=50;
 
-/* high cores version 
+/* high cores version
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_SECOND_RUN=200;
 const unsigned int COMPUTE_CRITICAL_DELTA_SIG_INTERVAL_LENGTH=250;
 */
