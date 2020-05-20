@@ -28,3 +28,4 @@ alpha0=0.0147955344326799
 alpha_mode=no_release_when_eat
 path_to_food_matrix=optimal_matrices/consumption/Nr50_Nc25/RandTrix_Nr50_Nc25_Nest0.3_Conn0.2296.txt
 path_to_save_file=data_output/strstab_Nest0.3_Conn0.2296_no_release_when_eat_own_max_syntrophy.out
+type_of_structural_perturbation=0

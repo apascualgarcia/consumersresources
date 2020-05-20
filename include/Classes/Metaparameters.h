@@ -35,6 +35,8 @@ struct Metaparameters{
   buildingmode building_mode;
   /* path to which point should be studied (eg common feasible volume) */
   std::string volume_of_interest_path;
+  /* tells in which way the system should be structurally perturbed */
+  unsigned int struct_pert_type;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

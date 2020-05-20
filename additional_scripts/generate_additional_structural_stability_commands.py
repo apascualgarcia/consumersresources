@@ -8,9 +8,11 @@ from os import listdir
 LOG_NAME='logs/structural_stability_computations_core'
 
 folder_mode='LRI_connectance_of_no_release_when_eat_Nr50_Nc25'
-filename ='commands/additional_struct_stab_computations.txt'
+filename ='commands/struct_stab_computations_modified_perturbation.txt'
 
 command = 'build/compute_critical_Delta'
+additional_params='type_of_structural_perturbation=1'
+
 
 # first get all the config files we have to run
 config_folder = 'config/structural_stability'
@@ -31,7 +33,7 @@ for i in range(len(files)):
     f = files[i]
     log_name="logs/"+files_wo_folder[i][:-3]+'.log'
     err_log_name="logs/err"+files_wo_folder[i][:-3]+'.log'
-    command_core= command +' '+f
+    command_core= command +' '+f+ ' ' + additional_params
     command_core+=" | ts \'[%Y-%m-%d %H:%M:%S]\' "
     command_core = command_core+' > '+log_name+' 2>'+err_log_name
     command_core = 'echo "'+command_core+'">> '+filename

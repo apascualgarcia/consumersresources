@@ -497,15 +497,47 @@ Dynamical_variables CRModel::perturb_equilibrium() const{
 }
 void CRModel::perturb_parameters(const ntype & Delta) const{
   Parameter_set* p = this->model_param->get_parameters();
-  std::uniform_real_distribution<ntype> uniform_distrib(-1., 1.);
-
-  for(size_t mu=0; mu < p->l.size(); ++mu){
-    p->l[mu] = p->l[mu]*(1+Delta*uniform_distrib(random_engine));
-  }
-
+  unsigned int pert_type=this->metaparameters->struct_pert_type;
   if(this->metaparameters->verbose > 1){
-    std::cout <<"\t Structurally perturbed the l_mu's the system with parameter delta =" << Delta << std::endl;
+    std::cout <<"\t Structurally perturbed the l_mu's the system with parameter delta =" << Delta;
   }
+  switch(pert_type){
+    case 0:{
+      std::uniform_real_distribution<ntype> uniform_distrib(-1., 1.);
+      for(size_t mu=0; mu < p->l.size(); ++mu){
+        p->l[mu] = p->l[mu]*(1+Delta*uniform_distrib(random_engine));
+      }
+
+      if(this->metaparameters->verbose > 1){
+        std::cout << " (l0 stays the same)" << std::endl;
+      }
+      break;
+    }
+
+    case 1:{
+      std::uniform_real_distribution<ntype> delta_distrib(0, 2.*Delta);
+      for(size_t mu=0; mu < p->l.size(); ++mu){
+        ntype diminution;
+        do{
+          diminution=delta_distrib(random_engine);
+        }while(diminution > 1);
+        p->l[mu]*=(1-diminution);
+      }
+      if(this->metaparameters->verbose > 1){
+        std::cout << " (l0 is now approximately "<< mean(p->l) << ")" << std::endl;
+      }
+      break;
+
+    }
+
+    default:{
+      throw error("Unknown parameter perturbation type, please choose either 0 or 1");
+
+    }
+  }
+
+
+
 
   return;
 }

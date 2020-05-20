@@ -8,15 +8,15 @@ from os import listdir
 CORES=int(sys.argv[1])
 
 LOG_NAME='logs/structural_stability_computations_core'
-
 command = 'build/compute_critical_Delta'
+additional_params='type_of_structural_perturbation=1'
 
 # first get all the config files we have to run
 config_folder = 'config/structural_stability'
 folders=['common_max_syntrophies', 'maximal_own_syntrophies', 'no_syntrophy']
 if(len(sys.argv)>1):
     folders=[sys.argv[2]]
-    
+
 files = []
 config_paths=[config_folder+'/'+a for a in folders]
 for c in config_paths:
@@ -29,10 +29,10 @@ for i in range(CORES):
     log_name=LOG_NAME+'_'+str(i)+'.log'
     command_core = '"'
     for j in range(len(files_per_core[i])):
-        command_core+= command +' '+files_per_core[i][j]
+        command_core+= command +' '+files_per_core[i][j] + ' ' + additional_params
         command_core+=" | ts \'[%Y-%m-%d %H:%M:%S]\' "
         command_core+=' && '
     command_core=command_core[:-4]+'"'
     command_core = "nohup sh -c "+command_core+' > '+log_name+' 2>&1 &'
-    os.system(command_core)
-print("Launched "+str(len(files))+" runs on "+str(CORES)+"cores. Please check appropriate log folders if needed.")
+    #os.system(command_core)
+#print("Launched "+str(len(files))+" runs on "+str(CORES)+"cores. Please check appropriate log folders if needed.")

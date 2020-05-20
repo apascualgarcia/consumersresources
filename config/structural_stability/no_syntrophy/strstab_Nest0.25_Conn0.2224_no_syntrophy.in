@@ -28,3 +28,4 @@ alpha0=0
 alpha_mode=fully_connected
 path_to_food_matrix=optimal_matrices/consumption/Nr50_Nc25/RandTrix_Nr50_Nc25_Nest0.25_Conn0.2224.txt
 path_to_save_file=data_output/strstab_Nest0.25_Conn0.2224_no_syntrophy.out
+type_of_structural_perturbation=0

@@ -1,4 +1,7 @@
 #!/bin/bash
-LINE="convergence_threshold=1e-4"
+LINE="type_of_structural_perturbation=0"
+FILE_MATCH="config/structural_stability/no_syntrophy/*"
 
-echo $LINE | tee -a config/configuration*
+for f in $FILE_MATCH; do
+  echo $LINE >> $f
+done

@@ -28,3 +28,4 @@ alpha0=0.00307404025011449
 alpha_mode=random_structure
 path_to_food_matrix=optimal_matrices/consumption/Nr50_Nc25/RandTrix_Nr50_Nc25_Nest0.25_Conn0.1656.txt
 path_to_save_file=data_output/strstab_Nest0.25_Conn0.1656_random_structure_common_max_syntrophy.out
+type_of_structural_perturbation=0
