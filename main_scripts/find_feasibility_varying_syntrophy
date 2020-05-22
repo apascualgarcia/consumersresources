@@ -2,8 +2,8 @@
 # This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
 # for every matrix listed (one graph per matrix list) and alpha_mode chosen
 MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
-ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
-#ALPHA_MODE="random_structure"
+#ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
+ALPHA_MODE="optimal_matrix"
 SAVENAME="other_LRI_feasibility_NR25_NS25"
 OPTIMAL_MATRIX_FOLDER="optimal_LRI_corrected_NR25_NS25"
 #ADDITIONAL_MODIF="NR=50 NS=25"
@@ -37,8 +37,8 @@ do
       #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
       echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/$COMMAND_FILE
       # write command to log
-      now="["$(date)"]"
-      echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+      #now="["$(date)"]"
+      #echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
     done
   done
 done
