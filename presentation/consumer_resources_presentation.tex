@@ -1,0 +1,138 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+\usepackage{amsmath}
+\usepackage{empheq}
+\usepackage{appendixnumberbeamer}
+\graphicspath{{./figures/}}
+
+%--- ADD AUTOMATIC TITLE TO FRAMES ---%
+\addtobeamertemplate{frametitle}{
+   \let\insertframetitle\insertsectionhead}{}
+\addtobeamertemplate{frametitle}{
+   \let\insertframesubtitle\insertsubsectionhead}{}
+\makeatletter
+  \CheckCommand*\beamer@checkframetitle{\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+  \renewcommand*\beamer@checkframetitle{\global\let\beamer@frametitle\relax\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+\makeatother
+%-------------------------------------%
+
+
+\begin{document}
+
+\title[Syntrophic MCs]{The impact of syntrophic interaction on microbial communities}
+\author[LB \& APG]{L\'eo Buchenel \& Alberto Pascual-Garc\'ia}
+\date{\today}
+\institute{ETH Z\"urich}
+
+\thispagestyle{empty}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section*{Presentation plan}
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Introduction to the model}
+\subsection{Syntrophic interaction}
+\begin{frame}
+\textbf{INSERT DRAWING OF SYNTROPHIC MCs}
+
+\end{frame}
+
+\subsection{Processes at play}
+\begin{frame}
+\textbf{INSERT EXPLANATION OF ALL DIFFERENT PROCESSES AT PLAY (DRAWING)}
+\end{frame}
+
+\subsection{Dynamical Equations}
+\begin{frame}
+Temporal evolution of the resources $R_\mu$ ($\mu = 1, \dots, N_R$) and the consumers $S_i$ ($i=1, \dots, N_S$):
+\begin{subequations}
+\begin{empheq}[left=\empheqlbrace]{align}
+\dot{R}_\mu= &  \left(\sum_{j=1}^{N_S} \gamma_{j \mu} S_j -m_\mu \right)R_\mu + \sum_{j=1}^{N_S} \alpha_{\mu j} S_j + l_\mu   \\
+\dot{S}_i = & \left(\sum_{\nu=1}^{N_R} \sigma_{i\nu} \gamma_{i\nu} R_\nu - d_i - \sum_{\nu=1}^{N_R} \alpha_{\nu i}\right)S_i
+\end{empheq}
+\end{subequations}
+\end{frame}
+
+\subsection{Metaparameters framework}
+\begin{frame}
+\textbf{INSERT DIAGRAM WHERE EXPLAIN METAPARAMETERS}
+\end{frame}
+
+\section{Feasibility}
+\subsection{Physical Requirements}
+\begin{frame}
+Impose two conditions:
+\begin{itemize}
+\item Conservation of biomass
+\item Positivity of the parameters
+\end{itemize}
+$\rightarrow$ restrictions on parameters $\rightarrow$ restrictions on metaparameters
+\end{frame}
+\subsection{Feasibility profile}
+\begin{frame}
+Without syntrophy: full feasibility for $\gamma_0$ below curve $ \sim S_0$
+\vfill
+\begin{center}
+\includegraphics[width=0.75\linewidth]{{typical_feasibility_volume}.pdf}
+\end{center}
+\end{frame}
+
+\subsection{Fully feasible region}
+\begin{frame}
+%% SAY THAT CAN FOCUS ON FULLY FEASIBLE REGION BECAUSE OF THIS
+Addition of syntrophy $\rightarrow$ only high $\gamma_0$, low $S_0$ remain feasible
+\vfill
+\begin{center}
+\includegraphics[width=0.75\linewidth]{{feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808}.pdf}
+\end{center}
+\end{frame}
+
+\section{Dynamical stability}
+\begin{frame}
+\end{frame}
+
+\section{Structural stability}
+\begin{frame}
+\end{frame}
+
+\appendix
+
+\section{Backup slides -- Feasibility}
+\subsection{Physical Requirements}
+\begin{frame}
+\begin{itemize}
+\item We impose that -- at equilibrium -- no biomass can be created out of nothing, which is translated mathematically by the constraint:
+\begin{equation}
+\sum_{\nu = 1}^{N_R} \left(1-\sigma_{i\nu}\right)\gamma_{i\nu}R^*_\nu \geq \sum_{\nu=1}^{N_R} \alpha_{\nu i} \quad \forall i = 1, \dots, N_S. \label{eq : conservation of biomass}
+\end{equation}
+
+\item We need every parameter in the model to be positive. In total there are $3 N_R + 2 N_S + 3 N_R N_S$ parameters, constrained by the $N_R + N_S$ fixed points equations. So we pick $2 N_R + N_S + 3 N_R N_S$ positive parameters and we make sure they verify:
+\begin{subequations}\label{eq : positive parameters}
+\begin{empheq}[left=\empheqlbrace]{align}
+d_i &= \sum_{\nu = 1}^{N_R} \left(\sigma_{i\nu} \gamma_{i\nu} R^*_\nu -\alpha_{\nu i}\right) > 0 \quad \forall i =1, \dots, N_S, \\
+m_\mu &= \frac{l_\mu - \sum_{j=1}^{N_S} \left(\gamma_{j\mu} R^*_\mu -\alpha_{\mu j}\right) S_j^*}{R^*_\mu} > 0 \quad \forall \mu = 1, \dots, N_R.
+\end{empheq}
+\end{subequations}
+
+\end{itemize}
+\end{frame}
+
+\subsection{Theoretical predictions}
+\begin{frame}
+\begin{itemize}
+\item \textbf{Fully feasible region:} Transforming Eqs.\eqref{eq : conservation of biomass} and \eqref{eq : positive parameters} in their metaparameters form, we get an equation that roughly  describes the fully feasible zone:
+\begin{subequations}\label{eq : fully feasible volume}
+\begin{empheq}{align}
+ \min(1-\sigma_0, \sigma_0) \gamma_0 R_0 \gtrapprox \max_i\left\{\frac{\deg(A,i)}{\deg(G,i)}\right\} \alpha_0\\
+\gamma_0 R_0 \lessapprox  \min_\nu \left\{ \frac{l_0}{\deg(G,\nu) S_0} + \frac{\deg(A,\nu)}{\deg(G,\nu)}\alpha_0\right\}
+\end{empheq}
+\end{subequations}
+
+\end{itemize}
+\end{frame}
+
+\end{document}
