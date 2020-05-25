@@ -25,3 +25,8 @@ text/*
 !text/feasibility
 !text/dyn_stab
 !text/struct_stab
+
+
+presentation/*
+!presentation/*.pdf
+!presentation/figures
