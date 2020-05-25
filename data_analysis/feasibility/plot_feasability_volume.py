@@ -90,8 +90,8 @@ ax1.set_xlim(0., 1.)
 ax1.set_ylim(0., 1.)
 ax1.set_xlabel(r'$\gamma_0$')
 ax1.set_ylabel(r'$S_0$')
-title_axis=r'$\eta='+str(closest_element_in_list(nestedness[mat_index], all_nestedness))
-title_axis+=r', \kappa='+str(closest_element_in_list(connectance[mat_index], all_connectance))+'$'
+title_axis=r'$\eta_G='+str(closest_element_in_list(nestedness[mat_index], all_nestedness))
+title_axis+=r', \kappa_G='+str(closest_element_in_list(connectance[mat_index], all_connectance))+'$'
 ax1.set_title(title_axis)
 
 

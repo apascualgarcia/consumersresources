@@ -188,70 +188,110 @@ alpha0=np.array(alpha0)
 #     plt.close()
 
 # now plot largest eigenvalue observed
-exponents=[]
-for k in range(len(largest_eigenvalue_region[0,0])):
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    local_exponents=[]
-    for i in range(len(largest_eigenvalue_region)):
-        data=np.ma.masked_invalid(largest_eigenvalue_region[i,:,k])
-        NR=np.real(data[0, 0])
-        NS=np.real(data[0, 1])
-        nestedness_=np.real(data[0,2])
-        connectance_=np.real(data[0,3])
-        largest_eigenvalue=np.real(data[:, 6::3])
-        largest_ev=np.max(largest_eigenvalue, axis=1)
-        indices_fit=~largest_ev.mask
-        fit, popt, error = cf.fit_data(cf.power_function, alpha0[indices_fit], np.abs(largest_ev[indices_fit]))
-        local_exponents.append(popt[1])
-        ax.plot(alpha0, np.abs(largest_ev), label=label[i],markersize=10, linewidth=2.5, markeredgewidth=3)
-        #ax.plot(alpha0[indices_fit], fit, marker='', linestyle='solid')
-    exponents.append(local_exponents)
-    save_name ='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness_)+'_Conn'+str(connectance_)
-    ax.set_xlim(0, alpha0[-1]*(1.01))
-    ax.set_xlabel(r'$\alpha_0$')
+# exponents=[]
+# for k in range(len(largest_eigenvalue_region[0,0])):
+#     fig = plt.figure()
+#     ax = fig.add_subplot(111)
+#     local_exponents=[]
+#     for i in range(len(largest_eigenvalue_region)):
+#         data=np.ma.masked_invalid(largest_eigenvalue_region[i,:,k])
+#         NR=np.real(data[0, 0])
+#         NS=np.real(data[0, 1])
+#         nestedness_=np.real(data[0,2])
+#         connectance_=np.real(data[0,3])
+#         largest_eigenvalue=np.real(data[:, 6::3])
+#         largest_ev=np.max(largest_eigenvalue, axis=1)
+#         indices_fit=~largest_ev.mask
+#         fit, popt, error = cf.fit_data(cf.power_function, alpha0[indices_fit], np.abs(largest_ev[indices_fit]))
+#         local_exponents.append(popt[1])
+#         ax.plot(alpha0, np.abs(largest_ev), label=label[i],markersize=10, linewidth=2.5, markeredgewidth=3)
+#         #ax.plot(alpha0[indices_fit], fit, marker='', linestyle='solid')
+#     exponents.append(local_exponents)
+#     save_name ='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness_)+'_Conn'+str(connectance_)
+#     ax.set_xlim(0, alpha0[-1]*(1.01))
+#     ax.set_xlabel(r'$\alpha_0$')
+#     #ax.set_ylabel(r'$\max_{(\gamma_0, S_0)\in [0,1]^2}|\langle$Re($\lambda_1$)$\rangle|$')
+#     ax.set_ylabel(r'$\max|\langle$Re($\lambda_1$)$\rangle|$')
+#     ax.set_yscale('linear')
+#     ax.ticklabel_format(axis="both", style="sci", scilimits=(-2,2))
+#     ax.legend()
+#     fig.tight_layout()
+#     fig.savefig('plots/largest_eigenvalue_varying_syntrophy_'+save_name+'.pdf')
+# #    plt.show()
+#     plt.close()
+
+Nmatrices=len(largest_eigenvalue_region[0,0])
+# now plot largest eigenvalue observed on average among all matrices
+fig = plt.figure()
+ax = fig.add_subplot(111)
+for i in range(len(largest_eigenvalue_region)):
+
+    NR=largest_eigenvalue_region[0,0,0,0]
+    NS=largest_eigenvalue_region[0,0,0,1]
+
+    av_lar_eival=[]
+    for j in range(len(alpha0)):
+        lar_eival_at_alpha0=[]
+        for k in range(Nmatrices):
+            l_eigvals=np.ma.masked_invalid(np.real(largest_eigenvalue_region[i,j,k, 6::3]))
+            l_eigvals=l_eigvals[l_eigvals.mask==False]
+            # if not fully unfeasible get the largest eigenvalue
+            if len(l_eigvals) > 0:
+                lar_eival_at_alpha0.append(np.max(l_eigvals))
+        print(lar_eival_at_alpha0)
+        if len(lar_eival_at_alpha0) > 0:
+            av_lar_eival.append(np.mean(lar_eival_at_alpha0))
+        else:
+            av_lar_eival.append('nan')
+    av_lar_eival=np.ma.masked_invalid(av_lar_eival)
+    ax.plot(alpha0, np.abs(av_lar_eival), label=label[i])
+save_name ='NR'+str(int(NR))+'_NS'+str(int(NS))+'_average'
+ax.set_xlim(0, alpha0[-1]*(1.01))
+ax.set_xlabel(r'$\alpha_0$')
     #ax.set_ylabel(r'$\max_{(\gamma_0, S_0)\in [0,1]^2}|\langle$Re($\lambda_1$)$\rangle|$')
-    ax.set_ylabel(r'$\max|\langle$Re($\lambda_1$)$\rangle|$')
-    ax.set_yscale('linear')
-    ax.ticklabel_format(axis="both", style="sci", scilimits=(-2,2))
-    ax.legend()
-    fig.tight_layout()
-    fig.savefig('plots/largest_eigenvalue_varying_syntrophy_'+save_name+'.pdf')
-#    plt.show()
-    plt.close()
-exponents=np.transpose(exponents)
+ax.set_ylabel(r'$\max|\langle$Re($\lambda_1$)$\rangle|$')
+ax.set_yscale('linear')
+ax.ticklabel_format(axis="both", style="sci", scilimits=(-2,2))
+ax.legend()
+fig.tight_layout()
+fig.savefig('plots/largest_eigenvalue_varying_syntrophy_'+save_name+'.pdf')
+plt.show()
+    #plt.close()
 
-# plot critical exponents that tells you how deeper your eigenvalues go
-for k in range(len(largest_eigenvalue_region)):
-    # plot exponent
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    for nest in all_nestedness:
-        indices = [int(i) for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        sorted_indices=np.array([indices[a] for a in np.argsort(connectance[indices])])
-        connectance_to_plot=[connectance[i] for i in sorted_indices]
-        exp_to_plot=[exponents[k][i] for i in sorted_indices]
-        ax.plot(connectance_to_plot, exp_to_plot, label=r'$\eta\approx'+str(nest)+'$', markersize=10, linewidth=2.5, markeredgewidth=3)
-    ax.set_xlabel(r'Connectance $\kappa$')
-    ax.set_ylabel(r'Fit exponent')
-    ax.set_title(label[k])
-    ax.legend(bbox_to_anchor=(1.0, 1.0))
-    fig.tight_layout()
-    fig.savefig('plots/fit_exponent_largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
-    plt.close()
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    for conn in all_connectance:
-        indices = [int(i) for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
-        sorted_indices=np.array([indices[a] for a in np.argsort(nestedness[indices])])
-        nestedness_to_plot=[nestedness[i] for i in sorted_indices]
-        exp_to_plot=[exponents[k][i] for i in sorted_indices]
-        ax.plot(nestedness_to_plot, exp_to_plot, label=r'$\kappa\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
-    ax.set_xlabel(r'Ecological overlap $\eta$')
-    ax.set_ylabel(r'Fit exponent')
-    ax.set_title(label[k])
-    ax.legend(bbox_to_anchor=(1.0, 1.0))
-    fig.tight_layout()
-    fig.savefig('plots/fit_exponent_largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
-    plt.close()
+# exponents=np.transpose(exponents)
+#
+# # plot critical exponents that tells you how deeper your eigenvalues go
+# for k in range(len(largest_eigenvalue_region)):
+#     # plot exponent
+#     fig = plt.figure()
+#     ax = fig.add_subplot(111)
+#     for nest in all_nestedness:
+#         indices = [int(i) for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
+#         sorted_indices=np.array([indices[a] for a in np.argsort(connectance[indices])])
+#         connectance_to_plot=[connectance[i] for i in sorted_indices]
+#         exp_to_plot=[exponents[k][i] for i in sorted_indices]
+#         ax.plot(connectance_to_plot, exp_to_plot, label=r'$\eta\approx'+str(nest)+'$', markersize=10, linewidth=2.5, markeredgewidth=3)
+#     ax.set_xlabel(r'Connectance $\kappa$')
+#     ax.set_ylabel(r'Fit exponent')
+#     ax.set_title(label[k])
+#     ax.legend(bbox_to_anchor=(1.0, 1.0))
+#     fig.tight_layout()
+#     fig.savefig('plots/fit_exponent_largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_nestedness_'+alpha_mode[k]+'.pdf')
+#     plt.close()
+#
+#     fig = plt.figure()
+#     ax = fig.add_subplot(111)
+#     for conn in all_connectance:
+#         indices = [int(i) for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
+#         sorted_indices=np.array([indices[a] for a in np.argsort(nestedness[indices])])
+#         nestedness_to_plot=[nestedness[i] for i in sorted_indices]
+#         exp_to_plot=[exponents[k][i] for i in sorted_indices]
+#         ax.plot(nestedness_to_plot, exp_to_plot, label=r'$\kappa\approx'+str(conn)+'$',markersize=10, linewidth=2.5, markeredgewidth=3)
+#     ax.set_xlabel(r'Ecological overlap $\eta$')
+#     ax.set_ylabel(r'Fit exponent')
+#     ax.set_title(label[k])
+#     ax.legend(bbox_to_anchor=(1.0, 1.0))
+#     fig.tight_layout()
+#     fig.savefig('plots/fit_exponent_largest_eigenvalue_NR'+str(int(NR))+'_NS'+str(int(NS))+'_critical_alpha0_fixed_connectance_'+alpha_mode[k]+'.pdf')
+#     plt.close()

@@ -2,5 +2,5 @@
 
 CORES=$1
 # config file folder, leave blank for default three folders
-FOLDER='test'
+FOLDER=$2
 python3 additional_scripts/run_structural_stability_computations.py $CORES $FOLDER
