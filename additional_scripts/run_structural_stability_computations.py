@@ -12,10 +12,11 @@ command = 'build/compute_critical_Delta'
 additional_params='type_of_structural_perturbation=1'
 
 # first get all the config files we have to run
-config_folder = 'config/structural_stability'
+config_folder = 'config/structural_stability/NR50_NS25'
 folders=['common_max_syntrophies', 'maximal_own_syntrophies', 'no_syntrophy']
-if(len(sys.argv)>1):
+if(len(sys.argv)>2):
     folders=[sys.argv[2]]
+    print('Using custom input of folder')
 
 files = []
 config_paths=[config_folder+'/'+a for a in folders]
@@ -34,5 +35,5 @@ for i in range(CORES):
         command_core+=' && '
     command_core=command_core[:-4]+'"'
     command_core = "nohup sh -c "+command_core+' > '+log_name+' 2>&1 &'
-    #os.system(command_core)
-#print("Launched "+str(len(files))+" runs on "+str(CORES)+"cores. Please check appropriate log folders if needed.")
+    os.system(command_core)
+print("Launched "+str(len(files))+" runs on "+str(CORES)+" cores. Please check appropriate log folders if needed.")
