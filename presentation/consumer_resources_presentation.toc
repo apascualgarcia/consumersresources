@@ -1,0 +1,14 @@
+\beamer@sectionintoc {2}{Introduction to the model}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Syntrophic interaction}{3}{0}{1}
+\beamer@subsectionintoc {2}{2}{Processes at play}{4}{0}{1}
+\beamer@subsectionintoc {2}{3}{Dynamical Equations}{5}{0}{1}
+\beamer@subsectionintoc {2}{4}{Metaparameters framework}{6}{0}{1}
+\beamer@sectionintoc {3}{Feasibility}{7}{0}{2}
+\beamer@subsectionintoc {3}{1}{Physical Requirements}{7}{0}{2}
+\beamer@subsectionintoc {3}{2}{Feasibility profile}{8}{0}{2}
+\beamer@subsectionintoc {3}{3}{Fully feasible region}{9}{0}{2}
+\beamer@sectionintoc {4}{Dynamical stability}{10}{0}{3}
+\beamer@sectionintoc {5}{Structural stability}{11}{0}{4}
+\beamer@sectionintoc {6}{Backup slides -- Feasibility}{12}{1}{5}
+\beamer@subsectionintoc {6}{1}{Physical Requirements}{12}{1}{5}
+\beamer@subsectionintoc {6}{2}{Theoretical predictions}{13}{1}{5}
