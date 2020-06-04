@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  23 MAY 2020 18:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.4.2)  25 MAY 2020 15:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -943,33 +943,30 @@ thkerncmss.
 ] [7
 
 ]
-<../text/figures/Results/feasibility/typical_feasibility_volume.pdf, id=317, 46
-2.52798pt x 346.89601pt>
-File: ../text/figures/Results/feasibility/typical_feasibility_volume.pdf Graphi
-c file (type pdf)
+<./figures/typical_feasibility_volume.pdf, id=317, 462.52798pt x 346.89601pt>
+File: ./figures/typical_feasibility_volume.pdf Graphic file (type pdf)
 
-<use ../text/figures/Results/feasibility/typical_feasibility_volume.pdf>
-Package pdftex.def Info: ../text/figures/Results/feasibility/typical_feasibilit
-y_volume.pdf used on input line 82.
+<use ./figures/typical_feasibility_volume.pdf>
+Package pdftex.def Info: ./figures/typical_feasibility_volume.pdf used on input
+ line 82.
 (pdftex.def)             Requested size: 256.72147pt x 192.55074pt.
+ [8
 
-[8
+ <./figures/typical_feasibility_volume.pdf>]
+<./figures/feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808.pdf, id=369, 101
+1.78pt x 325.215pt>
+File: ./figures/feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808.pdf Graphic
+ file (type pdf)
 
- <../text/figures/Results/feasibility/typical_feasibility_volume.pdf>]
-<../text/figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0.15_C
-onn0.1808.pdf, id=369, 1011.78pt x 325.215pt>
-File: ../text/figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0
-.15_Conn0.1808.pdf Graphic file (type pdf)
-
-<use ../text/figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0.
-15_Conn0.1808.pdf>
-Package pdftex.def Info: ../text/figures/Results/feasibility/feasibility_region
-_wt_NR25_NS25_Nest0.15_Conn0.1808.pdf used on input line 92.
+<use ./figures/feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808.pdf>
+Package pdftex.def Info: ./figures/feasibility_region_wt_NR25_NS25_Nest0.15_Con
+n0.1808.pdf used on input line 92.
 (pdftex.def)             Requested size: 256.72147pt x 82.51932pt.
- [9
 
- <../text/figures/Results/feasibility/feasibility_region_wt_NR25_NS25_Nest0.15_
-Conn0.1808.pdf>] [10
+[9
+
+ <./figures/feasibility_region_wt_NR25_NS25_Nest0.15_Conn0.1808.pdf>]
+[10
 
 ] [11
 
@@ -1008,8 +1005,8 @@ LaTeX Font Warning: Size substitutions with differences
  ) 
 Here is how much of TeX's memory you used:
  17990 strings out of 493013
- 345656 string characters out of 6133344
- 422917 words of memory out of 5000000
+ 345422 string characters out of 6133344
+ 422676 words of memory out of 5000000
  21067 multiletter control sequences out of 15000+600000
  10990 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1031,7 +1028,7 @@ exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/te
 xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on consumer_resources_presentation.pdf (13 pages, 491803 bytes).
+Output written on consumer_resources_presentation.pdf (13 pages, 491881 bytes).
 
 PDF statistics:
  599 PDF objects out of 1000 (max. 8388607)

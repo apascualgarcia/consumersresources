@@ -24,6 +24,7 @@ nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 
 N_alphamodes=len(alpha_mode)
+N_alphamodes=1
 
 # careful, only returns the real proba, ie the possible
 def proba_dyna_if_feas(f_region_, d_region_, alpha_mode_index_, alpha0_index_, mat_index_):
@@ -136,8 +137,12 @@ def plot_common_region(region, alpha_mode_, colors_, labels_):
     Nmatrices=len(region[0,0])
 
     # do that computation for each alpha_mode
-    for k in range(len(region)):
-        ax=axs[k]
+
+    for k in range(N_alphamodes):
+        if N_alphamodes > 1:
+            ax=axs[k]
+        else:
+            ax=axs
 
         # contains the indices which have quantity 1 for all matrices at different alpha0
         f_indices=[]
@@ -173,6 +178,7 @@ def plot_common_region(region, alpha_mode_, colors_, labels_):
         ax.set_xlim(min_gamma0, max_gamma0)
         ax.set_ylim(min_S0, max_S0)
         ax.set_title(labels_[k])
+    
     axs[0].set_ylabel(r'$S_0$')
     axs[0].set_yticks([0, 0.5, 1])
     axs[0].set_yticklabels([0, 0.5, 1])
@@ -217,6 +223,9 @@ def full_indices_in_data_set(data_):
 def plot_levels(data, colors, labels_):
     gamma0=data[0,0,4::3]
     S0=data[0,0,5::3]
+
+    print("N_alphamodes=", N_alphamodes)
+
 
 
     fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
