@@ -19,6 +19,7 @@ ylabel=r'Vol$\left(\mathcal{F}_1^{S_{25}}(\alpha_0)\right)$'
 feasibility_region = cf.load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
 alpha0=np.array(alpha0)
 
+
 NR=int(feasibility_region[0,0,0,0])
 NS=int(feasibility_region[0,0,0,1])
 

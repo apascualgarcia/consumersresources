@@ -10,8 +10,9 @@ from matplotlib.figure import figaspect
 
 import copy
 
-filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
+
+filename = 'feasibility/other_LRI_feasibility_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='optimal_LRI_corrected_NR25_NS25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 matrix_set='S_{25}'
 
@@ -20,7 +21,8 @@ matrix_set='S_{25}'
 # consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
 # matrix_set='S_{50}'
 
-
+alpha_mode=['optimal_matrix']
+label=['Modified LRI']
 
 cmap = plt.cm.get_cmap('jet_r')
 colors = [cmap(i/10) for i in range(len(alpha0))]
