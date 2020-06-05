@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import consumer_resource_data_analysis as cf
-from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours, nest_colours, conn_colours
+from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours, nest_colours, conn_colours, N_alphamodes
 import os
 import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -20,6 +20,7 @@ matrix_set='S_{25}'
 # optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
 # consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
 # matrix_set='S_{50}'
+
 
 alpha_mode=['optimal_matrix']
 label=['Modified LRI']
@@ -53,15 +54,24 @@ for j in range(len(feasibility_region[0,0])):
     fig, axs, im, levels = cf.plot_levels(data, colors, label)
     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
     # first save figure without color bar or title
+    if N_alphamodes<2:
+        fig.tight_layout()
     fig.savefig('plots/feasibility_region_wt_wc_'+save_name+'.pdf')
 
     # add colorbar to plot
     cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
     cbar.set_label(r'$\alpha_0$')
+    if N_alphamodes<2:
+        fig.tight_layout()
     fig.savefig('plots/feasibility_region_wt_'+save_name+'.pdf')
 
     # add suptitle to plot
-    fig.suptitle(r'Fully feasible region $\mathcal{F}^{G,A}_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
+    if N_alphamodes>=2:
+        fig.suptitle(r'Fully feasible region $\mathcal{F}^{G,A}_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
+        fig.tight_layout()
+    else:
+        fig.subplots_adjust(top=0.9)
+        fig.suptitle(r'$\mathcal{F}^{G,A}_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$', y=0.98)
     fig.savefig('plots/feasibility_region_'+save_name+'.pdf')
     plt.close()
 
@@ -164,38 +174,39 @@ for k in range(len(feasibility_region)):
 
 
 # deviations away from decay rate FC
-for k in range(len(feasibility_region)):
-    ratio=1.
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    for j in range(len(all_nestedness)):
-        nest=all_nestedness[j]
-        indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
-        ax.plot(connectance[indices],-decline[k][indices]/decline[0][indices]+1, label=r'$\eta_G\approx'+str(nest)+'$',linewidth=2.5, markeredgewidth=3, color=nest_colours[j])
-    ax.set_xlabel(r'Connectance $\kappa_G$')
-    ax.set_ylabel(r'$1-d_F(G,A)/d_F(G, $FC$)$')
-    lgd=ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    ax.set_title(label[k])
-    ax.set_aspect(1.0/ax.get_data_ratio()*ratio)
-    fig.tight_layout()
-    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_dev_away_from_FC_fixed_nestedness_'+alpha_mode[k]+'.pdf')#,bbox_extra_artists=(lgd,), bbox_inches='tight')
-    plt.close()
+if N_alphamodes > 1:
+    for k in range(len(feasibility_region)):
+        ratio=1.
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        for j in range(len(all_nestedness)):
+            nest=all_nestedness[j]
+            indices = [i for i in range(len(nestedness)) if cf.closest_element_in_list(nestedness[i], all_nestedness)==nest]
+            ax.plot(connectance[indices],-decline[k][indices]/decline[0][indices]+1, label=r'$\eta_G\approx'+str(nest)+'$',linewidth=2.5, markeredgewidth=3, color=nest_colours[j])
+        ax.set_xlabel(r'Connectance $\kappa_G$')
+        ax.set_ylabel(r'$1-d_F(G,A)/d_F(G, $FC$)$')
+        lgd=ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+        ax.set_title(label[k])
+        ax.set_aspect(1.0/ax.get_data_ratio()*ratio)
+        fig.tight_layout()
+        fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_dev_away_from_FC_fixed_nestedness_'+alpha_mode[k]+'.pdf')#,bbox_extra_artists=(lgd,), bbox_inches='tight')
+        plt.close()
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
-    for j in range(len(all_connectance)):
-        conn=all_connectance[j]
-        indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
-        sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
-        ax.plot(nestedness[sorted_indices],-decline[k][sorted_indices]/decline[0][sorted_indices]+1, label=r'$\kappa_G\approx'+str(conn)+'$', linewidth=2.5, markeredgewidth=3, color=conn_colours[j])
-    ax.set_xlabel(r'Ecological overlap $\eta_G$')
-    ax.set_ylabel(r'$1-d_F(G,A)/d_F(G, $FC$)$')
-    ax.set_aspect(1.0/ax.get_data_ratio()*ratio)
-    lgd=ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
-    ax.set_title(label[k])
-    fig.tight_layout()
-    fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_dev_away_from_FC_fixed_connectance_'+alpha_mode[k]+'.pdf')#, bbox_extra_artists=(lgd,), bbox_inches='tight')
-    plt.close()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+        for j in range(len(all_connectance)):
+            conn=all_connectance[j]
+            indices = [i for i in range(len(connectance)) if cf.closest_element_in_list(connectance[i], all_connectance)==conn]
+            sorted_indices=[ indices[a] for a in np.argsort(nestedness[indices])]
+            ax.plot(nestedness[sorted_indices],-decline[k][sorted_indices]/decline[0][sorted_indices]+1, label=r'$\kappa_G\approx'+str(conn)+'$', linewidth=2.5, markeredgewidth=3, color=conn_colours[j])
+        ax.set_xlabel(r'Ecological overlap $\eta_G$')
+        ax.set_ylabel(r'$1-d_F(G,A)/d_F(G, $FC$)$')
+        ax.set_aspect(1.0/ax.get_data_ratio()*ratio)
+        lgd=ax.legend(bbox_to_anchor=(1.0, 1.0), loc='upper left')
+        ax.set_title(label[k])
+        fig.tight_layout()
+        fig.savefig('plots/feasibility_NR'+str(int(NR))+'_NS'+str(int(NS))+'_feasibility_decay_rate_dev_away_from_FC_fixed_connectance_'+alpha_mode[k]+'.pdf')#, bbox_extra_artists=(lgd,), bbox_inches='tight')
+        plt.close()
 
 
 
