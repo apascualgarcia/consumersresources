@@ -22,8 +22,10 @@ nestedness_label=r'Ecological overlap $\eta_G$'
 connectance_label=r'Connectance $\kappa_G$'
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
-
 N_alphamodes=len(alpha_mode)
+
+alpha_mode=['optimal_matrix']
+label=['Modified LRI']
 N_alphamodes=1
 
 # careful, only returns the real proba, ie the possible
@@ -130,6 +132,7 @@ def plot_common_full_volume_shrinkage(ax_,region_, alpha_mode_index, alpha0_):
 
 # region contains all data for each alphamode, alpha0 and network
 def plot_common_region(region, alpha_mode_, colors_, labels_):
+
     fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
     quantity=region[:,:,:,6::3]
     gamma0=region[:,:,:,4::3]
@@ -143,7 +146,6 @@ def plot_common_region(region, alpha_mode_, colors_, labels_):
             ax=axs[k]
         else:
             ax=axs
-
         # contains the indices which have quantity 1 for all matrices at different alpha0
         f_indices=[]
         # do that for all alpha0
@@ -178,12 +180,16 @@ def plot_common_region(region, alpha_mode_, colors_, labels_):
         ax.set_xlim(min_gamma0, max_gamma0)
         ax.set_ylim(min_S0, max_S0)
         ax.set_title(labels_[k])
-    
-    axs[0].set_ylabel(r'$S_0$')
-    axs[0].set_yticks([0, 0.5, 1])
-    axs[0].set_yticklabels([0, 0.5, 1])
+    if N_alphamodes > 1:
+        axs[0].set_ylabel(r'$S_0$')
+        axs[0].set_yticks([0, 0.5, 1])
+        axs[0].set_yticklabels([0, 0.5, 1])
 
-    fig.subplots_adjust(bottom=0.2, top=0.95)
+        fig.subplots_adjust(bottom=0.2, top=0.95)
+    else:
+        axs.set_ylabel(r'$S_0$')
+        axs.set_yticks([0, 0.5, 1])
+        axs.set_yticklabels([0, 0.5, 1])
 
     return fig, axs, im, levels
 
@@ -223,37 +229,56 @@ def full_indices_in_data_set(data_):
 def plot_levels(data, colors, labels_):
     gamma0=data[0,0,4::3]
     S0=data[0,0,5::3]
-
-    print("N_alphamodes=", N_alphamodes)
-
-
-
-    fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
+    if N_alphamodes>1:
+        fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
+    else:
+        fig = plt.figure()
+        axs = fig.add_subplot(111)
     function_levels=levels_different_alpha0(data)
     max_level=np.amax(function_levels)
     levels=[i for i in range(max_level+2)]
     triang = tr.Triangulation(gamma0, S0)
     for i in range(len(data)):
         to_plot = function_levels[i]
-        axs[i].set_aspect('equal')
-        im = axs[i].tricontourf(triang, to_plot, levels=levels, colors=colors)
-        axs[i].set_xlabel(r'$\gamma_0$')
-        axs[i].set_xticks([0.01, 0.5, 1])
-        axs[i].set_xticklabels([0.01, 0.5, 1])
-        axs[i].set_title(labels_[i])
-        axs[i].set_xlim(0.01, 1)
-        axs[i].set_ylim(0.01, 1)
-    axs[0].set_ylabel(r'$S_0$')
-    axs[0].set_yticks([0.01, 0.5, 1])
-    axs[0].set_yticklabels([0.01, 0.5, 1])
+        if N_alphamodes > 1:
+            axs[i].set_aspect('equal')
+            im = axs[i].tricontourf(triang, to_plot, levels=levels, colors=colors)
+            axs[i].set_xlabel(r'$\gamma_0$')
+            axs[i].set_xticks([0.01, 0.5, 1])
+            axs[i].set_xticklabels([0.01, 0.5, 1])
+            axs[i].set_title(labels_[i])
+            axs[i].set_xlim(0.01, 1)
+            axs[i].set_ylim(0.01, 1)
+        else:
+            axs.set_aspect('equal')
+            im = axs.tricontourf(triang, to_plot, levels=levels, colors=colors)
+            axs.set_xlabel(r'$\gamma_0$')
+            axs.set_xticks([0.01, 0.5, 1])
+            axs.set_xticklabels([0.01, 0.5, 1])
+            axs.set_title(labels_[i])
+            axs.set_xlim(0.01, 1)
+            axs.set_ylim(0.01, 1)
 
-    fig.subplots_adjust(bottom=0.2, top=0.95)
+    if N_alphamodes>1:
+        axs[0].set_ylabel(r'$S_0$')
+        axs[0].set_yticks([0.01, 0.5, 1])
+        axs[0].set_yticklabels([0.01, 0.5, 1])
+
+        fig.subplots_adjust(bottom=0.2, top=0.95)
+    else:
+        axs.set_ylabel(r'$S_0$')
+        axs.set_yticks([0.01, 0.5, 1])
+        axs.set_yticklabels([0.01, 0.5, 1])
+
 
     return fig, axs, im, levels
 
 def add_colorbar_to_plot_levels(fig, im, levels, ticks):
-    cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
-    cbar=fig.colorbar(im, cax=cbar_ax, orientation='horizontal')
+    if N_alphamodes > 1:
+        cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
+        cbar=fig.colorbar(im, cax=cbar_ax, orientation='horizontal', format='%.2e')
+    else:
+        cbar=fig.colorbar(im, orientation='horizontal', format='%.2e', aspect=50)
     cbar.set_ticks([a +0.5 for a in levels])
     cbar.set_ticklabels(ticks)
     return cbar
