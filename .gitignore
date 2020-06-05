@@ -13,7 +13,7 @@ old_*
 !feasibility/*.out
 !local_dynamical_stability/*.out
 !largest_eigenvalue/*.out
-!structural_stability/*.out
+!structural_stability/*/*.out
 
 text/*
 
