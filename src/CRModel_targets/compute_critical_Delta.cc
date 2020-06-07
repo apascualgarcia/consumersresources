@@ -10,7 +10,7 @@ int main(int argc, char * argv[]){
     initialize_random_engine(metaparams);
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
     if(metaparams.verbose > 0){
-      std::cout << "The critical delta of " << metaparams.foodmatrixpath << " will be computed (alpha mode is "<< metaparams.alpha_mode << ")" ;
+      std::cout << "The critical delta of " << metaparams.foodmatrixpath << " will be computed (alpha mode is "<< metaparams.alpha_mode << " and type_of_structural_perturbation=" << metaparams.struct_pert_type << ")" ;
     }
 
     metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
