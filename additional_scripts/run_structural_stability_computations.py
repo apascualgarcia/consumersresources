@@ -4,6 +4,8 @@ from datetime import datetime
 from separate_file import separate_file, remove_files
 import numpy as np
 from os import listdir
+import random
+import string
 
 CORES=int(sys.argv[1])
 
@@ -31,7 +33,8 @@ for c in config_paths:
 # now we separate files among cores
 files_per_core=np.array_split(files, CORES)
 for i in range(CORES):
-    log_name=LOG_NAME+'_'+str(i)+'.log'
+    rnd=''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(3)])
+    log_name=LOG_NAME+'_'+str(i)+'_'+rnd+'.log'
     command_core = '"'
     for j in range(len(files_per_core[i])):
         command_core+= command +' '+files_per_core[i][j] + ' ' + additional_params
