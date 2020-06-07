@@ -33,7 +33,7 @@ for c in config_paths:
 # now we separate files among cores
 files_per_core=np.array_split(files, CORES)
 for i in range(CORES):
-    rnd=''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(3)])
+    rnd=''.join([random.choice(string.ascii_letters + string.digits) for n in range(3)])
     log_name=LOG_NAME+'_'+str(i)+'_'+rnd+'.log'
     command_core = '"'
     for j in range(len(files_per_core[i])):
