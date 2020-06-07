@@ -143,5 +143,32 @@ T maximum(const std::vector<T> & vec){
   return *std::max_element(vec.begin(), vec.end());
 };
 
+template<typename T>
+T mean(const std::vector<T> & vec){
+  unsigned int length=vec.size();
+  T to_ret=vec[0];
+  for (size_t i=1; i < length; ++i){
+    to_ret+=vec[i];
+  }
+  return to_ret*(1./length);
+}
+
+template<typename T>
+T variance(const std::vector<T> & vec){
+  T mean_ = mean(vec);
+  unsigned int n = vec.size();
+  if(n<=1){
+    throw error("Variance of vector provided cannot be computed, it has less than two elements.");
+  }
+
+  T total=(vec[0]-mean_)*(vec[0]-mean_);
+  for(size_t i=1; i < n; ++i){
+    total+=(vec[i]-mean_)*(vec[i]-mean_);
+  }
+  total = total*1./(n-1);
+  return total;
+}
+
+
 
 #endif

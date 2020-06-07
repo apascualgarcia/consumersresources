@@ -9,14 +9,18 @@ CORES=int(sys.argv[1])
 
 LOG_NAME='logs/structural_stability_computations_core'
 command = 'build/compute_critical_Delta'
-additional_params='type_of_structural_perturbation=1'
+additional_params=''
 
 # first get all the config files we have to run
 config_folder = 'config/structural_stability/NR50_NS25'
 folders=['common_max_syntrophies', 'maximal_own_syntrophies', 'no_syntrophy']
 if(len(sys.argv)>2):
     folders=[sys.argv[2]]
-    print('Using custom input of folder')
+    print('Using custom input of folder:', folders)
+    if len(sys.argv)> 3:
+        for i in range(3, len(sys.argv)):
+            additional_params+=sys.argv[i]
+            additional_params+=' '
 
 files = []
 config_paths=[config_folder+'/'+a for a in folders]
