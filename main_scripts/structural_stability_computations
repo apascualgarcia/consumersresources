@@ -1,6 +1,11 @@
 #!/bin/bash
 
 CORES=$1
-# config file folder, leave blank for default three folders
+# config file folder, then potential additional parameters
 FOLDER=$2
-python3 additional_scripts/run_structural_stability_computations.py $CORES $FOLDER
+ADDITIONAL_PARAMS=""
+for ((i=3; i <= $#; i++))
+do
+  ADDITIONAL_PARAMS="${ADDITIONAL_PARAMS} ${!i}"
+done
+python3 additional_scripts/run_structural_stability_computations.py $CORES $FOLDER $ADDITIONAL_PARAMS

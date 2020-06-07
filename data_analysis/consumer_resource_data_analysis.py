@@ -24,9 +24,9 @@ nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 N_alphamodes=len(alpha_mode)
 
-alpha_mode=['optimal_matrix']
-label=['Modified LRI']
-N_alphamodes=1
+# alpha_mode=['optimal_matrix']
+# label=['Modified LRI']
+# N_alphamodes=1
 
 # careful, only returns the real proba, ie the possible
 def proba_dyna_if_feas(f_region_, d_region_, alpha_mode_index_, alpha0_index_, mat_index_):

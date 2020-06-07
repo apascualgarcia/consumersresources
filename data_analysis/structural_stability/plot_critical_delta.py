@@ -4,10 +4,15 @@ import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
 from consumer_resource_data_analysis import label as alpha_label
 
-alpha_mode+=['RNISC', 'LNISC', 'NISCC']
-alpha_label+=[r'LRI-NIS', r'RS-NIS',r'RS-R']
+### CONFUSION IN THE LABELS OF THE ADDITIONAL REGIMES ??
+# alpha_mode+=['RNISC', 'LNISC', 'NISCC']
+# alpha_label+=[r'LRI-NIS', r'RS-NIS',r'RS-R']
+
+alpha_mode+=['RSNIS', 'LRINIS', 'RSR']
+alpha_label+=[r'RS-NIS', r'LRI-NIS', r'RS-R']
+
 alpha_mode_colours+=['orange', 'pink', 'grey']
-folder='structural_stability'
+folder='structural_stability/reduce_mean'
 filename='data_all_structural_stability'
 syntrophy_mode=['common_max_syntrophy','own_max_syntrophy', 'no_syntrophy']
 syntrophy_label=[r'$\alpha_0=$min$\{\alpha_C^D\}$', r'$\alpha_0=\alpha_C^D(\gamma_0, S_0, G, A)$', r'$\alpha_0=0$']
