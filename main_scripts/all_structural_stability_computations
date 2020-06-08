@@ -1,0 +1,13 @@
+#!/bin/bash
+# used to run ALL STRUCT STAB COMPUTATIONS at the same time ($NUMBER_OF_CORES cores are used at the same time)
+NUMBER_OF_CORES=$1
+main_scripts/structural_stability_computations NUMBER_OF_CORES common_max_syntrophies;
+main_scripts/structural_stability_computations NUMBER_OF_CORES maximal_own_syntrophies;
+main_scripts/structural_stability_computations NUMBER_OF_CORES no_syntrophy;
+mkdir data_output/str_stab_same_mean;
+mv data_output/strstab* data_output/str_stab_same_mean;
+main_scripts/structural_stability_computations NUMBER_OF_CORES common_max_syntrophies type_of_structural_perturbation=1;
+main_scripts/structural_stability_computations NUMBER_OF_CORES maximal_own_syntrophies type_of_structural_perturbation=1;
+main_scripts/structural_stability_computations NUMBER_OF_CORES no_syntrophy type_of_structural_perturbation=1;
+mkdir data_output/str_stab_reduce_mean;
+mv data_output/strstab* data_output/str_stab_reduce_mean
