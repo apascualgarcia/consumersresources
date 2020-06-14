@@ -9,7 +9,7 @@ from matplotlib.colors import LogNorm
 from consumer_resource_data_analysis import alpha_mode, alpha_mode_colours,label, alpha0, all_nestedness, all_connectance, N_alphamodes
 import copy
 
-filename = 'largest_eigenvalue/all_mat_largest_eigenvalue_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
+filename = 'data_shared/data_output_11-Jun_largest_eigenvalue/largest_eigenvalue_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
 optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 
