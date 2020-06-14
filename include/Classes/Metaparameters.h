@@ -79,7 +79,11 @@ struct Metaparameters{
   /* attempt at building a more accurate LRI quadratic form */
   ntype accurate_quadratic_form_LRI(const nmatrix& A, const nmatrix& G) const;
 
+  /* new attempt at building an LRI quadratic form */
+  ntype newly_corrected_quadratic_form_LRI(const nmatrix& A, const nmatrix& G) const;
 
+  /* estimates critical radius with A and G matrix as input */
+  ntype critical_radius(const nmatrix& A, const nmatrix& G) const;
 };
 
 

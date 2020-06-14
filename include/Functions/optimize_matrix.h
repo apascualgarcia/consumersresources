@@ -32,5 +32,6 @@ ntype quadratic_form_low_intra_resource_interaction(const nmatrix&, const nmatri
 ntype quadratic_form_nestedness(const nmatrix& gamma, const nmatrix& dummy, void*);
 ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy, void*);
 ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatrix& gamma, void* params);
+ntype quadratic_form_LRI_newly_corrected(const nmatrix& alpha, const nmatrix& gamma, void* params);
 
 #endif
