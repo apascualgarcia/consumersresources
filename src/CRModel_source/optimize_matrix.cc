@@ -462,3 +462,7 @@ ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatri
   Metaparameters* m= (Metaparameters*)(params);
   return m->accurate_quadratic_form_LRI(alpha, gamma);
 }
+ntype quadratic_form_LRI_newly_corrected(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  Metaparameters* m= (Metaparameters*)(params);
+  return m->newly_corrected_quadratic_form_LRI(alpha, gamma);
+}
