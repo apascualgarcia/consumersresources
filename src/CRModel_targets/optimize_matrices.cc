@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
-    mcsolv.cost_function=quadratic_form_LRI_with_critical_radius;
+    mcsolv.cost_function=quadratic_form_LRI_newly_corrected;
 ;
     mcsolv.additional_params=&metaparams;
 
