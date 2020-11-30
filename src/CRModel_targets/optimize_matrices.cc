@@ -1,5 +1,23 @@
+/*******************************************************************************
+
+This file allows to create matrices which respect the needed energy conditions.
+More specifically, it transforms each matrix of a set (the list of matrices
+needs to be given as the path_to_food_matrix value of the input configuration file)
+into a form which minimizes a given cost function energy_function (which can be)
+changed on line 18). New energy functions can be added on the optimize_matrix file
+from the CRModel_source folder.
+
+Typical usage (from main folder):
+
+build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_LIST
+
+*******************************************************************************/
+
 #include "../../include/CRModel.h"
 
+ntype energy_function(const nmatrix& a, const nmatrix& b, void* c){
+  return quadratic_form(a, b, c);
+}
 
 
 int main(int argc, char* argv[]){
@@ -13,7 +31,7 @@ int main(int argc, char* argv[]){
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
-    mcsolv.cost_function=quadratic_form_LRI_newly_corrected;
+    mcsolv.cost_function=energy_function;
 ;
     mcsolv.additional_params=&metaparams;
 
