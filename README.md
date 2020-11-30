@@ -99,7 +99,12 @@ The workload needed to compute the feasibility and dynamical stability data we a
 
 The variable ``LOCATION_OF_THE_TARGET_FILE`` has a self-explicit name and would be for instance ```commands/target.txt```. The variable ```NUMBER_OF_CORES``` is an integer which specifies on how many cores the simulations should be run (**warning**: once the simulations are started, it is very painful to delete them by hand, it is therefore really important to think well before launching them).
 
-### Feasiblity 
+### Feasibility
+
+
+
+### Dynamical stability
+
 
 
 

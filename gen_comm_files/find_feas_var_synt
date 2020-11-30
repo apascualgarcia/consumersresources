@@ -1,20 +1,30 @@
 #!/bin/bash
-# This script automatically computes and draws a graph max(eigenvalue) vs. alpha0
-# for every matrix listed (one graph per matrix list) and alpha_mode chosen
-#MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
+
+# This script generates a file which, when run, computes the percentage of feasible systems for every
+# matrix on the MATRIX_LIST file, with alpha in mode ALPHA_MODE, for every
+# value of alpha0 in the ALPHA_VALS list.
+
+# The file generated will be placed in the ./commands folder and named after
+# the variable COMMAND_FILE
+
+# Example for NR=NS=25
 MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
-#ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
 ALPHA_MODE="optimal_matrix"
-#SAVENAME="local_dynamical_stability_NR50_NS25"
 SAVENAME="other_LRI_local_dynamical_stability_NR25_NS25"
 OPTIMAL_MATRIX_FOLDER="optimal_LRI_corrected_NR25_NS25"
-ADDITIONAL_MODIF=""
-#ADDITIONAL_MODIF="NR=50 NS=25"
 ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
-#ALPHA_VALS="0"
-# for old version
-# VOL_NAME="common_feasibility_volume_NR25_NS25"
+ADDITIONAL_MODIF=""
+
+CONFIGURATION_FILE="config/configuration.in"
 COMMAND_FILE="feasibility_dynamical_stability_computations_modified_LRI.txt"
+
+# And possible modifications for NR=50 and NS=25
+#MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
+#ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
+#SAVENAME="local_dynamical_stability_NR50_NS25"
+#ADDITIONAL_MODIF="NR=50 NS=25"
+#ALPHA_VALS="0"
+
 
 for a in $ALPHA_MODE
 do
@@ -34,7 +44,7 @@ do
       CURRENT_NAME="${CURRENT_NAME}_alpha0=${alpha}"
       VOLUME_PATH="${VOLUME_PATH}_alpha0=${alpha}"
 
-      FIRST_COMMAND="build/check_percentage_dynamically_stable_systems config/configuration.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha}  ${ADDITIONAL_MODIF}"
+      FIRST_COMMAND="build/feasibility_varying_syntrophy ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha}  ${ADDITIONAL_MODIF}"
       # for old version
       # FIRST_COMMAND="${FIRST_COMMAND} path_to_volume='feasibility/${VOLUME_PATH}.out'"
       FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
