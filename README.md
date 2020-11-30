@@ -59,7 +59,7 @@ from the main folder to set up everything.
 
 ## Tree structure of the package
 
-## How to run scripts
+## Scripts: what they do and how to use them
 * **compute_critical_Delta_matrices** : this one is actually fairly simple. It computes the critical delta of a given set of matrices (given by default but which can be changed if needed) for every configuration of metaparameters specified. This means the total number of critical delta computed will be #matrices x #configuration. If you don't change the default matrix list and the default set of metaparameters, then you can simply run the script with the command
 ```
 main_scripts/compute_delta_critical_matrices CORES
@@ -78,3 +78,16 @@ Similarly, for an other set of metaparameters configurations
 METAPARAMS_LIST="other_metaparams_list"
 ```
 for the file config/other_metaparams_list.in
+
+* **build/optimize_matrices**:
+This script allows to create matrices which respect the needed energy conditions.
+More specifically, it transforms each matrix of a set (the list of matrices
+needs to be given as the path_to_food_matrix value of the input configuration file)
+into a form which minimizes a given cost function energy_function (which can be)
+changed on line 18). New energy functions can be added on the **optimize_matrix.cc** file
+from the CRModel_source folder (the command ``./configure`` will need to be run again after the new energy form is added).
+
+Typical usage (from main folder):
+```
+build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_LIST
+```
