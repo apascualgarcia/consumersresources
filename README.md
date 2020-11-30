@@ -59,7 +59,7 @@ from the main folder to set up everything.
 
 ## Tree structure of the package
 
-## Scripts: what they do and how to use them
+### Scripts: what they do and how to use them
 * **compute_critical_Delta_matrices** : this one is actually fairly simple. It computes the critical delta of a given set of matrices (given by default but which can be changed if needed) for every configuration of metaparameters specified. This means the total number of critical delta computed will be #matrices x #configuration. If you don't change the default matrix list and the default set of metaparameters, then you can simply run the script with the command
 ```
 main_scripts/compute_delta_critical_matrices CORES
@@ -91,3 +91,17 @@ Typical usage (from main folder):
 ```
 build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_LIST
 ```
+## Feasibility and dynamical stability
+
+The workload needed to compute the feasibility and dynamical stability data we are interested in is generally separated in two distinct steps. First, a text file containing the exact commands we would like to run is generated, either by hand or *as strongly advised* through the means of another script, and placed in the ``commands`` folder. The commands listed on the target text file, which we can call ``target.txt``, may then be executed with the command:
+
+```main_scripts/run_commands LOCATION_OF_THE_TARGET_FILE NUMBER_OF_CORES```
+
+The variable ``LOCATION_OF_THE_TARGET_FILE`` has a self-explicit name and would be for instance ```commands/target.txt```. The variable ```NUMBER_OF_CORES``` is an integer which specifies on how many cores the simulations should be run (**warning**: once the simulations are started, it is very painful to delete them by hand, it is therefore really important to think well before launching them).
+
+### Feasiblity 
+
+
+
+
+
