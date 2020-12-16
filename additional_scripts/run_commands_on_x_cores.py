@@ -9,6 +9,7 @@ import random
 file_name = sys.argv[1]
 CORES = int(sys.argv[2])
 commands = np.array([" ".join(f) for f in np.loadtxt(file_name, dtype='U')])
+print(commands)
 np.random.shuffle(commands)
 commands_per_core = np.array_split(commands, CORES)
 
@@ -21,4 +22,4 @@ for i in range(CORES):
         err_file = split_files[2]
         core_command+='nohup sh -c "'+command+'">'+log_file[1:]+"2>"+err_file+"; wait;"
     core_command=core_command[:-7]+') &'
-    os.system(core_command)
+    #os.system(core_command)

@@ -1,22 +1,23 @@
 #!/bin/bash
 
-# This script generates a file which, when run, computes the percentage of feasible systems for every
-# matrix on the MATRIX_LIST file, with alpha in mode ALPHA_MODE, for every
-# value of alpha0 in the ALPHA_VALS list.
+# This script generates a file which, when run, computes the percentage of feasible
+# systems for every consumption matrix on the MATRIX_LIST file, with alpha in mode ALPHA_MODE,
+# for every value of alpha0 in the ALPHA_VALS list, with the other metaparameters
+# given in the configuration file CONFIGURATION_FILE.
 
 # The file generated will be placed in the ./commands folder and named after
 # the variable COMMAND_FILE
 
 # Example for NR=NS=25
-MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+MATRIX_LIST="test_matrices"
 ALPHA_MODE="optimal_matrix"
-SAVENAME="other_LRI_local_dynamical_stability_NR25_NS25"
+SAVENAME="run_001"
 OPTIMAL_MATRIX_FOLDER="optimal_LRI_corrected_NR25_NS25"
-ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
-ADDITIONAL_MODIF=""
+ALPHA_VALS="0 0.5 1"
+ADDITIONAL_MODIF="verbose-level=1"
 
-CONFIGURATION_FILE="config/configuration.in"
-COMMAND_FILE="feasibility_dynamical_stability_computations_modified_LRI.txt"
+CONFIGURATION_FILE="configuration"
+COMMAND_FILE="test_feasibility"
 
 # And possible modifications for NR=50 and NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
@@ -25,6 +26,8 @@ COMMAND_FILE="feasibility_dynamical_stability_computations_modified_LRI.txt"
 #ADDITIONAL_MODIF="NR=50 NS=25"
 #ALPHA_VALS="0"
 
+# first clear all previous contents of the commands file
+rm commands/${COMMAND_FILE}
 
 for a in $ALPHA_MODE
 do
@@ -44,7 +47,7 @@ do
       CURRENT_NAME="${CURRENT_NAME}_alpha0=${alpha}"
       VOLUME_PATH="${VOLUME_PATH}_alpha0=${alpha}"
 
-      FIRST_COMMAND="build/feasibility_varying_syntrophy ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha}  ${ADDITIONAL_MODIF}"
+      FIRST_COMMAND="build/check_percentage_feasible_systems config/${CONFIGURATION_FILE}.in path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha} ${ADDITIONAL_MODIF}"
       # for old version
       # FIRST_COMMAND="${FIRST_COMMAND} path_to_volume='feasibility/${VOLUME_PATH}.out'"
       FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
@@ -55,7 +58,7 @@ do
       ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
       # execute command
       #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-      echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}
+      echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
       # write command to log
       now="["$(date)"]"
       echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
