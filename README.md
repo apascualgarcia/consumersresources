@@ -91,7 +91,7 @@ Typical usage (from main folder):
 ```
 build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_LIST
 ```
-## Feasibility and dynamical stability
+# Feasibility and dynamical stability
 
 The workload needed to compute the feasibility and dynamical stability data we are interested in is generally separated in two distinct steps. First, a text file containing the exact commands we would like to run is generated, either by hand or *as strongly advised* through the means of another script, and placed in the ``commands`` folder. The commands listed on the target text file, which we can call ``target.txt``, may then be executed with the command:
 
@@ -101,21 +101,21 @@ main_scripts/run_commands LOCATION_OF_THE_TARGET_FILE NUMBER_OF_CORES
 
 The variable ``LOCATION_OF_THE_TARGET_FILE`` has a self-explicit name and would be for instance ```commands/target.txt```. The variable ```NUMBER_OF_CORES``` is an integer which specifies on how many cores the simulations should be run (**warning**: once the simulations are started, it is very painful to delete them by hand, it is therefore really important to think well before launching them).
 
-### Feasibility
+## Feasibility
 
 How feasibility works is explained in the main Thesis. For a matrix consumption matrix _G_ and a set of metaparemeters _M_, the most interesting metric is the percentage of feasible systems -- which we also simply call feasibility -- denoted _F_.
-The file **find_feas_var_synt** located in the *gen_comm_files* folder allows to generate a command file which when executed will compute the feasibility of each configuration thrown as an input. The different variables, that can be chosen are:
-* `<MATRIX_LIST>`
-* `<ALPHA_MODE>`
-* `<SAVENAME>`
-* `<OPTIMAL_MATRIX_FOLDER>`
-* `<ALPHA_VALS>`
-* `<ADDITIONAL_MODIF>`
-* `<CONFIGURATION_FILE>`
-* `<COMMAND_FILE>`
-Note that all of them should be initialized in order for the command to work (even `<ADDITIONAL_MODIF>`. In case there are no additional modifications, just set it to the empty string `<"">`). `<MATRIX_LIST>` should be set to the name of the file which contains the list of all matrices for which _F_ . `<ALPHA_MODE>` is a list of strings which should be set to all the desired alpha modes. `<SAVENAME>` is the name under which the results should be saved. `<OPTIMAL_MATRIX_FOLDER>` is the location of the folder which contains the optimal syntrophy matrix, if needed. If no syntrophy matrix is used (e.g. if alpha=0) its value is not relevant. `<ALPHA_VALS>` is a string list which contains all the different alpha0 values for which we compute _F_. `<CONFIGURATION_FILE>` is the location of the configuration file which contains all the metaparameters _M_ (note that the value of alpha0 on that file will be overriden by `<ALPHA_VALS>`). Finally `<COMMAND_FILE>` is the name under which the generated command file should be saved in the */commands* folder.
+The file **find_feas_var_synt** located in the *gen_comm_files* folder allows to generate a command file which when executed will compute the feasibility of each configuration thrown as an input. The different variables that can be chosen are:
+* `MATRIX_LIST`
+* `ALPHA_MODE`
+* `SAVENAME`
+* `OPTIMAL_MATRIX_FOLDER`
+* `ALPHA_VALS`
+* `ADDITIONAL_MODIF`
+* `CONFIGURATION_FILE`
+* `COMMAND_FILE`
+Note that all of them should be initialized in order for the command to work (even `ADDITIONAL_MODIF`. In case there are no additional modifications, just set it to the empty string `""`). `MATRIX_LIST` should be set to the name of the file which contains the list of all matrices for which _F_ . `ALPHA_MODE` is a list of strings which should be set to all the desired alpha modes. `SAVENAME` is the name under which the results should be saved. `OPTIMAL_MATRIX_FOLDER` is the location of the folder which contains the optimal syntrophy matrix, if needed. If no syntrophy matrix is used (e.g. if alpha=0) its value is not relevant. `ALPHA_VALS` is a string list which contains all the different alpha0 values for which we compute _F_. `CONFIGURATION_FILE` is the location of the configuration file which contains all the metaparameters _M_ (note that the value of alpha0 on that file will be overriden by `ALPHA_VALS`). Finally `COMMAND_FILE` is the name under which the generated command file should be saved in the */commands* folder.
 
-# Usage example
+### Usage example
 
 To make it more clear, let's look at an example.
 ```
@@ -129,7 +129,32 @@ ADDITIONAL_MODIF="verbose-level=1"
 CONFIGURATION_FILE="configuration"
 COMMAND_FILE="test_feasibility"
 ```
-Feasibility for all matrices in the **matrix_list/test_matrices.in** file will be computed. Alpha is here in "optimal" mode, and the optimal matrices are located in the **optimal_matrices/syntrophy/optimal_LRI_corrected_NR25_NS25** folder. Please note that it is important to put any new folder created in the right place and to use the right extensions, otherwise this script *will not* work without modifications. _F_ will be computed for three different values of alpha0, i.e. 0, 0.5 and 1. Additionally we ask that the operations should be "mildly" displayed on the terminal, i.e. a `<verbose-level>` equal to 1. The file **config/configuration.in** will be loaded as a configuration file when the commands will be executed. Finally, the command file generated with this script will be **commands/test_feasibility**. 
+Feasibility for all matrices in the **matrix_list/test_matrices.in** file will be computed. Alpha is here in "optimal" mode, and the optimal matrices are located in the **optimal_matrices/syntrophy/optimal_LRI_corrected_NR25_NS25** folder. Please note that it is important to put any new folder created in the right place and to use the right extensions, otherwise this script *will not* work without modifications. _F_ will be computed for three different values of alpha0, i.e. 0, 0.5 and 1. Additionally we ask that the operations should be "mildly" displayed on the terminal, i.e. a `verbose-level` equal to 1. The file **config/configuration.in** will be loaded as a configuration file when the commands will be executed. Finally, the command file generated with this script will be **commands/test_feasibility**.
 
 
-### Dynamical stability
+## Dynamical stability
+
+How dynamical stability works is also explained in the main Thesis. For a matrix consumption matrix _G_ and a set of metaparemeters _M_ *which we know is fully feasible* the main point of interest is the percentage of dynamically stable -- or dynamical stability -- systems for that configuration.
+
+The file **find_dyn_stab** located in the *gen_comm_files* folder allows to generate a command file which when executed will compute the dynamical stability of each configuration thrown as an input. The different variables that can be chosen are:
+
+* `MATRIX_LIST`
+* `ALPHA_MODE`
+* `SAVENAME`
+* `OPTIMAL_MATRIX_FOLDER`
+* `ALPHA_VALS`
+* `ADDITIONAL_MODIF`
+* `CONFIGURATION_FILE`
+* `COMMAND_FILE`
+
+The script and variables function exactly the same way as for the feasibility case.
+
+# Examples of different tasks
+## Generation of matrices that minimize a new energy
+Let's say we would like to generate matrices that minimize a new quadratic form  _E'(A,G,m)_ that has not been implemented in the code yet. The first step is to include _E'(A,G,m)_ in the code, i.e. implement it as a C++ function in the **src/CRModel_source/optimize_matrix.cc** file. That C++ function, let's call it for instance `new_qf` should have the following definition:
+```
+ntype new_qf(const nmatrix& alpha, const nmatrix& gamma, void* additional_params){
+  ...
+}
+```
+The first argument must be the syntrophy matrix _A_, even if it ends up not being used in the quadratic form, while the second argument is the competition matrix _G_. Finally, the third argument can be a pointer to any additional parameters that would be needed, e.g. metaparameters.
