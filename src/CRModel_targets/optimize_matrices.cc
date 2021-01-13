@@ -4,7 +4,7 @@ This file allows to create matrices which respect the needed energy conditions.
 More specifically, it transforms each matrix of a set (the list of matrices
 needs to be given as the path_to_food_matrix value of the input configuration file)
 into a form which minimizes a given cost function energy_function (which can be)
-changed on line 18). New energy functions can be added on the optimize_matrix file
+changed on line 20). New energy functions can be added on the optimize_matrix file
 from the CRModel_source folder.
 
 Typical usage (from main folder):
@@ -15,9 +15,13 @@ build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_L
 
 #include "../../include/CRModel.h"
 
-ntype energy_function(const nmatrix& a, const nmatrix& b, void* c){
-  return quadratic_form(a, b, c);
+/*********** CUSTOMIZABLE PART : energy which is minimized ***********/
+
+ntype energy_function(const nmatrix& A, const nmatrix& G, void* params){
+  return quadratic_form(A, G, params);
 }
+
+/*********** END OF THE CUSTOMIZABLE PART  ***********/
 
 
 int main(int argc, char* argv[]){
@@ -36,8 +40,9 @@ int main(int argc, char* argv[]){
     mcsolv.additional_params=&metaparams;
 
     /* set alpha0 to its maximal possible value */
-    metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
+    //metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
 
+    // coprophagy is by convention allowed
     bool allow_coprophagy=true;
 
     for(size_t i=0; i < matrices_list.size();++i){
