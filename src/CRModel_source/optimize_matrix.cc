@@ -213,7 +213,9 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
 
     max_steps_reached = (steps>=mcs.max_steps);
 
-    stop = max_steps_reached || reached_zero || av_cost_function_converging;
+    // removed the reached_zero condition because we are now considering energies which may be negative
+    //stop = max_steps_reached || reached_zero || av_cost_function_converging;
+    stop = max_steps_reached || av_cost_function_converging;
 
     if(steps%mcs.display_stride==0 || stop){
       std::cout << "\t Step " << steps;
@@ -224,9 +226,11 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       if(stop){
         std::cout << std::endl << "-------" << std::endl << "STOPPING THE ALGORITHM ";
       }
+      /* not displaying this message anymore since consider also negative cost functions
       if(reached_zero){
         std::cout << " -> reached zero on the cost function." << std::endl;
       }
+      */
       if(max_steps_reached){
         std::cout << " -> max number of steps reached." << std::endl;
       }
