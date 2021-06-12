@@ -27,6 +27,7 @@ nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool coprop
 
 
 ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, void* params);
+ntype quadratic_form_corrected_AlbertoMay2021(const nmatrix& alpha, const nmatrix& gamma, void* params);
 ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* params);
 ntype quadratic_form_low_intra_resource_interaction(const nmatrix&, const nmatrix&, void*);
 ntype quadratic_form_nestedness(const nmatrix& gamma, const nmatrix& dummy, void*);

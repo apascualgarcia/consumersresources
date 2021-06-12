@@ -23,6 +23,29 @@ ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* p
   const nvector& u = *(nvector*)(params);
   return u*(alpha*gamma)*u;
 }
+
+// this function is the same as "quadratic_form" except corrected according to Alberto's ideas we discussed in May 2021
+ntype quadratic_form_corrected_AlbertoMay2021(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  unsigned int NR=alpha.size();
+  nmatrix alpha_gamma=alpha*gamma;
+  nmatrix gamma_square=transpose(gamma)*gamma;
+
+  ntype to_minimize=0.;
+  /* we want the absolute trace to be as close to zero as possible*/
+  /* and we want the rest to be as close to zero as possible*/
+  ntype off_diag=0., trace=0.;
+  for(size_t mu=0; mu < NR;++mu){
+    trace+=alpha_gamma[mu][mu]-gamma_square[mu][mu];
+    for(size_t nu=0; nu < NR;++nu){
+      if(nu!=mu){
+        off_diag+=abs(alpha_gamma[mu][nu]-gamma_square[mu][nu]);
+      }
+    }
+  }
+  to_minimize=trace+off_diag;
+  return to_minimize;
+}
+
 ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, void* params){
   /* the goal is to minimize the maximal sum of LHS in the intra resource regime */
   unsigned int NR=alpha.size();
