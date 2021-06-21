@@ -111,7 +111,11 @@ Typical usage (from main folder):
 ```
 build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_LIST
 ```
+<<<<<<< HEAD
 ## Feasibility and dynamical stability
+=======
+# Feasibility and dynamical stability
+>>>>>>> c4ff93926874c2d80c784c1ab553734f609a1039
 
 The workload needed to compute the feasibility and dynamical stability data we are interested in is generally separated in two distinct steps. First, a text file containing the exact commands we would like to run is generated, either by hand or *as strongly advised* through the means of another script, and placed in the ``commands`` folder. The commands listed on the target text file, which we can call ``target.txt``, may then be executed with the command:
 
@@ -168,3 +172,28 @@ The file **find_dyn_stab** located in the *gen_comm_files* folder allows to gene
 * `COMMAND_FILE`
 
 The script and variables function exactly the same way as for the feasibility case.
+<<<<<<< HEAD
+=======
+
+# Examples of different tasks
+## Generation of matrices that minimize a new energy
+Let's say we would like to generate syntrophy matrices that minimize a new quadratic form  _E'(A,G,m)_ that has not been implemented in the code yet. The first step is to include _E'(A,G,m)_ in the code, i.e. implement it as a C++ function in the **src/CRModel_source/optimize_matrix.cc** file (it can e.g. be impedended at the end of the file). That C++ function, let's call it for instance `new_qf` should have the following structure:
+```
+ntype new_qf(const nmatrix& alpha, const nmatrix& gamma, void* additional_params){
+   //definition of the new quadratic form.
+}
+```
+The first argument must be the syntrophy matrix _A_, while the second argument is the competition matrix _G_, even if it ends up not being used in the quadratic form. Finally, the third argument can be a pointer to any additional parameters that would be needed, e.g. metaparameters.
+
+Please note that the declaration of the function (so, without its complete definition) must also be added to the corresponding header file **include/Functions/optimize_matrix.h**.
+
+Once this has been done, the remaining steps are simply to change the line 20 of the file **src/CRModel_targets/optimize_matrices.cc** so that the function called energy_function returns `new_qf` instead of whatever it was set to before. Finally, one needs to recompile everything (from the main directory) and build the needed dependancies:
+```
+make -C build
+```
+Finally, the matrices can be generated using the command:
+```
+build/optimize_matrices LOCATION_OF_THE_CONFIGURATION_FILE path_to_food_matrix=LOCATION_OF_THE_CONSUMPTION_MATRIX_LIST
+```
+A configuration file is always needed, in case for instance metaparameters are used in the energy function. The _A_ matrices corresponding to each _G_ in the provided matrix list will be stored in the location of the `path_to_syntrophy_matrix` variable, which can also be specified as an additional argument of the script.
+>>>>>>> c4ff93926874c2d80c784c1ab553734f609a1039
