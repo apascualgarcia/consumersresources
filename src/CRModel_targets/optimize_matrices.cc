@@ -18,11 +18,7 @@ build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_L
 /*********** CUSTOMIZABLE PART : energy which is minimized ***********/
 
 ntype energy_function(const nmatrix& A, const nmatrix& G, void* params){
-<<<<<<< HEAD
   return quadratic_form_corrected_AlbertoMay2021(A, G, params);
-=======
-  return quadratic_form(A, G, params);
->>>>>>> c4ff93926874c2d80c784c1ab553734f609a1039
 }
 
 /*********** END OF THE CUSTOMIZABLE PART  ***********/

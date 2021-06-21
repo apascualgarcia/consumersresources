@@ -172,8 +172,7 @@ The file **find_dyn_stab** located in the *gen_comm_files* folder allows to gene
 * `COMMAND_FILE`
 
 The script and variables function exactly the same way as for the feasibility case.
-<<<<<<< HEAD
-=======
+
 
 # Examples of different tasks
 ## Generation of matrices that minimize a new energy
