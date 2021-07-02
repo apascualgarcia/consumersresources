@@ -38,7 +38,7 @@ do
         done
       fi
 
-    FIRST_COMMAND="build/optimize_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} ${ADDITIONAL_MODIF}"
+    FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} ${ADDITIONAL_MODIF}"
     FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
 
     COMMAND_NAME="${FIRST_COMMAND}"
