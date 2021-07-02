@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# This script generates a file which, when run, will find the optimal syntrophy matrix
+# for every consumption matrix on the MATRIX_LIST file
+# given in the configuration file CONFIGURATION_FILE.
+
+# The file generated will be placed in the ./commands folder and named after
+# the variable COMMAND_FILE
+
+# Example for NR=NS=25
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
+MCMODE="unconstrained constant_connectance"
+ADDITIONAL_MODIF="verbose-level=1"
+
+CONFIGURATION_FILE="configuration"
+COMMAND_FILE="optimize_matrices"
+
+# And possible modifications for NR=50 and NS=25
+#MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
+#ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
+#SAVENAME="local_dynamical_stability_NR50_NS25"
+#ADDITIONAL_MODIF="NR=50 NS=25"
+#ALPHA_VALS="0"
+
+# first clear all previous contents of the commands file
+rm commands/${COMMAND_FILE}.txt
+
+for mcmode in $MCMODE
+do
+  for matl in $MATRIX_LIST
+  do
+    CURRENT_NAME=${COMMAND_FILE}
+    if [ ! -z "${ADDITIONAL_MODIF}" ]
+      then
+        for add in $ADDITIONAL_MODIF
+        do
+          CURRENT_NAME="${CURRENT_NAME}_${add}"
+        done
+      fi
+
+    FIRST_COMMAND="build/optimize_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} ${ADDITIONAL_MODIF}"
+    FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
+
+    COMMAND_NAME="${FIRST_COMMAND}"
+
+    LOG_NAME="logs/${CURRENT_NAME}.log"
+    ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
+    # execute command
+    #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
+    echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
+    # write command to log
+    now="["$(date)"]"
+    echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+  done
+done
+#echo "Launched commands in the background, please check appropriate log files for progress"
