@@ -70,9 +70,23 @@ ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, void* params){
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs){
   return exp(-mcs.cost_function(alpha, gamma, mcs.additional_params)/mcs.T);
 }
-nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
-  return proposed_new_alpha_Alberto(alpha, gamma, coprophagy,steps);
-  //return flip_one_element(alpha, gamma, coprophagy);
+nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, const MonteCarloSolver& mcs){
+  switch(mcs.mcmode){
+    case unconstrained: {
+      /* July 2nd 2021: Leo proposes this new version: the same as Alberto but with a 0.5 probability of making a 0->1 or 1->0 in the matrix */
+      return proposed_new_alpha_Leo(alpha, gamma, coprophagy, steps);
+      break;
+    }
+    case constant_connectance : {
+      /* AS OF JULY 2ND proposed_new_alpha_Alberto VERSION WORKS, it only changes the nestedness without changing the connectance */
+      return proposed_new_alpha_Alberto(alpha, gamma, coprophagy, steps);
+      break;
+    }
+
+    default : {
+      throw error("Unknown MC mode in the proposed_new_alpha function");
+    }
+  }
 }
 
 /* creates an optimal consumption matrix with connectance ctarg  */
@@ -145,8 +159,10 @@ nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowe
 
   return new_alpha;
 }
+
+
 bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs){
-  nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps);
+  nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps, mcs);
   ntype proba_ratio=probability_density(new_alpha, gamma, mcs)/probability_density(alpha, gamma, mcs);
   if(proba_ratio>1){
     alpha=new_alpha;
@@ -163,21 +179,27 @@ bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, u
   return false;
 }
 void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
-  bool stop=false;
-  unsigned int steps=0;
-  unsigned int fails=0;
-  bool changed=false;
-  bool reached_zero=false;
-  bool max_steps_reached=false;
-  nvector last_changed_elements, average_cost_function;
-  /* idea of this variable, if the cost function hasn't decreased over that number of steps, we stop the simulations */
-  unsigned int Naverage=100000;
-  bool av_cost_function_converging=false;
+
+  unsigned int convergence=0, fails=0, steps=0;
+  bool max_steps_reached=false, changed=true, stop=false, energy_converged=false;
+  nvector last_changed_elements;
+  double mean_energy=0.;
+
+  std::ofstream energy_file=open_external_file_truncate(mcs.energy_file);
+  energy_file << "# Energy optimization to find the best syntrophy matrix for a given consumption matrix " << std::endl;
+  energy_file << "# Are given, in that order: energy, nestedness, connectance and temperature of the syntrophy matrix" << std::endl;
+  energy_file << "# Each new line is a further step of the MCS optimization algorithm" << std::endl;
+
+  const unsigned int Naverage=50, required_convergence=2000;
+  const double eps=1e-3;
+
   while(!stop){
-    changed=choose_next_matrix(alpha, gamma, coprophagy, steps, fails, mcs);
-    reached_zero=(mcs.cost_function(alpha,gamma, mcs.additional_params)<1e-15);
+    double current_energy = mcs.cost_function(alpha,gamma, mcs.additional_params);
+    double nest = nestedness(alpha);
+    double conn = connectance(alpha);
+    energy_file << current_energy << " " << nest << " " << conn << " "<< mcs.T << std::endl;
 
-
+    /* we check if the new matrix (computed at the previous loop or the initial one) == the old matrix. If not, count it as a "fail" */
     if(changed){
       fails=0;
       last_changed_elements.push_back(mcs.cost_function(alpha,gamma, mcs.additional_params));
@@ -185,44 +207,34 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       fails+=1;
     }
 
+    /* then compute if with the previous move the energy is converging */
     if(last_changed_elements.size() > Naverage){
       last_changed_elements.erase(last_changed_elements.begin());
     }
 
-    if(last_changed_elements.size() == Naverage && steps%Naverage==0){
-      average_cost_function.push_back(mean(last_changed_elements));
+    mean_energy=mean(last_changed_elements);
+
+    if(changed && last_changed_elements.size()==Naverage){
+      if(abs(current_energy-mean_energy) < eps*abs(mean_energy)){
+        convergence+=1;
+      }else{
+        convergence=0;
+      }
     }
 
-
-    /* if the average cost hasn't decreased significantly, we stop the simulation */
-    unsigned int size_cf = average_cost_function.size();
-    if(size_cf > 2){
-      av_cost_function_converging = !(average_cost_function[size_cf-1] < 0.99*average_cost_function[size_cf-2]);
-    }else{
-      av_cost_function_converging=false;
-    }
-    /* when the move has not been accepted too many times, increase temp */
-    if(fails>=mcs.max_fails){
-      mcs.T/=mcs.annealing_const;
-    }
-
-    /* at a given frequency, the temperature is reduced */
-    if(steps%mcs.annealing_freq==0){
-      mcs.T*=mcs.annealing_const;
-    }
-
+    energy_converged = (convergence>=required_convergence);
     max_steps_reached = (steps>=mcs.max_steps);
 
     // removed the reached_zero condition because we are now considering energies which may be negative
     //stop = max_steps_reached || reached_zero || av_cost_function_converging;
-    stop = max_steps_reached || av_cost_function_converging;
+    stop = max_steps_reached || energy_converged;
 
     if(steps%mcs.display_stride==0 || stop){
       std::cout << "\t Step " << steps;
       std::cout << ", T=" << mcs.T;
-      std::cout <<", cost function=" << mcs.cost_function(alpha,gamma, mcs.additional_params) ;
-      std::cout << ", nestedness=" << nestedness(alpha);
-      std::cout << ", connectance=" << connectance(alpha);
+      std::cout <<", cost function=" << current_energy;
+      std::cout << ", nestedness=" << nest;
+      std::cout << ", connectance=" << conn;
       if(stop){
         std::cout << std::endl << "-------" << std::endl << "STOPPING THE ALGORITHM ";
       }
@@ -236,15 +248,30 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
         std::cout << " -> max number of steps reached." << std::endl;
       }
 
-      if(av_cost_function_converging){
-        std::cout << " -> cost function only fluctuating around its average value." << std::endl;
+      if(energy_converged){
+        std::cout << " -> cost function converging." << std::endl;
       }
      // std::cout << ", matrix = " << std::endl;
       //display_food_matrix(std::cout, alpha);
       std::cout << std::endl;
     }
+
+    /* before getting the next matrix, we readjust the temperature if needed */
+    /* when the move has not been accepted too many times, increase temp */
+    if(fails>=mcs.max_fails){
+      mcs.T/=mcs.annealing_const;
+      fails=0;
+    }
+    /* at a given frequency, the temperature is reduced */
+    if(steps%mcs.annealing_freq==0){
+      mcs.T*=mcs.annealing_const;
+    }
+
+    /* Finally we get the next matrix and increase the amount of steps by 1 */
+    changed=choose_next_matrix(alpha, gamma, coprophagy, steps, fails, mcs);
     steps+=1;
   }
+  energy_file.close();
   return;
 }
 nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool allowed_coprophagy){
@@ -259,7 +286,7 @@ nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool all
       }
     }
   }while(not(allowed_coprophagy) && is_there_coprophagy(alpha, gamma));
-  std::cout << "Created initial alpha guess with nestedness " << nestedness(alpha) << std::endl;
+  std::cout << "Created initial alpha guess with nestedness " << nestedness(alpha) << " and connectance " << connectance(alpha) << std::endl;
   return alpha;
 }
 nmatrix proposed_new_alpha_Alberto(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
@@ -271,6 +298,13 @@ nmatrix proposed_new_alpha_Alberto(const nmatrix& alpha, const nmatrix& gamma, b
   }
   return new_alpha;
 }
+
+nmatrix proposed_new_alpha_Leo(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
+  nmatrix new_alpha = alpha;
+  flip_one_binary_matrix_element(new_alpha);
+  return new_alpha;
+}
+
 void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   /*  we first choose a random row (i.e. resource) that is neither completely empty nor
       completely filled */

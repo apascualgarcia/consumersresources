@@ -35,6 +35,9 @@ enum CRModelType{full, effective};
 /* different ways of building the system, do we choose l? m? */
 enum buildingmode{use_l, use_m};
 
+/* two different types to run the MC algorithm */
+enum MCmode{constant_connectance, unconstrained};
+
 
 /*  writemode is used in the general time evolution of the system. It tells you whether you should, and if so Where
     write the time evolution of the system */
@@ -124,6 +127,15 @@ struct MonteCarloSolver{
   ntype annealing_const;
   /* important, the matrices in argument here have to be binary */
   ntype(*cost_function)(const nmatrix&, const nmatrix&, void*);
+  /* three converging criteria discussed with Alberto on July 1st 2021 */
+  unsigned int N_average; // on how many points (when the matrix changed) is the average made
+  ntype eps; // relative convergence criterion
+  unsigned int convergence_achieved; // if (E-E_av) < eps * E_av for convergence_achieved times in a row, then we consider that the algorithm has converged
+  /* file in which to write the energy */
+  std::string energy_file;
+  /* to choose between the way the next step matrix is computed */
+  MCmode mcmode;
+  /* typically, the metaparameters */
   void* additional_params;
 };
 

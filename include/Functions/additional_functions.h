@@ -28,6 +28,9 @@ ntype det(const nmatrix&);
 
 Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> convert_nmatrix_to_eigen_matrix(const nmatrix& mat);
 
+MCmode string_to_mcmode(std::string);
+std::string mcmode_to_string(const MCmode &);
+
 /* computes number of links in a matrix */
 unsigned int number_of_links(const nmatrix&);
 
@@ -49,6 +52,9 @@ nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g);
 
 /* build LRI matrix with target connectance */
 nmatrix build_LRI_matrix(const nmatrix& g,const Metaparameters& m, const ntype& target_conn);
+
+/* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
+void flip_one_binary_matrix_element(nmatrix & B);
 
 void rescale_mean(nmatrix&, const ntype&);
 
@@ -113,6 +119,7 @@ std::ofstream open_external_file_truncate(std::string);
 bool compare_complex(const nctype&, const nctype&);
 bool operator<(const nctype&, const nctype&);
 bool operator>(const nctype&, const nctype&);
+
 
 
 /* taken from https://stackoverflow.com/questions/1577475/c-sorting-and-keeping-track-of-indexes on Feb 26 2020 */

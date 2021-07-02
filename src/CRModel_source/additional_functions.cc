@@ -785,3 +785,39 @@ nmatrix build_LRI_matrix(const nmatrix& g, const Metaparameters& m, const ntype&
   foodmatrix alpha = optimal_syntrophy_from_consumption(g, allow_coprophagy, mcsolv, target_conn);
   return alpha;
 }
+
+/* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
+void flip_one_binary_matrix_element(nmatrix & B){
+  std::uniform_int_distribution<unsigned int> row_dist(0, B.size()-1);
+  std::uniform_int_distribution<unsigned int> col_dist(0, B[0].size()-1);
+
+  unsigned int row_index=row_dist(random_engine);
+  unsigned int col_index=col_dist(random_engine);
+
+  B[row_index][col_index]=1-B[row_index][col_index];
+  return;
+}
+
+MCmode string_to_mcmode(std::string s){
+  if(s=="constant_connectance"){
+    return MCmode(constant_connectance);
+  }else{
+    if(s=="unconstrained"){
+      return MCmode(unconstrained);
+    }else{
+      throw error("Unknown MC mode");
+    }
+  }
+}
+
+std::string mcmode_to_string(const MCmode & mc){
+  if(mc==unconstrained){
+    return "unconstrained";
+  }else{
+    if(mc==constant_connectance){
+      return "constant_connectance";
+    }else{
+      throw error("Cannot convert string to an existing MCmode");
+    }
+  }
+}

@@ -12,7 +12,7 @@ nmatrix optimal_consumption_matrix(unsigned int NR, unsigned int NS, const ntype
 
 
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs);
-nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps);
+nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, const MonteCarloSolver& mcs);
 bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs);
 void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs);
 
@@ -20,6 +20,7 @@ nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool cop
 nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& conn_targ);
 
 nmatrix proposed_new_alpha_Alberto(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps);
+nmatrix proposed_new_alpha_Leo(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps);
 void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy);
 void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy);
 /* flips a random element from zero to one or the other way around. The variable coprophagy decides if coprophagy is allowed or not */

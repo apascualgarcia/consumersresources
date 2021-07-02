@@ -37,6 +37,8 @@ struct Metaparameters{
   std::string volume_of_interest_path;
   /* tells in which way the system should be structurally perturbed */
   unsigned int struct_pert_type;
+  /* next step matrix mode for possible MC solver */
+  MCmode mcmode;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

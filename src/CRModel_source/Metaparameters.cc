@@ -44,6 +44,7 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->building_mode = string_to_building_mode(configFile.get<std::string>("building_mode"));
   this->volume_of_interest_path=configFile.get<std::string>("path_to_volume");
   this->struct_pert_type=configFile.get<unsigned int>("type_of_structural_perturbation");
+  this->mcmode = string_to_mcmode(configFile.get<std::string>("mcmode"));
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
