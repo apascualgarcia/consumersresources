@@ -6,26 +6,67 @@ from matplotlib.patches import ConnectionPatch
 # file='optimal_LRI_for_NR25_NS25'
 # Nest=['0.599869',  '0.104794']
 # Conn=['0.316800',  '0.129600']
-Gamma_matrix=['optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168.txt',
-              'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.1296.txt']
-Alpha_matrix=['optimal_matrices/syntrophy/optimal_LRI_Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168_optimal_alpha.txt',
-              'optimal_matrices/syntrophy/optimal_LRI_Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.1296_optimal_alpha.txt']
+Gamma_matrix=[
+            #'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.45_Conn0.1856.txt'
+            #,'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.3_Conn0.2816.txt'
+            #,
+             'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.5_Conn0.2928.txt'
+           , 'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416.txt'
+              ]
+Alpha_matrix=[
+            #'data_output/RandTrix_Nr25_Nc25_Nest0.45_Conn0.1856_optimal_alpha.txt_unconstrained'
+            #,'data_output/RandTrix_Nr25_Nc25_Nest0.3_Conn0.2816_optimal_alpha.txt_unconstrained'
+            #'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.2928_optimal_alpha.txt_unconstrained'
+            #,'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416_optimal_alpha.txt_unconstrained',
+            # 'data_output/RandTrix_Nr25_Nc25_Nest0.45_Conn0.1856_optimal_alpha.txt_constant_connectance'
+            # ,'data_output/RandTrix_Nr25_Nc25_Nest0.3_Conn0.2816_optimal_alpha.txt_constant_connectance'
+            'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.2928_optimal_alpha.txt_constant_connectance'
+            ,'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416_optimal_alpha.txt_constant_connectance'
+              ]
+
+conn_g = [
+        # '0.19', '0.3',
+        '0.3', '0.4'
+        ]
+nest_g = [
+        # '0.45', '0.3',
+        '0.5', '0.5'
+        ]
+
+# conn_a = [
+#         #'0.2', '0.28',
+#         '0.31', '0.42'
+#         ]
+# nest_a = [
+#         #'0.4', '0.30',
+#         '0.48', '0.5'
+#         ]
+
+conn_a = [
+        # '0.19', '0.3',
+        '0.3', '0.4'
+        ]
+nest_a = [
+        # '0.46', '0.30', 
+        '0.5', '0.49'
+        ]
 
 mat_g = []
 mat_a = []
-for i in range(2):
+
+for i in range(len(Gamma_matrix)):
     mat_g.append(np.loadtxt(Gamma_matrix[i]))
     mat_a.append(np.loadtxt(Alpha_matrix[i]))
 
-fig, axs= plt.subplots(2,2)
-for i in range(2):
+fig, axs= plt.subplots(len(Gamma_matrix),2)
+for i in range(len(Gamma_matrix)):
     axs[i,0].imshow(mat_g[i], extent=[1,len(mat_g[i]), len(mat_g[i][0]),1], cmap='Greys')
-    axs[i,0].set_title(r'$G_'+str(i+1)+'$')
+    axs[i,0].set_title(r'$G_'+str(i+1)+'$'+', $\kappa_G='+conn_g[i]+', \eta_G='+nest_g[i]+'$')
     axs[i,0].set_xlabel(r'$N_R$')
     axs[i,0].set_ylabel(r'$N_S$')
 
     axs[i,1].imshow(mat_a[i], extent=[1, len(mat_a[i]), len(mat_a[i][0]), 1], cmap='Greys')
-    axs[i,1].set_title(r'$A_'+str(i+1)+'$')
+    axs[i,1].set_title(r'$A_'+str(i+1)+'$, $\kappa_A='+conn_a[i]+', \eta_A='+nest_a[i]+'$')
     axs[i,1].set_ylabel(r'$N_R$')
     axs[i,1].set_xlabel(r'$N_S$')
     #axs[i,1].set_title(r'$\kappa_G='+str(round(float(Conn[i]),2))+', \eta_G='+str(round(float(Nest[i]),2))+'$')
@@ -60,4 +101,4 @@ fig2.subplots_adjust(bottom=0.7, hspace=0.1)
 cbar_ax = fig2.add_axes([0.15, 0.05, 0.7, 0.02])
 fig2.colorbar(im, cax=cbar_ax, orientation='horizontal')
 fig2.tight_layout()
-plt.show()
+fig2.savefig('plots/typical_optimal_LRI_matrix_colorbar.pdf')

@@ -70,23 +70,33 @@ ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, void* params){
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs){
   return exp(-mcs.cost_function(alpha, gamma, mcs.additional_params)/mcs.T);
 }
-nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, const MonteCarloSolver& mcs){
-  switch(mcs.mcmode){
-    case unconstrained: {
-      /* July 2nd 2021: Leo proposes this new version: the same as Alberto but with a 0.5 probability of making a 0->1 or 1->0 in the matrix */
-      return proposed_new_alpha_Leo(alpha, gamma, coprophagy, steps);
-      break;
+nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy_allowed, unsigned int steps, const MonteCarloSolver& mcs){
+  nmatrix new_alpha;
+  /* As long as the leaving condition is not fulfilled, we do not leave the loop */
+  bool leave_loop=false;
+  do{
+    switch(mcs.mcmode){
+      case unconstrained: {
+        /* July 2nd 2021: Leo proposes this new version: the same as Alberto but with a 0.5 probability of making a 0->1 or 1->0 in the matrix */
+        new_alpha=proposed_new_alpha_Leo(alpha, gamma, coprophagy_allowed, steps);
+        break;
+      }
+      case constant_connectance : {
+        /* AS OF JULY 2ND proposed_new_alpha_Alberto VERSION WORKS, it only changes the nestedness without changing the connectance */
+        new_alpha=proposed_new_alpha_Alberto(alpha, gamma, coprophagy_allowed, steps);
+        break;
+      }
+      default : {
+        throw error("Unknown MC mode in the proposed_new_alpha function");
+        break;
+      }
     }
-    case constant_connectance : {
-      /* AS OF JULY 2ND proposed_new_alpha_Alberto VERSION WORKS, it only changes the nestedness without changing the connectance */
-      return proposed_new_alpha_Alberto(alpha, gamma, coprophagy, steps);
-      break;
-    }
+    /* if coprophagy is allowed then we leave the loop in any case, if it is not we leave it only if
+      indeed no coprophagy is observed */
+    leave_loop = coprophagy_allowed or not(is_there_coprophagy(new_alpha, gamma));
+  }while(not(leave_loop));
+  return new_alpha;
 
-    default : {
-      throw error("Unknown MC mode in the proposed_new_alpha function");
-    }
-  }
 }
 
 /* creates an optimal consumption matrix with connectance ctarg  */

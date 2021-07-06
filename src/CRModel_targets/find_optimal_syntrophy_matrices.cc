@@ -44,7 +44,7 @@ int main(int argc, char* argv[]){
     //metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
 
     // coprophagy is by convention allowed
-    bool allow_coprophagy=true;
+    bool allow_coprophagy=false;
 
     for(size_t i=0; i < matrices_list.size();++i){
       metaparams.foodmatrixpath=matrices_list[i];
