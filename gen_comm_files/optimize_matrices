@@ -29,7 +29,7 @@ for mcmode in $MCMODE
 do
   for matl in $MATRIX_LIST
   do
-    CURRENT_NAME=${COMMAND_FILE}
+    CURRENT_NAME=${COMMAND_FILE}_${matl}
     if [ ! -z "${ADDITIONAL_MODIF}" ]
       then
         for add in $ADDITIONAL_MODIF
