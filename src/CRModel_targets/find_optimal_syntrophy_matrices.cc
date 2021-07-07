@@ -18,7 +18,8 @@ build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_L
 /*********** CUSTOMIZABLE PART : energy which is minimized ***********/
 
 ntype energy_function(const nmatrix& A, const nmatrix& G, void* params){
-  return quadratic_form_corrected_AlbertoMay2021(A, G, params);
+  //return quadratic_form_corrected_AlbertoMay2021(A, G, params);
+  return quadratic_form(A, G, params);
 }
 
 /*********** END OF THE CUSTOMIZABLE PART  ***********/
@@ -40,11 +41,12 @@ int main(int argc, char* argv[]){
     mcsolv.additional_params=&metaparams;
     mcsolv.mcmode=metaparams.mcmode;
 
-    /* set alpha0 to its maximal possible value */
-    //metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
 
     // coprophagy is by convention allowed
     bool allow_coprophagy=false;
+
+    std::cout << "Running Monte Carlo Solver with the following parameters : " << std::endl;
+    std::cout << metaparams << std::endl;
 
     for(size_t i=0; i < matrices_list.size();++i){
       metaparams.foodmatrixpath=matrices_list[i];

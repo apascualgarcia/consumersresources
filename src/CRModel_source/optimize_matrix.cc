@@ -4,7 +4,6 @@
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
   return optimal_syntrophy_from_consumption(gamma, coprophagy, mcs, connectance(gamma));
 }
-
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs, const ntype& target_conn){
   nmatrix unit_gamma(gamma.size(), nvector(gamma[0].size(), 0.));
   for(size_t i=0; i < gamma.size(); ++i){
@@ -19,54 +18,7 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
   return alpha;
 }
 
-ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* params){
-  const nvector& u = *(nvector*)(params);
-  return u*(alpha*gamma)*u;
-}
 
-// this function is the same as "quadratic_form" except corrected according to Alberto's ideas we discussed in May 2021
-ntype quadratic_form_corrected_AlbertoMay2021(const nmatrix& alpha, const nmatrix& gamma, void* params){
-  unsigned int NR=alpha.size();
-  nmatrix alpha_gamma=alpha*gamma;
-  nmatrix gamma_square=transpose(gamma)*gamma;
-
-  ntype to_minimize=0.;
-  /* we want the absolute trace to be as close to zero as possible*/
-  /* and we want the rest to be as close to zero as possible*/
-  ntype off_diag=0., trace=0.;
-  for(size_t mu=0; mu < NR;++mu){
-    trace+=alpha_gamma[mu][mu]-gamma_square[mu][mu];
-    for(size_t nu=0; nu < NR;++nu){
-      if(nu!=mu){
-        off_diag+=abs(alpha_gamma[mu][nu]-gamma_square[mu][nu]);
-      }
-    }
-  }
-  to_minimize=trace+off_diag;
-  return to_minimize;
-}
-
-ntype quadratic_form(const nmatrix& alpha, const nmatrix& gamma, void* params){
-  /* the goal is to minimize the maximal sum of LHS in the intra resource regime */
-  unsigned int NR=alpha.size();
-  nmatrix alpha_gamma=alpha*gamma;
-  nmatrix gamma_square=transpose(gamma)*gamma;
-
-  ntype to_minimize=0.;
-  /* we want the absolute trace to be as close to zero as possible*/
-  /* and we want the rest to be as close to zero as possible*/
-  ntype off_diag=0., trace=0.;
-  for(size_t mu=0; mu < NR;++mu){
-    trace+=abs(alpha_gamma[mu][mu]);
-    for(size_t nu=0; nu < NR;++nu){
-      if(nu!=mu){
-        off_diag+=abs(alpha_gamma[mu][nu]-gamma_square[mu][nu]);
-      }
-    }
-  }
-  to_minimize=trace+off_diag;
-  return to_minimize;
-}
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs){
   return exp(-mcs.cost_function(alpha, gamma, mcs.additional_params)/mcs.T);
 }
@@ -232,7 +184,7 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       }
     }
 
-    energy_converged = (convergence>=required_convergence);
+    //energy_converged = (convergence>=required_convergence);
     max_steps_reached = (steps>=mcs.max_steps);
 
     // removed the reached_zero condition because we are now considering energies which may be negative
@@ -314,7 +266,6 @@ nmatrix proposed_new_alpha_Leo(const nmatrix& alpha, const nmatrix& gamma, bool 
   flip_one_binary_matrix_element(new_alpha);
   return new_alpha;
 }
-
 void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
   /*  we first choose a random row (i.e. resource) that is neither completely empty nor
       completely filled */
@@ -537,4 +488,53 @@ ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatri
 ntype quadratic_form_LRI_newly_corrected(const nmatrix& alpha, const nmatrix& gamma, void* params){
   Metaparameters* m= (Metaparameters*)(params);
   return m->newly_corrected_quadratic_form_LRI(alpha, gamma);
+}
+
+ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  const nvector& u = *(nvector*)(params);
+  return u*(alpha*gamma)*u;
+}
+
+// this function is the same as "quadratic_form" except corrected according to Alberto's ideas we discussed in May 2021
+ntype quadratic_form_corrected_AlbertoMay2021(const nmatrix& alpha, const nmatrix& gamma, void* params){
+  unsigned int NR=alpha.size();
+  nmatrix alpha_gamma=alpha*gamma;
+  nmatrix gamma_square=transpose(gamma)*gamma;
+
+  ntype to_minimize=0.;
+  /* we want the absolute trace to be as close to zero as possible*/
+  /* and we want the rest to be as close to zero as possible*/
+  ntype off_diag=0., trace=0.;
+  for(size_t mu=0; mu < NR;++mu){
+    trace+=alpha_gamma[mu][mu]-gamma_square[mu][mu];
+    for(size_t nu=0; nu < NR;++nu){
+      if(nu!=mu){
+        off_diag+=abs(alpha_gamma[mu][nu]-gamma_square[mu][nu]);
+      }
+    }
+  }
+  to_minimize=trace+off_diag;
+  return to_minimize;
+}
+ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
+  /* the goal is to minimize the maximal sum of LHS in the intra resource regime */
+  Metaparameters* m= (Metaparameters*)(params);
+  unsigned int NR=A.size();
+  nmatrix AG=A*G;
+  nmatrix GG=transpose(G)*G;
+
+  ntype to_minimize=0.;
+  /* we want the absolute trace to be as close to zero as possible*/
+  /* and we want the rest to be as close to zero as possible*/
+  ntype off_diag=0., trace=0.;
+  for(size_t mu=0; mu < NR;++mu){
+    trace+=m->alpha0*AG[mu][mu]-m->gamma0*m->R0*GG[mu][mu];
+    for(size_t nu=0; nu < NR;++nu){
+      if(nu!=mu){
+        off_diag+=abs(m->alpha0*AG[mu][nu]-m->gamma0*m->R0*GG[mu][nu]);
+      }
+    }
+  }
+  to_minimize=trace+off_diag;
+  return to_minimize;
 }
