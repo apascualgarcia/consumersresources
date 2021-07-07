@@ -47,6 +47,7 @@ unsigned int rank(const nmatrix&);
 
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn);
+nmatrix flip_whole_binary_matrix(const nmatrix& mat);
 /* for a matrix g of size NS x NR, returns the NRxNS matrix with the same connectance as g and such that if g_{im}=1 then alpha_{mi}=0 */
 nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g);
 
@@ -64,6 +65,9 @@ bool has_an_empty_row(const nmatrix& gamma);
 /* returns true if gamma has one column filled with zeros only */
 bool has_an_empty_column(const nmatrix& gamma);
 
+/* returns true if all elements of a vector are equal */
+bool all_elements_equal(const nvector &);
+
 nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
 nmatrix operator*(const nmatrix&, const nmatrix&);
@@ -73,6 +77,8 @@ nmatrix operator*(const nmatrix&, const ntype&);
 nmatrix operator/(const nmatrix&, const ntype&);
 
 nmatrix transpose(const nmatrix & m);
+nmatrix create_random_binary_matrix(unsigned int cols, unsigned int rows);
+
 
 bool non_neg_elements(const nmatrix&);
 bool non_neg_elements(const nvector&);

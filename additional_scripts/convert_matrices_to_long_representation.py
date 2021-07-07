@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 
-G_matrix_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.2_Conn0.168.txt"
-A_matrix_path = "optimal_matrices/syntrophy/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.2_Conn0.168_optimal_alpha.txt_unconstrained"
-save_path = "optimal_matrices/long_representation/G_Nest0.2_Conn0.168.csv"
+G_matrix_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0832.txt"
+A_matrix_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0832_optimal_alpha.txt_unconstrained"
+save_path = "optimal_matrices/long_representation/G_Nest0.1_Conn0.0832.csv"
 
 
 

@@ -45,6 +45,15 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->volume_of_interest_path=configFile.get<std::string>("path_to_volume");
   this->struct_pert_type=configFile.get<unsigned int>("type_of_structural_perturbation");
   this->mcmode = string_to_mcmode(configFile.get<std::string>("mcmode"));
+  if(configFile.get<std::string>("intra_specific_syntrophy")=="allowed"){
+    this->intra_specific_syntrophy=true;
+  }else{
+    if(configFile.get<std::string>("intra_specific_syntrophy")=="not_allowed"){
+      this->intra_specific_syntrophy=false;
+    }else{
+      throw error("intra_specific_syntrophy variable should be either 'allowed' or 'not_allowed' ");
+    }
+  }
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }

@@ -30,10 +30,9 @@ int main(int argc, char* argv[]){
     Metaparameters metaparams(argc, argv);
     std::vector<std::string> matrices_list=load_food_matrix_list(metaparams.foodmatrixpath);
     MonteCarloSolver mcsolv;
-    ntype T0=10.;
+    ntype T0=10;
     mcsolv.max_steps=5000000;
-    mcsolv.max_fails=10000;
-    /* put bias towards lowering the temperature */
+    mcsolv.max_fails=5000;
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
@@ -49,8 +48,9 @@ int main(int argc, char* argv[]){
     std::cout << metaparams << std::endl;
 
     for(size_t i=0; i < matrices_list.size();++i){
+      std::string add_string = metaparams.save_path;
       metaparams.foodmatrixpath=matrices_list[i];
-      metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath)+"_"+mcmode_to_string(mcsolv.mcmode);
+      metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath)+"_"+add_string;
       std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
       foodmatrix gamma=load_food_matrix(metaparams);
       mcsolv.energy_file =metaparams.save_path+"_energy";

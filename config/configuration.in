@@ -30,3 +30,4 @@ equilibrium_mode=one_extinct
 convergence_threshold=1e-8
 type_of_structural_perturbation=0
 mcmode=unconstrained
+intra_specific_syntrophy=not_allowed

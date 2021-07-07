@@ -14,11 +14,11 @@ def plot_moving_average(ax, x_axis, y_axis, symbol, legend):
     return
 
 
-umatrix_data_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416_optimal_alpha.txt_unconstrained_energy"
-save_path='plots/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416_optimal_alpha'
+umatrix_data_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0816_optimal_alpha.txt_unconstrained_energy"
+save_path='plots/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0816_optimal_alpha'
 
-g_nest='0.5'
-g_conn='0.416'
+g_nest='0.1'
+g_conn='0.0816'
 
 
 title = r'$\kappa_G ='+g_conn+', \ \eta_G='+g_nest+'$'

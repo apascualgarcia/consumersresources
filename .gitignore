@@ -30,3 +30,5 @@ text/*
 presentation/*
 !presentation/*.pdf
 !presentation/figures
+
+optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0832_optimal_alpha.txt_unconstrained_energy

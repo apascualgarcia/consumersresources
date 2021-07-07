@@ -608,7 +608,7 @@ bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
   for(size_t mu=0; mu < NR; ++mu){
     for(size_t i=0; i < NS ;++i){
       if(alpha[mu][i]*gamma[i][mu]>0.){
-        return false;
+        return true;
       }
     }
   }
@@ -820,4 +820,37 @@ std::string mcmode_to_string(const MCmode & mc){
       throw error("Cannot convert string to an existing MCmode");
     }
   }
+}
+
+nmatrix create_random_binary_matrix(unsigned int cols, unsigned int rows){
+  nmatrix mat(cols, nvector(rows, 0.));
+  std::uniform_real_distribution<double> unif(0., 1.);
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < cols; ++j){
+      if(unif(random_engine)>0.5){
+        mat[i][j]=1;
+      }
+    }
+  }
+  return mat;
+}
+
+nmatrix flip_whole_binary_matrix(const nmatrix& mat){
+  nmatrix to_ret = mat;
+  for(size_t i =0; i < to_ret.size(); ++i){
+    for(size_t j =0 ; j < to_ret[i].size(); ++j){
+      to_ret[i][j]=1-to_ret[i][j];
+    }
+  }
+  return to_ret;
+}
+
+
+bool all_elements_equal(const nvector & v){
+  for(size_t i =0; i< v.size()-1; i++){
+    if(v[i+1]!= v[i]){
+      return false;
+    }
+  }
+  return true;
 }

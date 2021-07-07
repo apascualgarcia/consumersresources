@@ -13,7 +13,8 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
       }
     }
   }
-  nmatrix alpha = create_alpha(target_conn, unit_gamma, coprophagy);
+  // the first choice of alpha by definition will have no intra specific syntrophy
+  nmatrix alpha = flip_whole_binary_matrix(transpose(unit_gamma));
   apply_MC_algorithm(alpha, unit_gamma, coprophagy, mcs);
   return alpha;
 }
@@ -177,14 +178,14 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
     mean_energy=mean(last_changed_elements);
 
     if(changed && last_changed_elements.size()==Naverage){
-      if(abs(current_energy-mean_energy) < eps*abs(mean_energy)){
+      if(abs(current_energy-mean_energy) <= eps*abs(mean_energy)){
         convergence+=1;
       }else{
         convergence=0;
       }
     }
 
-    //energy_converged = (convergence>=required_convergence);
+    energy_converged = (convergence>=required_convergence);
     max_steps_reached = (steps>=mcs.max_steps);
 
     // removed the reached_zero condition because we are now considering energies which may be negative
@@ -506,7 +507,7 @@ ntype quadratic_form_corrected_AlbertoMay2021(const nmatrix& alpha, const nmatri
   /* and we want the rest to be as close to zero as possible*/
   ntype off_diag=0., trace=0.;
   for(size_t mu=0; mu < NR;++mu){
-    trace+=alpha_gamma[mu][mu]-gamma_square[mu][mu];
+    trace+=(alpha_gamma[mu][mu]-gamma_square[mu][mu]);
     for(size_t nu=0; nu < NR;++nu){
       if(nu!=mu){
         off_diag+=abs(alpha_gamma[mu][nu]-gamma_square[mu][nu]);
@@ -523,12 +524,13 @@ ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
   nmatrix AG=A*G;
   nmatrix GG=transpose(G)*G;
 
+
   ntype to_minimize=0.;
   /* we want the absolute trace to be as close to zero as possible*/
   /* and we want the rest to be as close to zero as possible*/
   ntype off_diag=0., trace=0.;
   for(size_t mu=0; mu < NR;++mu){
-    trace+=m->alpha0*AG[mu][mu]-m->gamma0*m->R0*GG[mu][mu];
+    trace+=(m->alpha0*AG[mu][mu]-m->gamma0*m->R0*GG[mu][mu]);
     for(size_t nu=0; nu < NR;++nu){
       if(nu!=mu){
         off_diag+=abs(m->alpha0*AG[mu][nu]-m->gamma0*m->R0*GG[mu][nu]);

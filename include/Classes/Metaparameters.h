@@ -39,6 +39,8 @@ struct Metaparameters{
   unsigned int struct_pert_type;
   /* next step matrix mode for possible MC solver */
   MCmode mcmode;
+  /* for building the optimized matrices */
+  bool intra_specific_syntrophy;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

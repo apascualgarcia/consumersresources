@@ -9,11 +9,15 @@
 
 # Example for NR=NS=25
 MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
-MCMODE="unconstrained constant_connectance"
-ADDITIONAL_MODIF="verbose-level=1"
+MCMODE="unconstrained"
+ADDITIONAL_MODIF="verbose-level=1 gamma0=1"
+ALPHA_VAL="0.5 1"
+INTRA_SPE_SYN="allowed not_allowed"
+
 
 CONFIGURATION_FILE="configuration"
 COMMAND_FILE="optimize_matrices"
+
 
 # And possible modifications for NR=50 and NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
@@ -25,32 +29,38 @@ COMMAND_FILE="optimize_matrices"
 # first clear all previous contents of the commands file
 rm commands/${COMMAND_FILE}.txt
 
-for mcmode in $MCMODE
+for intra in $INTRA_SPE_SYN
 do
-  for matl in $MATRIX_LIST
+  for alpha in $ALPHA_VAL
   do
-    CURRENT_NAME=${COMMAND_FILE}_${matl}
-    if [ ! -z "${ADDITIONAL_MODIF}" ]
-      then
-        for add in $ADDITIONAL_MODIF
-        do
-          CURRENT_NAME="${CURRENT_NAME}_${add}"
-        done
-      fi
+    for mcmode in $MCMODE
+    do
+      for matl in $MATRIX_LIST
+      do
+        CURRENT_NAME="alpha0="${alpha}_"intra_specific_syntrophy="${intra}
+        if [ ! -z "${ADDITIONAL_MODIF}" ]
+          then
+            for add in $ADDITIONAL_MODIF
+            do
+              CURRENT_NAME="${CURRENT_NAME}_${add}"
+            done
+          fi
 
-    FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} ${ADDITIONAL_MODIF}"
-    FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
+        FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} ${ADDITIONAL_MODIF}"
+        FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
 
-    COMMAND_NAME="${FIRST_COMMAND}"
+        COMMAND_NAME="${FIRST_COMMAND}"
 
-    LOG_NAME="logs/${CURRENT_NAME}.log"
-    ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
-    # execute command
-    #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-    echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
-    # write command to log
-    now="["$(date)"]"
-    echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+        LOG_NAME="logs/${CURRENT_NAME}.log"
+        ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
+        # execute command
+        #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
+        echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
+        # write command to log
+        now="["$(date)"]"
+        echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+      done
+    done
   done
 done
 #echo "Launched commands in the background, please check appropriate log files for progress"
