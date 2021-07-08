@@ -12,7 +12,7 @@
 MATRIX_LIST="test_matrices"
 MCMODE="unconstrained"
 ADDITIONAL_MODIF="verbose-level=1 gamma0=1"
-ALPHA_VAL="0.5 1"
+ALPHA_VAL="0.25 1"
 INTRA_SPE_SYN="allowed not_allowed"
 
 
