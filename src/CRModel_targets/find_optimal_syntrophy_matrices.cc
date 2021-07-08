@@ -42,7 +42,7 @@ int main(int argc, char* argv[]){
 
 
     // coprophagy is by convention allowed
-    bool allow_coprophagy=false;
+    bool allow_coprophagy=metaparams.intra_specific_syntrophy;
 
     std::cout << "Running Monte Carlo Solver with the following parameters : " << std::endl;
     std::cout << metaparams << std::endl;

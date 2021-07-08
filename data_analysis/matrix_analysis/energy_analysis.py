@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+#### FUNCTION DEFINITION NOT CUSTOMIZABLE PART #########
+
 def moving_average(x, w):
     return np.convolve(x, np.ones(w), 'valid') / w
 def plot_moving_average(ax, x_axis, y_axis, symbol, legend):
@@ -13,57 +15,56 @@ def plot_moving_average(ax, x_axis, y_axis, symbol, legend):
     ax.set_xlabel(r'steps')
     return
 
+# plots energy, nestedness and connectance on the axis that are provided
+def plot_data_optimized(axis, min_data, label=''):
+    energy = min_data[:,0]
+    nest = min_data[:,1]
+    conn = min_data[:, 2]
+    T = min_data[:, 3]
+    steps = np.linspace(start=0, stop=len(T)-1, num=len(T))
 
-umatrix_data_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0816_optimal_alpha.txt_unconstrained_energy"
-save_path='plots/RandTrix_Nr25_Nc25_Nest0.1_Conn0.0816_optimal_alpha'
+    plot_moving_average(axis[0], steps, energy, r'$\langle E \rangle$', legend=label)
+    plot_moving_average(axis[1], steps, nest,r'$\langle \eta_A\rangle$', legend=label)
+    plot_moving_average(axis[2], steps, conn, r'$\langle \kappa_A\rangle$', legend=label)
 
-g_nest='0.1'
-g_conn='0.0816'
+    return
+
+###### END OF NON CUSTOMIZABLE PART : START OF THE SCRIPT #########
 
 
+umatrix_data_path = "data_output/RandTrix_Nr25_Nc25_Nest0.45_Conn0.424_optimal_alpha.txt"
+modes = [
+    #"_alpha0=0.5_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
+    #"_alpha0=0.5_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_",
+    "_alpha0=1_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
+    "_alpha0=1_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_"
+    ]
+
+modes_label = [
+    #r"$\alpha_0 = 0.5$ ISS",
+    #r"$\alpha_0 = 0.5$ no ISS",
+    r"$\alpha_0 = 1$ ISS",
+    r"$\alpha_0 = 1$ no ISS"
+    ]
+
+save_path='plots/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha'
+g_nest='0.45'
+g_conn='0.424'
 title = r'$\kappa_G ='+g_conn+', \ \eta_G='+g_nest+'$'
+figs_save_name = ["_energy.png", "_nestedness.png", "_connectance.png"]
 
-udata = np.loadtxt(umatrix_data_path)
-uenergy = udata[:,0]
-unest = udata[:,1]
-uconn = udata[:, 2]
-uT = udata[:, 3]
-usteps = np.linspace(start=0, stop=len(uT)-1, num=len(uT))
+figs = []
+axis = []
 
-fig1 = plt.figure(1)
-ax1 = fig1.add_subplot(111)
-ax1.set_title(title)
-plot_moving_average(ax1, usteps, uenergy, r'$\langle E \rangle$', r'unconstrained')
-ax1.legend()
-fig1.tight_layout()
-fig1.savefig(save_path+"_energy.png", dpi=200)
+for i in range(3):
+    figs.append(plt.figure(i))
+    axis.append(figs[i].add_subplot(111))
+    axis[i].set_title(title)
 
+for i in range(len(modes)):
+    plot_data_optimized(axis, min_data=np.loadtxt(umatrix_data_path+modes[i]+'energy'), label=modes_label[i])
 
-
-fig2 = plt.figure(2)
-ax2 = fig2.add_subplot(111)
-ax2.set_title(title)
-plot_moving_average(ax2, usteps, unest,r'$\langle \eta_A\rangle$', r'unconstrained')
-ax2.legend()
-fig2.tight_layout()
-fig2.savefig(save_path+"_nestedness.png", dpi=200)
-
-
-
-
-fig3 = plt.figure(3)
-ax3 = fig3.add_subplot(111)
-ax3.set_title(title)
-plot_moving_average(ax3, usteps, uconn, r'$\langle \kappa_A\rangle$', r'unconstrained')
-ax3.legend()
-fig3.tight_layout()
-fig3.savefig(save_path+"_connectance.png", dpi=200)
-
-
-
-
-#x4 = fig1.add_subplot(224)
-#ax4.plot(T, 'o', markersize=0.5)
-#ax4.set_yscale('log')
-#ax4.set_xlabel(r'steps')
-#ax4.set_ylabel(r'$T$(steps)')
+for i in range(3):
+    axis[i].legend()
+    figs[i].tight_layout()
+    figs[i].savefig(save_path+figs_save_name[i], dpi=200)
