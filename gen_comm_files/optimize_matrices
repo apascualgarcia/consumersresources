@@ -14,6 +14,7 @@ MCMODE="unconstrained"
 ADDITIONAL_MODIF="gamma0=1"
 ALPHA_VAL="0.25 1"
 INTRA_SPE_SYN="allowed not_allowed"
+SAVENAME="Heaviside"
 
 
 CONFIGURATION_FILE="configuration"
@@ -38,7 +39,7 @@ do
     do
       for matl in $MATRIX_LIST
       do
-        CURRENT_NAME="alpha0="${alpha}_"intra_specific_syntrophy="${intra}
+        CURRENT_NAME=${SAVENAME}_"alpha0="${alpha}_"intra_specific_syntrophy="${intra}
         if [ ! -z "${ADDITIONAL_MODIF}" ]
           then
             for add in $ADDITIONAL_MODIF
