@@ -854,3 +854,10 @@ bool all_elements_equal(const nvector & v){
   }
   return true;
 }
+
+ntype Heaviside(const ntype& x){
+  if(x>=0){
+    return 1.;
+  }
+  return 0.;
+}

@@ -523,20 +523,30 @@ ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
   unsigned int NR=A.size();
   nmatrix AG=A*G;
   nmatrix GG=transpose(G)*G;
+  nvector Z = nvector(NR, 0.);
 
 
-  ntype to_minimize=0.;
   /* we want the absolute trace to be as close to zero as possible*/
   /* and we want the rest to be as close to zero as possible*/
   ntype off_diag=0., trace=0.;
   for(size_t mu=0; mu < NR;++mu){
-    trace+=(m->alpha0*AG[mu][mu]-m->gamma0*m->R0*GG[mu][mu]);
+    Z[mu]+=(m->alpha0*AG[mu][mu]-m->gamma0*m->R0*GG[mu][mu]);
     for(size_t nu=0; nu < NR;++nu){
       if(nu!=mu){
-        off_diag+=abs(m->alpha0*AG[mu][nu]-m->gamma0*m->R0*GG[mu][nu]);
+        Z[mu]+=abs(m->alpha0*AG[mu][nu]-m->gamma0*m->R0*GG[mu][nu]);
       }
     }
   }
-  to_minimize=trace+off_diag;
-  return to_minimize;
+
+  /* version with Heaviside function */
+  ntype energy = 0;
+  ntype X = -NR;
+  for(size_t mu = 0; mu < NR; ++mu){
+    X+=Heaviside(-Z[mu]);
+  }
+  ntype coeff = Heaviside(X);
+  for(size_t mu=0; mu < NR; ++mu){
+    energy+=coeff*Z[mu];
+  }
+  return energy;
 }
