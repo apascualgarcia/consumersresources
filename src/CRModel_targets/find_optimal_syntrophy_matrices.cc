@@ -46,9 +46,9 @@ int main(int argc, char* argv[]){
 
     std::cout << "Running Monte Carlo Solver with the following parameters : " << std::endl;
     std::cout << metaparams << std::endl;
+    std::string add_string = metaparams.save_path;
 
     for(size_t i=0; i < matrices_list.size();++i){
-      std::string add_string = metaparams.save_path;
       metaparams.foodmatrixpath=matrices_list[i];
       metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath)+"_"+add_string;
       std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
