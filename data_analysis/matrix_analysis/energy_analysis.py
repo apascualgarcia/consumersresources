@@ -1,13 +1,12 @@
 import common_features.mpl_params
-from common_features.functions import asymptote
+from common_features.functions import asymptote, moving_average
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 #### FUNCTION DEFINITION NOT CUSTOMIZABLE PART #########
 
-def moving_average(x, w):
-    return np.convolve(x, np.ones(w), 'valid') / w
+
 def plot_moving_average(ax, x_axis, y_axis, symbol, legend):
     #ax.plot(x_axis, y_axis, 'o', markersize=0.5)
     ax.plot(moving_average(y_axis, 15000), marker='', linestyle='solid', linewidth=2, label=legend)
@@ -34,15 +33,15 @@ def plot_data_optimized(axis, min_data, label=''):
 
 umatrix_data_path = "data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt"
 modes = [
-    "_alpha0=0.5_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
-    "_alpha0=0.5_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_",
+    "_alpha0=0.25_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
+    "_alpha0=0.25_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_",
     "_alpha0=1_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
     "_alpha0=1_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_"
     ]
 
 modes_label = [
-    r"$\alpha_0 = 0.5$ ISS",
-    r"$\alpha_0 = 0.5$ no ISS",
+    r"$\alpha_0 = 0.25$ ISS",
+    r"$\alpha_0 = 0.25$ no ISS",
     r"$\alpha_0 = 1$ ISS",
     r"$\alpha_0 = 1$ no ISS"
     ]

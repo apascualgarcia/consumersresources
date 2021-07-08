@@ -7,48 +7,42 @@ from matplotlib.patches import ConnectionPatch
 # Nest=['0.599869',  '0.104794']
 # Conn=['0.316800',  '0.129600']
 Gamma_matrix=[
-            #'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.45_Conn0.1856.txt'
-            #,'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.3_Conn0.2816.txt'
-            #,
-             'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.5_Conn0.2928.txt'
-           , 'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416.txt'
+            #'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232.txt'
+            #,'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232.txt'
+            'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232.txt'
+            ,'optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232.txt'
               ]
 Alpha_matrix=[
-            #'data_output/RandTrix_Nr25_Nc25_Nest0.45_Conn0.1856_optimal_alpha.txt_unconstrained'
-            #,'data_output/RandTrix_Nr25_Nc25_Nest0.3_Conn0.2816_optimal_alpha.txt_unconstrained'
-            #'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.2928_optimal_alpha.txt_unconstrained'
-            #,'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416_optimal_alpha.txt_unconstrained',
-            # 'data_output/RandTrix_Nr25_Nc25_Nest0.45_Conn0.1856_optimal_alpha.txt_constant_connectance'
-            # ,'data_output/RandTrix_Nr25_Nc25_Nest0.3_Conn0.2816_optimal_alpha.txt_constant_connectance'
-            'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.2928_optimal_alpha.txt_constant_connectance'
-            ,'data_output/RandTrix_Nr25_Nc25_Nest0.5_Conn0.416_optimal_alpha.txt_constant_connectance'
+            #'data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt_alpha0=0.25_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1'
+            #,'data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt_alpha0=0.25_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1'
+            'data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt_alpha0=1_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1'
+            ,'data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt_alpha0=1_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1'
               ]
 
 conn_g = [
-        # '0.19', '0.3',
-        '0.3', '0.4'
+        '0.12',
+        '0.12',
+        '0.12',
+        '0.12'
         ]
 nest_g = [
-        # '0.45', '0.3',
-        '0.5', '0.5'
+        '0.4',
+        '0.4',
+        '0.4',
+        '0.4'
         ]
-
-# conn_a = [
-#         #'0.2', '0.28',
-#         '0.31', '0.42'
-#         ]
-# nest_a = [
-#         #'0.4', '0.30',
-#         '0.48', '0.5'
-#         ]
 
 conn_a = [
-        # '0.19', '0.3',
-        '0.3', '0.4'
+        #'0.5',
+        #'0.43',
+        '0.22',
+        '0.29'
         ]
 nest_a = [
-        # '0.46', '0.30', 
-        '0.5', '0.49'
+        #'0.85',
+        #'0.75',
+        '0.5',
+        '0.75'
         ]
 
 mat_g = []
