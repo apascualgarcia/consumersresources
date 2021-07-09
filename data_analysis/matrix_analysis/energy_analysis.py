@@ -31,12 +31,12 @@ def plot_data_optimized(axis, min_data, label=''):
 ###### END OF NON CUSTOMIZABLE PART : START OF THE SCRIPT #########
 
 
-umatrix_data_path = "data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt"
+umatrix_data_path = "data_output/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt_Heaviside"
 modes = [
-    "_alpha0=0.25_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
-    "_alpha0=0.25_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_",
-    "_alpha0=1_intra_specific_syntrophy=allowed_verbose-level=1_gamma0=1_",
-    "_alpha0=1_intra_specific_syntrophy=not_allowed_verbose-level=1_gamma0=1_"
+    "_alpha0=0.25_intra_specific_syntrophy=allowed_gamma0=1_",
+    "_alpha0=0.25_intra_specific_syntrophy=not_allowed_gamma0=1_",
+    "_alpha0=1_intra_specific_syntrophy=allowed_gamma0=1_",
+    "_alpha0=1_intra_specific_syntrophy=not_allowed_gamma0=1_"
     ]
 
 modes_label = [
@@ -46,7 +46,7 @@ modes_label = [
     r"$\alpha_0 = 1$ no ISS"
     ]
 
-save_path='plots/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha'
+save_path='plots/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha_Heaviside'
 g_nest='0.4'
 g_conn='0.12'
 title = r'$\kappa_G ='+g_conn+', \ \eta_G='+g_nest+'$'
