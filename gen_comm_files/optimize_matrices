@@ -8,13 +8,13 @@
 # the variable COMMAND_FILE
 
 # Example for NR=NS=25
-#MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
-MATRIX_LIST="test_matrices"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
+#MATRIX_LIST="test_matrices"
 MCMODE="unconstrained"
 ADDITIONAL_MODIF="gamma0=1"
-ALPHA_VAL="0.25 1"
-INTRA_SPE_SYN="allowed not_allowed"
-SAVENAME="Heaviside"
+ALPHA_VAL="1"
+INTRA_SPE_SYN="allowed"
+SAVENAME="optimize_matrices"
 
 
 CONFIGURATION_FILE="configuration"
@@ -49,7 +49,7 @@ do
           fi
 
         FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} ${ADDITIONAL_MODIF}"
-        FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
+        FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]' "
 
         COMMAND_NAME="${FIRST_COMMAND}"
 

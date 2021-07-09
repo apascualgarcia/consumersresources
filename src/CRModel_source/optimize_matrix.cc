@@ -147,8 +147,10 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
   bool max_steps_reached=false, changed=true, stop=false, energy_converged=false;
   nvector last_changed_elements;
   double mean_energy=0.;
+  Metaparameters* m = (Metaparameters*) mcs.additional_params;
 
   std::ofstream energy_file=open_external_file_truncate(mcs.energy_file);
+  energy_file << "# The following metaparameters were used for this matrix optimization : " << *m << std::endl;
   energy_file << "# Energy optimization to find the best syntrophy matrix for a given consumption matrix " << std::endl;
   energy_file << "# Are given, in that order: energy, nestedness, connectance and temperature of the syntrophy matrix" << std::endl;
   energy_file << "# Each new line is a further step of the MCS optimization algorithm" << std::endl;
@@ -547,7 +549,6 @@ ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
   }
   /* without Heaviside function */
   ntype coeff = 1;
-  std::cout << Z << std::endl;
   for(size_t mu=0; mu < NR; ++mu){
     energy+=coeff*Z[mu];
   }

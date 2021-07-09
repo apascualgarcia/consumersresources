@@ -56,6 +56,7 @@ int main(int argc, char* argv[]){
       mcsolv.energy_file =metaparams.save_path+"_energy";
 
       std::ofstream smatrix_file=open_external_file_truncate(metaparams.save_path);
+      smatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
 
 
       std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix for ";
