@@ -53,8 +53,8 @@ do
 
         COMMAND_NAME="${FIRST_COMMAND}"
 
-        LOG_NAME="logs/${CURRENT_NAME}.log"
-        ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
+        LOG_NAME="logs/${CURRENT_NAME}_${matl}.log"
+        ERR_LOG_NAME="logs/err_${CURRENT_NAME}_${matl}.log"
         # execute command
         #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
         echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt

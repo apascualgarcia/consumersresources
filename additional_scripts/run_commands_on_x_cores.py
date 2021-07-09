@@ -25,4 +25,5 @@ for i in range(CORES):
         err_file = split_files[2]
         core_command+='nohup sh -c "'+command+'">'+log_file[1:]+"2>"+err_file+"; wait;"
     core_command=core_command[:-7]+') &'
+    #print(core_command)
     os.system(core_command)
