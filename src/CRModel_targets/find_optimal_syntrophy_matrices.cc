@@ -32,7 +32,7 @@ int main(int argc, char* argv[]){
     MonteCarloSolver mcsolv;
     ntype T0=10;
     mcsolv.max_steps=1000000;
-    mcsolv.max_fails=5000;
+    mcsolv.max_fails=10000;
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
@@ -47,6 +47,12 @@ int main(int argc, char* argv[]){
     std::cout << "Running Monte Carlo Solver with the following parameters : " << std::endl;
     std::cout << metaparams << std::endl;
     std::string add_string = metaparams.save_path;
+
+    std::cout << "Intraspecific syntrophy is";
+    if(not(allow_coprophagy)){
+      std::cout << " not";
+    }
+    std::cout << " allowed during this run." << std::endl;
 
     for(size_t i=0; i < matrices_list.size();++i){
       metaparams.foodmatrixpath=matrices_list[i];

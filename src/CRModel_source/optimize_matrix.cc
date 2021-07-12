@@ -190,16 +190,14 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
     energy_converged = (convergence>=required_convergence);
     max_steps_reached = (steps>=mcs.max_steps);
 
-    // removed the reached_zero condition because we are now considering energies which may be negative
-    //stop = max_steps_reached || reached_zero || av_cost_function_converging;
     stop = max_steps_reached || energy_converged;
 
     if(steps%mcs.display_stride==0 || stop){
       std::cout << "\t Step " << steps;
-      std::cout << ", T=" << mcs.T;
-      std::cout <<", cost function=" << current_energy;
-      std::cout << ", nestedness=" << nest;
-      std::cout << ", connectance=" << conn;
+      std::cout << "\t T=" << mcs.T;
+      std::cout <<"\t cost function=" << current_energy;
+      std::cout << "\t nestedness=" << nest;
+      std::cout << "\t connectance=" << conn;
       if(stop){
         std::cout << std::endl << "-------" << std::endl << "STOPPING THE ALGORITHM ";
       }
@@ -526,7 +524,6 @@ ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
   nmatrix AG=A*G;
   nmatrix GG=transpose(G)*G;
   nvector Z = nvector(NR, 0.);
-
 
   /* we want the absolute trace to be as close to zero as possible*/
   /* and we want the rest to be as close to zero as possible*/
