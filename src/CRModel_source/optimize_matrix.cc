@@ -527,7 +527,6 @@ ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
 
   /* we want the absolute trace to be as close to zero as possible*/
   /* and we want the rest to be as close to zero as possible*/
-  ntype off_diag=0., trace=0.;
   for(size_t mu=0; mu < NR;++mu){
     Z[mu]+=(m->alpha0*AG[mu][mu]-m->gamma0*m->R0*GG[mu][mu]);
     for(size_t nu=0; nu < NR;++nu){

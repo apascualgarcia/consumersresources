@@ -5,15 +5,15 @@
 # value of alpha0 in the ALPHA_VALS list.
 
 # Example for NR=NS=25
-MATRIX_LIST="test_matrices"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 ALPHA_MODE="optimal_matrix"
-SAVENAME="other_LRI_local_dynamical_stability_NR25_NS25"
-OPTIMAL_MATRIX_FOLDER="optimal_LRI_corrected_NR25_NS25"
-ALPHA_VALS="0"
+SAVENAME="opt_mat_local_dynamical_stability_NR25_NS25_test_run"
+OPTIMAL_MATRIX_FOLDER="9Jul21"
+ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 ADDITIONAL_MODIF="verbose-level=1"
 
 CONFIGURATION_FILE="config/configuration.in"
-COMMAND_FILE="test_dyn_stab.txt"
+COMMAND_FILE="local_dynamical_stability_NR25_NS25_opt_mat.txt"
 
 # And possible modifications for NR=50 and NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"

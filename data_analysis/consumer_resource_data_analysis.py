@@ -557,3 +557,76 @@ def extract_numbers_from_string(filename):
     temp = re.findall(r"[-+]?\d*\.\d+|\d+", filename)
     res = list(map(float, temp))
     return res
+
+def mat_connectance(mat):
+    N = len(mat)
+    M = len(mat[0])
+    links=0
+
+    for i in range(N):
+        for j in range(M):
+            if mat[i][j]!=0:
+                links+=1.
+    return links/(N*M)
+
+def mat_nestedness(mat):
+    M = []
+
+    n_rows = len(mat)
+    n_cols = len(mat[0])
+
+    for i in range(n_rows):
+        M.append([])
+        for j in range(n_cols):
+            if mat[i][j]!=0:
+                M[i].append(1)
+            else:
+                M[i].append(0)
+
+    n = []
+    for i in range(n_rows):
+        n.append(0.)
+        for k in range(n_cols):
+            n[i] += M[i][k]
+
+    n_tilde = []
+    for i in range(n_rows):
+        n_tilde.append([])
+        for j in range(n_cols):
+            n_tilde[i].append(0.)
+            for k in range(n_cols):
+                n_tilde[i][j]+=M[i][k]*M[j][k]
+
+    nest = 0.
+    num = sum([n_tilde[i][j] for j in range(n_cols) for i in range(n_rows) if i < j])
+    denom = sum([min([n[i], n[j]]) for j in range(n_cols) for i in range(n_rows) if i < j])
+
+    if denom==0:
+        nest=0
+    else:
+        nest = num/denom
+
+
+    return nest
+
+def eco_energy(A, G, alpha0=1, gamma0=1, R0=1):
+    NR=len(A)
+    AG=A@G
+    GG=np.transpose(G)@G
+    Z =np.zeros(NR)
+
+    energy=0.
+
+
+    for mu in range(NR):
+        Z[mu]+=(alpha0*AG[mu][mu]-gamma0*R0*GG[mu][mu]);
+        for nu in range(NR):
+            if nu!=mu:
+                Z[mu]+=abs(alpha0*AG[mu][nu]-gamma0*R0*GG[mu][nu])
+
+
+
+    coeff = 1;
+    for mu in range(NR):
+        energy+=coeff*Z[mu]
+    return energy;
