@@ -30,8 +30,8 @@ def append_mat_from_Gnname(df, G_matrix_folder, G_matrix_save_path, A_matrix_fol
 G_matrix_folder = "optimal_matrices/consumption/Nr25_Nc25/"
 G_matrix_list = "matrix_list/full_rank_opt_consumption_mat_NR25_NS25.in"
 A_matrix_folder = "data_output/"
-A_matrix_suffix = "_optimize_matrices_alpha0=1_intra_specific_syntrophy=allowed_gamma0=1_energy"
-save_file = "data_output/optimized_matrix_data_alpha0=1_intra_specific_syntrophy=allowed.csv"
+A_matrix_suffix = "_optimize_matrices_alpha0=1_intra_specific_syntrophy=allowed_gamma0=1_energy_5millionssteps"
+save_file = "data_output/optimized_matrix_data_alpha0=1_intra_specific_syntrophy=allowed_5millionssteps.csv"
 Npoints = 2000
 columns=["NR", "NS", "connG", "nestG", "E", "connA", "nestA"]
 df = pd.DataFrame(columns=columns)
