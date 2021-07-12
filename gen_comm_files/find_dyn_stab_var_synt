@@ -8,9 +8,11 @@
 MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 ALPHA_MODE="optimal_matrix"
 SAVENAME="opt_mat_local_dynamical_stability_NR25_NS25_test_run"
-OPTIMAL_MATRIX_FOLDER="Nr25_Nc25/9Jul21"
+OPTIMAL_MATRIX_FOLDER="9Jul21"
 ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 ADDITIONAL_MODIF="verbose-level=1"
+NR=25
+NS=25
 
 CONFIGURATION_FILE="config/configuration.in"
 COMMAND_FILE="local_dynamical_stability_NR25_NS25_opt_mat.txt"
@@ -44,7 +46,7 @@ do
       CURRENT_NAME="${CURRENT_NAME}_alpha0=${alpha}"
       VOLUME_PATH="${VOLUME_PATH}_alpha0=${alpha}"
 
-      FIRST_COMMAND="build/check_percentage_dynamically_stable_systems ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha} ${ADDITIONAL_MODIF}"
+      FIRST_COMMAND="build/check_percentage_dynamically_stable_systems ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha} ${ADDITIONAL_MODIF}"
       # for old version
       # FIRST_COMMAND="${FIRST_COMMAND} path_to_volume='feasibility/${VOLUME_PATH}.out'"
       FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
