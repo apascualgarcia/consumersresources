@@ -495,49 +495,41 @@ Dynamical_variables CRModel::perturb_equilibrium() const{
   return Dynamical_variables(p_resources, p_consumers);
 
 }
-void CRModel::perturb_parameters(const ntype & Delta) const{
+void CRModel::perturb_parameters(const ntype & Delta, perturbmode pert_mode) const{
   Parameter_set* p = this->model_param->get_parameters();
-  unsigned int pert_type=this->metaparameters->struct_pert_type;
-  if(this->metaparameters->verbose > 1){
-    std::cout <<"\t Structurally perturbed the l_mu's the system with parameter delta =" << Delta;
-  }
-  switch(pert_type){
-    case 0:{
+  switch(pert_mode){
+    case perturb_l:{
       std::uniform_real_distribution<ntype> uniform_distrib(-1., 1.);
       for(size_t mu=0; mu < p->l.size(); ++mu){
         p->l[mu] = p->l[mu]*(1+Delta*uniform_distrib(random_engine));
       }
-
       if(this->metaparameters->verbose > 1){
-        std::cout << " (l0 stays the same)" << std::endl;
+        std::cout <<"\t Perturbed the l_mu's the system with parameter delta =" << Delta;
+        std::cout << " (l0 stays the same), each l_mu -> l_mu (1+Delta)" << std::endl;
       }
       break;
     }
 
-    case 1:{
-      std::uniform_real_distribution<ntype> delta_distrib(0, 2.*Delta);
+    case remove_l:{
+      std::uniform_real_distribution<double> unif_distrib(0., 1.);
+      unsigned int removed_resources=0;
       for(size_t mu=0; mu < p->l.size(); ++mu){
-        ntype diminution;
-        do{
-          diminution=delta_distrib(random_engine);
-        }while(diminution > 1);
-        p->l[mu]*=(1-diminution);
+        if(unif_distrib(random_engine)<Delta){
+          p->l[mu] = 0;
+          removed_resources+=1;
+        }
       }
       if(this->metaparameters->verbose > 1){
-        std::cout << " (l0 is now approximately "<< mean(p->l) << ")" << std::endl;
+        std::cout << "\t Structurally perturbed the system by removing " << removed_resources << " resources at random (Delta="<< Delta <<")" << std::endl;
       }
       break;
-
-    }
+    };
 
     default:{
-      throw error("Unknown parameter perturbation type, please choose either 0 or 1");
+      throw error("Unknown parameter perturbation type!");
 
     }
   }
-
-
-
 
   return;
 }

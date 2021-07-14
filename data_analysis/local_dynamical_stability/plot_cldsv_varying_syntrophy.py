@@ -8,21 +8,21 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 from scipy.optimize import curve_fit
 
 import copy
-
-filename = 'local_dynamical_stability/local_dynamical_stability_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
-optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
-consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
-matrix_set='S_{50}'
+#
+# filename = 'local_dynamical_stability/local_dynamical_stability_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
+# optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
+# consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
+# matrix_set='S_{50}'
 
 filename = 'local_dynamical_stability/all_mat_local_dynamical_stability_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
 optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 matrix_set='S_{25}'
 
-filename='local_dynamical_stability/other_LRI_local_dynamical_stability_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI_corrected_NR25_NS25'
-consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
-matrix_set='S_{25}'
+# filename='local_dynamical_stability/other_LRI_local_dynamical_stability_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
+# optimal_LRI_folder='optimal_LRI_corrected_NR25_NS25'
+# consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
+# matrix_set='S_{25}'
 
 
 cmap = plt.cm.get_cmap('jet_r')

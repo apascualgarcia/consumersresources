@@ -46,7 +46,7 @@ public:
   void write_death_rates(std::string) const;
   Dynamical_variables perturb_equilibrium() const;
   void perturb_parameters() const;
-  void perturb_parameters(const ntype &) const;
+  void perturb_parameters(const ntype &, perturbmode=perturb_l) const;
   void save_new_equilibrium(const Extinction&) const;
   bool respects_equations_of_evolution_at_equilibrium() const;
 

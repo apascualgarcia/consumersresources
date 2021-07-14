@@ -14,8 +14,6 @@ def remove_iss_links(G_matrix_path, A_matrix_path):
     return
 
 
-G_matrix_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232.txt"
-A_matrix_path = "optimal_matrices/consumption/Nr25_Nc25/RandTrix_Nr25_Nc25_Nest0.4_Conn0.1232_optimal_alpha.txt"
 
 G_mat_list="matrix_list/full_rank_opt_consumption_mat_NR25_NS25.in"
 G_folder = "optimal_matrices/consumption/Nr25_Nc25"
