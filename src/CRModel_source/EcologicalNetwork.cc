@@ -29,7 +29,7 @@ void EcologicalNetwork::optimize(MonteCarloSolver& mcs){
   }
   if(mcs.mcmode==both_modified){
     this->A = random_binary_matrix_with_connectance(this->NR, this->NS, 0.5);
-    this->G = random_binary_matrix_with_connectance(this->NS, this->NR, connectance(this->G));
+    this->G = random_full_rank_binary_matrix_with_connectance(this->NS, this->NR, connectance(this->G));
   }
   apply_MC_algorithm(*this, mcs);
   return;

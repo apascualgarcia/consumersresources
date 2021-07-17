@@ -48,6 +48,8 @@ bool is_matrix_full_rank(const nmatrix&);
 
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn);
+nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int & columns, const ntype& conn);
+
 nmatrix flip_whole_binary_matrix(const nmatrix& mat);
 /* for a matrix g of size NS x NR, returns the NRxNS matrix with the same connectance as g and such that if g_{im}=1 then alpha_{mi}=0 */
 nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g);

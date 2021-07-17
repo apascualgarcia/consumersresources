@@ -775,6 +775,39 @@ nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const un
   return mat;
 }
 
+nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int & columns, const ntype& conn){
+  nmatrix mat(rows, nvector(columns, 0.));
+  std::uniform_int_distribution<unsigned int> row_pick(0, rows-1);
+  std::uniform_int_distribution<unsigned int> col_pick(0, columns-1);
+  unsigned int links = conn*rows*columns;
+  if(rows!=columns){
+    throw error("Matrix cannot be full rank: it is not square");
+  }
+
+  if(links < rows){
+    throw error("Matrix has a connectance too low, it cannot be full rank");
+  }
+
+  /* first place everything on diagonal */
+  for(size_t i=0; links>0 and i < rows; --links, ++i){
+    mat[i][i] = 1.;
+  }
+
+  /* then place rest as long as it gives a full rank matrix */
+  do{
+    for(; links>0; --links){
+      unsigned int picked_row, picked_column;
+      do{
+        picked_row = row_pick(random_engine);
+        picked_column = col_pick(random_engine);
+      }while(mat[picked_row][picked_column]>0.);
+      mat[picked_row][picked_column] = 1.;
+    }
+  }while(not(is_matrix_full_rank(mat)));
+
+  return mat;
+}
+
 
 nmatrix build_LRI_matrix(const nmatrix& g, const Metaparameters& m, const ntype& target_conn){
 
