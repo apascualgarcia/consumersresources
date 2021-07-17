@@ -780,6 +780,7 @@ nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows
   std::uniform_int_distribution<unsigned int> row_pick(0, rows-1);
   std::uniform_int_distribution<unsigned int> col_pick(0, columns-1);
   unsigned int links = conn*rows*columns;
+
   if(rows!=columns){
     throw error("Matrix cannot be full rank: it is not square");
   }
@@ -793,18 +794,22 @@ nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows
     mat[i][i] = 1.;
   }
 
-  /* then place rest as long as it gives a full rank matrix */
-  do{
-    for(; links>0; --links){
-      unsigned int picked_row, picked_column;
-      do{
-        picked_row = row_pick(random_engine);
-        picked_column = col_pick(random_engine);
-      }while(mat[picked_row][picked_column]>0.);
-      mat[picked_row][picked_column] = 1.;
-    }
-  }while(not(is_matrix_full_rank(mat)));
 
+  /* then place rest as long as it gives a full rank matrix */
+  for(; links>0; --links){
+      unsigned int picked_row, picked_column;
+      nmatrix dummy;
+      do{
+          picked_row = row_pick(random_engine);
+          picked_column = col_pick(random_engine);
+
+          dummy = mat;
+          dummy[picked_row][picked_column]=1.;
+
+      }while(mat[picked_row][picked_column]>0. or not(is_matrix_full_rank(dummy)));
+
+      mat[picked_row][picked_column] = 1.;
+  }
   return mat;
 }
 

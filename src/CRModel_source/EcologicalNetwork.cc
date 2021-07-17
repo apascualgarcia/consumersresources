@@ -10,7 +10,7 @@ EcologicalNetwork::EcologicalNetwork(const unsigned int NR_, const unsigned int 
 
   /* take by default A as a zero matrix first */
   this->A = nmatrix(this->NR, nvector(this->NS, 0.));
-  this->G = random_binary_matrix_with_connectance(this->NS, this->NR, g_conn);
+  this->G = random_full_rank_binary_matrix_with_connectance(this->NS, this->NR, g_conn);
   return;
 }
 
