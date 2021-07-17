@@ -62,3 +62,15 @@ eqmode string_to_eq_mode(std::string mode){
       throw err;
     }
 }
+
+MCmode string_to_mcmode(std::string s){
+  if(s=="constant_connectance"){
+    return MCmode(constant_connectance);
+  }else if(s=="unconstrained"){
+    return MCmode(unconstrained);
+  }else if(s=="both_modified"){
+    return MCmode(both_modified);
+  }else{
+    throw error("Unknown MC mode");
+  }
+}

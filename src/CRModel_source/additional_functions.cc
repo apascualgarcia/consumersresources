@@ -616,6 +616,10 @@ bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
   return false;
 }
 
+bool is_there_coprophagy(const EcologicalNetwork& net){
+  return is_there_coprophagy(net.A, net.G);
+}
+
 bool has_an_empty_row(const nmatrix& gamma){
   for(size_t i=0; i < gamma.size(); ++i){
     bool row_is_empty=true;
@@ -692,6 +696,10 @@ unsigned int rank(const nmatrix& mat){
   return lu.rank();
 }
 
+bool is_matrix_full_rank(const nmatrix& mat){
+  return mat.size()==mat[0].size() and rank(mat)==mat.size();
+}
+
 ntype mean_non_zero_elements(const nmatrix & mat){
   ntype mean=0.;
   ntype index=0;
@@ -754,15 +762,16 @@ nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g){
 
 nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn){
   nmatrix mat(rows, nvector(columns, 0.));
-  std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
-  for(size_t i=0; i < rows; ++i){
-    for(size_t j=0; j < columns;++j){
-      if(unif_distrib(random_engine)< conn){
-        mat[i][j]=1;
-      }
-    }
+  std::uniform_int_distribution<unsigned int> row_pick(0, rows-1);
+  std::uniform_int_distribution<unsigned int> col_pick(0, columns-1);
+  for(unsigned int links = conn*rows*columns; links>0; --links){
+    unsigned int picked_row, picked_column;
+    do{
+      picked_row = row_pick(random_engine);
+      picked_column = col_pick(random_engine);
+    }while(mat[picked_row][picked_column]>0.);
+    mat[picked_row][picked_column] = 1.;
   }
-
   return mat;
 }
 
@@ -798,27 +807,16 @@ void flip_one_binary_matrix_element(nmatrix & B){
   return;
 }
 
-MCmode string_to_mcmode(std::string s){
-  if(s=="constant_connectance"){
-    return MCmode(constant_connectance);
-  }else{
-    if(s=="unconstrained"){
-      return MCmode(unconstrained);
-    }else{
-      throw error("Unknown MC mode");
-    }
-  }
-}
 
 std::string mcmode_to_string(const MCmode & mc){
   if(mc==unconstrained){
     return "unconstrained";
+  }else if(mc==constant_connectance){
+    return "constant_connectance";
+  }else if(mc==both_modified){
+    return "both_modified";
   }else{
-    if(mc==constant_connectance){
-      return "constant_connectance";
-    }else{
-      throw error("Cannot convert string to an existing MCmode");
-    }
+    throw error("Cannot convert string to an existing MCmode");
   }
 }
 
@@ -860,4 +858,27 @@ ntype Heaviside(const ntype& x){
     return 1.;
   }
   return 0.;
+}
+
+void swap_two_matrix_elements(nmatrix & B){
+  unsigned int rows = B.size();
+  unsigned int cols = B[0].size();
+  std::uniform_int_distribution<unsigned int> pick_row(0, rows-1);
+  std::uniform_int_distribution<unsigned int> pick_col(0, cols-1);
+
+  unsigned int row_1, row_2, col_1, col_2;
+  do{
+    row_1 = pick_row(random_engine);
+    row_2 = pick_row(random_engine);
+
+    col_1 = pick_col(random_engine);
+    col_2 = pick_col(random_engine);
+
+  }while(row_1==row_2 and col_1==col_2);
+
+  ntype el_1 = B[row_1][col_1];
+  B[row_1][col_1] = B[row_2][col_2];
+  B[row_2][col_2] = el_1;
+
+  return;
 }

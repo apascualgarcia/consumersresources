@@ -6,15 +6,15 @@ import consumer_resource_data_analysis as cf
 def append_mat_data_to_df(df, G_matrix_name, G_matrix_folder, A_matrix_path, columns, Npoints):
 
     [NR, NS, nestG, connG] = cf.extract_numbers_from_string(G_matrix_name)
-    nestG = cf.closest_element_in_list(nestG, cf.all_nestedness)
-    connG = cf.closest_element_in_list(connG, cf.all_connectance)
 
     A_data=np.loadtxt(A_matrix_path)
     energy = A_data[:, 0]
     nestA = A_data[:, 1]
     connA = A_data[:, 2]
+    nestG = A_data[:, 3]
+    connG = A_data[:, 4]
 
-    df = df.append(pd.DataFrame([[int(NR), int(NS), connG, nestG, cf.asymptote(energy, Npoints), cf.asymptote(connA, Npoints), cf.asymptote(nestA, Npoints)]], columns=columns))
+    df = df.append(pd.DataFrame([[int(NR), int(NS), cf.asymptote(connG, Npoints), cf.asymptote(nestG, Npoints), cf.asymptote(energy, Npoints), cf.asymptote(connA, Npoints), cf.asymptote(nestA, Npoints)]], columns=columns))
     return df
 
 def append_mat_from_Gnname(df, G_matrix_folder, G_matrix_save_path, A_matrix_folder, A_matrix_suffix, columns, Npoints):

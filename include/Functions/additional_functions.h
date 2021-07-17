@@ -4,6 +4,7 @@
 #include "../Classes/Metaparameters.h"
 #include "../Classes/Custom_types.h"
 #include "../Classes/Extinction.h"
+#include "../Classes/EcologicalNetwork.h"
 #include<algorithm>
 #include<random>
 #include<string>
@@ -28,7 +29,6 @@ ntype det(const nmatrix&);
 
 Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> convert_nmatrix_to_eigen_matrix(const nmatrix& mat);
 
-MCmode string_to_mcmode(std::string);
 std::string mcmode_to_string(const MCmode &);
 
 /* computes number of links in a matrix */
@@ -44,6 +44,7 @@ ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
 ntype assortativity(const nmatrix&);
 unsigned int rank(const nmatrix&);
+bool is_matrix_full_rank(const nmatrix&);
 
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn);
@@ -56,10 +57,13 @@ nmatrix build_LRI_matrix(const nmatrix& g,const Metaparameters& m, const ntype& 
 
 /* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
 void flip_one_binary_matrix_element(nmatrix & B);
+void swap_two_matrix_elements(nmatrix & B);
 
 void rescale_mean(nmatrix&, const ntype&);
 
 bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
+bool is_there_coprophagy(const EcologicalNetwork& net);
+
 /* returns true if gamma has one row filled with zeros only */
 bool has_an_empty_row(const nmatrix& gamma);
 /* returns true if gamma has one column filled with zeros only */

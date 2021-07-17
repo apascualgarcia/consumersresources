@@ -15,7 +15,7 @@ int main(int argc, char * argv[]){
     }
 
     metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
-    delta_solver solv_params = {fitmode(sigmoidal),eqmode(oneextinct), stabilitymode(structural), perturbmode(remove_l)};
+    delta_solver solv_params = {fitmode(polynomial),eqmode(oneextinct), stabilitymode(structural), perturbmode(remove_l)};
 
     if(metaparams.verbose >0){
       std::cout << "The metaparameters used are " << metaparams << std::endl;

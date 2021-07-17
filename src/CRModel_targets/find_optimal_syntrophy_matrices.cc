@@ -32,7 +32,7 @@ int main(int argc, char* argv[]){
     MonteCarloSolver mcsolv;
     ntype T0=10;
     mcsolv.max_steps=1000000;
-    mcsolv.max_fails=10000;
+    mcsolv.max_fails=2000;
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
@@ -42,34 +42,40 @@ int main(int argc, char* argv[]){
 
 
     // coprophagy is by convention allowed
-    bool allow_coprophagy=metaparams.intra_specific_syntrophy ;
+    mcsolv.iss_allowed = metaparams.intra_specific_syntrophy;
 
     std::cout << "Running Monte Carlo Solver with the following parameters : " << std::endl;
     std::cout << metaparams << std::endl;
     std::string add_string = metaparams.save_path;
 
     std::cout << "Intraspecific syntrophy is";
-    if(not(allow_coprophagy)){
+    if(not(mcsolv.iss_allowed)){
       std::cout << " not";
     }
     std::cout << " allowed during this run." << std::endl;
 
     for(size_t i=0; i < matrices_list.size();++i){
+
       metaparams.foodmatrixpath=matrices_list[i];
       metaparams.save_path=optimal_alpha_matrix_path(metaparams.foodmatrixpath)+"_"+add_string;
       std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
-      foodmatrix gamma=load_food_matrix(metaparams);
       mcsolv.energy_file =metaparams.save_path+"_energy";
 
       std::ofstream smatrix_file=open_external_file_truncate(metaparams.save_path);
       smatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
-
-
       std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix for ";
       std::cout << metaparams.foodmatrixpath << std::endl;
       mcsolv.T=T0;
-      foodmatrix optimal_alpha=optimal_syntrophy_from_consumption(gamma, allow_coprophagy, mcsolv);
-      display_food_matrix(smatrix_file, optimal_alpha);
+
+      EcologicalNetwork eco_net(metaparams);
+      eco_net.optimize(mcsolv);
+      display_food_matrix(smatrix_file, eco_net.A);
+      if(mcsolv.mcmode==both_modified){
+        std::ofstream gmatrix_file=open_external_file_truncate(metaparams.foodmatrixpath+"_optimized");
+        gmatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
+        display_food_matrix(gmatrix_file, eco_net.G);
+        gmatrix_file.close();
+      }
       std::cout << "An optimal syntrophy matrix was found and saved in " << metaparams.save_path << std::endl;
 
       smatrix_file.close();

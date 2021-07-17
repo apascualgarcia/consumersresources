@@ -4,6 +4,9 @@
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
   return optimal_syntrophy_from_consumption(gamma, coprophagy, mcs, connectance(gamma));
 }
+
+
+
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs, const ntype& target_conn){
   nmatrix unit_gamma(gamma.size(), nvector(gamma[0].size(), 0.));
   for(size_t i=0; i < gamma.size(); ++i){
@@ -15,7 +18,10 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
   }
   // the first choice of alpha by definition will have no intra specific syntrophy
   nmatrix alpha = flip_whole_binary_matrix(transpose(unit_gamma));
-  apply_MC_algorithm(alpha, unit_gamma, coprophagy, mcs);
+  EcologicalNetwork eco_net;
+  eco_net.A = alpha;
+  eco_net.G = unit_gamma;
+  apply_MC_algorithm(eco_net, mcs);
   return alpha;
 }
 
@@ -23,6 +29,11 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs){
   return exp(-mcs.cost_function(alpha, gamma, mcs.additional_params)/mcs.T);
 }
+
+ntype probability_density(const EcologicalNetwork& eco_net, const MonteCarloSolver& mcs){
+  return probability_density(eco_net.A, eco_net.G, mcs);
+}
+
 nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy_allowed, unsigned int steps, const MonteCarloSolver& mcs){
   nmatrix new_alpha;
   /* As long as the leaving condition is not fulfilled, we do not leave the loop */
@@ -36,7 +47,7 @@ nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool cop
       }
       case constant_connectance : {
         /* AS OF JULY 2ND proposed_new_alpha_Alberto VERSION WORKS, it only changes the nestedness without changing the connectance */
-        new_alpha=proposed_new_alpha_Alberto(alpha, gamma, coprophagy_allowed, steps);
+        new_alpha=proposed_new_matrix_Alberto(alpha, steps);
         break;
       }
       default : {
@@ -51,12 +62,51 @@ nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool cop
   return new_alpha;
 
 }
+EcologicalNetwork proposed_new_eco_net(const EcologicalNetwork& old_net, unsigned int steps, const MonteCarloSolver& mcs){
+  EcologicalNetwork new_net;
+  bool leave_loop=false;
+  do{
+    bool add_condition=true;
+    switch(mcs.mcmode){
+      case unconstrained:{
+        new_net = old_net;
+        flip_one_binary_matrix_element(new_net.A);
+        break;
+      }
+
+      case constant_connectance:{
+        new_net = old_net;
+        swap_two_matrix_elements(new_net.A);
+        break;
+      }
+
+      case both_modified:{
+        new_net = old_net;
+        swap_two_matrix_elements(new_net.G);
+        flip_one_binary_matrix_element(new_net.A);
+        add_condition = is_matrix_full_rank(new_net.G);
+        break;
+      }
+
+      default:{
+        throw error("Unknown MC mode in the proposed_new_eco_net function");
+        break;
+      }
+    }
+    leave_loop = (mcs.iss_allowed or not(is_there_coprophagy(new_net))) and add_condition;
+  }while(not(leave_loop));
+  return new_net;
+}
 
 /* creates an optimal consumption matrix with connectance ctarg  */
 nmatrix optimal_consumption_matrix(unsigned int NR, unsigned int NS, const ntype& ctarg, MonteCarloSolver& mcs){
   nmatrix gamma = create_gamma(NR, NS, ctarg);
   nmatrix dummy(NS, nvector(NR, 0.));
-  apply_MC_algorithm(gamma, dummy, true, mcs);
+  mcs.iss_allowed=true;
+  EcologicalNetwork eco_net;
+  eco_net.A = gamma;
+  eco_net.G = dummy;
+  apply_MC_algorithm(eco_net, mcs);
   return gamma;
 }
 
@@ -141,8 +191,24 @@ bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, u
   }
   return false;
 }
-void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
-
+bool choose_next_ecological_network(EcologicalNetwork& eco_net, unsigned int steps, unsigned int fails, MonteCarloSolver& mcs){
+  EcologicalNetwork new_net = proposed_new_eco_net(eco_net, steps, mcs);
+  ntype proba_ratio = probability_density(new_net, mcs)/probability_density(eco_net, mcs);
+  if(proba_ratio>1){
+    eco_net=new_net;
+    fails=0;
+    return true;
+  }else{
+    fails+=1;
+    std::uniform_real_distribution<ntype> real_distrib(0., 1.);
+    if(real_distrib(random_engine)<proba_ratio){
+      eco_net=new_net;
+      return true;
+    }
+  }
+  return false;
+}
+void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
   unsigned int convergence=0, fails=0, steps=0;
   bool max_steps_reached=false, changed=true, stop=false, energy_converged=false;
   nvector last_changed_elements;
@@ -159,15 +225,18 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
   const double eps=1e-3;
 
   while(!stop){
-    double current_energy = mcs.cost_function(alpha,gamma, mcs.additional_params);
-    double nest = nestedness(alpha);
-    double conn = connectance(alpha);
-    energy_file << current_energy << " " << nest << " " << conn << " "<< mcs.T << std::endl;
+    double current_energy = mcs.cost_function(eco_net.A, eco_net.G, mcs.additional_params);
+    double nestA = nestedness(eco_net.A);
+    double connA = connectance(eco_net.A);
+    double nestG = nestedness(eco_net.G);
+    double connG = connectance(eco_net.G);
+    energy_file << current_energy << " " << nestA << " " << connA << " " << nestG;
+    energy_file << " "<< connG <<" "<< mcs.T << std::endl;
 
     /* we check if the new matrix (computed at the previous loop or the initial one) == the old matrix. If not, count it as a "fail" */
     if(changed){
       fails=0;
-      last_changed_elements.push_back(mcs.cost_function(alpha,gamma, mcs.additional_params));
+      last_changed_elements.push_back(current_energy);
     }else{
       fails+=1;
     }
@@ -196,8 +265,10 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
       std::cout << "\t Step " << steps;
       std::cout << "\t T=" << mcs.T;
       std::cout <<"\t cost function=" << current_energy;
-      std::cout << "\t nestedness=" << nest;
-      std::cout << "\t connectance=" << conn;
+      std::cout << "\t nestA=" << nestA;
+      std::cout << "\t connA=" << connA;
+      std::cout << "\t nestG=" << nestG;
+      std::cout << "\t connG=" << connG;
       if(stop){
         std::cout << std::endl << "-------" << std::endl << "STOPPING THE ALGORITHM ";
       }
@@ -231,7 +302,7 @@ void apply_MC_algorithm(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, M
     }
 
     /* Finally we get the next matrix and increase the amount of steps by 1 */
-    changed=choose_next_matrix(alpha, gamma, coprophagy, steps, fails, mcs);
+    changed=choose_next_ecological_network(eco_net, steps, fails, mcs);
     steps+=1;
   }
   energy_file.close();
@@ -252,12 +323,12 @@ nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool all
   std::cout << "Created initial alpha guess with nestedness " << nestedness(alpha) << " and connectance " << connectance(alpha) << std::endl;
   return alpha;
 }
-nmatrix proposed_new_alpha_Alberto(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
+nmatrix proposed_new_matrix_Alberto(const nmatrix& alpha, unsigned int steps){
   nmatrix new_alpha=alpha;
   if(steps%2==0){
-    modify_row(new_alpha, gamma, coprophagy);
+    modify_row(new_alpha);
   }else{
-    modify_column(new_alpha, gamma, coprophagy);
+    modify_column(new_alpha);
   }
   return new_alpha;
 }
@@ -267,7 +338,7 @@ nmatrix proposed_new_alpha_Leo(const nmatrix& alpha, const nmatrix& gamma, bool 
   flip_one_binary_matrix_element(new_alpha);
   return new_alpha;
 }
-void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
+void modify_row(nmatrix& alpha){
   /*  we first choose a random row (i.e. resource) that is neither completely empty nor
       completely filled */
   const unsigned int NR = alpha.size();
@@ -349,22 +420,23 @@ void modify_row(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
     }
   }
 
-  /* we check if with the chosen zero index there is coprophagy */
-  bool conditionCopr=false;
-  if(gamma[zero_index][mu]!=1){
-    conditionCopr=true;
-  }else if(coprophagy){
-    conditionCopr=true;
-  }
+  // Remove the coprophagy part, this is taken care of in a loop above if needed
+  // /* we check if with the chosen zero index there is coprophagy */
+  // bool conditionCopr=false;
+  // if(gamma[zero_index][mu]!=1){
+  //   conditionCopr=true;
+  // }else if(coprophagy){
+  //   conditionCopr=true;
+  // }
 
   /* if both conditions are fulfilled, we can swap the two elements */
-  if(conditionCopr && conditionRel){
+  if(conditionRel){
     alpha[mu][zero_index]=1;
     alpha[mu][one_index]=0;
   }
   return;
 }
-void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
+void modify_column(nmatrix& alpha){
   /*  we first choose a random column (i.e consumer) that is not empty and
       not completely filled */
   const unsigned int NR = alpha.size();
@@ -449,16 +521,17 @@ void modify_column(nmatrix& alpha, const nmatrix& gamma, bool coprophagy){
     }
   }
 
+  // Remove the coprophagy part, this is taken care of in a loop above if needed
   /* we check if with the chosen zero index there is coprophagy */
-  bool conditionCopr=false;
-  if(gamma[k][zero_index]!=1){
-    conditionCopr=true;
-  }else if(coprophagy){
-    conditionCopr=true;
-  }
+  // bool conditionCopr=false;
+  // if(gamma[k][zero_index]!=1){
+  //   conditionCopr=true;
+  // }else if(coprophagy){
+  //   conditionCopr=true;
+  // }
 
   /* if both conditions are fulfilled we can swap the two elements */
-  if(conditionCopr && conditionRel){
+  if(conditionRel){
     alpha[zero_index][k]=1;
     alpha[one_index][k]=0;
   }

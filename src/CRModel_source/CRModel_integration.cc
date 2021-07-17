@@ -152,6 +152,7 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
           extinct_variables.push_back(i);
           already_extinct = false;
         }
+        /* what happens if a consumer (i.e. i >= NR) goes extinct? */
         if(i >= p->NR){
           one_extinct=true;
           if(eq_mode==oneextinct){
@@ -168,14 +169,15 @@ Extinction CRModel::evolve_until_equilibrium_general(const nmatrix& init_val, nt
         }else{
           if(p->verbose > 2){
             if(not(already_extinct)){
-              std::cout << "\t \t Species " << i << " went extinct at time t=" << t << std::endl;
+              std::cout << "\t \t Resource " << i << " went extinct at time t=" << t << std::endl;
             }
-            if(eq_mode==oneextinct){
-              std::cout << "\t \t Stopped calculating who goes extinct since we found one resource extinct " <<std::endl;
-            }
+            // The lines below are not correct, we do not stop calculating when a resource is extinct
+            // if(eq_mode==oneextinct){
+            //   std::cout << "\t \t Stopped calculating who goes extinct since we found one resource extinct " <<std::endl;
+            // }
           }
         }
-        }
+      }
     }
 
     /* let's not forget to add a count since we did a whole step */
