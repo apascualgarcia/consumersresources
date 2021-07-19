@@ -74,6 +74,7 @@ int main(int argc, char* argv[]){
         std::ofstream gmatrix_file=open_external_file_truncate(metaparams.foodmatrixpath+"_optimized_"+add_string);
         gmatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
         display_food_matrix(gmatrix_file, eco_net.G);
+        std::cout << "An optimal consumption matrix was found and saved in " << metaparams.foodmatrixpath+"_optimized_"+add_string << std::endl;
         gmatrix_file.close();
       }
       std::cout << "An optimal syntrophy matrix was found and saved in " << metaparams.save_path << std::endl;
