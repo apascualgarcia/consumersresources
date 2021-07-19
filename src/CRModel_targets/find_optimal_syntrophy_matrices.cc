@@ -71,7 +71,7 @@ int main(int argc, char* argv[]){
       eco_net.optimize(mcsolv);
       display_food_matrix(smatrix_file, eco_net.A);
       if(mcsolv.mcmode==both_modified){
-        std::ofstream gmatrix_file=open_external_file_truncate(metaparams.foodmatrixpath+"_optimized");
+        std::ofstream gmatrix_file=open_external_file_truncate(metaparams.foodmatrixpath+"_optimized_"+add_string);
         gmatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
         display_food_matrix(gmatrix_file, eco_net.G);
         gmatrix_file.close();
