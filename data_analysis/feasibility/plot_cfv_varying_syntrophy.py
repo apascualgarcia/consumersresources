@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import consumer_resource_data_analysis as cf
-from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours, nest_colours, conn_colours, N_alphamodes
+from consumer_resource_data_analysis import alpha_mode, label, alpha0, all_nestedness, all_connectance,alpha_mode_colours, nest_colours, conn_colours
 import os
 import matplotlib.tri as tr
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -11,8 +11,8 @@ from matplotlib.figure import figaspect
 import copy
 
 
-filename = 'feasibility/other_LRI_feasibility_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI_corrected_NR25_NS25'
+filename = 'feasibility/opt_mat_feasibility_NR25_NS25_test_run_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='9Jul21'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 matrix_set='S_{25}'
 
@@ -23,6 +23,7 @@ matrix_set='S_{25}'
 
 
 alpha_mode=['optimal_matrix']
+cf.N_alphamodes = 1
 label=['Modified LRI']
 
 cmap = plt.cm.get_cmap('jet_r')
@@ -33,6 +34,7 @@ colors = [cmap(i/10) for i in range(len(alpha0))]
 cf.filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
 feasibility_region = cf.load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
 alpha0=np.array(alpha0)
+
 
 #Plot common feasibility volume
 NR=int(feasibility_region[0,0,0,0])
@@ -54,19 +56,19 @@ for j in range(len(feasibility_region[0,0])):
     fig, axs, im, levels = cf.plot_levels(data, colors, label)
     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
     # first save figure without color bar or title
-    if N_alphamodes<2:
+    if cf.N_alphamodes<2:
         fig.tight_layout()
     fig.savefig('plots/feasibility_region_wt_wc_'+save_name+'.pdf')
 
     # add colorbar to plot
     cbar = cf.add_colorbar_to_plot_levels(fig, im, levels, alpha0)
     cbar.set_label(r'$\alpha_0$')
-    if N_alphamodes<2:
+    if cf.N_alphamodes<2:
         fig.tight_layout()
     fig.savefig('plots/feasibility_region_wt_'+save_name+'.pdf')
 
     # add suptitle to plot
-    if N_alphamodes>=2:
+    if cf.N_alphamodes>=2:
         fig.suptitle(r'Fully feasible region $\mathcal{F}^{G,A}_1$ for $N_R='+str(int(NR))+', N_S='+str(int(NS))+', \kappa='+str(round(connectance,2))+', \eta='+str(nestedness)+'$')
         fig.tight_layout()
     else:
@@ -107,7 +109,7 @@ for j in range(len(feasibility_region[0][0])):
     save_name='NR'+str(int(NR))+'_NS'+str(int(NS))+'_Nest'+str(nestedness)+'_Conn'+str(connectance)
     fig.tight_layout()
     print('Saving fig under', 'plots/size_feasibility_region_'+save_name+'.pdf')
-    #fig.savefig('plots/size_feasibility_region_'+save_name+'.pdf')
+    fig.savefig('plots/size_feasibility_region_'+save_name+'.pdf')
     decline.append(local_decline)
     critical_alpha0.append(local_critical)
     #plt.show()
@@ -174,7 +176,7 @@ for k in range(len(feasibility_region)):
 
 
 # deviations away from decay rate FC
-if N_alphamodes > 1:
+if cf.N_alphamodes > 1:
     for k in range(len(feasibility_region)):
         ratio=1.
         fig = plt.figure()

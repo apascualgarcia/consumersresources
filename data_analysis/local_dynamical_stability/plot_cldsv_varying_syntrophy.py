@@ -14,10 +14,14 @@ import copy
 # consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
 # matrix_set='S_{50}'
 
-filename = 'local_dynamical_stability/all_mat_local_dynamical_stability_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
+filename = 'local_dynamical_stability/opt_mat_local_dynamical_stability_NR25_NS25_test_run_full_rank_opt_consumption_mat_NR25_NS25'
+optimal_LRI_folder='9Jul21'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 matrix_set='S_{25}'
+
+alpha_mode = ['optimal_matrix']
+cf.N_alphamodes=1
+cf.label=['Opt mat']
 
 # filename='local_dynamical_stability/other_LRI_local_dynamical_stability_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25'
 # optimal_LRI_folder='optimal_LRI_corrected_NR25_NS25'

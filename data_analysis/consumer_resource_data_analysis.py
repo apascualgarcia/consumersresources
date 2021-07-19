@@ -8,9 +8,11 @@ import sys
 import re
 
 np.set_printoptions(threshold=sys.maxsize)
-mpl.rcParams['lines.linewidth']=2.5
+mpl.rcParams['lines.linewidth']=1.5
 mpl.rcParams['lines.markersize']=12
 mpl.rcParams['lines.markeredgewidth']=3
+mpl.rcParams['lines.marker']='.'
+mpl.rcParams['lines.linestyle']='solid'
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
 alpha_mode_colours=['blue', 'green', 'red', 'black']

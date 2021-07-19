@@ -37,13 +37,13 @@ def save_network_to_long_rep(G_matrix_path, A_matrix_path, save_path):
 ############### END OF NON CUSTOMIZABLE PART ################################
 
 
-G_mat_list="matrix_list/full_rank_opt_consumption_mat_NR25_NS25.in"
-G_folder = "optimal_matrices/consumption/Nr25_Nc25"
-A_folder = "optimal_matrices/syntrophy/Nr25_Nc25/9Jul21_no_iss"
+G_mat_list="matrix_list/G_matrices.in"
+G_folder = "optimal_matrices/consumption/Nr25_Nc25_opt"
+A_folder = "optimal_matrices/syntrophy/Nr25_Nc25_opt"
 A_suffix = "_optimal_alpha.txt"
-save_folder = "optimal_matrices/long_representation/9Jul21_no_iss"
+save_folder = "optimal_matrices/long_representation/both_modified"
 
 for G_mat_path in np.loadtxt(G_mat_list, dtype="U"):
-    A_mat_path = A_folder+G_mat_path[len(G_folder):-4]+A_suffix
+    A_mat_path = A_folder+G_mat_path[len(G_folder)-4:-4]+A_suffix
     save_path = save_folder+'/G'+G_mat_path[len(G_folder)+9:-3]+'csv'
     save_network_to_long_rep(G_mat_path, A_mat_path, save_path)
