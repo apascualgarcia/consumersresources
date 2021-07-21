@@ -9,17 +9,18 @@
 
 # Example for NR=NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
-MATRIX_LIST="G_matrices"
-MCMODE="both_modified"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+#MATRIX_LIST="G_matrices"
+MCMODE="unconstrained"
 ADDITIONAL_MODIF="gamma0=1"
 ALPHA_VAL="1"
 INTRA_SPE_SYN="allowed"
 SAVENAME="opt_mat"
-SEED_NUMBER="0 1 2 3 4 5 6 7 8 9"
+SEED_NUMBER=($(seq 0 1 100))
 
 
 CONFIGURATION_FILE="configuration"
-COMMAND_FILE="optimize_matrices_bm"
+COMMAND_FILE="optimize_matrices"
 
 
 # And possible modifications for NR=50 and NS=25
@@ -31,7 +32,7 @@ COMMAND_FILE="optimize_matrices_bm"
 
 # first clear all previous contents of the commands file
 rm commands/${COMMAND_FILE}.txt
-for seed in $SEED_NUMBER
+for seed in ${SEED_NUMBER[@]}
 do
   for intra in $INTRA_SPE_SYN
   do

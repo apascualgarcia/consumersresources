@@ -373,13 +373,13 @@ ntype median(const nvector& x){
   return median;
 }
 
-ntype standard_dev(const nvector& x){
+ntype standard_dev(const nvector& x, const unsigned int ddof){
   ntype std = 0.;
   ntype variance = 0.;
   ntype m = mean(x);
   size_t N = x.size();
   for(size_t i=0; i < N; ++i){
-    variance += ntype(1./(N-1))*(x[i]-m)*(x[i]-m);
+    variance += ntype(1./(N-ddof))*(x[i]-m)*(x[i]-m);
   }
   std=sqrt(variance);
   return std;
@@ -475,9 +475,9 @@ nvector operator*(const nvector& v, const nmatrix& M){
 }
 
 
-statistics::statistics(const nvector& v){
+statistics::statistics(const nvector& v, const unsigned int ddof){
   this->mean_ = mean(v);
-  this->std_deviation_ = standard_dev(v);
+  this->std_deviation_ = standard_dev(v, ddof);
   this->median_ = median(v);
 }
 

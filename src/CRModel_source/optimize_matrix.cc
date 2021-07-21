@@ -210,33 +210,57 @@ bool choose_next_ecological_network(EcologicalNetwork& eco_net, unsigned int ste
 }
 void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
   unsigned int convergence=0, fails=0, steps=0;
-  bool max_steps_reached=false, changed=true, stop=false, energy_converged=false;
+  bool max_steps_reached=false, changed=true, stop=false, energy_converged=false, increase_temp=false;
   nvector last_changed_elements;
+  // these vector keep track of the last required_convergence elements (same order as writing elements)
+  nmatrix previous_results;
   double mean_energy=0.;
   Metaparameters* m = (Metaparameters*) mcs.additional_params;
 
-  std::ofstream energy_file=open_external_file_truncate(mcs.energy_file);
+  std::ofstream energy_file;
+  if(mcs.write_mode=="all"){
+    energy_file=open_external_file_truncate(mcs.energy_file);
+  }
+
+  if(mcs.write_mode=="converged_only"){
+    energy_file=open_external_file_append(mcs.energy_file);
+  }
+
   energy_file << "# The following metaparameters were used for this matrix optimization : " << *m << std::endl;
   energy_file << "# Energy optimization to find the best syntrophy matrix for a given consumption matrix " << std::endl;
   energy_file << "# Are given, in that order: energy, A-nestedness, A-connectance, G-nestedness, G-connectance and temperature of the syntrophy matrix" << std::endl;
-  energy_file << "# Each new line is a further step of the MCS optimization algorithm" << std::endl;
-
+  if(mcs.write_mode=="all"){
+    energy_file << "# Each new line is a further step of the MCS optimization algorithm" << std::endl;
+  }
+  if(mcs.write_mode=="converged_only"){
+    energy_file << "# This line is the converged value at the end of the MCS optimization algorithm" << std::endl;
+  }
   const unsigned int Naverage=50, required_convergence=2000;
   const double eps=1e-3;
 
   while(!stop){
     double current_energy = mcs.cost_function(eco_net.A, eco_net.G, mcs.additional_params);
-    double nestA = nestedness(eco_net.A);
-    double connA = connectance(eco_net.A);
-    double nestG = nestedness(eco_net.G);
-    double connG = connectance(eco_net.G);
-    energy_file << current_energy << " " << nestA << " " << connA << " " << nestG;
-    energy_file << " "<< connG <<" "<< mcs.T << std::endl;
+    double nestA, connA, nestG, connG;
+
+
+    nestA = nestedness(eco_net.A);
+    connA = connectance(eco_net.A);
+    nestG = nestedness(eco_net.G);
+    connG = connectance(eco_net.G);
+
+    if(mcs.write_mode=="all"){
+      energy_file << current_energy << " " << nestA << " " << connA << " " << nestG;
+      energy_file << " "<< connG <<" "<< mcs.T << std::endl;
+    }
+
 
     /* we check if the new matrix (computed at the previous loop or the initial one) == the old matrix. If not, count it as a "fail" */
     if(changed){
       fails=0;
       last_changed_elements.push_back(current_energy);
+      if(mcs.write_mode=="converged_only"){
+        previous_results.push_back(nvector{current_energy, nestA, connA, nestG, connG, mcs.T});
+      }
     }else{
       fails+=1;
     }
@@ -244,6 +268,12 @@ void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
     /* then compute if with the previous move the energy is converging */
     if(last_changed_elements.size() > Naverage){
       last_changed_elements.erase(last_changed_elements.begin());
+    }
+
+    if(mcs.write_mode=="converged_only"){
+      if(previous_results.size() > required_convergence){
+        previous_results.erase(previous_results.begin());
+      }
     }
 
     mean_energy=mean(last_changed_elements);
@@ -258,10 +288,25 @@ void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
 
     energy_converged = (convergence>=required_convergence);
     max_steps_reached = (steps>=mcs.max_steps);
-
     stop = max_steps_reached || energy_converged;
+    increase_temp = fails >= mcs.max_fails;
 
-    if(steps%mcs.display_stride==0 || stop){
+    if(mcs.write_mode=="converged_only" && stop){
+      nmatrix results = transpose(previous_results);
+      for(size_t i = 0; i < results.size(); ++i){
+        energy_file << mean(results[i]) << " ";
+      }
+      for(size_t i=0; i < results.size(); ++i){
+        energy_file << standard_dev(results[i]);
+        if(i==results.size()-1){
+          energy_file << std::endl;
+        }else{
+          energy_file << " ";
+        }
+      }
+    }
+
+    if(steps%mcs.display_stride==0 || stop ){
       std::cout << "\t Step " << steps;
       std::cout << "\t T=" << mcs.T;
       std::cout <<"\t cost function=" << current_energy;
@@ -280,22 +325,27 @@ void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
 
       if(max_steps_reached){
         std::cout << " -> max number of steps reached." << std::endl;
+        if(mcs.write_mode=="converged_only"){
+          energy_file << "# According to our algorithm, there was no convergence so please take the results with a grain of salt" << std::endl;
+        }
       }
 
       if(energy_converged){
         std::cout << " -> cost function converging." << std::endl;
       }
+
+
      // std::cout << ", matrix = " << std::endl;
       //display_food_matrix(std::cout, alpha);
       std::cout << std::endl;
     }
-
     /* before getting the next matrix, we readjust the temperature if needed */
     /* when the move has not been accepted too many times, increase temp */
-    if(fails>=mcs.max_fails){
-      mcs.T/=mcs.annealing_const;
+    if(increase_temp){
+      mcs.T = mcs.T/mcs.annealing_const;
       fails=0;
     }
+
     /* at a given frequency, the temperature is reduced */
     if(steps%mcs.annealing_freq==0){
       mcs.T*=mcs.annealing_const;

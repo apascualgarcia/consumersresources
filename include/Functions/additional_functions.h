@@ -93,7 +93,8 @@ void initialize_random_engine(const Metaparameters&);
 void print_rand_number();
 
 ntype mean(const nvector&);
-ntype standard_dev(const nvector&);
+// ddof is the offset in the numerator (N-ddof is taken in the computation)
+ntype standard_dev(const nvector&, const unsigned int ddof=1);
 ntype median(const nvector&);
 
 ntype mean_non_zero_elements(const nmatrix&);

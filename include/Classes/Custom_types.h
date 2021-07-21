@@ -66,7 +66,7 @@ struct statistics{
   ntype mean_;
   ntype std_deviation_;
   ntype median_;
-  statistics(const nvector&);
+  statistics(const nvector&, const unsigned int ddof=0);
   statistics(const statistics&);
   statistics();
 };
@@ -125,7 +125,6 @@ struct stability{
 struct error{
   std::string message;
   unsigned int category;
-
   error(std::string a, unsigned int cat=0):message(a), category(cat){};
   void handle();
 };
@@ -146,6 +145,8 @@ struct MonteCarloSolver{
   unsigned int convergence_achieved; // if (E-E_av) < eps * E_av for convergence_achieved times in a row, then we consider that the algorithm has converged
   /* file in which to write the energy */
   std::string energy_file;
+  /* either "all" or "converged_only" (write either all data points or only the converged ones at the ending)*/
+  std::string write_mode;
   /* to choose between the way the next step matrix is computed */
   MCmode mcmode;
   bool iss_allowed;

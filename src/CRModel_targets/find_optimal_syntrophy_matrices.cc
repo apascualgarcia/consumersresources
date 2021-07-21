@@ -31,14 +31,15 @@ int main(int argc, char* argv[]){
     std::vector<std::string> matrices_list=load_food_matrix_list(metaparams.foodmatrixpath);
     MonteCarloSolver mcsolv;
     ntype T0=10;
-    mcsolv.max_steps=1000000;
-    mcsolv.max_fails=2000;
+    mcsolv.max_steps=2000000;
+    mcsolv.max_fails=300;
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
     mcsolv.display_stride=10000;
     mcsolv.cost_function=energy_function;
     mcsolv.additional_params=&metaparams;
     mcsolv.mcmode=metaparams.mcmode;
+    mcsolv.write_mode="converged_only";
 
 
     // coprophagy is by convention allowed
