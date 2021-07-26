@@ -33,6 +33,8 @@ struct Metaparameters{
   eqmode equilibrium;
   ntype convergence_threshold;
   buildingmode building_mode;
+  perturbmode perturb_mode;
+  
   /* path to which point should be studied (eg common feasible volume) */
   std::string volume_of_interest_path;
   /* tells in which way the system should be structurally perturbed */

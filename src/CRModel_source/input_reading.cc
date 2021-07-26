@@ -74,3 +74,13 @@ MCmode string_to_mcmode(std::string s){
     throw error("Unknown MC mode");
   }
 }
+
+perturbmode string_to_perturbmode(std::string s){
+  if(s=="perturb_l"){
+    return perturbmode(perturb_l);
+  }else if(s=="remove_l"){
+    return perturbmode(remove_l);
+  }else{
+    throw error("Unknown perturb mode!");
+  }
+}

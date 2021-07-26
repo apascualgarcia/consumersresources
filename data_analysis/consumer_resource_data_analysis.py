@@ -6,6 +6,9 @@ import matplotlib as mpl
 import copy
 import sys
 import re
+import pandas as pd
+from matplotlib.colors import to_rgb
+from matplotlib.patches import Patch
 
 np.set_printoptions(threshold=sys.maxsize)
 mpl.rcParams['lines.linewidth']=1.5
@@ -15,8 +18,9 @@ mpl.rcParams['lines.marker']='.'
 mpl.rcParams['lines.linestyle']='solid'
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
-alpha_mode_colours=['blue', 'green', 'red', 'black']
-label=['FC', 'NIS', 'LRI', 'RS']
+alpha_mode_colours=dict({'fully_connected':'blue', 'no_release_when_eat':'orange', 'optimal_matrix':'red', 'random_structure':'green'})
+alpha_mode_sym = dict({'fully_connected': 'P', 'no_release_when_eat': 'D', 'optimal_matrix':'o', 'random_structure': 'd'})
+alpha_mode_label=dict({'fully_connected':'FC', 'no_release_when_eat': 'NIS', 'optimal_matrix': 'OM', 'random_structure':'RS'})
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
@@ -216,6 +220,8 @@ def load_data_region(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_):
     region=np.array(region)
     print('Dimensions of tableau : ', len(region), 'x', len(region[0]),'x',len(region[0,0]),'x', len(region[0,0,0]))
     return region
+
+
 # returns the local dynamical stability levels (first index is alpha_mode, second is point)
 # data has lds[alpha_mode][alpha0]Çpoint
 def levels_different_alpha0(data):
@@ -632,3 +638,134 @@ def eco_energy(A, G, alpha0=1, gamma0=1, R0=1):
     for mu in range(NR):
         energy+=coeff*Z[mu]
     return energy;
+
+def compute_feasibility_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
+    return compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type=["feasibility", "feasible"])
+
+def compute_lds_data(alpha_mode,alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
+    return compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type=["ld stability", "ld stable"])
+
+def compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type):
+    columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
+    # FIRST LOAD DATA
+    #feasibility region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the feasibility of said point
+    filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+    data_region = load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
+    alpha0=np.array(alpha0)
+
+    if data_type[0]+' volume' in to_compute:
+        df = pd.DataFrame(columns=columns+["alpha0", data_type[1]+" volume"])
+        for al_mode in range(len(alpha_mode)):
+            for a0 in range(len(alpha0)):
+                for mat in range(len(data_region[al_mode, a0])):
+                    data=data_region[al_mode, a0, mat, 6::3]
+                    volume=np.sum(data)/len(data)
+                    dict={
+                        "NR": int(data_region[al_mode, a0, mat,0]),
+                        "NS": int(data_region[al_mode, a0, mat,1]),
+                        "connG": closest_element_in_list(data_region[al_mode, a0, mat,3], all_connectance),
+                        "nestG": closest_element_in_list(data_region[al_mode, a0, mat,2], all_nestedness),
+                        "alpha_mode":alpha_mode[al_mode],
+                        "alpha0": alpha0[a0],
+                        data_type[1]+" volume": volume,
+                    }
+
+                    df=df.append(pd.DataFrame([dict]), sort=False)
+        df.to_csv(save_file, index=False)
+        print("Saved "+data_type[0]+" volumes in file ", save_file)
+
+    if data_type[0]+' decay rate' in to_compute:
+        df = pd.DataFrame(columns=columns+[data_type[1]+" decay rate", data_type[1]+" decay rate error"])
+        for al_mode in range(len(alpha_mode)):
+            data_vols=[]
+            for a0 in range(len(alpha0)):
+                local_vols = []
+                for mat in range(len(data_region[al_mode, a0])):
+                    data=data_region[al_mode, a0, mat, 6::3]
+                    data_volume=np.sum(data)/len(data)
+                    local_vols.append(data_volume)
+                data_vols.append(local_vols)
+            data_vols=np.transpose(data_vols)
+            for mat in range(len(data_vols)):
+                dict={
+                    "NR": int(data_region[al_mode, 0, mat,0]),
+                    "NS": int(data_region[al_mode, 0, mat,1]),
+                    "connG": closest_element_in_list(data_region[al_mode, 0, mat,3], all_connectance),
+                    "nestG": closest_element_in_list(data_region[al_mode, 0, mat,2], all_nestedness),
+                    "alpha_mode": alpha_mode[al_mode]
+                    }
+                fitted_y, popt, perr = fit_data(exponential_function, alpha0, data_vols[mat])
+                dict[data_type[0]+' decay rate']=popt[1]
+                dict[data_type[0]+' decay rate error']=perr[1]
+                df=df.append(pd.DataFrame([dict]), sort=False)
+        df.to_csv(save_file, index=False)
+        print("Saved "+data_type[0]+" decay rates in file ", save_file)
+    return
+
+def plot_feasible_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
+    ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='feasible')
+    ax.set_ylabel('Feasible volume')
+    return ax
+def plot_lds_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
+    ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='ld stable')
+    ax.set_ylabel('Locally dynamically stable volume')
+    return ax
+
+def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
+    df = pd.read_csv(data_file)
+
+    N_alphamodes = len(alpha_mode_)
+    N_alpha0 = len(alpha0_)
+    L = N_alphamodes*(width+shift)
+    xs = 0.5*(width+shift)
+
+    for a in df['alpha0']:
+        df['alpha0'] = df['alpha0'].replace([a], closest_element_in_list(a, alpha0_))
+
+    ticks=[]
+    for i in range(N_alpha0):
+        box_start = i*L
+        box_end = box_start+L
+        if i%2==0:
+            ax.axvspan(xmin=box_start, xmax=box_end, color='black', alpha=0.1)
+        xloc = 0.5*(box_end-box_start)+box_start
+        ticks.append(xloc)
+
+    legend_els=[]
+    for i in range(N_alphamodes):
+        amode=alpha_mode_[i]
+        data=df[df['alpha_mode']==amode]
+        to_plot=pd.DataFrame(columns=['matrix'])
+        col = alpha_mode_colours[amode]
+        marker = alpha_mode_sym[amode]
+        facecol = to_rgb(col)+(0.5,)
+        boxprops = dict(edgecolor=col, facecolor=facecol)
+        meanprops=dict(color=col, marker=marker, markeredgecolor=col, markerfacecolor=col, linestyle='solid', markersize=10)
+        medianprops=dict(color=col, marker='')
+        whiskerprops=dict(color=col, marker='')
+        capprops=dict(color=col, marker='')
+        flierprops=dict(marker=marker, markeredgecolor=col, markerfacecolor=col, markeredgewidth=1, markersize=5)
+        means=[]
+        for a0 in alpha0_:
+            volumes = data[data['alpha0']==a0][data_type+' volume'].to_numpy()
+            means.append(np.mean(volumes))
+            to_plot=to_plot.append(pd.DataFrame([volumes]), sort=False)
+        positions = np.linspace(start=xs+i*(width+shift), stop=xs+(N_alpha0-1)*L+i*(width+shift), num=N_alpha0)
+        ax.boxplot(to_plot, positions=positions, widths=width,
+                showmeans=True, patch_artist=True , boxprops=boxprops,
+                meanprops=meanprops, medianprops=medianprops,
+                flierprops=flierprops, whiskerprops=whiskerprops,
+                capprops=capprops)
+        #ax.plot(positions, means, marker=marker, markerfacecolor=col, markersize=5, linestyle='', markeredgecolor='black', markeredgewidth=0.5)
+        legend_els.append(Patch(facecolor=facecol, edgecolor=col, label=alpha_mode_label[amode]))
+
+
+
+    ax.set_xticks(ticks)
+    ax.set_xticklabels([a*1e3 for a in alpha0_], rotation=45)
+    ax.set_xlim(0, xs+(N_alpha0-1)*L+(N_alphamodes-1)*(width+shift)+(width+shift)*0.5)
+    ax.legend(handles=legend_els, bbox_to_anchor=(0.85,1.15), fontsize=12, ncol=len(legend_els))
+    ax.set_title('')
+    ax.set_yscale('linear')
+    ax.set_xlabel(r'$\alpha_0 \times 10^{3}$')
+    return ax

@@ -31,3 +31,4 @@ convergence_threshold=1e-8
 type_of_structural_perturbation=0
 mcmode=unconstrained
 intra_specific_syntrophy=allowed
+struct_pert_mode=remove_l

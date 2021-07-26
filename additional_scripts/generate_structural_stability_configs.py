@@ -3,14 +3,15 @@ from consumer_resource_data_analysis import remove_strings_from_file
 import os
 
 matrices_folder='optimal_matrices/consumption/Nr50_Nc25'
-filename='structural_stability/critical_dynamical_syntrophies_NR50_NS25_backup'
+filename='structural_stability/same_mean/critical_dynamical_syntrophies_NR50_NS25_backup'
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
 
+struct_stab_mode='remove_l'
 
-files_max_own_folder='config/structural_stability/maximal_own_syntrophies'
-files_common_max_folder='config/structural_stability/common_max_syntrophies'
-files_no_syntrophy_folder='config/structural_stability/no_syntrophy'
+files_max_own_folder='config/structural_stability/NR50_NS25/maximal_own_syntrophies'
+files_common_max_folder='config/structural_stability/NR50_NS25/common_max_syntrophies'
+files_no_syntrophy_folder='config/structural_stability/NR50_NS25/no_syntrophy'
 
 # files_max_own_folder='config/structural_stability/test'
 # files_common_max_folder='config/structural_stability/test'
@@ -44,6 +45,7 @@ for i in range(len(matrix_name)):
         to_add.append('alpha_mode='+alpha_mode[j])
         to_add.append('path_to_food_matrix='+matrix_name[i])
         to_add.append('path_to_save_file='+path_to_save)
+        to_add.append('struct_pert_type='+struct_stab_mode)
 
         for el in to_add :
             command = 'echo "'+el+'" >> '+filename
