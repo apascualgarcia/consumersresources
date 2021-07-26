@@ -23,7 +23,7 @@ NR=25
 NS=25
 # for old version
 # VOL_NAME="common_feasibility_volume_NR25_NS25"
-COMMAND_FILE="test_feasibility_dynamical_stability_computations.txt"
+COMMAND_FILE="feasibility_dynamical_stability_computations.txt"
 
 
 for a in $ALPHA_MODE
