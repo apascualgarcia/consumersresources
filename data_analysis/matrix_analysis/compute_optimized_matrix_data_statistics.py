@@ -10,20 +10,21 @@ def append_one_matrix_data(df, mat_files):
     K_G =[]
     ETA_A=[]
     ETA_G=[]
-    
+
     for file in mat_files:
         data = np.loadtxt(file)
-        energy = data[:, 0]
-        nestA = data[:, 1]
-        connA = data[:, 2]
-        nestG = data[:, 3]
-        connG = data[:, 4]
+        if data.size > 0:
+            energy = data[0]
+            nestA = data[1]
+            connA = data[2]
+            nestG = data[3]
+            connG = data[4]
 
-        E.append(cf.asymptote(energy, 2000))
-        K_A.append(cf.asymptote(connA, 2000))
-        K_G.append(cf.asymptote(connG, 2000))
-        ETA_A.append(cf.asymptote(nestA, 2000))
-        ETA_G.append(cf.asymptote(nestG, 2000))
+            E.append(energy)
+            K_A.append(connA)
+            K_G.append(connG)
+            ETA_A.append(nestA)
+            ETA_G.append(nestG)
     data ={'NR':25,'NS':25,'<connG>':np.mean(K_G),'<connA>':np.mean(K_A),'<E>': np.mean(E),
         '<nestG>':np.mean(ETA_G),'<nestA>':np.mean(ETA_A),'connG std':np.std(K_G, ddof=1),
         'connA std':np.std(K_A, ddof=0),'E std':np.std(E, ddof=0),'nestG std':np.std(ETA_G, ddof=0),
@@ -33,11 +34,11 @@ def append_one_matrix_data(df, mat_files):
     return df
 
 
-mat_list = "matrix_list/G_matrices.in"
+mat_list = "matrix_list/full_rank_opt_consumption_mat_NR25_NS25.in"
 mat_folder = "optimal_matrices/consumption/Nr25_Nc25"
-data_folder = "data_output"
+data_folder = "optimal_matrices/consumption/Nr25_Nc25"
 suffix = "_energy"
-save_file = "data_output/optimized_matrix_data_bm.csv"
+save_file = "data_output/optimized_matrix_data_all.csv"
 columns=['NR', 'NS', '<connG>', '<nestG>', '<E>', '<connA>', '<nestA>', 'connG std', 'nestG std', 'E std', 'connA std', 'nestA std']
 
 

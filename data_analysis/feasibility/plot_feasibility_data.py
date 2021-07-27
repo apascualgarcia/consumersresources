@@ -9,12 +9,16 @@ from matplotlib.colors import to_rgb
 
 data_file="data_output/all_types_feasibility_volume.csv"
 save_file='plots/feasible_volume_Nr25_Nc25.pdf'
-cf.alpha_mode=['optimal_matrix', 'fully_connected', 'random_structure', 'no_release_when_eat']
+cf.alpha_mode=['optimal_matrix', 'fully_connected', 'random_structure']
 
 
 fig = plt.figure(1)
 ax = fig.add_subplot(111)
-shift = 0.5
+
+intrashift = 0.1
+intershift = 0.5
+
+shift = [intershift, intrashift]
 width=1
 
 ax = cf.plot_feasible_volume(ax, data_file, width, shift, cf.alpha0, cf.alpha_mode)

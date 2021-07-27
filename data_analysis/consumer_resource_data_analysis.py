@@ -26,8 +26,9 @@ all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 min_gamma0, max_gamma0=0.01, 1
 min_S0, max_S0=0.01, 1
-nestedness_label=r'Ecological overlap $\eta_G$'
-connectance_label=r'Connectance $\kappa_G$'
+labels=dict({'nestG': r'Consumption overlap $\eta_G$', 'connG': r'Consumption connectance $\kappa_G$',
+            'E': r'Ecosystem energy $ E $', 'connA': r'Syntrophy connectance $\kappa_A$',
+            'nestA': r'Syntrophy overlap $\eta_A$'})
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 N_alphamodes=len(alpha_mode)
@@ -739,16 +740,19 @@ def plot_lds_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
     return ax
 def plot_largest_eigenvalue(ax, data_file, width, shift, alpha0_, alpha_mode_):
     ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='av. dominant eigenvalue')
-    ax.set_ylabel('- Dominant eigenvalue')
+    ax.set_ylabel('-Dominant eigenvalue')
     return ax
 
 def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
     df = pd.read_csv(data_file)
 
+    intershift = shift[0]
+    intrashift = shift[1]
+
     N_alphamodes = len(alpha_mode_)
     N_alpha0 = len(alpha0_)
-    L = N_alphamodes*(width+shift)
-    xs = 0.5*(width+shift)
+    L = N_alphamodes*(width+intrashift)-intrashift+intershift
+    xs = 0.5*(width+intershift)
 
     for a in df['alpha0']:
         df['alpha0'] = df['alpha0'].replace([a], closest_element_in_list(a, alpha0_))
@@ -782,22 +786,23 @@ def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
             if data_type == "av. dominant eigenvalue":
                 string = 'av. dominant eigenvalue'
             volumes = data[data['alpha0']==a0][string].to_numpy()
+            volumes = volumes[~np.isnan(volumes)]
             means.append(np.mean(volumes))
             to_plot=to_plot.append(pd.DataFrame([volumes]), sort=False)
-        positions = np.linspace(start=xs+i*(width+shift), stop=xs+(N_alpha0-1)*L+i*(width+shift), num=N_alpha0)
+        positions = np.linspace(start=xs+i*(width+intrashift), stop=xs+(N_alpha0-1)*L+i*(width+intrashift), num=N_alpha0)
         ax.boxplot(to_plot, positions=positions, widths=width,
                 showmeans=True, patch_artist=True , boxprops=boxprops,
                 meanprops=meanprops, medianprops=medianprops,
                 flierprops=flierprops, whiskerprops=whiskerprops,
                 capprops=capprops)
-        #ax.plot(positions, means, marker=marker, markerfacecolor=col, markersize=5, linestyle='', markeredgecolor='black', markeredgewidth=0.5)
+        ax.plot(positions, means, marker=marker, markerfacecolor='black', markersize=5, linestyle='solid', color=col, markeredgecolor='black', markeredgewidth=0.5)
         legend_els.append(Patch(facecolor=facecol, edgecolor=col, label=alpha_mode_label[amode]))
 
 
 
     ax.set_xticks(ticks)
     ax.set_xticklabels([a*1e3 for a in alpha0_], rotation=45)
-    ax.set_xlim(0, xs+(N_alpha0-1)*L+(N_alphamodes-1)*(width+shift)+(width+shift)*0.5)
+    ax.set_xlim(0, xs+(N_alpha0-1)*L+(N_alphamodes-1)*(width+intrashift)+(width+intershift)*0.5)
     ax.legend(handles=legend_els, bbox_to_anchor=(0.85,1.15), fontsize=12, ncol=len(legend_els))
     ax.set_title('')
     ax.set_yscale('linear')

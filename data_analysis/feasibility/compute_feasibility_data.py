@@ -5,8 +5,8 @@ filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_c
 optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
 consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
 save_file = 'data_output/test.csv'
-to_compute = ['feasibility volume']
-alpha_mode=['fully_connected', 'random_structure', 'no_release_when_eat']
+to_compute = ['feasibility volume', 'feasibility decay rate']
+alpha_mode=['fully_connected', 'random_structure']
 
 
 # filename = 'feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
