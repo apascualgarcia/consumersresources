@@ -207,13 +207,13 @@ def filter_data(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_, consumptio
             file=filename_+'_'+al_mo+'_'+optimal_LRI_folder_+'_alpha0='+str(a)
             remove_strings_from_file(consumption_matrix_folder_, file)
     return
-def load_data_region(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_):
+def load_data_region(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_, type_=np.float64):
     region=[]
     for al_mo in alpha_mode_:
         local_vector=[]
         for a in alpha0_:
             file=filename_+'_'+al_mo+'_'+optimal_LRI_folder_+'_alpha0='+str(a)+'_filtered.out'
-            local_data=np.loadtxt(file)
+            local_data=np.loadtxt(file, dtype=type_)
             print('Loading file', file, 'which contains the data of', len(local_data), 'matrices')
             local_vector.append(local_data)
         region.append(local_vector)
@@ -645,6 +645,33 @@ def compute_feasibility_data(alpha_mode, alpha0, filename, optimal_LRI_folder, c
 def compute_lds_data(alpha_mode,alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
     return compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type=["ld stability", "ld stable"])
 
+def compute_largest_eigenvalue_data(alpha_mode_, alpha0_, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
+    columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
+    filter_data(alpha_mode_,alpha0_,filename,optimal_LRI_folder, consumption_matrix_folder)
+    data_region = load_data_region(alpha_mode_, alpha0_, filename, optimal_LRI_folder, type_=np.complex)
+    if 'av. dominant eigenvalue' in to_compute:
+        df = pd.DataFrame(columns=columns+["alpha0", "av. dominant eigenvalue"])
+        for amode in range(len(alpha_mode_)):
+            for a0 in range(len(alpha0_)):
+                for mat in range(len(data_region[amode, a0])):
+                    data = np.real(np.ma.masked_invalid(data_region[amode, a0, mat, 6::3]))
+                    av_dom_eig = np.NaN
+                    if len(data[~data.mask]) > 0:
+                        av_dom_eig = np.sum(data[~data.mask])/len(data[~data.mask])
+                    dict={
+                        "NR": int(data_region[amode, a0, mat,0]),
+                        "NS": int(data_region[amode, a0, mat,1]),
+                        "connG": closest_element_in_list(data_region[amode, a0, mat,3], all_connectance),
+                        "nestG": closest_element_in_list(data_region[amode, a0, mat,2], all_nestedness),
+                        "alpha_mode":alpha_mode_[amode],
+                        "alpha0": alpha0_[a0],
+                        "av. dominant eigenvalue": np.abs(av_dom_eig)
+                    }
+                    df=df.append(pd.DataFrame([dict]), sort=False)
+        df.to_csv(save_file, index=False)
+        print("Saved av. dominant eigenvalues in file ", save_file)
+    return
+
 def compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type):
     columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
     # FIRST LOAD DATA
@@ -708,7 +735,11 @@ def plot_feasible_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
     return ax
 def plot_lds_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
     ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='ld stable')
-    ax.set_ylabel('Locally dynamically stable volume')
+    ax.set_ylabel('Dynamically stable volume')
+    return ax
+def plot_largest_eigenvalue(ax, data_file, width, shift, alpha0_, alpha_mode_):
+    ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='av. dominant eigenvalue')
+    ax.set_ylabel('- Dominant eigenvalue')
     return ax
 
 def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
@@ -747,7 +778,10 @@ def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
         flierprops=dict(marker=marker, markeredgecolor=col, markerfacecolor=col, markeredgewidth=1, markersize=5)
         means=[]
         for a0 in alpha0_:
-            volumes = data[data['alpha0']==a0][data_type+' volume'].to_numpy()
+            string = data_type+' volume'
+            if data_type == "av. dominant eigenvalue":
+                string = 'av. dominant eigenvalue'
+            volumes = data[data['alpha0']==a0][string].to_numpy()
             means.append(np.mean(volumes))
             to_plot=to_plot.append(pd.DataFrame([volumes]), sort=False)
         positions = np.linspace(start=xs+i*(width+shift), stop=xs+(N_alpha0-1)*L+i*(width+shift), num=N_alpha0)
