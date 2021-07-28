@@ -18,6 +18,6 @@ decay_rate_data=dict({
     'alpha0_range': cf.alpha0
 })
 
-to_compute = ['ld stable volume', 'ld stable decay rate']
+to_compute = ['ld stable p-value']
 
 cf.compute_lds_data(to_compute, volume_data, decay_rate_data)

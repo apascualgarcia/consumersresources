@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+from scipy.stats import wilcoxon
 import matplotlib.tri as tr
 import matplotlib as mpl
 import copy
@@ -681,7 +682,7 @@ def compute_data(to_compute, volume_data, decay_rate_data, data_type):
 
         alpha_mode = volume_data['alpha_mode']
         alpha0 = volume_data['alpha0']
-        filename = volume_data['file name']
+        filename = volume_data['data file']
         optimal_LRI_folder = volume_data['OM folder']
         consumption_matrix_folder = volume_data['G matrices folder']
         save_file = volume_data['save file']
@@ -714,7 +715,7 @@ def compute_data(to_compute, volume_data, decay_rate_data, data_type):
 
         alpha_mode = decay_rate_data['alpha_mode']
         alpha0 = decay_rate_data['alpha0_range']
-        filename = decay_rate_data['file name']
+        filename = decay_rate_data['data file']
         optimal_LRI_folder = decay_rate_data['OM folder']
         consumption_matrix_folder = decay_rate_data['G matrices folder']
         save_file = decay_rate_data['save file']
@@ -764,6 +765,33 @@ def plot_largest_eigenvalue(ax, data_file, width, shift, alpha0_, alpha_mode_):
 def plot_feasible_decay_rates(ax, decay_rate_data):
     return plot_decay_rates(ax, decay_rate_data, type='feasible')
 
+def plot_p_values_vs_alpha0(axes, volume, type):
+    data = pd.read_csv(volume['data file'])
+    # take all possibles alpha_modes pairs
+    a0modes = volume['alpha mode']
+    pairs = [(a0modes[i], a0modes[j]) for i in range(len(a0modes)) for j in range(i+1, len(a0modes))]
+    for pair in pairs:
+        a0mode1 = pair[0]
+        a0mode2 = pair[1]
+        p_vals = []
+        a_vals = []
+        for a0 in volume['alpha0']:
+            indices1 = [x for x in range(data.shape[0]) if (data.loc[x]['alpha_mode']==a0mode1 and closest_element_in_list(data.loc[x]['alpha0'], volume['alpha0'])==a0)]
+            indices2 = [x for x in range(data.shape[0]) if (data.loc[x]['alpha_mode']==a0mode2 and closest_element_in_list(data.loc[x]['alpha0'], volume['alpha0'])==a0)]
+
+            distrib1 = data.loc[indices1][type+' volume'].to_numpy()
+            distrib2 = data.loc[indices2][type+' volume'].to_numpy()
+
+            statistics, pval = wilcoxon(x=distrib1, y=distrib2, alternative='less', zero_method='zsplit')
+            p_vals.append(pval)
+            a_vals.append(a0)
+        axes.plot(a_vals, p_vals, label=alpha_mode_label[a0mode1]+'-'+alpha_mode_label[a0mode2])
+        axes.legend()
+        axes.set_xlabel(r'$\alpha_0$')
+        axes.set_ylabel(r'$p$-value ('+type+')')
+        axes.set_title(r'Null hypothesis for pair P1-P2 : median(P1) $>$ median(P2). Small $p$ : null hyp. should be rejected', fontsize=10)
+    return axes
+
 def plot_data(figures_to_plot, volume, decay_rates, type):
     if type+' volume' in figures_to_plot:
         fig = plt.figure(type+' volume')
@@ -796,11 +824,19 @@ def plot_data(figures_to_plot, volume, decay_rates, type):
 
             figs[2*i].savefig(decay_rates['save name']+'_'+decay_rates['alpha mode'][i]+'_fixed_conn.pdf')
             figs[2*i+1].savefig(decay_rates['save name']+'_'+decay_rates['alpha mode'][i]+'_fixed_nest.pdf')
+
+    if type+' p-value' in figures_to_plot:
+        Namodes = len(decay_rates['alpha mode'])
+        fig = plt.figure()
+        axes = fig.add_subplot(111)
+        axes = plot_p_values_vs_alpha0(axes, volume, type)
+        fig.tight_layout()
+        fig.savefig(decay_rates['save name']+'_p_value.pdf')
     return
 
 
 def plot_decay_rates(axs, decay_rate_data, type):
-    data = pd.read_csv(decay_rate_data['file name'])
+    data = pd.read_csv(decay_rate_data['data file'])
     for j in range(len(decay_rate_data['alpha mode'])):
         amode = decay_rate_data['alpha mode'][j]
         for i in range(len(all_connectance)):

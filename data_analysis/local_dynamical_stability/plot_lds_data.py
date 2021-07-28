@@ -12,13 +12,13 @@ ldstable_volume=dict({
 })
 
 ldstable_decay_rates = dict({
-    'file name': 'data_output/all_mat_dynamically_stable_decay_rates.csv',
+    'data file': 'data_output/all_mat_dynamically_stable_decay_rates.csv',
     'save name': 'plots/lds_decay_rates',
     'alpha mode': ['optimal_matrix', 'fully_connected', 'random_structure'],
 })
 
 
-figures_to_plot = ['ld stable volume', 'ld stable decay rate']
+figures_to_plot = ['ld stable p-value']
 
 
 cf.plot_data(figures_to_plot, ldstable_volume, ldstable_decay_rates, type='ld stable')

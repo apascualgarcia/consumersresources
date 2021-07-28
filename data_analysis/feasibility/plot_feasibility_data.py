@@ -7,18 +7,18 @@ feasible_volume=dict({
     'width': 1,
     'data file': 'data_output/all_mat_feasible_volume.csv',
     'save name': 'plots/feasible_volume_Nr25_Nc25.pdf',
-    'alpha mode': ['optimal_matrix', 'fully_connected', 'random_structure'],
+    'alpha mode': ['optimal_matrix','fully_connected', 'random_structure'],
     'alpha0': cf.alpha0
 })
 
 feasible_decay_rates = dict({
-    'file name': 'data_output/all_mat_feasible_decay_rates.csv',
+    'data file': 'data_output/all_mat_feasible_decay_rates.csv',
     'save name': 'plots/feasible_decay_rates',
-    'alpha mode': ['optimal_matrix', 'fully_connected', 'random_structure'],
+    'alpha mode': ['optimal_matrix','fully_connected', 'random_structure'],
 })
 
 
-figures_to_plot = ['feasible volume', 'feasible decay rate']
+figures_to_plot = ['feasible p-value']
 
 
 cf.plot_data(figures_to_plot, feasible_volume, feasible_decay_rates, type='feasible')
