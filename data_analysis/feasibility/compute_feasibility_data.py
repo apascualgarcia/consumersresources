@@ -1,16 +1,23 @@
 import consumer_resource_data_analysis as cf
 
+volume_data=dict({
+    'file name': 'feasibility/opt_mat_feasibility_NR25_NS25_test_run_full_rank_opt_consumption_mat_NR25_NS25',
+    'OM folder': '9Jul21',
+    'G matrices folder': 'optimal_matrices/consumption/Nr25_Nc25',
+    'save file': 'data_output/opt_mat_feasible_volume.csv',
+    'alpha_mode': ['optimal_matrix'],
+    'alpha0': cf.alpha0
+})
 
-filename = 'feasibility/all_mat_feasibility_NR25_NS25_100_points_full_rank_opt_consumption_mat_NR25_NS25'
-optimal_LRI_folder='optimal_LRI_Nr25_Nc25'
-consumption_matrix_folder='optimal_matrices/consumption/Nr25_Nc25'
-save_file = 'data_output/test.csv'
-to_compute = ['feasibility volume', 'feasibility decay rate']
-alpha_mode=['fully_connected', 'random_structure']
+decay_rate_data=dict({
+    'file name': 'feasibility/opt_mat_feasibility_NR25_NS25_test_run_full_rank_opt_consumption_mat_NR25_NS25',
+    'OM folder': '9Jul21',
+    'G matrices folder': 'optimal_matrices/consumption/Nr25_Nc25',
+    'save file' : 'data_output/opt_mat_feasible_decay_rates.csv',
+    'alpha_mode': ['optimal_matrix'],
+    'alpha0_range': cf.alpha0
+})
 
+to_compute = ['feasible volume', 'feasible decay rate']
 
-# filename = 'feasibility/feasibility_NR50_NS25_full_rank_opt_consumption_mat_NR50_NS25'
-# optimal_LRI_folder='optimal_LRI_Nr50_Nc25'
-# consumption_matrix_folder='optimal_matrices/consumption/Nr50_Nc25'
-# matrix_set='S_{50}'
-cf.compute_feasibility_data(alpha_mode, cf.alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file)
+cf.compute_feasibility_data(to_compute, volume_data, decay_rate_data)

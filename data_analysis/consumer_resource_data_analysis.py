@@ -28,7 +28,8 @@ min_gamma0, max_gamma0=0.01, 1
 min_S0, max_S0=0.01, 1
 labels=dict({'nestG': r'Consumption overlap $\eta_G$', 'connG': r'Consumption connectance $\kappa_G$',
             'E': r'Ecosystem energy $ E $', 'connA': r'Syntrophy connectance $\kappa_A$',
-            'nestA': r'Syntrophy overlap $\eta_A$'})
+            'nestA': r'Syntrophy overlap $\eta_A$', 'feasible decay rate': r'Feasibility decay',
+            'ld stable decay rate': r'Dynamical stability decay'})
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 N_alphamodes=len(alpha_mode)
@@ -640,11 +641,11 @@ def eco_energy(A, G, alpha0=1, gamma0=1, R0=1):
         energy+=coeff*Z[mu]
     return energy;
 
-def compute_feasibility_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
-    return compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type=["feasibility", "feasible"])
+def compute_feasibility_data(to_compute, volume_data, decay_rate_data):
+    return compute_data(to_compute, volume_data, decay_rate_data, data_type="feasible")
 
-def compute_lds_data(alpha_mode,alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
-    return compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type=["ld stability", "ld stable"])
+def compute_lds_data(to_compute, volume_data, decay_rate_data):
+    return compute_data(to_compute, volume_data, decay_rate_data, data_type="ld stable")
 
 def compute_largest_eigenvalue_data(alpha_mode_, alpha0_, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
     columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
@@ -673,16 +674,23 @@ def compute_largest_eigenvalue_data(alpha_mode_, alpha0_, filename, optimal_LRI_
         print("Saved av. dominant eigenvalues in file ", save_file)
     return
 
-def compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file, data_type):
+def compute_data(to_compute, volume_data, decay_rate_data, data_type):
     columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
-    # FIRST LOAD DATA
-    #feasibility region[alpha_mode][alpha0][connectance][nestedness][gamma0][S0] contains the feasibility of said point
-    filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
-    data_region = load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
-    alpha0=np.array(alpha0)
 
-    if data_type[0]+' volume' in to_compute:
-        df = pd.DataFrame(columns=columns+["alpha0", data_type[1]+" volume"])
+    if data_type+' volume' in to_compute:
+
+        alpha_mode = volume_data['alpha_mode']
+        alpha0 = volume_data['alpha0']
+        filename = volume_data['file name']
+        optimal_LRI_folder = volume_data['OM folder']
+        consumption_matrix_folder = volume_data['G matrices folder']
+        save_file = volume_data['save file']
+
+        filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+        data_region = load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
+        alpha0=np.array(alpha0)
+
+        df = pd.DataFrame(columns=columns+["alpha0", data_type+" volume"])
         for al_mode in range(len(alpha_mode)):
             for a0 in range(len(alpha0)):
                 for mat in range(len(data_region[al_mode, a0])):
@@ -695,15 +703,26 @@ def compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_m
                         "nestG": closest_element_in_list(data_region[al_mode, a0, mat,2], all_nestedness),
                         "alpha_mode":alpha_mode[al_mode],
                         "alpha0": alpha0[a0],
-                        data_type[1]+" volume": volume,
+                        data_type+" volume": volume,
                     }
 
                     df=df.append(pd.DataFrame([dict]), sort=False)
         df.to_csv(save_file, index=False)
-        print("Saved "+data_type[0]+" volumes in file ", save_file)
+        print("Saved "+data_type+" volumes in file ", save_file)
 
-    if data_type[0]+' decay rate' in to_compute:
-        df = pd.DataFrame(columns=columns+[data_type[1]+" decay rate", data_type[1]+" decay rate error"])
+    if data_type+' decay rate' in to_compute:
+
+        alpha_mode = decay_rate_data['alpha_mode']
+        alpha0 = decay_rate_data['alpha0_range']
+        filename = decay_rate_data['file name']
+        optimal_LRI_folder = decay_rate_data['OM folder']
+        consumption_matrix_folder = decay_rate_data['G matrices folder']
+        save_file = decay_rate_data['save file']
+
+        filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+        data_region = load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
+
+        df = pd.DataFrame(columns=columns+[data_type+" decay rate", data_type+" decay rate error"])
         for al_mode in range(len(alpha_mode)):
             data_vols=[]
             for a0 in range(len(alpha0)):
@@ -723,11 +742,11 @@ def compute_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_m
                     "alpha_mode": alpha_mode[al_mode]
                     }
                 fitted_y, popt, perr = fit_data(exponential_function, alpha0, data_vols[mat])
-                dict[data_type[0]+' decay rate']=popt[1]
-                dict[data_type[0]+' decay rate error']=perr[1]
+                dict[data_type+' decay rate']=popt[1]
+                dict[data_type+' decay rate error']=perr[1]
                 df=df.append(pd.DataFrame([dict]), sort=False)
         df.to_csv(save_file, index=False)
-        print("Saved "+data_type[0]+" decay rates in file ", save_file)
+        print("Saved "+data_type+" decay rates in file ", save_file)
     return
 
 def plot_feasible_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
@@ -742,6 +761,81 @@ def plot_largest_eigenvalue(ax, data_file, width, shift, alpha0_, alpha_mode_):
     ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='av. dominant eigenvalue')
     ax.set_ylabel('-Dominant eigenvalue')
     return ax
+def plot_feasible_decay_rates(ax, decay_rate_data):
+    return plot_decay_rates(ax, decay_rate_data, type='feasible')
+
+def plot_data(figures_to_plot, volume, decay_rates, type):
+    if type+' volume' in figures_to_plot:
+        fig = plt.figure(type+' volume')
+        ax = fig.add_subplot(111)
+        intrashift = volume['intrashift']
+        intershift = volume['intershift']
+        shift = [intershift, intrashift]
+        width=volume['width']
+        if type=='feasible':
+            ax = plot_feasible_volume(ax, volume['data file'], width, shift,
+                        volume['alpha0'], volume['alpha mode'])
+        elif type=='ld stable':
+            ax = plot_lds_volume(ax, volume['data file'], width, shift,
+                        volume['alpha0'], volume['alpha mode'])
+        fig.tight_layout()
+        fig.savefig(volume['save name'])
+
+    if type+' decay rate' in figures_to_plot:
+        Namodes = len(decay_rates['alpha mode'])
+        axes = []
+        figs = []
+        for i in range(Namodes):
+            figs.append(plt.figure())
+            figs.append(plt.figure())
+            axes.append([figs[2*i].add_subplot(111), figs[2*i+1].add_subplot(111)])
+        axes = plot_decay_rates(axes, decay_rates, type)
+        for i in range(Namodes):
+            figs[2*i].tight_layout()
+            figs[2*i+1].tight_layout()
+
+            figs[2*i].savefig(decay_rates['save name']+'_'+decay_rates['alpha mode'][i]+'_fixed_conn.pdf')
+            figs[2*i+1].savefig(decay_rates['save name']+'_'+decay_rates['alpha mode'][i]+'_fixed_nest.pdf')
+    return
+
+
+def plot_decay_rates(axs, decay_rate_data, type):
+    data = pd.read_csv(decay_rate_data['file name'])
+    for j in range(len(decay_rate_data['alpha mode'])):
+        amode = decay_rate_data['alpha mode'][j]
+        for i in range(len(all_connectance)):
+            connG = all_connectance[i]
+            indices = [x for x in range(data.shape[0]) if closest_element_in_list(data.loc[x]['connG'], all_connectance)==connG and data.loc[x]['alpha_mode']==amode]
+            to_plot = data.loc[indices]
+            to_plot = to_plot.sort_values(by='nestG')
+            to_plot.plot(x = 'nestG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][1], label=r'$\kappa_G \approx'+str(connG)+'$',
+                    linestyle='solid', color=conn_colours[i], marker=alpha_mode_sym[amode])
+        min_nest = np.min(data['nestG'])
+        max_nest = np.max(data['nestG'])
+        axs[j][1].set_xlim(min_nest-0.1*(max_nest-min_nest), max_nest+0.1*(max_nest-min_nest))
+        axs[j][1].set_xlabel(labels['nestG'])
+        axs[j][1].set_ylabel(labels[type+' decay rate'])
+        axs[j][1].legend(bbox_to_anchor=(1.05,1.), loc='upper left')
+        axs[j][1].set_title(alpha_mode_label[amode])
+
+    for j in range(len(decay_rate_data['alpha mode'])):
+        amode = decay_rate_data['alpha mode'][j]
+        for i in range(len(all_nestedness)):
+            nestG = all_nestedness[i]
+            indices = [x for x in range(data.shape[0]) if closest_element_in_list(data.loc[x]['nestG'], all_nestedness)==nestG and data.loc[x]['alpha_mode']==amode]
+            to_plot = data.loc[indices]
+            to_plot = to_plot.sort_values(by='connG')
+            to_plot.plot(x = 'connG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][0], label=r'$\eta_G \approx'+str(nestG)+'$',
+                    linestyle='solid', color=nest_colours[i], marker=alpha_mode_sym[amode])
+        min_conn = np.min(data['connG'])
+        max_conn = np.max(data['connG'])
+        axs[j][0].set_xlim(min_conn-0.1*(max_conn-min_conn), max_conn+0.1*(max_conn-min_conn))
+        axs[j][0].set_xlabel(labels['connG'])
+        axs[j][0].set_ylabel(labels[type+' decay rate'])
+        axs[j][0].legend(bbox_to_anchor=(1.05,1.), loc='upper left')
+        axs[j][0].set_title(alpha_mode_label[amode])
+
+    return axs
 
 def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
     df = pd.read_csv(data_file)

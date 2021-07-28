@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 data_file="data_output/all_mat_dominant_eigenvalue.csv"
 save_file='plots/dominant_eigenvalue_Nr25_Nc25.pdf'
-cf.alpha_mode=['fully_connected', 'random_structure']
+cf.alpha_mode=['optimal_matrix', 'fully_connected', 'random_structure']
 
 
 fig = plt.figure(1)
