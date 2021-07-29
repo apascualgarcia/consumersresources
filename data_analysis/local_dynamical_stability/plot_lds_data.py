@@ -18,7 +18,7 @@ ldstable_decay_rates = dict({
 })
 
 
-figures_to_plot = ['ld stable p-value']
+figures_to_plot = ['ld stable volume']
 
 
 cf.plot_data(figures_to_plot, ldstable_volume, ldstable_decay_rates, type='ld stable')

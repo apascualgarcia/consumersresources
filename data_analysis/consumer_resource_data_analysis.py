@@ -897,6 +897,8 @@ def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
         ticks.append(xloc)
 
     legend_els=[]
+    all_means = []
+    all_positions = []
     for i in range(N_alphamodes):
         amode=alpha_mode_[i]
         data=df[df['alpha_mode']==amode]
@@ -904,11 +906,11 @@ def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
         col = alpha_mode_colours[amode]
         marker = alpha_mode_sym[amode]
         facecol = to_rgb(col)+(0.5,)
-        boxprops = dict(edgecolor=col, facecolor=facecol)
+        boxprops = dict(edgecolor=facecol, facecolor=facecol, linewidth=0)
         meanprops=dict(color=col, marker=marker, markeredgecolor=col, markerfacecolor=col, linestyle='solid', markersize=10)
         medianprops=dict(color=col, marker='')
-        whiskerprops=dict(color=col, marker='')
-        capprops=dict(color=col, marker='')
+        whiskerprops=dict(color=facecol, marker='')
+        capprops=dict(color=facecol, marker='')
         flierprops=dict(marker=marker, markeredgecolor=col, markerfacecolor=col, markeredgewidth=1, markersize=5)
         means=[]
         for a0 in alpha0_:
@@ -919,21 +921,30 @@ def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
             volumes = volumes[~np.isnan(volumes)]
             means.append(np.mean(volumes))
             to_plot=to_plot.append(pd.DataFrame([volumes]), sort=False)
+        all_means.append(means)
         positions = np.linspace(start=xs+i*(width+intrashift), stop=xs+(N_alpha0-1)*L+i*(width+intrashift), num=N_alpha0)
+        all_positions.append(positions)
         ax.boxplot(to_plot, positions=positions, widths=width,
-                showmeans=True, patch_artist=True , boxprops=boxprops,
+                patch_artist=True , boxprops=boxprops,
                 meanprops=meanprops, medianprops=medianprops,
                 flierprops=flierprops, whiskerprops=whiskerprops,
                 capprops=capprops)
-        ax.plot(positions, means, marker=marker, markerfacecolor='black', markersize=5, linestyle='solid', color=col, markeredgecolor='black', markeredgewidth=0.5)
-        legend_els.append(Patch(facecolor=facecol, edgecolor=col, label=alpha_mode_label[amode]))
+        legend_els.append(Patch(facecolor=facecol, edgecolor=facecol, linewidth=0, label=alpha_mode_label[amode]))
+
+    for i in range(N_alphamodes):
+        amode = alpha_mode_[i]
+        col = alpha_mode_colours[amode]
+        marker = alpha_mode_sym[amode]
+        ax.plot(all_positions[i], all_means[i], marker=marker, markerfacecolor='black', markersize=5,
+                linestyle='solid', color=col, markeredgecolor='black', markeredgewidth=0.5)
 
 
 
     ax.set_xticks(ticks)
     ax.set_xticklabels([a*1e3 for a in alpha0_], rotation=45)
     ax.set_xlim(0, xs+(N_alpha0-1)*L+(N_alphamodes-1)*(width+intrashift)+(width+intershift)*0.5)
-    ax.legend(handles=legend_els, bbox_to_anchor=(0.85,1.15), fontsize=12, ncol=len(legend_els))
+    ax.legend(handles=legend_els, bbox_to_anchor=(0., 1.02, 1., .102), loc='center',
+           ncol=len(legend_els), borderaxespad=0., fontsize=12)
     ax.set_title('')
     ax.set_yscale('linear')
     ax.set_xlabel(r'$\alpha_0 \times 10^{3}$')

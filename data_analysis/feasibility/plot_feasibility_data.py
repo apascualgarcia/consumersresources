@@ -18,7 +18,7 @@ feasible_decay_rates = dict({
 })
 
 
-figures_to_plot = ['feasible p-value']
+figures_to_plot = ['feasible volume']
 
 
 cf.plot_data(figures_to_plot, feasible_volume, feasible_decay_rates, type='feasible')
