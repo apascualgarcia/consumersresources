@@ -4,9 +4,6 @@
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs){
   return optimal_syntrophy_from_consumption(gamma, coprophagy, mcs, connectance(gamma));
 }
-
-
-
 nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy, MonteCarloSolver& mcs, const ntype& target_conn){
   nmatrix unit_gamma(gamma.size(), nvector(gamma[0].size(), 0.));
   for(size_t i=0; i < gamma.size(); ++i){
@@ -24,16 +21,12 @@ nmatrix optimal_syntrophy_from_consumption(const nmatrix& gamma, bool coprophagy
   apply_MC_algorithm(eco_net, mcs);
   return alpha;
 }
-
-
 ntype probability_density(const nmatrix& alpha, const nmatrix& gamma, const MonteCarloSolver& mcs){
   return exp(-mcs.cost_function(alpha, gamma, mcs.additional_params)/mcs.T);
 }
-
 ntype probability_density(const EcologicalNetwork& eco_net, const MonteCarloSolver& mcs){
   return probability_density(eco_net.A, eco_net.G, mcs);
 }
-
 nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool coprophagy_allowed, unsigned int steps, const MonteCarloSolver& mcs){
   nmatrix new_alpha;
   /* As long as the leaving condition is not fulfilled, we do not leave the loop */
@@ -97,7 +90,6 @@ EcologicalNetwork proposed_new_eco_net(const EcologicalNetwork& old_net, unsigne
   }while(not(leave_loop));
   return new_net;
 }
-
 /* creates an optimal consumption matrix with connectance ctarg  */
 nmatrix optimal_consumption_matrix(unsigned int NR, unsigned int NS, const ntype& ctarg, MonteCarloSolver& mcs){
   nmatrix gamma = create_gamma(NR, NS, ctarg);
@@ -109,7 +101,6 @@ nmatrix optimal_consumption_matrix(unsigned int NR, unsigned int NS, const ntype
   apply_MC_algorithm(eco_net, mcs);
   return gamma;
 }
-
 nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& ctarg){
   nmatrix gamma(NS, nvector(NR,0.));
   std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
@@ -172,8 +163,6 @@ nmatrix flip_one_element(const nmatrix& alpha, const nmatrix& gamma, bool allowe
 
   return new_alpha;
 }
-
-
 bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps, unsigned int& fails, const MonteCarloSolver& mcs){
   nmatrix new_alpha=proposed_new_alpha(alpha, gamma, coprophagy, steps, mcs);
   ntype proba_ratio=probability_density(new_alpha, gamma, mcs)/probability_density(alpha, gamma, mcs);
@@ -382,7 +371,6 @@ nmatrix proposed_new_matrix_Alberto(const nmatrix& alpha, unsigned int steps){
   }
   return new_alpha;
 }
-
 nmatrix proposed_new_alpha_Leo(const nmatrix& alpha, const nmatrix& gamma, bool coprophagy, unsigned int steps){
   nmatrix new_alpha = alpha;
   flip_one_binary_matrix_element(new_alpha);
@@ -588,14 +576,13 @@ void modify_column(nmatrix& alpha){
 
   return;
 }
-
 ntype quadratic_form_low_intra_resource_interaction(const nmatrix& alpha, const nmatrix& gamma, void* params){
   Metaparameters* m = (Metaparameters*)(params);
   return m->quadratic_form_low_intra_resource_interaction(alpha, gamma);
 }
-ntype quadratic_form_nestedness(const nmatrix& gamma, const nmatrix& dummy, void*params){
+ntype quadratic_form_nestedness(const nmatrix& A, const nmatrix& G, void*params){
   ntype* target = (ntype*)(params);
-  return abs(nestedness(gamma)-(*target));
+  return abs(nestedness(G)-(*target));
 }
 ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy, void*params){
   int max_rank = gamma.size();
@@ -604,7 +591,6 @@ ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy,
   }
   return quadratic_form_nestedness(gamma, dummy, params)+max_rank-rank(gamma);
 }
-
 ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatrix& gamma, void* params){
   Metaparameters* m= (Metaparameters*)(params);
   return m->accurate_quadratic_form_LRI(alpha, gamma);

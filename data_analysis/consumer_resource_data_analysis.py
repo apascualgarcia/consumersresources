@@ -752,15 +752,15 @@ def compute_data(to_compute, volume_data, decay_rate_data, data_type):
 
 def plot_feasible_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
     ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='feasible')
-    ax.set_ylabel('Feasible volume')
+    ax.set_ylabel(r'Feasible volume')
     return ax
 def plot_lds_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
     ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='ld stable')
-    ax.set_ylabel('Dynamically stable volume')
+    ax.set_ylabel(r'Dynamically stable volume')
     return ax
 def plot_largest_eigenvalue(ax, data_file, width, shift, alpha0_, alpha_mode_):
     ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='av. dominant eigenvalue')
-    ax.set_ylabel('-Dominant eigenvalue')
+    ax.set_ylabel(r'Rate of return')
     return ax
 def plot_feasible_decay_rates(ax, decay_rate_data):
     return plot_decay_rates(ax, decay_rate_data, type='feasible')

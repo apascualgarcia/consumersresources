@@ -23,10 +23,10 @@ CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
 }
-CRModel::CRModel(Metaparameters& meta):CRModel(load_food_matrix(meta), meta){
+CRModel::CRModel(Metaparameters& meta, bool has_to_be_feasible):CRModel(load_food_matrix(meta), meta, has_to_be_feasible){
   return;
 }
-CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
+CRModel::CRModel(const foodmatrix& F, Metaparameters& meta, bool has_to_be_feasible):equations_of_evolution(ode_equations_of_evolution){
   unsigned int attempts(0);
   this->create_model_parameters(meta);
   do{
@@ -44,7 +44,7 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evoluti
         throw error("Unrecognized building mode in model constructor.");
       }
     }
-  }while(not(this->constraints_fulfilled(meta)));
+  }while(not(this->constraints_fulfilled(meta)) && has_to_be_feasible);
 
   if(meta.verbose > 1){
     std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
@@ -278,6 +278,7 @@ ncvector CRModel::eigenvalues_at_equilibrium() const{
     v.push_back(eivals(i)*min_element);
     //v.push_back(eivals(i));
   }
+  // sorting so that the last element is the largest eigenvalue
   std::sort(v.begin(), v.end(), compare_complex);
   return v;
 }
@@ -664,14 +665,8 @@ bool CRModel::has_linearly_stable_eq() const{
   return false;
 }
 systemstability CRModel::assess_dynamical_stability() const{
-  ncvector eigvals = this->eigenvalues_at_equilibrium();
-  ntype max_real_eigval = real(eigvals[0]);
-  for(size_t i=1; i < eigvals.size(); ++i){
-    ntype test = real(eigvals[i]);
-    if(test > max_real_eigval){
-      max_real_eigval = test;
-    }
-  }
+  nctype max_eigval = this->largest_eigenvalue_at_equilibrium();
+  ntype max_real_eigval = real(max_eigval);
 
   if(max_real_eigval > EIGENSOLVER_PRECISION){
     if(this->metaparameters->verbose>1){

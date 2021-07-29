@@ -21,8 +21,8 @@ public:
   /* CONSTRUCTORS */
   CRModel();
   CRModel(const CRModel&);
-  CRModel(Metaparameters&);
-  CRModel(const foodmatrix&, Metaparameters&);
+  CRModel(Metaparameters&, bool has_to_be_feasible=true);
+  CRModel(const foodmatrix&, Metaparameters&, bool has_to_be_feasible=true);
   CRModel(Model_parameters*);
 
   /* DESTRUCTOR */
