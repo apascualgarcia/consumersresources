@@ -215,9 +215,13 @@ void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
     energy_file=open_external_file_append(mcs.energy_file);
   }
 
-  energy_file << "# The following metaparameters were used for this matrix optimization : " << *m << std::endl;
-  energy_file << "# Energy optimization to find the best syntrophy matrix for a given consumption matrix " << std::endl;
-  energy_file << "# Are given, in that order: energy, A-nestedness, A-connectance, G-nestedness, G-connectance and temperature of the syntrophy matrix" << std::endl;
+  if(mcs.write_mode!="none"){
+    energy_file << "# The following metaparameters were used for this matrix optimization : " << *m << std::endl;
+    energy_file << "# Energy optimization to find the best syntrophy matrix for a given consumption matrix " << std::endl;
+    energy_file << "# Are given, in that order: energy, A-nestedness, A-connectance, G-nestedness, G-connectance and temperature of the syntrophy matrix" << std::endl;
+  }
+
+
   if(mcs.write_mode=="all"){
     energy_file << "# Each new line is a further step of the MCS optimization algorithm" << std::endl;
   }
@@ -584,12 +588,12 @@ ntype quadratic_form_nestedness(const nmatrix& A, const nmatrix& G, void*params)
   ntype* target = (ntype*)(params);
   return abs(nestedness(G)-(*target));
 }
-ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy, void*params){
-  int max_rank = gamma.size();
-  if(gamma[0].size() < max_rank){
-    max_rank =gamma[0].size();
+ntype quadratic_form_nestedness_rank(const nmatrix& A, const nmatrix& G, void*params){
+  int max_rank = G.size();
+  if(G[0].size() < max_rank){
+    max_rank =G[0].size();
   }
-  return quadratic_form_nestedness(gamma, dummy, params)+max_rank-rank(gamma);
+  return quadratic_form_nestedness(A, G, params)+max_rank-rank(G);
 }
 ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatrix& gamma, void* params){
   Metaparameters* m= (Metaparameters*)(params);

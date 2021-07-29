@@ -19,6 +19,7 @@ int main(int argc, char * argv[]){
     unsigned int Nsimuls=2e6;
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
+    myfile << "# We are writing, in that order, G-matrix location, proportion of feasible, stable, unstable, marginal and dominant eigenvalue" << std::endl;
 
     for(auto mat: matrix_list){
       ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0.;

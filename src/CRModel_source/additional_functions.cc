@@ -5,6 +5,7 @@
 #include <cmath>
 #include <numeric>
 #include <algorithm>
+#include <string>
 
 std::mt19937 random_engine;
 
@@ -919,4 +920,18 @@ void swap_two_matrix_elements(nmatrix & B){
   B[row_2][col_2] = el_1;
 
   return;
+}
+
+
+std::string operator+(const std::string& s, const unsigned int& i){
+  return s+NumberToString(i);
+}
+std::string operator+(const unsigned int& i, const std::string & s){
+  return NumberToString(i)+s;
+}
+std::string operator+(const std::string& s, const ntype& n){
+  return s+NumberToString(n);
+}
+std::string operator+(const ntype& n, const std::string& s){
+  return NumberToString(s)+n;
 }

@@ -86,6 +86,11 @@ nmatrix transpose(const nmatrix & m);
 nmatrix create_random_binary_matrix(unsigned int cols, unsigned int rows);
 
 
+std::string operator+(const std::string&, const unsigned int&);
+std::string operator+(const unsigned int&, const std::string &);
+std::string operator+(const std::string&, const ntype&);
+std::string operator+(const ntype&, const std::string&);
+
 bool non_neg_elements(const nmatrix&);
 bool non_neg_elements(const nvector&);
 
@@ -190,6 +195,14 @@ T variance(const std::vector<T> & vec){
   total = total*1./(n-1);
   return total;
 }
+
+template <typename T>
+  std::string NumberToString ( T Number )
+  {
+     std::ostringstream ss;
+     ss << Number;
+     return ss.str();
+  }
 
 
 

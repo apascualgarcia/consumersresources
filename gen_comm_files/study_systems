@@ -50,7 +50,7 @@ do
       FIRST_COMMAND="build/study_dynamical_stability_systems ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha} ${ADDITIONAL_MODIF}"
       # for old version
       # FIRST_COMMAND="${FIRST_COMMAND} path_to_volume='feasibility/${VOLUME_PATH}.out'"
-      FIRST_COMMAND="${FIRST_COMMAND} | ts \"[%Y-%m-%d %H:%M:%S]\""
+      FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
 
       COMMAND_NAME="${FIRST_COMMAND}"
 

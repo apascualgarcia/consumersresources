@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
     mcsolv.display_stride=10000;
     mcsolv.cost_function=energy_function;
     mcsolv.mcmode=metaparams.mcmode;
-    mcsolv.write_mode="converged_only";
+    mcsolv.write_mode="none";
 
 
     // coprophagy is by convention allowed
@@ -48,39 +48,31 @@ int main(int argc, char* argv[]){
     if(not(mcsolv.iss_allowed)){
       std::cout << " not";
     }
+
+    nvector target_connectance = linear_interval(0.08, 0.43, 8);
+    nvector target_nestedness = linear_interval(0.1, 0.6, 11);
+
     std::cout << " allowed during this run." << std::endl;
+    for(auto target_conn : target_connectance){
+      for(size_t i=0; i < target_nestedness.size() && target_nestedness[i] > target_conn; ++i){
+        ntype target_nest = target_nestedness[i];
+        mcsolv.additional_params=&target_nest;
+        std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
+        mcsolv.T=T0;
 
-    for(size_t i=0; i < matrices_list.size();++i){
+        EcologicalNetwork eco_net(metaparams.NR, metaparams.NS, target_conn);
+        eco_net.optimize(mcsolv);
 
-      ntype target_nest = 0.9, target_conn=0.2;
-      mcsolv.additional_params=&target_nest;
 
-      metaparams.foodmatrixpath=matrices_list[i];
-      std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
-      mcsolv.energy_file =metaparams.save_path+"_energy";
+        //save path = save folder
+        std::string savepath = metaparams.save_path+"/RandTrix_Nr"+metaparams.NR+"_Nc"+metaparams.NS+"_Nest"+nestedness(eco_net.G)+"_Conn"+connectance(eco_net.G)+".txt";
+        std::ofstream savestream = open_external_file_truncate(savepath);
+        display_food_matrix(savestream, eco_net.G);
+        std::cout << "A target G-matrix was found and saved in " << savepath << std::endl;
 
-      std::ofstream smatrix_file=open_external_file_truncate(metaparams.save_path);
-      smatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
-      std::cout << "Starting the Monte Carlo algorithm to find the optimal syntrophy matrix for ";
-      std::cout << metaparams.foodmatrixpath << std::endl;
-      mcsolv.T=T0;
-
-      EcologicalNetwork eco_net(metaparams.NR, metaparams.NS, target_conn);
-      eco_net.optimize(mcsolv);
-      display_food_matrix(smatrix_file, eco_net.A);
-      if(mcsolv.mcmode==both_modified){
-        std::ofstream gmatrix_file=open_external_file_truncate(metaparams.foodmatrixpath+"_optimized_"+add_string);
-        gmatrix_file << "# The following metaparameters were used for this matrix optimization : " << metaparams << std::endl;
-        display_food_matrix(gmatrix_file, eco_net.G);
-        std::cout << "An optimal consumption matrix was found and saved in " << metaparams.foodmatrixpath+"_optimized_"+add_string << std::endl;
-        gmatrix_file.close();
+        savestream.close();
       }
-      std::cout << "An optimal syntrophy matrix was found and saved in " << metaparams.save_path << std::endl;
-
-      smatrix_file.close();
-
     }
-
   }catch(error e){
     e.handle();
   }
