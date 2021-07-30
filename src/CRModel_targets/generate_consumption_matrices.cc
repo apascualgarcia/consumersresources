@@ -55,22 +55,24 @@ int main(int argc, char* argv[]){
     std::cout << " allowed during this run." << std::endl;
     for(auto target_conn : target_connectance){
       for(size_t i=0; i < target_nestedness.size() && target_nestedness[i] > target_conn; ++i){
-        ntype target_nest = target_nestedness[i];
-        mcsolv.additional_params=&target_nest;
-        std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
-        mcsolv.T=T0;
+        if(target_nestedness[i] > target_conn){
+          ntype target_nest = target_nestedness[i];
+          mcsolv.additional_params=&target_nest;
+          std::cout << "MC Mode = " << mcmode_to_string(mcsolv.mcmode) << std::endl;
+          mcsolv.T=T0;
 
-        EcologicalNetwork eco_net(metaparams.NR, metaparams.NS, target_conn);
-        eco_net.optimize(mcsolv);
+          EcologicalNetwork eco_net(metaparams.NR, metaparams.NS, target_conn);
+          eco_net.optimize(mcsolv);
 
 
-        //save path = save folder
-        std::string savepath = metaparams.save_path+"/RandTrix_Nr"+metaparams.NR+"_Nc"+metaparams.NS+"_Nest"+nestedness(eco_net.G)+"_Conn"+connectance(eco_net.G)+".txt";
-        std::ofstream savestream = open_external_file_truncate(savepath);
-        display_food_matrix(savestream, eco_net.G);
-        std::cout << "A target G-matrix was found and saved in " << savepath << std::endl;
+          //save path = save folder
+          std::string savepath = metaparams.save_path+"/RandTrix_Nr"+metaparams.NR+"_Nc"+metaparams.NS+"_Nest"+nestedness(eco_net.G)+"_Conn"+connectance(eco_net.G)+".txt";
+          std::ofstream savestream = open_external_file_truncate(savepath);
+          display_food_matrix(savestream, eco_net.G);
+          std::cout << "A target G-matrix was found and saved in " << savepath << std::endl;
 
-        savestream.close();
+          savestream.close();
+        }
       }
     }
   }catch(error e){
