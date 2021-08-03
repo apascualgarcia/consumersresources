@@ -40,5 +40,7 @@ ntype quadratic_form_nestedness(const nmatrix& gamma, const nmatrix& dummy, void
 ntype quadratic_form_nestedness_rank(const nmatrix& gamma, const nmatrix& dummy, void*);
 ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatrix& gamma, void* params);
 ntype quadratic_form_LRI_newly_corrected(const nmatrix& alpha, const nmatrix& gamma, void* params);
+ntype quadratic_form_effective_competition(const nmatrix & A, const nmatrix & G, void* params);
+
 
 #endif

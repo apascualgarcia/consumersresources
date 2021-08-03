@@ -9,10 +9,12 @@
 struct EcologicalNetwork{
   /* Different ways of initializing an EcologicalNetwork */
   EcologicalNetwork();
+  EcologicalNetwork(const nmatrix& A, const nmatrix& G);
   EcologicalNetwork(const unsigned int NR, const unsigned int NS, const double & g_conn);
   EcologicalNetwork(const Metaparameters& m);
 
   void optimize(MonteCarloSolver& mcs);
+  ntype effective_competition(const Metaparameters&) const;
 
   // attributes
   nmatrix A;

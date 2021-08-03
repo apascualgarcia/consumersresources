@@ -233,13 +233,15 @@ void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
 
   while(!stop){
     double current_energy = mcs.cost_function(eco_net.A, eco_net.G, mcs.additional_params);
-    double nestA, connA, nestG, connG;
+    double nestA, connA, nestG, connG, eff_comp;
+    Metaparameters* m = (Metaparameters*)(mcs.additional_params);
 
 
     nestA = nestedness(eco_net.A);
     connA = connectance(eco_net.A);
     nestG = nestedness(eco_net.G);
     connG = connectance(eco_net.G);
+    eff_comp = eco_net.effective_competition(*m);
 
     if(mcs.write_mode=="all"){
       energy_file << current_energy << " " << nestA << " " << connA << " " << nestG;
@@ -307,6 +309,7 @@ void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs){
       std::cout << "\t connA=" << connA;
       std::cout << "\t nestG=" << nestG;
       std::cout << "\t connG=" << connG;
+      std::cout << "\t eff_comp=" << eff_comp;
       if(stop){
         std::cout << std::endl << "-------" << std::endl << "STOPPING THE ALGORITHM ";
       }
@@ -602,6 +605,11 @@ ntype quadratic_form_LRI_with_critical_radius(const nmatrix& alpha, const nmatri
 ntype quadratic_form_LRI_newly_corrected(const nmatrix& alpha, const nmatrix& gamma, void* params){
   Metaparameters* m= (Metaparameters*)(params);
   return m->newly_corrected_quadratic_form_LRI(alpha, gamma);
+}
+ntype quadratic_form_effective_competition(const nmatrix & A, const nmatrix & G, void* params){
+  EcologicalNetwork eco_net(A, G);
+  Metaparameters* m = (Metaparameters*)(params);
+  return eco_net.effective_competition(*m);
 }
 
 ntype quadratic_form_Alberto(const nmatrix& alpha, const nmatrix& gamma, void* params){

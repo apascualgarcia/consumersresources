@@ -21,16 +21,22 @@ mpl.rcParams['lines.linestyle']='solid'
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
 alpha_mode_colours=dict({'fully_connected':'blue', 'no_release_when_eat':'orange', 'optimal_matrix':'red', 'random_structure':'green'})
 alpha_mode_sym = dict({'fully_connected': 'P', 'no_release_when_eat': 'D', 'optimal_matrix':'o', 'random_structure': 'd'})
-alpha_mode_label=dict({'fully_connected':'FC', 'no_release_when_eat': 'NIS', 'optimal_matrix': 'OM', 'random_structure':'RS'})
+
+alpha_mode_label=dict({'fully_connected':'Fully Connected', 'no_release_when_eat': 'NIS', 'optimal_matrix': 'Optimized', 'random_structure':'Random'})
+legend_titles=dict({'nestG': 'Consumption \n overlap '+r'$\eta_G$', 'connG': 'Consumption \n connectance '+r'$\kappa_G$'})
+
+labels=dict({'nestG': r'Consumption overlap $\eta_G$', 'connG': r'Consumption connectance $\kappa_G$',
+            'E': r'Objective function $ E $', 'connA': r'Syntrophy connectance $\kappa_A$',
+            'nestA': r'Syntrophy overlap $\eta_A$', 'feasible decay rate': r'Feasibility decay',
+            'ld stable decay rate': r'Dynamical stability decay', 'alpha0': r'Syntrophy strength $\alpha_0$'})
+
+
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 min_gamma0, max_gamma0=0.01, 1
 min_S0, max_S0=0.01, 1
-labels=dict({'nestG': r'Consumption overlap $\eta_G$', 'connG': r'Consumption connectance $\kappa_G$',
-            'E': r'Ecosystem energy $ E $', 'connA': r'Syntrophy connectance $\kappa_A$',
-            'nestA': r'Syntrophy overlap $\eta_A$', 'feasible decay rate': r'Feasibility decay',
-            'ld stable decay rate': r'Dynamical stability decay'})
+
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 N_alphamodes=len(alpha_mode)
@@ -837,6 +843,7 @@ def plot_data(figures_to_plot, volume, decay_rates, type):
 
 def plot_decay_rates(axs, decay_rate_data, type):
     data = pd.read_csv(decay_rate_data['data file'])
+    ms = 8
     for j in range(len(decay_rate_data['alpha mode'])):
         amode = decay_rate_data['alpha mode'][j]
         for i in range(len(all_connectance)):
@@ -844,14 +851,14 @@ def plot_decay_rates(axs, decay_rate_data, type):
             indices = [x for x in range(data.shape[0]) if closest_element_in_list(data.loc[x]['connG'], all_connectance)==connG and data.loc[x]['alpha_mode']==amode]
             to_plot = data.loc[indices]
             to_plot = to_plot.sort_values(by='nestG')
-            to_plot.plot(x = 'nestG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][1], label=r'$\kappa_G \approx'+str(connG)+'$',
-                    linestyle='solid', color=conn_colours[i], marker=alpha_mode_sym[amode])
+            to_plot.plot(x = 'nestG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][1], label=r'$'+str(connG)+'$',
+                    linestyle='solid', color=conn_colours[i], marker=alpha_mode_sym[amode], markersize=ms)
         min_nest = np.min(data['nestG'])
         max_nest = np.max(data['nestG'])
         axs[j][1].set_xlim(min_nest-0.1*(max_nest-min_nest), max_nest+0.1*(max_nest-min_nest))
         axs[j][1].set_xlabel(labels['nestG'])
         axs[j][1].set_ylabel(labels[type+' decay rate'])
-        axs[j][1].legend(bbox_to_anchor=(1.05,1.), loc='upper left')
+        axs[j][1].legend(bbox_to_anchor=(1.,1.), loc='upper left', title=legend_titles['connG'], fontsize=13, title_fontsize=14)
         axs[j][1].set_title(alpha_mode_label[amode])
 
     for j in range(len(decay_rate_data['alpha mode'])):
@@ -861,14 +868,14 @@ def plot_decay_rates(axs, decay_rate_data, type):
             indices = [x for x in range(data.shape[0]) if closest_element_in_list(data.loc[x]['nestG'], all_nestedness)==nestG and data.loc[x]['alpha_mode']==amode]
             to_plot = data.loc[indices]
             to_plot = to_plot.sort_values(by='connG')
-            to_plot.plot(x = 'connG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][0], label=r'$\eta_G \approx'+str(nestG)+'$',
-                    linestyle='solid', color=nest_colours[i], marker=alpha_mode_sym[amode])
+            to_plot.plot(x = 'connG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][0], label=r'$'+str(nestG)+'$',
+                    linestyle='solid', color=nest_colours[i], marker=alpha_mode_sym[amode], markersize=ms)
         min_conn = np.min(data['connG'])
         max_conn = np.max(data['connG'])
         axs[j][0].set_xlim(min_conn-0.1*(max_conn-min_conn), max_conn+0.1*(max_conn-min_conn))
         axs[j][0].set_xlabel(labels['connG'])
         axs[j][0].set_ylabel(labels[type+' decay rate'])
-        axs[j][0].legend(bbox_to_anchor=(1.05,1.), loc='upper left')
+        axs[j][0].legend(bbox_to_anchor=(1.,1.), loc='upper left', title=legend_titles['nestG'], fontsize=13, title_fontsize=14)
         axs[j][0].set_title(alpha_mode_label[amode])
 
     return axs
@@ -947,5 +954,5 @@ def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
            ncol=len(legend_els), borderaxespad=0., fontsize=12)
     ax.set_title('')
     ax.set_yscale('linear')
-    ax.set_xlabel(r'$\alpha_0 \times 10^{3}$')
+    ax.set_xlabel(labels['alpha0']+r' $\times 10^{3}$')
     return ax

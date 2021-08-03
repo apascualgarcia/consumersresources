@@ -22,6 +22,15 @@ EcologicalNetwork::EcologicalNetwork(const Metaparameters& m){
   return;
 }
 
+EcologicalNetwork::EcologicalNetwork(const nmatrix& A_, const nmatrix& G_){
+  this->A = A_;
+  this->G = G_;
+
+  this->NS = this->G.size();
+  this->NR = this->A.size();
+  return;
+}
+
 
 void EcologicalNetwork::optimize(MonteCarloSolver& mcs){
   if(mcs.mcmode==constant_connectance){
@@ -33,4 +42,18 @@ void EcologicalNetwork::optimize(MonteCarloSolver& mcs){
   }
   apply_MC_algorithm(*this, mcs);
   return;
+}
+
+ntype EcologicalNetwork::effective_competition(const Metaparameters& m) const{
+  nmatrix BetaGamma = m.sigma0*m.gamma0*m.S0*(m.alpha0*this->G*this->A-m.R0*this->G*transpose(this->G));
+  ntype eff_comp=0.;
+  for(size_t i =0; i < m.NS; ++i){
+    for(size_t j=0; j < m.NS; ++j){
+      eff_comp += BetaGamma[i][j];
+    }
+  }
+
+  eff_comp*=2./(m.NS*(1.-m.NS));
+
+  return eff_comp;
 }
