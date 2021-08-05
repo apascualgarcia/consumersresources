@@ -1,0 +1,128 @@
+\documentclass[12pt, titlepage, twoside, openright]{report}
+\usepackage{consumer_resource_final}
+
+%% CHOOSE FONT
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%\usepackage{utopia}
+\usepackage{charter}
+%\usepackage{lmodern}
+%\renewcommand*\familydefault{\sfdefault}
+
+\usepackage[expert]{mathdesign}
+
+%% SET UP IMAGES
+\usepackage{graphicx}
+\graphicspath{{./figures/Results/feasibility/}{./figures/Results/local_dynamical_stability/}{./figures/Results/largest_eigenvalue/}{./figures/Results/matrix_structure/}{./figures/Results/structural_stability/}{./figures/}{./}}
+
+%% SET UP HEADERS AND FOOTERS
+\usepackage{fancyhdr}
+\fancyhf[HLE,HRO]{\leftmark}
+\fancyhf[HRE,HLO]{\rightmark}
+\fancyhf[FLE,FRO]{\thepage}
+\fancyhf[FRE, FLO]{\footnotesize\textit{Impact of syntrophy on microbial communities}}
+\setlength{\headheight}{15pt}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyfoot[FLE, FRO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}}
+
+\pagestyle{fancy}
+% remove normal page number
+\cfoot{}
+
+
+
+%% ADDITIONAL PACKAGES
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\counterwithin{figure}{section}
+
+%\interfootnotelinepenalty=10000
+
+
+\begin{document}
+\section{Figuring out the effective competition}
+  From the main document (Eq. 5.37), we have for the effective system:
+  \begin{equation}
+  \frac{d S_i}{dt} = \left[ \sum_\nu \left( \frac{\sigma_{i\nu} \gamma_{i\nu} l_\nu}{m_\nu + \sum_k \gamma_{k\nu}S_k}-\alpha_{\nu i}\right)-d_i + \sum_{\nu j} \frac{\sigma_{i\nu} \gamma_{i\nu} \alpha_{\nu j}}{m_\nu + \sum_k \gamma_{k\nu} S_k} S_j \right] S_i \label{eq : eff system}
+  \end{equation}
+  The goal is to regroup terms such that we may rewrite this equation in the form of:
+  \begin{equation}
+    \frac{d S_i}{dt} = \left( \tilde{K}_i - \sum_j C_{ij} S_j + \text{higher order interactions ...} \right) S_i
+  \end{equation}
+  Following standard Lotka-Volterra reasoning (see e.g. \cite{dorschner_lotka-volterra_1987}), we may interpret $C_{ij}$ as the \textbf{effective competition matrix} and define its average $\rho_{\text{eff}}$ as the \textbf{effective competition}:
+  \begin{equation}
+  \rho_{\text{eff}} = \frac{1}{N_S^2}\sum_{ij} C_{ij}.
+  \end{equation}
+  The tricky part is that we have $S_k$ at the denominator of some terms of Eq.\eqref{eq : eff system} and we somehow want them to appear at the numerator, i.e. we want to do a Taylor expansion. We write:
+  \begin{equation}
+  m_\nu + \sum_k \gamma_{k\nu} S_k = m_\nu + \sum_k \gamma_{k_\nu}S^*_k - \sum_k \gamma_{k_\nu}\left(S^*_k-S_k\right)
+  \end{equation}
+  We may safely assume that $S^*_k-S_k$ is small compared to the other term, which allows us to Taylor expand:
+  \begin{equation}
+  \frac{1}{m_\nu+\sum_k \gamma_{k\nu}S_k} \approx \frac{1}{m_\nu+\gamma_{k\nu}S^*_k}\left[\left(1+\sum_k\frac{ \gamma_{k\nu}S^*_k}{m_\nu + \sum_l \gamma_{l\nu}S^*_l}\right)-\sum_j\frac{ \gamma_{j\nu}}{m_\nu + \sum_l \gamma_{l\nu}S^*_l}S_j\right]
+  \end{equation}
+  We would like to get rid of $m_\nu$, since we do not directly control it ($m$ and $d$ are the only parameters that we do not choose, see p.33 of the main document). For this we use Eq.(3.2b) of the main document:
+  \begin{equation}
+  m_\nu + \sum_k \gamma_{k\nu}S^*_k = \frac{l_\nu + \sum_k \alpha_{\nu k} S^*_k}{R^*_\nu} = D_\nu
+  \end{equation}
+  This is interesting: $D_\nu$ is a strictly positive quantity which appears naturally in the jacobian and we see here that it somehow plays a role in the effective one too! Inserting this in the previous equation yields:
+  \begin{equation}
+  %\frac{1}{m_\nu + \sum_k \gamma_{k\nu} S_k} \approx \frac{R^*_\nu}{l_\nu + \sum_k \alpha_{\nu k} S^*_k} \left[\left(1+\sum_j \frac{\gamma_{j\nu}R^*_\nu S^*_j}{l_\nu + \sum_l \alpha_{\nu l}S^*_l}\right)-\sum_j \frac{\gamma_{j\nu}R^*_\nu}{l_\nu + \sum_l \alpha_{\nu l}S^*_l}S_j\right]
+  \frac{1}{m_\nu + \sum_k \gamma_{k\nu} S_k} \approx \frac{1}{D_\nu} \left[\left(1+\sum_j \frac{\gamma_{j\nu} S^*_j}{D_\nu}\right)-\sum_j \frac{\gamma_{j\nu}}{D_\nu}S_j\right] = \left(\frac{1}{D_\nu}+\sum_j \frac{\gamma_{j\nu} S^*_j}{D_\nu^2}\right)-\sum_j \frac{\gamma_{j\nu}}{D_\nu^2}S_j
+  \end{equation}
+  This allows us to write Eq.\eqref{eq : eff system} as:
+  \begin{equation}
+  \frac{d S_i}{dt} = \left[ \tilde{K}_i - \sum_{\nu j} \frac{\sigma_{i\nu} \gamma_{i\nu}}{D_\nu^2}\left(\gamma_{j\nu}l_\nu- \alpha_{\nu j}\left(D_\nu+\sum_k \gamma_{k \nu}S^*_k\right)\right)S_j+\dots \right] S_i
+  \end{equation}
+  Which gives us the following expression for the effective competition matrix:
+  \begin{equation}
+  C_{ij} = \sum_\nu \frac{\sigma_{i\nu} \gamma_{i\nu}}{D_\nu^2}\left(\gamma_{j\nu}l_\nu- \alpha_{\nu j}\left(D_\nu+\sum_k \gamma_{k \nu}S^*_k\right)\right) \label{eq : full expression C}
+  \end{equation}
+  However we would like an expression which depends only on metaparameters and on the $G, A$ topology matrices, so that we may get an intuition about how this effective competition matrix behaves. The first step is to notice that $D_\nu \gg \sum_k \gamma_{k\nu}S^*_k$. Indeed, it is easy to show with basic metaparameters considerations that $m_\nu \gg \sum_k \gamma_{k\nu} S^*_k$ which implies $D_\nu \gg \sum_k \gamma_{k\nu}S^*_k$ and hence:
+  \begin{equation}
+  D_\nu + \sum_k \gamma_{k\nu}S^*_k \approx D_\nu
+  \end{equation}
+  With that approximation, Eq.\eqref{eq : full expression C} becomes:
+  \begin{equation}
+  C_{ij} \approx \sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}}{D_\nu}\left(\gamma_{j\nu}\frac{l_\nu}{D_\nu}-\alpha_{\nu j}\right) \label{eq : approx 1 C}
+  \end{equation}
+  We then try to make sense of the $l_\nu / D_\nu $ term:
+  \begin{equation}
+  \frac{l_\nu}{D_\nu} = \frac{R^*_\nu}{1+\sum_k \frac{\alpha_{\nu k}S^*_k}{l_\nu}} \approx \frac{R^*_\nu}{1+\frac{N_S \kappa_A S_0}{l_0}}
+  \end{equation}
+  When building the optimal syntrophy matrices, we take $\gamma_0=1$, which means that $S_0$ \textbf{must} be small (remember that feasible systems all respect a relation $S_0 < K \gamma_0^{-1}$), typically we use $S_0 = 0.05$ during the $A$-optimization process. We also decided to set $l_0 = 1$, $N_S=25$. An outcome of the  optimization is that $\kappa_A \approx \kappa_G$ which is fairly small. These arguments allow to say that $N_S \kappa_A S_0/l_0$ will be smaller than 1 which means:
+  \begin{equation}
+  \frac{l_\nu}{D_\nu} \approx R^*_\nu.
+  \end{equation}
+  Finally, we try to simplify $D_\nu$:
+  \begin{equation}
+  D_\nu = \frac{l_\nu + \sum_k \alpha_{\nu k}S^*_k}{R^*_\nu} \approx \frac{l_0+ N_S \kappa_A \alpha_0 S_0}{R_0} \approx \frac{l_0}{R_0}
+  \end{equation}
+  Inserting this in Eq.\eqref{eq : approx 1 C} yields:
+  \begin{equation}
+  C_{ij} \approx \frac{R_0}{l_0}\sum_\nu \frac{\sigma_{i\nu}\gamma_{i\nu}S^*_i}{S_i^*}\left(\gamma_{j\nu}R^*_\nu - \alpha_{\nu j}\right) \approx \frac{R_0}{l_0 S_0}\sum_\nu {\sigma_{i\nu}\gamma_{i\nu}S^*_i}\left(\gamma_{j\nu}R^*_\nu - \alpha_{\nu j}\right)
+  \end{equation}
+  This expression can be made clearer using the $\Beta$ and $\Gamma$ matrices:
+  \begin{equation}
+  \boxed{C_{ij} = - \frac{R_0}{l_0 S_0}\left(\Beta \Gamma\right)_{ij}}
+  \end{equation}
+  It is important to remember that this approximation is only true for systems with low $S_0$ and we should expect a slight departure from it for high $S_0$ (i.e low $\gamma_0$), which can be easily computed. We also assumed $\kappa_A$ was small so this won't be a good measure for $e.g.$ the fully connected case. However, note that Eq.\eqref{eq : full expression C} is always true (as long as the assumptions for the fully effective system are fulfilled) and should be used in these extreme cases.
+  \section{Mathematical computations}
+  \subsection{Simplifying the denominator}
+  We stated earlier that $m_\nu \gg \sum_k \gamma_{k\nu}S^*_k$. This is true under certain assumptions. Using metaparameters considerations we can approximate both of these terms:
+  \begin{equation}
+  m_\nu = \frac{l_\nu + \sum_k \alpha_{\nu k}S^*_k}{R^*_\nu}-\sum_k \gamma_{k\nu} S^*_k \approx \frac{l_0 + N_S \kappa_A \alpha_0 S_0}{R_0} - N_S \gamma_0 \kappa_G S_0
+  \end{equation}
+  And :
+  \begin{equation}
+  \sum_k \gamma_{k\nu}S^*_k \approx N_S \gamma_0 \kappa_G S_0
+  \end{equation}
+  For a small $S_0 ~ N_S^{-1}$ we have:
+  \begi
+  \addcontentsline{toc}{chapter}{Bibliography}
+  \printbibliography
+\end{document}

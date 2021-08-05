@@ -6,6 +6,7 @@
 #include "Metaparameters.h"
 #include "Dynamical_variables.h"
 #include "Extinction.h"
+#include "EcologicalNetwork.h"
 #include "../Functions/model_characteristics.h"
 #include <iostream>
 #include <string>
@@ -83,11 +84,23 @@ public:
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
 
+  EcologicalNetwork get_ecological_network() const;
+
 
   /* gives back the Beta and Gamma matrices from the jacobian at equilibrium */
   nmatrix get_Beta_matrix(unsigned int eq_number=0) const;
   nmatrix get_Gamma_matrix(unsigned int eq_number=0) const;
   nvector get_Delta_vector(unsigned int eq_number=0) const;
+
+  /* topology matrices */
+  nmatrix get_A() const;
+  nmatrix get_G() const;
+
+  /* returns the effective competition matrix */
+  nmatrix get_effective_competition_matrix(unsigned int eq_number=0) const;
+
+  /* returns the effective competition (average of the effective competition matrix) */
+  ntype get_effective_competition(unsigned int eq_number=0) const;
 
   /* gives back binary biomass flux network */
   nmatrix get_biomass_flux_network() const;

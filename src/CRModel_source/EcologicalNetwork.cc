@@ -45,15 +45,10 @@ void EcologicalNetwork::optimize(MonteCarloSolver& mcs){
 }
 
 ntype EcologicalNetwork::effective_competition(const Metaparameters& m) const{
-  nmatrix BetaGamma = m.sigma0*m.gamma0*m.S0*(m.alpha0*this->G*this->A-m.R0*this->G*transpose(this->G));
-  ntype eff_comp=0.;
-  for(size_t i =0; i < m.NS; ++i){
-    for(size_t j=0; j < m.NS; ++j){
-      eff_comp += BetaGamma[i][j];
-    }
-  }
+  nmatrix G = this->G, A = this->A;
+  ntype sigma0 = m.sigma0, R0 = m.R0, S0=m.S0, l0 = m.l0, alpha0=m.alpha0, gamma0=m.gamma0;
+  nmatrix BetaGamma = sigma0*S0*gamma0*G*(-gamma0*R0*G+alpha0*A);
+  nmatrix C = -R0/(S0*l0)*BetaGamma;
 
-  eff_comp*=2./(m.NS*(1.-m.NS));
-
-  return eff_comp;
+  return mean(C);
 }

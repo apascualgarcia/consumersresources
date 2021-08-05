@@ -34,7 +34,6 @@ struct Metaparameters{
   ntype convergence_threshold;
   buildingmode building_mode;
   perturbmode perturb_mode;
-  
   /* path to which point should be studied (eg common feasible volume) */
   std::string volume_of_interest_path;
   /* tells in which way the system should be structurally perturbed */
@@ -43,6 +42,7 @@ struct Metaparameters{
   MCmode mcmode;
   /* for building the optimized matrices */
   bool intra_specific_syntrophy;
+
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

@@ -935,3 +935,47 @@ std::string operator+(const std::string& s, const ntype& n){
 std::string operator+(const ntype& n, const std::string& s){
   return NumberToString(s)+n;
 }
+
+nctype largest_eigenvalue(const nmatrix & m){
+  return eigenvalues(m)[m.size()-1];
+}
+ncvector eigenvalues(const nmatrix & M){
+  ncvector v;
+  ntype min_element(std::abs(M[0][0]));
+
+  /* the jacobian should always be a square matrix */
+  const unsigned int M_size=M.size();
+
+  for(size_t i = 0; i < M_size; ++i){
+    if(M[i].size()!=M_size){
+      error err("Can't determine eigenvalues of matrix: it is ill formed (not a square matrix).");
+      throw err;
+    }
+    for(size_t j=0; j < M_size; ++j){
+      if(M[i][j]*M[i][j] > 0. and std::abs(M[i][j]) < min_element){
+        min_element = std::abs(M[i][j]);
+      }
+    }
+  }
+
+  // for testing purpose
+  //min_element = 1.;
+  //std::cout << " put min_element as 1" << std::endl;
+
+  Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> m;
+  m.resize(M_size, M_size);
+  // we rescale the jacobian such that even the smallest value is of order 1
+  for(size_t i=0; i < M_size; ++i){
+    for(size_t j=0; j < M_size; ++j){
+      m(i,j) = M[i][j]/min_element;
+    }
+  }
+  Eigen::Matrix<nctype, Eigen::Dynamic, 1> eivals = m.eigenvalues();
+  for(size_t i=0; i < eivals.rows(); ++i){
+    v.push_back(eivals(i)*min_element);
+    //v.push_back(eivals(i));
+  }
+  // sorting so that the last element is the largest eigenvalue
+  std::sort(v.begin(), v.end(), compare_complex);
+  return v;
+}

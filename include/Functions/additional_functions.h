@@ -85,6 +85,8 @@ nmatrix operator/(const nmatrix&, const ntype&);
 nmatrix transpose(const nmatrix & m);
 nmatrix create_random_binary_matrix(unsigned int cols, unsigned int rows);
 
+nctype largest_eigenvalue(const nmatrix & );
+ncvector eigenvalues(const nmatrix & );
 
 std::string operator+(const std::string&, const unsigned int&);
 std::string operator+(const unsigned int&, const std::string &);

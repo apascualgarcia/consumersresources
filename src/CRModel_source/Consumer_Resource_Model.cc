@@ -242,45 +242,7 @@ nmatrix CRModel::jacobian_at_equilibrium() const{
   return jac_eq;
 }
 ncvector CRModel::eigenvalues_at_equilibrium() const{
-  ncvector v;
-  nmatrix jac_eq = this->jacobian_at_equilibrium();
-  ntype min_element(std::abs(jac_eq[0][0]));
-
-  /* the jacobian should always be a square matrix */
-  const unsigned int jacobian_size=jac_eq.size();
-
-  for(size_t i = 0; i < jacobian_size; ++i){
-    if(jac_eq[i].size()!=jacobian_size){
-      error err("Jacobian is ill formed (not a square matrix).");
-      throw err;
-    }
-    for(size_t j=0; j < jacobian_size; ++j){
-      if(jac_eq[i][j]*jac_eq[i][j] > 0. and std::abs(jac_eq[i][j]) < min_element){
-        min_element = std::abs(jac_eq[i][j]);
-      }
-    }
-  }
-
-  // for testing purpose
-  //min_element = 1.;
-  //std::cout << " put min_element as 1" << std::endl;
-
-  Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> jacob;
-  jacob.resize(jacobian_size, jacobian_size);
-  // we rescale the jacobian such that even the smallest value is of order 1
-  for(size_t i=0; i < jacobian_size; ++i){
-    for(size_t j=0; j < jacobian_size; ++j){
-      jacob(i,j) = jac_eq[i][j]/min_element;
-    }
-  }
-  Eigen::Matrix<nctype, Eigen::Dynamic, 1> eivals = jacob.eigenvalues();
-  for(size_t i=0; i < eivals.rows(); ++i){
-    v.push_back(eivals(i)*min_element);
-    //v.push_back(eivals(i));
-  }
-  // sorting so that the last element is the largest eigenvalue
-  std::sort(v.begin(), v.end(), compare_complex);
-  return v;
+  return eigenvalues(this->jacobian_at_equilibrium());
 }
 
 void CRModel::save(std::ostream& os) const{
@@ -998,4 +960,60 @@ nmatrix CRModel::get_biomass_flux_network()const{
   }
 
   return f_network;
+}
+
+/* returns the effective competition matrix */
+nmatrix CRModel::get_effective_competition_matrix(unsigned int eq_number) const{
+  nmatrix C=nmatrix(this->metaparameters->NS, nvector(this->metaparameters->NS, 0.));
+  Parameter_set p = this->model_param->get_parameter_set();
+  nmatrix sigma = p.sigma, gamma = p.gamma, alpha = p.alpha;
+  nvector l = p.l, S = this->get_consumers_equilibrium(eq_number), D=this->get_Delta_vector(eq_number);
+  unsigned int NR = this->metaparameters->NR, NS = this->metaparameters->NS;
+  for(size_t i = 0; i < NS; ++i){
+    for(size_t j=0; j < NS; ++j){
+      for(size_t nu=0; nu < NR; ++nu){
+        ntype sum = 0.;
+        for(size_t k=0; k < NS; ++k){
+          sum += gamma[k][nu]*S[k];
+        }
+        C[i][j] += sigma[i][nu]*gamma[i][nu]/(D[nu]*D[nu])*(gamma[j][nu]*l[nu]-alpha[nu][j]*(D[nu]+sum));
+      }
+    }
+  }
+  return C;
+}
+
+nmatrix CRModel::get_A() const{
+  nmatrix A = this->model_param->get_parameter_set().alpha;
+  for(size_t i = 0; i < this->metaparameters->NS; ++i){
+    for(size_t mu=0; mu < this->metaparameters->NR; ++mu){
+      if(abs(A[mu][i]) > 0.){
+        A[mu][i]=1.;
+      }
+    }
+  }
+  return A;
+}
+
+nmatrix CRModel::get_G() const{
+  nmatrix G = this->model_param->get_parameter_set().gamma;
+  for(size_t i = 0; i < this->metaparameters->NS; ++i){
+    for(size_t mu=0; mu < this->metaparameters->NR; ++mu){
+      if(abs(G[i][mu]) > 0.){
+        G[i][mu]=1.;
+      }
+    }
+  }
+  return G;
+}
+
+EcologicalNetwork CRModel::get_ecological_network() const{
+  EcologicalNetwork eco_net(this->get_A(), this->get_G());
+  return eco_net;
+}
+
+/* returns the effective competition (average of the effective competition matrix) */
+ntype CRModel::get_effective_competition(unsigned int eq_number) const{
+  nmatrix C = this->get_effective_competition_matrix(eq_number);
+  return mean(C);
 }
