@@ -174,11 +174,13 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
       }
 
       case optimal_matrix:{
-        alpha=load_syntrophy_matrix(m);
+        alpha=load_meta_matrix(m);
         for(size_t mu=0; mu < p->NR; ++mu){
           for(size_t i=0; i < p->NS; ++i){
-            if(alpha[mu][i]>0.){
+            if(empty_or_not_distrib(random_engine)<alpha[mu][i]){
               alpha[mu][i] = alpha_distrib(random_engine);
+            }else{
+              alpha[mu][i] = 0.;
             }
           }
         }
@@ -208,102 +210,7 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
 
   }
 
-  /* OLD CODE from Jan 27
-  if(attempts <= m.nb_attempts){
-    switch(m.alpha_mode){
-      case random_structure:{
-        for(size_t mu=0; mu < p->NR; ++mu){
-          for(size_t i=0; i < p->NS; ++i){
-            alpha[mu][i] = alpha_distrib(random_engine);
-          }
-        }
-        break;
-      }
 
-      case no_release_when_eat:{
-        for(size_t i=0; i < p->NS; ++i){
-          for(size_t mu=0; mu < p->NR; ++mu){
-            if(p->gamma[i][mu]>0. and ntype(empty_or_not_distrib(random_engine)) < m.p){
-              alpha[mu][i] = alpha_distrib(random_engine);
-            }
-          }
-        }
-        //rescale_mean(alpha, m.alpha0);
-      }
-      default:{
-        std::cerr << " This case of alpha mode has not been implemented yet " << std::endl;
-      }
-    }
-  }else{
-    if(m.tau_mode==tau0){
-      if(m.energy_constraint){
-        for(size_t i = 0; i < p->NS; ++i){
-          nvector v;
-          for(size_t nu = 0; nu < p->NR; ++nu){
-            v.push_back(p->sigma[i][nu]*Req[nu]);
-          }
-          ntype max_value = *std::min_element(v.begin(), v.end());
-          std::uniform_real_distribution<ntype> distrib(0., max_value) ;
-          for(size_t nu = 0; nu < p->NR; ++nu){
-            alpha[nu][i] = distrib(random_engine);
-          }
-        }
-
-      }
-    }else if(m.tau_mode==taualpha){
-      if(m.energy_constraint){
-        for(size_t i = 0; i < p->NS; ++i){
-          nvector v, w;
-          for(size_t nu = 0; nu < p->NR; ++nu){
-            v.push_back(p->sigma[i][nu]*Req[nu]);
-            w.push_back((1-p->sigma[i][nu])*Req[nu]);
-          }
-          ntype max_value = *std::min_element(v.begin(), v.end());
-          if (*std::min_element(w.begin(), w.end())<max_value){
-            max_value=*std::min_element(w.begin(), w.end());
-          }
-          std::uniform_real_distribution<ntype> distrib(0., max_value);
-          for(size_t nu = 0; nu < p->NR; ++nu){
-            alpha[nu][i] = distrib(random_engine);
-          }
-        }
-    }
-  }
-    m.alpha0 = mean(alpha);
-  }
-  */
-  /* OLD CODE for when the Metaparameters might not be consistent
-  nvector alpha_upperbound;
-
-  // we compute the upperbound of each column sum of alpha
-  switch(m.tau_mode){
-    case tau0:{
-      for(size_t i = 0; i < p->NS; ++i){
-        ntype mass_upperbound = 0.;
-        for(size_t nu = 0; nu < p->NR; ++nu){
-          mass_upperbound+=(1.-p->sigma[i][nu])*p->gamma[i][nu]*Req[nu];
-        }
-        alpha_upperbound.push_back(mass_upperbound);
-      }
-      break;
-    }
-    case taualpha:{
-      for(size_t i = 0; i < p->NS; ++i){
-        ntype mass_upperbound(0.), feasability_upperbound(0.);
-        for(size_t nu = 0; nu < p->NR; ++nu){
-          mass_upperbound+=(1.-p->sigma[i][nu])*p->gamma[i][nu]*Req[nu];
-          feasability_upperbound+=p->sigma[i][nu]*p->gamma[i][nu]*Req[nu];
-        }
-        alpha_upperbound.push_back(std::min(mass_upperbound, feasability_upperbound));
-      }
-      break;
-    }
-    default:{
-      std::cerr << "build_alpha for this value of tau_mode not implemented yet";
-      break;
-    };
-  };
-  */
   return alpha;
 }
 nmatrix build_tau(Parameter_set* p, Metaparameters& m, unsigned int attempts){

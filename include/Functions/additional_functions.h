@@ -14,6 +14,7 @@
 /* loads the food matrix and relabels columns and resources such that gamma is "most triangular" */
 foodmatrix load_food_matrix(const Metaparameters&);
 nmatrix load_syntrophy_matrix(const Metaparameters&);
+nmatrix load_meta_matrix(const Metaparameters&);
 /* relabels the row of  m such that degree of row i > degree of row j if i < j */
 nmatrix order_matrix_by_row_degree(const nmatrix&);
 /* relabels the columns of m such that degree of column i > degree of column j if i < j */

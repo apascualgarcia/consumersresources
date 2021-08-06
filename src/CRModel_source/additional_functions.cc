@@ -46,6 +46,11 @@ foodmatrix load_food_matrix(const Metaparameters& m){
   return f;
 }
 
+/* don't know if this is right but it should */
+nmatrix load_meta_matrix(const Metaparameters& m){
+  return load_syntrophy_matrix(m);
+}
+
 nmatrix load_syntrophy_matrix(const Metaparameters& m){
   nmatrix a(m.NR,nvector(m.NS, 0.));
   nmatrix input;
@@ -67,7 +72,7 @@ nmatrix load_syntrophy_matrix(const Metaparameters& m){
       if(line[0]!='#'){
         std::istringstream iss(line);
         input.push_back(nvector());
-        unsigned int element;
+        ntype element;
         while(iss>>element){
           input[index].push_back(element);
         }
