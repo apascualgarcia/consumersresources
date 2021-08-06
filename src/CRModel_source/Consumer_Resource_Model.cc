@@ -1017,3 +1017,14 @@ ntype CRModel::get_effective_competition(unsigned int eq_number) const{
   nmatrix C = this->get_effective_competition_matrix(eq_number);
   return mean(C);
 }
+
+nmatrix CRModel::get_normalized_effective_competition_matrix(unsigned int eq_number) const{
+  nmatrix C = this->get_effective_competition_matrix(eq_number);
+  nmatrix B = C;
+  for(size_t i = 0; i < B.size(); ++i){
+    for(size_t j=0; j < B[i].size(); ++j){
+      B[i][j] = C[i][j]/square_root(C[i][i]*C[j][j]);
+    }
+  }
+  return B;
+}

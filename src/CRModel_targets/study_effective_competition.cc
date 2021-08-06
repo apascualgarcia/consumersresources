@@ -19,17 +19,17 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_alpha(min_a0, max_a0);
 
 
-    unsigned int Nsimuls=5e4;
+    unsigned int Nsimuls=1e4;
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
-    myfile << "# We are writing, in that order, G-matrix location, proportion of feasible, stable, unstable, marginal, dominant eigenvalue of J, <C>, dominant eigenvalue of C, trace of C" << std::endl;
+    myfile << "# We are writing, in that order, G-matrix location, proportion of feasible, stable, unstable, marginal, dominant eigenvalue of J, <C>, dominant eigenvalue of C, trace of C, dominant eigenvalue of B" << std::endl;
 
     for(auto mat: matrix_list){
-      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0., av_av_comp=0., av_dom_c_eigval=0., av_c_trace=0.;
+      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0., av_av_comp=0., av_dom_c_eigval=0., av_c_trace=0., av_dom_b_eigval=0.;
       unsigned int N_dyn = 0;
       metaparams.foodmatrixpath=mat;
       metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
-      std::cout << metaparams.foodmatrixpath << " ";
+      myfile << metaparams.foodmatrixpath << " ";
       /* we are less conservative than before and will simply compute the percentage
            of feasible, stable, unstable and marginally stable systems in the [gamma0]x[S0] are */
       for(size_t i=0; i < Nsimuls; ++i){
@@ -44,6 +44,7 @@ int main(int argc, char * argv[]){
           av_av_comp+=mean(C);
           av_dom_c_eigval+=real(largest_eigenvalue(C));
           av_c_trace += trace(C);
+          av_dom_b_eigval+=real(largest_eigenvalue(model.get_normalized_effective_competition_matrix()));
           systemstability sys_stab = model.assess_dynamical_stability();
           switch(sys_stab){
             case stable:{
@@ -77,8 +78,9 @@ int main(int argc, char * argv[]){
       av_av_comp/=Nsimuls;
       av_dom_c_eigval/=Nsimuls;
       av_c_trace/=Nsimuls;
+      av_dom_b_eigval/=Nsimuls;
       myfile << prob_feasible <<" "<< prob_stable << " " << prob_unstable << " " << prob_marginal;
-      myfile << " " << av_dom_eig <<" " << av_av_comp <<  " " << av_dom_c_eigval << " " << av_c_trace  <<  std::endl;
+      myfile << " " << av_dom_eig <<" " << av_av_comp <<  " " << av_dom_c_eigval << " " << av_c_trace  << " " << av_dom_b_eigval <<   std::endl;
 
     }
 

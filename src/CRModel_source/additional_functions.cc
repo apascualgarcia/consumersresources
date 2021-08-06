@@ -979,3 +979,10 @@ ncvector eigenvalues(const nmatrix & M){
   std::sort(v.begin(), v.end(), compare_complex);
   return v;
 }
+
+ntype square_root(const ntype& A){
+  if(A < 0){
+    throw error("Attempting to find the square root of a negative number.");
+  }
+  return 1.;
+}

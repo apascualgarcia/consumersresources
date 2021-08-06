@@ -98,6 +98,7 @@ public:
 
   /* returns the effective competition matrix */
   nmatrix get_effective_competition_matrix(unsigned int eq_number=0) const;
+  nmatrix get_normalized_effective_competition_matrix(unsigned int eq_number=0) const;
 
   /* returns the effective competition (average of the effective competition matrix) */
   ntype get_effective_competition(unsigned int eq_number=0) const;
