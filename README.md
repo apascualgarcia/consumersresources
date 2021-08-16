@@ -35,16 +35,32 @@ cmake --version
 ```
 sudo apt-get install python3
 ```
+We recommend to install pip3, which will make it easier to install the required packages:
+```
+sudo python3 -m pip install pip
+```
 
-* **Python libraries** : Four Python libraries need to be installed on your Python 3 path in order to make the programs work. These are **os**, **numpy**, **matplotlib** and **glob**. If these are not already present on your system, you can install them e.g. with pip.
+* **Python libraries** : Some Python libraries need to be installed on your Python 3 path in order to make the programs work. To avoid messing up your current setup, we recommend the usage of a virtual environment. The file requirements.txt provides a list of all needed python3 packages, which have to be downloaded within the virtual environment. We provide here a working example on how to set this up using the command **venv** to create a virtual environment named _consumers_resources_:
 ```
-sudo apt-get install python3-pip
+python3 -m venv consumers_resources
 ```
-will install pip on your system. You can then type
+We then activate the virtual environment so we can work in it without disturbing the rest of our python3 installation:
+
 ```
-pip3 install [libname]
+source bin/activate/consumers_resources
 ```
-where [libname] is the name of the wanted library.
+This new virtual environment does not have any package installed yet so we install all the ones required for this project:
+```
+pip3 install -r requirements.txt
+```
+
+We are now ready to work with any data analysis command in the project. When you have finished working on this project, do not forget to deactivate the virtual environment:
+
+```
+deactivate
+```
+
+Whenever you start working with this project, don't forget to activate your virtual environment!
 
 * **ts** : this tool is needed in order to print timestamps in the console output when a script is running. It can be found e.g. in the **moreutils** package which can be installed with
 ```

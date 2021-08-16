@@ -15,6 +15,8 @@ struct EcologicalNetwork{
 
   void optimize(MonteCarloSolver& mcs);
   ntype effective_competition(const Metaparameters&) const;
+  nmatrix get_effective_competition_matrix(const Metaparameters&) const;
+
 
   // attributes
   nmatrix A;

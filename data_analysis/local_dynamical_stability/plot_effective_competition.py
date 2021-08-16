@@ -4,23 +4,25 @@ import pandas as pd
 import numpy as np
 
 columns=['feasible volume', 'stable volume', 'unstable volume', 'marginal volume',
-                                'rate of return', 'mean(C)', 'dom C eigval', 'trace(C)', 'dom B eigval']
+                                'rate of return', 'mean(C)', 'dom C eigval', 'trace(C)',
+                                 'dom B eigval', 'ratio inter- intraspecific competition']
 data_file = 'data_output/eff_comp_all_data_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25_'
-data_suffix = '_9Jul21_verbose-level=1_alpha0=0.out'
+data_suffix = '_Metamatrices_verbose-level=1_alpha0=0.out'
 
 alpha_mode = ['optimal_matrix', 'fully_connected', 'random_structure']
 
-x_plot = 'dom B eigval'
-y_plot = 'stable volume'
-y_scale = 'linear'
-save_name = 'domBeigval_stability'
+x_plot = 'ratio inter- intraspecific competition'
+y_plot = 'rate of return'
+y_scale = 'log'
+save_name = 'ratio_inter_intra'
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
 
 for a in alpha_mode:
-    df = pd.DataFrame(data=np.loadtxt(data_file+a+data_suffix, usecols=[1,2,3,4,5,6,7,8,9]), columns=columns)
-    df[y_plot]=df[y_plot].abs()
+    df = pd.DataFrame(data=np.loadtxt(data_file+a+data_suffix, usecols=range(1, len(columns)+1)), columns=columns)
+    if y_scale=='log':
+        df[y_plot]=df[y_plot].abs()
     df.plot(x=x_plot, y=y_plot, ax=ax, linestyle='', label=cf.alpha_mode_label[a], color=cf.alpha_mode_colours[a])
 
 ax.set_ylabel(y_plot)

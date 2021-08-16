@@ -44,11 +44,38 @@ void EcologicalNetwork::optimize(MonteCarloSolver& mcs){
   return;
 }
 
-ntype EcologicalNetwork::effective_competition(const Metaparameters& m) const{
-  nmatrix G = this->G, A = this->A;
-  ntype sigma0 = m.sigma0, R0 = m.R0, S0=m.S0, l0 = m.l0, alpha0=m.alpha0, gamma0=m.gamma0;
-  nmatrix BetaGamma = sigma0*S0*gamma0*G*(-gamma0*R0*G+alpha0*A);
-  nmatrix C = -R0/(S0*l0)*BetaGamma;
+nmatrix EcologicalNetwork::get_effective_competition_matrix(const Metaparameters& m) const{
+  nmatrix C = nmatrix(m.NS, nvector(m.NS, 0.)), G=this->G, A=this->A;
+  nvector D = nvector(m.NR, 0.);
 
-  return mean(C);
+  /* initialize D */
+  for(size_t nu=0; nu < m.NR; ++nu){
+    for(size_t k=0; k < m.NS; ++k){
+      D[nu]+=A[nu][k];
+    }
+    D[nu]*=(1.*m.alpha0*m.S0);
+    D[nu]+=m.l0;
+    D[nu]/=(1.*m.R0);
+  }
+
+  for(size_t i=0; i < m.NS; ++i){
+    for(size_t j=0; j < m.NS; ++j){
+      for(size_t nu=0; nu < m.NR; ++nu){
+        ntype G_sum=0.;
+        for(size_t k=0; k < m.NS; ++k){
+          G_sum+=G[k][nu];
+        }
+        C[i][j]+=m.sigma0*m.gamma0/(D[nu]*D[nu])*G[i][nu]*(m.gamma0*m.l0*G[j][nu]-m.alpha0*A[nu][j]*(D[nu]+m.gamma0*m.S0*G_sum));
+      }
+    }
+  }
+
+  return C;
+}
+
+ntype EcologicalNetwork::effective_competition(const Metaparameters& m) const{
+  nmatrix C = this->get_effective_competition_matrix(m);
+  ntype lambda1 = real(largest_eigenvalue(C));
+
+  return 1./(m.NS-1.)*((1.*m.NS*lambda1)/trace(C)-1.);
 }

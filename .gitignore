@@ -14,6 +14,7 @@ old_*
 !local_dynamical_stability/*.out
 !largest_eigenvalue/*.out
 !structural_stability/*/*.out
+consumers_resources
 
 text/*
 
