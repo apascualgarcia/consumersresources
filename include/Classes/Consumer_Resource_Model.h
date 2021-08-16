@@ -102,6 +102,9 @@ public:
 
   /* returns the effective competition (average of the effective competition matrix) */
   ntype get_effective_competition(unsigned int eq_number=0) const;
+  /* returns the effective competition defined as the ratio of inter- and intraspecific competition (Eq. 9 in SM APG 2017)*/
+  ntype get_ratio_inter_intraspecific_competition(unsigned int eq_number=0) const;
+
 
   /* gives back binary biomass flux network */
   nmatrix get_biomass_flux_network() const;

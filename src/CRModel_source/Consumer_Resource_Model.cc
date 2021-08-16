@@ -1028,3 +1028,13 @@ nmatrix CRModel::get_normalized_effective_competition_matrix(unsigned int eq_num
   }
   return B;
 }
+
+ntype CRModel::get_ratio_inter_intraspecific_competition(unsigned int eq_number) const{
+  ntype sum_trace=trace(this->get_effective_competition_matrix(eq_number));
+  ntype lambda1 = real(this->largest_eigenvalue_at_equilibrium());
+  unsigned int NS = this->get_parameter_set()->NS;
+
+  ntype rho_eff = 1./(NS-1.)*((NS*lambda1*1.)/sum_trace-1.);
+
+  return rho_eff;
+}

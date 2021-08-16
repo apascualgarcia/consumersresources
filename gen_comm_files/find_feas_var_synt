@@ -12,7 +12,7 @@
 MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 ALPHA_MODE="optimal_matrix"
 SAVENAME="opt_mat_feasibility_NR25_NS25_test_run"
-OPTIMAL_MATRIX_FOLDER="9Jul21"
+OPTIMAL_MATRIX_FOLDER="Metamatrices"
 ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 ADDITIONAL_MODIF="verbose-level=1"
 NR=25

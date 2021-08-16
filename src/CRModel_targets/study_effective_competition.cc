@@ -22,10 +22,12 @@ int main(int argc, char * argv[]){
     unsigned int Nsimuls=1e4;
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
-    myfile << "# We are writing, in that order, G-matrix location, proportion of feasible, stable, unstable, marginal, dominant eigenvalue of J, <C>, dominant eigenvalue of C, trace of C, dominant eigenvalue of B" << std::endl;
+    myfile << "# We are writing, in that order, G-matrix location, proportion of feasible, stable, unstable, marginal, dominant eigenvalue of J, <C>";
+    myfile << ", dominant eigenvalue of C, trace of C, dominant eigenvalue of B, effective comp defined as Eq.9 in APG 2017" << std::endl;
 
     for(auto mat: matrix_list){
-      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0., av_av_comp=0., av_dom_c_eigval=0., av_c_trace=0., av_dom_b_eigval=0.;
+      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0.;
+      ntype av_av_comp=0., av_dom_c_eigval=0., av_c_trace=0., av_dom_b_eigval=0., av_inter_intra_ratio=0.;
       unsigned int N_dyn = 0;
       metaparams.foodmatrixpath=mat;
       metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
@@ -45,6 +47,7 @@ int main(int argc, char * argv[]){
           av_dom_c_eigval+=real(largest_eigenvalue(C));
           av_c_trace += trace(C);
           av_dom_b_eigval+=real(largest_eigenvalue(model.get_normalized_effective_competition_matrix()));
+          av_inter_intra_ratio+=model.get_ratio_inter_intraspecific_competition();
           systemstability sys_stab = model.assess_dynamical_stability();
           switch(sys_stab){
             case stable:{
@@ -70,17 +73,19 @@ int main(int argc, char * argv[]){
       }
       metaparams.syntrophy_matrix_path = syntrophy_folder;
       /* normalize to get probabilities */
-      prob_feasible/=Nsimuls;
-      prob_stable/=Nsimuls;
-      prob_unstable/=Nsimuls;
-      prob_marginal/=Nsimuls;
-      av_dom_eig/=N_dyn;
-      av_av_comp/=Nsimuls;
-      av_dom_c_eigval/=Nsimuls;
-      av_c_trace/=Nsimuls;
-      av_dom_b_eigval/=Nsimuls;
+      prob_feasible/=(1.*Nsimuls);
+      prob_stable/=(1.*Nsimuls);
+      prob_unstable/=(1.*Nsimuls);
+      prob_marginal/=(1.*Nsimuls);
+      av_dom_eig/=(1.*N_dyn);
+      av_av_comp/=(1.*Nsimuls);
+      av_dom_c_eigval/=(1.*Nsimuls);
+      av_c_trace/=(1.*Nsimuls);
+      av_dom_b_eigval/=(1.*Nsimuls);
+      av_inter_intra_ratio/=(1.*Nsimuls);
       myfile << prob_feasible <<" "<< prob_stable << " " << prob_unstable << " " << prob_marginal;
-      myfile << " " << av_dom_eig <<" " << av_av_comp <<  " " << av_dom_c_eigval << " " << av_c_trace  << " " << av_dom_b_eigval <<   std::endl;
+      myfile << " " << av_dom_eig <<" " << av_av_comp <<  " " << av_dom_c_eigval << " " << av_c_trace;
+      myfile  << " " << av_dom_b_eigval << " " << av_inter_intra_ratio<<  std::endl;
 
     }
 
