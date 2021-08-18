@@ -20,14 +20,14 @@ ADDITIONAL_MODIF="gamma0=1 alpha0=1"
 SAVENAME="opt_mat"
 # we would like to run a 100 runs of the MC algorithm of each matrix
 SEED_NUMBER=($(seq 0 1 100))
-
+# name of the command file generated in the ./commands folder
+COMMAND_FILE="optimize_matrices"
 # other metaparameters have default value
 CONFIGURATION_FILE="configuration"
 
 
 ##### END OF CONFIGURABLE PART #######
 
-COMMAND_FILE="optimize_matrices"
 # And possible modifications for NR=50 and NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
 #ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
@@ -74,4 +74,3 @@ do
     done
   done
 done
-#echo "Launched commands in the background, please check appropriate log files for progress"
