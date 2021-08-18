@@ -93,7 +93,8 @@ This package offers the possibility of finding the ecological network _(A, G)_ w
 ./gen_comm_files/optimize_matrices
 ./run_commands commands/optimize_matrices.txt CORES
 ```
-#### The energy function _E(A,G,m)_ is by default the one from the main text but may be easily modified if needed. Let us say we would like to generate syntrophy matrices that minimize a new quadratic form  _E'(A,G,m)_ that has not been implemented in the code yet. The first step is to include _E'(A,G,m)_ in the code, i.e. write it as a C++ function in the **src/CRModel_source/optimize_matrix.cc** file (it can e.g. be appended at the end of the file). That C++ function, let's call it for instance `new_qf` must have the following structure:
+
+The energy function _E(A,G,m)_ is by default the one from the main text but may be easily modified if needed. Let us say we would like to generate syntrophy matrices that minimize a new quadratic form  _E'(A,G,m)_ that has not been implemented in the code yet. The first step is to include _E'(A,G,m)_ in the code, i.e. write it as a C++ function in the **src/CRModel_source/optimize_matrix.cc** file (it can e.g. be appended at the end of the file). That C++ function, let's call it for instance `new_qf` must have the following structure:
 ```
 ntype new_qf(const nmatrix& alpha, const nmatrix& gamma, void* additional_params){
    //definition of the new quadratic form.
@@ -111,49 +112,11 @@ make -C build
 The new energy form has then been added and the commands above can be run to generate the new optimized matrices.
 
 
-### Scripts: what they do and how to use them
-* **compute_critical_Delta_matrices** : this one is actually fairly simple. It computes the critical delta of a given set of matrices (given by default but which can be changed if needed) for every configuration of metaparameters specified. This means the total number of critical delta computed will be #matrices x #configuration. If you don't change the default matrix list and the default set of metaparameters, then you can simply run the script with the command
-```
-main_scripts/compute_delta_critical_matrices CORES
-```
-where **CORES** is an integer specifying the number of cores you want to allocate for this task. If you need to change the list of matrices or the set of configurations, you can do it manually in the script with a standard text editor, e.g. **nano** :
-```
-nano main_scripts/compute_delta_critical_matrices
-```
-Then you can specify the name of your set of matrices by changing the value of **MATRIX_LIST**. Be careful not to include the file extension. Note that the file extension must be '.in' and the file must be in the **config** folder, e.g.
-```
-MATRIX_LIST="other_matrix_list"
-```
-for a list of matrices that would be config/other_matrix_list.in.
-Similarly, for an other set of metaparameters configurations
-```
-METAPARAMS_LIST="other_metaparams_list"
-```
-for the file config/other_metaparams_list.in
+### Feasibility and dynamical stability
+One script is used to assess the feasibility and local dynamical stability of a given ecological network. We first explain which metrics are used and how they are computed and then we discuss about how this can be performed.
 
-* **build/optimize_matrices**:
-This script allows to create matrices which respect the needed energy conditions.
-More specifically, it transforms each matrix of a set (the list of matrices
-needs to be given as the path_to_food_matrix value of the input configuration file)
-into a form which minimizes a given cost function energy_function (which can be)
-changed on line 18). New energy functions can be added on the **optimize_matrix.cc** file
-from the CRModel_source folder (the command ``./configure`` will need to be run again after the new energy form is added).
+To assess feasibility/dynamical stability, we estimate the percentage of feasible/dynamically stable within a rectangular cuboid ![cuboid](http://www.sciweavers.org/tex2img.php?eq=%28%5Cgamma_0%2C%20S_0%2C%20%5Calpha_0%29%20%5Cin%20%5B0.01%2C%201%5D%20%5Ctimes%20%5B0.01%2C1%5D%20%5Ctimes%20%5B0%2C%200.02%5D&bc=White&fc=Black&im=jpg&fs=12&ff=modern&edit=0)
 
-Typical usage (from main folder):
-```
-build/optimize_matrices PATH_TO_CONFIG_FILE path_to_food_matrix=PATH_OF_MATRIX_LIST
-```
-# Feasibility and dynamical stability
-
-The workload needed to compute the feasibility and dynamical stability data we are interested in is generally separated in two distinct steps. First, a text file containing the exact commands we would like to run is generated, either by hand or *as strongly advised* through the means of another script, and placed in the ``commands`` folder. The commands listed on the target text file, which we can call ``target.txt``, may then be executed with the command:
-
-```
-main_scripts/run_commands LOCATION_OF_THE_TARGET_FILE NUMBER_OF_CORES
-```
-
-The variable ``LOCATION_OF_THE_TARGET_FILE`` has a self-explicit name and would be for instance ```commands/target.txt```. The variable ```NUMBER_OF_CORES``` is an integer which specifies on how many cores the simulations should be run (**warning**: once the simulations are started, it is very painful to delete them by hand, it is therefore really important to think well before launching them).
-
-## Feasibility
 
 How feasibility works is explained in the main Thesis. For a matrix consumption matrix _G_ and a set of metaparemeters _M_, the most interesting metric is the percentage of feasible systems -- which we also simply call feasibility -- denoted _F_.
 The file **find_feas_var_synt** located in the *gen_comm_files* folder allows to generate a command file which when executed will compute the feasibility of each configuration thrown as an input. The different variables that can be chosen are:
@@ -202,24 +165,24 @@ The file **find_dyn_stab** located in the *gen_comm_files* folder allows to gene
 The script and variables function exactly the same way as for the feasibility case.
 
 
-# Examples of different tasks
-## Generation of matrices that minimize a new energy
-Let's say we would like to generate syntrophy matrices that minimize a new quadratic form  _E'(A,G,m)_ that has not been implemented in the code yet. The first step is to include _E'(A,G,m)_ in the code, i.e. implement it as a C++ function in the **src/CRModel_source/optimize_matrix.cc** file (it can e.g. be impedended at the end of the file). That C++ function, let's call it for instance `new_qf` should have the following structure:
-```
-ntype new_qf(const nmatrix& alpha, const nmatrix& gamma, void* additional_params){
-   //definition of the new quadratic form.
-}
-```
-The first argument must be the syntrophy matrix _A_, while the second argument is the competition matrix _G_, even if it ends up not being used in the quadratic form. Finally, the third argument can be a pointer to any additional parameters that would be needed, e.g. metaparameters.
 
-Please note that the declaration of the function (so, without its complete definition) must also be added to the corresponding header file **include/Functions/optimize_matrix.h**.
+## Structural stability
 
-Once this has been done, the remaining steps are simply to change the line 20 of the file **src/CRModel_targets/optimize_matrices.cc** so that the function called energy_function returns `new_qf` instead of whatever it was set to before. Finally, one needs to recompile everything (from the main directory) and build the needed dependancies:
+* **compute_critical_Delta_matrices** : this one is actually fairly simple. It computes the critical delta of a given set of matrices (given by default but which can be changed if needed) for every configuration of metaparameters specified. This means the total number of critical delta computed will be #matrices x #configuration. If you don't change the default matrix list and the default set of metaparameters, then you can simply run the script with the command
 ```
-make -C build
+main_scripts/compute_delta_critical_matrices CORES
 ```
-Finally, the matrices can be generated using the command:
+where **CORES** is an integer specifying the number of cores you want to allocate for this task. If you need to change the list of matrices or the set of configurations, you can do it manually in the script with a standard text editor, e.g. **nano** :
 ```
-build/optimize_matrices LOCATION_OF_THE_CONFIGURATION_FILE path_to_food_matrix=LOCATION_OF_THE_CONSUMPTION_MATRIX_LIST
+nano main_scripts/compute_delta_critical_matrices
 ```
-A configuration file is always needed, in case for instance metaparameters are used in the energy function. The _A_ matrices corresponding to each _G_ in the provided matrix list will be stored in the location of the `path_to_syntrophy_matrix` variable, which can also be specified as an additional argument of the script.
+Then you can specify the name of your set of matrices by changing the value of **MATRIX_LIST**. Be careful not to include the file extension. Note that the file extension must be '.in' and the file must be in the **config** folder, e.g.
+```
+MATRIX_LIST="other_matrix_list"
+```
+for a list of matrices that would be config/other_matrix_list.in.
+Similarly, for an other set of metaparameters configurations
+```
+METAPARAMS_LIST="other_metaparams_list"
+```
+for the file config/other_metaparams_list.in
