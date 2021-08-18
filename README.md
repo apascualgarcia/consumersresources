@@ -116,11 +116,14 @@ The new energy form has then been added and the commands above can be run to gen
 One script is used to assess the feasibility and local dynamical stability of a given ecological network. We first explain which metrics are used and how they are computed and then we discuss about how this can be performed.
 
 To assess feasibility/dynamical stability of a given ecological network, we estimate the percentage of feasible/dynamically stable within a rectangular cuboid ![cuboid](http://www.sciweavers.org/tex2img.php?eq=%28%5Cgamma_0%2C%20S_0%2C%20%5Calpha_0%29%20%5Cin%20%5B0.01%2C%201%5D%20%5Ctimes%20%5B0.01%2C%201%5D%20%5Ctimes%20%5B0%2C%200.02%5D&bc=White&fc=Black&im=jpg&fs=12&ff=modern&edit=0). For each ecological network, the procedure is the following:
+
 1. Choose a random ![point](http://www.sciweavers.org/tex2img.php?eq=%28%5Cgamma_0%2C%20S_0%2C%20%5Calpha_0%29&bc=White&fc=Black&im=jpg&fs=12&ff=modern&edit=0) point in the metaparameters-cuboid.
 1. Generate a parameters set from these metaparameters.
 1. Check whether that parameters set is feasible or not.
 1. If the parameters set is feasible, check if it is dynamically stable.
 1. If it is dynamically stable, compute its rate of return to equilibrium and its effective competition.
+
+That algorithmic procedure is repeated a large number of times, such that we obtain a fairly accurate measure of the feasible/dynamically stable volume inside the cuboid.
 
 
 How feasibility works is explained in the main Thesis. For a matrix consumption matrix _G_ and a set of metaparemeters _M_, the most interesting metric is the percentage of feasible systems -- which we also simply call feasibility -- denoted _F_.
