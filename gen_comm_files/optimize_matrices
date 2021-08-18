@@ -8,21 +8,26 @@
 # the variable COMMAND_FILE
 
 # Example for NR=NS=25
-#MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
+# Name of the matrix list within the matrix_list folder
 MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
-#MATRIX_LIST="G_matrices"
-MCMODE="unconstrained"
-ADDITIONAL_MODIF="gamma0=1"
-ALPHA_VAL="1"
+# intra specific syntrophy, can be either "allowed" or "not_allowed"
 INTRA_SPE_SYN="allowed"
+# Monte Carlo mode: A_only to find the optimal A for a given G or both_modified to find both G and A for a given G connectance
+MCMODE="A_only"
+# additional modifications of the default metaparameters values
+ADDITIONAL_MODIF="gamma0=1 alpha0=1"
+# additional suffix in the final name
 SAVENAME="opt_mat"
+# we would like to run a 100 runs of the MC algorithm of each matrix
 SEED_NUMBER=($(seq 0 1 100))
 
-
+# other metaparameters have default value
 CONFIGURATION_FILE="configuration"
+
+
+##### END OF CONFIGURABLE PART #######
+
 COMMAND_FILE="optimize_matrices"
-
-
 # And possible modifications for NR=50 and NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
 #ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"

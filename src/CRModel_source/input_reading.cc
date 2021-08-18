@@ -64,10 +64,8 @@ eqmode string_to_eq_mode(std::string mode){
 }
 
 MCmode string_to_mcmode(std::string s){
-  if(s=="constant_connectance"){
-    return MCmode(constant_connectance);
-  }else if(s=="unconstrained"){
-    return MCmode(unconstrained);
+  if(s=="A_only"){
+    return MCmode(A_only);
   }else if(s=="both_modified"){
     return MCmode(both_modified);
   }else{

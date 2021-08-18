@@ -12,8 +12,8 @@ data_suffix = '_Metamatrices_verbose-level=1_alpha0=0.out'
 alpha_mode = ['optimal_matrix', 'fully_connected', 'random_structure']
 
 x_plot = 'ratio inter- intraspecific competition'
-y_plot = 'rate of return'
-y_scale = 'log'
+y_plot = 'stable volume'
+y_scale = 'linear'
 save_name = 'ratio_inter_intra'
 
 fig = plt.figure()

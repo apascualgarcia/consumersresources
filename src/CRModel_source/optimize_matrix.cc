@@ -33,16 +33,16 @@ nmatrix proposed_new_alpha(const nmatrix & alpha, const nmatrix& gamma, bool cop
   bool leave_loop=false;
   do{
     switch(mcs.mcmode){
-      case unconstrained: {
+      case A_only: {
         /* July 2nd 2021: Leo proposes this new version: the same as Alberto but with a 0.5 probability of making a 0->1 or 1->0 in the matrix */
         new_alpha=proposed_new_alpha_Leo(alpha, gamma, coprophagy_allowed, steps);
         break;
       }
-      case constant_connectance : {
-        /* AS OF JULY 2ND proposed_new_alpha_Alberto VERSION WORKS, it only changes the nestedness without changing the connectance */
-        new_alpha=proposed_new_matrix_Alberto(alpha, steps);
-        break;
-      }
+      // case constant_connectance : {
+      //   /* AS OF JULY 2ND proposed_new_alpha_Alberto VERSION WORKS, it only changes the nestedness without changing the connectance */
+      //   new_alpha=proposed_new_matrix_Alberto(alpha, steps);
+      //   break;
+      // }
       default : {
         throw error("Unknown MC mode in the proposed_new_alpha function");
         break;
@@ -61,17 +61,17 @@ EcologicalNetwork proposed_new_eco_net(const EcologicalNetwork& old_net, unsigne
   do{
     bool add_condition=true;
     switch(mcs.mcmode){
-      case unconstrained:{
+      case A_only:{
         new_net = old_net;
         flip_one_binary_matrix_element(new_net.A);
         break;
       }
 
-      case constant_connectance:{
-        new_net = old_net;
-        swap_two_matrix_elements(new_net.A);
-        break;
-      }
+      // case constant_connectance:{
+      //   new_net = old_net;
+      //   swap_two_matrix_elements(new_net.A);
+      //   break;
+      // }
 
       case both_modified:{
         new_net = old_net;

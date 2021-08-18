@@ -16,7 +16,6 @@ NS=25
 CONFIGURATION_FILE="config/configuration.in"
 COMMAND_FILE="study_eff_comp_NR25_NS25.txt"
 SAVENAME="eff_comp_all_data_NR25_NS25"
-ALPHA_VALS="0"
 #BUILD_NAME="study_dynamical_stability_systems"
 BUILD_NAME="study_effective_competition"
 
@@ -35,36 +34,27 @@ for a in $ALPHA_MODE
 do
   for matl in $MATRIX_LIST
   do
-    for alpha in $ALPHA_VALS
-    do
-      CURRENT_NAME="${SAVENAME}_${matl}_${a}_${OPTIMAL_MATRIX_FOLDER}"
-      VOLUME_PATH="${VOL_NAME}_${matl}_${a}_${OPTIMAL_MATRIX_FOLDER}"
-      if [ ! -z "${ADDITIONAL_MODIF}" ]
-      then
-        for add in $ADDITIONAL_MODIF
-        do
-          CURRENT_NAME="${CURRENT_NAME}_${add}"
-        done
-      fi
-      CURRENT_NAME="${CURRENT_NAME}_alpha0=${alpha}"
-      VOLUME_PATH="${VOLUME_PATH}_alpha0=${alpha}"
+    CURRENT_NAME="${SAVENAME}_${matl}_${OPTIMAL_MATRIX_FOLDER}"
+    VOLUME_PATH="${VOL_NAME}_${matl}_${OPTIMAL_MATRIX_FOLDER}"
+    if [ ! -z "${ADDITIONAL_MODIF}" ]
+    then
+      for add in $ADDITIONAL_MODIF
+      do
+        CURRENT_NAME="${CURRENT_NAME}_${add}"
+      done
+    fi
 
-      FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} alpha0=${alpha} ${ADDITIONAL_MODIF}"
-      # for old version
-      # FIRST_COMMAND="${FIRST_COMMAND} path_to_volume='feasibility/${VOLUME_PATH}.out'"
-      FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
+    FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} ${ADDITIONAL_MODIF}"
+    FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
 
-      COMMAND_NAME="${FIRST_COMMAND}"
+    COMMAND_NAME="${FIRST_COMMAND}"
 
-      LOG_NAME="logs/${CURRENT_NAME}.log"
-      ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
-      # execute command
-      #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-      echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}
-      # write command to log
-      now="["$(date)"]"
-      echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
-    done
+    LOG_NAME="logs/${CURRENT_NAME}.log"
+    ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
+    echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}
+    # write command to log
+    now="["$(date)"]"
+    echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
   done
 done
 #echo "Launched commands in the background, please check appropriate log files for progress"

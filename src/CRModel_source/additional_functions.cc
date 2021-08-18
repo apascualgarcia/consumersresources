@@ -853,10 +853,8 @@ void flip_one_binary_matrix_element(nmatrix & B){
 
 
 std::string mcmode_to_string(const MCmode & mc){
-  if(mc==unconstrained){
-    return "unconstrained";
-  }else if(mc==constant_connectance){
-    return "constant_connectance";
+  if(mc==A_only){
+    return "A_only";
   }else if(mc==both_modified){
     return "both_modified";
   }else{

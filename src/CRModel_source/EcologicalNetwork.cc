@@ -33,9 +33,9 @@ EcologicalNetwork::EcologicalNetwork(const nmatrix& A_, const nmatrix& G_){
 
 
 void EcologicalNetwork::optimize(MonteCarloSolver& mcs){
-  if(mcs.mcmode==constant_connectance){
-    this->A = random_binary_matrix_with_connectance(this->NR, this->NS, connectance(this->G));
-  }
+  // if(mcs.mcmode==constant_connectance){
+  //   this->A = random_binary_matrix_with_connectance(this->NR, this->NS, connectance(this->G));
+  // }
   if(mcs.mcmode==both_modified){
     this->A = random_binary_matrix_with_connectance(this->NR, this->NS, 0.5);
     this->G = random_full_rank_binary_matrix_with_connectance(this->NS, this->NR, connectance(this->G));

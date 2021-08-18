@@ -45,11 +45,10 @@ enum CRModelType{full, effective};
 enum buildingmode{use_l, use_m};
 
 /*  three different types to run the MC algorithm :
-      - constant_connectance: alpha only is changed and is kept at a constant given connectance
-      - unconstrained : alpha only is changed and is unconstrained
-      - both_modified : BOTH alpha and gamma are modified by the algorithm. alpha is unconstrained
-                        but gamma must have full rank AND has a given connectance   */
-enum MCmode{constant_connectance, unconstrained, both_modified};
+      - A_only : alpha only is changed and is unconstrained
+      - both_modified : BOTH alpha and gamma are modified by the algorithm. alpha is modified without constraints
+                        but gamma must have full rank AND a given connectance   */
+enum MCmode{A_only, both_modified};
 
 
 /*  writemode is used in the general time evolution of the system. It tells you whether you should, and if so Where
