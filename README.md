@@ -86,7 +86,6 @@ The script can be executed with the following command:
 ```
 where _CORES_ is the number of cores (integer) which should be reserved for the script. In order to avoid cluttering the terminal, every script is run in the background. It uses the _nohup_ command and runs even when the user logs out (e.g when an ssh session is left) and can hence only be killed manually commands similar to _pkill_.
 
-## Tasks that can be accomplished with this package
 ### Generation of optimized matrices
 This package offers the possibility of finding the ecological network _(A, G)_ which minimizes a given energy function _E(A,G,m)_ (_m_ are simply metaparameters). Using a Monte Carlo algorithm, one can find the syntrophy matrix _A_ which minimizes _E(A,G,m)_ for a given consumption matrix _G_ and a set of metaparameters _m_. One also has the possibility to find both _A_ and _G_ for a given _m_. This can be set up using the provided script in **./gen_comm_files/optimize_matrices**. As explained above, the scripts can be run with the commands:
 ```
@@ -138,7 +137,7 @@ Note that all of them should be initialized in order for the command to work (ev
 
 **Usage example:**
 
-To make it more clear, let's look at an example.
+To make it clearer, let's look at an example.
 ```
 MATRIX_LIST="test_matrices"
 ALPHA_MODE="optimal_matrix"
@@ -152,7 +151,7 @@ COMMAND_FILE="run_001_study_systems"
 Feasibility for all matrices in the **matrix_list/test_matrices.in** file will be computed. Alpha is here in "optimal" mode, and the optimal meta-matrices are located in the **optimal_matrices/syntrophy/Nr25_Nc25/Metamatrices** folder. Please note that it is important to put any new folder created in the right place and to use the right extensions, otherwise this script *will not* work without modifications. _F_ will be computed for three different values of alpha0, i.e. 0, 0.5 and 1. Additionally we ask that the operations should be "mildly" displayed on the terminal, i.e. a `verbose-level` equal to 1. The file **config/configuration.in** will be loaded as a configuration file when the commands will be executed. Finally, the command file generated with this script will be **commands/run_001_study_systems.txt**.
 
 
-### Structural stability
+<!-- ### Structural stability
 
 * **compute_critical_Delta_matrices** : this one is actually fairly simple. It computes the critical delta of a given set of matrices (given by default but which can be changed if needed) for every configuration of metaparameters specified. This means the total number of critical delta computed will be #matrices x #configuration. If you don't change the default matrix list and the default set of metaparameters, then you can simply run the script with the command
 ```
@@ -171,6 +170,35 @@ Similarly, for an other set of metaparameters configurations
 ```
 METAPARAMS_LIST="other_metaparams_list"
 ```
-for the file config/other_metaparams_list.in
+for the file config/other_metaparams_list.in -->
 
 ## Analysing data
+Once data has been produced (see section above), it needs to be analyzed. This is done mainly through the pandas and matplotlib Python libraries. As stated above, we recommend working in a Python virtual environment in order to install and use the required packages locally. The workflow for data analysis is the following :
+1. Take the files computed by the scripts above.
+1. Transform it into a more readable (usually with a .csv extension) file.
+1. Plot the desired quantities.
+
+We have four folders which produce the figures from the four main quantities of interest : feasibility, local dynamical stability, rate of return to equilibrium (i.e. eigenvalue of the jacobian at equilibrium with the largest real part) and structural stability. The scripts are pretty documented themselves so we only provide the commands to produce figures:
+
+*feasibility*:
+```
+python3 data_analysis/feasibility/compute_feasibility_data.py
+python3 data_analysis/feasibility/plot_feasibility_data.py
+```
+
+*dynamical stability*:
+```
+python3 data_analysis/local_dynamical_stability/compute_lds_data.py
+python3 data_analysis/local_dynamical_stability/plot_lds_data.py
+```
+
+*effective competition* (part of dynamical stability):
+```
+python3 data_analysis/local_dynamical_stability/plot_lds_data.py
+```
+
+*dominant eigenvalue*:
+```
+python3 data_analysis/largest_eigenvalue/compute_largest_eigenvalue_data.py
+python3 data_analysis/largest_eigenvalue/plot_largest_eigenvalue_data.py
+```

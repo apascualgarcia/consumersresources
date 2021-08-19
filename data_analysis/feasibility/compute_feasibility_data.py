@@ -1,5 +1,8 @@
 import consumer_resource_data_analysis as cf
 
+# Two important metrics are computed from the feasibility data:
+# the feasibility volume and decay rate.
+
 volume_data=dict({
     'data file': 'feasibility/opt_mat_feasibility_NR25_NS25_test_run_full_rank_opt_consumption_mat_NR25_NS25',
     'OM folder': '9Jul21',
@@ -18,6 +21,7 @@ decay_rate_data=dict({
     'alpha0_range': cf.alpha0
 })
 
-to_compute = ['feasible volume', 'feasible decay rate']
 
+##### DO NOT MODIFY BELOW THIS LINE ##########
+to_compute = ['feasible volume', 'feasible decay rate']
 cf.compute_feasibility_data(to_compute, volume_data, decay_rate_data)

@@ -1,5 +1,9 @@
 import consumer_resource_data_analysis as cf
 
+# Three important metrics can be computed from the dynamical stability data:
+# the stability volume, decay rate and p-value
+to_compute = ['ld stable volume', 'ld stable decay rate', 'ld stable p-value']
+
 volume_data=dict({
     'file name': 'local_dynamical_stability/opt_mat_local_dynamical_stability_NR25_NS25_test_run_full_rank_opt_consumption_mat_NR25_NS25',
     'OM folder': '9Jul21',
@@ -18,6 +22,5 @@ decay_rate_data=dict({
     'alpha0_range': cf.alpha0
 })
 
-to_compute = ['ld stable p-value']
-
+####### DO NOT MODIFY BELOW THIS LINE ################  
 cf.compute_lds_data(to_compute, volume_data, decay_rate_data)

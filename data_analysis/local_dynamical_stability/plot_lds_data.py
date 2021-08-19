@@ -1,6 +1,8 @@
 import consumer_resource_data_analysis as cf
 import matplotlib.pyplot as plt
 
+figures_to_plot = ['ld stable volume', 'ld stable decay rate']
+
 ldstable_volume=dict({
     'intrashift': 0.1,
     'intershift': 0.5,
@@ -17,8 +19,6 @@ ldstable_decay_rates = dict({
     'alpha mode': ['optimal_matrix', 'fully_connected', 'random_structure'],
 })
 
-
-figures_to_plot = ['ld stable volume', 'ld stable decay rate']
-
+##### DO NOT MODIFY BELOW THIS LINE #####
 
 cf.plot_data(figures_to_plot, ldstable_volume, ldstable_decay_rates, type='ld stable')

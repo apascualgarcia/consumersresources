@@ -3,19 +3,21 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-columns=['feasible volume', 'stable volume', 'unstable volume', 'marginal volume',
-                                'rate of return', 'mean(C)', 'dom C eigval', 'trace(C)',
-                                 'dom B eigval', 'ratio inter- intraspecific competition']
+## Plot effective competition figure
+
 data_file = 'data_output/eff_comp_all_data_NR25_NS25_full_rank_opt_consumption_mat_NR25_NS25_'
-data_suffix = '_Metamatrices_verbose-level=1_alpha0=0.out'
-
+data_suffix = '_Metamatrices_verbose-level=1_alpha0=0.out' 
 alpha_mode = ['optimal_matrix', 'fully_connected', 'random_structure']
-
 x_plot = 'ratio inter- intraspecific competition'
 y_plot = 'stable volume'
 y_scale = 'linear'
 save_name = 'ratio_inter_intra'
 
+
+######### DO NOT MODIFY BELOW THIS LINE #########
+columns=['feasible volume', 'stable volume', 'unstable volume', 'marginal volume',
+                                'rate of return', 'mean(C)', 'dom C eigval', 'trace(C)',
+                                 'dom B eigval', 'ratio inter- intraspecific competition']
 fig = plt.figure()
 ax = fig.add_subplot(111)
 
@@ -24,7 +26,6 @@ for a in alpha_mode:
     if y_scale=='log':
         df[y_plot]=df[y_plot].abs()
     df.plot(x=x_plot, y=y_plot, ax=ax, linestyle='', label=cf.alpha_mode_label[a], color=cf.alpha_mode_colours[a])
-
 ax.set_ylabel(y_plot)
 ax.legend()
 ax.set_yscale(y_scale)
