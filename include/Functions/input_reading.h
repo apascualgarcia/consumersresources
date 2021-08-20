@@ -11,6 +11,7 @@ eqmode string_to_eq_mode(std::string);
 buildingmode string_to_building_mode(std::string);
 MCmode string_to_mcmode(std::string);
 perturbmode string_to_perturbmode(std::string);
+alphavalue string_to_alpha_value(std::string);
 
 
 #endif

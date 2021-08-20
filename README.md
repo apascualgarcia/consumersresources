@@ -149,7 +149,11 @@ CONFIGURATION_FILE="configuration"
 COMMAND_FILE="run_001_study_systems"
 ```
 Feasibility for all matrices in the **matrix_list/test_matrices.in** file will be computed. Alpha is here in "optimal" mode, and the optimal meta-matrices are located in the **optimal_matrices/syntrophy/Nr25_Nc25/Metamatrices** folder. Please note that it is important to put any new folder created in the right place and to use the right extensions, otherwise this script *will not* work without modifications. _F_ will be computed for three different values of alpha0, i.e. 0, 0.5 and 1. Additionally we ask that the operations should be "mildly" displayed on the terminal, i.e. a `verbose-level` equal to 1. The file **config/configuration.in** will be loaded as a configuration file when the commands will be executed. Finally, the command file generated with this script will be **commands/run_001_study_systems.txt**.
-
+As explained above, the commands to run are then:
+```
+./gen_comm_files/study_systems
+./run_commands commands/run_001_study_systems.txt CORES
+```
 
 <!-- ### Structural stability
 
@@ -197,7 +201,7 @@ python3 data_analysis/local_dynamical_stability/plot_lds_data.py
 python3 data_analysis/local_dynamical_stability/plot_lds_data.py
 ```
 
-*dominant eigenvalue*:
+*rate of return*:
 ```
 python3 data_analysis/largest_eigenvalue/compute_largest_eigenvalue_data.py
 python3 data_analysis/largest_eigenvalue/plot_largest_eigenvalue_data.py

@@ -12,7 +12,7 @@ std::mt19937 random_engine;
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
   nmatrix input;
-  if(m.verbose > 1){
+  if(m.verbose > 2){
     std::cout << "\t Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
   std::ifstream in(m.foodmatrixpath);

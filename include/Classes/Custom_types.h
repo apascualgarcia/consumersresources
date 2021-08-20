@@ -25,6 +25,9 @@ enum gammamode{random_val, nested, antinested};
 enum alphamode{fully_connected, random_structure, no_release_when_eat, one_release, optimal_matrix};
 /* eqmode tells you when you stop your time evolution algorithm */
 enum eqmode{oneextinct, convergence};
+/* alpha value: input value or overriden by critical value */
+enum alphavalue{input, critical};
+
 /*
 perturbmode tells which type of perturbation is chosen :
     - perturb_l : l_mu is perturbed by an amount delta
@@ -35,7 +38,7 @@ enum perturbmode{perturb_l, remove_l};
 
 /*  when using polynomial please specify the degree manually otherwise,
     there will be a runtime error */
-enum fitmode{sigmoidal, polynomial, sigmoidal_erf};
+enum fitmode{sigmoidal, polynomial, sigmoidal_erf, linear};
 enum stabilitymode{dynamical, structural};
 
 enum systemstability {stable, marginal, unstable};

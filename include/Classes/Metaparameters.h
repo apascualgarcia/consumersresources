@@ -19,6 +19,7 @@ struct Metaparameters{
   gammamode gamma_mode;
   taumode tau_mode;
   alphamode alpha_mode;
+  alphavalue alpha_value;
   std::string foodmatrixpath;
   std::string syntrophy_matrix_path;
   unsigned int verbose;

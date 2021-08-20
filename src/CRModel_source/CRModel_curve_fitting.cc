@@ -33,6 +33,7 @@ double sigmoidal_fit(double x, const gsl_vector* a){
   double x0 = gsl_vector_get(a,0);
   double scale = gsl_vector_get(a,1);
 
+  /* /!\ THE LINE BELOW SHOULD NOT BE HERE */
   /* CAREFUL : add -0.5 because that's the target */
   result = 1./(1.+gsl_sf_exp(-scale*(x-x0)))-0.5;
   return result;
@@ -61,8 +62,7 @@ void set_jacobian_matrix_fit(const gsl_vector* params, void* data, gsl_matrix* J
       set_jacobian_matrix_sigmoidal_fit(params, data, J);
       break;
     case polynomial:{
-      error err("Jacobian for the polynomial fit not implemented.");
-      throw err;
+      set_jacobian_matrix_polynomial_fit(params,data,J);
       break;
     }
     default:{
@@ -92,6 +92,24 @@ void set_jacobian_matrix_sigmoidal_fit(const gsl_vector* params, void* data, gsl
   return;
 }
 
+void set_jacobian_matrix_polynomial_fit(const gsl_vector* params, void* data, gsl_matrix* J){
+  /* x-axis data points */
+  double* x = ((struct data*)data)->x;
+  /* number of points that must be fitted */
+  size_t n = ((struct data*)data)->n;
+  /* number of fitting parameters */
+  size_t p = NUMBER_OF_FITTING_PARAMETERS;
+
+  /* J has shape n x p i.e number of points rows x polynomial degree columns */
+  for(size_t i=0; i < n; ++i){
+    for(size_t j=0; j < p; ++j){
+      /* dfi/dpj = x_i^j */
+      gsl_matrix_set(J, i, j, gsl_pow_uint(x[i],j));
+    }
+  }
+
+  return;
+}
 
 
 double fitting_function(double x, const gsl_vector* a, fitmode fit_mode){
@@ -269,6 +287,26 @@ nvector guess_initial_fit_parameters(const nvector& x, const nvector& y, fitmode
       break;
     }
 
+    case polynomial:{
+      /* for the estimate on the solution, we simply take the x whose y is closer to 0 */
+      ntype approx_sol = x[0], val_of_approx_sol = y[0];
+      for(size_t i = 1; i < n; ++i){
+        /* if y[i] is closer to zero than the previous value, change the estimate */
+        if(y[i]*y[i] < val_of_approx_sol*val_of_approx_sol){
+          approx_sol = x[i];
+          val_of_approx_sol = y[i];
+        }
+      }
+
+      a_init.push_back(approx_sol);
+
+      /* for the slope estimate, we take (y[n]-y[0])/(x[n]-x[0])*/
+      ntype approx_slope = (1.*(y[n-1]-y[0]))/(1.*(x[n-1]-x[0]));
+
+      a_init.push_back(approx_slope);
+      break;
+    }
+
     default:{
       error err("This type of fitting has not been implemented yet or does not exist.");
       throw err;
@@ -343,12 +381,19 @@ statistics estimate_alpha_crit_from_interval(const nvector& interval, const nvec
   nvector y_points_to_fit = extinctions;
 
   switch(fit_mode){
-    case sigmoidal :
+    case sigmoidal :{
       NUMBER_OF_FITTING_PARAMETERS = 2;
       break;
-    case sigmoidal_erf:
+      }
+    case sigmoidal_erf:{
       NUMBER_OF_FITTING_PARAMETERS = 2;
       break;
+    }
+    /* fitting with a polynomial of degree 2 ie with a linear fit*/
+    case polynomial:{
+      NUMBER_OF_FITTING_PARAMETERS = 2;
+      break;
+    }
     default:
       error err("This type of fitting has not been implemented yet or does not exist.");
       throw err;

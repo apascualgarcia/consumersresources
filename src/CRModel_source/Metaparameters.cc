@@ -46,6 +46,17 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->struct_pert_type=configFile.get<unsigned int>("type_of_structural_perturbation");
   this->mcmode = string_to_mcmode(configFile.get<std::string>("mcmode"));
   this->perturb_mode = string_to_perturbmode(configFile.get<std::string>("struct_pert_mode"));
+  this->alpha_value = string_to_alpha_value(configFile.get<std::string>("alpha_value"));
+
+  if(this->alpha_value==critical){
+    if(this->verbose > 0){
+      std::cout << "Overriding input alpha value, computing the critical alpha now" << std::endl;
+    }
+    statistics alpha_crit = compute_critical_alpha(*this, 1e-4, polynomial);
+    this->alpha0 = alpha_crit.mean_;
+  }
+
+
   if(configFile.get<std::string>("intra_specific_syntrophy")=="allowed"){
     this->intra_specific_syntrophy=true;
   }else{
@@ -55,13 +66,12 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
       throw error("intra_specific_syntrophy variable should be either 'allowed' or 'not_allowed' ");
     }
   }
+
   if(this->verbose > 0){
     std::cout << "Metaparameters loaded : " << *this << std::endl;
   }
+
   initialize_random_engine(*this);
-  if(this->verbose>0){
-    std::cout << "Random engine initialized" << std::endl;
-  }
 
   return;
 }

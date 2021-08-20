@@ -82,3 +82,13 @@ perturbmode string_to_perturbmode(std::string s){
     throw error("Unknown perturb mode!");
   }
 }
+
+alphavalue string_to_alpha_value(std::string s){
+  if(s=="input"){
+    return alphavalue(input);
+  }else if(s=="critical"){
+    return alphavalue(critical);
+  }else{
+    throw error("Unknown alpha value type!");
+  }
+}

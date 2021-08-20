@@ -7,11 +7,9 @@ ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nrun
   ntype proba = 0.;
   switch(model_type){
     case full:{
-      CRModel model;
-      model.create_model_parameters(metaparams);
       for(size_t j=0; j < Nruns;++j){
-        model.attempt_to_build_model(F, metaparams, 0);
-        if(model.constraints_fulfilled(metaparams)){
+        CRModel model(metaparams, false);
+        if(model.is_feasible()){
           proba+=1./Nruns;
         }
       }
