@@ -9,19 +9,19 @@
 
 # Example for NR=NS=25
 # Name of the matrix list within the matrix_list folder
-MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_conn"
 # intra specific syntrophy, can be either "allowed" or "not_allowed"
 INTRA_SPE_SYN="allowed"
 # Monte Carlo mode: A_only to find the optimal A for a given G or both_modified to find both G and A for a given G connectance
-MCMODE="A_only"
+MCMODE="both_modified"
 # additional modifications of the default metaparameters values
 ADDITIONAL_MODIF="gamma0=1 alpha0=1"
 # additional suffix in the final name
-SAVENAME="opt_mat"
+SAVENAME="opt_both_g1_a1"
 # we would like to run a 100 runs of the MC algorithm of each matrix
 SEED_NUMBER=($(seq 0 1 100))
 # name of the command file generated in the ./commands folder
-COMMAND_FILE="optimize_matrices"
+COMMAND_FILE="optimize_matrices_both_g1_a1"
 # other metaparameters have default value
 CONFIGURATION_FILE="configuration"
 
@@ -33,15 +33,15 @@ CONFIGURATION_FILE="configuration"
 #ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
 #SAVENAME="local_dynamical_stability_NR50_NS25"
 #ADDITIONAL_MODIF="NR=50 NS=25"
-#ALPHA_VALS="0"
+ALPHA_VALS="0"
 
 # first clear all previous contents of the commands file
-rm commands/${COMMAND_FILE}.txt
+#rm commands/${COMMAND_FILE}.txt
 for seed in ${SEED_NUMBER[@]}
 do
   for intra in $INTRA_SPE_SYN
   do
-    for alpha in $ALPHA_VAL
+    for alpha in $ALPHA_VALS
     do
       for mcmode in $MCMODE
       do
@@ -60,12 +60,12 @@ do
           FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]' "
 
           COMMAND_NAME="${FIRST_COMMAND}"
-
           LOG_NAME="logs/${CURRENT_NAME}_${matl}.log"
           ERR_LOG_NAME="logs/err_${CURRENT_NAME}_${matl}.log"
           # execute command
           #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
           echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
+          #echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" # debug apg
           # write command to log
           now="["$(date)"]"
           echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
