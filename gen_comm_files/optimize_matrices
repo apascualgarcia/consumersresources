@@ -33,7 +33,7 @@ CONFIGURATION_FILE="configuration"
 #ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
 #SAVENAME="local_dynamical_stability_NR50_NS25"
 #ADDITIONAL_MODIF="NR=50 NS=25"
-ALPHA_VALS="0"
+#ALPHA_VALS="0"
 
 # first clear all previous contents of the commands file
 #rm commands/${COMMAND_FILE}.txt
@@ -41,8 +41,8 @@ for seed in ${SEED_NUMBER[@]}
 do
   for intra in $INTRA_SPE_SYN
   do
-    for alpha in $ALPHA_VALS
-    do
+    #for alpha in $ALPHA_VALS
+    #do
       for mcmode in $MCMODE
       do
         for matl in $MATRIX_LIST
@@ -56,7 +56,8 @@ do
               done
             fi
 
-          FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
+#          FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
+          FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}" # APG, removed alpha
           FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]' "
 
           COMMAND_NAME="${FIRST_COMMAND}"
@@ -69,8 +70,8 @@ do
           # write command to log
           now="["$(date)"]"
           echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
-        done
-      done
-    done
+        done # matrix list
+      done # mcmode
+    #done # alpha_vals
   done
 done
