@@ -19,7 +19,7 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_alpha(min_a0, max_a0);
 
 
-    unsigned int Nsimuls=1e7;
+    unsigned int Nsimuls=1e6;
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
     myfile << "# We are writing, in that order, G-matrix location, proportion of feasible, stable, unstable, marginal, dominant eigenvalue of J, <C>";

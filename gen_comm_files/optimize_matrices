@@ -9,19 +9,19 @@
 
 # Example for NR=NS=25
 # Name of the matrix list within the matrix_list folder
-MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25_conn"
+MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
 # intra specific syntrophy, can be either "allowed" or "not_allowed"
 INTRA_SPE_SYN="allowed"
 # Monte Carlo mode: A_only to find the optimal A for a given G or both_modified to find both G and A for a given G connectance
-MCMODE="both_modified"
+MCMODE="A_only"
 # additional modifications of the default metaparameters values
 ADDITIONAL_MODIF="gamma0=1 alpha0=1"
 # additional suffix in the final name
-SAVENAME="opt_both_g1_a1"
+SAVENAME="opt_mat"
 # we would like to run a 100 runs of the MC algorithm of each matrix
 SEED_NUMBER=($(seq 0 1 100))
 # name of the command file generated in the ./commands folder
-COMMAND_FILE="optimize_matrices_both_g1_a1"
+COMMAND_FILE="optimize_matrices"
 # other metaparameters have default value
 CONFIGURATION_FILE="configuration"
 
@@ -36,13 +36,13 @@ CONFIGURATION_FILE="configuration"
 #ALPHA_VALS="0"
 
 # first clear all previous contents of the commands file
-#rm commands/${COMMAND_FILE}.txt
+rm commands/${COMMAND_FILE}.txt
 for seed in ${SEED_NUMBER[@]}
 do
   for intra in $INTRA_SPE_SYN
   do
-    #for alpha in $ALPHA_VALS
-    #do
+    for alpha in $ALPHA_VAL
+    do
       for mcmode in $MCMODE
       do
         for matl in $MATRIX_LIST
@@ -56,22 +56,21 @@ do
               done
             fi
 
-#          FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
-          FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}" # APG, removed alpha
+          FIRST_COMMAND="build/find_optimal_syntrophy_matrices config/${CONFIGURATION_FILE}.in path_to_food_matrix=matrix_list/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
           FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]' "
 
           COMMAND_NAME="${FIRST_COMMAND}"
+
           LOG_NAME="logs/${CURRENT_NAME}_${matl}.log"
           ERR_LOG_NAME="logs/err_${CURRENT_NAME}_${matl}.log"
           # execute command
           #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
           echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
-          #echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" # debug apg
           # write command to log
           now="["$(date)"]"
           echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
-        done # matrix list
-      done # mcmode
-    #done # alpha_vals
+        done
+      done
+    done
   done
 done

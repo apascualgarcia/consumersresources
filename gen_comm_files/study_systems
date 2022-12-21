@@ -17,7 +17,7 @@ CONFIGURATION_FILE="config/configuration.in"
 COMMAND_FILE="study_eff_comp_NR25_NS25.txt"
 SAVENAME="eff_comp_all_data_NR25_NS25"
 #BUILD_NAME="study_dynamical_stability_systems"
-BUILD_NAME="study_effective_competition"
+BUILD_NAME="study_systems"
 
 # And possible modifications for NR=50 and NS=25
 #MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
