@@ -9,7 +9,7 @@
 # the variable COMMAND_FILE
 
 # Example for NR=NS=25
-MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
+MATRIX_LIST="matrix_list/Nr25_Nc25/consumption"
 ALPHA_MODE="optimal_matrix"
 SAVENAME=""
 OPTIMAL_MATRIX_FOLDER="Metamatrices"
