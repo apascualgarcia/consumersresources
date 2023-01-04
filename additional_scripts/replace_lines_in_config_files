@@ -1,6 +1,0 @@
-#!/bin/bash
-TO_REPLACE="eqmode"
-REPLACE_WITH="equilibrium_mode"
-
-STRING="s/${TO_REPLACE}/${REPLACE_WITH}/g"
-sed -i '' $STRING config/*
