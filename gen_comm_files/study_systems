@@ -5,8 +5,9 @@
 # value of alpha0 in the ALPHA_VALS list.
 
 # Example for NR=NS=25
-MATRIX_LIST="full_rank_opt_consumption_mat_NR25_NS25"
-ALPHA_MODE="optimal_matrix fully_connected random_structure"
+MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
+MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
+ALPHA_MODE="optimal_matrix random_structure"
 OPTIMAL_MATRIX_FOLDER="Metamatrices"
 #ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 ADDITIONAL_MODIF="verbose-level=1"
@@ -14,7 +15,7 @@ NR=25
 NS=25
 
 CONFIGURATION_FILE="config/configuration.in"
-COMMAND_FILE="study_eff_comp_NR25_NS25.txt"
+COMMAND_FILE="study_eff_comp_NR25_NS25"
 SAVENAME="eff_comp_all_data_NR25_NS25"
 #BUILD_NAME="study_dynamical_stability_systems"
 BUILD_NAME="study_systems"
@@ -27,12 +28,12 @@ BUILD_NAME="study_systems"
 #ALPHA_VALS="0"
 
 # first clear all previous contents of the commands file
-rm commands/${COMMAND_FILE}
+rm commands/${BUILD_NAME}.txt
 
 
 for a in $ALPHA_MODE
 do
-  for matl in $MATRIX_LIST
+  for matl in $MATRIX_LIST_FILENAME
   do
     CURRENT_NAME="${SAVENAME}_${matl}_${OPTIMAL_MATRIX_FOLDER}"
     VOLUME_PATH="${VOL_NAME}_${matl}_${OPTIMAL_MATRIX_FOLDER}"
@@ -44,14 +45,15 @@ do
       done
     fi
 
-    FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=matrix_list/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} ${ADDITIONAL_MODIF}"
+    FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=data_output/${CURRENT_NAME}.out path_to_food_matrix=${MATRIX_LIST_FOLDER}/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} ${ADDITIONAL_MODIF}"
     FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
 
     COMMAND_NAME="${FIRST_COMMAND}"
 
-    LOG_NAME="logs/${CURRENT_NAME}.log"
-    ERR_LOG_NAME="logs/err_${CURRENT_NAME}.log"
-    echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}
+    LOG_NAME="logs/${BUILD_NAME}.log"
+    ERR_LOG_NAME="logs/err_${BUILD_NAME}.log"
+
+    echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${BUILD_NAME}.txt
     # write command to log
     now="["$(date)"]"
     echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
