@@ -16,7 +16,11 @@ tau_mode = taualpha
 alpha_mode = fully_connected
 building_mode = use_l
 path_to_food_matrix = ./matrices/Nr25_Nc25/consumption/RandTrix_Nr25_Nc25_Nest0.15_Conn0.1808.txt
+<<<<<<< HEAD
 path_to_syntrophy_matrix=./matrices/Nr25_Nc25/syntrophy/optimized
+=======
+path_to_syntrophy_matrix=./matrices/Nr25_Nc25/syntrophy/optimized/Metamatrices
+>>>>>>> e7bf837e (added additional scripts file and removed useless commands)
 path_to_volume=.
 verbose-level = 0
 budget_constraint = false
