@@ -19,6 +19,7 @@ struct Metaparameters{
   gammamode gamma_mode;
   taumode tau_mode;
   alphamode alpha_mode;
+  alphavalue alpha_value;
   std::string foodmatrixpath;
   std::string syntrophy_matrix_path;
   unsigned int verbose;
@@ -33,10 +34,16 @@ struct Metaparameters{
   eqmode equilibrium;
   ntype convergence_threshold;
   buildingmode building_mode;
+  perturbmode perturb_mode;
   /* path to which point should be studied (eg common feasible volume) */
   std::string volume_of_interest_path;
   /* tells in which way the system should be structurally perturbed */
   unsigned int struct_pert_type;
+  /* next step matrix mode for possible MC solver */
+  MCmode mcmode;
+  /* for building the optimized matrices */
+  bool intra_specific_syntrophy;
+
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

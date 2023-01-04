@@ -6,6 +6,7 @@
 #include "Metaparameters.h"
 #include "Dynamical_variables.h"
 #include "Extinction.h"
+#include "EcologicalNetwork.h"
 #include "../Functions/model_characteristics.h"
 #include <iostream>
 #include <string>
@@ -21,8 +22,8 @@ public:
   /* CONSTRUCTORS */
   CRModel();
   CRModel(const CRModel&);
-  CRModel(Metaparameters&);
-  CRModel(const foodmatrix&, Metaparameters&);
+  CRModel(Metaparameters&, bool has_to_be_feasible=true);
+  CRModel(const foodmatrix&, Metaparameters&, bool has_to_be_feasible=true);
   CRModel(Model_parameters*);
 
   /* DESTRUCTOR */
@@ -46,7 +47,7 @@ public:
   void write_death_rates(std::string) const;
   Dynamical_variables perturb_equilibrium() const;
   void perturb_parameters() const;
-  void perturb_parameters(const ntype &) const;
+  void perturb_parameters(const ntype &, perturbmode=perturb_l) const;
   void save_new_equilibrium(const Extinction&) const;
   bool respects_equations_of_evolution_at_equilibrium() const;
 
@@ -83,11 +84,27 @@ public:
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
 
+  EcologicalNetwork get_ecological_network() const;
+
 
   /* gives back the Beta and Gamma matrices from the jacobian at equilibrium */
   nmatrix get_Beta_matrix(unsigned int eq_number=0) const;
   nmatrix get_Gamma_matrix(unsigned int eq_number=0) const;
   nvector get_Delta_vector(unsigned int eq_number=0) const;
+
+  /* topology matrices */
+  nmatrix get_A() const;
+  nmatrix get_G() const;
+
+  /* returns the effective competition matrix */
+  nmatrix get_effective_competition_matrix(unsigned int eq_number=0) const;
+  nmatrix get_normalized_effective_competition_matrix(unsigned int eq_number=0) const;
+
+  /* returns the effective competition (average of the effective competition matrix) */
+  ntype get_effective_competition(unsigned int eq_number=0) const;
+  /* returns the effective competition defined as the ratio of inter- and intraspecific competition (Eq. 9 in SM APG 2017)*/
+  ntype get_ratio_inter_intraspecific_competition(unsigned int eq_number=0) const;
+
 
   /* gives back binary biomass flux network */
   nmatrix get_biomass_flux_network() const;

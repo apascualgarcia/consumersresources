@@ -5,13 +5,14 @@
 #include <cmath>
 #include <numeric>
 #include <algorithm>
+#include <string>
 
 std::mt19937 random_engine;
 
 foodmatrix load_food_matrix(const Metaparameters& m){
   foodmatrix f(m.NS,nvector(m.NR, 0.));
   nmatrix input;
-  if(m.verbose > 1){
+  if(m.verbose > 2){
     std::cout << "\t Loading food matrix from " << m.foodmatrixpath << std::endl;
   }
   std::ifstream in(m.foodmatrixpath);
@@ -45,6 +46,11 @@ foodmatrix load_food_matrix(const Metaparameters& m){
   return f;
 }
 
+/* don't know if this is right but it should */
+nmatrix load_meta_matrix(const Metaparameters& m){
+  return load_syntrophy_matrix(m);
+}
+
 nmatrix load_syntrophy_matrix(const Metaparameters& m){
   nmatrix a(m.NR,nvector(m.NS, 0.));
   nmatrix input;
@@ -66,7 +72,7 @@ nmatrix load_syntrophy_matrix(const Metaparameters& m){
       if(line[0]!='#'){
         std::istringstream iss(line);
         input.push_back(nvector());
-        unsigned int element;
+        ntype element;
         while(iss>>element){
           input[index].push_back(element);
         }
@@ -373,13 +379,13 @@ ntype median(const nvector& x){
   return median;
 }
 
-ntype standard_dev(const nvector& x){
+ntype standard_dev(const nvector& x, const unsigned int ddof){
   ntype std = 0.;
   ntype variance = 0.;
   ntype m = mean(x);
   size_t N = x.size();
   for(size_t i=0; i < N; ++i){
-    variance += ntype(1./(N-1))*(x[i]-m)*(x[i]-m);
+    variance += ntype(1./(N-ddof))*(x[i]-m)*(x[i]-m);
   }
   std=sqrt(variance);
   return std;
@@ -475,9 +481,9 @@ nvector operator*(const nvector& v, const nmatrix& M){
 }
 
 
-statistics::statistics(const nvector& v){
+statistics::statistics(const nvector& v, const unsigned int ddof){
   this->mean_ = mean(v);
-  this->std_deviation_ = standard_dev(v);
+  this->std_deviation_ = standard_dev(v, ddof);
   this->median_ = median(v);
 }
 
@@ -608,12 +614,16 @@ bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
   for(size_t mu=0; mu < NR; ++mu){
     for(size_t i=0; i < NS ;++i){
       if(alpha[mu][i]*gamma[i][mu]>0.){
-        return false;
+        return true;
       }
     }
   }
 
   return false;
+}
+
+bool is_there_coprophagy(const EcologicalNetwork& net){
+  return is_there_coprophagy(net.A, net.G);
 }
 
 bool has_an_empty_row(const nmatrix& gamma){
@@ -692,6 +702,10 @@ unsigned int rank(const nmatrix& mat){
   return lu.rank();
 }
 
+bool is_matrix_full_rank(const nmatrix& mat){
+  return mat.size()==mat[0].size() and rank(mat)==mat.size();
+}
+
 ntype mean_non_zero_elements(const nmatrix & mat){
   ntype mean=0.;
   ntype index=0;
@@ -754,15 +768,54 @@ nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g){
 
 nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn){
   nmatrix mat(rows, nvector(columns, 0.));
-  std::uniform_real_distribution<ntype> unif_distrib(0., 1.);
-  for(size_t i=0; i < rows; ++i){
-    for(size_t j=0; j < columns;++j){
-      if(unif_distrib(random_engine)< conn){
-        mat[i][j]=1;
-      }
-    }
+  std::uniform_int_distribution<unsigned int> row_pick(0, rows-1);
+  std::uniform_int_distribution<unsigned int> col_pick(0, columns-1);
+  for(unsigned int links = conn*rows*columns; links>0; --links){
+    unsigned int picked_row, picked_column;
+    do{
+      picked_row = row_pick(random_engine);
+      picked_column = col_pick(random_engine);
+    }while(mat[picked_row][picked_column]>0.);
+    mat[picked_row][picked_column] = 1.;
+  }
+  return mat;
+}
+
+nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int & columns, const ntype& conn){
+  nmatrix mat(rows, nvector(columns, 0.));
+  std::uniform_int_distribution<unsigned int> row_pick(0, rows-1);
+  std::uniform_int_distribution<unsigned int> col_pick(0, columns-1);
+  unsigned int links = conn*rows*columns;
+
+  if(rows!=columns){
+    throw error("Matrix cannot be full rank: it is not square");
   }
 
+  if(links < rows){
+    throw error("Matrix has a connectance too low, it cannot be full rank");
+  }
+
+  /* first place everything on diagonal */
+  for(size_t i=0; links>0 and i < rows; --links, ++i){
+    mat[i][i] = 1.;
+  }
+
+
+  /* then place rest as long as it gives a full rank matrix */
+  for(; links>0; --links){
+      unsigned int picked_row, picked_column;
+      nmatrix dummy;
+      do{
+          picked_row = row_pick(random_engine);
+          picked_column = col_pick(random_engine);
+
+          dummy = mat;
+          dummy[picked_row][picked_column]=1.;
+
+      }while(mat[picked_row][picked_column]>0. or not(is_matrix_full_rank(dummy)));
+
+      mat[picked_row][picked_column] = 1.;
+  }
   return mat;
 }
 
@@ -784,4 +837,155 @@ nmatrix build_LRI_matrix(const nmatrix& g, const Metaparameters& m, const ntype&
   bool allow_coprophagy=true;
   foodmatrix alpha = optimal_syntrophy_from_consumption(g, allow_coprophagy, mcsolv, target_conn);
   return alpha;
+}
+
+/* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
+void flip_one_binary_matrix_element(nmatrix & B){
+  std::uniform_int_distribution<unsigned int> row_dist(0, B.size()-1);
+  std::uniform_int_distribution<unsigned int> col_dist(0, B[0].size()-1);
+
+  unsigned int row_index=row_dist(random_engine);
+  unsigned int col_index=col_dist(random_engine);
+
+  B[row_index][col_index]=1-B[row_index][col_index];
+  return;
+}
+
+
+std::string mcmode_to_string(const MCmode & mc){
+  if(mc==A_only){
+    return "A_only";
+  }else if(mc==both_modified){
+    return "both_modified";
+  }else{
+    throw error("Cannot convert string to an existing MCmode");
+  }
+}
+
+nmatrix create_random_binary_matrix(unsigned int cols, unsigned int rows){
+  nmatrix mat(cols, nvector(rows, 0.));
+  std::uniform_real_distribution<double> unif(0., 1.);
+  for(size_t i=0; i < rows; ++i){
+    for(size_t j=0; j < cols; ++j){
+      if(unif(random_engine)>0.5){
+        mat[i][j]=1;
+      }
+    }
+  }
+  return mat;
+}
+
+nmatrix flip_whole_binary_matrix(const nmatrix& mat){
+  nmatrix to_ret = mat;
+  for(size_t i =0; i < to_ret.size(); ++i){
+    for(size_t j =0 ; j < to_ret[i].size(); ++j){
+      to_ret[i][j]=1-to_ret[i][j];
+    }
+  }
+  return to_ret;
+}
+
+
+bool all_elements_equal(const nvector & v){
+  for(size_t i =0; i< v.size()-1; i++){
+    if(v[i+1]!= v[i]){
+      return false;
+    }
+  }
+  return true;
+}
+
+ntype Heaviside(const ntype& x){
+  if(x>=0){
+    return 1.;
+  }
+  return 0.;
+}
+
+void swap_two_matrix_elements(nmatrix & B){
+  unsigned int rows = B.size();
+  unsigned int cols = B[0].size();
+  std::uniform_int_distribution<unsigned int> pick_row(0, rows-1);
+  std::uniform_int_distribution<unsigned int> pick_col(0, cols-1);
+
+  unsigned int row_1, row_2, col_1, col_2;
+  do{
+    row_1 = pick_row(random_engine);
+    row_2 = pick_row(random_engine);
+
+    col_1 = pick_col(random_engine);
+    col_2 = pick_col(random_engine);
+
+  }while(row_1==row_2 and col_1==col_2);
+
+  ntype el_1 = B[row_1][col_1];
+  B[row_1][col_1] = B[row_2][col_2];
+  B[row_2][col_2] = el_1;
+
+  return;
+}
+
+
+std::string operator+(const std::string& s, const unsigned int& i){
+  return s+NumberToString(i);
+}
+std::string operator+(const unsigned int& i, const std::string & s){
+  return NumberToString(i)+s;
+}
+std::string operator+(const std::string& s, const ntype& n){
+  return s+NumberToString(n);
+}
+std::string operator+(const ntype& n, const std::string& s){
+  return NumberToString(s)+n;
+}
+
+nctype largest_eigenvalue(const nmatrix & m){
+  return eigenvalues(m)[m.size()-1];
+}
+ncvector eigenvalues(const nmatrix & M){
+  ncvector v;
+  ntype min_element(std::abs(M[0][0]));
+
+  /* the jacobian should always be a square matrix */
+  const unsigned int M_size=M.size();
+
+  for(size_t i = 0; i < M_size; ++i){
+    if(M[i].size()!=M_size){
+      error err("Can't determine eigenvalues of matrix: it is ill formed (not a square matrix).");
+      throw err;
+    }
+    for(size_t j=0; j < M_size; ++j){
+      if(M[i][j]*M[i][j] > 0. and std::abs(M[i][j]) < min_element){
+        min_element = std::abs(M[i][j]);
+      }
+    }
+  }
+
+  // for testing purpose
+  //min_element = 1.;
+  //std::cout << " put min_element as 1" << std::endl;
+
+  Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> m;
+  m.resize(M_size, M_size);
+  // we rescale the jacobian such that even the smallest value is of order 1
+  for(size_t i=0; i < M_size; ++i){
+    for(size_t j=0; j < M_size; ++j){
+      m(i,j) = M[i][j]/min_element;
+    }
+  }
+  Eigen::Matrix<nctype, Eigen::Dynamic, 1> eivals = m.eigenvalues();
+  for(size_t i=0; i < eivals.rows(); ++i){
+    v.push_back(eivals(i)*min_element);
+    //v.push_back(eivals(i));
+  }
+  // sorting so that the last element is the largest eigenvalue
+  std::sort(v.begin(), v.end(), compare_complex);
+  return v;
+}
+
+ntype square_root(const ntype& A){
+  if(A < 0){
+    throw error("Attempting to find the square root of a negative number.");
+  }
+  return 1.;
 }

@@ -12,6 +12,7 @@ struct Solver_Parameters{
   eqmode equilibrium;
   stabilitymode stab_mode; // either structural or dynamical
   double target; //basically allows us to say we want to solve f(x)=shift instead of f(x)=0
+  perturbmode pert_mode;
 };
 
 struct Delta_critical{
@@ -25,6 +26,7 @@ struct delta_solver{
   fitmode fit_mode;
   eqmode eq_mode;
   stabilitymode stab_mode;
+  perturbmode pert_mode;
 };
 
 

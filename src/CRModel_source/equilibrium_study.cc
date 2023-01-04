@@ -7,11 +7,9 @@ ntype find_feasability_probability(Metaparameters& metaparams, unsigned int Nrun
   ntype proba = 0.;
   switch(model_type){
     case full:{
-      CRModel model;
-      model.create_model_parameters(metaparams);
       for(size_t j=0; j < Nruns;++j){
-        model.attempt_to_build_model(F, metaparams, 0);
-        if(model.constraints_fulfilled(metaparams)){
+        CRModel model(metaparams, false);
+        if(model.is_feasible()){
           proba+=1./Nruns;
         }
       }
@@ -132,7 +130,7 @@ double average_number_of_extinctions(double delta, Metaparameters* m, unsigned i
 
   return av_number_extinct;
 }
-double probability_of_extinction_greather_than_one(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul, stabilitymode stab_mode){
+double probability_of_extinction_greather_than_one(Metaparameters* metaparams, const ntype& Delta, unsigned int Nsimul, stabilitymode stab_mode, perturbmode pert_mode){
   ntype convergence_threshold = metaparams->convergence_threshold;
   double probability_ext_gtone = 0.;
   std::string stability;
@@ -154,7 +152,7 @@ double probability_of_extinction_greather_than_one(Metaparameters* metaparams, c
           CRModel model2(*metaparams);
           model = model2;
         }
-        model.perturb_parameters(Delta);
+        model.perturb_parameters(Delta, pert_mode);
         Extinction new_equilib = model.evolve_until_equilibrium(convergence_threshold, eqmode(oneextinct));
         if(new_equilib.extinct >=1){
           probability_ext_gtone+=1./Nsimul;

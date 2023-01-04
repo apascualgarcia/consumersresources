@@ -1,25 +1,42 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+from scipy.stats import wilcoxon
 import matplotlib.tri as tr
 import matplotlib as mpl
 import copy
 import sys
+import re
+import pandas as pd
+from matplotlib.colors import to_rgb
+from matplotlib.patches import Patch
+
 np.set_printoptions(threshold=sys.maxsize)
-mpl.rcParams['lines.linewidth']=2.5
+mpl.rcParams['lines.linewidth']=1.5
 mpl.rcParams['lines.markersize']=12
 mpl.rcParams['lines.markeredgewidth']=3
+mpl.rcParams['lines.marker']='.'
+mpl.rcParams['lines.linestyle']='solid'
 
 alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
-alpha_mode_colours=['blue', 'green', 'red', 'black']
-label=['FC', 'NIS', 'LRI', 'RS']
+alpha_mode_colours=dict({'fully_connected':'blue', 'no_release_when_eat':'orange', 'optimal_matrix':'red', 'random_structure':'green'})
+alpha_mode_sym = dict({'fully_connected': 'P', 'no_release_when_eat': 'D', 'optimal_matrix':'o', 'random_structure': 'd'})
+
+alpha_mode_label=dict({'fully_connected':'Fully Connected', 'no_release_when_eat': 'NIS', 'optimal_matrix': 'Optimized', 'random_structure':'Random'})
+legend_titles=dict({'nestG': 'Consumption \n overlap '+r'$\eta_G$', 'connG': 'Consumption \n connectance '+r'$\kappa_G$'})
+
+labels=dict({'nestG': r'Consumption overlap $\eta_G$', 'connG': r'Consumption connectance $\kappa_G$',
+            'E': r'Objective function $ E $', 'connA': r'Syntrophy connectance $\kappa_A$',
+            'nestA': r'Syntrophy overlap $\eta_A$', 'feasible decay rate': r'Feasibility decay',
+            'ld stable decay rate': r'Dynamical stability decay', 'alpha0': r'Syntrophy strength $\alpha_0$'})
+
+
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 min_gamma0, max_gamma0=0.01, 1
 min_S0, max_S0=0.01, 1
-nestedness_label=r'Ecological overlap $\eta_G$'
-connectance_label=r'Connectance $\kappa_G$'
+
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
 N_alphamodes=len(alpha_mode)
@@ -199,19 +216,21 @@ def filter_data(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_, consumptio
             file=filename_+'_'+al_mo+'_'+optimal_LRI_folder_+'_alpha0='+str(a)
             remove_strings_from_file(consumption_matrix_folder_, file)
     return
-def load_data_region(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_):
+def load_data_region(alpha_mode_, alpha0_, filename_, optimal_LRI_folder_, type_=np.float64):
     region=[]
     for al_mo in alpha_mode_:
         local_vector=[]
         for a in alpha0_:
             file=filename_+'_'+al_mo+'_'+optimal_LRI_folder_+'_alpha0='+str(a)+'_filtered.out'
-            local_data=np.loadtxt(file)
+            local_data=np.loadtxt(file, dtype=type_)
             print('Loading file', file, 'which contains the data of', len(local_data), 'matrices')
             local_vector.append(local_data)
         region.append(local_vector)
     region=np.array(region)
     print('Dimensions of tableau : ', len(region), 'x', len(region[0]),'x',len(region[0,0]),'x', len(region[0,0,0]))
     return region
+
+
 # returns the local dynamical stability levels (first index is alpha_mode, second is point)
 # data has lds[alpha_mode][alpha0]Çpoint
 def levels_different_alpha0(data):
@@ -523,3 +542,417 @@ def get_fit_cfr(points):
     fitted_S0 = np.array([fitted_g0S0[i]/gborder[i] for i in range(len(gborder))])
 
     return popt, pcov, gborder, fitted_S0
+
+# finds the asymptote value of an asymptotic function y, which is assumed to be constant
+# or constantly oscillating for its last Npoints
+def asymptote(y, Npoints):
+    return np.mean(y[-Npoints:])
+def remove_strings_from_file(matrices_folder,filename):
+    file = open(filename + '.out', "r")
+    metadata = []
+    for x in file:
+        name = x.replace(matrices_folder + '/RandTrix_Nr', '')
+        name = name.replace('_Nc', ' ')
+        name = name.replace('_Nest', ' ')
+        name = name.replace('_Conn', ' ')
+        name = name.replace('.txt', '')
+        metadata.append(name)
+    file.close()
+    f = open(filename + '_filtered.out', 'w')
+    for a in metadata:  # python will convert \n to os.linesep
+        f.write(a + '\n')
+    f.close()
+    return
+
+def moving_average(x, w):
+    return np.convolve(x, np.ones(w), 'valid') / w
+
+def extract_numbers_from_string(filename):
+    # printing original string
+    # using re.findall()
+    # getting numbers from string
+    temp = re.findall(r"[-+]?\d*\.\d+|\d+", filename)
+    res = list(map(float, temp))
+    return res
+
+def mat_connectance(mat):
+    N = len(mat)
+    M = len(mat[0])
+    links=0
+
+    for i in range(N):
+        for j in range(M):
+            if mat[i][j]!=0:
+                links+=1.
+    return links/(N*M)
+
+def mat_nestedness(mat):
+    M = []
+
+    n_rows = len(mat)
+    n_cols = len(mat[0])
+
+    for i in range(n_rows):
+        M.append([])
+        for j in range(n_cols):
+            if mat[i][j]!=0:
+                M[i].append(1)
+            else:
+                M[i].append(0)
+
+    n = []
+    for i in range(n_rows):
+        n.append(0.)
+        for k in range(n_cols):
+            n[i] += M[i][k]
+
+    n_tilde = []
+    for i in range(n_rows):
+        n_tilde.append([])
+        for j in range(n_cols):
+            n_tilde[i].append(0.)
+            for k in range(n_cols):
+                n_tilde[i][j]+=M[i][k]*M[j][k]
+
+    nest = 0.
+    num = sum([n_tilde[i][j] for j in range(n_cols) for i in range(n_rows) if i < j])
+    denom = sum([min([n[i], n[j]]) for j in range(n_cols) for i in range(n_rows) if i < j])
+
+    if denom==0:
+        nest=0
+    else:
+        nest = num/denom
+
+
+    return nest
+
+def eco_energy(A, G, alpha0=1, gamma0=1, R0=1):
+    NR=len(A)
+    AG=A@G
+    GG=np.transpose(G)@G
+    Z =np.zeros(NR)
+
+    energy=0.
+
+
+    for mu in range(NR):
+        Z[mu]+=(alpha0*AG[mu][mu]-gamma0*R0*GG[mu][mu]);
+        for nu in range(NR):
+            if nu!=mu:
+                Z[mu]+=abs(alpha0*AG[mu][nu]-gamma0*R0*GG[mu][nu])
+
+
+
+    coeff = 1;
+    for mu in range(NR):
+        energy+=coeff*Z[mu]
+    return energy;
+
+def compute_feasibility_data(to_compute, volume_data, decay_rate_data):
+    return compute_data(to_compute, volume_data, decay_rate_data, data_type="feasible")
+
+def compute_lds_data(to_compute, volume_data, decay_rate_data):
+    return compute_data(to_compute, volume_data, decay_rate_data, data_type="ld stable")
+
+def compute_largest_eigenvalue_data(alpha_mode_, alpha0_, filename, optimal_LRI_folder, consumption_matrix_folder, to_compute, save_file):
+    columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
+    filter_data(alpha_mode_,alpha0_,filename,optimal_LRI_folder, consumption_matrix_folder)
+    data_region = load_data_region(alpha_mode_, alpha0_, filename, optimal_LRI_folder, type_=np.complex)
+    if 'av. dominant eigenvalue' in to_compute:
+        df = pd.DataFrame(columns=columns+["alpha0", "av. dominant eigenvalue"])
+        for amode in range(len(alpha_mode_)):
+            for a0 in range(len(alpha0_)):
+                for mat in range(len(data_region[amode, a0])):
+                    data = np.real(np.ma.masked_invalid(data_region[amode, a0, mat, 6::3]))
+                    av_dom_eig = np.NaN
+                    if len(data[~data.mask]) > 0:
+                        av_dom_eig = np.sum(data[~data.mask])/len(data[~data.mask])
+                    dict={
+                        "NR": int(data_region[amode, a0, mat,0]),
+                        "NS": int(data_region[amode, a0, mat,1]),
+                        "connG": closest_element_in_list(data_region[amode, a0, mat,3], all_connectance),
+                        "nestG": closest_element_in_list(data_region[amode, a0, mat,2], all_nestedness),
+                        "alpha_mode":alpha_mode_[amode],
+                        "alpha0": alpha0_[a0],
+                        "av. dominant eigenvalue": np.abs(av_dom_eig)
+                    }
+                    df=df.append(pd.DataFrame([dict]), sort=False)
+        df.to_csv(save_file, index=False)
+        print("Saved av. dominant eigenvalues in file ", save_file)
+    return
+
+def compute_data(to_compute, volume_data, decay_rate_data, data_type):
+    columns = ["NR", "NS", "connG", "nestG", "alpha_mode"]
+
+    if data_type+' volume' in to_compute:
+
+        alpha_mode = volume_data['alpha_mode']
+        alpha0 = volume_data['alpha0']
+        filename = volume_data['data file']
+        optimal_LRI_folder = volume_data['OM folder']
+        consumption_matrix_folder = volume_data['G matrices folder']
+        save_file = volume_data['save file']
+
+        filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+        data_region = load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
+        alpha0=np.array(alpha0)
+
+        df = pd.DataFrame(columns=columns+["alpha0", data_type+" volume"])
+        for al_mode in range(len(alpha_mode)):
+            for a0 in range(len(alpha0)):
+                for mat in range(len(data_region[al_mode, a0])):
+                    data=data_region[al_mode, a0, mat, 6::3]
+                    volume=np.sum(data)/len(data)
+                    dict={
+                        "NR": int(data_region[al_mode, a0, mat,0]),
+                        "NS": int(data_region[al_mode, a0, mat,1]),
+                        "connG": closest_element_in_list(data_region[al_mode, a0, mat,3], all_connectance),
+                        "nestG": closest_element_in_list(data_region[al_mode, a0, mat,2], all_nestedness),
+                        "alpha_mode":alpha_mode[al_mode],
+                        "alpha0": alpha0[a0],
+                        data_type+" volume": volume,
+                    }
+
+                    df=df.append(pd.DataFrame([dict]), sort=False)
+        df.to_csv(save_file, index=False)
+        print("Saved "+data_type+" volumes in file ", save_file)
+
+    if data_type+' decay rate' in to_compute:
+
+        alpha_mode = decay_rate_data['alpha_mode']
+        alpha0 = decay_rate_data['alpha0_range']
+        filename = decay_rate_data['data file']
+        optimal_LRI_folder = decay_rate_data['OM folder']
+        consumption_matrix_folder = decay_rate_data['G matrices folder']
+        save_file = decay_rate_data['save file']
+
+        filter_data(alpha_mode, alpha0, filename, optimal_LRI_folder, consumption_matrix_folder)
+        data_region = load_data_region(alpha_mode, alpha0, filename, optimal_LRI_folder)
+
+        df = pd.DataFrame(columns=columns+[data_type+" decay rate", data_type+" decay rate error"])
+        for al_mode in range(len(alpha_mode)):
+            data_vols=[]
+            for a0 in range(len(alpha0)):
+                local_vols = []
+                for mat in range(len(data_region[al_mode, a0])):
+                    data=data_region[al_mode, a0, mat, 6::3]
+                    data_volume=np.sum(data)/len(data)
+                    local_vols.append(data_volume)
+                data_vols.append(local_vols)
+            data_vols=np.transpose(data_vols)
+            for mat in range(len(data_vols)):
+                dict={
+                    "NR": int(data_region[al_mode, 0, mat,0]),
+                    "NS": int(data_region[al_mode, 0, mat,1]),
+                    "connG": closest_element_in_list(data_region[al_mode, 0, mat,3], all_connectance),
+                    "nestG": closest_element_in_list(data_region[al_mode, 0, mat,2], all_nestedness),
+                    "alpha_mode": alpha_mode[al_mode]
+                    }
+                fitted_y, popt, perr = fit_data(exponential_function, alpha0, data_vols[mat])
+                dict[data_type+' decay rate']=popt[1]
+                dict[data_type+' decay rate error']=perr[1]
+                df=df.append(pd.DataFrame([dict]), sort=False)
+        df.to_csv(save_file, index=False)
+        print("Saved "+data_type+" decay rates in file ", save_file)
+    return
+
+def plot_feasible_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
+    ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='feasible')
+    ax.set_ylabel(r'Feasible volume')
+    return ax
+def plot_lds_volume(ax, data_file, width, shift, alpha0_, alpha_mode_):
+    ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='ld stable')
+    ax.set_ylabel(r'Dynamically stable volume')
+    return ax
+def plot_largest_eigenvalue(ax, data_file, width, shift, alpha0_, alpha_mode_):
+    ax = plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type='av. dominant eigenvalue')
+    ax.set_ylabel(r'Rate of return')
+    return ax
+def plot_feasible_decay_rates(ax, decay_rate_data):
+    return plot_decay_rates(ax, decay_rate_data, type='feasible')
+
+def plot_p_values_vs_alpha0(axes, volume, type):
+    data = pd.read_csv(volume['data file'])
+    # take all possibles alpha_modes pairs
+    a0modes = volume['alpha mode']
+    pairs = [(a0modes[i], a0modes[j]) for i in range(len(a0modes)) for j in range(i+1, len(a0modes))]
+    for pair in pairs:
+        a0mode1 = pair[0]
+        a0mode2 = pair[1]
+        p_vals = []
+        a_vals = []
+        for a0 in volume['alpha0']:
+            indices1 = [x for x in range(data.shape[0]) if (data.loc[x]['alpha_mode']==a0mode1 and closest_element_in_list(data.loc[x]['alpha0'], volume['alpha0'])==a0)]
+            indices2 = [x for x in range(data.shape[0]) if (data.loc[x]['alpha_mode']==a0mode2 and closest_element_in_list(data.loc[x]['alpha0'], volume['alpha0'])==a0)]
+
+            distrib1 = data.loc[indices1][type+' volume'].to_numpy()
+            distrib2 = data.loc[indices2][type+' volume'].to_numpy()
+
+            statistics, pval = wilcoxon(x=distrib1, y=distrib2, alternative='less', zero_method='zsplit')
+            p_vals.append(pval)
+            a_vals.append(a0)
+        axes.plot(a_vals, p_vals, label=alpha_mode_label[a0mode1]+'-'+alpha_mode_label[a0mode2])
+        axes.legend()
+        axes.set_xlabel(r'$\alpha_0$')
+        axes.set_ylabel(r'$p$-value ('+type+')')
+        axes.set_title(r'Null hypothesis for pair P1-P2 : median(P1) $>$ median(P2). Small $p$ : null hyp. should be rejected', fontsize=10)
+    return axes
+
+def plot_data(figures_to_plot, volume, decay_rates, type):
+    if type+' volume' in figures_to_plot:
+        fig = plt.figure(type+' volume')
+        ax = fig.add_subplot(111)
+        intrashift = volume['intrashift']
+        intershift = volume['intershift']
+        shift = [intershift, intrashift]
+        width=volume['width']
+        if type=='feasible':
+            ax = plot_feasible_volume(ax, volume['data file'], width, shift,
+                        volume['alpha0'], volume['alpha mode'])
+        elif type=='ld stable':
+            ax = plot_lds_volume(ax, volume['data file'], width, shift,
+                        volume['alpha0'], volume['alpha mode'])
+        fig.tight_layout()
+        fig.savefig(volume['save name'])
+
+    if type+' decay rate' in figures_to_plot:
+        Namodes = len(decay_rates['alpha mode'])
+        axes = []
+        figs = []
+        for i in range(Namodes):
+            figs.append(plt.figure())
+            figs.append(plt.figure())
+            axes.append([figs[2*i].add_subplot(111), figs[2*i+1].add_subplot(111)])
+        axes = plot_decay_rates(axes, decay_rates, type)
+        for i in range(Namodes):
+            figs[2*i].tight_layout()
+            figs[2*i+1].tight_layout()
+
+            figs[2*i].savefig(decay_rates['save name']+'_'+decay_rates['alpha mode'][i]+'_fixed_conn.pdf')
+            figs[2*i+1].savefig(decay_rates['save name']+'_'+decay_rates['alpha mode'][i]+'_fixed_nest.pdf')
+
+    if type+' p-value' in figures_to_plot:
+        Namodes = len(decay_rates['alpha mode'])
+        fig = plt.figure()
+        axes = fig.add_subplot(111)
+        axes = plot_p_values_vs_alpha0(axes, volume, type)
+        fig.tight_layout()
+        fig.savefig(decay_rates['save name']+'_p_value.pdf')
+    return
+
+
+def plot_decay_rates(axs, decay_rate_data, type):
+    data = pd.read_csv(decay_rate_data['data file'])
+    ms = 8
+    for j in range(len(decay_rate_data['alpha mode'])):
+        amode = decay_rate_data['alpha mode'][j]
+        for i in range(len(all_connectance)):
+            connG = all_connectance[i]
+            indices = [x for x in range(data.shape[0]) if closest_element_in_list(data.loc[x]['connG'], all_connectance)==connG and data.loc[x]['alpha_mode']==amode]
+            to_plot = data.loc[indices]
+            to_plot = to_plot.sort_values(by='nestG')
+            to_plot.plot(x = 'nestG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][1], label=r'$'+str(connG)+'$',
+                    linestyle='solid', color=conn_colours[i], marker=alpha_mode_sym[amode], markersize=ms)
+        min_nest = np.min(data['nestG'])
+        max_nest = np.max(data['nestG'])
+        axs[j][1].set_xlim(min_nest-0.1*(max_nest-min_nest), max_nest+0.1*(max_nest-min_nest))
+        axs[j][1].set_xlabel(labels['nestG'])
+        axs[j][1].set_ylabel(labels[type+' decay rate'])
+        axs[j][1].legend(bbox_to_anchor=(1.,1.), loc='upper left', title=legend_titles['connG'], fontsize=13, title_fontsize=14)
+        axs[j][1].set_title(alpha_mode_label[amode])
+
+    for j in range(len(decay_rate_data['alpha mode'])):
+        amode = decay_rate_data['alpha mode'][j]
+        for i in range(len(all_nestedness)):
+            nestG = all_nestedness[i]
+            indices = [x for x in range(data.shape[0]) if closest_element_in_list(data.loc[x]['nestG'], all_nestedness)==nestG and data.loc[x]['alpha_mode']==amode]
+            to_plot = data.loc[indices]
+            to_plot = to_plot.sort_values(by='connG')
+            to_plot.plot(x = 'connG', y=type+' decay rate', yerr=type+' decay rate error', ax=axs[j][0], label=r'$'+str(nestG)+'$',
+                    linestyle='solid', color=nest_colours[i], marker=alpha_mode_sym[amode], markersize=ms)
+        min_conn = np.min(data['connG'])
+        max_conn = np.max(data['connG'])
+        axs[j][0].set_xlim(min_conn-0.1*(max_conn-min_conn), max_conn+0.1*(max_conn-min_conn))
+        axs[j][0].set_xlabel(labels['connG'])
+        axs[j][0].set_ylabel(labels[type+' decay rate'])
+        axs[j][0].legend(bbox_to_anchor=(1.,1.), loc='upper left', title=legend_titles['nestG'], fontsize=13, title_fontsize=14)
+        axs[j][0].set_title(alpha_mode_label[amode])
+
+    return axs
+
+def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
+    df = pd.read_csv(data_file)
+
+    intershift = shift[0]
+    intrashift = shift[1]
+
+    N_alphamodes = len(alpha_mode_)
+    N_alpha0 = len(alpha0_)
+    L = N_alphamodes*(width+intrashift)-intrashift+intershift
+    xs = 0.5*(width+intershift)
+
+    for a in df['alpha0']:
+        df['alpha0'] = df['alpha0'].replace([a], closest_element_in_list(a, alpha0_))
+
+    ticks=[]
+    for i in range(N_alpha0):
+        box_start = i*L
+        box_end = box_start+L
+        if i%2==0:
+            ax.axvspan(xmin=box_start, xmax=box_end, color='black', alpha=0.1)
+        xloc = 0.5*(box_end-box_start)+box_start
+        ticks.append(xloc)
+
+    legend_els=[]
+    all_means = []
+    all_positions = []
+    for i in range(N_alphamodes):
+        amode=alpha_mode_[i]
+        data=df[df['alpha_mode']==amode]
+        to_plot=pd.DataFrame(columns=['matrix'])
+        col = alpha_mode_colours[amode]
+        marker = alpha_mode_sym[amode]
+        facecol = to_rgb(col)+(0.5,)
+        boxprops = dict(edgecolor=facecol, facecolor=facecol, linewidth=0)
+        meanprops=dict(color=col, marker=marker, markeredgecolor=col, markerfacecolor=col, linestyle='solid', markersize=10)
+        medianprops=dict(color=col, marker='')
+        whiskerprops=dict(color=facecol, marker='')
+        capprops=dict(color=facecol, marker='')
+        flierprops=dict(marker=marker, markeredgecolor=col, markerfacecolor=col, markeredgewidth=1, markersize=5)
+        means=[]
+        for a0 in alpha0_:
+            string = data_type+' volume'
+            if data_type == "av. dominant eigenvalue":
+                string = 'av. dominant eigenvalue'
+            volumes = data[data['alpha0']==a0][string].to_numpy()
+            volumes = volumes[~np.isnan(volumes)]
+            means.append(np.mean(volumes))
+            to_plot=to_plot.append(pd.DataFrame([volumes]), sort=False)
+        all_means.append(means)
+        positions = np.linspace(start=xs+i*(width+intrashift), stop=xs+(N_alpha0-1)*L+i*(width+intrashift), num=N_alpha0)
+        all_positions.append(positions)
+        ax.boxplot(to_plot, positions=positions, widths=width,
+                patch_artist=True , boxprops=boxprops,
+                meanprops=meanprops, medianprops=medianprops,
+                flierprops=flierprops, whiskerprops=whiskerprops,
+                capprops=capprops)
+        legend_els.append(Patch(facecolor=facecol, edgecolor=facecol, linewidth=0, label=alpha_mode_label[amode]))
+
+    for i in range(N_alphamodes):
+        amode = alpha_mode_[i]
+        col = alpha_mode_colours[amode]
+        marker = alpha_mode_sym[amode]
+        ax.plot(all_positions[i], all_means[i], marker=marker, markerfacecolor='black', markersize=5,
+                linestyle='solid', color=col, markeredgecolor='black', markeredgewidth=0.5)
+
+
+
+    ax.set_xticks(ticks)
+    ax.set_xticklabels([a*1e3 for a in alpha0_], rotation=45)
+    ax.set_xlim(0, xs+(N_alpha0-1)*L+(N_alphamodes-1)*(width+intrashift)+(width+intershift)*0.5)
+    ax.legend(handles=legend_els, bbox_to_anchor=(0., 1.02, 1., .102), loc='center',
+           ncol=len(legend_els), borderaxespad=0., fontsize=12)
+    ax.set_title('')
+    ax.set_yscale('linear')
+    ax.set_xlabel(labels['alpha0']+r' $\times 10^{3}$')
+    return ax

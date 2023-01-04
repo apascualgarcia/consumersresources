@@ -23,10 +23,10 @@ CRModel::CRModel(Model_parameters* mod_params):CRModel(){
   model_param=mod_params;
   return;
 }
-CRModel::CRModel(Metaparameters& meta):CRModel(load_food_matrix(meta), meta){
+CRModel::CRModel(Metaparameters& meta, bool has_to_be_feasible):CRModel(load_food_matrix(meta), meta, has_to_be_feasible){
   return;
 }
-CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evolution(ode_equations_of_evolution){
+CRModel::CRModel(const foodmatrix& F, Metaparameters& meta, bool has_to_be_feasible):equations_of_evolution(ode_equations_of_evolution){
   unsigned int attempts(0);
   this->create_model_parameters(meta);
   do{
@@ -44,7 +44,7 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta):equations_of_evoluti
         throw error("Unrecognized building mode in model constructor.");
       }
     }
-  }while(not(this->constraints_fulfilled(meta)));
+  }while(not(this->constraints_fulfilled(meta)) && has_to_be_feasible);
 
   if(meta.verbose > 1){
     std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
@@ -242,44 +242,7 @@ nmatrix CRModel::jacobian_at_equilibrium() const{
   return jac_eq;
 }
 ncvector CRModel::eigenvalues_at_equilibrium() const{
-  ncvector v;
-  nmatrix jac_eq = this->jacobian_at_equilibrium();
-  ntype min_element(std::abs(jac_eq[0][0]));
-
-  /* the jacobian should always be a square matrix */
-  const unsigned int jacobian_size=jac_eq.size();
-
-  for(size_t i = 0; i < jacobian_size; ++i){
-    if(jac_eq[i].size()!=jacobian_size){
-      error err("Jacobian is ill formed (not a square matrix).");
-      throw err;
-    }
-    for(size_t j=0; j < jacobian_size; ++j){
-      if(jac_eq[i][j]*jac_eq[i][j] > 0. and std::abs(jac_eq[i][j]) < min_element){
-        min_element = std::abs(jac_eq[i][j]);
-      }
-    }
-  }
-
-  // for testing purpose
-  //min_element = 1.;
-  //std::cout << " put min_element as 1" << std::endl;
-
-  Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> jacob;
-  jacob.resize(jacobian_size, jacobian_size);
-  // we rescale the jacobian such that even the smallest value is of order 1
-  for(size_t i=0; i < jacobian_size; ++i){
-    for(size_t j=0; j < jacobian_size; ++j){
-      jacob(i,j) = jac_eq[i][j]/min_element;
-    }
-  }
-  Eigen::Matrix<nctype, Eigen::Dynamic, 1> eivals = jacob.eigenvalues();
-  for(size_t i=0; i < eivals.rows(); ++i){
-    v.push_back(eivals(i)*min_element);
-    //v.push_back(eivals(i));
-  }
-  std::sort(v.begin(), v.end(), compare_complex);
-  return v;
+  return eigenvalues(this->jacobian_at_equilibrium());
 }
 
 void CRModel::save(std::ostream& os) const{
@@ -495,49 +458,41 @@ Dynamical_variables CRModel::perturb_equilibrium() const{
   return Dynamical_variables(p_resources, p_consumers);
 
 }
-void CRModel::perturb_parameters(const ntype & Delta) const{
+void CRModel::perturb_parameters(const ntype & Delta, perturbmode pert_mode) const{
   Parameter_set* p = this->model_param->get_parameters();
-  unsigned int pert_type=this->metaparameters->struct_pert_type;
-  if(this->metaparameters->verbose > 1){
-    std::cout <<"\t Structurally perturbed the l_mu's the system with parameter delta =" << Delta;
-  }
-  switch(pert_type){
-    case 0:{
+  switch(pert_mode){
+    case perturb_l:{
       std::uniform_real_distribution<ntype> uniform_distrib(-1., 1.);
       for(size_t mu=0; mu < p->l.size(); ++mu){
         p->l[mu] = p->l[mu]*(1+Delta*uniform_distrib(random_engine));
       }
-
       if(this->metaparameters->verbose > 1){
-        std::cout << " (l0 stays the same)" << std::endl;
+        std::cout <<"\t Perturbed the l_mu's the system with parameter delta =" << Delta;
+        std::cout << " (l0 stays the same), each l_mu -> l_mu (1+Delta)" << std::endl;
       }
       break;
     }
 
-    case 1:{
-      std::uniform_real_distribution<ntype> delta_distrib(0, 2.*Delta);
+    case remove_l:{
+      std::uniform_real_distribution<double> unif_distrib(0., 1.);
+      unsigned int removed_resources=0;
       for(size_t mu=0; mu < p->l.size(); ++mu){
-        ntype diminution;
-        do{
-          diminution=delta_distrib(random_engine);
-        }while(diminution > 1);
-        p->l[mu]*=(1-diminution);
+        if(unif_distrib(random_engine)<Delta){
+          p->l[mu] = 0;
+          removed_resources+=1;
+        }
       }
       if(this->metaparameters->verbose > 1){
-        std::cout << " (l0 is now approximately "<< mean(p->l) << ")" << std::endl;
+        std::cout << "\t Structurally perturbed the system by removing " << removed_resources << " resources at random (Delta="<< Delta <<")" << std::endl;
       }
       break;
-
-    }
+    };
 
     default:{
-      throw error("Unknown parameter perturbation type, please choose either 0 or 1");
+      throw error("Unknown parameter perturbation type!");
 
     }
   }
-
-
-
 
   return;
 }
@@ -672,14 +627,8 @@ bool CRModel::has_linearly_stable_eq() const{
   return false;
 }
 systemstability CRModel::assess_dynamical_stability() const{
-  ncvector eigvals = this->eigenvalues_at_equilibrium();
-  ntype max_real_eigval = real(eigvals[0]);
-  for(size_t i=1; i < eigvals.size(); ++i){
-    ntype test = real(eigvals[i]);
-    if(test > max_real_eigval){
-      max_real_eigval = test;
-    }
-  }
+  nctype max_eigval = this->largest_eigenvalue_at_equilibrium();
+  ntype max_real_eigval = real(max_eigval);
 
   if(max_real_eigval > EIGENSOLVER_PRECISION){
     if(this->metaparameters->verbose>1){
@@ -1011,4 +960,82 @@ nmatrix CRModel::get_biomass_flux_network()const{
   }
 
   return f_network;
+}
+
+/* returns the effective competition matrix */
+nmatrix CRModel::get_effective_competition_matrix(unsigned int eq_number) const{
+  nmatrix C=nmatrix(this->metaparameters->NS, nvector(this->metaparameters->NS, 0.));
+  Parameter_set p = this->model_param->get_parameter_set();
+  nmatrix sigma = p.sigma, gamma = p.gamma, alpha = p.alpha;
+  nvector l = p.l, S = this->get_consumers_equilibrium(eq_number), D=this->get_Delta_vector(eq_number);
+  unsigned int NR = this->metaparameters->NR, NS = this->metaparameters->NS;
+  for(size_t i = 0; i < NS; ++i){
+    for(size_t j=0; j < NS; ++j){
+      for(size_t nu=0; nu < NR; ++nu){
+        ntype sum = 0.;
+        for(size_t k=0; k < NS; ++k){
+          sum += gamma[k][nu]*S[k];
+        }
+        C[i][j] += sigma[i][nu]*gamma[i][nu]/(D[nu]*D[nu])*(gamma[j][nu]*l[nu]-alpha[nu][j]*(D[nu]+sum));
+      }
+    }
+  }
+  return C;
+}
+
+nmatrix CRModel::get_A() const{
+  nmatrix A = this->model_param->get_parameter_set().alpha;
+  for(size_t i = 0; i < this->metaparameters->NS; ++i){
+    for(size_t mu=0; mu < this->metaparameters->NR; ++mu){
+      if(abs(A[mu][i]) > 0.){
+        A[mu][i]=1.;
+      }
+    }
+  }
+  return A;
+}
+
+nmatrix CRModel::get_G() const{
+  nmatrix G = this->model_param->get_parameter_set().gamma;
+  for(size_t i = 0; i < this->metaparameters->NS; ++i){
+    for(size_t mu=0; mu < this->metaparameters->NR; ++mu){
+      if(abs(G[i][mu]) > 0.){
+        G[i][mu]=1.;
+      }
+    }
+  }
+  return G;
+}
+
+EcologicalNetwork CRModel::get_ecological_network() const{
+  EcologicalNetwork eco_net(this->get_A(), this->get_G());
+  return eco_net;
+}
+
+/* returns the effective competition (average of the effective competition matrix) */
+ntype CRModel::get_effective_competition(unsigned int eq_number) const{
+  nmatrix C = this->get_effective_competition_matrix(eq_number);
+  return mean(C);
+}
+
+nmatrix CRModel::get_normalized_effective_competition_matrix(unsigned int eq_number) const{
+  nmatrix C = this->get_effective_competition_matrix(eq_number);
+  nmatrix B = C;
+  for(size_t i = 0; i < B.size(); ++i){
+    for(size_t j=0; j < B[i].size(); ++j){
+      B[i][j] = C[i][j]/square_root(C[i][i]*C[j][j]);
+    }
+  }
+  return B;
+}
+
+ntype CRModel::get_ratio_inter_intraspecific_competition(unsigned int eq_number) const{
+  nmatrix C = this->get_effective_competition_matrix(eq_number);
+  ntype sum_trace=trace(C);
+  ntype lambda1 = real(largest_eigenvalue(C));
+  unsigned int NS = this->get_parameter_set()->NS;
+
+  ntype rho_eff = 1./(NS-1.)*((NS*lambda1*1.)/sum_trace-1.);
+
+  return rho_eff;
 }

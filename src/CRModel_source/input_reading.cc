@@ -62,3 +62,33 @@ eqmode string_to_eq_mode(std::string mode){
       throw err;
     }
 }
+
+MCmode string_to_mcmode(std::string s){
+  if(s=="A_only"){
+    return MCmode(A_only);
+  }else if(s=="both_modified"){
+    return MCmode(both_modified);
+  }else{
+    throw error("Unknown MC mode");
+  }
+}
+
+perturbmode string_to_perturbmode(std::string s){
+  if(s=="perturb_l"){
+    return perturbmode(perturb_l);
+  }else if(s=="remove_l"){
+    return perturbmode(remove_l);
+  }else{
+    throw error("Unknown perturb mode!");
+  }
+}
+
+alphavalue string_to_alpha_value(std::string s){
+  if(s=="input"){
+    return alphavalue(input);
+  }else if(s=="critical"){
+    return alphavalue(critical);
+  }else{
+    throw error("Unknown alpha value type!");
+  }
+}

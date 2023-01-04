@@ -36,5 +36,7 @@ void fit_points_with_function(const nvector&, const nvector&, fitting_parameters
 
 void set_jacobian_matrix_fit(const gsl_vector*, void*, gsl_matrix*);
 void set_jacobian_matrix_sigmoidal_fit(const gsl_vector*, void*, gsl_matrix*);
+void set_jacobian_matrix_polynomial_fit(const gsl_vector*, void*, gsl_matrix*);
+
 
 #endif

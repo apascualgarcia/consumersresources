@@ -11,6 +11,7 @@
 #include "Classes/Consumer_Resource_Model.h"
 #include "Classes/Effective_Consumer_Resource_Model.h"
 #include "Classes/ButlerModel.h"
+#include "Classes/EcologicalNetwork.h"
 
 #include "Functions/output_writing.h"
 #include "Functions/fitting.h"

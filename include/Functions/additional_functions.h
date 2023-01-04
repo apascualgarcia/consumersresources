@@ -4,6 +4,7 @@
 #include "../Classes/Metaparameters.h"
 #include "../Classes/Custom_types.h"
 #include "../Classes/Extinction.h"
+#include "../Classes/EcologicalNetwork.h"
 #include<algorithm>
 #include<random>
 #include<string>
@@ -13,6 +14,7 @@
 /* loads the food matrix and relabels columns and resources such that gamma is "most triangular" */
 foodmatrix load_food_matrix(const Metaparameters&);
 nmatrix load_syntrophy_matrix(const Metaparameters&);
+nmatrix load_meta_matrix(const Metaparameters&);
 /* relabels the row of  m such that degree of row i > degree of row j if i < j */
 nmatrix order_matrix_by_row_degree(const nmatrix&);
 /* relabels the columns of m such that degree of column i > degree of column j if i < j */
@@ -28,6 +30,8 @@ ntype det(const nmatrix&);
 
 Eigen::Matrix<ntype, Eigen::Dynamic, Eigen::Dynamic> convert_nmatrix_to_eigen_matrix(const nmatrix& mat);
 
+std::string mcmode_to_string(const MCmode &);
+
 /* computes number of links in a matrix */
 unsigned int number_of_links(const nmatrix&);
 
@@ -41,22 +45,35 @@ ntype nestedness(const nmatrix &);
 ntype trace(const nmatrix&);
 ntype assortativity(const nmatrix&);
 unsigned int rank(const nmatrix&);
+bool is_matrix_full_rank(const nmatrix&);
 
 nmatrix random_uniform_matrix(const unsigned int&, const unsigned int&, const ntype&);
 nmatrix random_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int& columns, const ntype& conn);
+nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows, const unsigned int & columns, const ntype& conn);
+
+nmatrix flip_whole_binary_matrix(const nmatrix& mat);
 /* for a matrix g of size NS x NR, returns the NRxNS matrix with the same connectance as g and such that if g_{im}=1 then alpha_{mi}=0 */
 nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g);
 
 /* build LRI matrix with target connectance */
 nmatrix build_LRI_matrix(const nmatrix& g,const Metaparameters& m, const ntype& target_conn);
 
+/* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
+void flip_one_binary_matrix_element(nmatrix & B);
+void swap_two_matrix_elements(nmatrix & B);
+
 void rescale_mean(nmatrix&, const ntype&);
 
 bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
+bool is_there_coprophagy(const EcologicalNetwork& net);
+
 /* returns true if gamma has one row filled with zeros only */
 bool has_an_empty_row(const nmatrix& gamma);
 /* returns true if gamma has one column filled with zeros only */
 bool has_an_empty_column(const nmatrix& gamma);
+
+/* returns true if all elements of a vector are equal */
+bool all_elements_equal(const nvector &);
 
 nmatrix operator+(const nmatrix&, const nmatrix&);
 nmatrix operator-(const nmatrix&, const nmatrix &);
@@ -67,6 +84,15 @@ nmatrix operator*(const nmatrix&, const ntype&);
 nmatrix operator/(const nmatrix&, const ntype&);
 
 nmatrix transpose(const nmatrix & m);
+nmatrix create_random_binary_matrix(unsigned int cols, unsigned int rows);
+
+nctype largest_eigenvalue(const nmatrix & );
+ncvector eigenvalues(const nmatrix & );
+
+std::string operator+(const std::string&, const unsigned int&);
+std::string operator+(const unsigned int&, const std::string &);
+std::string operator+(const std::string&, const ntype&);
+std::string operator+(const ntype&, const std::string&);
 
 bool non_neg_elements(const nmatrix&);
 bool non_neg_elements(const nvector&);
@@ -75,7 +101,8 @@ void initialize_random_engine(const Metaparameters&);
 void print_rand_number();
 
 ntype mean(const nvector&);
-ntype standard_dev(const nvector&);
+// ddof is the offset in the numerator (N-ddof is taken in the computation)
+ntype standard_dev(const nvector&, const unsigned int ddof=1);
 ntype median(const nvector&);
 
 ntype mean_non_zero_elements(const nmatrix&);
@@ -85,6 +112,10 @@ nvector log_interval(const ntype& begin, const ntype& end, unsigned int Npoints)
 
 ntype angle(const nvector&, const nvector&);
 ntype distance(const nvector&, const nvector&);
+
+ntype square_root(const ntype& );
+
+ntype Heaviside(const ntype&);
 
 nvector operator+(const nvector&, const nvector&);
 nvector operator-(const nvector&);
@@ -113,6 +144,7 @@ std::ofstream open_external_file_truncate(std::string);
 bool compare_complex(const nctype&, const nctype&);
 bool operator<(const nctype&, const nctype&);
 bool operator>(const nctype&, const nctype&);
+
 
 
 /* taken from https://stackoverflow.com/questions/1577475/c-sorting-and-keeping-track-of-indexes on Feb 26 2020 */
@@ -168,6 +200,14 @@ T variance(const std::vector<T> & vec){
   total = total*1./(n-1);
   return total;
 }
+
+template <typename T>
+  std::string NumberToString ( T Number )
+  {
+     std::ostringstream ss;
+     ss << Number;
+     return ss.str();
+  }
 
 
 

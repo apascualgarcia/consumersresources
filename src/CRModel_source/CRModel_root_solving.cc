@@ -62,6 +62,8 @@ nvector find_rough_interval_sigmoidal_fit(gsl_function* f, unsigned int Npoints,
   Solver_Parameters* s = (Solver_Parameters*) f->params;
   double initial_target = s->target;
 
+  /* /!\ Problem with this function : assumes that f is an increasing function */
+
   /* the idea is to find the first point x0 such that f(x0) > 0. It will be taken as the start of the interval */
   if(verbose > 0){
     std::cout << "We look for a point slightly above zero." << std::endl;
@@ -155,6 +157,9 @@ double find_zero(gsl_function* f, unsigned int verbose, interval bounds){
   }catch(error e){
     e.handle();
   }
+  if(verbose > 1){
+    std::cout << "The function vanishes at x= " << estimate << std::endl;
+  }
   return estimate;
 }
 nvector find_rough_interval(gsl_function* f, unsigned int Npoints, unsigned int verbose, fitmode fit_mode, interval bounds){
@@ -225,6 +230,7 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
   params.equilibrium = equilibrium;
   params.target = target;
   params.stab_mode=delta_solv.stab_mode;
+  params.pert_mode=delta_solv.pert_mode;
 
   gsl_function F;
   F.function = &function_av_extinct_solver;
@@ -279,40 +285,51 @@ statistics compute_critical_Delta(Metaparameters metaparams, delta_solver delta_
 }
 statistics compute_critical_alpha(Metaparameters& metaparams, ntype accuracy, fitmode fit_mode){
   statistics critical_alpha;
-  double target=0.;
-  unsigned int Nsimul_frun = 100, Nsimul_srun = 10000;
+  unsigned int Nsimul_frun = 10000, Nsimul_srun = 10000;
   size_t interval_length = 50;
   interval initial_guess(0., metaparams.physical_maximum_alpha0());
 
   Solver_Parameters params;
   params.metaparameters = &metaparams;
   params.Nsimul = Nsimul_frun;
-  params.target = target;
 
   gsl_function F;
   F.function = &function_proba_feasability_solver;
   F.params = &params;
 
   if(metaparams.verbose > 0){
-    std::cout << "Now attempting to find the critical alpha for the following set of parameters : " << metaparams << std::endl;
+    std::cout << "Now attempting to find the critical alpha (95% of feasible systems) for the following set of parameters : " << metaparams << std::endl;
     std::cout << "We first find a rough interval where we know the critical alpha will lie ("<<params.Nsimul << " runs per point). " << std::endl;
   }
-  nvector interval = find_rough_interval(&F, interval_length, metaparams.verbose, fit_mode, initial_guess);
-  /* when we have found an interval we highly suspect of containing the root
-    we compute the feasability probability at a better accuracy for the points
-    in the interval */
-  params.Nsimul=Nsimul_srun;
 
+
+  double x_lo = 0., x_hi=0.;
+  /* first find lower limit of interval */
+  params.target = 0.999;
+  x_lo = find_zero(&F, metaparams.verbose, initial_guess);
+  /* then find upper limit of interval */
+  params.target = 0.90;
+  x_hi = find_zero(&F, metaparams.verbose, initial_guess);
+
+  /* set back to final target value */
+  params.target=0.95;
+  params.Nsimul = Nsimul_srun;
+
+
+  nvector interval=linear_interval(x_lo, x_hi, interval_length);
   nvector function_y_values;
   if(metaparams.verbose > 0){
+    std::cout << "Interval for critical alpha: [" << x_lo << ";" << x_hi << "]" << std::endl;
     std::cout << "Now computing the feasability probability for different alpha, ";
     std::cout << interval_length << " points inside this interval (" << params.Nsimul <<" runs per point)" << std::endl;
   }
 
   for(size_t i=0; i < interval_length; ++i){
     double result = function_proba_feasability_solver(interval[i], &params);
+    std::cout << "alpha0=" << interval[i] << " function proba solver (F-0.95)= " << result << std::endl;
     function_y_values.push_back(result);
   }
+
 
   /* after getting these ten points, we fit them with a curve of a given shape,
    that allows us to estimate the critical alpha */
@@ -326,13 +343,14 @@ double function_av_extinct_solver(double delta, void*params){
   Metaparameters* m = s->metaparameters;
   unsigned int Nsimul = s->Nsimul;
   double target = s->target;
+  double pert_mode = s->pert_mode;
 
   switch(s->equilibrium){
     case convergence:
       return average_number_of_extinctions(delta, m, Nsimul)-target;
       break;
     case oneextinct:
-      return probability_of_extinction_greather_than_one(m, delta, Nsimul, s->stab_mode)-target;
+      return probability_of_extinction_greather_than_one(m, delta, Nsimul, s->stab_mode, s->pert_mode)-target;
       break;
     default:
       error err("Equilibrium type not implemented yet.");
@@ -399,8 +417,26 @@ statistics solve_for_delta_with_fit(fitting_parameters& fit_parameters, double &
       error = gsl_vector_get(fit_parameters.error, 0);
     }
     case polynomial:{
-      struct error err("PLEASE IMPLEMENT THE FUNCTION TO SOLVE FOR DELTA WITH POLYNOMIAL FIT.");
-      throw err;
+      switch (NUMBER_OF_FITTING_PARAMETERS){
+        case 2:{
+          double a = gsl_vector_get(fit_parameters.fit_parameters,1);
+          double b = gsl_vector_get(fit_parameters.fit_parameters,0);
+
+          double err_a = gsl_vector_get(fit_parameters.error, 1);
+          double err_b = gsl_vector_get(fit_parameters.error, 0);
+
+          estimate = -b/a;
+          error = abs(estimate)*(err_a/abs(a)+err_b/abs(b));
+
+          break;
+        }
+
+        default:{
+          struct error err("Implement fit solving for polynomial with degree larger than 1 please");
+          throw err;
+          break;
+        }
+      }
       break;
     }
 
