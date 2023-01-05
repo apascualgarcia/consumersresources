@@ -16,13 +16,17 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_gamma(min_gamma0, max_gamma0);
     std::uniform_real_distribution<double> random_S(min_S0, max_S0);
 
-    unsigned int Nsimuls=1e3;
+    unsigned int Nsimuls=1e6;
+    unsigned int spacing = Nsimuls/10;
+
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
-    myfile << "# We are writing, in that order, G-matrix location, A-matrix location, A-mode, alpha0 value, total number of simulations, proportion of feasible, stable, unstable, marginal and dominant eigenvalue" << std::endl;
+    myfile << "# We are writing, in that order, G-matrix location, A-matrix location, G connectance, G nestedness, A connectance, A nestedness, A-mode, alpha0 value, total number of simulations, proportion of feasible, stable, unstable, marginal and dominant eigenvalue" << std::endl;
+
+    ntype G_connectance = 0., G_nestedness=0.;
 
     for(auto mat: matrix_list){
-      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0.;
+      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0., av_A_connectance=0., av_A_nestedness=0.,percentage_run = 0.;
       unsigned int N_dyn = 0;
       metaparams.foodmatrixpath=mat;
       metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
@@ -32,11 +36,23 @@ int main(int argc, char * argv[]){
         metaparams.gamma0=random_gamma(random_engine);
         metaparams.S0=random_S(random_engine);
 
+        percentage_run += 100./Nsimuls;
+
         if(metaparams.verbose>1){
           std::cout << "Run " << i << " out of "<< Nsimuls << ": ";
         }
 
+        if(metaparams.verbose>0 && i%spacing==0){
+          std::cout << int((100.0*i)/Nsimuls) << "% of the simulations have been run." << std::endl;
+        }
+
         CRModel model(metaparams, false);
+        if(i==0){
+          G_connectance = connectance(model.get_G());
+          G_nestedness = nestedness(model.get_G());
+        }
+        av_A_nestedness+=nestedness(model.get_A())/Nsimuls;
+        av_A_connectance+=connectance(model.get_A())/Nsimuls;
         if(model.is_feasible()){
           prob_feasible+=1.;
           systemstability sys_stab = model.assess_dynamical_stability();
@@ -73,11 +89,19 @@ int main(int argc, char * argv[]){
       /* Write everything to output */
       myfile << metaparams.foodmatrixpath << " ";
       myfile << metaparams.syntrophy_matrix_path << " ";
+      myfile << G_connectance << " ";
+      myfile << G_nestedness << " ";
+      myfile << av_A_connectance << " ";
+      myfile << av_A_nestedness << " ";
       myfile << metaparams.alpha_mode << " ";
       myfile << metaparams.alpha0 << " ";
       myfile << Nsimuls << " ";
       myfile << prob_feasible <<" "<< prob_stable << " " << prob_unstable << " " << prob_marginal;
       myfile << " " << av_dom_eig << std::endl;
+
+      if(metaparams.verbose>0){
+        std::cout << "Done for matrix G = " << metaparams.foodmatrixpath << std::endl;
+      }
 
     }
 

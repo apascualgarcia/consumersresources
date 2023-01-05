@@ -11,8 +11,7 @@ CONSUMPTION_MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25_1 full
 # SYNTROPHY_MATRIX_FOLDER is unused if ALPHA_MODE is set to random structure
 SYNTROPHY_MATRIX_FOLDER="matrices/Nr25_Nc25/syntrophy/optimized/previous_run_matrices/Metamatrices"
 ALPHA_MODE="optimal_matrix random_structure"
-ALPHA_VALS="0.0013"
-#ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
+ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
 
 ADDITIONAL_MODIF="verbose-level=1"
 NR=25
@@ -33,8 +32,7 @@ do
   do
     for alpha0 in $ALPHA_VALS
     do
-      CURRENT_NAME="${SAVENAME}_${matl}_alpha0=${alpha0}"
-      VOLUME_PATH="${VOL_NAME}_${matl}_alpha0=${alpha0}"
+      CURRENT_NAME="${SAVENAME}"
       if [ ! -z "${ADDITIONAL_MODIF}" ]
       then
         for add in $ADDITIONAL_MODIF

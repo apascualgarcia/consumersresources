@@ -23,9 +23,11 @@ log_name=log_name[1].split(".")[0]
 for i in range(CORES):
     core_command = '('
     for j in range(len(commands_per_core[i])):
-        core_command+='nohup sh -c "'+commands_per_core[i][j]
         log_file = "logs/"+log_name+"_core_"+str(i)+".log"
-        err_file = "logs/err"+log_name+"_core_"+str(i)+".log"
+        err_file = "logs/err_"+log_name+"_core_"+str(i)+".log"
+
+        core_command+='nohup sh -c "'+commands_per_core[i][j]
+        core_command+="| ts '[%Y-%m-%d %H:%M:%S]' "
         core_command+='">'+log_file+" 2>"+err_file
         core_command+="; wait;"
     core_command=core_command[:-7]+') &'
