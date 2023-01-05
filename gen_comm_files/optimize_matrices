@@ -59,14 +59,12 @@ do
 
           COMMAND_NAME="${FIRST_COMMAND}"
 
-          LOG_NAME="logs/${COMMAND_FILE}_${matl}_${seed}.log"
-          ERR_LOG_NAME="logs/err_${COMMAND_FILE}_${matl}_${seed}.log"
           # execute command
           #nohup sh -c "${COMMAND_NAME}" >${LOG_NAME} 2>${ERR_LOG_NAME} &
-          echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
+          echo "${COMMAND_NAME}" >> commands/${COMMAND_FILE}.txt
           # write command to log
           now="["$(date)"]"
-          echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+          echo "${now} nohup sh -c \"${COMMAND_NAME}\" &" >> logs/commands.log
         done
     done
   done

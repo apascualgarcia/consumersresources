@@ -46,15 +46,6 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta, bool has_to_be_feasi
     }
   }while(not(this->constraints_fulfilled(meta)) && has_to_be_feasible);
 
-  if(meta.verbose > 1){
-    std::cout << "\t Feasible system built in "<<attempts<<" iteration(s). ";
-    if(attempts > meta.nb_attempts){
-      std::cout << "\t The metaparameters had to be changed.";
-    }else{
-      std::cout << "It was possible to use the initial metaparameters.";
-    }
-    std::cout << std::endl;
-  }
   return;
 }
 CRModel::~CRModel(){
@@ -916,8 +907,12 @@ bool CRModel::is_in_strong_LRI() const{
 bool CRModel::is_feasible() const{
   Metaparameters* m = this->metaparameters;
   if(not(this->positive_parameters())){
+
     if(m->verbose > 3){
       std::cout << "Model rejected because some of the parameters are not positive" << std::endl;
+    }
+    if(m->verbose > 1){
+      std::cout << "Model unfeasible" << std::endl;
     }
     return false;
   }
@@ -926,6 +921,9 @@ bool CRModel::is_feasible() const{
     if(m->verbose > 3){
       std::cout << "Model rejected because the energy constraint is not fulfilled" << std::endl;
     }
+    if(m->verbose > 1){
+      std::cout << "Model unfeasible" << std::endl;
+    }
     return false;
   }
 
@@ -933,7 +931,13 @@ bool CRModel::is_feasible() const{
     if(m->verbose > 3){
       std::cout << "Model rejected because the equations of evolution are not respected at equilibrium " << std::endl;
     }
+    if(m->verbose > 1){
+      std::cout << "Model unfeasible" << std::endl;
+    }
     return false;
+  }
+  if(m->verbose > 1){
+    std::cout << "Model feasible" << std::endl;
   }
   return true;
 }

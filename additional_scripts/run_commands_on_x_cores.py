@@ -16,14 +16,18 @@ else:
 np.random.shuffle(commands)
 commands_per_core = np.array_split(commands, CORES)
 
+log_name=str(file_name).split("/")
+log_name=log_name[1].split(".")[0]
+
+
 for i in range(CORES):
     core_command = '('
     for j in range(len(commands_per_core[i])):
-        split_files = commands_per_core[i][j].split(">")
-        command = split_files[0]
-        log_file = split_files[1][:-1]
-        err_file = split_files[2]
-        core_command+='nohup sh -c "'+command+'">'+log_file[1:]+"2>"+err_file+"; wait;"
+        core_command+='nohup sh -c "'+commands_per_core[i][j]
+        log_file = "logs/"+log_name+"_core_"+str(i)+".log"
+        err_file = "logs/err"+log_name+"_core_"+str(i)+".log"
+        core_command+='">'+log_file+" 2>"+err_file
+        core_command+="; wait;"
     core_command=core_command[:-7]+') &'
     #print(core_command)
     os.system(core_command)

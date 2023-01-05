@@ -5,27 +5,23 @@
 # value of alpha0 in the ALPHA_VALS list.
 
 # Example for NR=NS=25
-MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
-MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
+CONSUMPTION_MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
+CONSUMPTION_MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
+
+# SYNTROPHY_MATRIX_FOLDER is unused if ALPHA_MODE is set to random structure
+SYNTROPHY_MATRIX_FOLDER="matrices/Nr25_Nc25/syntrophy/optimized/previous_run_matrices/Metamatrices"
 ALPHA_MODE="optimal_matrix random_structure"
-OPTIMAL_MATRIX_FOLDER="Metamatrices"
+ALPHA_VALS="0.0013"
 #ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
+
 ADDITIONAL_MODIF="verbose-level=1"
 NR=25
 NS=25
 
 CONFIGURATION_FILE="config/configuration.in"
-COMMAND_FILE="study_dyn_stab_NR25_NS25"
-SAVENAME="eff_comp_all_data_NR25_NS25"
-BUILD_NAME="study_dynamical_stability_systems"
-#BUILD_NAME="study_systems"
-
-# And possible modifications for NR=50 and NS=25
-#MATRIX_LIST="full_rank_opt_consumption_mat_NR50_NS25"
-#ALPHA_MODE="random_structure no_release_when_eat optimal_matrix fully_connected"
-#SAVENAME="local_dynamical_stability_NR50_NS25"
-#ADDITIONAL_MODIF="NR=50 NS=25"
-#ALPHA_VALS="0"
+COMMAND_FILE="study_systems_NR25_NS25"
+SAVENAME="all_data_NR25_NS25"
+BUILD_NAME="study_ecological_systems"
 
 # first clear all previous contents of the commands file
 rm commands/${COMMAND_FILE}.txt
@@ -33,30 +29,33 @@ rm commands/${COMMAND_FILE}.txt
 
 for a in $ALPHA_MODE
 do
-  for matl in $MATRIX_LIST_FILENAME
+  for matl in $CONSUMPTION_MATRIX_LIST_FILENAME
   do
-    CURRENT_NAME="${SAVENAME}_${matl}_${OPTIMAL_MATRIX_FOLDER}"
-    VOLUME_PATH="${VOL_NAME}_${matl}_${OPTIMAL_MATRIX_FOLDER}"
-    if [ ! -z "${ADDITIONAL_MODIF}" ]
-    then
-      for add in $ADDITIONAL_MODIF
-      do
-        CURRENT_NAME="${CURRENT_NAME}_${add}"
-      done
-    fi
+    for alpha0 in $ALPHA_VALS
+    do
+      CURRENT_NAME="${SAVENAME}_${matl}_alpha0=${alpha0}"
+      VOLUME_PATH="${VOL_NAME}_${matl}_alpha0=${alpha0}"
+      if [ ! -z "${ADDITIONAL_MODIF}" ]
+      then
+        for add in $ADDITIONAL_MODIF
+        do
+          CURRENT_NAME="${CURRENT_NAME}_${add}"
+        done
+      fi
 
-    FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=results/${CURRENT_NAME}.out path_to_food_matrix=${MATRIX_LIST_FOLDER}/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=optimal_matrices/syntrophy/Nr${NR}_Nc${NS}/${OPTIMAL_MATRIX_FOLDER} ${ADDITIONAL_MODIF}"
-    FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
+      FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=results/${CURRENT_NAME}.out path_to_food_matrix=${CONSUMPTION_MATRIX_LIST_FOLDER}/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=${SYNTROPHY_MATRIX_FOLDER} NR=${NR} NS=${NS} alpha0=${alpha0} ${ADDITIONAL_MODIF}"
+      #FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
 
-    COMMAND_NAME="${FIRST_COMMAND}"
+      COMMAND_NAME="${FIRST_COMMAND}"
 
-    LOG_NAME="logs/${COMMAND_FILE}.log"
-    ERR_LOG_NAME="logs/err_${COMMAND_FILE}.log"
+      #LOG_NAME="logs/${COMMAND_FILE}.log"
+      #ERR_LOG_NAME="logs/err_${COMMAND_FILE}.log"
 
-    echo "${COMMAND_NAME} > ${LOG_NAME} 2>${ERR_LOG_NAME}" >> commands/${COMMAND_FILE}.txt
-    # write command to log
-    now="["$(date)"]"
-    echo "${now} nohup sh -c \"${COMMAND_NAME}\" >${LOG_NAME} 2>${ERR_LOG_NAME} &" >> logs/commands.log
+      echo "${COMMAND_NAME}" >> commands/${COMMAND_FILE}.txt
+      # write command to log
+      now="["$(date)"]"
+      echo "${now} ${COMMAND_NAME}" >> logs/commands.log
+    done
   done
 done
 #echo "Launched commands in the background, please check appropriate log files for progress"

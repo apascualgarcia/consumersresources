@@ -192,22 +192,22 @@ std::ostream& operator<<(std::ostream& os, const buildingmode & b){
 std::ostream& operator<<(std::ostream& os, const alphamode& a){
   switch(a){
     case random_structure:{
-      os << "random structure";
+      os << "random_structure";
       break;
     };
 
     case no_release_when_eat:{
-      os << "no intraspecific syntrophy";
+      os << "no_intraspecific_syntrophy";
       break;
     };
 
     case optimal_matrix:{
-      os << "optimized matrix";
+      os << "optimized_matrix";
       break;
     };
 
     case fully_connected:{
-      os << "fully connected";
+      os << "fully_connected";
       break;
     };
 
