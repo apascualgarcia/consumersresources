@@ -6,7 +6,7 @@
 
 # Example for NR=NS=25
 CONSUMPTION_MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
-CONSUMPTION_MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
+CONSUMPTION_MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25_1 full_rank_opt_consumption_mat_NR25_NS25_2 full_rank_opt_consumption_mat_NR25_NS25_3 full_rank_opt_consumption_mat_NR25_NS25_4"
 
 # SYNTROPHY_MATRIX_FOLDER is unused if ALPHA_MODE is set to random structure
 SYNTROPHY_MATRIX_FOLDER="matrices/Nr25_Nc25/syntrophy/optimized/previous_run_matrices/Metamatrices"
