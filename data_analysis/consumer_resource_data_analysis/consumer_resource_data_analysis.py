@@ -8,27 +8,8 @@ import copy
 import sys
 import re
 import pandas as pd
-from matplotlib.colors import to_rgb
 from matplotlib.patches import Patch
-
-np.set_printoptions(threshold=sys.maxsize)
-mpl.rcParams['lines.linewidth']=1.5
-mpl.rcParams['lines.markersize']=12
-mpl.rcParams['lines.markeredgewidth']=3
-mpl.rcParams['lines.marker']='.'
-mpl.rcParams['lines.linestyle']='solid'
-
-alpha_mode=['fully_connected', 'no_release_when_eat', 'optimal_matrix', 'random_structure']
-alpha_mode_colours=dict({'fully_connected':'blue', 'no_release_when_eat':'orange', 'optimal_matrix':'red', 'random_structure':'green'})
-alpha_mode_sym = dict({'fully_connected': 'P', 'no_release_when_eat': 'D', 'optimal_matrix':'o', 'random_structure': 'd'})
-
-alpha_mode_label=dict({'fully_connected':'Fully Connected', 'no_release_when_eat': 'NIS', 'optimal_matrix': 'Optimized', 'random_structure':'Random'})
-legend_titles=dict({'nestG': 'Consumption \n overlap '+r'$\eta_G$', 'connG': 'Consumption \n connectance '+r'$\kappa_G$'})
-
-labels=dict({'nestG': r'Consumption overlap $\eta_G$', 'connG': r'Consumption connectance $\kappa_G$',
-            'E': r'Objective function $ E $', 'connA': r'Syntrophy connectance $\kappa_A$',
-            'nestA': r'Syntrophy overlap $\eta_A$', 'feasible decay rate': r'Feasibility decay',
-            'ld stable decay rate': r'Dynamical stability decay', 'alpha0': r'Syntrophy strength $\alpha_0$'})
+from matplotlib.colors import to_rgb
 
 
 alpha0=[0, 1.3e-3, 2.6e-3, 3.9e-3, 5.2e-3, 6.5e-3, 7.8e-3, 9.1e-3, 1.04e-2, 1.4e-2]
@@ -302,26 +283,6 @@ def add_colorbar_to_plot_levels(fig, im, levels, ticks):
     cbar.set_ticklabels(ticks)
     return cbar
 
-
-def closest_element_in_list(el, liste):
-    closest_index=0
-    distance=abs(el-liste[0])
-    for i in range(1, len(liste)):
-        dist = abs(el-liste[i])
-        if(dist<=distance):
-            distance=dist
-            closest_index=i
-    return liste[closest_index]
-
-def index_closest_element_in_list(el, liste):
-    closest_index=0
-    distance=abs(el-liste[0])
-    for i in range(1, len(liste)):
-        dist = abs(el-liste[i])
-        if(dist<=distance):
-            distance=dist
-            closest_index=i
-    return closest_index
 
 def remove_strings_from_file(matrices_folder,filename):
     file = open(filename + '.out', "r")
@@ -879,80 +840,3 @@ def plot_decay_rates(axs, decay_rate_data, type):
         axs[j][0].set_title(alpha_mode_label[amode])
 
     return axs
-
-def plot_volumes(ax, data_file, width, shift, alpha0_, alpha_mode_, data_type):
-    df = pd.read_csv(data_file)
-
-    intershift = shift[0]
-    intrashift = shift[1]
-
-    N_alphamodes = len(alpha_mode_)
-    N_alpha0 = len(alpha0_)
-    L = N_alphamodes*(width+intrashift)-intrashift+intershift
-    xs = 0.5*(width+intershift)
-
-    for a in df['alpha0']:
-        df['alpha0'] = df['alpha0'].replace([a], closest_element_in_list(a, alpha0_))
-
-    ticks=[]
-    for i in range(N_alpha0):
-        box_start = i*L
-        box_end = box_start+L
-        if i%2==0:
-            ax.axvspan(xmin=box_start, xmax=box_end, color='black', alpha=0.1)
-        xloc = 0.5*(box_end-box_start)+box_start
-        ticks.append(xloc)
-
-    legend_els=[]
-    all_means = []
-    all_positions = []
-    for i in range(N_alphamodes):
-        amode=alpha_mode_[i]
-        data=df[df['alpha_mode']==amode]
-        to_plot=pd.DataFrame(columns=['matrix'])
-        col = alpha_mode_colours[amode]
-        marker = alpha_mode_sym[amode]
-        facecol = to_rgb(col)+(0.5,)
-        boxprops = dict(edgecolor=facecol, facecolor=facecol, linewidth=0)
-        meanprops=dict(color=col, marker=marker, markeredgecolor=col, markerfacecolor=col, linestyle='solid', markersize=10)
-        medianprops=dict(color=col, marker='')
-        whiskerprops=dict(color=facecol, marker='')
-        capprops=dict(color=facecol, marker='')
-        flierprops=dict(marker=marker, markeredgecolor=col, markerfacecolor=col, markeredgewidth=1, markersize=5)
-        means=[]
-        for a0 in alpha0_:
-            string = data_type+' volume'
-            if data_type == "av. dominant eigenvalue":
-                string = 'av. dominant eigenvalue'
-            volumes = data[data['alpha0']==a0][string].to_numpy()
-            volumes = volumes[~np.isnan(volumes)]
-            means.append(np.mean(volumes))
-            to_plot=to_plot.append(pd.DataFrame([volumes]), sort=False)
-        all_means.append(means)
-        positions = np.linspace(start=xs+i*(width+intrashift), stop=xs+(N_alpha0-1)*L+i*(width+intrashift), num=N_alpha0)
-        all_positions.append(positions)
-        ax.boxplot(to_plot, positions=positions, widths=width,
-                patch_artist=True , boxprops=boxprops,
-                meanprops=meanprops, medianprops=medianprops,
-                flierprops=flierprops, whiskerprops=whiskerprops,
-                capprops=capprops)
-        legend_els.append(Patch(facecolor=facecol, edgecolor=facecol, linewidth=0, label=alpha_mode_label[amode]))
-
-    for i in range(N_alphamodes):
-        amode = alpha_mode_[i]
-        col = alpha_mode_colours[amode]
-        marker = alpha_mode_sym[amode]
-        ax.plot(all_positions[i], all_means[i], marker=marker, markerfacecolor='black', markersize=5,
-                linestyle='solid', color=col, markeredgecolor='black', markeredgewidth=0.5)
-
-
-
-    ax.set_xticks(ticks)
-    ax.set_xticklabels([a*1e3 for a in alpha0_], rotation=45)
-    ax.set_xlim(0, xs+(N_alpha0-1)*L+(N_alphamodes-1)*(width+intrashift)+(width+intershift)*0.5)
-    ax.legend(handles=legend_els, bbox_to_anchor=(0., 1.02, 1., .102), loc='center',
-           ncol=len(legend_els), borderaxespad=0., fontsize=12)
-    ax.set_title('')
-    ax.set_yscale('linear')
-    ax.set_xlabel(labels['alpha0']+r' $\times 10^{3}$')
-    return ax

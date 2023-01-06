@@ -1,7 +1,0 @@
-#!/bin/bash
-LINE="type_of_structural_perturbation=0"
-FILE_MATCH="config/structural_stability/no_syntrophy/*"
-
-for f in $FILE_MATCH; do
-  echo $LINE >> $f
-done

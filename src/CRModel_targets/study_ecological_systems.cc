@@ -16,7 +16,7 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_gamma(min_gamma0, max_gamma0);
     std::uniform_real_distribution<double> random_S(min_S0, max_S0);
 
-    unsigned int Nsimuls=1e6;
+    unsigned int Nsimuls=1e2;
     unsigned int spacing = Nsimuls/10;
 
 

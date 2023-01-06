@@ -23,12 +23,14 @@ text/*
 !text/*.pdf
 !text/*.tex
 !text/*.sty
+!text/*.md
 
 !text/figures
 !text/feasibility
 !text/dyn_stab
 !text/struct_stab
 
+!results/*all_data*.out
 
 presentation/*
 !presentation/*.pdf
