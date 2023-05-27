@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
     mcsolv.max_fails=300;
     mcsolv.annealing_freq=1000;
     mcsolv.annealing_const=1.-1e-2;
-    mcsolv.display_stride=10000;
+    mcsolv.display_stride=100;
     mcsolv.cost_function=energy_function;
     mcsolv.additional_params=&metaparams;
     mcsolv.mcmode=metaparams.mcmode;
