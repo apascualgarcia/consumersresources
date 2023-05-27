@@ -10,7 +10,7 @@
 # Example for NR=NS=25
 # Name of the matrix list within the matrix_list folder
 MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
-MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
+MATRIX_LIST_FILENAME="one_test_matrix"
 # intra specific syntrophy, can be either "allowed" or "not_allowed"
 INTRA_SPE_SYN="allowed"
 # Monte Carlo mode: A_only to find the optimal A for a given G or both_modified to find both G and A for a given G connectance
@@ -54,7 +54,7 @@ do
             done
           fi
 
-          FIRST_COMMAND="build/find_optimal_syntrophy_matrices ${CONFIGURATION_FILE} path_to_food_matrix=${MATRIX_LIST_FOLDER}/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
+          FIRST_COMMAND="build/optimize_matrices ${CONFIGURATION_FILE} path_to_food_matrix=${MATRIX_LIST_FOLDER}/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
           FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]' "
 
           COMMAND_NAME="${FIRST_COMMAND}"

@@ -47,7 +47,7 @@ python3 -m venv consumers_resources
 We then activate the virtual environment so we can work in it without disturbing the rest of our python3 installation:
 
 ```
-source bin/activate/consumers_resources
+source consumers_resources/bin/activate
 ```
 This new virtual environment does not have any package installed yet so we install all the ones required for this project:
 ```
