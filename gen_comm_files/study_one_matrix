@@ -18,7 +18,7 @@ NR=25
 NS=25
 
 CONFIGURATION_FILE="config/configuration.in"
-COMMAND_FILE="study_systems_NR25_NS25"
+COMMAND_FILE="study_one_matrix"
 SAVENAME="one_matrix_data_NR25_NS25"
 BUILD_NAME="study_one_matrix"
 
