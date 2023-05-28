@@ -20,9 +20,8 @@ min_S0, max_S0=0.01, 1
 
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
-N_alphamodes=len(alpha_mode)
 
-# alpha_mode=['optimal_matrix']
+alpha_mode=['optimal_matrix']
 # label=['Modified LRI']
 # N_alphamodes=1
 

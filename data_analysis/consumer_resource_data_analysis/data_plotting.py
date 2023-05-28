@@ -73,7 +73,7 @@ def plot_figure_2F(ax, df, plotting_dict):
 def plot_figure_2G(ax, df, plotting_dict):
     ax = plot_p_values_vs_alpha0(ax, df, plotting_dict, 'dynamically stable volume')
     return ax
-    
+
 def plot_p_values_vs_alpha0(axes, data_frame, plotting_dict, data_type):
     # take all possibles alpha_modes pairs
     df = data_frame.copy()
