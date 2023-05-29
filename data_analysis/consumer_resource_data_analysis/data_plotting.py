@@ -2,7 +2,8 @@ import numpy as np
 import sys
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
+import pandas as pd
+import matplotlib.tri as tr
 
 #======= GENERAL PLOTTING VARIABLES ========#
 np.set_printoptions(threshold=sys.maxsize)
@@ -230,3 +231,105 @@ def plot_against_matrix_properties(axs, data_frame_, plotting_properties, data_t
         axs[j][0].legend(bbox_to_anchor=(1.,1.), loc='upper left', title=legend_titles['nestG'], fontsize=13, title_fontsize=14)
         axs[j][0].set_title(alpha_mode_label[amode])
     return axs
+
+def plot_levels(data, colors, level_name):
+    # On récupère la liste des alpha0
+    alpha0s = sorted(pd.unique(data['alpha0']))
+    Nalpha0s = len(alpha0s)
+
+    # Création des figures - canevas vide
+    alphamodes = sorted(pd.unique(data['alpha_mode']))
+    N_alphamodes = len(alphamodes)
+    if N_alphamodes>1:
+        fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
+    else:
+        fig = plt.figure()
+        axs = fig.add_subplot(111)
+
+    # find max alpha0 for which there is a non-zero fully feasible/stable/etc. volume -> this is the goal of the to_plot variable
+    gamma0s = sorted(pd.unique(data['gamma0']))
+    S0s = sorted(pd.unique(data['S0']))
+    to_plot = pd.DataFrame(columns=['alpha_mode','gamma0','S0','alpha0_max'])
+    to_plot_vector = []
+
+    for alphamode in alphamodes:
+        for gamma0 in gamma0s:
+            for S0 in S0s:
+                to_analyse = data[((data['gamma0']==gamma0)&(data['S0']==S0)&(data['alpha_mode']==alphamode))][['alpha0',level_name]]
+                alpha0_max = np.max(to_analyse[(to_analyse[level_name]>=1.0)]['alpha0'])
+                to_plot = to_plot.append(pd.DataFrame(
+                {
+                    'alpha_mode':alphamode,
+                    'gamma0':gamma0,
+                    'S0':S0,
+                    'alpha0_max':alpha0_max
+                },
+                index=[0]
+                ))
+    print(to_plot)
+
+
+
+
+
+
+
+
+    # for i in range(N_alphamodes):
+    #     for alpha0 in alpha0s:
+    #         # first select relevant indices in dataframe
+    #         index_selection = data.index[(data['alpha0']==alpha0)&(data['alpha_mode']==alphamodes[i])]
+    #         data_subset = data.loc[index_selection]
+    #
+    #         gamma0 = list(data_subset['gamma0'])
+    #         S0 = list(data_subset['S0'])
+    #         function_levels = list(data_subset[level_name])
+    #         triang = tr.Triangulation(gamma0,S0)
+    #
+    #         im = axs[i].tricontourf(triang, function_levels, colors=colors)
+
+
+    # print('gamma0=', gamma0)
+    # print('S0=', S0)
+    # print(level_name+"=", levels)
+    #
+    # function_levels=levels_different_alpha0(data)
+    # max_level=np.amax(function_levels)
+    #
+    # levels=[i for i in range(max_level+2)]
+    # triang = tr.Triangulation(gamma0, S0)
+    #
+    # for i in range(len(data)):
+    #     to_plot = function_levels[i]
+    #     if N_alphamodes > 1:
+    #         axs[i].set_aspect('equal')
+    #         im = axs[i].tricontourf(triang, to_plot, levels=levels, colors=colors)
+    #         axs[i].set_xlabel(r'$\gamma_0$')
+    #         axs[i].set_xticks([0.01, 0.5, 1])
+    #         axs[i].set_xticklabels([0.01, 0.5, 1])
+    #         axs[i].set_title(labels_[i])
+    #         axs[i].set_xlim(0.01, 1)
+    #         axs[i].set_ylim(0.01, 1)
+    #     else:
+    #         axs.set_aspect('equal')
+    #         im = axs.tricontourf(triang, to_plot, levels=levels, colors=colors)
+    #         axs.set_xlabel(r'$\gamma_0$')
+    #         axs.set_xticks([0.01, 0.5, 1])
+    #         axs.set_xticklabels([0.01, 0.5, 1])
+    #         axs.set_title(labels_[i])
+    #         axs.set_xlim(0.01, 1)
+    #         axs.set_ylim(0.01, 1)
+    #
+    # if N_alphamodes>1:
+    #     axs[0].set_ylabel(r'$S_0$')
+    #     axs[0].set_yticks([0.01, 0.5, 1])
+    #     axs[0].set_yticklabels([0.01, 0.5, 1])
+    #
+    #     fig.subplots_adjust(bottom=0.2, top=0.95)
+    # else:
+    #     axs.set_ylabel(r'$S_0$')
+    #     axs.set_yticks([0.01, 0.5, 1])
+    #     axs.set_yticklabels([0.01, 0.5, 1])
+
+
+    return fig, axs

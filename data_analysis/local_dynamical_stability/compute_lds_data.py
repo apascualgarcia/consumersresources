@@ -22,5 +22,5 @@ decay_rate_data=dict({
     'alpha0_range': cf.alpha0
 })
 
-####### DO NOT MODIFY BELOW THIS LINE ################  
+####### DO NOT MODIFY BELOW THIS LINE ################
 cf.compute_lds_data(to_compute, volume_data, decay_rate_data)
