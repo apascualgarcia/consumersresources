@@ -3,6 +3,7 @@ import sys
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pandas as pd
+import math
 import matplotlib.tri as tr
 
 #======= GENERAL PLOTTING VARIABLES ========#
@@ -33,6 +34,8 @@ labels=dict({'nestG': r'Consumption overlap $\eta_\mathrm{G}$', 'connG': r'Consu
 
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
+
+cmap = plt.cm.get_cmap('jet_r')
 
 #======== DO NOT MODIFY BELOW ===============#
 import pandas as pd
@@ -230,15 +233,16 @@ def plot_against_matrix_properties(axs, data_frame_, plotting_properties, data_t
         axs[j][0].set_ylabel(labels[data_type])
         axs[j][0].legend(bbox_to_anchor=(1.,1.), loc='upper left', title=legend_titles['nestG'], fontsize=13, title_fontsize=14)
         axs[j][0].set_title(alpha_mode_label[amode])
+
+
     return axs
 
-def plot_levels(data, colors, level_name):
+def plot_levels(data, colors_, level_name, alphamodes):
     # On récupère la liste des alpha0
     alpha0s = sorted(pd.unique(data['alpha0']))
     Nalpha0s = len(alpha0s)
 
     # Création des figures - canevas vide
-    alphamodes = sorted(pd.unique(data['alpha_mode']))
     N_alphamodes = len(alphamodes)
     if N_alphamodes>1:
         fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
@@ -249,87 +253,70 @@ def plot_levels(data, colors, level_name):
     # find max alpha0 for which there is a non-zero fully feasible/stable/etc. volume -> this is the goal of the to_plot variable
     gamma0s = sorted(pd.unique(data['gamma0']))
     S0s = sorted(pd.unique(data['S0']))
-    to_plot = pd.DataFrame(columns=['alpha_mode','gamma0','S0','alpha0_max'])
-    to_plot_vector = []
 
+    i=0
     for alphamode in alphamodes:
+        # data analysis, find the right data subset
+        to_analyse = data[data['alpha_mode']==alphamode][['gamma0', 'S0', 'alpha0', level_name]].sort_values(['gamma0', 'S0','alpha0'])
+        max_ff = []
         for gamma0 in gamma0s:
             for S0 in S0s:
-                to_analyse = data[((data['gamma0']==gamma0)&(data['S0']==S0)&(data['alpha_mode']==alphamode))][['alpha0',level_name]]
-                alpha0_max = np.max(to_analyse[(to_analyse[level_name]>=1.0)]['alpha0'])
-                to_plot = to_plot.append(pd.DataFrame(
-                {
-                    'alpha_mode':alphamode,
-                    'gamma0':gamma0,
-                    'S0':S0,
-                    'alpha0_max':alpha0_max
-                },
-                index=[0]
-                ))
-    print(to_plot)
+                sub_data = to_analyse[(to_analyse['gamma0']==gamma0)&(to_analyse['S0']==S0)]
+                alpha0_max = np.max(sub_data[sub_data[level_name]==1.]['alpha0'])
+                max_ff.append([gamma0, S0, alpha0_max])
+        max_ff = np.array(max_ff)
+        triang = tr.Triangulation(max_ff[:,0], max_ff[:,1])
+        isbad = np.isnan(max_ff[:,2])
+        # masque les valeurs nan
+        mask = np.any(np.where(isbad[triang.triangles], True, False), axis=1)
+        triang.set_mask(mask)
+
+        axs[i].set_aspect('equal')
+        im = axs[i].tricontourf(triang, max_ff[:,2], colors=colors_)
+        axs[i].set_xlabel(r'$\gamma_0$')
+        axs[i].set_title(alpha_mode_label[alphamode])
+        axs[i].set_xticks([0.01, 0.5, 1])
+        axs[i].set_xticklabels([0.01, 0.5, 1])
+
+        i+=1
 
 
+    axs[0].set_ylabel(r'$S_0$')
+    axs[0].set_yticks([0.01, 0.5, 1])
+    axs[0].set_yticklabels([0.01, 0.5, 1])
+
+    cbar_ax = fig.add_axes([0.125, 0.1375, 0.775, 0.02])
+
+    cbar=add_colorbar_to_plot_levels(cbar_ax, colors_, alpha0, [str(a) for a in alpha0])
+    cbar.set_label(r'$\alpha_0$')
 
 
-
-
-
-
-    # for i in range(N_alphamodes):
-    #     for alpha0 in alpha0s:
-    #         # first select relevant indices in dataframe
-    #         index_selection = data.index[(data['alpha0']==alpha0)&(data['alpha_mode']==alphamodes[i])]
-    #         data_subset = data.loc[index_selection]
-    #
-    #         gamma0 = list(data_subset['gamma0'])
-    #         S0 = list(data_subset['S0'])
-    #         function_levels = list(data_subset[level_name])
-    #         triang = tr.Triangulation(gamma0,S0)
-    #
-    #         im = axs[i].tricontourf(triang, function_levels, colors=colors)
-
-
-    # print('gamma0=', gamma0)
-    # print('S0=', S0)
-    # print(level_name+"=", levels)
-    #
-    # function_levels=levels_different_alpha0(data)
-    # max_level=np.amax(function_levels)
-    #
-    # levels=[i for i in range(max_level+2)]
-    # triang = tr.Triangulation(gamma0, S0)
-    #
-    # for i in range(len(data)):
-    #     to_plot = function_levels[i]
-    #     if N_alphamodes > 1:
-    #         axs[i].set_aspect('equal')
-    #         im = axs[i].tricontourf(triang, to_plot, levels=levels, colors=colors)
-    #         axs[i].set_xlabel(r'$\gamma_0$')
-    #         axs[i].set_xticks([0.01, 0.5, 1])
-    #         axs[i].set_xticklabels([0.01, 0.5, 1])
-    #         axs[i].set_title(labels_[i])
-    #         axs[i].set_xlim(0.01, 1)
-    #         axs[i].set_ylim(0.01, 1)
-    #     else:
-    #         axs.set_aspect('equal')
-    #         im = axs.tricontourf(triang, to_plot, levels=levels, colors=colors)
-    #         axs.set_xlabel(r'$\gamma_0$')
-    #         axs.set_xticks([0.01, 0.5, 1])
-    #         axs.set_xticklabels([0.01, 0.5, 1])
-    #         axs.set_title(labels_[i])
-    #         axs.set_xlim(0.01, 1)
-    #         axs.set_ylim(0.01, 1)
-    #
-    # if N_alphamodes>1:
-    #     axs[0].set_ylabel(r'$S_0$')
-    #     axs[0].set_yticks([0.01, 0.5, 1])
-    #     axs[0].set_yticklabels([0.01, 0.5, 1])
-    #
-    #     fig.subplots_adjust(bottom=0.2, top=0.95)
-    # else:
-    #     axs.set_ylabel(r'$S_0$')
-    #     axs.set_yticks([0.01, 0.5, 1])
-    #     axs.set_yticklabels([0.01, 0.5, 1])
-
+    fig.subplots_adjust(bottom=0.2, top=1)
 
     return fig, axs
+
+def add_colorbar_to_plot_levels(ax_,colors_, levels, tick_labels, N_alphamodes=3):
+    # colors_ = plt.cm.get_cmap('jet_r')
+    # norm_= mpl.colors.Normalize(vmin = min(levels)-0.5, vmax=max(levels)+0.5)
+    # if N_alphamodes > 1:
+    #     cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
+    #     cbar=fig.colorbar(mpl.cm.ScalarMappable(cmap=colors_, norm=norm_), cax=cbar_ax, orientation='horizontal', format='%.2e')
+    # else:
+    #     cbar=fig.colorbar(mpl.cm.ScalarMappable(cmap=colors_, norm=norm_), orientation='horizontal', cmap=colors_, format='%.2e', aspect=50)
+    cmap_ = mpl.colors.ListedColormap(colors_)
+    cmap_.set_over('0.25')
+    cmap_.set_under('0.75')
+
+    bounds = [i for i in range(len(levels)+1)]
+    norm = mpl.colors.BoundaryNorm(bounds, cmap_.N)
+    cbar = mpl.colorbar.ColorbarBase(ax_, cmap=cmap_,
+                                norm=norm,
+                                extend='neither',
+                                spacing='uniform',
+                                orientation='horizontal')
+
+
+    cbar.set_ticks(ticks=[a +0.5 for a in bounds])
+    cbar.set_ticklabels(tick_labels)
+
+    return cbar
