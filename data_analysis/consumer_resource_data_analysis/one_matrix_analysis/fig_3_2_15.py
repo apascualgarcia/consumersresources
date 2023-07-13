@@ -28,3 +28,4 @@ colors = [dp.cmap(i/(len(dp.alpha0))) for i in range(len(dp.alpha0))]
 
 fig, axs = dp.plot_levels(data, colors, 'stability probability', alphamodes)
 fig.savefig(savefolder+'/'+savename+'.pdf')
+plt.show()

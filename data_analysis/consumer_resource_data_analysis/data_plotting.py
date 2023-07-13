@@ -14,6 +14,8 @@ mpl.rcParams['lines.markersize']=12
 mpl.rcParams['lines.markeredgewidth']=3
 mpl.rcParams['lines.marker']='.'
 mpl.rcParams['lines.linestyle']='solid'
+mpl.rcParams['xtick.labelsize']=15
+mpl.rcParams['ytick.labelsize']=15
 
 alpha0=np.array([0., 0.0013, 0.0026, 0.0039, 0.0052, 0.0065, 0.0078, 0.0091, 0.0104, 0.014])
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
@@ -287,7 +289,7 @@ def plot_levels(data, colors_, level_name, alphamodes):
 
     cbar_ax = fig.add_axes([0.125, 0.1375, 0.775, 0.02])
 
-    cbar=add_colorbar_to_plot_levels(cbar_ax, colors_, alpha0, [str(a) for a in alpha0])
+    cbar=add_discrete_color_bar(cbar_ax, colors_, alpha0, [str(a) for a in alpha0])
     cbar.set_label(r'$\alpha_0$')
 
 
@@ -295,14 +297,7 @@ def plot_levels(data, colors_, level_name, alphamodes):
 
     return fig, axs
 
-def add_colorbar_to_plot_levels(ax_,colors_, levels, tick_labels, N_alphamodes=3):
-    # colors_ = plt.cm.get_cmap('jet_r')
-    # norm_= mpl.colors.Normalize(vmin = min(levels)-0.5, vmax=max(levels)+0.5)
-    # if N_alphamodes > 1:
-    #     cbar_ax = fig.add_axes([0.125, 0.15, 0.75, 0.02])
-    #     cbar=fig.colorbar(mpl.cm.ScalarMappable(cmap=colors_, norm=norm_), cax=cbar_ax, orientation='horizontal', format='%.2e')
-    # else:
-    #     cbar=fig.colorbar(mpl.cm.ScalarMappable(cmap=colors_, norm=norm_), orientation='horizontal', cmap=colors_, format='%.2e', aspect=50)
+def add_discrete_color_bar(ax_,colors_, levels, tick_labels, N_alphamodes=3):
     cmap_ = mpl.colors.ListedColormap(colors_)
     cmap_.set_over('0.25')
     cmap_.set_under('0.75')
@@ -320,3 +315,45 @@ def add_colorbar_to_plot_levels(ax_,colors_, levels, tick_labels, N_alphamodes=3
     cbar.set_ticklabels(tick_labels)
 
     return cbar
+
+def plot_parameters_fixed_alpha0(data, level_name, alpha0_val, alphamodes, cmap = mpl.cm.get_cmap('bwr_r')):
+
+    # Création des figures - canevas vide
+    N_alphamodes = len(alphamodes)
+    if N_alphamodes>1:
+        fig, axs = plt.subplots(1, N_alphamodes, sharey=True, sharex=True, figsize=(3.5*N_alphamodes,4.5))
+    else:
+        fig = plt.figure()
+        axs = [fig.add_subplot(111)]
+
+
+    i=0
+    for alphamode in alphamodes:
+        to_plot = data[(data['alpha_mode']==alphamode) & (data['alpha0']==alpha0_val)][['gamma0', 'S0',level_name]].to_numpy()
+        triang = tr.Triangulation(to_plot[:,0], to_plot[:,1])
+        isbad = np.isnan(to_plot[:,2])
+        # masque les valeurs nan
+        mask = np.any(np.where(isbad[triang.triangles], True, False), axis=1)
+        triang.set_mask(mask)
+
+        axs[i].set_aspect('equal')
+        im = axs[i].tricontourf(triang, to_plot[:,2], cmap=cmap)
+        axs[i].set_xlabel(r'$\gamma_0$')
+        #axs[i].set_title(alpha_mode_label[alphamode])
+        axs[i].set_xticks([0.01, 0.5, 1])
+        axs[i].set_xticklabels([0.01, 0.5, 1])
+
+        i+=1
+
+
+    axs[0].set_ylabel(r'$S_0$')
+    axs[0].set_yticks([0.01, 0.5, 1])
+    axs[0].set_yticklabels([0.01, 0.5, 1])
+
+    norm= mpl.colors.Normalize(vmin=0, vmax=1)
+    sm = plt.cm.ScalarMappable(norm=norm, cmap = cmap)
+    sm.set_array([])
+
+    cbar = fig.colorbar(sm, ticks=[0,0.25, 0.5, 0.75,1.])
+
+    return fig, axs

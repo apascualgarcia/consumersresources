@@ -813,3 +813,18 @@ def plot_decay_rates(axs, decay_rate_data, type):
         axs[j][0].set_title(alpha_mode_label[amode])
 
     return axs
+
+def theoretical_S0_feasible_boundary(degmaxG, gamma0, l0=1, R0=1):
+    K = l0/(R0*degmaxG)
+    th_S0 = np.array([K/g0 for g0 in gamma0])
+    return th_S0
+
+def compute_largest_column_degree(matrix_location):
+    matrix = np.loadtxt(matrix_location)
+    degrees = np.sum(matrix, axis=0)
+    return max(degrees)
+
+def compute_largest_row_degree(matrix_location):
+    matrix = np.loadtxt(matrix_location)
+    degrees = np.sum(matrix, axis=1)
+    return max(degrees)
