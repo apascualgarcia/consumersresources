@@ -206,3 +206,21 @@ python3 data_analysis/local_dynamical_stability/plot_lds_data.py
 python3 data_analysis/largest_eigenvalue/compute_largest_eigenvalue_data.py
 python3 data_analysis/largest_eigenvalue/plot_largest_eigenvalue_data.py
 ```
+
+## Supplement : optimal matrix generation
+We define an ecological network (A,G,m) as a set made of:
+- A binary syntrophy matrix A,
+- A binary consumption matrix G,
+- A set of metaparameters m.
+
+This set is sufficient to generate an instance of an ecological network, following the procedure described at the beginning of the paper.
+
+The question now is : given a binary consumption matrix G and a set of metaparameters m, is there a way to find an optimized syntrophy matrix A? The approach followed in this paper is to define an objective function E (that can be thought of as the "energy" of the system) and, with the help of a Monte Carlo Solver (spelled MCS hereafter), find a matrix which minimizes E and allows to generate a binary syntrophy matrix A for each run.
+
+Given a consumption matrix G, a set of metaparameters m, and an objective function E, the goal is to find a matrix, let's call it P_A, which allows to generate A-matrices for which the objective function E(A, G, m) is minimal. G and m are given as an input by the user and are not modified during the algorithmic procedure. Here is the algorithm followed to determine P_A :
+1. P_A is initialized as an empty matrix.
+2. For a given number of runs i = 1, ..., N_runs, generate an A_i matrix. Each A_i matrix is a binary matrix that is a local minimum of the E(A,G,m) function, found through a MCS of the objective function E.
+3. P_A is defined as the sum-average of the A_i matrices set.
+
+Because the A_i matrices are all binary matrices, every element of the P_A matrix is included in the [0,1] interval.  P_A is then used as a probability density function to generate an A-matrix when an ecological network is instantiated: each matrix element A_(nu i) has a probability of being 1 given by the element P_A(nu i).
+.
