@@ -11,7 +11,6 @@ def plot_moving_average(ax, x_axis, y_axis, symbol, legend):
     ax.set_xscale('linear')
     #ax.plot(x_axis, cf.moving_average(y_axis, average), marker='', linestyle='solid', linewidth=2, label=legend)
     ax.set_ylabel(symbol)
-    ax.set_xlabel(r'steps')
     return
 
 # plots energy, nestedness and connectance on the axis that are provided
@@ -49,6 +48,7 @@ for i in range(len(runs)):
     plot_data_optimized(axis, data=pd.read_csv(filename, dtype = float, sep=";", names=columns), label='Run '+str(i+1))
 
 for i in range(3):
+    axis[i].set_xlabel(r'Number of steps')
     axis[i].legend()
     figs[i].tight_layout()
     figs[i].savefig(save_path+figs_save_name[i], dpi=200)

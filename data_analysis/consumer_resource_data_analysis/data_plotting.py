@@ -28,9 +28,9 @@ alpha_mode_sym = dict({'fully_connected': 'P', 'no_release_when_eat': 'D', 'opti
 alpha_mode_label=dict({'fully_connected':'Fully Connected', 'no_release_when_eat': 'NIS', 'optimized_matrix': 'Optimized', 'random_structure':'Random'})
 legend_titles=dict({'nestG': 'Consumption \n overlap '+r'$\eta_\mathrm{G}$', 'connG': 'Consumption \n connectance '+r'$\kappa_\mathrm{G}$'})
 
-labels=dict({'nestG': r'Consumption overlap $\eta_\mathrm{G}$', 'connG': r'Consumption connectance $\kappa_\mathrm{G}$',
-            'E': r'Objective function $ E $', 'connA': r'Syntrophy connectance $\kappa_\mathrm{A}$',
-            'nestA': r'Syntrophy overlap $\eta_\mathrm{A}$', 'feasible decay rate': r'Feasibility decay',
+labels=dict({'nestG': r'Consumption overlap $\eta_\mathrm{G}$', 'connG': r'Consumption connectance',
+            'E': r'Objective function', 'connA': r'Syntrophy connectance',
+            'nestA': r'Syntrophy overlap', 'feasible decay rate': r'Feasibility decay',
             'ld stable decay rate': r'Dynamical stability decay', 'alpha0': r'Syntrophy strength $\alpha_0$',
             'av. dominant eigenvalue':r'Mean rate of return', 'feasible volume':r'Feasible volume', 'dynamically stable volume':r'Dynamically stable volume'})
 
