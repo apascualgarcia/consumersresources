@@ -10,7 +10,7 @@
 # Example for NR=NS=25
 # Name of the matrix list within the matrix_list folder
 MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
-MATRIX_LIST_FILENAME="one_test_matrix"
+MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
 # intra specific syntrophy, can be either "allowed" or "not_allowed"
 INTRA_SPE_SYN="allowed"
 # Monte Carlo mode: A_only to find the optimal A for a given G or both_modified to find both G and A for a given G connectance
