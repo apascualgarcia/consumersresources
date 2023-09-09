@@ -18,7 +18,7 @@ Make sure that at least the 2.4 version is installed on your system.
 
 * **Eigen 3 library** : This library can be installed through the following command on Ubuntu
 ```
-sudo apt-get install eigen3
+sudo apt-get install libeigen3-dev
 ```
 Make sure that at least the 3.3 version is installed on your system.
 
