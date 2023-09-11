@@ -23,7 +23,7 @@ SAVENAME="opt_mat"
 #SEED_NUMBER=($(seq 0 1 3))
 SEED_NUMBER=2
 # name of the command file generated in the ./commands folder
-COMMAND_FILE="optimize_matrices"
+COMMAND_FILE="optimize_matrices_run_2"
 # other metaparameters have default value
 CONFIGURATION_FILE="config/configuration.in"
 
@@ -55,7 +55,7 @@ do
             done
           fi
 
-          FIRST_COMMAND="build/optimize_matrices ${CONFIGURATION_FILE} path_to_food_matrix=${MATRIX_LIST_FOLDER}/${matl}.in mcmode=${mcmode} alpha0=${alpha} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
+          FIRST_COMMAND="build/optimize_matrices ${CONFIGURATION_FILE} path_to_food_matrix=${MATRIX_LIST_FOLDER}/${matl}.in mcmode=${mcmode} intra_specific_syntrophy=${intra} path_to_save_file=${CURRENT_NAME} seed_number=${seed} ${ADDITIONAL_MODIF}"
           FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]' "
 
           COMMAND_NAME="${FIRST_COMMAND}"
