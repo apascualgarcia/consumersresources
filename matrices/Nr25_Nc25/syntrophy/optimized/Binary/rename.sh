@@ -1,15 +1,16 @@
 #!/bin/bash
 #!/bin/bash
-FOLDER=run_3
-SN=3
+FOLDER=run_2
+SN=2
+PATTERN=_opt_mat_intra_specific_syntrophy=allowed_seed_number=1_gamma0=1_alpha0=1
 
-ls $FOLDER/*_opt_mat_intra_specific_syntrophy=allowed_seed_number=$SN
+ls $FOLDER/*$PATTERN
 
 #Iterate the loop to read all text files
-for value in `ls $FOLDER/*_opt_mat_intra_specific_syntrophy=allowed_seed_number=$SN`;
+for value in `ls $FOLDER/*$PATTERN`;
 do
     #Read the basename of the file
-    filename=`basename $value _opt_mat_intra_specific_syntrophy=allowed_seed_number=$SN`
+    filename=`basename $value $PATTERN`
     #Rename all files to doc files
     mv $value $FOLDER/$filename;
 done
