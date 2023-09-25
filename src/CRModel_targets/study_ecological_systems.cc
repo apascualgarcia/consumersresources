@@ -16,9 +16,13 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_gamma(min_gamma0, max_gamma0);
     std::uniform_real_distribution<double> random_S(min_S0, max_S0);
 
-    unsigned int Nsimuls=1e2;
+    // unsigned int Nsimuls=1e2; // for testing run
+    unsigned int Nsimuls = 1e5; // for production run
     unsigned int spacing = Nsimuls/10;
 
+    if Nsimuls < 1e5{
+      std::cout << "WARNING : number of simulations smaller than 100'000. Are you sure you want to run at a lower value?" << std::endl;
+    }
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
     myfile << "# We are writing, in that order, G-matrix location, A-matrix location, G connectance, G nestedness, A connectance, A nestedness, A-mode, alpha0 value, total number of simulations, proportion of feasible, stable, unstable, marginal and dominant eigenvalue" << std::endl;
