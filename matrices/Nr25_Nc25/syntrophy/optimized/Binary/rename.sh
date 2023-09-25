@@ -2,7 +2,7 @@
 #!/bin/bash
 FOLDER=run_2
 SN=2
-PATTERN=_opt_mat_intra_specific_syntrophy=allowed_seed_number=1_gamma0=1_alpha0=1
+PATTERN=_opt_mat_intra_specific_syntrophy=allowed_seed_number=2_gamma0=1_alpha0=1
 
 ls $FOLDER/*$PATTERN
 
