@@ -74,7 +74,7 @@ std::ostream& operator<<(std::ostream& os, const nvector& v){
 }
 std::ostream& operator<<(std::ostream& os, const nmatrix& M){
   for (size_t i=0; i < M.size()-1; ++i){
-    os << M[i] << std::endl;
+    os  << M[i] << std::endl;
   }
   os << M[M.size()-1];
   return os;
@@ -208,6 +208,11 @@ std::ostream& operator<<(std::ostream& os, const alphamode& a){
 
     case fully_connected:{
       os << "fully_connected";
+      break;
+    };
+
+    case binary_metamatrix:{
+      os << "binary_metamatrix";
       break;
     };
 

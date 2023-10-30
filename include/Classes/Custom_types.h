@@ -22,7 +22,7 @@ typedef int(*func_equ_evol)(double, const double[], double[], void *);
 enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
 // when loading an external matrix, please use optimal_matrix mode
-enum alphamode{fully_connected, random_structure, no_release_when_eat, one_release, optimal_matrix};
+enum alphamode{fully_connected, random_structure, no_release_when_eat, one_release, optimal_matrix, binary_metamatrix};
 /* eqmode tells you when you stop your time evolution algorithm */
 enum eqmode{oneextinct, convergence};
 /* alpha value: input value or overriden by critical value */

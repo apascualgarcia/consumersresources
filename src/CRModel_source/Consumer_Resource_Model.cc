@@ -46,6 +46,11 @@ CRModel::CRModel(const foodmatrix& F, Metaparameters& meta, bool has_to_be_feasi
     }
   }while(not(this->constraints_fulfilled(meta)) && has_to_be_feasible);
 
+  if(this->metaparameters->verbose > 3){
+    std::cout << "CR Model generated with the following properties : " << std::endl;
+    std::cout << *this << std::endl;
+  }
+
   return;
 }
 CRModel::~CRModel(){

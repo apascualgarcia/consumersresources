@@ -9,17 +9,17 @@ CONSUMPTION_MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
 CONSUMPTION_MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25"
 
 # SYNTROPHY_MATRIX_FOLDER is unused if ALPHA_MODE is set to random structure
-SYNTROPHY_MATRIX_FOLDER="matrices/Nr25_Nc25/syntrophy/optimized/Binary/run_0"
-ALPHA_MODE="optimal_matrix"
-ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
+SYNTROPHY_MATRIX_FOLDER="matrices/Nr25_Nc25/syntrophy/optimized/Metamatrices"
+ALPHA_MODE="random_structure fully_connected optimal_matrix"
+ALPHA_VALS="0"
 
 ADDITIONAL_MODIF="verbose-level=1"
 NR=25
 NS=25
 
-CONFIGURATION_FILE="config/configuration.in"
-COMMAND_FILE="study_systems_NR25_NS25_binary_metamatrix"
-SAVENAME="binary_metamatrix_test_data_NR25_NS25"
+CONFIGURATION_FILE="config/default_configuration.in"
+COMMAND_FILE="study_test_no_syntrophy"
+SAVENAME="all_data_NR25_NS25"
 BUILD_NAME="study_ecological_systems"
 
 # first clear all previous contents of the commands file

@@ -21,11 +21,11 @@ alpha0=np.array([0., 0.0013, 0.0026, 0.0039, 0.0052, 0.0065, 0.0078, 0.0091, 0.0
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 
-alpha_mode=['fully_connected','random_structure', 'optimized_matrix']
-alpha_mode_colours=dict({'fully_connected':'blue', 'no_release_when_eat':'orange', 'optimized_matrix':'green', 'random_structure':'red'})
-alpha_mode_sym = dict({'fully_connected': 'P', 'no_release_when_eat': 'D', 'optimized_matrix':'o', 'random_structure': 'd'})
+alpha_mode=['fully_connected','random_structure', 'optimized_matrix', 'binary_metamatrix']
+alpha_mode_colours=dict({'fully_connected':'blue', 'binary_metamatrix':'orange', 'optimized_matrix':'green', 'random_structure':'red'})
+alpha_mode_sym = dict({'fully_connected': 'P', 'binary_metamatrix': 'D', 'optimized_matrix':'o', 'random_structure': 'd'})
 
-alpha_mode_label=dict({'fully_connected':'Fully Connected', 'no_release_when_eat': 'NIS', 'optimized_matrix': 'Optimized', 'random_structure':'Random'})
+alpha_mode_label=dict({'fully_connected':'Fully Connected', 'binary_metamatrix': 'Binary Optimized', 'optimized_matrix': 'Optimized', 'random_structure':'Random'})
 legend_titles=dict({'nestG': 'Consumption \n overlap '+r'$\eta_\mathrm{G}$', 'connG': 'Consumption \n connectance '+r'$\kappa_\mathrm{G}$'})
 
 labels=dict({'nestG': r'Consumption overlap $\eta_\mathrm{G}$', 'connG': r'Consumption connectance',

@@ -173,6 +173,22 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
         break;
       }
 
+      // in the binary metamatrix case, alpha is built the same way as an optimal matrix except
+      // it's only either zero or one
+      case binary_metamatrix:{
+        alpha=load_meta_matrix(m);
+        for(size_t mu=0; mu < p->NR; ++mu){
+          for(size_t i=0; i < p->NS; ++i){
+            if(alpha[mu][i] > 0.){
+              alpha[mu][i] = alpha_distrib(random_engine);
+            }else{
+              alpha[mu][i] = 0.;
+            }
+          }
+        }
+        break;
+      }
+
       case optimal_matrix:{
         alpha=load_meta_matrix(m);
         for(size_t mu=0; mu < p->NR; ++mu){

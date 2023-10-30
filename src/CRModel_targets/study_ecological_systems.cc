@@ -16,11 +16,11 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_gamma(min_gamma0, max_gamma0);
     std::uniform_real_distribution<double> random_S(min_S0, max_S0);
 
-    // unsigned int Nsimuls=1e2; // for testing run
-    unsigned int Nsimuls = 1e5; // for production run
+    unsigned int Nsimuls=1e2; // for testing run
+    //unsigned int Nsimuls = 1e5; // for production run
     unsigned int spacing = Nsimuls/10;
 
-    if Nsimuls < 1e5{
+    if(Nsimuls < 1e5){
       std::cout << "WARNING : number of simulations smaller than 100'000. Are you sure you want to run at a lower value?" << std::endl;
     }
 
