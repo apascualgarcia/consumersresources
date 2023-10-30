@@ -3,9 +3,9 @@ plotting_properties=dict({
     'intrashift': 0.1,  # distance between two boxes at the same alpha0
     'intershift': 0.5,  # distance between two boxes (last at alpha0 and first at the next value of alpha0)
     'width': 1,         # box width
-    'data file': 'results/all_data_NR25_NS25.out', # location of the data file produced with compute_feasibility_data.py
+    'data file': './results/all_data_NR25_NS25.out', # location of the data file produced with compute_feasibility_data.py
     'save folder': 'main_figures',
-    'mode': 'test'      # test mode for testing stuff out, plot mode for plotting data
+    'mode': 'plot'      # test mode for testing stuff out, plot mode for plotting data
 })
 
 #============ DO NOT MODIFY BELOW ==================================#
@@ -17,11 +17,12 @@ import numpy as np
 
 plotting_properties['alpha mode']=dp.alpha_mode
 plotting_properties['alpha0']=dp.alpha0
-
 data_frame = dl.load_data_frame(plotting_properties['data file'])
-print(data_frame.columns)
-to_plot=['G connectance', 'G nestedness','A connectance','A nestedness', 'A-mode','alpha0','feasible volume']
-print(data_frame[data_frame['alpha0']==0][to_plot].sort_values(by=['G connectance', 'G nestedness','A-mode']).to_string())
+
+if plotting_properties['mode']=='test':
+    print(data_frame.columns)
+    to_show=['G connectance', 'G nestedness','A connectance','A nestedness', 'A-mode','alpha0','feasible volume']
+    print(data_frame[data_frame['alpha0']==0][to_show].sort_values(by=['G connectance', 'G nestedness','A-mode']).to_string())
 
 if plotting_properties['mode']=='plot':
     figA = plt.figure("Figure 2A")
