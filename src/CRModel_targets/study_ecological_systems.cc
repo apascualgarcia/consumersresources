@@ -17,7 +17,8 @@ int main(int argc, char * argv[]){
     std::uniform_real_distribution<double> random_S(min_S0, max_S0);
 
     //unsigned int Nsimuls=1e2; // for testing run
-    unsigned int Nsimuls = 1e5; // for production run
+    //unsigned int Nsimuls = 1e5; // for low precision production run
+    unsigned int Nsimuls = 1e6; // for high precision production run
     unsigned int spacing = Nsimuls/10;
 
     if(Nsimuls < 1e5){
