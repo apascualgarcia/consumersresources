@@ -31,5 +31,5 @@ for i in range(CORES):
         core_command+='">'+log_file+" 2>"+err_file
         core_command+="; wait;"
     core_command=core_command[:-7]+') &'
-    #print(core_command)
+    print(core_command)
     os.system(core_command)

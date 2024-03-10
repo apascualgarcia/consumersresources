@@ -1,2 +1,2 @@
 #!/bin/bash
-cd build && touch plholder && rm -r ./* && cmake CXX=g++ .. && make && cd ..
+cd build && touch plholder && rm -r ./* && cmake CXX=g++ CXX_STANDARD=c++11 .. && make && cd ..
