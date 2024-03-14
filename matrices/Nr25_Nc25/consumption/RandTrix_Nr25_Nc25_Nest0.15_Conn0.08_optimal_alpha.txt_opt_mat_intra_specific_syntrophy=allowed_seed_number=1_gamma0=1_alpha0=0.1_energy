@@ -3,3 +3,4 @@
 # Energy optimization to find the best syntrophy matrix for a given consumption matrix 
 # Are given, in that order: energy, A-nestedness, A-connectance, G-nestedness, G-connectance and temperature of the syntrophy matrix
 # This line is the converged value at the end of the MCS optimization algorithm
+23 0.506416522401531 0.1980048 0.15 0.0816 0.012991775016679 3.14063474837449e-16 0.0259527680578335 0.00848166648089552 9.21802326007707e-19 8.26910910095149e-19 0.000320156695001126
