@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# this script moves all files following the *seed_number=$SEED* pattern for all values of $SEED-
+# It moves them from the $ORIGIN_FOLDER folder to the $DESTINATION_FOLDER folder
+
+DESTINATION_FOLDER="./matrices/Nr25_Nc25/syntrophy/optimized_alpha01/Binary"
+ORIGIN_FOLDER="./matrices/Nr25_Nc25/consumption"
+
+SEED_NUMBER=($(seq 0 1 49))
+
+for SEED in ${SEED_NUMBER[@]}
+do
+    NEW_FOLDER=${DESTINATION_FOLDER}/seed_${SEED}
+    mkdir "${NEW_FOLDER}"
+    FILES_TO_MOVE=${ORIGIN_FOLDER}/*_optimal_alpha*_seed_number=${SEED}_*
+    for FILE in ${FILES_TO_MOVE[@]}
+    do
+        mv ${FILE} ${NEW_FOLDER}
+    done
+done
