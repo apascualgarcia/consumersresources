@@ -3,7 +3,7 @@ plotting_properties=dict({
     'intrashift': 0.1,  # distance between two boxes at the same alpha0
     'intershift': 0.5,  # distance between two boxes (last at alpha0 and first at the next value of alpha0)
     'width': 1,         # box width
-    'data file': './results/all_data_NR25_NS25.out', # location of the data file produced with compute_feasibility_data.py
+    'data file': 'results/all_data_NR25_NS25_optmatalpha01_verbose-level=1.out', # location of the data file produced with compute_feasibility_data.py
     'save folder': 'main_figures',
     'mode': 'plot'      # test mode for testing stuff out, plot mode for plotting data
 })

@@ -21,7 +21,8 @@ alpha0=np.array([0., 0.0013, 0.0026, 0.0039, 0.0052, 0.0065, 0.0078, 0.0091, 0.0
 all_nestedness=[0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6]
 all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 
-alpha_mode=['fully_connected','random_structure', 'optimized_matrix', 'binary_metamatrix']
+alpha_mode=['fully_connected','random_structure', 'optimized_matrix']
+#alpha_mode=['fully_connected','random_structure', 'optimized_matrix', 'binary_metamatrix']
 alpha_mode_colours=dict({'fully_connected':'blue', 'binary_metamatrix':'orange', 'optimized_matrix':'green', 'random_structure':'red'})
 alpha_mode_sym = dict({'fully_connected': 'P', 'binary_metamatrix': 'D', 'optimized_matrix':'o', 'random_structure': 'd'})
 
