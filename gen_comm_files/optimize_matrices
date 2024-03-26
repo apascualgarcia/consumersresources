@@ -16,14 +16,14 @@ INTRA_SPE_SYN="allowed"
 # Monte Carlo mode: A_only to find the optimal A for a given G or both_modified to find both G and A for a given G connectance
 MCMODE="A_only"
 # additional modifications of the default metaparameters values
-ADDITIONAL_MODIF="gamma0=0.5 alpha0=0.005"
+ADDITIONAL_MODIF="gamma0=0.1 alpha0=0.001"
 # additional suffix in the final name
 SAVENAME="opt_mat"
 # we would like to run 50 runs of the MC algorithm of each matrix
-SEED_NUMBER=($(seq 1 1 49))
+SEED_NUMBER=($(seq 0 1 19))
 #SEED_NUMBER=2
 # name of the command file generated in the ./commands folder
-COMMAND_FILE="optimize_matrices_Alberto"
+COMMAND_FILE="optimize_matrices_Leo"
 # other metaparameters have default value
 CONFIGURATION_FILE="config/default_configuration.in"
 
