@@ -658,12 +658,14 @@ ntype quadratic_form(const nmatrix& A, const nmatrix& G, void* params){
   }
 
 
-  /* version with Heaviside function */
   ntype energy = 0;
-  ntype X = -1.*int(NR);
+
+  /* version with Heaviside function */
+  /* ntype X = -1.*int(NR);
   for(size_t mu = 0; mu < NR; ++mu){
     X+=Heaviside(-Z[mu]);
-  }
+  } */
+  
   /* without Heaviside function */
   ntype coeff = 1;
   for(size_t mu=0; mu < NR; ++mu){
