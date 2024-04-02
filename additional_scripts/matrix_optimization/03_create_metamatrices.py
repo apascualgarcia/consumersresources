@@ -5,11 +5,11 @@ import re
 from datetime import datetime
 
 
-origin_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha001_gamma1/Binary"
-destination_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha001_gamma1/Metamatrices"
+origin_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha=0.005_gamma=0.5/Binary"
+destination_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha=0.005_gamma=0.5/Metamatrices"
 
 matrix_list = "./matrix_list/Nr25_Nc25/consumption/full_rank_opt_consumption_mat_NR25_NS25.in"
-seeds = range(20)
+seeds = range(50)
 
 matrices = np.genfromtxt(matrix_list, dtype='str')
 for mat in matrices:
@@ -22,7 +22,7 @@ for mat in matrices:
     for seed in seeds:
         root_folder = origin_folder+"/seed_"+str(seed)
         opt_matrices = listdir(root_folder)
-        opt_mat = [root_folder+"/"+str(x) for x in opt_matrices if (mat_name in x and x[-6::]!="energy")]
+        opt_mat = [root_folder+"/"+str(x) for x in opt_matrices if (mat_name in x and x[-4::]==".txt")]
 
         if len(opt_mat)==1:
             act_seeds.append(seed)
