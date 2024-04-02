@@ -5,11 +5,11 @@ import re
 from datetime import datetime
 
 
-origin_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha01/Binary"
-destination_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha01/Metamatrices"
+origin_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha001_gamma1/Binary"
+destination_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha001_gamma1/Metamatrices"
 
 matrix_list = "./matrix_list/Nr25_Nc25/consumption/full_rank_opt_consumption_mat_NR25_NS25.in"
-seeds = range(50)
+seeds = range(20)
 
 matrices = np.genfromtxt(matrix_list, dtype='str')
 for mat in matrices:
@@ -36,8 +36,13 @@ for mat in matrices:
         meta_mat = np.divide(meta_mat, len(opt_mats))
         
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        header="created "+now+" with binary optimized matrices with seeds "+str(act_seeds)+" for matrix "+mat_name
+        header="created "+now+" with binary optimized matrices with seeds "+str(act_seeds)+" from folder "+origin_folder+" for matrix "+mat_name
         np.savetxt(destination_folder+"/"+mat_name+"_optimal_alpha.txt",meta_mat,fmt="%.5f", header=header)
+
+        if len(opt_mats) < len(seeds):
+            print("Warning : optimized matrix for ", mat_name,"only computed with seeds",act_seeds, "could not find remaining source matrices")
+
     else:
-        print(mat_name)
+        print("Couldn't compute optimized matrix for",mat_name, "cannot find source matrices")
+
         

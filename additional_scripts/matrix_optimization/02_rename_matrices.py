@@ -5,8 +5,8 @@ import re
 
 
 
-matrix_root_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha01/Binary"
-seeds = range(50)
+matrix_root_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha001_gamma1/Binary"
+seeds = range(20)
 for seed in seeds:
     matrix_folder = matrix_root_folder+"/seed_"+str(seed)
     matrices=[matrix_folder+'/'+f for f in listdir(matrix_folder) if isfile(join(matrix_folder, f)) and not f.startswith('.')]
