@@ -52,6 +52,7 @@ int main(int argc, char * argv[]){
         }
 
         CRModel model(metaparams, false);
+        
         if(i==0){
           G_connectance = connectance(model.get_G());
           G_nestedness = nestedness(model.get_G());
