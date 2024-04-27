@@ -15,8 +15,9 @@ public:
 
   Parameter_set get_parameter_set() const;
 
+  void optimize(MonteCarloSolver&); 
 
-  void display(std::ostream& ) const;
+  void display(std::ostream& ) const;  
 
   // all the set functions
   void set_sigma(const nmatrix&) ;

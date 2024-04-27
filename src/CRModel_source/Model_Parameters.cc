@@ -64,3 +64,8 @@ void Model_parameters::set_NS(const unsigned int & enes)  {
   params.NS = enes;
   return;
 }
+
+
+void Model_parameters::optimize(MonteCarloSolver & mcs) {
+  return;
+}

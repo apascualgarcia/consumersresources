@@ -20,6 +20,7 @@ bool choose_next_matrix(nmatrix& alpha, const nmatrix& gamma, bool coprophagy, u
 bool choose_next_ecological_network(EcologicalNetwork& eco_net, unsigned int steps, unsigned int fails, MonteCarloSolver& mcs);
 
 void apply_MC_algorithm(EcologicalNetwork& eco_net, MonteCarloSolver& mcs);
+void apply_MC_algorithm(Model_parameters& model_params, MonteCarloSolver& mcs);
 
 nmatrix create_alpha(const ntype& connectance_in, const nmatrix& gamma, bool coprophagy_allowed);
 nmatrix create_gamma(unsigned int NR, unsigned int NS, const ntype& conn_targ);
