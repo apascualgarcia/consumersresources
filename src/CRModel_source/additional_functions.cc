@@ -622,8 +622,8 @@ bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma){
   return false;
 }
 
-bool is_there_coprophagy(const EcologicalNetwork& net){
-  return is_there_coprophagy(net.A, net.G);
+bool is_there_coprophagy(const Model_parameters& net){
+  return is_there_coprophagy(net.get_parameter_set().alpha, net.get_parameter_set().gamma);
 }
 
 bool has_an_empty_row(const nmatrix& gamma){
@@ -819,26 +819,6 @@ nmatrix random_full_rank_binary_matrix_with_connectance(const unsigned int& rows
   return mat;
 }
 
-
-nmatrix build_LRI_matrix(const nmatrix& g, const Metaparameters& m, const ntype& target_conn){
-
-  Metaparameters metaparams=m;
-  MonteCarloSolver mcsolv;
-  mcsolv.T=5.;
-  mcsolv.max_steps=1000000;
-  mcsolv.max_fails=1000;
-  mcsolv.annealing_freq=1000;
-  mcsolv.annealing_const=1.-1e-2;
-  mcsolv.display_stride=10000;
-  mcsolv.cost_function=quadratic_form_low_intra_resource_interaction;
-  mcsolv.additional_params=&metaparams;
-
-  metaparams.alpha0=metaparams.NR*metaparams.sigma0*metaparams.R0*metaparams.gamma0;
-  bool allow_coprophagy=true;
-  foodmatrix alpha = optimal_syntrophy_from_consumption(g, allow_coprophagy, mcsolv, target_conn);
-  return alpha;
-}
-
 /* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
 void flip_one_binary_matrix_element(nmatrix & B){
   std::uniform_int_distribution<unsigned int> row_dist(0, B.size()-1);
@@ -883,6 +863,20 @@ nmatrix flip_whole_binary_matrix(const nmatrix& mat){
     }
   }
   return to_ret;
+}
+
+nmatrix convert_to_binary(const nmatrix& mat){
+  nmatrix to_return = mat;
+  for(size_t i=0; i < mat.size(); ++i){
+    for(size_t j=0; j < mat[i].size();++j){
+      if(mat[i][j]!=0){
+        to_return[i][j] = 1.;
+      }else{
+        to_return[i][j]=0.;
+      }
+    }
+  }
+  return to_return;
 }
 
 

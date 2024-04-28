@@ -6,7 +6,6 @@
 #include "Metaparameters.h"
 #include "Dynamical_variables.h"
 #include "Extinction.h"
-#include "EcologicalNetwork.h"
 #include "../Functions/model_characteristics.h"
 #include <iostream>
 #include <string>
@@ -83,8 +82,6 @@ public:
 
   ntype get_resilience_jacobian() const;
   ntype get_resilience_dynamical_stability(const ntype& delta=0.);
-
-  EcologicalNetwork get_ecological_network() const;
 
 
   /* gives back the Beta and Gamma matrices from the jacobian at equilibrium */

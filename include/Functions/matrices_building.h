@@ -9,8 +9,8 @@ nmatrix build_sigma(const Metaparameters&);
 nvector build_resources(const Metaparameters&);
 nvector build_consumers(const Metaparameters&);
 nmatrix build_gamma(const foodmatrix&, const Metaparameters&);
-nmatrix build_alpha(const Parameter_set*, Metaparameters&, const nvector&, unsigned int);
-nmatrix build_tau(Parameter_set*, Metaparameters&, unsigned int);
+nmatrix build_alpha(const Parameter_set*, const Metaparameters&, const nvector&, unsigned int);
+nmatrix build_tau(Parameter_set*, const Metaparameters&, unsigned int);
 nvector build_l(const Metaparameters& );
 nvector build_m(const Metaparameters& ); 
 

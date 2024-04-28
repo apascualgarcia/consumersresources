@@ -31,6 +31,8 @@ std::ostream& operator<<(std::ostream&, const stability&);
 std::ostream& operator<<(std::ostream&, const error&);
 std::ostream& operator<<(std::ostream&, const buildingmode&);
 std::ostream& operator<<(std::ostream&, const alphamode&);
+std::ostream& operator<<(std::ostream&, const MCS_Running_Parameters&);
+std::ostream& operator<<(std::ostream&, const MonteCarloSolver&);
 
 template <class T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T> & t){

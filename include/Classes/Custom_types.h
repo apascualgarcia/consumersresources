@@ -131,29 +131,33 @@ struct error{
   void handle();
 };
 
-struct MonteCarloSolver{
-  ntype T;
-  unsigned int max_steps;
-  unsigned int max_fails;
-  unsigned int display_stride;
-  /* those decide how simulated annealing is made during the simulation */
-  unsigned int annealing_freq;
-  ntype annealing_const;
-  /* important, the matrices in argument here have to be binary */
-  ntype(*cost_function)(const nmatrix&, const nmatrix&, void*);
-  /* three converging criteria discussed with Alberto on July 1st 2021 */
-  unsigned int N_average; // on how many points (when the matrix changed) is the average made
-  ntype eps; // relative convergence criterion
-  unsigned int convergence_achieved; // if (E-E_av) < eps * E_av for convergence_achieved times in a row, then we consider that the algorithm has converged
-  /* file in which to write the energy */
-  std::string energy_file;
-  /* either "all" or "converged_only" (write either all data points or only the converged ones at the ending)*/
-  std::string write_mode;
-  /* to choose between the way the next step matrix is computed */
-  MCmode mcmode;
-  bool iss_allowed;
-  /* typically, the metaparameters */
-  void* additional_params;
+struct MCS_Running_Parameters{
+    /* constant values determined at the initialization */
+    const unsigned int max_steps = 2000000;
+    const unsigned int max_fails = 300;
+    const unsigned int annealing_freq = 1000;
+    const double annealing_const = 0.99;
+    const unsigned int display_stride = 10000;
+
+    /* constant values used for the determination of energy convergence */
+    const unsigned int convergence_Naverage = 50;
+    const unsigned int required_convergence = 100;
+    const double eps = 1e-2;
+
+    /* variables changing while the algorithm is running */
+    nvector last_changed_elements;
+    ntype current_temperature = 5;
+    unsigned int current_fails = 0;
+    unsigned int current_step = 0;
+    unsigned int current_convergence = 0;
+    bool changed_matrix = false;
+
+
+    /* functions */
+    void display(std::ostream&);
 };
+
+
+
 
 #endif

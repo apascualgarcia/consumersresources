@@ -1016,10 +1016,6 @@ nmatrix CRModel::get_G() const{
   return G;
 }
 
-EcologicalNetwork CRModel::get_ecological_network() const{
-  EcologicalNetwork eco_net(this->get_A(), this->get_G());
-  return eco_net;
-}
 
 /* returns the effective competition (average of the effective competition matrix) */
 ntype CRModel::get_effective_competition(unsigned int eq_number) const{

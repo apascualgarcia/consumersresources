@@ -130,7 +130,7 @@ nmatrix build_gamma(const foodmatrix& F, const Metaparameters& m){
   }
   return gamma;
 }
-nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Req, unsigned int attempts){
+nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvector& Req, unsigned int attempts){
   std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
   std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
   nmatrix alpha = nmatrix(p->NR, nvector(p->NS, 0.));
@@ -229,7 +229,7 @@ nmatrix build_alpha(const Parameter_set* p, Metaparameters& m, const nvector& Re
 
   return alpha;
 }
-nmatrix build_tau(Parameter_set* p, Metaparameters& m, unsigned int attempts){
+nmatrix build_tau(Parameter_set* p, const Metaparameters& m, unsigned int attempts){
   nmatrix tau;
   switch(m.tau_mode){
     case tau0:{

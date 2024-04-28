@@ -239,3 +239,23 @@ std::ostream& display_food_matrix(std::ostream& os, const foodmatrix& f){
   }
   return os;
 }
+
+std::ostream& operator<<(std::ostream& os, const MCS_Running_Parameters& params){
+  params.display(os);
+  return os;
+}
+
+std::ostream& operator<<(std::ostream& os, const MonteCarloSolver& mcs){
+  mcs.display(os);
+  return os;
+}
+
+void MCS_Running_Parameters::display(std::ostream & os){
+  os << "Step=" << current_step << "/" << max_steps;
+  os << " Fails=" << current_fails << "/" << max_fails;
+  os << " Convergence=" << current_convergence << "/" << required_convergence;
+  os << " Temperature=" << current_temperature;
+  os << " Annealing frequency=" << annealing_freq << " ";
+  os << " Annealing constant=" << annealing_const;
+  return;
+};

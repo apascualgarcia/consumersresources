@@ -4,7 +4,6 @@
 #include "../Classes/Metaparameters.h"
 #include "../Classes/Custom_types.h"
 #include "../Classes/Extinction.h"
-#include "../Classes/EcologicalNetwork.h"
 #include<algorithm>
 #include<random>
 #include<string>
@@ -55,17 +54,16 @@ nmatrix flip_whole_binary_matrix(const nmatrix& mat);
 /* for a matrix g of size NS x NR, returns the NRxNS matrix with the same connectance as g and such that if g_{im}=1 then alpha_{mi}=0 */
 nmatrix binary_matrix_no_intraspecific_syntrophy(const nmatrix& g);
 
-/* build LRI matrix with target connectance */
-nmatrix build_LRI_matrix(const nmatrix& g,const Metaparameters& m, const ntype& target_conn);
 
 /* takes a random element of the binary matrix and flips it i.e. 0->1 and 1->0 */
 void flip_one_binary_matrix_element(nmatrix & B);
 void swap_two_matrix_elements(nmatrix & B);
+nmatrix convert_to_binary(const nmatrix&);
 
 void rescale_mean(nmatrix&, const ntype&);
 
 bool is_there_coprophagy(const nmatrix& alpha, const nmatrix& gamma);
-bool is_there_coprophagy(const EcologicalNetwork& net);
+bool is_there_coprophagy(const Model_parameters& net);
 
 /* returns true if gamma has one row filled with zeros only */
 bool has_an_empty_row(const nmatrix& gamma);
