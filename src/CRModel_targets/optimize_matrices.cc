@@ -39,7 +39,9 @@ int main(int argc, char* argv[]){
         Model_parameters model_params(metaparams);
         model_params.optimize(mcs, &metaparams);
 
-        smatrix_file << model_params.get_parameter_set().alpha ;
+        nmatrix optimized_alpha = model_params.get_parameter_set().alpha;
+
+        smatrix_file << optimized_alpha;
         smatrix_file.close();
 
         std::cout << "An optimal syntrophy matrix was found and saved in " << metaparams.save_path << std::endl;
