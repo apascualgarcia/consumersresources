@@ -5,7 +5,7 @@ import re
 
 
 
-matrix_root_folder="./matrices/Nr25_Nc25/syntrophy/optimized_alpha=0.005_gamma=0.5/Binary"
+matrix_root_folder="./matrices/Nr25_Nc25/syntrophy/optimized_gamma0=0.5"
 seeds = range(50)
 for seed in seeds:
     matrix_folder = matrix_root_folder+"/seed_"+str(seed)
@@ -18,4 +18,4 @@ for seed in seeds:
         f = open(mat)
         header_1 = f.readline()
         header_2 = f.readline()
-        np.savetxt(new_name, np.loadtxt(mat), fmt='%d', header=header_1 + " "+ header_2)
+        np.savetxt(new_name, np.loadtxt(mat), header=header_1 + " "+ header_2)
