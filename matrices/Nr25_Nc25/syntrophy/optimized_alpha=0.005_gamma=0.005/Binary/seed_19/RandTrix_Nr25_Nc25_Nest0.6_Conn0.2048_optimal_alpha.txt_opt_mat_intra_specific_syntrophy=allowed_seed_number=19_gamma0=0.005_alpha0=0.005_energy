@@ -1,7 +1,0 @@
-# File last opened on Tue Apr 16 21:00:55 2024
-# The following metaparameters were used for this matrix optimization : gamma0 = 0.005; alpha0 = 0.005; sigma0 = 0.25; l0 = 1;p = 1; R0 = 1; S0 = 0.05; NR = 25; NS = 25; matrix path = matrices/Nr25_Nc25/consumption/RandTrix_Nr25_Nc25_Nest0.6_Conn0.2048.txt; convergence threshold = 1e-08
-# Energy optimization to find the best syntrophy matrix for a given consumption matrix 
-# Are given, in that order: energy, A-nestedness, A-connectance, G-nestedness, G-connectance and temperature of the syntrophy matrix
-# This line is the converged value at the end of the MCS optimization algorithm
--0.0198325 0.475869767104132 0.2149888 0.6 0.2048 0.000634508603255423 0.000899915926260431 0.00415083877243435 0.00183074585215633 3.68720930403083e-18 1.72160140298498e-18 7.83681069184974e-05
-# According to our algorithm, there was no convergence so please take the results with a grain of salt
