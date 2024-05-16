@@ -101,6 +101,7 @@ Model_parameters MonteCarloSolver::propose_new_parameters(const Model_parameters
 ntype MonteCarloSolver::probability_density(const Model_parameters& model_params, void* extra_params) const{
   return exp(-this->cost_function(model_params, extra_params)/this->run_params.current_temperature);
 }
+
 ntype quadratic_form(const Model_parameters& model_params, void* extra_params){
   /* the goal is to minimize the maximal sum of LHS in the intra resource regime */
   Metaparameters* m= (Metaparameters*)(extra_params);
@@ -146,7 +147,7 @@ MonteCarloSolver::MonteCarloSolver(){
 void MCSv2::initialize_parameters(Model_parameters& mod_params, void* extra_params){
   
   Metaparameters* m = (Metaparameters*)(extra_params);
-  ntype max_alpha0 = m->gamma0*m->R0*m->NR;
+  ntype max_alpha0 = m->gamma0*m->R0/m->NR;
   if(m->sigma0 < 0.5){
     max_alpha0 *= m->sigma0;
   }else{
@@ -178,7 +179,7 @@ Model_parameters MCSv2::propose_new_parameters(const Model_parameters& current_p
   =================== */
 
   Metaparameters* m = (Metaparameters*)(extra_params);
-  ntype max_alpha0 = m->gamma0*m->R0*m->NR;
+  ntype max_alpha0 = m->gamma0*m->R0/m->NR;
   if(m->sigma0 < 0.5){
     max_alpha0 *= m->sigma0;
   }else{

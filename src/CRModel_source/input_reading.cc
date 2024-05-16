@@ -37,6 +37,14 @@ alphamode string_to_alpha_mode(std::string mode){
     return alphamode(fully_connected);
   }else if(mode=="binary_metamatrix"){
     return alphamode(binary_metamatrix);
+  }else if(mode=="user_input"){
+    return alphamode(user_input);
+  }else if(mode=="random_structure_v2"){
+    return alphamode(random_structure_v2);
+  }else if(mode=="optimal_matrix_v2"){
+    return alphamode(optimal_matrix_v2);
+  }else if(mode=="fully_connected_v2"){
+    return alphamode(fully_connected_v2);
   }else{
     error err("Error, that value of alphamode has not been implemented yet or does not exist.");
     throw err;

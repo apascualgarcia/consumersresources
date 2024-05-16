@@ -131,21 +131,52 @@ nmatrix build_gamma(const foodmatrix& F, const Metaparameters& m){
   return gamma;
 }
 nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvector& Req, unsigned int attempts){
-  std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
-  std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
   nmatrix alpha = nmatrix(p->NR, nvector(p->NS, 0.));
-  if(m.alpha0 > 0){
-    switch(m.alpha_mode){
+  switch(m.alpha_mode){
+
       case fully_connected:{
+
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
+
         for(size_t mu=0; mu < p->NR; ++mu){
           for(size_t i=0; i < p->NS; ++i){
             alpha[mu][i] = alpha_distrib(random_engine);
           }
         }
+
+        break;
+      }
+
+      // according to APG's proposal of April 2024 on the shared Google doc and Slack discussions in May 2024
+      case fully_connected_v2:{
+        // fully connected matrix but elements are drawn from the gaussian distribution of the non-zero
+        // optimized alpha matrix
+        nmatrix dummy = load_syntrophy_matrix(m); 
+        nvector non_zero_els;
+
+        for(size_t mu = 0; mu < p->NR; ++mu){
+          for(size_t i = 0; i < p->NS; ++i){
+            if(dummy[mu][i] > 0){
+              non_zero_els.push_back(dummy[mu][i]);
+            }
+          }
+        }
+
+        ntype mean_a_opt = mean(non_zero_els);
+        ntype std_a_opt = standard_dev(non_zero_els);
+
+        std::normal_distribution<ntype> alpha_gaussian_distrib(mean_a_opt, std_a_opt);
+        for(size_t mu=0; mu < p->NR; ++mu){
+          for(size_t i=0 ; i < p-> NS; ++i){
+            alpha[mu][i] = alpha_gaussian_distrib(random_engine);
+          }
+        }
+
         break;
       }
 
       case no_release_when_eat:{
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
         for(size_t i=0; i < p->NS; ++i){
           for(size_t mu=0; mu < p->NR; ++mu){
             if(!(p->gamma[i][mu]>0.)){
@@ -158,6 +189,7 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
       }
 
       case one_release:{
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
         for(size_t i=0; i < p->NS; ++i){
           std::vector<unsigned int> uneaten_resources;
           for(size_t mu=0; mu < p->NR; ++mu){
@@ -176,6 +208,7 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
       // in the binary metamatrix case, alpha is built the same way as an optimal matrix except
       // it's only either zero or one
       case binary_metamatrix:{
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
         alpha=load_meta_matrix(m);
         for(size_t mu=0; mu < p->NR; ++mu){
           for(size_t i=0; i < p->NS; ++i){
@@ -189,7 +222,15 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         break;
       }
 
+      // user_input case : allows to specify directly alpha matrix
+      case user_input:{
+        alpha=load_syntrophy_matrix(m);
+        break;
+      }
+
       case optimal_matrix:{
+        std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
         alpha=load_meta_matrix(m);
         for(size_t mu=0; mu < p->NR; ++mu){
           for(size_t i=0; i < p->NS; ++i){
@@ -203,8 +244,16 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         break;
       }
 
+      // for now this is the same as the user_input case
+      case optimal_matrix_v2:{
+        alpha=load_syntrophy_matrix(m);
+        break;
+      }
+
       // for random structure, alpha has the same connectance as gamma but elements are placed randomly
       case random_structure:{
+        std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
         ntype conn = connectance(p->gamma);
         for(size_t mu=0; mu < p->NR;++mu){
           for(size_t i=0; i < p->NS; ++i){
@@ -216,6 +265,35 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         break;
       }
 
+      // for random structure v2, the matrix is obtained by loading the optimized matrix and mixing the elements up
+      case random_structure_v2:{
+
+        std::vector<unsigned int> R_indices; // vector that contains resource indices -> will be shuffled to get new random A
+        std::vector<unsigned int> S_indices; // vector that contains species indices -> will be shuffled to get new random A
+
+
+        for(size_t mu=0; mu < p->NR; ++mu){
+          R_indices.push_back(mu);
+        }
+
+        for(size_t i=0; i < p-> NS ; ++i){
+          S_indices.push_back(i);
+        }
+
+        std::shuffle(R_indices.begin(), R_indices.end(), random_engine);
+        std::shuffle(S_indices.begin(), S_indices.end(), random_engine);
+
+        nmatrix dummy = load_syntrophy_matrix(m);
+
+        for(size_t mu=0; mu < p->NR; ++mu){
+          for(size_t i=0; i < p->NS; ++i){
+            alpha[mu][i] = dummy[R_indices[mu]][S_indices[i]];
+          }
+        }
+
+        break;
+      }
+
       default:{
         std::cerr << "alpha mode : " << m.alpha_mode << std::endl;
         error e("This alpha mode has not been implemented in build_alpha.");
@@ -223,9 +301,6 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         break;
       }
     }
-
-  }
-
 
   return alpha;
 }

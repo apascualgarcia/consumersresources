@@ -196,6 +196,11 @@ std::ostream& operator<<(std::ostream& os, const alphamode& a){
       break;
     };
 
+    case random_structure_v2:{
+      os << "random_structure_v2";
+      break;
+    }
+
     case no_release_when_eat:{
       os << "no_intraspecific_syntrophy";
       break;
@@ -206,15 +211,30 @@ std::ostream& operator<<(std::ostream& os, const alphamode& a){
       break;
     };
 
+    case optimal_matrix_v2:{
+      os << "optimized_matrix_v2";
+      break;
+    }
+
     case fully_connected:{
       os << "fully_connected";
       break;
     };
+    
+    case fully_connected_v2:{
+      os << "fully_connected_v2";
+      break;
+    }
 
     case binary_metamatrix:{
       os << "binary_metamatrix";
       break;
     };
+
+    case user_input:{
+      os << "user_input";
+      break;
+    }
 
     default:{
       throw error("This mode of alpha_mode has not been implemented yet in the << operator",1);

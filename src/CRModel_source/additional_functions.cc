@@ -87,6 +87,7 @@ nmatrix load_syntrophy_matrix(const Metaparameters& m){
       a[x][y]=input[x][y];
     }
   }
+
   return a;
 }
 nmatrix order_matrix_by_row_degree(const nmatrix& m){

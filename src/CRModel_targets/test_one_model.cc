@@ -12,11 +12,12 @@ int main(int argc, char * argv[]){
     Metaparameters metaparams(argc, argv);
 
     // create model
-    CRModel test_model(metaparams);
+    CRModel test_model(metaparams, false);
 
     // display alpha matrix
     nmatrix alpha = test_model.get_model_parameters()->get_parameter_set().alpha;
-    std::cout << alpha << std::endl;
+    std::cout << "============" << std::endl;
+    std::cout << "alpha = " << alpha << std::endl;
 
 
   }catch(error e){
