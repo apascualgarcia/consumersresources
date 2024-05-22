@@ -61,28 +61,31 @@ int main(int argc, char * argv[]){
         av_A_connectance+=connectance(model.get_A())/Nsimuls;
         if(model.is_feasible()){
           prob_feasible+=1.;
-          systemstability sys_stab = model.assess_dynamical_stability();
-          switch(sys_stab){
-            case stable:{
-              prob_stable+=1.;
-              N_dyn+=1;
-              av_dom_eig+=real(model.largest_eigenvalue_at_equilibrium());
-              break;
-            }
-            case marginal:{
-              prob_marginal+=1.;
-              break;
-            }
-            case unstable:{
-              prob_unstable+=1.;
-              break;
-            }
-            default:{
-              throw error("Invalid system stability mode!");
-              break;
-            }
+          }
+        // decouple feasibility and stability according to the discussion between APG and LB on May 16
+        systemstability sys_stab = model.assess_dynamical_stability();
+
+        switch(sys_stab){
+          case stable:{
+            prob_stable+=1.;
+            N_dyn+=1;
+            av_dom_eig+=real(model.largest_eigenvalue_at_equilibrium());
+            break;
+          }
+          case marginal:{
+            prob_marginal+=1.;
+            break;
+          }
+          case unstable:{
+            prob_unstable+=1.;
+            break;
+          }
+          default:{
+            throw error("Invalid system stability mode!");
+            break;
           }
         }
+        
       }
       metaparams.syntrophy_matrix_path = syntrophy_folder;
       /* normalize to get probabilities */
