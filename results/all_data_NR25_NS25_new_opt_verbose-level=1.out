@@ -804,3 +804,5 @@ matrices/Nr25_Nc25/consumption/RandTrix_Nr25_Nc25_Nest0.6_Conn0.2048.txt matrice
 matrices/Nr25_Nc25/consumption/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3168.txt matrices/Nr25_Nc25/syntrophy/optimized_gamma0=0.5/seed_0 0.3168 0.599869024230517 1 1 fully_connected_v2 0 100000 0 0 0 0 -nan
 matrices/Nr25_Nc25/consumption/RandTrix_Nr25_Nc25_Nest0.6_Conn0.3712.txt matrices/Nr25_Nc25/syntrophy/optimized_gamma0=0.5/seed_0 0.3712 0.595085995085995 1 1 fully_connected_v2 0 100000 0 0 0 0 -nan
 matrices/Nr25_Nc25/consumption/RandTrix_Nr25_Nc25_Nest0.6_Conn0.44.txt matrices/Nr25_Nc25/syntrophy/optimized_gamma0=0.5/seed_0 0.44 0.6 1 1 fully_connected_v2 0 100000 0 0 0 0 -nan
+# File last opened on Wed May 22 22:15:59 2024
+# We are writing, in that order, G-matrix location, A-matrix location, G connectance, G nestedness, A connectance, A nestedness, A-mode, alpha0 value, total number of simulations, proportion of feasible, stable, unstable, marginal and dominant eigenvalue

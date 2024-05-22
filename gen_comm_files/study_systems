@@ -18,7 +18,7 @@ NR=25
 NS=25
 
 CONFIGURATION_FILE="config/default_configuration.in"
-COMMAND_FILE="study_systems_NR25_NS25_test"
+COMMAND_FILE="study_systems_NR25_NS25_Alberto"
 SAVENAME="all_data_NR25_NS25_new_opt"
 BUILD_NAME="study_ecological_systems"
 
