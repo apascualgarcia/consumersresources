@@ -23,17 +23,56 @@ all_connectance=[0.08, 0.13, 0.18, 0.23, 0.28, 0.33, 0.38, 0.43]
 
 alpha_mode=['user_input']
 #alpha_mode=['fully_connected','random_structure', 'optimized_matrix', 'binary_metamatrix']
-alpha_mode_colours=dict({'fully_connected':'blue', 'binary_metamatrix':'orange', 'optimized_matrix':'green', 'user_input':'green', 'random_structure':'red'})
-alpha_mode_sym = dict({'fully_connected': 'P', 'binary_metamatrix': 'D', 'optimized_matrix':'o', 'user_input':'o', 'random_structure': 'd'})
+alpha_mode_colours=dict({
+    'fully_connected':'blue', 
+    'binary_metamatrix':'orange', 
+    'optimized_matrix':'green', 
+    'user_input':'green', 
+    'random_structure':'red',
+    'fully_connected_v2':'blue',
+    'optimized_matrix_v2':'green',
+    'random_structure_v2':'red'
+    })
+alpha_mode_sym = dict({
+    'fully_connected': 'P', 
+    'binary_metamatrix': 'D', 
+    'optimized_matrix':'o', 
+    'user_input':'o', 
+    'random_structure': 'd',
+    'fully_connected_v2':'P',
+    'optimized_matrix_v2':'o',
+    'random_structure_v2':'d'
+    })
 
-alpha_mode_label=dict({'fully_connected':'Fully Connected', 'binary_metamatrix': 'Binary Optimized', 'optimized_matrix': 'Optimized', 'user_input':'User input', 'random_structure':'Random'})
-legend_titles=dict({'nestG': 'Consumption \n overlap '+r'$\eta_\mathrm{G}$', 'connG': 'Consumption \n connectance '+r'$\kappa_\mathrm{G}$'})
+alpha_mode_label=dict({
+    'fully_connected':'Fully Connected', 
+    'binary_metamatrix': 'Binary Optimized', 
+    'optimized_matrix': 'Optimized', 
+    'user_input':'User input', 
+    'random_structure':'Random',
+    'fully_connected_v2' : 'Fully Connected',
+    'optimized_matrix_v2' : 'Optimized',
+    'random_structure_v2' : 'Random'
+    })
 
-labels=dict({'nestG': r'Consumption overlap $\eta_\mathrm{G}$', 'connG': r'Consumption connectance',
-            'E': r'Objective function', 'connA': r'Syntrophy connectance',
-            'nestA': r'Syntrophy overlap', 'feasible decay rate': r'Feasibility decay',
-            'ld stable decay rate': r'Dynamical stability decay', 'alpha0': r'Syntrophy strength $\alpha_0$',
-            'av. dominant eigenvalue':r'Mean rate of return', 'feasible volume':r'Feasible volume', 'dynamically stable volume':r'Dynamically stable volume'})
+legend_titles=dict({
+    'nestG': 'Consumption \n overlap '+r'$\eta_\mathrm{G}$', 
+    'connG': 'Consumption \n connectance '+r'$\kappa_\mathrm{G}$'
+    })
+
+labels=dict({
+    'nestG': r'Consumption overlap $\eta_\mathrm{G}$', 
+    'connG': r'Consumption connectance',
+    'E': r'Objective function', 
+    'connA': r'Syntrophy connectance',
+    'nestA': r'Syntrophy overlap', 
+    'feasible decay rate': r'Feasibility decay',
+    'ld stable decay rate': r'Dynamical stability decay', 
+    'alpha0': r'Syntrophy strength $\alpha_0$',
+    'av. dominant eigenvalue':r'Mean rate of return', 
+    'feasible volume':r'Feasible volume', 
+    'dynamically stable volume':r'Dynamically stable volume'
+    })
 
 nest_colours=[plt.cm.get_cmap('jet_r')(i/len(all_nestedness)) for i in range(len(all_nestedness))]
 conn_colours=[plt.cm.get_cmap('jet_r')(i/len(all_connectance)) for i in range(len(all_connectance))]
@@ -199,7 +238,7 @@ def plot_against_matrix_properties(axs, data_frame_, plotting_properties, data_t
     amodes = plotting_properties['alpha mode']
     for j in range(len(amodes)):
         amode = amodes[j]
-        alpha0=0.0013
+        alpha0=0.0
         for i in range(len(all_connectance)):
             connG = all_connectance[i]
             indices = [x for x in range(data.shape[0]) if mf.closest_element_in_list(data.loc[x]['G connectance'], all_connectance)==connG and data.loc[x]['A-mode']==amode and data.loc[x]['alpha0']==alpha0]
@@ -219,7 +258,7 @@ def plot_against_matrix_properties(axs, data_frame_, plotting_properties, data_t
 
     for j in range(len(amodes)):
         amode = amodes[j]
-        alpha0=0.0013
+        alpha0=0.0
         for i in range(len(all_nestedness)):
             nestG = all_nestedness[i]
             indices = [x for x in range(data.shape[0]) if mf.closest_element_in_list(data.loc[x]['G nestedness'], all_nestedness)==nestG and data.loc[x]['A-mode']==amode and data.loc[x]['alpha0']==alpha0]
