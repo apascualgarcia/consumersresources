@@ -19,6 +19,7 @@ int main(int argc, char * argv[]){
     //unsigned int Nsimuls=1e2; // for testing run
     unsigned int Nsimuls = 1e5; // for low precision production run
     //unsigned int Nsimuls = 1e6; // for high precision production run
+    unsigned int N_optimized_matrices = 50; // following APG-Leo meeting on July 4th: add multiple optimized matrices
     unsigned int spacing = Nsimuls/10;
 
     if(Nsimuls < 1e5){
@@ -31,87 +32,89 @@ int main(int argc, char * argv[]){
     ntype G_connectance = 0., G_nestedness=0.;
 
     for(auto mat: matrix_list){
-      ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0., av_A_connectance=0., av_A_nestedness=0.,percentage_run = 0.;
-      unsigned int N_dyn = 0;
-      metaparams.foodmatrixpath=mat;
-      metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
-            /* we are less conservative than before and will simply compute the percentage
-           of feasible, stable, unstable and marginally stable systems in the [gamma0]x[S0] are */
-      for(size_t i=0; i < Nsimuls; ++i){
-        metaparams.gamma0=random_gamma(random_engine);
-        metaparams.S0=random_S(random_engine);
+      for(size_t j=0; j < N_optimized_matrices; ++j){
+        ntype prob_feasible=0., prob_stable = 0., prob_unstable= 0., prob_marginal = 0., av_dom_eig=0., av_A_connectance=0., av_A_nestedness=0.,percentage_run = 0.;
+        unsigned int N_dyn = 0;
+        metaparams.foodmatrixpath=mat;
+        metaparams.syntrophy_matrix_path=optimal_alpha_matrix_path_from_syntrophy_folder(metaparams);
+              /* we are less conservative than before and will simply compute the percentage
+            of feasible, stable, unstable and marginally stable systems in the [gamma0]x[S0] are */
+        for(size_t i=0; i < Nsimuls; ++i){
+          metaparams.gamma0=random_gamma(random_engine);
+          metaparams.S0=random_S(random_engine);
 
-        percentage_run += 100./Nsimuls;
+          percentage_run += 100./Nsimuls;
 
-        if(metaparams.verbose>1){
-          std::cout << "Run " << i << " out of "<< Nsimuls << ": ";
+          if(metaparams.verbose>1){
+            std::cout << "Run " << i << " out of "<< Nsimuls << ": ";
+          }
+
+          if(metaparams.verbose>0 && i%spacing==0){
+            std::cout << int((100.0*i)/Nsimuls) << "% of the simulations have been run." << std::endl;
+          }
+
+          CRModel model(metaparams, false);
+          
+          if(i==0){
+            G_connectance = connectance(model.get_G());
+            G_nestedness = nestedness(model.get_G());
+          }
+          av_A_nestedness+=nestedness(model.get_A())/Nsimuls;
+          av_A_connectance+=connectance(model.get_A())/Nsimuls;
+          if(model.is_feasible()){
+            prob_feasible+=1.;
+            }
+          // decouple feasibility and stability according to the discussion between APG and LB on May 16
+          systemstability sys_stab = model.assess_dynamical_stability();
+
+          switch(sys_stab){
+            case stable:{
+              prob_stable+=1.;
+              N_dyn+=1;
+              av_dom_eig+=real(model.largest_eigenvalue_at_equilibrium());
+              break;
+            }
+            case marginal:{
+              prob_marginal+=1.;
+              break;
+            }
+            case unstable:{
+              prob_unstable+=1.;
+              break;
+            }
+            default:{
+              throw error("Invalid system stability mode!");
+              break;
+            }
+          }
+          
+        }
+        metaparams.syntrophy_matrix_path = syntrophy_folder;
+        /* normalize to get probabilities */
+        prob_feasible/=Nsimuls;
+        prob_stable/=Nsimuls;
+        prob_unstable/=Nsimuls;
+        prob_marginal/=Nsimuls;
+        av_dom_eig/=N_dyn;
+
+        /* Write everything to output */
+        myfile << metaparams.foodmatrixpath << " ";
+        myfile << metaparams.syntrophy_matrix_path << " ";
+        myfile << G_connectance << " ";
+        myfile << G_nestedness << " ";
+        myfile << av_A_connectance << " ";
+        myfile << av_A_nestedness << " ";
+        myfile << metaparams.alpha_mode << " ";
+        myfile << metaparams.alpha0 << " ";
+        myfile << Nsimuls << " ";
+        myfile << prob_feasible <<" "<< prob_stable << " " << prob_unstable << " " << prob_marginal;
+        myfile << " " << av_dom_eig << std::endl;
+
+        if(metaparams.verbose>0){
+          std::cout << "Done for matrix G = " << metaparams.foodmatrixpath << std::endl;
         }
 
-        if(metaparams.verbose>0 && i%spacing==0){
-          std::cout << int((100.0*i)/Nsimuls) << "% of the simulations have been run." << std::endl;
-        }
-
-        CRModel model(metaparams, false);
-        
-        if(i==0){
-          G_connectance = connectance(model.get_G());
-          G_nestedness = nestedness(model.get_G());
-        }
-        av_A_nestedness+=nestedness(model.get_A())/Nsimuls;
-        av_A_connectance+=connectance(model.get_A())/Nsimuls;
-        if(model.is_feasible()){
-          prob_feasible+=1.;
-          }
-        // decouple feasibility and stability according to the discussion between APG and LB on May 16
-        systemstability sys_stab = model.assess_dynamical_stability();
-
-        switch(sys_stab){
-          case stable:{
-            prob_stable+=1.;
-            N_dyn+=1;
-            av_dom_eig+=real(model.largest_eigenvalue_at_equilibrium());
-            break;
-          }
-          case marginal:{
-            prob_marginal+=1.;
-            break;
-          }
-          case unstable:{
-            prob_unstable+=1.;
-            break;
-          }
-          default:{
-            throw error("Invalid system stability mode!");
-            break;
-          }
-        }
-        
       }
-      metaparams.syntrophy_matrix_path = syntrophy_folder;
-      /* normalize to get probabilities */
-      prob_feasible/=Nsimuls;
-      prob_stable/=Nsimuls;
-      prob_unstable/=Nsimuls;
-      prob_marginal/=Nsimuls;
-      av_dom_eig/=N_dyn;
-
-      /* Write everything to output */
-      myfile << metaparams.foodmatrixpath << " ";
-      myfile << metaparams.syntrophy_matrix_path << " ";
-      myfile << G_connectance << " ";
-      myfile << G_nestedness << " ";
-      myfile << av_A_connectance << " ";
-      myfile << av_A_nestedness << " ";
-      myfile << metaparams.alpha_mode << " ";
-      myfile << metaparams.alpha0 << " ";
-      myfile << Nsimuls << " ";
-      myfile << prob_feasible <<" "<< prob_stable << " " << prob_unstable << " " << prob_marginal;
-      myfile << " " << av_dom_eig << std::endl;
-
-      if(metaparams.verbose>0){
-        std::cout << "Done for matrix G = " << metaparams.foodmatrixpath << std::endl;
-      }
-
     }
 
     myfile.close();
