@@ -33,3 +33,4 @@ mcmode=A_only
 intra_specific_syntrophy=allowed
 struct_pert_mode=remove_l
 alpha_value=input
+N_optimized_alpha=1

@@ -47,6 +47,8 @@ Metaparameters::Metaparameters(int argc, char *argv[]){
   this->mcmode = string_to_mcmode(configFile.get<std::string>("mcmode"));
   this->perturb_mode = string_to_perturbmode(configFile.get<std::string>("struct_pert_mode"));
   this->alpha_value = string_to_alpha_value(configFile.get<std::string>("alpha_value"));
+  this->N_optimized_matrices = configFile.get<unsigned int>("N_optimized_alpha");
+
 
   if(this->alpha_value==critical){
     if(this->verbose > 0){
