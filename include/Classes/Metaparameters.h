@@ -43,7 +43,8 @@ struct Metaparameters{
   MCmode mcmode;
   /* for building the optimized matrices */
   bool intra_specific_syntrophy;
-
+  /* Added by APG */
+  unsigned int N_optimized_matrices;
 
   Metaparameters(int argc, char *argv[]);
   /* gives back the hard limit over which we know we won't find any feasible system*/

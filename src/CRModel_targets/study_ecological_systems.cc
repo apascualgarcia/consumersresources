@@ -19,8 +19,8 @@ int main(int argc, char * argv[]){
     //unsigned int Nsimuls=1e2; // for testing run
     unsigned int Nsimuls = 1e5; // for low precision production run
     //unsigned int Nsimuls = 1e6; // for high precision production run
-    unsigned int N_optimized_matrices = 50; // following APG-Leo meeting on July 4th: add multiple optimized matrices
-    unsigned int N_optimized_matrices = metaparams.N_optimized_alpha; // Modified by Alberto
+    //unsigned int N_optimized_matrices = 50; // following APG-Leo meeting on July 4th: add multiple optimized matrices
+    unsigned int N_optimized_matrices = metaparams.N_optimized_matrices; // Modified by APG to take it as a parameter
 
     unsigned int spacing = Nsimuls/10;
 
