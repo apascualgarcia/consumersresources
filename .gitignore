@@ -16,7 +16,7 @@ old_*
 !largest_eigenvalue/*.out
 !structural_stability/*/*.out
 consumers_resources
-
+*~
 
 text/*
 
