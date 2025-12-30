@@ -23,8 +23,8 @@ enum taumode{tau0,taualpha};
 enum gammamode{random_val, nested, antinested};
 // when loading an external matrix, please use optimal_matrix mode
 enum alphamode{fully_connected, random_structure, no_release_when_eat, one_release, optimal_matrix, binary_metamatrix, user_input,
-// alphamodes with v2 suffix refer to the generation procedure proposed by APG in Apr 2024
-fully_connected_v2,random_structure_v2, optimal_matrix_v2};
+// alphamodes with v2 suffix refer to the generation procedure proposed by APG in Apr 2024, binary_alpha and v3 introduced by APG
+fully_connected_v2,random_structure_v2, optimal_matrix_v2, binary_alpha, random_structure_v3};
 /* eqmode tells you when you stop your time evolution algorithm */
 enum eqmode{oneextinct, convergence};
 /* alpha value: input value or overriden by critical value */

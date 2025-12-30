@@ -221,6 +221,22 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         }
         break;
       }
+      
+      // APG: in the binary alpha case, alpha structure is taken and binarized, assigning a random value for positive entries
+      case binary_alpha:{
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
+        alpha=load_syntrophy_matrix(m);
+        for(size_t mu=0; mu < p->NR; ++mu){
+          for(size_t i=0; i < p->NS; ++i){
+            if(alpha[mu][i] > 0.){
+              alpha[mu][i] = alpha_distrib(random_engine);
+            }else{
+              alpha[mu][i] = 0.;
+            }
+          }
+        }
+        break;
+      }
 
       // user_input case : allows to specify directly alpha matrix
       case user_input:{
@@ -301,6 +317,21 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         break;
       }
     }
+    // for random structure v3, alpha has the same connectance as an optimized alpha but elements are placed randomly
+    case random_structure_v3:{
+        std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
+        std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
+        alpha=load_syntrophy_matrix(m);
+        ntype conn = connectance(p->alpha);
+        for(size_t mu=0; mu < p->NR;++mu){
+          for(size_t i=0; i < p->NS; ++i){
+            if(empty_or_not_distrib(random_engine)<conn){
+              alpha[mu][i] = alpha_distrib(random_engine);
+            }
+          }
+        }
+        break;
+      }
 
   return alpha;
 }

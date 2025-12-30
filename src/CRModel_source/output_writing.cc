@@ -200,6 +200,11 @@ std::ostream& operator<<(std::ostream& os, const alphamode& a){
       os << "random_structure_v2";
       break;
     }
+    
+    case random_structure_v3:{
+      os << "random_structure_v3";
+      break;
+    }
 
     case no_release_when_eat:{
       os << "no_intraspecific_syntrophy";
@@ -230,6 +235,12 @@ std::ostream& operator<<(std::ostream& os, const alphamode& a){
       os << "binary_metamatrix";
       break;
     };
+    
+    case binary_alpha:{
+      os << "binary_alpha";
+      break;
+    };
+
 
     case user_input:{
       os << "user_input";
