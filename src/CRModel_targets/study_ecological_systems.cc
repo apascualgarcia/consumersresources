@@ -29,7 +29,7 @@ int main(int argc, char * argv[]){
     }
 
     std::ofstream myfile = open_external_file_append(metaparams.save_path);
-    myfile << "# We are writing, in that order, G-matrix location, A-matrix location, G connectance, G nestedness, A connectance, A nestedness, A-mode, alpha0 value, total number of simulations, proportion of feasible, stable, unstable, marginal and dominant eigenvalue" << std::endl;
+    myfile << "#G-matrix_path, A-matrix_path, G_connectance, G_nestedness, A_connectance, A_nestedness, A-mode, alpha0_value, total_num_simul, prop_feasible, prop_stable, prop_unstable, prop_marginal, dominant_eigenv" << std::endl;
 
     ntype G_connectance = 0., G_nestedness=0.;
 
