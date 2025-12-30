@@ -1,12 +1,12 @@
 % Enter here the needed metaparameters to run the simulation :
-gamma0 = 0.5
+gamma0 = 0.25
 alpha0 = 0.0
 sigma0 = 0.25
 m0 = 0.
 R0 = 1.
 S0 = 0.05
 l0 = 5.
-epsilon = 0.1
+epsilon = 0.05
 p = 1
 NR = 25
 NS = 25
@@ -33,5 +33,5 @@ mcmode=A_only
 intra_specific_syntrophy=allowed
 struct_pert_mode=remove_l
 alpha_value=input
-N_optimized_alpha=25
+N_optimized_alpha=50
 
