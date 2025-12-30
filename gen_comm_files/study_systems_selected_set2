@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# This script generates a file which, when run, computes the percentage of dynamically stable systems for every
+# matrix on the MATRIX_LIST file, with alpha in mode ALPHA_MODE, for every
+# value of alpha0 in the ALPHA_VALS list.
+
+# Example for NR=NS=25
+CONSUMPTION_MATRIX_LIST_FOLDER="matrix_list/Nr25_Nc25/consumption"
+CONSUMPTION_MATRIX_LIST_FILENAME="full_rank_opt_consumption_mat_NR25_NS25_2"
+
+# SYNTROPHY_MATRIX_FOLDER is unused if ALPHA_MODE is set to random structure
+SYNTROPHY_MATRIX_FOLDER="../energy_crm_net/data/matrices_optimized/mode-A_alg-L-BFGS-B_maxev-5e+08_GASR-0.25-0.0075-1-1_selected"
+ALPHA_MODE="binary_alpha random_structure_v3 fully_connected" # "random_structure_v2 fully_connected_v2" #"user_input" #"fully_connected random_structure optimal_matrix"
+ALPHA_VALS="0 0.0013 0.0026 0.0039 0.0052 0.0065 0.0078 0.0091 0.0104 0.014"
+
+ADDITIONAL_MODIF="verbose-level=0"
+NR=25
+NS=25
+
+CONFIGURATION_FILE="config/configuration_alg-L-BFGS-B.in"
+COMMAND_FILE="study_systems_selected_set2"
+SAVENAME="study_systems_selected_set2"
+BUILD_NAME="study_ecological_systems"
+
+# first clear all previous contents of the commands file
+rm commands/${COMMAND_FILE}.txt
+
+
+for a in $ALPHA_MODE
+do
+  for matl in $CONSUMPTION_MATRIX_LIST_FILENAME
+  do
+    for alpha0 in $ALPHA_VALS
+    do
+      CURRENT_NAME="${SAVENAME}"
+      if [ ! -z "${ADDITIONAL_MODIF}" ]
+      then
+        for add in $ADDITIONAL_MODIF
+        do
+          CURRENT_NAME="${CURRENT_NAME}_${add}"
+        done
+      fi
+
+      FIRST_COMMAND="build/${BUILD_NAME} ${CONFIGURATION_FILE} path_to_save_file=results/${CURRENT_NAME}.out path_to_food_matrix=${CONSUMPTION_MATRIX_LIST_FOLDER}/${matl}.in alpha_mode=${a} path_to_syntrophy_matrix=${SYNTROPHY_MATRIX_FOLDER} NR=${NR} NS=${NS} alpha0=${alpha0} ${ADDITIONAL_MODIF}"
+      #FIRST_COMMAND="${FIRST_COMMAND} | ts '[%Y-%m-%d %H:%M:%S]'"
+
+      COMMAND_NAME="${FIRST_COMMAND}"
+
+      #LOG_NAME="logs/${COMMAND_FILE}.log"
+      #ERR_LOG_NAME="logs/err_${COMMAND_FILE}.log"
+
+      echo "${COMMAND_NAME}" >> commands/${COMMAND_FILE}.txt
+      # write command to log
+      now="["$(date)"]"
+      echo "${now} ${COMMAND_NAME}" >> logs/commands.log
+    done
+  done
+done
+#echo "Launched commands in the background, please check appropriate log files for progress"
