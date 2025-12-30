@@ -309,16 +309,8 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
 
         break;
       }
-
-      default:{
-        std::cerr << "alpha mode : " << m.alpha_mode << std::endl;
-        error e("This alpha mode has not been implemented in build_alpha.");
-        throw e;
-        break;
-      }
-    }
-    // for random structure v3, alpha has the same connectance as an optimized alpha but elements are placed randomly
-    case random_structure_v3:{
+     // for random structure v3, alpha has the same connectance as an optimized alpha but elements are placed randomly
+     case random_structure_v3:{
         std::uniform_real_distribution<ntype> empty_or_not_distrib(0., 1.);
         std::uniform_real_distribution<ntype> alpha_distrib((1-m.epsilon)*m.alpha0, (1+m.epsilon)*m.alpha0);
         alpha=load_syntrophy_matrix(m);
@@ -332,6 +324,14 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         }
         break;
       }
+      default:{
+        std::cerr << "alpha mode : " << m.alpha_mode << std::endl;
+        error e("This alpha mode has not been implemented in build_alpha.");
+        throw e;
+        break;
+      }
+    }
+
 
   return alpha;
 }
