@@ -31,6 +31,14 @@ It is important that the version is at least 3.0. This can be checked using the 
 cmake --version
 ```
 
+**UPDATE** Current (2025) cmake versions are above 4.0  so current code has compatibility problems, you may need to run 
+
+```
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
+```
+
+before configuring.
+
 * **Python 3** : the data analysis scripts are mostly written in Python 3. Versions `>= 3.12` may generate problems, so we recommend Python 3.8. If Python 3 is not already installed on your system, you can use the following command to get it from the terminal :
 ```
 sudo apt-get install python3
