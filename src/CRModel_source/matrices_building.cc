@@ -317,6 +317,7 @@ nmatrix build_alpha(const Parameter_set* p, const Metaparameters& m, const nvect
         ntype conn = connectance(alpha);
         for(size_t mu=0; mu < p->NR;++mu){
           for(size_t i=0; i < p->NS; ++i){
+            alpha[mu][i] = 0;
             if(empty_or_not_distrib(random_engine)<conn){
               alpha[mu][i] = alpha_distrib(random_engine);
             }
